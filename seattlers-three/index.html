@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Settlers II — Veni, Vidi, Vici</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/squad-labs/seattlers-three/assets/index-Df3x0zZY.js"></script>
+    <link rel="stylesheet" crossorigin href="/squad-labs/seattlers-three/assets/index-D1pEagye.css">
+  </head>
+  <body>
+    <div id="app">
+      <!-- ============ BOOT / TITLE ============ -->
+      <div id="title-screen" class="shell-overlay">
+        <div class="boot">
+          <div class="boot-ornament" aria-hidden="true"></div>
+          <p class="boot-kicker">Blue Byte · 1996 · Fan client</p>
+          <h1 class="boot-title">
+            <span>The Settlers&nbsp;II</span>
+          </h1>
+          <p class="boot-latin">Veni · Vidi · Vici</p>
+          <p class="boot-lead">
+            Um cliente web da simulação econômica que definiu a logística em tempo real.
+            Estradas. Bandeiras. Carregadores. Nada de micro.
+          </p>
+          <div class="boot-actions">
+            <button type="button" id="btn-start" class="gbtn gbtn-primary">
+              Entrar no império
+            </button>
+            <button type="button" id="btn-howto" class="gbtn gbtn-ghost">Manual</button>
+          </div>
+          <div class="boot-meta">
+            <span>GF pacing</span>
+            <span class="dot"></span>
+            <span>Isometric</span>
+            <span class="dot"></span>
+            <span>History Edition spirit</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="howto-screen" class="shell-overlay hidden">
+        <div class="manual">
+          <header class="manual-head">
+            <h2>Manual do governador</h2>
+            <button type="button" id="btn-howto-close" class="gbtn gbtn-ghost gbtn-sm">Fechar</button>
+          </header>
+          <div class="manual-grid">
+            <section>
+              <h3>01 · Mapa</h3>
+              <p>Arraste com botão direito. <kbd>WASD</kbd> pan. Scroll zoom.</p>
+            </section>
+            <section>
+              <h3>02 · Estradas</h3>
+              <p>Mercadorias só andam em estrada. Bandeiras criam trechos — um carregador por trecho.</p>
+            </section>
+            <section>
+              <h3>03 · Abertura</h3>
+              <p>Lenhador → serraria → pedreira + silvicultor. Ritmo lento de propósito.</p>
+            </section>
+            <section>
+              <h3>04 · Expansão</h3>
+              <p>Quartéis expandem fronteira. Empurre até os acampamentos rivais.</p>
+            </section>
+          </div>
+          <div class="manual-keys">
+            <span><kbd>Q</kbd> Lenhador</span>
+            <span><kbd>E</kbd> Serraria</span>
+            <span><kbd>C</kbd> Pedreira</span>
+            <span><kbd>V</kbd> Silvicultor</span>
+            <span><kbd>B</kbd> Quartel</span>
+            <span><kbd>R</kbd> Estrada</span>
+            <span><kbd>F</kbd> Bandeira</span>
+            <span><kbd>1</kbd> Velocidade</span>
+            <span><kbd>Espaço</kbd> Pausa</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="victory-screen" class="shell-overlay hidden" aria-hidden="true">
+        <div class="boot victory">
+          <p class="boot-kicker">Campanha concluída</p>
+          <h2 class="boot-title"><span>Veni · Vidi · Vici</span></h2>
+          <p id="victory-subtitle" class="boot-lead">Os rivais caíram. As estradas carregaram o triunfo.</p>
+          <div class="boot-actions">
+            <button type="button" id="btn-victory-again" class="gbtn gbtn-primary">Nova campanha</button>
+            <button type="button" id="btn-victory-close" class="gbtn gbtn-ghost">Continuar no mapa</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ GAME STAGE ============ -->
+      <div id="stage" class="stage">
+        <canvas id="game-canvas"></canvas>
+
+        <!-- Wood frame chrome -->
+        <div id="hud" class="game-chrome hidden">
+          <!-- Top beam -->
+          <header class="chrome-top">
+            <div class="chrome-brand">
+              <div class="seal" aria-hidden="true">II</div>
+              <div class="chrome-brand-text">
+                <strong>Settlers&nbsp;II</strong>
+                <small id="status-line">Império Romano</small>
+              </div>
+            </div>
+            <div id="resources" class="chrome-res" role="status"></div>
+            <div class="chrome-controls">
+              <button type="button" id="btn-speed" class="icon-rail-btn" title="Velocidade (1)"></button>
+              <button type="button" id="btn-pause" class="icon-rail-btn" title="Pausar"></button>
+              <button type="button" id="btn-help" class="icon-rail-btn" title="Manual"></button>
+            </div>
+          </header>
+
+          <!-- Left build rail -->
+          <aside class="chrome-rail" aria-label="Construção">
+            <div class="rail-block">
+              <span class="rail-label">Campo</span>
+              <div id="build-basic" class="rail-grid"></div>
+            </div>
+            <div class="rail-block">
+              <span class="rail-label">Indústria</span>
+              <div id="build-prod" class="rail-grid"></div>
+            </div>
+            <div class="rail-block">
+              <span class="rail-label">Guerra</span>
+              <div id="build-mil" class="rail-grid"></div>
+            </div>
+            <div class="rail-block rail-tools">
+              <span class="rail-label">Ordem</span>
+              <div class="rail-grid">
+                <button type="button" class="rail-btn tool" data-tool="select" title="Selecionar (Esc)"></button>
+                <button type="button" class="rail-btn tool" data-tool="road" title="Estrada (R)"></button>
+                <button type="button" class="rail-btn tool" data-tool="flag" title="Bandeira (F)"></button>
+                <button type="button" class="rail-btn tool" data-tool="destroy" title="Demolir (X)"></button>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Bottom command -->
+          <footer class="chrome-bottom">
+            <div id="tool-hint" class="cmd">
+              <div id="tool-hint-icon" class="cmd-icon"></div>
+              <div class="cmd-copy">
+                <strong id="tool-hint-name">Selecionar</strong>
+                <span id="tool-hint-detail">Clique em um edifício ou bandeira</span>
+              </div>
+              <div id="tool-hint-cost" class="cmd-cost hidden"></div>
+            </div>
+          </footer>
+
+          <!-- Right stack -->
+          <div class="chrome-right">
+            <div id="tutorial" class="mission">
+              <header>
+                <span class="mission-kicker">Missão</span>
+                <span id="tutorial-pct" class="mission-pct">0%</span>
+              </header>
+              <p id="tutorial-text">Construa um Lenhador e ligue-o ao QG.</p>
+              <div class="mission-bar"><i id="tutorial-bar"></i></div>
+            </div>
+            <div id="selection" class="inspector hidden"></div>
+            <div id="minimap-wrap" class="map-frame">
+              <div class="map-frame-label">Região</div>
+              <canvas id="minimap" width="200" height="150"></canvas>
+            </div>
+          </div>
+
+          <div id="tooltip" class="g-tip hidden"></div>
+          <div id="toast" class="g-toast hidden"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

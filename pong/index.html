@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pong</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Courier New', monospace;
+  }
+  canvas { border: 2px solid #444; display: block; }
+  #info {
+    color: #888;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div>
+  <canvas id="pong" width="800" height="500"></canvas>
+  <div id="info">Player 1: W/S &nbsp;|&nbsp; Player 2: ↑/↓ &nbsp;|&nbsp; Space: pause &nbsp;|&nbsp; R: reset</div>
+</div>
+<script>
+const canvas = document.getElementById('pong');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+
+const PADDLE_W = 12;
+const PADDLE_H = 90;
+const BALL_R = 8;
+const PADDLE_SPEED = 6;
+const BALL_SPEED_INIT = 5;
+const BALL_SPEED_INC = 0.4;
+const MAX_BALL_SPEED = 12;
+const WIN_SCORE = 10;
+
+let paused = false;
+
+const keys = {};
+document.addEventListener('keydown', e => { keys[e.key] = true; if (e.key === ' ') { paused = !paused; e.preventDefault(); } if (e.key === 'r' || e.key === 'R') resetGame(); });
+document.addEventListener('keyup', e => { keys[e.key] = false; });
+
+function createPaddle(x) {
+  return { x, y: H / 2 - PADDLE_H / 2, w: PADDLE_W, h: PADDLE_H };
+}
+
+function createBall() {
+  const angle = (Math.random() * Math.PI / 3) - Math.PI / 6;
+  const dir = Math.random() < 0.5 ? 1 : -1;
+  return {
+    x: W / 2, y: H / 2, r: BALL_R,
+    vx: Math.cos(angle) * BALL_SPEED_INIT * dir,
+    vy: Math.sin(angle) * BALL_SPEED_INIT,
+    speed: BALL_SPEED_INIT
+  };
+}
+
+let p1 = createPaddle(20);
+let p2 = createPaddle(W - 20 - PADDLE_W);
+let ball = createBall();
+let score1 = 0;
+let score2 = 0;
+
+function resetGame() {
+  score1 = 0;
+  score2 = 0;
+  resetBall();
+}
+
+function resetBall() {
+  ball = createBall();
+}
+
+function movePaddles() {
+  if (keys['w'] || keys['W']) p1.y -= PADDLE_SPEED;
+  if (keys['s'] || keys['S']) p1.y += PADDLE_SPEED;
+  if (keys['ArrowUp']) p2.y -= PADDLE_SPEED;
+  if (keys['ArrowDown']) p2.y += PADDLE_SPEED;
+  p1.y = Math.max(0, Math.min(H - p1.h, p1.y));
+  p2.y = Math.max(0, Math.min(H - p2.h, p2.y));
+}
+
+function collides(paddle) {
+  return ball.x + ball.r > paddle.x &&
+         ball.x - ball.r < paddle.x + paddle.w &&
+         ball.y + ball.r > paddle.y &&
+         ball.y - ball.r < paddle.y + paddle.h;
+}
+
+function moveBall() {
+  ball.x += ball.vx;
+  ball.y += ball.vy;
+
+  // top/bottom walls
+  if (ball.y - ball.r <= 0) { ball.y = ball.r; ball.vy *= -1; }
+  if (ball.y + ball.r >= H) { ball.y = H - ball.r; ball.vy *= -1; }
+
+  // paddle collisions
+  const paddle = ball.x < W / 2 ? p1 : p2;
+  if (collides(paddle)) {
+    const hitPos = (ball.y - (paddle.y + paddle.h / 2)) / (paddle.h / 2);
+    const angle = hitPos * (Math.PI / 3);
+    ball.speed = Math.min(ball.speed + BALL_SPEED_INC, MAX_BALL_SPEED);
+    const dir = paddle === p1 ? 1 : -1;
+    ball.vx = Math.cos(angle) * ball.speed * dir;
+    ball.vy = Math.sin(angle) * ball.speed;
+    ball.x = paddle === p1 ? paddle.x + paddle.w + ball.r : paddle.x - ball.r;
+  }
+
+  // scoring
+  if (ball.x - ball.r <= 0) { score2++; resetBall(); }
+  if (ball.x + ball.r >= W) { score1++; resetBall(); }
+}
+
+function draw() {
+  // background
+  ctx.fillStyle = '#111';
+  ctx.fillRect(0, 0, W, H);
+
+  // center dashed line
+  ctx.setLineDash([8, 12]);
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(W / 2, 0);
+  ctx.lineTo(W / 2, H);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // scores
+  ctx.fillStyle = '#555';
+  ctx.font = '64px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText(score1, W / 4, 72);
+  ctx.fillText(score2, (W / 4) * 3, 72);
+
+  // paddles
+  ctx.fillStyle = '#ddd';
+  ctx.fillRect(p1.x, p1.y, p1.w, p1.h);
+  ctx.fillRect(p2.x, p2.y, p2.w, p2.h);
+
+  // ball
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+  ctx.fill();
+
+  // pause overlay
+  if (paused) {
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#fff';
+    ctx.font = '36px Courier New';
+    ctx.fillText('PAUSED', W / 2, H / 2);
+  }
+
+  // win overlay
+  if (score1 >= WIN_SCORE || score2 >= WIN_SCORE) {
+    ctx.fillStyle = 'rgba(0,0,0,0.6)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#fff';
+    ctx.font = '36px Courier New';
+    const winner = score1 >= WIN_SCORE ? 'Player 1' : 'Player 2';
+    ctx.fillText(winner + ' wins!', W / 2, H / 2 - 20);
+    ctx.font = '18px Courier New';
+    ctx.fillStyle = '#aaa';
+    ctx.fillText('Press R to restart', W / 2, H / 2 + 25);
+  }
+}
+
+function loop() {
+  if (!paused && score1 < WIN_SCORE && score2 < WIN_SCORE) {
+    movePaddles();
+    moveBall();
+  }
+  draw();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>
