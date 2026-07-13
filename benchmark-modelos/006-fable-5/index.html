@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kibu - Focus on Excellent Service. We Handle The Rest.</title>
+<meta name="description" content="Kibu helps IDD providers focus on people, not paperwork. AI-powered documentation, 600+ on-demand classes, and compliance tools in one platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Asap:wght@700&family=Caveat:wght@400;600&family=Libre+Baskerville:ital@0;1&family=Noto+Serif+Display:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============ Reset & tokens ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sans:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --asap:'Asap',var(--sans);
+  --serif:'Noto Serif Display',Georgia,serif;
+  --baskerville:'Libre Baskerville',Georgia,serif;
+  --caveat:'Caveat',cursive;
+  --black:#08090a;
+  --kibu-blue:#328cff;
+  --kibu-blue-dark:#2b7ae0;
+  --kibu-blue-light:#ebf3ff;
+  --kibu-gray:#f5f5f5;
+  --kibu-border:rgba(34,34,34,.102);
+  --kibu-muted:#6b7280;
+  --kibu-navy:#1f4e91;
+  --kibu-navy-dark:#16407a;
+  --maxw:1056px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:#000;background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit}
+.container{max-width:var(--maxw);margin:0 auto;padding-left:20px;padding-right:20px}
+@media(min-width:1024px){.container{padding-left:0;padding-right:0}}
+.sec{padding:60px 0}
+@media(min-width:1024px){.sec{padding:80px 0}}
+
+/* ============ Buttons ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-weight:500;border-radius:12px;padding:9.2px 16px;font-size:16px;background:#000;color:#fff;border:1px solid #000;transition:background .2s,transform .2s;white-space:nowrap}
+.btn:hover{background:#222}
+.btn:active{transform:scale(.98)}
+.btn-sm{border-radius:10px;padding:6px 12px;font-size:14px}
+.btn .avatar{width:27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#f7c59f 0%,#e8946a 55%,#b96a45 100%);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.btn-sm .avatar{width:23px;height:23px;font-size:10px}
+
+/* ============ Navbar ============ */
+.nav-wrap{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;pointer-events:none}
+@media(min-width:1024px){.nav-wrap{padding-top:14px}}
+nav.nav{position:relative;display:flex;flex-direction:column;width:100%;max-width:var(--maxw);pointer-events:auto;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(0,0,0,.03);overflow:visible}
+@media(min-width:1024px){nav.nav{border-radius:16px}}
+.nav-row{display:flex;align-items:center;padding:8px 16px}
+.nav-logo{font-family:var(--asap);font-size:22px;font-weight:700;color:#000;margin-right:56px}
+.nav-links{display:none;align-items:center;gap:28px;flex:1}
+@media(min-width:1024px){.nav-links{display:flex}}
+.nav-link{font-size:14px;font-weight:500;letter-spacing:-.01em;line-height:2em;color:rgba(8,9,10,.8);transition:color .2s;white-space:nowrap}
+.nav-link:hover{color:#000}
+.nav-dd{position:relative}
+.nav-dd-btn{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;letter-spacing:-.01em;line-height:2em;color:rgba(8,9,10,.8);padding:4px 0}
+.nav-dd-btn svg{transition:transform .2s}
+.nav-dd-menu{position:absolute;top:100%;left:-12px;min-width:190px;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.1);padding:6px;display:none;animation:dropdown-in .18s ease}
+.nav-dd:hover .nav-dd-menu{display:block}
+.nav-dd:hover .nav-dd-btn svg{transform:rotate(180deg)}
+.nav-dd-menu a{display:block;padding:8px 12px;font-size:14px;font-weight:500;color:rgba(8,9,10,.8);border-radius:8px}
+.nav-dd-menu a:hover{background:#f5f5f5;color:#000}
+@keyframes dropdown-in{0%{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.nav-right{display:flex;align-items:center;gap:16px;margin-left:auto}
+.nav-login{display:none;font-size:14px;font-weight:500;letter-spacing:-.01em;color:rgba(8,9,10,.8);margin-right:4px;transition:color .2s}
+.nav-login:hover{color:#000}
+@media(min-width:1024px){.nav-login{display:block}}
+.nav-burger{display:flex;position:relative;width:40px;height:40px;align-items:center;justify-content:center}
+@media(min-width:1024px){.nav-burger{display:none}}
+.nav-burger span{position:absolute;width:24px;height:2px;background:#000;border-radius:8px;transition:transform .25s,opacity .25s}
+.nav-burger span:first-child{transform:translateY(-6px)}
+.nav-burger span:last-child{transform:translateY(6px)}
+.menu-open .nav-burger span:first-child{transform:rotate(45deg)}
+.menu-open .nav-burger span:last-child{transform:rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px 16px 20px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-top:1px solid rgba(0,0,0,.06)}
+.menu-open .mobile-menu{display:flex}
+.mobile-menu a{padding:10px 4px;font-size:16px;font-weight:500;color:rgba(8,9,10,.85);border-bottom:1px solid rgba(0,0,0,.05)}
+.mobile-menu .btn{margin-top:12px;justify-content:center}
+
+/* ============ Hero ============ */
+.hero{position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(38% 22% at 18% 16%,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 100%),
+  radial-gradient(46% 26% at 78% 24%,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 100%),
+  radial-gradient(30% 18% at 45% 38%,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 100%),
+  radial-gradient(55% 30% at 60% 55%,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 100%)}
+.hero-grad{position:absolute;inset:0;z-index:1;background:linear-gradient(rgb(199,231,255) 0%,rgb(150,203,255) 28.29%,rgba(5,122,255,.5) 60.36%,rgb(255,255,255) 90.23%)}
+.hero-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:100px 24px 0;text-align:center}
+@media(min-width:768px){.hero-inner{text-align:left}}
+@media(min-width:1024px){.hero-inner{padding:140px 0 0}}
+.hero h1{font-family:var(--sans);font-weight:600;letter-spacing:-1.216px;color:#000;font-size:28px;line-height:34px}
+@media(min-width:768px){.hero h1{font-size:60px;line-height:66px}}
+.hero-sub{margin:16px auto 0;max-width:600px;font-weight:500;color:rgba(0,0,0,.8);font-size:15px;line-height:23px}
+@media(min-width:768px){.hero-sub{margin-left:0;font-size:20px;line-height:30px}}
+.hero-cta{margin-top:20px}
+@media(min-width:768px){.hero-cta{margin-top:28px}}
+.hero-showcase{position:relative;z-index:2;margin:56px auto 0;max-width:var(--maxw)}
+@media(min-width:768px){.hero-showcase{margin-top:80px}}
+.hero-tabs-block{display:flex;flex-direction:column;gap:16px;margin:0 auto;width:calc(100vw - 40px);max-width:var(--maxw);opacity:0;transform:translateY(70px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.hero-tabs-block.in{opacity:1;transform:translateY(0)}
+.hero-tabs{display:flex;gap:48px;justify-content:flex-start;width:calc(100vw - 50px);max-width:var(--maxw);overflow:auto;scrollbar-width:none}
+.hero-tabs::-webkit-scrollbar{display:none}
+@media(min-width:851px){.hero-tabs{justify-content:center}}
+.hero-tab{display:flex;flex-direction:column}
+.hero-tab button{display:flex;align-items:center;gap:8px;padding-bottom:6px;font-family:var(--sans);font-size:16px;font-weight:500;transition:opacity .2s;opacity:.6;color:#000}
+.hero-tab.active button{opacity:1}
+.hero-tab button svg{width:16px;height:16px;flex-shrink:0}
+.hero-tab p{white-space:nowrap;color:#000}
+.hero-tab-bar{height:4px;background:#000;border-radius:8px;margin-top:4px;width:0}
+.hero-tab.active .hero-tab-bar{animation:tabProgress var(--tab-dur,6s) linear forwards}
+@keyframes tabProgress{from{width:0}to{width:100%}}
+.hero-screen{position:relative;width:100%;overflow:hidden;border-radius:8px;padding-bottom:59.7%;background:#fff;box-shadow:0 30px 70px -20px rgba(22,64,122,.35)}
+.hero-shot{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
+.hero-shot.active{opacity:1}
+.hero-shot svg{width:100%;height:100%}
+
+/* ============ Logos section ============ */
+.logos-sec{padding:60px 0;background:#fff}
+@media(min-width:1024px){.logos-sec{padding:80px 0}}
+.logos-sec .container{text-align:center;padding-left:24px;padding-right:24px}
+.logos-title{font-family:var(--sans);font-weight:500;letter-spacing:-.4px;color:#000;margin-bottom:4px;font-size:18px}
+@media(min-width:1024px){.logos-title{font-size:20px}}
+.logos-sub{font-family:var(--sans);font-weight:500;letter-spacing:-.4px;color:rgba(0,0,0,.54);margin-bottom:32px;font-size:16px}
+@media(min-width:1024px){.logos-sub{font-size:18px}}
+.logos-rows{display:flex;flex-direction:column;align-items:center;gap:21px;margin-bottom:64px}
+@media(min-width:1024px){.logos-rows{gap:36px}}
+.logos-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:28px}
+@media(min-width:1024px){.logos-row{gap:48px}}
+.logo-ph{height:28px;display:flex;align-items:center;filter:grayscale(1);opacity:.6;color:#333;white-space:nowrap;user-select:none}
+@media(min-width:1024px){.logo-ph{height:40px}}
+.logo-ph span{font-size:17px}
+@media(min-width:1024px){.logo-ph span{font-size:22px}}
+.lp-serif span{font-family:var(--baskerville);font-weight:700}
+.lp-bold span{font-weight:800;letter-spacing:-.03em}
+.lp-caps span{font-weight:700;letter-spacing:.14em;font-size:14px!important;text-transform:uppercase}
+.lp-script span{font-family:var(--caveat);font-weight:600;font-size:24px!important}
+.lp-round span{font-weight:700;letter-spacing:-.01em;border:2.5px solid currentColor;border-radius:999px;padding:2px 12px;font-size:14px!important}
+
+/* ============ Focus / letter reveal ============ */
+.focus-sec{padding:60px 0;background:#fff}
+@media(min-width:1024px){.focus-sec{padding:80px 0}}
+.focus-inner{max-width:720px;margin:0 auto;padding:0 24px}
+.focus-inner h2{font-family:var(--baskerville);font-size:32px;font-weight:500;line-height:48px;letter-spacing:-.4px;color:#000;margin-bottom:40px}
+.reveal-text{font-family:var(--baskerville);font-style:italic;font-size:16px;line-height:1.7}
+@media(min-width:1024px){.reveal-text{font-size:22px;line-height:38px}}
+.reveal-text .w{display:inline-block}
+.reveal-text .c{opacity:.4;transition:opacity .12s linear}
+.reveal-text .c.on{opacity:1}
+.focus-sig{margin-top:48px}
+.sig-script{font-family:var(--caveat);font-size:44px;line-height:1.1;font-weight:600;color:#111;transform:rotate(-3deg);display:inline-block;margin-left:-4px}
+.focus-sig h3{font-family:var(--caveat);font-size:20px;font-weight:400;font-style:italic;color:#000;margin-top:8px}
+
+/* ============ Section headings ============ */
+.h2-std{font-family:var(--sans);font-weight:600;letter-spacing:-.8px;color:#000;margin-bottom:8px;font-size:24px}
+@media(min-width:1024px){.h2-std{font-size:38px;line-height:46px}}
+.p-std{font-family:var(--sans);font-size:16px;color:#000}
+@media(min-width:1024px){.p-std{font-size:18px}}
+
+/* ============ Staff cards ============ */
+.staff-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:40px}
+@media(min-width:640px){.staff-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.staff-grid{grid-template-columns:repeat(3,1fr)}}
+.staff-card{border-radius:16px;overflow:hidden;background:var(--kibu-gray);text-align:center}
+.staff-card-media{height:380px;display:flex;align-items:center;justify-content:center;padding:16px 4px 4px}
+.staff-card p{font-family:var(--sans);font-size:20px;font-weight:500;color:#000;padding:16px 0}
+.staff-card-media svg{max-width:100%;max-height:100%}
+
+/* ============ Compliance 60s ============ */
+.comp-flex{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+@media(min-width:1024px){.comp-flex{flex-direction:row}}
+.comp-left{flex-shrink:0;width:100%;padding-top:32px}
+@media(min-width:1024px){.comp-left{max-width:382px}}
+.comp-left h2{font-family:var(--sans);font-weight:600;letter-spacing:-.02em;color:#000;font-size:24px}
+@media(min-width:1024px){.comp-left h2{font-size:38px;line-height:46px}}
+.comp-left>p{font-family:var(--sans);font-size:16px;color:#000;margin-top:8px}
+@media(min-width:1024px){.comp-left>p{font-size:18px}}
+.comp-bullets{display:flex;flex-direction:column;gap:12px;padding-top:32px}
+@media(min-width:1024px){.comp-bullets{padding-top:40px}}
+.comp-bullet{display:flex;align-items:center;gap:10px;text-align:left;white-space:nowrap}
+@media(min-width:1024px){.comp-bullet{white-space:normal}}
+.comp-bullet .tick{width:4px;height:20px;border-radius:999px;flex-shrink:0;transition:background .3s;background:rgba(0,0,0,.1)}
+.comp-bullet.active .tick{background:#000}
+.comp-bullet span{font-family:var(--sans);font-size:16px;font-weight:500;color:#000}
+@media(min-width:1024px){.comp-bullet span{font-size:18px}}
+.comp-media{flex:1;width:100%;border-radius:20px;overflow:hidden;position:relative;aspect-ratio:4/3}
+@media(min-width:1024px){.comp-media{aspect-ratio:auto;height:500px}}
+.comp-pane{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+.comp-pane.active{opacity:1}
+.comp-pane svg{width:100%;height:100%}
+
+/* ============ Feature grid + big cells ============ */
+.feat-grid{display:grid;grid-template-columns:1fr}
+@media(min-width:640px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.feat-grid{grid-template-columns:repeat(4,1fr)}}
+.feat-cell{display:flex;flex-direction:column;gap:12px;padding:20px;border-top:1px solid var(--kibu-border);border-bottom:1px solid var(--kibu-border)}
+@media(min-width:1024px){.feat-cell{padding:24px}}
+@media(min-width:640px){.feat-cell.sm-r{border-right:1px solid var(--kibu-border)}}
+@media(min-width:1024px){.feat-cell.lg-r{border-right:1px solid var(--kibu-border)}.feat-cell.lg-r0{border-right:0}}
+.feat-head{display:flex;align-items:center;gap:8px}
+.feat-head svg{flex-shrink:0;color:rgba(0,0,0,.25)}
+.feat-head span{font-family:var(--sans);font-size:16px;font-weight:600;color:#000}
+.feat-cell>p{font-family:var(--sans);font-size:14px;line-height:160%;letter-spacing:-.01em;color:rgba(0,0,0,.75)}
+.big-cell{grid-column:span 1;padding:32px}
+@media(min-width:640px){.big-cell{padding:40px}}
+@media(min-width:1024px){.big-cell{grid-column:span 2;padding:80px}}
+@media(min-width:1024px){.big-cell.lg-r{border-right:1px solid var(--kibu-border)}}
+.big-cell h3{font-family:var(--sans);font-size:20px;font-weight:600;line-height:28px;letter-spacing:-.01em;color:#000;margin-bottom:8px}
+.big-cell>p{font-family:var(--sans);font-size:15px;line-height:24px;color:var(--kibu-muted)}
+.big-cell-media{margin-top:24px;width:100%;border-radius:12px;overflow:hidden;aspect-ratio:1536/1322}
+.big-cell-media svg{width:100%;height:100%}
+
+/* 84.3% stat */
+.stat-wrap{position:relative;width:100%;height:100%;border-radius:16px;overflow:hidden;padding:28px;background:
+  radial-gradient(60% 55% at 22% 25%,rgba(158,42,40,.55) 0%,rgba(158,42,40,0) 100%),
+  radial-gradient(65% 60% at 80% 30%,rgba(30,77,143,.65) 0%,rgba(30,77,143,0) 100%),
+  radial-gradient(70% 60% at 45% 85%,rgba(50,140,255,.5) 0%,rgba(50,140,255,0) 100%),
+  linear-gradient(135deg,#dfe9f7 0%,#e9dede 100%)}
+.stat-card{position:relative;width:100%;height:100%;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;padding:60px 0}
+.stat-card .gt{font-family:var(--serif);font-size:55px;font-weight:400;color:var(--kibu-navy-dark);user-select:none}
+.stat-card .num{font-family:var(--serif);font-size:64px;font-weight:600;line-height:1.5em;color:var(--kibu-navy);user-select:none;font-variant-numeric:tabular-nums}
+.stat-card .pct{font-family:var(--serif);font-size:55px;font-weight:600;user-select:none;background:linear-gradient(to left,#9e2a28,#1e4d8f);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ============ Content marquees ============ */
+.content-head{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+@media(min-width:1024px){.content-head{padding:0}}
+.content-head .p-std{margin-bottom:40px;max-width:600px}
+.content-head .btn-row{margin-bottom:32px}
+@media(min-width:1024px){.content-head .btn-row{margin-bottom:40px}}
+.marquee{max-width:var(--maxw);margin:0 auto;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)}
+.marquee-track{display:flex;align-items:center;gap:12px;width:max-content;will-change:transform}
+.mq-rtl{animation:scroll-rtl 60s linear infinite}
+.mq-ltr{animation:scroll-ltr 70s linear infinite}
+.mq-ltr-fast{animation:scroll-ltr 45s linear infinite}
+@keyframes scroll-rtl{0%{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes scroll-ltr{0%{transform:translateX(-50%)}to{transform:translateX(0)}}
+.cat-pill{display:flex;align-items:center;gap:8px;height:40px;padding:0 18px 0 8px;border-radius:999px;font-size:15px;font-weight:600;white-space:nowrap;flex-shrink:0}
+.cat-pill .dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.55)}
+.cat-pill .dot svg{width:14px;height:14px}
+.thumb{height:150px;width:240px;border-radius:12px;opacity:.75;transition:opacity .2s;cursor:pointer;flex-shrink:0;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:12px}
+.thumb:hover{opacity:1}
+.thumb span{position:relative;z-index:1;font-size:13px;font-weight:700;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35);line-height:1.25}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.38) 100%)}
+.thumb .ico{position:absolute;top:10px;left:12px;z-index:1;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;font-size:14px}
+.mb-6{margin-bottom:24px}.mb-3{margin-bottom:12px}
+
+/* ============ Elevate ============ */
+.elevate-head{text-align:center}
+.elevate-head .h2-std{max-width:600px;margin-left:auto;margin-right:auto}
+.elevate-head .p-std{max-width:620px;margin:0 auto 40px}
+.demo-video{border-radius:16px;overflow:hidden;margin-bottom:40px;aspect-ratio:16/9;position:relative;background:linear-gradient(135deg,#0c1a2e 0%,#16407a 55%,#2b7ae0 100%)}
+.demo-video svg{width:100%;height:100%}
+
+/* ============ Stories ============ */
+.stories-sec{background:#FAFAFA}
+.stories-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:40px}
+@media(min-width:1024px){.stories-grid{grid-template-columns:repeat(3,1fr)}}
+.story-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,.06);transition:box-shadow .25s}
+.story-card:hover{box-shadow:0 14px 40px rgba(0,0,0,.09)}
+.story-photo{position:relative;height:200px}
+.story-meta{padding:16px 20px;display:flex;align-items:center;gap:12px}
+.story-meta .story-logo{width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
+.story-meta p{font-size:14px;font-weight:600;color:#000}
+
+/* ============ Wall of Love ============ */
+.wall-sec{background:#fff;overflow:hidden}
+.wall-head{text-align:center;margin-bottom:32px}
+@media(min-width:1024px){.wall-head{margin-bottom:40px}}
+.wall-box{position:relative;max-width:var(--maxw);margin:0 auto;padding:0 20px;height:520px;overflow:hidden}
+@media(min-width:1024px){.wall-box{padding:0}}
+.wall-fade-t,.wall-fade-b{position:absolute;left:0;right:0;height:80px;z-index:10;pointer-events:none}
+.wall-fade-t{top:0;background:linear-gradient(to bottom,#fff,transparent)}
+.wall-fade-b{bottom:0;background:linear-gradient(to top,#fff,transparent)}
+.wall-mobile{height:100%;overflow:hidden}
+@media(min-width:1024px){.wall-mobile{display:none}}
+.wall-desktop{display:none}
+@media(min-width:1024px){.wall-desktop{display:flex;gap:16px;height:100%}}
+.wall-col{flex:1;overflow:hidden}
+.wall-track{display:flex;flex-direction:column;gap:16px;will-change:transform}
+.anim-up-80{animation:scroll-up 80s linear infinite}
+.anim-up-60{animation:scroll-up 60s linear infinite}
+.anim-down-70{animation:scroll-down 70s linear infinite}
+@keyframes scroll-up{0%{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes scroll-down{0%{transform:translateY(-50%)}to{transform:translateY(0)}}
+.t-card{background:#fff;border-radius:20px;padding:24px;border:1px solid rgba(0,0,0,.06);flex-shrink:0}
+.t-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.t-logo{height:44px;width:44px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff}
+.t-head p:first-of-type,.t-name{font-size:14px;font-weight:600;color:#000;margin-bottom:2px}
+.t-role{font-size:12px;color:rgba(0,0,0,.5)}
+.t-quote{font-size:14px;color:#000;line-height:22px}
+
+/* ============ Final CTA ============ */
+.final-sec{padding:60px 0;background:#FAFAFA}
+@media(min-width:1024px){.final-sec{padding:80px 0}}
+.final-sec .container{text-align:center;padding-left:24px;padding-right:24px}
+.final-sec h2{font-family:var(--sans);font-weight:600;letter-spacing:-.8px;color:#000;margin:0 auto 32px;max-width:560px;font-size:24px}
+@media(min-width:1024px){.final-sec h2{font-size:38px;line-height:46px}}
+
+/* ============ Footer ============ */
+footer{display:flex;width:100%;justify-content:center;border-top:1px solid rgba(0,0,0,.1);background:#fbfbfb}
+.footer-inner{display:flex;width:100%;max-width:var(--maxw);flex-direction:column;gap:40px;border-left:1px solid rgba(0,0,0,.1);border-right:1px solid rgba(0,0,0,.1);padding:80px 32px}
+@media(min-width:1024px){.footer-inner{gap:70px;padding:80px 64px}}
+.footer-top{display:flex;flex-direction:column;gap:32px}
+@media(min-width:1024px){.footer-top{flex-direction:row}}
+.footer-brand{display:flex;width:100%;flex-direction:column;gap:14px}
+@media(min-width:1024px){.footer-brand{width:175px;flex-shrink:0}}
+.footer-brand h3{font-family:var(--asap);font-size:24px;font-weight:700;line-height:1.4;letter-spacing:-.4px}
+.footer-map{opacity:.6}
+.footer-social{display:flex;align-items:flex-end;gap:12px}
+.footer-social a{opacity:.6;transition:opacity .2s;color:#000}
+.footer-social a:hover{opacity:1}
+.footer-social svg{height:18px;width:auto}
+.footer-addr{font-size:12px;line-height:1.4;letter-spacing:-.4px;color:#3f3f3f}
+.footer-cols{display:grid;flex:1;grid-template-columns:repeat(2,1fr);gap:30px}
+@media(min-width:640px){.footer-cols{grid-template-columns:repeat(3,1fr)}}
+.footer-col{display:flex;flex-direction:column;gap:15px}
+.footer-col>p{font-size:14px;font-weight:500;line-height:1.5;letter-spacing:-.16px;color:rgba(0,0,0,.75)}
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{font-size:14px;color:#777;transition:color .2s}
+.footer-col-links a:hover{color:#000}
+.footer-copy{display:flex;width:100%;justify-content:center}
+.footer-copy p{text-align:center;font-size:14px;color:rgba(0,0,0,.6)}
+.footer-col.ord-3{order:3}.footer-col.ord-2{order:2}
+@media(min-width:640px){.footer-col.ord-3{order:0}.footer-col.ord-2{order:0}}
+
+/* util */
+.tc{text-align:center}
+</style>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div class="nav-wrap">
+  <nav class="nav" id="nav">
+    <div class="nav-row">
+      <div style="display:inline-flex"><a class="nav-logo" href="#">kibu</a></div>
+      <div class="nav-links">
+        <a class="nav-link" href="#">Documentation</a>
+        <a class="nav-link" href="#">Content</a>
+        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Contact</a>
+        <div class="nav-dd">
+          <button class="nav-dd-btn">Resources
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <div class="nav-dd-menu">
+            <a href="#">Blog</a>
+            <a href="#">Resource Center</a>
+            <a href="#">Careers</a>
+            <a href="#">Changelog</a>
+          </div>
+        </div>
+        <div class="nav-dd">
+          <button class="nav-dd-btn">Fun
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <div class="nav-dd-menu">
+            <a href="#">Kibu TV</a>
+            <a href="#">Community</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <a class="nav-login" href="#">Login</a>
+        <a class="btn btn-sm" href="#"><span>Get a demo</span><span class="avatar">D</span></a>
+        <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu">
+      <a href="#">Documentation</a>
+      <a href="#">Content</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Blog</a>
+      <a href="#">Resource Center</a>
+      <a href="#">Login</a>
+      <a class="btn" href="#"><span>Get a demo</span><span class="avatar">D</span></a>
+    </div>
+  </nav>
+</div>
+
+<main>
+<div style="width:100%;overflow:hidden">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-inner">
+    <h1>Focus on Excellent Service.<br>We&#8217;ll Handle the Rest.</h1>
+    <p class="hero-sub">Kibu transforms compliance, documentation, and reporting while providing content that service providers love.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#"><span>Get a demo</span><span class="avatar">D</span></a>
+    </div>
+  </div>
+  <div class="hero-showcase">
+    <div class="hero-tabs-block" id="heroBlock">
+      <div class="hero-tabs" id="heroTabs">
+        <div class="hero-tab active" data-tab="0">
+          <button>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+            <p>Attendance</p>
+          </button>
+          <div class="hero-tab-bar"></div>
+        </div>
+        <div class="hero-tab" data-tab="1">
+          <button>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+            <p>Notes</p>
+          </button>
+          <div class="hero-tab-bar"></div>
+        </div>
+        <div class="hero-tab" data-tab="2">
+          <button>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.7L19.5 10l-5.6 1.3L12 17l-1.9-5.7L4.5 10l5.6-1.3Z"/><path d="M19 15l.7 2.1 2.1.7-2.1.7L19 20.6l-.7-2.1-2.1-.7 2.1-.7Z"/></svg>
+            <p>AI Reports</p>
+          </button>
+          <div class="hero-tab-bar"></div>
+        </div>
+        <div class="hero-tab" data-tab="3">
+          <button>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="#000"/></svg>
+            <p>Life Plans</p>
+          </button>
+          <div class="hero-tab-bar"></div>
+        </div>
+        <div class="hero-tab" data-tab="4">
+          <button>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="10" rx="5" transform="rotate(-40 12 14)"/><path d="M8.5 8.6 15 16"/></svg>
+            <p>Medication</p>
+          </button>
+          <div class="hero-tab-bar"></div>
+        </div>
+        <div class="hero-tab" data-tab="5">
+          <button>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5Z" fill="#000" stroke="none"/></svg>
+            <p>Content</p>
+          </button>
+          <div class="hero-tab-bar"></div>
+        </div>
+      </div>
+      <div class="hero-screen" id="heroScreen">
+        <!-- 6 app screenshot placeholders (SVG) -->
+        <div class="hero-shot active">
+          <svg viewBox="0 0 1056 630" preserveAspectRatio="xMidYMid slice">
+            <rect width="1056" height="630" fill="#f7f8fa"/>
+            <rect width="216" height="630" fill="#ffffff"/><line x1="216" y1="0" x2="216" y2="630" stroke="#ececef"/>
+            <text x="24" y="44" font-family="Asap,sans-serif" font-size="26" font-weight="700" fill="#08090a">kibu</text>
+            <rect x="20" y="76" width="176" height="34" rx="8" fill="#ebf3ff"/><text x="36" y="98" font-size="14" font-weight="600" fill="#2b7ae0" font-family="Inter,sans-serif">Attendance</text>
+            <rect x="36" y="130" width="120" height="10" rx="5" fill="#e8e9ec"/><rect x="36" y="160" width="140" height="10" rx="5" fill="#e8e9ec"/><rect x="36" y="190" width="100" height="10" rx="5" fill="#e8e9ec"/><rect x="36" y="220" width="130" height="10" rx="5" fill="#e8e9ec"/>
+            <rect x="240" y="28" width="300" height="26" rx="6" fill="#e9eaee"/>
+            <rect x="880" y="22" width="152" height="38" rx="10" fill="#08090a"/><text x="906" y="46" font-size="14" fill="#fff" font-family="Inter,sans-serif">Take attendance</text>
+            <g font-family="Inter,sans-serif">
+              <rect x="240" y="90" width="792" height="56" rx="10" fill="#fff" stroke="#ececef"/>
+              <circle cx="272" cy="118" r="14" fill="#c7e7ff"/><rect x="300" y="110" width="140" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="932" y="104" width="80" height="28" rx="14" fill="#dcfce7"/><text x="948" y="123" font-size="13" fill="#158a4c">Present</text>
+              <rect x="240" y="158" width="792" height="56" rx="10" fill="#fff" stroke="#ececef"/>
+              <circle cx="272" cy="186" r="14" fill="#ffd9b3"/><rect x="300" y="178" width="170" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="932" y="172" width="80" height="28" rx="14" fill="#dcfce7"/><text x="948" y="191" font-size="13" fill="#158a4c">Present</text>
+              <rect x="240" y="226" width="792" height="56" rx="10" fill="#fff" stroke="#ececef"/>
+              <circle cx="272" cy="254" r="14" fill="#e3d0ff"/><rect x="300" y="246" width="120" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="932" y="240" width="80" height="28" rx="14" fill="#ffe2e2"/><text x="952" y="259" font-size="13" fill="#c22">Absent</text>
+              <rect x="240" y="294" width="792" height="56" rx="10" fill="#fff" stroke="#ececef"/>
+              <circle cx="272" cy="322" r="14" fill="#c9f3d8"/><rect x="300" y="314" width="150" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="932" y="308" width="80" height="28" rx="14" fill="#dcfce7"/><text x="948" y="327" font-size="13" fill="#158a4c">Present</text>
+              <rect x="240" y="362" width="792" height="56" rx="10" fill="#fff" stroke="#ececef"/>
+              <circle cx="272" cy="390" r="14" fill="#ffe0ef"/><rect x="300" y="382" width="160" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="932" y="376" width="80" height="28" rx="14" fill="#dcfce7"/><text x="948" y="395" font-size="13" fill="#158a4c">Present</text>
+              <rect x="240" y="430" width="792" height="56" rx="10" fill="#fff" stroke="#ececef"/>
+              <circle cx="272" cy="458" r="14" fill="#d0e8ff"/><rect x="300" y="450" width="130" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="932" y="444" width="80" height="28" rx="14" fill="#dcfce7"/><text x="948" y="463" font-size="13" fill="#158a4c">Present</text>
+            </g>
+          </svg>
+        </div>
+        <div class="hero-shot">
+          <svg viewBox="0 0 1056 630" preserveAspectRatio="xMidYMid slice">
+            <rect width="1056" height="630" fill="#f7f8fa"/>
+            <rect width="216" height="630" fill="#fff"/><line x1="216" y1="0" x2="216" y2="630" stroke="#ececef"/>
+            <text x="24" y="44" font-family="Asap,sans-serif" font-size="26" font-weight="700" fill="#08090a">kibu</text>
+            <rect x="20" y="76" width="176" height="34" rx="8" fill="#ebf3ff"/><text x="36" y="98" font-size="14" font-weight="600" fill="#2b7ae0" font-family="Inter,sans-serif">Notes</text>
+            <rect x="240" y="40" width="520" height="20" rx="8" fill="#e2e4e8"/>
+            <rect x="240" y="90" width="792" height="440" rx="14" fill="#fff" stroke="#ececef"/>
+            <g font-family="Inter,sans-serif">
+              <rect x="268" y="120" width="220" height="14" rx="7" fill="#d6d8dd"/>
+              <rect x="268" y="156" width="736" height="10" rx="5" fill="#ececef"/>
+              <rect x="268" y="180" width="700" height="10" rx="5" fill="#ececef"/>
+              <rect x="268" y="204" width="720" height="10" rx="5" fill="#ececef"/>
+              <rect x="268" y="228" width="560" height="10" rx="5" fill="#ececef"/>
+              <rect x="268" y="276" width="736" height="10" rx="5" fill="#ececef"/>
+              <rect x="268" y="300" width="680" height="10" rx="5" fill="#ececef"/>
+              <rect x="268" y="324" width="710" height="10" rx="5" fill="#ececef"/>
+              <rect x="820" y="470" width="184" height="40" rx="12" fill="#328cff"/>
+              <text x="846" y="495" font-size="14" fill="#fff">✦ Magic Pen</text>
+            </g>
+          </svg>
+        </div>
+        <div class="hero-shot">
+          <svg viewBox="0 0 1056 630" preserveAspectRatio="xMidYMid slice">
+            <rect width="1056" height="630" fill="#f7f8fa"/>
+            <rect width="216" height="630" fill="#fff"/><line x1="216" y1="0" x2="216" y2="630" stroke="#ececef"/>
+            <text x="24" y="44" font-family="Asap,sans-serif" font-size="26" font-weight="700" fill="#08090a">kibu</text>
+            <rect x="20" y="76" width="176" height="34" rx="8" fill="#ebf3ff"/><text x="36" y="98" font-size="14" font-weight="600" fill="#2b7ae0" font-family="Inter,sans-serif">AI Reports</text>
+            <rect x="240" y="40" width="320" height="20" rx="8" fill="#e2e4e8"/>
+            <g>
+              <rect x="240" y="90" width="384" height="300" rx="14" fill="#fff" stroke="#ececef"/>
+              <rect x="272" y="330" width="40" height="30" rx="4" fill="#96cbff"/>
+              <rect x="328" y="290" width="40" height="70" rx="4" fill="#328cff"/>
+              <rect x="384" y="250" width="40" height="110" rx="4" fill="#96cbff"/>
+              <rect x="440" y="200" width="40" height="160" rx="4" fill="#328cff"/>
+              <rect x="496" y="160" width="40" height="200" rx="4" fill="#1f4e91"/>
+              <rect x="272" y="120" width="150" height="12" rx="6" fill="#d6d8dd"/>
+            </g>
+            <g>
+              <rect x="648" y="90" width="384" height="300" rx="14" fill="#fff" stroke="#ececef"/>
+              <circle cx="840" cy="240" r="86" fill="none" stroke="#ececef" stroke-width="22"/>
+              <circle cx="840" cy="240" r="86" fill="none" stroke="#328cff" stroke-width="22" stroke-dasharray="486 540" stroke-linecap="round" transform="rotate(-90 840 240)"/>
+              <text x="840" y="250" text-anchor="middle" font-family="Inter,sans-serif" font-size="30" font-weight="700" fill="#1f4e91">99.2%</text>
+            </g>
+            <rect x="240" y="414" width="792" height="120" rx="14" fill="#fff" stroke="#ececef"/>
+            <rect x="272" y="444" width="620" height="10" rx="5" fill="#ececef"/><rect x="272" y="470" width="560" height="10" rx="5" fill="#ececef"/><rect x="272" y="496" width="600" height="10" rx="5" fill="#ececef"/>
+          </svg>
+        </div>
+        <div class="hero-shot">
+          <svg viewBox="0 0 1056 630" preserveAspectRatio="xMidYMid slice">
+            <rect width="1056" height="630" fill="#f7f8fa"/>
+            <rect width="216" height="630" fill="#fff"/><line x1="216" y1="0" x2="216" y2="630" stroke="#ececef"/>
+            <text x="24" y="44" font-family="Asap,sans-serif" font-size="26" font-weight="700" fill="#08090a">kibu</text>
+            <rect x="20" y="76" width="176" height="34" rx="8" fill="#ebf3ff"/><text x="36" y="98" font-size="14" font-weight="600" fill="#2b7ae0" font-family="Inter,sans-serif">Life Plans</text>
+            <g font-family="Inter,sans-serif">
+              <rect x="240" y="60" width="792" height="90" rx="14" fill="#fff" stroke="#ececef"/>
+              <rect x="268" y="88" width="180" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="268" y="114" width="700" height="10" rx="5" fill="#ececef"/><rect x="268" y="114" width="480" height="10" rx="5" fill="#328cff"/>
+              <rect x="240" y="170" width="792" height="90" rx="14" fill="#fff" stroke="#ececef"/>
+              <rect x="268" y="198" width="220" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="268" y="224" width="700" height="10" rx="5" fill="#ececef"/><rect x="268" y="224" width="300" height="10" rx="5" fill="#05df72"/>
+              <rect x="240" y="280" width="792" height="90" rx="14" fill="#fff" stroke="#ececef"/>
+              <rect x="268" y="308" width="160" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="268" y="334" width="700" height="10" rx="5" fill="#ececef"/><rect x="268" y="334" width="580" height="10" rx="5" fill="#ffd236"/>
+              <rect x="240" y="390" width="792" height="90" rx="14" fill="#fff" stroke="#ececef"/>
+              <rect x="268" y="418" width="200" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="268" y="444" width="700" height="10" rx="5" fill="#ececef"/><rect x="268" y="444" width="420" height="10" rx="5" fill="#2b7ae0"/>
+            </g>
+          </svg>
+        </div>
+        <div class="hero-shot">
+          <svg viewBox="0 0 1056 630" preserveAspectRatio="xMidYMid slice">
+            <rect width="1056" height="630" fill="#f7f8fa"/>
+            <rect width="216" height="630" fill="#fff"/><line x1="216" y1="0" x2="216" y2="630" stroke="#ececef"/>
+            <text x="24" y="44" font-family="Asap,sans-serif" font-size="26" font-weight="700" fill="#08090a">kibu</text>
+            <rect x="20" y="76" width="176" height="34" rx="8" fill="#ebf3ff"/><text x="36" y="98" font-size="14" font-weight="600" fill="#2b7ae0" font-family="Inter,sans-serif">Medication</text>
+            <g font-family="Inter,sans-serif">
+              <rect x="240" y="60" width="792" height="64" rx="12" fill="#fff" stroke="#ececef"/>
+              <rect x="266" y="78" width="28" height="28" rx="14" fill="#ffe2e2"/><rect x="312" y="80" width="180" height="11" rx="5" fill="#d6d8dd"/><rect x="312" y="99" width="120" height="9" rx="4" fill="#ececef"/>
+              <rect x="912" y="76" width="96" height="32" rx="16" fill="#dcfce7"/><text x="936" y="97" font-size="13" fill="#158a4c">Given</text>
+              <rect x="240" y="136" width="792" height="64" rx="12" fill="#fff" stroke="#ececef"/>
+              <rect x="266" y="154" width="28" height="28" rx="14" fill="#fef3c6"/><rect x="312" y="156" width="150" height="11" rx="5" fill="#d6d8dd"/><rect x="312" y="175" width="140" height="9" rx="4" fill="#ececef"/>
+              <rect x="912" y="152" width="96" height="32" rx="16" fill="#dcfce7"/><text x="936" y="173" font-size="13" fill="#158a4c">Given</text>
+              <rect x="240" y="212" width="792" height="64" rx="12" fill="#fff" stroke="#ececef"/>
+              <rect x="266" y="230" width="28" height="28" rx="14" fill="#ebf3ff"/><rect x="312" y="232" width="200" height="11" rx="5" fill="#d6d8dd"/><rect x="312" y="251" width="110" height="9" rx="4" fill="#ececef"/>
+              <rect x="912" y="228" width="96" height="32" rx="16" fill="#fef3c6"/><text x="930" y="249" font-size="13" fill="#a16207">Pending</text>
+              <rect x="240" y="288" width="792" height="64" rx="12" fill="#fff" stroke="#ececef"/>
+              <rect x="266" y="306" width="28" height="28" rx="14" fill="#e3d0ff"/><rect x="312" y="308" width="170" height="11" rx="5" fill="#d6d8dd"/><rect x="312" y="327" width="130" height="9" rx="4" fill="#ececef"/>
+              <rect x="912" y="304" width="96" height="32" rx="16" fill="#dcfce7"/><text x="936" y="325" font-size="13" fill="#158a4c">Given</text>
+              <rect x="240" y="364" width="792" height="64" rx="12" fill="#fff" stroke="#ececef"/>
+              <rect x="266" y="382" width="28" height="28" rx="14" fill="#c9f3d8"/><rect x="312" y="384" width="190" height="11" rx="5" fill="#d6d8dd"/><rect x="312" y="403" width="100" height="9" rx="4" fill="#ececef"/>
+              <rect x="912" y="380" width="96" height="32" rx="16" fill="#dcfce7"/><text x="936" y="401" font-size="13" fill="#158a4c">Given</text>
+            </g>
+          </svg>
+        </div>
+        <div class="hero-shot">
+          <svg viewBox="0 0 1056 630" preserveAspectRatio="xMidYMid slice">
+            <rect width="1056" height="630" fill="#f7f8fa"/>
+            <rect width="216" height="630" fill="#fff"/><line x1="216" y1="0" x2="216" y2="630" stroke="#ececef"/>
+            <text x="24" y="44" font-family="Asap,sans-serif" font-size="26" font-weight="700" fill="#08090a">kibu</text>
+            <rect x="20" y="76" width="176" height="34" rx="8" fill="#ebf3ff"/><text x="36" y="98" font-size="14" font-weight="600" fill="#2b7ae0" font-family="Inter,sans-serif">Content</text>
+            <g>
+              <rect x="240" y="70" width="248" height="150" rx="12" fill="#96cbff"/><circle cx="364" cy="145" r="24" fill="rgba(255,255,255,.9)"/><path d="M357 133l22 12-22 12z" fill="#1f4e91"/>
+              <rect x="512" y="70" width="248" height="150" rx="12" fill="#ffd9b3"/><circle cx="636" cy="145" r="24" fill="rgba(255,255,255,.9)"/><path d="M629 133l22 12-22 12z" fill="#9a4b12"/>
+              <rect x="784" y="70" width="248" height="150" rx="12" fill="#c9f3d8"/><circle cx="908" cy="145" r="24" fill="rgba(255,255,255,.9)"/><path d="M901 133l22 12-22 12z" fill="#14683c"/>
+              <rect x="240" y="236" width="180" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="240" y="286" width="248" height="150" rx="12" fill="#e3d0ff"/><circle cx="364" cy="361" r="24" fill="rgba(255,255,255,.9)"/><path d="M357 349l22 12-22 12z" fill="#5b2d91"/>
+              <rect x="512" y="286" width="248" height="150" rx="12" fill="#ffe0ef"/><circle cx="636" cy="361" r="24" fill="rgba(255,255,255,.9)"/><path d="M629 349l22 12-22 12z" fill="#9c2860"/>
+              <rect x="784" y="286" width="248" height="150" rx="12" fill="#fef3c6"/><circle cx="908" cy="361" r="24" fill="rgba(255,255,255,.9)"/><path d="M901 349l22 12-22 12z" fill="#8a6a06"/>
+              <rect x="240" y="452" width="180" height="12" rx="6" fill="#d6d8dd"/>
+              <rect x="240" y="486" width="248" height="80" rx="12" fill="#d0e8ff"/>
+              <rect x="512" y="486" width="248" height="80" rx="12" fill="#ffd9b3"/>
+              <rect x="784" y="486" width="248" height="80" rx="12" fill="#c9f3d8"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOGOS ================= -->
+<section class="logos-sec">
+  <div class="container">
+    <h2 class="logos-title">Organizations We Serve</h2>
+    <p class="logos-sub">Trusted by Disability Providers across the USA</p>
+    <div class="logos-rows">
+      <div class="logos-row">
+        <div class="logo-ph lp-caps"><span>Chimes</span></div>
+        <div class="logo-ph lp-serif"><span>The Arc</span></div>
+        <div class="logo-ph lp-bold"><span>YMCA</span></div>
+        <div class="logo-ph lp-round"><span>UCP</span></div>
+        <div class="logo-ph lp-caps"><span>Jewish Federation</span></div>
+        <div class="logo-ph lp-bold"><span>CP Unlimited</span></div>
+        <div class="logo-ph lp-script"><span>Woodfords</span></div>
+      </div>
+      <div class="logos-row">
+        <div class="logo-ph lp-serif"><span>Mission Road</span></div>
+        <div class="logo-ph lp-caps"><span>Corner of Determination</span></div>
+        <div class="logo-ph lp-serif"><span>Catholic Guardian</span></div>
+        <div class="logo-ph lp-bold"><span>Active Day</span></div>
+        <div class="logo-ph lp-caps"><span>Babcock</span></div>
+        <div class="logo-ph lp-round"><span>Elwyn</span></div>
+      </div>
+    </div>
+    <a class="btn" href="#"><span>Get a demo</span></a>
+  </div>
+</section>
+
+<!-- ================= FOCUS / LETTER REVEAL ================= -->
+<section class="focus-sec">
+  <div class="focus-inner">
+    <h2>Focus on People, Not Paper</h2>
+    <div class="reveal-text" id="revealText">Disability providers know firsthand the challenges facing individuals with intellectual and developmental disabilities — social isolation, communication barriers, limited resources, and the constant struggle for independence. Still, outdated systems and never-ending compliance requirements shift your focus, limiting the time and energy you have to support meaningful progress.&#10;&#10;Kibu was founded to help disability providers overcome these hurdles to focus on what really matters: supporting individuals living with IDD.</div>
+    <div class="focus-sig">
+      <span class="sig-script">Daniel Caridi</span>
+      <h3>Daniel Caridi, Co-Founder &amp; CEO</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STAFF CARDS ================= -->
+<section class="sec">
+  <div class="container tc">
+    <h2 class="h2-std">Actually built for staff</h2>
+    <p class="p-std">Kibu gives DSPs the power to focus on delivering outstanding support.</p>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <div class="staff-card-media">
+          <svg viewBox="0 0 320 340" width="320" height="340">
+            <rect x="60" y="40" width="200" height="260" rx="18" fill="#fff"/>
+            <circle cx="160" cy="110" r="34" fill="#c7e7ff"/>
+            <circle cx="160" cy="98" r="13" fill="#96cbff"/>
+            <path d="M138 126c4-12 40-12 44 0v6h-44z" fill="#96cbff"/>
+            <rect x="100" y="164" width="120" height="12" rx="6" fill="#e5e7eb"/>
+            <rect x="116" y="188" width="88" height="10" rx="5" fill="#eef0f3"/>
+            <rect x="88" y="222" width="144" height="30" rx="10" fill="#ebf3ff"/>
+            <rect x="102" y="232" width="70" height="10" rx="5" fill="#328cff"/>
+            <rect x="88" y="260" width="144" height="30" rx="10" fill="#f5f5f7"/>
+            <rect x="102" y="270" width="90" height="10" rx="5" fill="#d6d8dd"/>
+            <circle cx="252" cy="64" r="20" fill="#ffd236"/>
+            <path d="M245 64l5 5 10-10" stroke="#7a5c00" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p>Personalized</p>
+      </div>
+      <div class="staff-card">
+        <div class="staff-card-media">
+          <svg viewBox="0 0 320 340" width="320" height="340">
+            <rect x="50" y="70" width="220" height="70" rx="14" fill="#fff"/>
+            <rect x="70" y="92" width="110" height="12" rx="6" fill="#e5e7eb"/>
+            <rect x="70" y="114" width="70" height="8" rx="4" fill="#eef0f3"/>
+            <circle cx="242" cy="105" r="16" fill="#dcfce7"/><path d="M235 105l5 5 9-9" stroke="#158a4c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="50" y="156" width="220" height="70" rx="14" fill="#fff"/>
+            <rect x="70" y="178" width="130" height="12" rx="6" fill="#e5e7eb"/>
+            <rect x="70" y="200" width="90" height="8" rx="4" fill="#eef0f3"/>
+            <circle cx="242" cy="191" r="16" fill="#dcfce7"/><path d="M235 191l5 5 9-9" stroke="#158a4c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M175 20l-34 66h26l-14 54 48-72h-28l20-48z" fill="#ffd236" stroke="#e8b400" stroke-width="2" stroke-linejoin="round" transform="translate(60,180) scale(.62)"/>
+          </svg>
+        </div>
+        <p>Fast &amp; Easy</p>
+      </div>
+      <div class="staff-card">
+        <div class="staff-card-media">
+          <svg viewBox="0 0 320 340" width="320" height="340">
+            <rect x="96" y="24" width="128" height="292" rx="24" fill="#08090a"/>
+            <rect x="104" y="32" width="112" height="276" rx="18" fill="#fff"/>
+            <rect x="146" y="40" width="28" height="6" rx="3" fill="#e5e7eb"/>
+            <text x="118" y="76" font-family="Asap,sans-serif" font-size="18" font-weight="700" fill="#08090a">kibu</text>
+            <rect x="116" y="92" width="88" height="52" rx="10" fill="#c7e7ff"/>
+            <rect x="116" y="152" width="88" height="14" rx="7" fill="#eef0f3"/>
+            <rect x="116" y="174" width="60" height="10" rx="5" fill="#eef0f3"/>
+            <rect x="116" y="196" width="88" height="34" rx="10" fill="#ebf3ff"/>
+            <rect x="126" y="208" width="46" height="10" rx="5" fill="#328cff"/>
+            <rect x="116" y="238" width="88" height="34" rx="10" fill="#f5f5f7"/>
+            <rect x="126" y="250" width="56" height="10" rx="5" fill="#d6d8dd"/>
+            <circle cx="160" cy="292" r="10" fill="#eef0f3"/>
+          </svg>
+        </div>
+        <p>Mobile-Ready</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPLIANCE 60s ================= -->
+<section class="sec">
+  <div class="container">
+    <div class="comp-flex">
+      <div class="comp-left">
+        <h2>Compliance in 60 Seconds</h2>
+        <p>Accessible features that save your organization time, while keeping up with regulations:</p>
+        <div class="comp-bullets" id="compBullets">
+          <button class="comp-bullet active" data-pane="0"><div class="tick"></div><span>Built-In Translation</span></button>
+          <button class="comp-bullet" data-pane="1"><div class="tick"></div><span>AI-Assisted Service Notes</span></button>
+          <button class="comp-bullet" data-pane="2"><div class="tick"></div><span>Beautiful, Fast Reporting</span></button>
+        </div>
+      </div>
+      <div class="comp-media" id="compMedia">
+        <div class="comp-pane active">
+          <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="cg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c7e7ff"/><stop offset="1" stop-color="#96cbff"/></linearGradient></defs>
+            <rect width="700" height="500" fill="url(#cg1)"/>
+            <rect x="90" y="90" width="380" height="96" rx="18" fill="#fff"/>
+            <text x="118" y="132" font-family="Inter,sans-serif" font-size="20" fill="#08090a">Hello! How are you today?</text>
+            <text x="118" y="162" font-family="Inter,sans-serif" font-size="13" fill="#8a8f98">English</text>
+            <rect x="230" y="230" width="380" height="96" rx="18" fill="#1f4e91"/>
+            <text x="258" y="272" font-family="Inter,sans-serif" font-size="20" fill="#fff">¡Hola! ¿Cómo estás hoy?</text>
+            <text x="258" y="302" font-family="Inter,sans-serif" font-size="13" fill="rgba(255,255,255,.7)">Spanish · Translated</text>
+            <circle cx="350" cy="404" r="30" fill="#fff"/>
+            <path d="M340 404h20M350 394v20" stroke="#328cff" stroke-width="3" stroke-linecap="round" transform="rotate(45 350 404)"/>
+          </svg>
+        </div>
+        <div class="comp-pane">
+          <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="cg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e3d0ff"/><stop offset="1" stop-color="#c8a8f5"/></linearGradient></defs>
+            <rect width="700" height="500" fill="url(#cg2)"/>
+            <rect x="110" y="80" width="480" height="340" rx="18" fill="#fff"/>
+            <rect x="140" y="112" width="180" height="14" rx="7" fill="#d6d8dd"/>
+            <rect x="140" y="150" width="420" height="10" rx="5" fill="#ececef"/>
+            <rect x="140" y="174" width="390" height="10" rx="5" fill="#ececef"/>
+            <rect x="140" y="198" width="410" height="10" rx="5" fill="#ececef"/>
+            <rect x="140" y="222" width="300" height="10" rx="5" fill="#ececef"/>
+            <rect x="140" y="262" width="420" height="10" rx="5" fill="#d9c4ff"/>
+            <rect x="140" y="286" width="360" height="10" rx="5" fill="#d9c4ff"/>
+            <rect x="404" y="352" width="156" height="40" rx="12" fill="#5b2d91"/>
+            <text x="428" y="377" font-family="Inter,sans-serif" font-size="14" fill="#fff">✦ Generate</text>
+          </svg>
+        </div>
+        <div class="comp-pane">
+          <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="cg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9f3d8"/><stop offset="1" stop-color="#8fdcb0"/></linearGradient></defs>
+            <rect width="700" height="500" fill="url(#cg3)"/>
+            <rect x="110" y="80" width="480" height="340" rx="18" fill="#fff"/>
+            <rect x="150" y="300" width="52" height="80" rx="6" fill="#96cbff"/>
+            <rect x="222" y="250" width="52" height="130" rx="6" fill="#328cff"/>
+            <rect x="294" y="210" width="52" height="170" rx="6" fill="#1f4e91"/>
+            <rect x="366" y="170" width="52" height="210" rx="6" fill="#328cff"/>
+            <rect x="438" y="130" width="52" height="250" rx="6" fill="#14683c"/>
+            <rect x="150" y="112" width="200" height="14" rx="7" fill="#d6d8dd"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURE GRID 1 ================= -->
+<section style="padding-bottom:60px" class="pb-grid">
+  <div style="max-width:1056px;margin:0 auto">
+    <div class="feat-grid">
+      <div class="feat-cell sm-r lg-r">
+        <div class="feat-head">
+          <svg stroke="currentColor" fill="none" stroke-width="1.36" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Member Records</span>
+        </div>
+        <p>Keep member records accurate and accessible.</p>
+      </div>
+      <div class="feat-cell lg-r">
+        <div class="feat-head">
+          <svg stroke="currentColor" fill="none" stroke-width="1.36" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Tasks</span>
+        </div>
+        <p>Assign, track, and complete tasks quickly.</p>
+      </div>
+      <div class="feat-cell sm-r lg-r">
+        <div class="feat-head">
+          <svg stroke="currentColor" fill="none" stroke-width="1.36" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Appointments/Transports</span>
+        </div>
+        <p>Never miss a pickup or appointment again.</p>
+      </div>
+      <div class="feat-cell lg-r0">
+        <div class="feat-head">
+          <svg stroke="currentColor" fill="none" stroke-width="1.36" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Custom Controls</span>
+        </div>
+        <p>Adapt Kibu&#8217;s platform to fit your needs.</p>
+      </div>
+
+      <div class="big-cell lg-r">
+        <h3>Directors Can Track Compliance Instantly. Anywhere, Anytime.</h3>
+        <p>No more complex Excel work - we&#8217;ll do the math for you.</p>
+        <div class="big-cell-media">
+          <svg viewBox="0 0 768 661" preserveAspectRatio="xMidYMid slice">
+            <rect width="768" height="661" fill="#f7f8fa"/>
+            <rect x="36" y="36" width="332" height="230" rx="16" fill="#fff" stroke="#ececef"/>
+            <circle cx="202" cy="160" r="62" fill="none" stroke="#ececef" stroke-width="18"/>
+            <circle cx="202" cy="160" r="62" fill="none" stroke="#328cff" stroke-width="18" stroke-dasharray="368 390" stroke-linecap="round" transform="rotate(-90 202 160)"/>
+            <text x="202" y="168" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" font-weight="700" fill="#1f4e91">99.2%</text>
+            <rect x="64" y="60" width="140" height="12" rx="6" fill="#d6d8dd"/>
+            <rect x="400" y="36" width="332" height="230" rx="16" fill="#fff" stroke="#ececef"/>
+            <rect x="428" y="60" width="120" height="12" rx="6" fill="#d6d8dd"/>
+            <rect x="428" y="200" width="36" height="42" rx="4" fill="#96cbff"/>
+            <rect x="478" y="170" width="36" height="72" rx="4" fill="#328cff"/>
+            <rect x="528" y="140" width="36" height="102" rx="4" fill="#96cbff"/>
+            <rect x="578" y="110" width="36" height="132" rx="4" fill="#328cff"/>
+            <rect x="628" y="92" width="36" height="150" rx="4" fill="#1f4e91"/>
+            <rect x="36" y="290" width="696" height="80" rx="14" fill="#fff" stroke="#ececef"/>
+            <circle cx="76" cy="330" r="16" fill="#dcfce7"/><path d="M69 330l5 5 9-9" stroke="#158a4c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="110" y="314" width="220" height="12" rx="6" fill="#d6d8dd"/><rect x="110" y="338" width="150" height="9" rx="4" fill="#ececef"/>
+            <rect x="36" y="386" width="696" height="80" rx="14" fill="#fff" stroke="#ececef"/>
+            <circle cx="76" cy="426" r="16" fill="#dcfce7"/><path d="M69 426l5 5 9-9" stroke="#158a4c" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="110" y="410" width="260" height="12" rx="6" fill="#d6d8dd"/><rect x="110" y="434" width="130" height="9" rx="4" fill="#ececef"/>
+            <rect x="36" y="482" width="696" height="80" rx="14" fill="#fff" stroke="#ececef"/>
+            <circle cx="76" cy="522" r="16" fill="#fef3c6"/><path d="M76 514v10M76 530h.01" stroke="#a16207" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <rect x="110" y="506" width="190" height="12" rx="6" fill="#d6d8dd"/><rect x="110" y="530" width="170" height="9" rx="4" fill="#ececef"/>
+            <rect x="36" y="578" width="696" height="60" rx="14" fill="#fff" stroke="#ececef"/>
+            <rect x="64" y="600" width="240" height="12" rx="6" fill="#ececef"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="big-cell">
+        <h3>Providers who use Kibu don&#8217;t just meet standards — they set them.</h3>
+        <p>Kibu partners average over 99.2% compliance within their first 2 months.</p>
+        <div class="big-cell-media" style="overflow:visible">
+          <div class="stat-wrap">
+            <div class="stat-card">
+              <span class="gt">&gt;</span><span class="num" id="statNum">0.0</span><span class="pct">%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTENT & LESSON PLANS ================= -->
+<section class="sec">
+  <div class="content-head">
+    <h2 class="h2-std">Content and Lesson Plans, Built for You</h2>
+    <p class="p-std" style="margin-bottom:40px;max-width:600px">Never worry about finding your next video lesson or building your next lesson plan. We&#8217;ve already done the heavy lifting for you!</p>
+    <div class="btn-row" style="margin-bottom:40px"><a class="btn" href="#"><span>Get a demo</span></a></div>
+  </div>
+  <div class="marquee mb-6">
+    <div class="marquee-track mq-rtl" id="catTrack">
+      <!-- populated by JS (duplicated set) -->
+    </div>
+  </div>
+  <div class="marquee mb-3">
+    <div class="marquee-track mq-ltr-fast" id="thumbTrack1"></div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track mq-ltr" id="thumbTrack2"></div>
+  </div>
+</section>
+
+<!-- ================= ELEVATE ================= -->
+<section class="sec">
+  <div class="container elevate-head">
+    <h2 class="h2-std">Elevate Content with Intelligent Features</h2>
+    <p class="p-std">Combining content and documentation is what makes our platform extraordinary. Educate members and track progress automatically, all in one place.</p>
+    <div class="demo-video">
+      <svg viewBox="0 0 1056 594" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="dv" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0c1a2e"/><stop offset=".55" stop-color="#16407a"/><stop offset="1" stop-color="#2b7ae0"/>
+          </linearGradient>
+        </defs>
+        <rect width="1056" height="594" fill="url(#dv)"/>
+        <rect x="128" y="90" width="560" height="360" rx="16" fill="rgba(255,255,255,.1)"/>
+        <rect x="150" y="112" width="516" height="280" rx="10" fill="rgba(255,255,255,.16)"/>
+        <rect x="150" y="410" width="220" height="14" rx="7" fill="rgba(255,255,255,.35)"/>
+        <rect x="720" y="90" width="208" height="170" rx="14" fill="rgba(255,255,255,.12)"/>
+        <rect x="742" y="114" width="120" height="12" rx="6" fill="rgba(255,255,255,.4)"/>
+        <rect x="742" y="140" width="164" height="9" rx="4" fill="rgba(255,255,255,.25)"/>
+        <rect x="742" y="160" width="150" height="9" rx="4" fill="rgba(255,255,255,.25)"/>
+        <rect x="742" y="196" width="164" height="10" rx="5" fill="rgba(255,255,255,.2)"/>
+        <rect x="742" y="196" width="110" height="10" rx="5" fill="#ffd236"/>
+        <rect x="720" y="280" width="208" height="170" rx="14" fill="rgba(255,255,255,.12)"/>
+        <rect x="742" y="304" width="100" height="12" rx="6" fill="rgba(255,255,255,.4)"/>
+        <circle cx="824" cy="392" r="34" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="9"/>
+        <circle cx="824" cy="392" r="34" fill="none" stroke="#05df72" stroke-width="9" stroke-dasharray="160 214" stroke-linecap="round" transform="rotate(-90 824 392)"/>
+        <circle cx="528" cy="270" r="52" fill="rgba(255,255,255,.92)"/>
+        <path d="M512 244l46 26-46 26z" fill="#16407a"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURE GRID 2 ================= -->
+<section class="sec">
+  <div style="max-width:1056px;margin:0 auto">
+    <div class="feat-grid">
+      <div class="feat-cell sm-r lg-r">
+        <div class="feat-head">
+          <svg stroke="currentColor" fill="none" stroke-width="1.36" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Tracking &amp; Goals</span>
+        </div>
+        <p>Keep programming aligned for your members.</p>
+      </div>
+      <div class="feat-cell lg-r">
+        <div class="feat-head">
+          <svg stroke="currentColor" fill="none" stroke-width="1.36" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Full Platform</span>
+        </div>
+        <p>No more switching between different systems.</p>
+      </div>
+      <div class="feat-cell sm-r lg-r">
+        <div class="feat-head">
+          <svg stroke="currentColor" fill="none" stroke-width="1.36" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Easy to use</span>
+        </div>
+        <p>Eliminate confusion from clunky, outdated platforms.</p>
+      </div>
+      <div class="feat-cell lg-r0">
+        <div class="feat-head">
+          <svg stroke="currentColor" fill="none" stroke-width="1.36" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Custom dashboard</span>
+        </div>
+        <p>Personalized for every member of your organization.</p>
+      </div>
+
+      <div class="big-cell lg-r">
+        <h3>We&#8217;ll Walk You Through Every Step.</h3>
+        <p>Start strong with personalized onboarding tailored for your organization.</p>
+        <div class="big-cell-media">
+          <svg viewBox="0 0 768 661" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="ob" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fef3c6"/><stop offset="1" stop-color="#ffd9b3"/></linearGradient></defs>
+            <rect width="768" height="661" fill="url(#ob)"/>
+            <circle cx="384" cy="270" r="120" fill="#fff"/>
+            <circle cx="384" cy="238" r="46" fill="#f7c59f"/>
+            <path d="M310 330c14-44 134-44 148 0v30H310z" fill="#1f4e91"/>
+            <path d="M330 226c0-30 24-54 54-54s54 24 54 54" stroke="#08090a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <rect x="318" y="222" width="18" height="34" rx="9" fill="#08090a"/>
+            <rect x="426" y="222" width="18" height="34" rx="9" fill="#08090a"/>
+            <path d="M435 256c0 22-18 34-38 36" stroke="#08090a" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <circle cx="393" cy="294" r="7" fill="#08090a"/>
+            <rect x="214" y="440" width="340 " height="56" rx="16" fill="#fff"/>
+            <text x="384" y="476" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="600" fill="#08090a">Hi! I&#8217;m here to help 👋</text>
+            <circle cx="530" cy="180" r="26" fill="#fff"/><text x="530" y="189" text-anchor="middle" font-size="22">💬</text>
+            <circle cx="238" cy="200" r="22" fill="#fff"/><text x="238" y="208" text-anchor="middle" font-size="18">✅</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="big-cell">
+        <h3>HIPAA Compliant. Fully Encrypted.</h3>
+        <p>With Kibu, security comes standard - your member data stays safe, no matter what.</p>
+        <div class="big-cell-media">
+          <svg viewBox="0 0 768 661" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="hp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c7e7ff"/><stop offset="1" stop-color="#96cbff"/></linearGradient></defs>
+            <rect width="768" height="661" fill="url(#hp)"/>
+            <rect x="120" y="110" width="528" height="440" rx="20" fill="#fff"/>
+            <path d="M384 200l108 38v78c0 74-46 130-108 152-62-22-108-78-108-152v-78z" fill="#1f4e91"/>
+            <path d="M384 224l86 30v64c0 60-37 106-86 125-49-19-86-65-86-125v-64z" fill="#328cff"/>
+            <rect x="356" y="330" width="56" height="46" rx="8" fill="#fff"/>
+            <path d="M366 330v-14a18 18 0 0 1 36 0v14" stroke="#fff" stroke-width="9" fill="none"/>
+            <circle cx="384" cy="350" r="6" fill="#1f4e91"/>
+            <rect x="380" y="352" width="8" height="12" rx="3" fill="#1f4e91"/>
+            <text x="384" y="500" text-anchor="middle" font-family="Inter,sans-serif" font-size="30" font-weight="800" letter-spacing="4" fill="#1f4e91">HIPAA</text>
+            <text x="384" y="526" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" letter-spacing="2" fill="#6b7280">COMPLIANT</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STORIES ================= -->
+<section class="sec stories-sec">
+  <div class="container">
+    <h2 class="h2-std">Real People, Real Results.</h2>
+    <p class="p-std">Read one of our customer stories from our blog.</p>
+    <div class="stories-grid">
+      <a class="story-card" href="#">
+        <div class="story-photo" style="background:
+          radial-gradient(60% 70% at 30% 30%,rgba(255,255,255,.35),transparent),
+          linear-gradient(135deg,#96cbff 0%,#2b7ae0 100%)"></div>
+        <div class="story-meta">
+          <span class="story-logo" style="background:#1f4e91">TC</span>
+          <p>Target Community &amp; Education</p>
+        </div>
+      </a>
+      <a class="story-card" href="#">
+        <div class="story-photo" style="background:
+          radial-gradient(60% 70% at 70% 30%,rgba(255,255,255,.35),transparent),
+          linear-gradient(135deg,#ffd9b3 0%,#f99c00 100%)"></div>
+        <div class="story-meta">
+          <span class="story-logo" style="background:#c2410c">AR</span>
+          <p>The ARC Caddo-Bossier</p>
+        </div>
+      </a>
+      <a class="story-card" href="#">
+        <div class="story-photo" style="background:
+          radial-gradient(60% 70% at 40% 60%,rgba(255,255,255,.35),transparent),
+          linear-gradient(135deg,#c9f3d8 0%,#0f9f5f 100%)"></div>
+        <div class="story-meta">
+          <span class="story-logo" style="background:#14683c">WF</span>
+          <p>Woodfords Family Services</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WALL OF LOVE ================= -->
+<section class="sec wall-sec">
+  <div class="container wall-head">
+    <h2 class="h2-std">Wall of Love</h2>
+    <p class="p-std">See how organizations like yours are leveling up with Kibu!</p>
+  </div>
+  <div class="wall-box">
+    <div class="wall-fade-t"></div>
+    <div class="wall-fade-b"></div>
+    <div class="wall-mobile">
+      <div class="wall-track anim-up-80" id="wallMobile"></div>
+    </div>
+    <div class="wall-desktop">
+      <div class="wall-col"><div class="wall-track anim-up-60" id="wallCol1"></div></div>
+      <div class="wall-col"><div class="wall-track anim-down-70" id="wallCol2"></div></div>
+      <div class="wall-col"><div class="wall-track anim-up-60" id="wallCol3"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="final-sec">
+  <div class="container">
+    <div class="logos-rows">
+      <div class="logos-row">
+        <div class="logo-ph lp-caps"><span>Chimes</span></div>
+        <div class="logo-ph lp-serif"><span>The Arc</span></div>
+        <div class="logo-ph lp-bold"><span>YMCA</span></div>
+        <div class="logo-ph lp-round"><span>UCP</span></div>
+        <div class="logo-ph lp-caps"><span>Jewish Federation</span></div>
+        <div class="logo-ph lp-bold"><span>CP Unlimited</span></div>
+        <div class="logo-ph lp-script"><span>Woodfords</span></div>
+      </div>
+      <div class="logos-row">
+        <div class="logo-ph lp-serif"><span>Mission Road</span></div>
+        <div class="logo-ph lp-caps"><span>Corner of Determination</span></div>
+        <div class="logo-ph lp-serif"><span>Catholic Guardian</span></div>
+        <div class="logo-ph lp-bold"><span>Active Day</span></div>
+        <div class="logo-ph lp-caps"><span>Babcock</span></div>
+        <div class="logo-ph lp-round"><span>Elwyn</span></div>
+      </div>
+    </div>
+    <h2>Compliance Shouldn&#8217;t Stand in the Way of Exceptional Care</h2>
+    <a class="btn" href="#"><span>Get a demo</span></a>
+  </div>
+</section>
+
+</div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>kibu</h3>
+        <svg class="footer-map" width="126" height="33" viewBox="0 0 126 33" fill="none">
+          <path d="M4 6l30-3 1 16-4 6-6 3-3-3-14 4-3-5 1-9z" fill="#c9ccd2"/>
+          <circle cx="26" cy="16" r="3" fill="#3f3f3f"/>
+          <text x="44" y="21" font-family="Inter,sans-serif" font-size="11" fill="#3f3f3f" letter-spacing=".4">Connecticut</text>
+        </svg>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.12-2.45-.12-2.4 0-4.05 1.47-4.05 4.17v2.33H7.5V13h2.7v8h3.3z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23 12s0-3.85-.5-5.7a2.9 2.9 0 0 0-2-2C18.6 3.8 12 3.8 12 3.8s-6.6 0-8.5.5a2.9 2.9 0 0 0-2 2C1 8.15 1 12 1 12s0 3.85.5 5.7a2.9 2.9 0 0 0 2 2c1.9.5 8.5.5 8.5.5s6.6 0 8.5-.5a2.9 2.9 0 0 0 2-2c.5-1.85.5-5.7.5-5.7zM9.8 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 300 271" width="17" height="17" fill="currentColor"><path d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z"/></svg></a>
+        </div>
+        <p class="footer-addr">78 Harvard Ave, Floor 3<br>Stamford, CT 06902</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <p>Solutions</p>
+          <div class="footer-col-links">
+            <a href="#">Documentation</a>
+            <a href="#">Content</a>
+          </div>
+        </div>
+        <div class="footer-col ord-3">
+          <p>Resources</p>
+          <div class="footer-col-links">
+            <a href="#">Blog</a>
+            <a href="#">Resource Center</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Submit Request for Proposal (RFP)</a>
+            <a href="#">Changelog</a>
+          </div>
+        </div>
+        <div class="footer-col ord-2">
+          <p>Legal</p>
+          <div class="footer-col-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Member Code of Conduct</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copy"><p>© 2026 kibu</p></div>
+  </div>
+</footer>
+
+<script>
+/* ============ Mobile menu ============ */
+var nav = document.getElementById('nav');
+document.getElementById('burger').addEventListener('click', function(){
+  nav.classList.toggle('menu-open');
+});
+
+/* ============ Hero entrance ============ */
+var heroBlock = document.getElementById('heroBlock');
+requestAnimationFrame(function(){
+  setTimeout(function(){ heroBlock.classList.add('in'); }, 120);
+});
+
+/* ============ Hero tabs rotation ============ */
+(function(){
+  var TAB_MS = 6000;
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.hero-tab'));
+  var shots = Array.prototype.slice.call(document.querySelectorAll('.hero-shot'));
+  var current = 0, timer = null;
+
+  function setTab(i){
+    current = i;
+    tabs.forEach(function(t, k){
+      t.classList.toggle('active', k === i);
+      var bar = t.querySelector('.hero-tab-bar');
+      bar.style.animation = 'none';
+      void bar.offsetWidth; /* restart keyframes */
+      bar.style.animation = '';
+    });
+    shots.forEach(function(s, k){ s.classList.toggle('active', k === i); });
+    clearInterval(timer);
+    timer = setInterval(next, TAB_MS);
+  }
+  function next(){ setTab((current + 1) % tabs.length); }
+
+  tabs.forEach(function(t, i){
+    t.querySelector('button').addEventListener('click', function(){ setTab(i); });
+  });
+  setTab(0);
+})();
+
+/* ============ Letter reveal on scroll ============ */
+(function(){
+  var el = document.getElementById('revealText');
+  var raw = el.textContent;
+  el.textContent = '';
+  var frag = document.createDocumentFragment();
+  var chars = [];
+  raw.split('\n\n').forEach(function(par, pi){
+    if (pi > 0) { frag.appendChild(document.createElement('br')); frag.appendChild(document.createElement('br')); }
+    par.split(' ').forEach(function(word, wi){
+      var w = document.createElement('span');
+      w.className = 'w';
+      for (var i = 0; i < word.length; i++){
+        var c = document.createElement('span');
+        c.className = 'c';
+        c.textContent = word[i];
+        w.appendChild(c);
+        chars.push(c);
+      }
+      frag.appendChild(w);
+      frag.appendChild(document.createTextNode(' '));
+    });
+  });
+  el.appendChild(frag);
+
+  var lastCount = -1;
+  function onScroll(){
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    /* progress: 0 when text top hits 85% of viewport, 1 when text bottom reaches 45% */
+    var start = vh * 0.85;
+    var end = vh * 0.45;
+    var total = (r.height + (start - end));
+    var p = (start - r.top) / total;
+    p = Math.max(0, Math.min(1, p));
+    var count = Math.floor(p * chars.length);
+    if (count === lastCount) return;
+    if (count > lastCount){
+      for (var i = Math.max(0, lastCount); i < count; i++) chars[i].classList.add('on');
+    } else {
+      for (var j = count; j <= Math.min(chars.length - 1, lastCount); j++) chars[j].classList.remove('on');
+    }
+    lastCount = count;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
+
+/* ============ Compliance bullets ============ */
+(function(){
+  var bullets = Array.prototype.slice.call(document.querySelectorAll('.comp-bullet'));
+  var panes = Array.prototype.slice.call(document.querySelectorAll('.comp-pane'));
+  bullets.forEach(function(b){
+    b.addEventListener('click', function(){
+      var i = parseInt(b.getAttribute('data-pane'), 10);
+      bullets.forEach(function(x, k){ x.classList.toggle('active', k === i); });
+      panes.forEach(function(p, k){ p.classList.toggle('active', k === i); });
+    });
+  });
+})();
+
+/* ============ 84.3% count-up ============ */
+(function(){
+  var el = document.getElementById('statNum');
+  var done = false;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && !done){
+        done = true;
+        var start = null, DUR = 1600, TARGET = 84.3;
+        function step(ts){
+          if (!start) start = ts;
+          var p = Math.min(1, (ts - start) / DUR);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (TARGET * eased).toFixed(1);
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = TARGET.toFixed(1);
+        }
+        requestAnimationFrame(step);
+        io.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  io.observe(el);
+})();
+
+/* ============ Category pills + content thumbs (marquees) ============ */
+(function(){
+  var CATS = [
+    { n:'Dance',              bg:'#ffd9ec', fg:'#9c2860', ic:'M9 18V6l8-2v12M9 18a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm8-2a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z' },
+    { n:'Life Skills',        bg:'#c9f3d8', fg:'#14683c', ic:'M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 5v8' },
+    { n:'Job Development',    bg:'#d0e8ff', fg:'#1f4e91', ic:'M4 8h16v11H4V8Zm5 0V6a3 3 0 0 1 6 0v2' },
+    { n:'General Fitness',    bg:'#ffe0c2', fg:'#9a4b12', ic:'M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12' },
+    { n:'Yoga',               bg:'#e3d0ff', fg:'#5b2d91', ic:'M12 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-7 8 7-3 7 3M12 10v6l-4 5m4-5 4 5' },
+    { n:'Cooking',            bg:'#ffe2e2', fg:'#c22222', ic:'M5 11h14v8H5v-8Zm2-3a5 5 0 0 1 10 0' },
+    { n:'Enrichment & Arts',  bg:'#cdeff2', fg:'#0e6672', ic:'M12 3a9 9 0 1 0 0 18 2 2 0 0 0 0-4h2a4 4 0 0 0 0-8h-1' },
+    { n:'Games',              bg:'#fef3c6', fg:'#8a6a06', ic:'M6 9h4m-2-2v4m8-1h.01M15 8h.01M4 15c0-4 2-7 8-7s8 3 8 7-2 4-4 4l-2-2h-4l-2 2c-2 0-4 0-4-4Z' },
+    { n:'Staff Training',     bg:'#dfe4ec', fg:'#38455c', ic:'M12 4 3 8l9 4 9-4-9-4Zm-5 6v4c0 1.5 2.2 3 5 3s5-1.5 5-3v-4' }
+  ];
+  var track = document.getElementById('catTrack');
+  var setHTML = CATS.map(function(c){
+    return '<div class="cat-pill" style="background:' + c.bg + ';color:' + c.fg + '">' +
+      '<span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="' + c.fg + '" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="' + c.ic + '"/></svg></span>' +
+      c.n + '</div>';
+  }).join('');
+  track.innerHTML = setHTML + setHTML; /* duplicate for seamless loop */
+
+  var THUMBS1 = [
+    ['Fire Safety','🔥','linear-gradient(135deg,#ff9a76 0%,#e04b3a 100%)'],
+    ['How to Write a Check','✍️','linear-gradient(135deg,#a8d8ff 0%,#4a90d9 100%)'],
+    ['How to Ride the Bus','🚌','linear-gradient(135deg,#ffe29a 0%,#f5a623 100%)'],
+    ['Kibu Classes','▶️','linear-gradient(135deg,#96cbff 0%,#1f4e91 100%)'],
+    ['Let’s Color','🎨','linear-gradient(135deg,#ffc3e0 0%,#d65db1 100%)'],
+    ['Credit vs Debit','💳','linear-gradient(135deg,#b8f2cf 0%,#2e9e6b 100%)']
+  ];
+  var THUMBS2 = [
+    ['Arts & Crafts','✂️','linear-gradient(135deg,#e8c9ff 0%,#8a5bd6 100%)'],
+    ['Dog Safety','🐶','linear-gradient(135deg,#ffd9b3 0%,#d97b29 100%)'],
+    ['Showering & Bathing','🚿','linear-gradient(135deg,#c2ecff 0%,#3aa4c9 100%)'],
+    ['Community Service Tips','🤝','linear-gradient(135deg,#d3f0c2 0%,#5ba838 100%)'],
+    ['Urgent Care vs ER','🏥','linear-gradient(135deg,#ffc9c9 0%,#d64545 100%)'],
+    ['Disaster Safety','⛑️','linear-gradient(135deg,#ffe9a8 0%,#d9a021 100%)']
+  ];
+  function thumbsHTML(list){
+    var h = list.map(function(t){
+      return '<div class="thumb" style="background:' + t[2] + '"><span class="ico">' + t[1] + '</span><span>' + t[0] + '</span></div>';
+    }).join('');
+    return h + h; /* duplicate for seamless loop */
+  }
+  document.getElementById('thumbTrack1').innerHTML = thumbsHTML(THUMBS1);
+  document.getElementById('thumbTrack2').innerHTML = thumbsHTML(THUMBS2);
+})();
+
+/* ============ Wall of Love ============ */
+(function(){
+  var T = [
+    ['Barbara Yates','Service Manager','The Arc of North Florida','Using Kibu has allowed our staff to take the lead and has empowered them with tools to succeed.','#1f4e91','AN'],
+    ['Crystal Stone','Program Director','Daybreak / CareGiver','We are crazy about Kibu!','#c2410c','DC'],
+    ['Pennie Staup','Adult Day Instructor','Target Community & Education','Kibu’s lesson plans make things so much easier… It allows us to focus on engaging with our members instead of searching for materials.','#14683c','TC'],
+    ['Cortney Lucente','Director of Day Services','Little City Foundation','Kibu gives us the flexibility to meet each person where they are while keeping things engaging, structured, and fun.','#5b2d91','LC'],
+    ['Brian DeLeon','Direct Support Professional','Family Resource Associates','It’s all about working smarter, not harder. Kibu lets us do that.','#0e6672','FR'],
+    ['Laurie Sena','Engagement Coordinator','The Arc Caddo-Bossier','Kibu gives us one more tool to teach real-life skills, making learning engaging and impactful.','#9c2860','AC'],
+    ['Alethea Breidenbaugh','Life Skills DSP','Inspire Central Florida','These are real tools that engage [clients] without feeling childish. That makes all the difference.','#8a6a06','IC'],
+    ['Aretha Harper','Assistant Director','Unique Abilities','Using the magic pen on daily notes makes things a lot more efficient and easier. So no secret, we just really like Kibu!','#38455c','UA'],
+    ['Alexis Spektor','Program Director','Family Resource Associates','When I found Kibu, I think I had a tear in my eye. It was the first digital platform I’ve seen that is actually built for people with IDD.','#0e6672','FR'],
+    ['Erica Null Pellegrin','Director of Engagement & Marketing','TARC - Terrebonne ARC','Having Kibu is a true highlight daily for the people we serve. We are having soooo much fun with it and learning a lot as well!','#2b7ae0','TA'],
+    ['Sara Umfleet','Special Needs Coordinator','SEMO Alliance for Disability Independence','…this has made my life soooo much easier, you have no idea how much time this is saving me.','#c22222','SA']
+  ];
+  function card(t){
+    return '<div class="t-card">' +
+      '<div class="t-head">' +
+        '<span class="t-logo" style="background:' + t[4] + '">' + t[5] + '</span>' +
+        '<div><p class="t-name">' + t[0] + '</p><p class="t-role">' + t[1] + '</p><p class="t-role">' + t[2] + '</p></div>' +
+      '</div>' +
+      '<p class="t-quote">“' + t[3] + '”</p>' +
+    '</div>';
+  }
+  function fill(id, items){
+    var html = items.map(card).join('');
+    document.getElementById(id).innerHTML = html + html; /* duplicate for loop */
+  }
+  fill('wallMobile', T);
+  fill('wallCol1', [T[0], T[3], T[6], T[9]]);
+  fill('wallCol2', [T[1], T[4], T[7], T[10]]);
+  fill('wallCol3', [T[2], T[5], T[8], T[0]]);
+})();
+</script>
+</body>
+</html>

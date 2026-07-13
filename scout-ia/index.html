@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SCOUT-IA — Seu email de vendas diário, escrito e enviado pela IA</title>
+  <meta
+    name="description"
+    content="A IA escreve e dispara seu email de vendas todos os dias, na sua voz — mesmo quando você não escreve nada. Agende uma Sessão Estratégica gratuita."
+  />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://scout-ia.com.br/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SCOUT-IA" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://scout-ia.com.br/" />
+  <meta property="og:title" content="SCOUT-IA — Seu email de vendas diário, escrito e enviado pela IA" />
+  <meta property="og:description" content="A IA escreve e dispara seu email de vendas todos os dias, na sua voz — mesmo quando você não escreve nada. Agende uma Sessão Estratégica gratuita." />
+  <meta property="og:image" content="https://scout-ia.com.br/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SCOUT-IA — automação de email de vendas com IA para infoprodutores" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SCOUT-IA — Seu email de vendas diário, escrito e enviado pela IA" />
+  <meta name="twitter:description" content="A IA escreve e dispara seu email de vendas todos os dias, na sua voz — mesmo quando você não escreve nada. Agende uma Sessão Estratégica gratuita." />
+  <meta name="twitter:image" content="https://scout-ia.com.br/og-image.png" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#hero">Pular para o conteúdo</a>
+
+  <!-- ============================ 1. NAV ============================ -->
+  <nav id="nav" class="nav" aria-label="Navegação principal">
+    <div class="nav__inner">
+      <a class="brand" href="#hero" aria-label="SCOUT-IA, página inicial">
+        <span class="brand__mark" aria-hidden="true">S</span>
+        SCOUT-IA
+      </a>
+      <div class="nav__links">
+        <div class="nav__menu-links">
+          <a href="#mecanismo">Como funciona</a>
+          <a href="#prova">Resultados</a>
+          <a href="#faq">Dúvidas</a>
+        </div>
+        <a class="btn btn--nav" href="#agendar">Agendar sessão estratégica</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============================ 2. HERO ============================ -->
+    <section id="hero" class="hero">
+      <div class="container">
+        <h1 class="hero__title reveal">
+          Sua lista recebe um email de vendas todo dia.
+          <span class="soft">Mesmo quando você não escreve nada.</span>
+        </h1>
+        <p class="hero__sub lead reveal" style="--reveal-delay: 100ms">
+          A IA aprende sua voz, seu produto e sua audiência. Depois assume o
+          trabalho — escreve e dispara o email diário no seu lugar.
+        </p>
+        <div class="hero__actions reveal" style="--reveal-delay: 200ms">
+          <a class="btn btn--primary btn--lg" href="#agendar"
+            >Agendar sessão estratégica</a
+          >
+          <a class="btn btn--ghost btn--lg" href="#mecanismo">Ver como funciona</a>
+        </div>
+        <p class="hero__proof reveal" style="--reveal-delay: 280ms">
+          <strong>+300 infoprodutores</strong> já automatizaram suas vendas
+          diárias por email
+        </p>
+
+        <!-- Mock: email sendo gerado e disparado -->
+        <figure
+          class="email-mock reveal"
+          style="--reveal-delay: 360ms"
+          aria-label="Demonstração de um email de vendas sendo gerado pela IA"
+        >
+          <div class="email-mock__bar" aria-hidden="true">
+            <span class="email-mock__dot"></span>
+            <span class="email-mock__dot"></span>
+            <span class="email-mock__dot"></span>
+            <span class="email-mock__status">
+              <span class="email-mock__pulse"></span>
+              IA escrevendo · envio às 09:00
+            </span>
+          </div>
+          <div class="email-mock__body">
+            <p class="email-mock__meta">Para: sua lista &nbsp;·&nbsp; De: você</p>
+            <p class="email-mock__subject">
+              O erro de R$2.000 que você comete toda segunda
+            </p>
+            <p class="email-mock__typed" id="typed" aria-live="off"></p>
+            <div class="email-mock__line w-95" aria-hidden="true"></div>
+            <div class="email-mock__line w-88" aria-hidden="true"></div>
+            <div class="email-mock__line w-70" aria-hidden="true"></div>
+            <span class="email-mock__cta" aria-hidden="true"
+              >Quero garantir minha vaga →</span
+            >
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================ 3. DOR ============================ -->
+    <section id="dor" class="section">
+      <div class="container">
+        <div class="measure reveal">
+          <p class="eyebrow">A real do email marketing</p>
+          <h2 style="font-size: var(--text-h1); letter-spacing: -0.022em; line-height: 1.08;">
+            Você sabe que email vende. O problema é escrever todo santo dia.
+          </h2>
+          <p class="lead" style="margin-top: 20px;">
+            Não é falta de vontade. É falta de tempo, de energia e de
+            consistência — e a sua lista esfria no silêncio.
+          </p>
+        </div>
+
+        <div class="dor__grid">
+          <div class="dor__item reveal">
+            <p class="dor__num">01</p>
+            <h3>Faz semanas que você não manda nada</h3>
+            <p>
+              Você trava na escrita, adia "pra amanhã" e quando vê passou um mês
+              sem um único email de vendas.
+            </p>
+          </div>
+          <div class="dor__item reveal" style="--reveal-delay: 80ms">
+            <p class="dor__num">02</p>
+            <h3>Lista fria é receita parada</h3>
+            <p>
+              Cada dia sem aparecer na caixa de entrada é dinheiro que sua lista
+              guardou no bolso — e vai gastar com outro.
+            </p>
+          </div>
+          <div class="dor__item reveal" style="--reveal-delay: 160ms">
+            <p class="dor__num">03</p>
+            <h3>Copywriter custa caro e te deixa refém</h3>
+            <p>
+              R$3k a R$8k por mês, briefing toda semana e o risco de perder a sua
+              voz no processo.
+            </p>
+          </div>
+          <div class="dor__item reveal" style="--reveal-delay: 240ms">
+            <p class="dor__num">04</p>
+            <h3>Você faz na mão o que deveria delegar</h3>
+            <p>
+              45 a 90 minutos por dia escrevendo email quando deveria estar
+              criando produto ou preparando o próximo lançamento.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 4. MECANISMO ============================ -->
+    <section id="mecanismo" class="section section--dark">
+      <div class="container">
+        <div class="measure center reveal">
+          <p class="eyebrow" style="color: #2997ff;">Como funciona</p>
+          <h2 style="font-size: var(--text-h1); letter-spacing: -0.022em; line-height: 1.08;">
+            Três passos. Você configura uma vez. A IA trabalha todos os dias.
+          </h2>
+        </div>
+
+        <div class="steps">
+          <article class="step reveal">
+            <p class="step__index">Passo 01</p>
+            <svg class="step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 5h16M4 12h16M4 19h10" stroke-linecap="round" />
+            </svg>
+            <h3>Briefing único</h3>
+            <p>
+              Você nos conta seu produto, sua oferta, seu avatar e seu objetivo.
+              A IA também aprende com os emails que você já escreveu.
+            </p>
+          </article>
+          <article class="step reveal" style="--reveal-delay: 100ms">
+            <p class="step__index">Passo 02</p>
+            <svg class="step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M12 3v3m0 12v3m9-9h-3M6 12H3m13.5-6.5-2 2m-7 7-2 2m11 0-2-2m-7-7-2-2" stroke-linecap="round" />
+            </svg>
+            <h3>A IA escreve</h3>
+            <p>
+              Um motor proprietário gera o email de vendas do dia com copy nova,
+              no seu tom — não é template, é você em escala.
+            </p>
+          </article>
+          <article class="step reveal" style="--reveal-delay: 200ms">
+            <p class="step__index">Passo 03</p>
+            <svg class="step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" stroke-linejoin="round" stroke-linecap="round" />
+            </svg>
+            <h3>Disparo automático</h3>
+            <p>
+              Integra com a sua plataforma de email e dispara sozinho — sem você
+              abrir o computador. Quer revisar antes? O modo aprovação é seu.
+            </p>
+          </article>
+        </div>
+
+        <p class="mech__note reveal">
+          Não é ChatGPT genérico. <span>É um sistema treinado para a voz de quem vive de infoproduto.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================ 5. PROVA ============================ -->
+    <section id="prova" class="section section--gray">
+      <div class="container">
+        <div class="measure center reveal">
+          <p class="eyebrow">Resultados reais</p>
+          <h2 style="font-size: var(--text-h1); letter-spacing: -0.022em; line-height: 1.08;">
+            Outros como você já automatizaram — e os números apareceram.
+          </h2>
+        </div>
+
+        <div class="metrics" style="margin-top: 64px;">
+          <div class="metric reveal">
+            <p class="metric__num">+1,2M</p>
+            <p class="metric__label">emails enviados por clientes ativos</p>
+          </div>
+          <div class="metric reveal" style="--reveal-delay: 100ms">
+            <p class="metric__num">4,8×</p>
+            <p class="metric__label">mais touchpoints com a lista por mês</p>
+          </div>
+          <div class="metric reveal" style="--reveal-delay: 200ms">
+            <p class="metric__num">1h12</p>
+            <p class="metric__label">economizadas por cliente, todo dia</p>
+          </div>
+        </div>
+
+        <div class="quotes">
+          <figure class="quote reveal">
+            <blockquote class="quote__text">
+              "Fui de 6 emails por mês para 28. Faturei <b>R$12 mil a mais</b> só
+              no segundo mês — e não escrevi nenhum deles."
+            </blockquote>
+            <figcaption class="quote__person">
+              <span class="quote__avatar" aria-hidden="true">MR</span>
+              <span>
+                <span class="quote__name">Marina Rocha</span><br />
+                <span class="quote__niche">Mentoria de finanças pessoais</span>
+              </span>
+            </figcaption>
+          </figure>
+          <figure class="quote reveal" style="--reveal-delay: 100ms">
+            <blockquote class="quote__text">
+              "Minha lista estava fria há meses. Em 3 semanas voltei a faturar
+              <b>todo dia</b> — e ninguém percebeu que não fui eu que escrevi."
+            </blockquote>
+            <figcaption class="quote__person">
+              <span class="quote__avatar" aria-hidden="true">TL</span>
+              <span>
+                <span class="quote__name">Thiago Lemes</span><br />
+                <span class="quote__niche">Curso de tráfego pago</span>
+              </span>
+            </figcaption>
+          </figure>
+          <figure class="quote reveal" style="--reveal-delay: 200ms">
+            <blockquote class="quote__text">
+              "Demitir a culpa de não mandar email não tem preço. A IA mantém
+              <b>meu piso de receita</b> mesmo nos meses que eu sumo."
+            </blockquote>
+            <figcaption class="quote__person">
+              <span class="quote__avatar" aria-hidden="true">CA</span>
+              <span>
+                <span class="quote__name">Camila Antunes</span><br />
+                <span class="quote__niche">Infoproduto de culinária fit</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="integrations reveal">
+          <p class="integrations__label">Integra com as plataformas que você já usa</p>
+          <div class="integrations__row">
+            <span>ActiveCampaign</span>
+            <span>RD Station</span>
+            <span>Mailchimp</span>
+            <span>Hotmart</span>
+            <span>Kajabi</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 6. QUALIFICAÇÃO ============================ -->
+    <section id="qualificacao" class="section">
+      <div class="container">
+        <div class="measure reveal">
+          <p class="eyebrow">Para quem é</p>
+          <h2 style="font-size: var(--text-h1); letter-spacing: -0.022em; line-height: 1.08;">
+            Isso é para você se…
+          </h2>
+        </div>
+
+        <div class="qual__cols">
+          <div class="qual__card qual__card--yes reveal">
+            <h3>Faz sentido se você</h3>
+            <ul class="qual__list">
+              <li>
+                <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Já tem uma lista ativa de email
+              </li>
+              <li>
+                <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Vende produto digital e sabe que email é canal de vendas
+              </li>
+              <li>
+                <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quer escalar a consistência sem contratar copywriter
+              </li>
+              <li>
+                <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Está cansado de improvisar e de depender da própria inspiração
+              </li>
+            </ul>
+          </div>
+          <div class="qual__card qual__card--no reveal" style="--reveal-delay: 100ms">
+            <h3>Não é para você se</h3>
+            <ul class="qual__list">
+              <li>
+                <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
+                Ainda não construiu uma lista de email
+              </li>
+              <li>
+                <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
+                Procura um botão mágico sem configurar nada uma vez
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 7. CTA INTERMEDIÁRIO ============================ -->
+    <section id="agendar" class="section section--dark">
+      <div class="container">
+        <div class="cta-block reveal">
+          <h2>Pronto para delegar seus emails de vendas?</h2>
+          <p class="lead">
+            Na Sessão Estratégica a gente mostra exatamente como a IA funciona
+            para o seu negócio — e configura junto com você.
+          </p>
+          <div class="cta-block__actions">
+            <a class="btn btn--primary btn--lg" href="#"
+              >Agendar sessão estratégica</a
+            >
+            <a class="btn btn--ghost btn--lg btn--on-dark" href="#prova"
+              >Ver resultados</a
+            >
+          </div>
+          <p class="cta-block__micro">Gratuita · 30 minutos · sem compromisso</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 8. CREDIBILIDADE ============================ -->
+    <section id="credibilidade" class="section">
+      <div class="container">
+        <div class="credo">
+          <div class="reveal">
+            <p class="eyebrow">Quem está por trás</p>
+            <h2>Construído por gente que vive de email marketing.</h2>
+          </div>
+          <div class="credo__body reveal" style="--reveal-delay: 100ms">
+            <p>
+              A SCOUT-IA nasceu de uma frustração real: ver bons infoprodutores
+              deixarem dinheiro na mesa porque não conseguiam manter a
+              consistência de aparecer todo dia.
+            </p>
+            <p>
+              Combinamos <b>anos de operação em infoproduto</b> com um motor de
+              IA treinado especificamente para copy de vendas em português — não
+              é mais um SaaS genérico com ChatGPT por trás. É gente real,
+              intencional, do seu lado. <b>A consistência deixou de ser problema
+              seu.</b>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 9. FAQ ============================ -->
+    <section id="faq" class="section section--gray">
+      <div class="container">
+        <div class="measure center reveal">
+          <p class="eyebrow">Dúvidas</p>
+          <h2 style="font-size: var(--text-h1); letter-spacing: -0.022em; line-height: 1.08;">
+            Tudo que você precisa saber antes da sessão.
+          </h2>
+        </div>
+
+        <div class="faq" id="faq-list">
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false" aria-controls="faq-a1">
+              Vai soar como eu mesmo?
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__a" id="faq-a1" role="region">
+              <p class="faq__a-inner">
+                Sim. A IA aprende com os emails que você já escreveu e mantém seu
+                estilo, suas gírias e seu tom. Não é template genérico — é a sua
+                voz em escala, calibrada no seu material.
+              </p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false" aria-controls="faq-a2">
+              Preciso de uma ferramenta de email?
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__a" id="faq-a2" role="region">
+              <p class="faq__a-inner">
+                Integramos com as principais plataformas do mercado —
+                ActiveCampaign, RD Station, Mailchimp, Hotmart e Kajabi, entre
+                outras. Se você já dispara email hoje, a gente se conecta.
+              </p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false" aria-controls="faq-a3">
+              E se eu quiser revisar antes de enviar?
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__a" id="faq-a3" role="region">
+              <p class="faq__a-inner">
+                O controle é seu. Você escolhe entre piloto automático total ou
+                modo aprovação, em que cada email espera seu OK antes de sair.
+              </p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false" aria-controls="faq-a4">
+              Quanto tempo até o primeiro email?
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__a" id="faq-a4" role="region">
+              <p class="faq__a-inner">
+                A configuração leva menos de 30 minutos — e a gente faz junto com
+                você na Sessão Estratégica. Em poucos dias o primeiro email de
+                vendas já está saindo na sua voz.
+              </p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false" aria-controls="faq-a5">
+              Já tentei automação antes e virou spam genérico.
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__a" id="faq-a5" role="region">
+              <p class="faq__a-inner">
+                Essa IA não usa templates. Ela gera conteúdo novo todo dia com
+                base na sua oferta, no que está acontecendo e no que converte na
+                sua lista. É o oposto de email robotizado.
+              </p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false" aria-controls="faq-a6">
+              E se não funcionar para o meu nicho?
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__a" id="faq-a6" role="region">
+              <p class="faq__a-inner">
+                A Sessão Estratégica existe justamente para diagnosticar o fit
+                antes de qualquer coisa. Se não fizer sentido para o seu negócio,
+                a gente te diz na hora — sem pressão, sem compromisso.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 10. CTA FINAL ============================ -->
+    <section id="cta-final" class="section section--dark">
+      <div class="container">
+        <div class="cta-block reveal">
+          <p class="eyebrow" style="color: #2997ff;">Última chamada</p>
+          <h2>Seu concorrente já vai enviar o email de amanhã. E você?</h2>
+          <p class="lead">
+            Consistência é o maior diferencial no email marketing. Agora ela é
+            automática — começa na sua Sessão Estratégica.
+          </p>
+          <div class="cta-block__actions">
+            <a class="btn btn--primary btn--lg" href="#"
+              >Agendar sessão estratégica</a
+            >
+          </div>
+          <p class="cta-block__micro">
+            Vagas limitadas por semana · próxima disponibilidade nos próximos dias
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ 11. FOOTER ============================ -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <a class="brand" href="#hero" aria-label="SCOUT-IA, topo da página">
+            <span class="brand__mark" aria-hidden="true">S</span>
+            SCOUT-IA
+          </a>
+          <p class="footer__tagline">
+            A IA que escreve e dispara o seu email de vendas diário — na sua voz,
+            sem você precisar escrever nada.
+          </p>
+        </div>
+        <nav class="footer__links" aria-label="Links do rodapé">
+          <a href="#mecanismo">Como funciona</a>
+          <a href="#prova">Resultados</a>
+          <a href="#faq">Dúvidas</a>
+          <a href="#agendar">Agendar sessão</a>
+          <a href="#">Política de privacidade</a>
+          <a href="#">Termos de uso</a>
+          <a href="mailto:contato@scout-ia.com.br">contato@scout-ia.com.br</a>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 SCOUT-IA. Todos os direitos reservados.</span>
+        <span>Feito para infoprodutores que vivem de email.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://scout-ia.com.br/#organization",
+        "name": "SCOUT-IA",
+        "url": "https://scout-ia.com.br/",
+        "description": "SaaS de automação de email de vendas com IA para infoprodutores brasileiros.",
+        "email": "contato@scout-ia.com.br",
+        "inLanguage": "pt-BR"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://scout-ia.com.br/#webpage",
+        "url": "https://scout-ia.com.br/",
+        "name": "SCOUT-IA — Seu email de vendas diário, escrito e enviado pela IA",
+        "description": "A IA escreve e dispara seu email de vendas todos os dias, na sua voz — mesmo quando você não escreve nada. Agende uma Sessão Estratégica gratuita.",
+        "inLanguage": "pt-BR",
+        "isPartOf": { "@id": "https://scout-ia.com.br/#organization" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://scout-ia.com.br/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Vai soar como eu mesmo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim. A IA aprende com os emails que você já escreveu e mantém seu estilo, suas gírias e seu tom. Não é template genérico — é a sua voz em escala, calibrada no seu material."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Preciso de uma ferramenta de email?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Integramos com as principais plataformas do mercado — ActiveCampaign, RD Station, Mailchimp, Hotmart e Kajabi, entre outras. Se você já dispara email hoje, a gente se conecta."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "E se eu quiser revisar antes de enviar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O controle é seu. Você escolhe entre piloto automático total ou modo aprovação, em que cada email espera seu OK antes de sair."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto tempo até o primeiro email?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A configuração leva menos de 30 minutos — e a gente faz junto com você na Sessão Estratégica. Em poucos dias o primeiro email de vendas já está saindo na sua voz."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Já tentei automação antes e virou spam genérico.",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Essa IA não usa templates. Ela gera conteúdo novo todo dia com base na sua oferta, no que está acontecendo e no que converte na sua lista. É o oposto de email robotizado."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "E se não funcionar para o meu nicho?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Sessão Estratégica existe justamente para diagnosticar o fit antes de qualquer coisa. Se não fizer sentido para o seu negócio, a gente te diz na hora — sem pressão, sem compromisso."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</body>
+</html>

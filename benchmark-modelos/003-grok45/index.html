@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Física Interativa — Bolinhas</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0a0a12;
+      font-family: "SF Pro Display", "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: #e8e8f0;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+    }
+
+    #ui {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .panel {
+      position: absolute;
+      pointer-events: auto;
+    }
+
+    .top-bar {
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: rgba(16, 16, 28, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    button {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+      padding: 10px 18px;
+      border-radius: 12px;
+      color: #0a0a12;
+      background: linear-gradient(135deg, #7c6cff 0%, #a78bfa 50%, #c4b5fd 100%);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+        0 4px 16px rgba(124, 108, 255, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+        0 6px 22px rgba(124, 108, 255, 0.5);
+    }
+
+    button:active {
+      transform: translateY(0) scale(0.97);
+      filter: brightness(0.96);
+    }
+
+    .stat {
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+      color: rgba(232, 232, 240, 0.75);
+      padding: 0 6px;
+      white-space: nowrap;
+    }
+
+    .stat strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .hint {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: rgba(232, 232, 240, 0.45);
+      text-align: center;
+      line-height: 1.5;
+      max-width: 90vw;
+      pointer-events: none;
+    }
+
+    .hint kbd {
+      display: inline-block;
+      padding: 2px 7px;
+      margin: 0 2px;
+      font-size: 11px;
+      font-family: inherit;
+      color: rgba(232, 232, 240, 0.7);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="ui">
+    <div class="panel top-bar">
+      <button type="button" id="spawnBtn" title="Soltar 50 bolinhas">+ 50 bolinhas</button>
+      <span class="stat">Bolinhas: <strong id="count">0</strong></span>
+      <span class="stat">FPS: <strong id="fps">—</strong></span>
+    </div>
+    <p class="hint">
+      <kbd>segurar</kbd> atrai · <kbd>clique</kbd> explode · bordas e colisões reais
+    </p>
+  </div>
+
+  <script>
+(() => {
+  "use strict";
+
+  // ── Canvas ──────────────────────────────────────────────
+  const canvas = document.getElementById("c");
+  const ctx = canvas.getContext("2d", { alpha: false });
+  const countEl = document.getElementById("count");
+  const fpsEl = document.getElementById("fps");
+  const spawnBtn = document.getElementById("spawnBtn");
+
+  let W = 0, H = 0, dpr = 1;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = Math.floor(W * dpr);
+    canvas.height = Math.floor(H * dpr);
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  // ── Palette ─────────────────────────────────────────────
+  const PALETTE = [
+    "#ff6b6b", "#feca57", "#48dbfb", "#ff9ff3",
+    "#54a0ff", "#5f27cd", "#01a3a4", "#f368e0",
+    "#ff9f43", "#10ac84", "#ee5a24", "#0abde3",
+    "#c56cf0", "#fd79a8", "#00b894", "#fdcb6e",
+  ];
+
+  // ── Physics constants ───────────────────────────────────
+  const GRAVITY = 980;          // px/s²
+  const RESTITUTION = 0.82;     // bounce (0–1)
+  const FRICTION = 0.995;       // air drag per frame @60fps scaled by dt
+  const WALL_FRICTION = 0.98;
+  const MIN_R = 8;
+  const MAX_R = 22;
+  const ATTRACT_RADIUS = 220;
+  const ATTRACT_STRENGTH = 2200;
+  const EXPLODE_RADIUS = 280;
+  const EXPLODE_FORCE = 1400;
+  const MAX_BALLS = 400;
+  const FIXED_DT = 1 / 60;
+  const MAX_SUBSTEPS = 3;
+
+  // ── State ───────────────────────────────────────────────
+  /** @type {Ball[]} */
+  let balls = [];
+  const mouse = { x: W / 2, y: H / 2, down: false, moved: false };
+  let holding = false;
+  let pointerDownAt = 0;
+  let pointerDownPos = { x: 0, y: 0 };
+  let didDrag = false;
+
+  // particles for explosion feedback
+  /** @type {{x:number,y:number,vx:number,vy:number,life:number,color:string,r:number}[]} */
+  let sparks = [];
+
+  // ── Ball ────────────────────────────────────────────────
+  class Ball {
+    constructor(x, y, r, color) {
+      this.x = x;
+      this.y = y;
+      this.vx = (Math.random() - 0.5) * 80;
+      this.vy = Math.random() * 40;
+      this.r = r;
+      this.mass = r * r; // area-proportional
+      this.color = color;
+      this.glow = color;
+    }
+  }
+
+  function randomColor() {
+    return PALETTE[(Math.random() * PALETTE.length) | 0];
+  }
+
+  function spawnBalls(n, originX, originY) {
+    const room = MAX_BALLS - balls.length;
+    const count = Math.min(n, room);
+    const cx = originX ?? W * 0.5 + (Math.random() - 0.5) * W * 0.3;
+    const cy = originY ?? 40;
+
+    for (let i = 0; i < count; i++) {
+      const r = MIN_R + Math.random() * (MAX_R - MIN_R);
+      const angle = Math.random() * Math.PI * 2;
+      const spread = Math.random() * 60;
+      const x = clamp(cx + Math.cos(angle) * spread, r + 2, W - r - 2);
+      const y = clamp(cy + Math.sin(angle) * spread * 0.3, r + 2, H * 0.25);
+      const b = new Ball(x, y, r, randomColor());
+      b.vx = (Math.random() - 0.5) * 200;
+      b.vy = Math.random() * 60 + 20;
+      balls.push(b);
+    }
+    updateCount();
+  }
+
+  function clamp(v, a, b) {
+    return v < a ? a : v > b ? b : v;
+  }
+
+  function updateCount() {
+    countEl.textContent = String(balls.length);
+  }
+
+  // ── Collision helpers ───────────────────────────────────
+  function resolveBallBall(a, b) {
+    let dx = b.x - a.x;
+    let dy = b.y - a.y;
+    let distSq = dx * dx + dy * dy;
+    const minDist = a.r + b.r;
+    if (distSq <= 0 || distSq >= minDist * minDist) return;
+
+    const dist = Math.sqrt(distSq);
+    // normal
+    const nx = dx / dist;
+    const ny = dy / dist;
+
+    // positional correction (split by inverse mass)
+    const overlap = minDist - dist;
+    const invA = 1 / a.mass;
+    const invB = 1 / b.mass;
+    const invSum = invA + invB;
+    const corr = (overlap / invSum) * 0.85; // slop factor
+    a.x -= nx * corr * invA;
+    a.y -= ny * corr * invA;
+    b.x += nx * corr * invB;
+    b.y += ny * corr * invB;
+
+    // relative velocity
+    const rvx = b.vx - a.vx;
+    const rvy = b.vy - a.vy;
+    const velAlongNormal = rvx * nx + rvy * ny;
+    if (velAlongNormal > 0) return; // separating
+
+    // impulse scalar
+    const e = RESTITUTION;
+    let j = -(1 + e) * velAlongNormal;
+    j /= invSum;
+
+    const ix = j * nx;
+    const iy = j * ny;
+    a.vx -= ix * invA;
+    a.vy -= iy * invA;
+    b.vx += ix * invB;
+    b.vy += iy * invB;
+
+    // light tangential friction
+    const tx = -ny;
+    const ty = nx;
+    const velAlongT = rvx * tx + rvy * ty;
+    let jt = -velAlongT / invSum;
+    const mu = 0.08;
+    const maxF = Math.abs(j) * mu;
+    if (jt > maxF) jt = maxF;
+    if (jt < -maxF) jt = -maxF;
+    a.vx -= jt * tx * invA;
+    a.vy -= jt * ty * invA;
+    b.vx += jt * tx * invB;
+    b.vy += jt * ty * invB;
+  }
+
+  function resolveWalls(b) {
+    // left
+    if (b.x - b.r < 0) {
+      b.x = b.r;
+      b.vx = -b.vx * RESTITUTION;
+      b.vy *= WALL_FRICTION;
+    }
+    // right
+    if (b.x + b.r > W) {
+      b.x = W - b.r;
+      b.vx = -b.vx * RESTITUTION;
+      b.vy *= WALL_FRICTION;
+    }
+    // top
+    if (b.y - b.r < 0) {
+      b.y = b.r;
+      b.vy = -b.vy * RESTITUTION;
+      b.vx *= WALL_FRICTION;
+    }
+    // bottom
+    if (b.y + b.r > H) {
+      b.y = H - b.r;
+      b.vy = -b.vy * RESTITUTION;
+      b.vx *= WALL_FRICTION;
+      // floor stickiness for very small bounce
+      if (Math.abs(b.vy) < 30) b.vy = 0;
+      if (Math.abs(b.vx) < 8) b.vx = 0;
+    }
+  }
+
+  // ── Forces ──────────────────────────────────────────────
+  function applyAttraction(b, dt) {
+    if (!holding) return;
+    const dx = mouse.x - b.x;
+    const dy = mouse.y - b.y;
+    const distSq = dx * dx + dy * dy;
+    const r = ATTRACT_RADIUS;
+    if (distSq > r * r || distSq < 1) return;
+
+    const dist = Math.sqrt(distSq);
+    // falloff: stronger closer, smooth at edge
+    const t = 1 - dist / r;
+    const falloff = t * t;
+    const force = ATTRACT_STRENGTH * falloff;
+    const invDist = 1 / dist;
+    b.vx += dx * invDist * force * dt;
+    b.vy += dy * invDist * force * dt;
+  }
+
+  function explode(cx, cy) {
+    // visual ring sparks
+    for (let i = 0; i < 36; i++) {
+      const ang = (i / 36) * Math.PI * 2 + Math.random() * 0.2;
+      const sp = 200 + Math.random() * 400;
+      sparks.push({
+        x: cx,
+        y: cy,
+        vx: Math.cos(ang) * sp,
+        vy: Math.sin(ang) * sp,
+        life: 0.35 + Math.random() * 0.25,
+        color: PALETTE[(Math.random() * PALETTE.length) | 0],
+        r: 2 + Math.random() * 3,
+      });
+    }
+
+    for (const b of balls) {
+      const dx = b.x - cx;
+      const dy = b.y - cy;
+      const distSq = dx * dx + dy * dy;
+      const r = EXPLODE_RADIUS;
+      if (distSq > r * r) continue;
+      const dist = Math.max(Math.sqrt(distSq), 1);
+      const t = 1 - dist / r;
+      const falloff = t * t;
+      // mass-aware impulse
+      const impulse = (EXPLODE_FORCE * falloff) / Math.sqrt(b.mass) * 12;
+      b.vx += (dx / dist) * impulse;
+      b.vy += (dy / dist) * impulse;
+    }
+  }
+
+  // ── Spatial hash for broadphase ─────────────────────────
+  const CELL = 48;
+  /** @type {Map<number, number[]>} */
+  let grid = new Map();
+
+  function cellKey(cx, cy) {
+    // pack into single int (assume < 4096 cells)
+    return (cx + 2048) | ((cy + 2048) << 12);
+  }
+
+  function rebuildGrid() {
+    grid.clear();
+    for (let i = 0; i < balls.length; i++) {
+      const b = balls[i];
+      const cx = (b.x / CELL) | 0;
+      const cy = (b.y / CELL) | 0;
+      const k = cellKey(cx, cy);
+      let bucket = grid.get(k);
+      if (!bucket) {
+        bucket = [];
+        grid.set(k, bucket);
+      }
+      bucket.push(i);
+    }
+  }
+
+  function collidePairs() {
+    rebuildGrid();
+    const checked = new Set();
+
+    for (let i = 0; i < balls.length; i++) {
+      const a = balls[i];
+      const cx = (a.x / CELL) | 0;
+      const cy = (a.y / CELL) | 0;
+
+      for (let ox = -1; ox <= 1; ox++) {
+        for (let oy = -1; oy <= 1; oy++) {
+          const bucket = grid.get(cellKey(cx + ox, cy + oy));
+          if (!bucket) continue;
+          for (let k = 0; k < bucket.length; k++) {
+            const j = bucket[k];
+            if (j <= i) continue;
+            const pair = i * 100000 + j;
+            if (checked.has(pair)) continue;
+            checked.add(pair);
+            resolveBallBall(a, balls[j]);
+          }
+        }
+      }
+    }
+  }
+
+  // ── Simulation step ─────────────────────────────────────
+  function step(dt) {
+    const drag = Math.pow(FRICTION, dt * 60);
+
+    for (const b of balls) {
+      b.vy += GRAVITY * dt;
+      applyAttraction(b, dt);
+      b.vx *= drag;
+      b.vy *= drag;
+
+      // soft speed clamp to keep sim stable
+      const sp = Math.hypot(b.vx, b.vy);
+      const maxSp = 1800;
+      if (sp > maxSp) {
+        const s = maxSp / sp;
+        b.vx *= s;
+        b.vy *= s;
+      }
+
+      b.x += b.vx * dt;
+      b.y += b.vy * dt;
+      resolveWalls(b);
+    }
+
+    // two iterations for more solid stacking
+    collidePairs();
+    collidePairs();
+
+    // sparks
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const s = sparks[i];
+      s.life -= dt;
+      if (s.life <= 0) {
+        sparks.splice(i, 1);
+        continue;
+      }
+      s.vy += GRAVITY * 0.4 * dt;
+      s.x += s.vx * dt;
+      s.y += s.vy * dt;
+      s.vx *= 0.96;
+      s.vy *= 0.96;
+    }
+  }
+
+  // ── Render ──────────────────────────────────────────────
+  function drawBackground() {
+    // deep gradient
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#0c0c18");
+    g.addColorStop(0.55, "#0a0a14");
+    g.addColorStop(1, "#08080f");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    // subtle vignette
+    const vg = ctx.createRadialGradient(W * 0.5, H * 0.45, H * 0.15, W * 0.5, H * 0.5, H * 0.85);
+    vg.addColorStop(0, "rgba(0,0,0,0)");
+    vg.addColorStop(1, "rgba(0,0,0,0.35)");
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawCursorField() {
+    if (!holding) return;
+    const r = ATTRACT_RADIUS;
+    const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, r);
+    g.addColorStop(0, "rgba(124, 108, 255, 0.18)");
+    g.addColorStop(0.5, "rgba(124, 108, 255, 0.06)");
+    g.addColorStop(1, "rgba(124, 108, 255, 0)");
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    // core
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, 6, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(196, 181, 253, 0.85)";
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, 14, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(167, 139, 250, 0.45)";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  function drawBalls() {
+    // soft glow pass for a few larger balls only (perf)
+    for (const b of balls) {
+      if (b.r < 14) continue;
+      const g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r * 2.2);
+      g.addColorStop(0, hexAlpha(b.color, 0.22));
+      g.addColorStop(1, hexAlpha(b.color, 0));
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r * 2.2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    for (const b of balls) {
+      // body
+      const body = ctx.createRadialGradient(
+        b.x - b.r * 0.35,
+        b.y - b.r * 0.4,
+        b.r * 0.1,
+        b.x,
+        b.y,
+        b.r
+      );
+      body.addColorStop(0, lighten(b.color, 0.45));
+      body.addColorStop(0.55, b.color);
+      body.addColorStop(1, darken(b.color, 0.35));
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.fillStyle = body;
+      ctx.fill();
+
+      // specular highlight
+      ctx.beginPath();
+      ctx.ellipse(
+        b.x - b.r * 0.32,
+        b.y - b.r * 0.35,
+        b.r * 0.28,
+        b.r * 0.18,
+        -0.5,
+        0,
+        Math.PI * 2
+      );
+      ctx.fillStyle = "rgba(255,255,255,0.35)";
+      ctx.fill();
+    }
+  }
+
+  function drawSparks() {
+    for (const s of sparks) {
+      const a = Math.max(0, s.life / 0.5);
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r * a, 0, Math.PI * 2);
+      ctx.fillStyle = hexAlpha(s.color, a);
+      ctx.fill();
+    }
+  }
+
+  // color utils
+  function hexToRgb(hex) {
+    const h = hex.replace("#", "");
+    const n = parseInt(h.length === 3
+      ? h.split("").map((c) => c + c).join("")
+      : h, 16);
+    return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+  }
+
+  function hexAlpha(hex, a) {
+    const { r, g, b } = hexToRgb(hex);
+    return `rgba(${r},${g},${b},${a})`;
+  }
+
+  function lighten(hex, t) {
+    const { r, g, b } = hexToRgb(hex);
+    const L = (c) => Math.round(c + (255 - c) * t);
+    return `rgb(${L(r)},${L(g)},${L(b)})`;
+  }
+
+  function darken(hex, t) {
+    const { r, g, b } = hexToRgb(hex);
+    const D = (c) => Math.round(c * (1 - t));
+    return `rgb(${D(r)},${D(g)},${D(b)})`;
+  }
+
+  // ── Main loop ───────────────────────────────────────────
+  let last = performance.now();
+  let acc = 0;
+  let fpsFrames = 0;
+  let fpsTimer = 0;
+  let displayFps = 60;
+
+  function frame(now) {
+    let rawDt = (now - last) / 1000;
+    last = now;
+    // clamp big stalls (tab switch)
+    if (rawDt > 0.05) rawDt = 0.05;
+
+    acc += rawDt;
+    let steps = 0;
+    while (acc >= FIXED_DT && steps < MAX_SUBSTEPS) {
+      step(FIXED_DT);
+      acc -= FIXED_DT;
+      steps++;
+    }
+    // leftover: avoid spiral
+    if (acc >= FIXED_DT) acc = 0;
+
+    // render
+    drawBackground();
+    drawCursorField();
+    drawBalls();
+    drawSparks();
+
+    // fps
+    fpsFrames++;
+    fpsTimer += rawDt;
+    if (fpsTimer >= 0.5) {
+      displayFps = Math.round(fpsFrames / fpsTimer);
+      fpsEl.textContent = String(displayFps);
+      fpsFrames = 0;
+      fpsTimer = 0;
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  // ── Input ───────────────────────────────────────────────
+  function pointerPos(e) {
+    if (e.touches && e.touches[0]) {
+      return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    return { x: e.clientX, y: e.clientY };
+  }
+
+  function onPointerDown(e) {
+    // ignore UI chrome
+    if (e.target && e.target.closest && e.target.closest("#ui .panel")) return;
+    const p = pointerPos(e);
+    mouse.x = p.x;
+    mouse.y = p.y;
+    mouse.down = true;
+    holding = true;
+    pointerDownAt = performance.now();
+    pointerDownPos = { x: p.x, y: p.y };
+    didDrag = false;
+  }
+
+  function onPointerMove(e) {
+    const p = pointerPos(e);
+    mouse.x = p.x;
+    mouse.y = p.y;
+    if (mouse.down) {
+      const dx = p.x - pointerDownPos.x;
+      const dy = p.y - pointerDownPos.y;
+      if (dx * dx + dy * dy > 36) didDrag = true;
+    }
+  }
+
+  function onPointerUp(e) {
+    if (!mouse.down) return;
+    const p = pointerPos(e.changedTouches ? e : e);
+    // touch end uses changedTouches
+    let x = mouse.x, y = mouse.y;
+    if (e.changedTouches && e.changedTouches[0]) {
+      x = e.changedTouches[0].clientX;
+      y = e.changedTouches[0].clientY;
+    } else if (typeof e.clientX === "number") {
+      x = e.clientX;
+      y = e.clientY;
+    }
+    mouse.x = x;
+    mouse.y = y;
+
+    const heldMs = performance.now() - pointerDownAt;
+    // click (not a long hold/drag): explosion
+    // short press without much drag = explode
+    if (heldMs < 220 && !didDrag) {
+      explode(x, y);
+    }
+    // also: if it was a pure click without move, explode is enough;
+    // if held long, attraction was the intent — no extra explode
+
+    mouse.down = false;
+    holding = false;
+  }
+
+  // Mouse
+  canvas.addEventListener("mousedown", onPointerDown);
+  window.addEventListener("mousemove", onPointerMove);
+  window.addEventListener("mouseup", onPointerUp);
+
+  // Touch
+  canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    onPointerDown(e);
+  }, { passive: false });
+  window.addEventListener("touchmove", (e) => {
+    if (mouse.down) e.preventDefault();
+    onPointerMove(e);
+  }, { passive: false });
+  window.addEventListener("touchend", (e) => {
+    onPointerUp(e);
+  });
+  window.addEventListener("touchcancel", () => {
+    mouse.down = false;
+    holding = false;
+  });
+
+  // Keep attract while holding even if pointer leaves
+  canvas.addEventListener("mouseleave", () => {
+    // keep holding state if button still down
+  });
+
+  spawnBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    // drop from top near center with slight random
+    spawnBalls(50, W * 0.5 + (Math.random() - 0.5) * W * 0.4, 30 + Math.random() * 40);
+  });
+
+  // Prevent context menu on long press (mobile / hold)
+  canvas.addEventListener("contextmenu", (e) => e.preventDefault());
+
+  // ── Boot ────────────────────────────────────────────────
+  spawnBalls(40);
+  requestAnimationFrame((t) => {
+    last = t;
+    requestAnimationFrame(frame);
+  });
+})();
+  </script>
+</body>
+</html>

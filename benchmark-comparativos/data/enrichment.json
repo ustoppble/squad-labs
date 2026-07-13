@@ -1,0 +1,466 @@
+{
+ "sonnet-5": {
+  "summary": "O eficiente da bateria: US$1,14 pelos 4 testes, o mais barato entre os Claude, sempre rápido (575s no total). Trabalha enxuto — 1 Write por teste, Bash pra conferir — e só se estendeu no FPS (11 rounds, 2 Edits). Único Claude a usar ToolSearch.",
+  "audit_summary": "4/4 runs auditados: single-shot, prompt verbatim, sem subagentes, sem skills, zero violações.",
+  "tests": {
+   "001": {
+    "narrative": "Run do teste 001 (sistema solar 3D): 3 rounds, 132s, US$0.21. Ferramentas: Write×1, Bash×1. Artefato de 469 linhas. Usa lib externa: cdn.jsdelivr.net.",
+    "tokens": {
+     "input_uncached": 229,
+     "output": 13669,
+     "cache_read": 71316,
+     "cache_write": 24117
+    },
+    "cost_usd": 0.211704,
+    "rounds": 3,
+    "duration_s": 132.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "002": {
+    "narrative": "Run do teste 002 (clone da home da Apple): 5 rounds, 90s, US$0.18. Ferramentas: Bash×3, Write×1. Artefato de 593 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 233,
+     "output": 10203,
+     "cache_read": 116120,
+     "cache_write": 20978
+    },
+    "cost_usd": 0.178165,
+    "rounds": 5,
+    "duration_s": 90.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "003": {
+    "narrative": "Run do teste 003 (física de bolinhas): 4 rounds, 102s, US$0.20. Ferramentas: Bash×2, Write×1. Artefato de 353 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 231,
+     "output": 12337,
+     "cache_read": 100769,
+     "cache_write": 23055
+    },
+    "cost_usd": 0.201623,
+    "rounds": 4,
+    "duration_s": 102.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "004": {
+    "narrative": "Run do teste 004 (jogo FPS): 11 rounds, 251s, US$0.55. Ferramentas: Bash×5, Write×1, Edit×2, ToolSearch×1, Read×1. Artefato de 739 linhas. Usa lib externa: unpkg.com.",
+    "tokens": {
+     "input_uncached": 390,
+     "output": 25499,
+     "cache_read": 392358,
+     "cache_write": 85428
+    },
+    "cost_usd": 0.547812,
+    "rounds": 11,
+    "duration_s": 251.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   }
+  }
+ },
+ "sonnet-4-6": {
+  "summary": "O one-shotter: 2 rounds em quase tudo — escreve o arquivo inteiro num Write e entrega, sem verificar. Artefatos grandes (1085 linhas no clone da Apple). Pagou caro no tokenizer antigo? Não: pagou caro em output bruto — US$3,33 na bateria, com 907s parados no teste 001.",
+  "audit_summary": "4/4 runs auditados: single-shot, prompt verbatim, sem subagentes, sem skills, zero violações.",
+  "tests": {
+   "001": {
+    "narrative": "Run do teste 001 (sistema solar 3D): 2 rounds, 907s, US$1.30. Ferramentas: Write×1. Artefato de 499 linhas. Usa lib externa: cdnjs.cloudflare.com.",
+    "tokens": {
+     "input_uncached": 9,
+     "output": 72321,
+     "cache_read": 77519,
+     "cache_write": 51378
+    },
+    "cost_usd": 1.300765,
+    "rounds": 2,
+    "duration_s": 907.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "002": {
+    "narrative": "Run do teste 002 (clone da home da Apple): 2 rounds, 185s, US$0.36. Ferramentas: Write×1. Artefato de 1085 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 4,
+     "output": 17267,
+     "cache_read": 26007,
+     "cache_write": 25164
+    },
+    "cost_usd": 0.361184,
+    "rounds": 2,
+    "duration_s": 185.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "003": {
+    "narrative": "Run do teste 003 (física de bolinhas): 2 rounds, 168s, US$0.29. Ferramentas: Write×1. Artefato de 324 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 3,
+     "output": 13644,
+     "cache_read": 25936,
+     "cache_write": 21525
+    },
+    "cost_usd": 0.293169,
+    "rounds": 2,
+    "duration_s": 168.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "004": {
+    "narrative": "Run do teste 004 (jogo FPS): 3 rounds, 908s, US$1.38. Ferramentas: Write×1, Bash×1. Artefato de 792 linhas. Usa lib externa: cdn.jsdelivr.net.",
+    "tokens": {
+     "input_uncached": 10,
+     "output": 76272,
+     "cache_read": 150320,
+     "cache_write": 50763
+    },
+    "cost_usd": 1.379567,
+    "rounds": 3,
+    "duration_s": 908.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   }
+  }
+ },
+ "opus-4-8": {
+  "summary": "O perfeccionista compulsivo: US$9,49 (o mais caro da bateria, 40% do custo total) e 99 rounds, dos quais 81 só no FPS — 31 Bash, 35 Edits, 11 Reads em 29 minutos de lapidação. Zero libs externas em todos os testes: escreve tudo na mão.",
+  "audit_summary": "4/4 runs auditados: single-shot, prompt verbatim, sem subagentes, sem skills, zero violações.",
+  "tests": {
+   "001": {
+    "narrative": "Run do teste 001 (sistema solar 3D): 6 rounds, 304s, US$1.00. Ferramentas: Write×2, Bash×2, Read×1. Artefato de 614 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 220,
+     "output": 27128,
+     "cache_read": 140825,
+     "cache_write": 40682
+    },
+    "cost_usd": 1.003975,
+    "rounds": 6,
+    "duration_s": 304.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "002": {
+    "narrative": "Run do teste 002 (clone da home da Apple): 8 rounds, 232s, US$0.78. Ferramentas: Write×1, Edit×5, Bash×1. Artefato de 783 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 369,
+     "output": 19995,
+     "cache_read": 206291,
+     "cache_write": 27564
+    },
+    "cost_usd": 0.777141,
+    "rounds": 8,
+    "duration_s": 232.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "003": {
+    "narrative": "Run do teste 003 (física de bolinhas): 4 rounds, 140s, US$0.45. Ferramentas: Write×1, Bash×2. Artefato de 437 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 216,
+     "output": 11725,
+     "cache_read": 67543,
+     "cache_write": 18730
+    },
+    "cost_usd": 0.445039,
+    "rounds": 4,
+    "duration_s": 140.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "004": {
+    "narrative": "Run do teste 004 (jogo FPS): 81 rounds, 1731s, US$7.26. Ferramentas: Bash×31, Write×3, Read×11, Edit×35. Artefato de 1702 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 2449,
+     "output": 105201,
+     "cache_read": 7530454,
+     "cache_write": 136447
+    },
+    "cost_usd": 7.260291,
+    "rounds": 81,
+    "duration_s": 1731.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   }
+  }
+ },
+ "fable-5": {
+  "summary": "O frontier econômico de movimentos: 11 rounds na bateria toda, 692s, US$4,31. Padrão 1 Write + conferida rápida, sem retrabalho. Artefatos médios-grandes (873 linhas no FPS) sem dependência externa.",
+  "audit_summary": "4/4 runs auditados: single-shot, prompt verbatim, sem subagentes, sem skills, zero violações.",
+  "tests": {
+   "001": {
+    "narrative": "Run do teste 001 (sistema solar 3D): 3 rounds, 109s, US$0.77. Ferramentas: Write×1, Bash×1. Artefato de 340 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 213,
+     "output": 8911,
+     "cache_read": 36596,
+     "cache_write": 22710
+    },
+    "cost_usd": 0.768151,
+    "rounds": 3,
+    "duration_s": 109.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "002": {
+    "narrative": "Run do teste 002 (clone da home da Apple): 2 rounds, 164s, US$0.99. Ferramentas: Write×1. Artefato de 730 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 215,
+     "output": 13936,
+     "cache_read": 19920,
+     "cache_write": 21996
+    },
+    "cost_usd": 0.99382,
+    "rounds": 2,
+    "duration_s": 164.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "003": {
+    "narrative": "Run do teste 003 (física de bolinhas): 2 rounds, 77s, US$0.55. Ferramentas: Write×1. Artefato de 424 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 211,
+     "output": 6825,
+     "cache_read": 19800,
+     "cache_write": 14896
+    },
+    "cost_usd": 0.54936,
+    "rounds": 2,
+    "duration_s": 77.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "004": {
+    "narrative": "Run do teste 004 (jogo FPS): 4 rounds, 342s, US$2.00. Ferramentas: Write×1, Bash×1, Edit×1. Artefato de 873 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 215,
+     "output": 28770,
+     "cache_read": 103375,
+     "cache_write": 36728
+    },
+    "cost_usd": 2.003125,
+    "rounds": 4,
+    "duration_s": 342.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   }
+  }
+ },
+ "gpt-5-6-luna": {
+  "summary": "O barato que confere: US$0,42 pela bateria inteira — 22× mais barato que o Opus. Compensa tamanho com iteração (14 rounds no sistema solar via exec). Artefatos compactos (258-294 linhas).",
+  "audit_summary": "4/4 runs auditados: single-shot, prompt verbatim, sem subagentes, sem skills, zero violações.",
+  "tests": {
+   "001": {
+    "narrative": "Run do teste 001 (sistema solar 3D): 14 rounds, 325s, US$0.17. Ferramentas: exec×13. Artefato de 294 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 40309,
+     "output": 17116,
+     "cache_read": 275968,
+     "cache_write": 0
+    },
+    "cost_usd": 0.170602,
+    "rounds": 14,
+    "duration_s": 324.7,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "002": {
+    "narrative": "Run do teste 002 (clone da home da Apple): 5 rounds, 178s, US$0.09. Ferramentas: exec×4. Artefato de 277 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 24643,
+     "output": 9561,
+     "cache_read": 59136,
+     "cache_write": 0
+    },
+    "cost_usd": 0.087923,
+    "rounds": 5,
+    "duration_s": 177.7,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "003": {
+    "narrative": "Run do teste 003 (física de bolinhas): 5 rounds, 113s, US$0.06. Ferramentas: exec×4. Artefato de 258 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 20044,
+     "output": 5996,
+     "cache_read": 52992,
+     "cache_write": 0
+    },
+    "cost_usd": 0.061319,
+    "rounds": 5,
+    "duration_s": 112.8,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "004": {
+    "narrative": "Run do teste 004 (jogo FPS): 6 rounds, 210s, US$0.10. Ferramentas: exec×5. Artefato de 278 linhas. Usa lib externa: cdn.jsdelivr.net.",
+    "tokens": {
+     "input_uncached": 19023,
+     "output": 11330,
+     "cache_read": 93696,
+     "cache_write": 0
+    },
+    "cost_usd": 0.096373,
+    "rounds": 6,
+    "duration_s": 209.9,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   }
+  }
+ },
+ "gpt-5-6-terra": {
+  "summary": "O minimalista: bateria em US$0,60 e 468s (o mais rápido), com os menores artefatos do pool — 94 linhas no clone da Apple, 135 no FPS. Poucos rounds, pouco código; o julgamento cego dirá se entregou ou só esboçou.",
+  "audit_summary": "4/4 runs auditados: single-shot, prompt verbatim, sem subagentes, sem skills, zero violações.",
+  "tests": {
+   "001": {
+    "narrative": "Run do teste 001 (sistema solar 3D): 5 rounds, 120s, US$0.16. Ferramentas: exec×4. Artefato de 165 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 24202,
+     "output": 5649,
+     "cache_read": 54016,
+     "cache_write": 0
+    },
+    "cost_usd": 0.158744,
+    "rounds": 5,
+    "duration_s": 120.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "002": {
+    "narrative": "Run do teste 002 (clone da home da Apple): 4 rounds, 114s, US$0.14. Ferramentas: exec×3. Artefato de 94 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 13824,
+     "output": 5999,
+     "cache_read": 47616,
+     "cache_write": 0
+    },
+    "cost_usd": 0.136449,
+    "rounds": 4,
+    "duration_s": 113.8,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "003": {
+    "narrative": "Run do teste 003 (física de bolinhas): 4 rounds, 93s, US$0.12. Ferramentas: exec×3. Artefato de 225 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 18033,
+     "output": 4417,
+     "cache_read": 39936,
+     "cache_write": 0
+    },
+    "cost_usd": 0.121321,
+    "rounds": 4,
+    "duration_s": 93.3,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "004": {
+    "narrative": "Run do teste 004 (jogo FPS): 5 rounds, 141s, US$0.18. Ferramentas: exec×4. Artefato de 135 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 28066,
+     "output": 6719,
+     "cache_read": 55040,
+     "cache_write": 0
+    },
+    "cost_usd": 0.18471,
+    "rounds": 5,
+    "duration_s": 140.7,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   }
+  }
+ },
+ "gpt-5-6-sol": {
+  "summary": "O flagship insistente: 65 rounds e US$4,14, com 23 rounds no sistema solar e 25 no FPS — itera via exec até ficar satisfeito. Curioso: no FPS entregou só 277 linhas depois de 25 rounds.",
+  "audit_summary": "4/4 runs auditados: single-shot, prompt verbatim, sem subagentes, sem skills, zero violações.",
+  "tests": {
+   "001": {
+    "narrative": "Run do teste 001 (sistema solar 3D): 23 rounds, 504s, US$1.85. Ferramentas: exec×21, wait×1. Artefato de 737 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 136400,
+     "output": 22642,
+     "cache_read": 987392,
+     "cache_write": 0
+    },
+    "cost_usd": 1.854956,
+    "rounds": 23,
+    "duration_s": 504.2,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "002": {
+    "narrative": "Run do teste 002 (clone da home da Apple): 9 rounds, 244s, US$0.58. Ferramentas: exec×8. Artefato de 625 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 23396,
+     "output": 12608,
+     "cache_read": 176896,
+     "cache_write": 0
+    },
+    "cost_usd": 0.583668,
+    "rounds": 9,
+    "duration_s": 243.5,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "003": {
+    "narrative": "Run do teste 003 (física de bolinhas): 8 rounds, 171s, US$0.45. Ferramentas: exec×7. Artefato de 575 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 28201,
+     "output": 8333,
+     "cache_read": 120832,
+     "cache_write": 0
+    },
+    "cost_usd": 0.451411,
+    "rounds": 8,
+    "duration_s": 170.9,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "004": {
+    "narrative": "Run do teste 004 (jogo FPS): 25 rounds, 449s, US$1.25. Ferramentas: exec×22, wait×2. Artefato de 277 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 69575,
+     "output": 19413,
+     "cache_read": 642816,
+     "cache_write": 0
+    },
+    "cost_usd": 1.251673,
+    "rounds": 25,
+    "duration_s": 449.0,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   }
+  }
+ },
+ "grok-4-5": {
+  "summary": "Custo medido: US$0.92 na bateria (usage do unified.jsonl do CLI; cache read cobrado a $0,50/1M, preço real da xAI) — segundo mais barato do pool. Maiores artefatos do benchmark (1436 linhas no clone da Apple, 964 no solar), estilo write + search_replace, 477s no total.",
+  "audit_summary": "4/4 runs auditados via transcript (single-shot, verbatim, sem subagentes, sem skills, zero violações) e usage recuperado do log unificado do CLI — nada mais 'não medido'.",
+  "tests": {
+   "001": {
+    "narrative": "Run do teste 001 (sistema solar 3D): 113s. Ferramentas: list_dir×2, write×2, search_replace×10, run_terminal_command×2. Artefato de 964 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 34853,
+     "output": 15750,
+     "cache_read": 236416,
+     "cache_write": 0
+    },
+    "cost_usd": 0.282414,
+    "rounds": 9,
+    "duration_s": 113,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "002": {
+    "narrative": "Run do teste 002 (clone da home da Apple): 191s. Ferramentas: list_dir×2, write×2, search_replace×12. Artefato de 1436 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 40402,
+     "output": 24959,
+     "cache_read": 299008,
+     "cache_write": 0
+    },
+    "cost_usd": 0.380062,
+    "rounds": 9,
+    "duration_s": 191,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "003": {
+    "narrative": "Run do teste 003 (física de bolinhas): 58s. Ferramentas: write×2, search_replace×4. Artefato de 541 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 20273,
+     "output": 6975,
+     "cache_read": 50816,
+     "cache_write": 0
+    },
+    "cost_usd": 0.107804,
+    "rounds": 3,
+    "duration_s": 58,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   },
+   "004": {
+    "narrative": "Run do teste 004 (jogo FPS): 115s. Ferramentas: list_dir×2, write×2. Artefato de 1075 linhas. Sem dependência externa.",
+    "tokens": {
+     "input_uncached": 26222,
+     "output": 12955,
+     "cache_read": 45568,
+     "cache_write": 0
+    },
+    "cost_usd": 0.152958,
+    "rounds": 3,
+    "duration_s": 115,
+    "fairness_summary": "auditado, single-shot, prompt verbatim, sem subagentes, sem skills"
+   }
+  }
+ }
+}

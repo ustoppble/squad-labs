@@ -1,0 +1,339 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Google Antigravity" [ref=e4] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e5]
+        - generic [ref=e8]: Google Antigravity
+      - navigation "Primary" [ref=e9]:
+        - button "Products keyboard_arrow_down" [ref=e11] [cursor=pointer]:
+          - text: Products
+          - generic [ref=e12]: keyboard_arrow_down
+        - button "Use Cases keyboard_arrow_down" [ref=e14] [cursor=pointer]:
+          - text: Use Cases
+          - generic [ref=e15]: keyboard_arrow_down
+        - link "Pricing" [ref=e17] [cursor=pointer]:
+          - /url: "#pricing"
+        - link "Blog" [ref=e19] [cursor=pointer]:
+          - /url: "#blogs"
+        - button "Resources keyboard_arrow_down" [ref=e21] [cursor=pointer]:
+          - text: Resources
+          - generic [ref=e22]: keyboard_arrow_down
+      - link "Download download" [ref=e24] [cursor=pointer]:
+        - /url: "#download"
+        - text: Download
+        - generic [ref=e25]: download
+  - main [ref=e26]:
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - img [ref=e30]
+        - text: Google Antigravity
+      - heading "Experience liftoff with the next-gen agent platform" [level=1] [ref=e33]
+      - generic [ref=e34]:
+        - link "Download for MacOS" [ref=e35] [cursor=pointer]:
+          - /url: "#download"
+          - img [ref=e36]
+          - text: Download for MacOS
+        - link "Explore use cases" [ref=e38] [cursor=pointer]:
+          - /url: "#use-cases"
+    - button "Play intro video" [ref=e40] [cursor=pointer]:
+      - generic:
+        - generic:
+          - img
+          - generic: Google
+          - generic: Antigravity
+      - generic [ref=e43]:
+        - generic [ref=e44]: play_arrow
+        - text: Play intro
+      - button "Play" [ref=e45]:
+        - generic [ref=e46]: play_arrow
+    - generic [ref=e47]:
+      - list [ref=e48]:
+        - listitem [ref=e49]:
+          - generic [ref=e50]: dashboard_customize
+        - listitem [ref=e51]:
+          - generic [ref=e52]: keyboard_tab
+        - listitem [ref=e53]:
+          - generic [ref=e54]: check_circle
+        - listitem [ref=e55]:
+          - generic [ref=e56]: keyboard_command_key
+        - listitem [ref=e57]:
+          - generic [ref=e58]: data_object
+        - listitem [ref=e59]:
+          - generic [ref=e60]: file_copy
+        - listitem [ref=e61]:
+          - generic [ref=e62]: terminal
+        - listitem [ref=e63]:
+          - generic [ref=e64]: developer_mode_tv
+        - listitem [ref=e65]:
+          - generic [ref=e66]: folder
+        - listitem [ref=e67]:
+          - generic [ref=e68]: refresh
+        - listitem [ref=e69]:
+          - generic [ref=e70]: commit
+        - listitem [ref=e71]:
+          - generic [ref=e72]: search
+        - listitem [ref=e73]:
+          - generic [ref=e74]: code_blocks
+        - listitem [ref=e75]:
+          - generic [ref=e76]: code
+        - listitem [ref=e77]:
+          - generic [ref=e78]: keyboard_return
+        - listitem [ref=e79]:
+          - generic [ref=e80]: merge
+        - listitem [ref=e81]:
+          - generic [ref=e82]: deployed_code
+        - listitem [ref=e83]:
+          - generic [ref=e84]: auto_awesome
+        - listitem [ref=e85]:
+          - generic [ref=e86]: data_object
+        - listitem [ref=e87]:
+          - generic [ref=e88]: edit
+        - listitem [ref=e89]:
+          - generic [ref=e90]: device_hub
+      - paragraph [ref=e92]: Google Antigravity is our agentic development platform, allowing anyone to build in the agent-first era.
+    - generic [ref=e94]:
+      - article [ref=e95]:
+        - generic [ref=e96]:
+          - heading "Antigravity 2.0" [level=3] [ref=e97]
+          - paragraph [ref=e98]: Your command center to manage multiple local agents in parallel. Group conversations into Projects, operate across multiple workspaces, and automate routine tasks with scheduled messages.
+          - link "Explore Product" [ref=e99] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e102]:
+          - generic [ref=e104]: 📁 new-project ▾
+          - generic [ref=e105]: Ask anything, @ to mention, / for actions
+          - generic [ref=e106]:
+            - generic [ref=e107]: + Gemini 3.5 Flash ▾
+            - generic [ref=e108]: 🌳 New Worktree ▾
+            - generic [ref=e109]: main ▾
+          - generic [ref=e111]: Local ▾
+      - article [ref=e112]:
+        - generic [ref=e113]:
+          - heading "Antigravity CLI" [level=3] [ref=e114]
+          - paragraph [ref=e115]: The lightweight, fast, terminal-first surface to work with Antigravity agents. Run autonomous coding agents, execute shell commands directly, and manage background subagents all from your keyboard.
+          - link "Explore Product" [ref=e116] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e119]:
+          - generic [ref=e120]: $ agy theme list
+          - generic [ref=e121]: light
+          - generic [ref=e122]: solarized light
+          - generic [ref=e123]: › dark
+          - generic [ref=e124]: colorblind-friendly dark
+          - generic [ref=e125]: tokyo night
+          - generic [ref=e126]: terminal
+          - generic [ref=e127]: "[Next]"
+          - generic [ref=e128]: "AGY: Here's the change:"
+          - generic [ref=e129]: 3 import "fmt"
+          - generic [ref=e130]: "- func main() {"
+          - generic [ref=e131]: "+ func greet(name string) {"
+          - generic [ref=e132]: fmt.Printf("Hello, %s\n", name)
+          - generic [ref=e133]: "}"
+      - article [ref=e134]:
+        - generic [ref=e135]:
+          - heading "Antigravity SDK" [level=3] [ref=e136]
+          - paragraph [ref=e137]: Prototype custom agents leveraging Antigravity's harness with minimal code. Simple Python scripts to iterate on agentic applications, automate software engineering tasks, and run evaluations on top of the Antigravity agent harness.
+          - link "Explore Product" [ref=e138] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e141]: Antigravity SDK
+      - article [ref=e142]:
+        - generic [ref=e143]:
+          - heading "Antigravity IDE" [level=3] [ref=e144]
+          - paragraph [ref=e145]: The fully-featured, agentic IDE. Complete with the agent manager, artifacts, and a deep understanding of your codebase.
+          - link "Explore Product" [ref=e146] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e151]:
+          - generic [ref=e152]: "import { useState } from \"react\""
+          - generic [ref=e153]: "export function AgentPanel() {"
+          - generic [ref=e154]: const [open, setOpen] = useState(true)
+          - generic [ref=e155]: return (
+          - generic [ref=e156]: <aside className="panel">
+          - generic [ref=e157]: "{/* agent stream */}"
+          - generic [ref=e158]: </aside>
+          - generic [ref=e159]: )
+          - generic [ref=e160]: "}"
+    - generic [ref=e162]:
+      - generic [ref=e163]:
+        - heading "Built for developers for the agent-first era" [level=2] [ref=e164]:
+          - text: Built for developers
+          - text: for the agent-first era
+        - paragraph [ref=e165]: Google Antigravity is built for user trust, whether you're a professional developer working in a large enterprise codebase, a hobbyist vibe-coding in their spare time, or anyone in between.
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - article [ref=e168]:
+            - button "Watch case" [ref=e172] [cursor=pointer]:
+              - generic [ref=e173]: play_arrow
+            - generic [ref=e174]:
+              - heading "Full stack developer" [level=4] [ref=e175]
+              - paragraph [ref=e176]: Build production-ready applications with confidence with thoroughly designed artifacts and comprehensive verification tests.
+              - link "View case chevron_right" [ref=e177] [cursor=pointer]:
+                - /url: "#"
+                - text: View case
+                - generic [ref=e178]: chevron_right
+          - article [ref=e179]:
+            - button "Watch case" [ref=e183] [cursor=pointer]:
+              - generic [ref=e184]: play_arrow
+            - generic [ref=e185]:
+              - heading "Enterprise developer" [level=4] [ref=e186]
+              - paragraph [ref=e187]: Google Antigravity empowers the next era of enterprise builders.
+              - link "View case chevron_right" [ref=e188] [cursor=pointer]:
+                - /url: "#"
+                - text: View case
+                - generic [ref=e189]: chevron_right
+          - article [ref=e190]:
+            - button "Watch case" [ref=e194] [cursor=pointer]:
+              - generic [ref=e195]: play_arrow
+            - generic [ref=e196]:
+              - heading "Frontend developer" [level=4] [ref=e197]
+              - paragraph [ref=e198]: Streamline UX development by leveraging browser-in-the-loop agents to automate repetitive tasks.
+              - link "View case chevron_right" [ref=e199] [cursor=pointer]:
+                - /url: "#"
+                - text: View case
+                - generic [ref=e200]: chevron_right
+        - generic [ref=e201]:
+          - button "Previous" [ref=e202] [cursor=pointer]:
+            - generic [ref=e203]: keyboard_arrow_left
+          - button "Next" [ref=e204] [cursor=pointer]:
+            - generic [ref=e205]: keyboard_arrow_right
+    - generic [ref=e207]:
+      - article [ref=e208]:
+        - generic [ref=e209]: Available at no charge
+        - heading "For developers" [level=3] [ref=e210]
+        - paragraph [ref=e211]: Achieve new heights
+        - link "Download" [ref=e212] [cursor=pointer]:
+          - /url: "#download"
+      - article [ref=e213]:
+        - generic [ref=e214]: Now Available!
+        - heading "For organizations" [level=3] [ref=e215]
+        - paragraph [ref=e216]: Level up your entire team
+        - link "Read More" [ref=e217] [cursor=pointer]:
+          - /url: "#"
+    - generic [ref=e218]:
+      - generic [ref=e219]:
+        - heading "Latest Blogs" [level=2] [ref=e220]
+        - link "View blog" [ref=e221] [cursor=pointer]:
+          - /url: "#"
+      - generic [ref=e222]:
+        - generic [ref=e223]:
+          - article [ref=e224]:
+            - img [ref=e226]
+            - generic [ref=e233]:
+              - generic [ref=e234]: May 19, 2026
+              - generic [ref=e236]: Product
+            - heading "Google Antigravity @ I/O 2026" [level=4] [ref=e237]
+            - link "Read blog" [ref=e238] [cursor=pointer]:
+              - /url: "#"
+          - article [ref=e239]:
+            - img [ref=e241]:
+              - generic [ref=e244]: New Projects ▾
+              - generic [ref=e246]: Ask anything…
+              - generic [ref=e247]: Antigravity 2.0
+            - generic [ref=e248]:
+              - generic [ref=e249]: May 19, 2026
+              - generic [ref=e251]: Product
+            - heading "Introducing Google Antigravity 2.0" [level=4] [ref=e252]
+            - link "Read blog" [ref=e253] [cursor=pointer]:
+              - /url: "#"
+          - article [ref=e254]:
+            - img [ref=e256]:
+              - generic [ref=e259]: /teamwork-preview
+              - generic [ref=e260]: Agent Teams
+            - generic [ref=e261]:
+              - generic [ref=e262]: May 19, 2026
+              - generic [ref=e264]: Product
+            - heading "Google Antigravity Built an OS (and more)" [level=4] [ref=e265]
+            - link "Read blog" [ref=e266] [cursor=pointer]:
+              - /url: "#"
+          - article [ref=e267]:
+            - img [ref=e269]
+            - generic [ref=e277]:
+              - generic [ref=e278]: May 19, 2026
+              - generic [ref=e280]: Product
+            - heading "Google Antigravity CLI" [level=4] [ref=e281]
+            - link "Read blog" [ref=e282] [cursor=pointer]:
+              - /url: "#"
+          - article [ref=e283]:
+            - img [ref=e285]:
+              - generic [ref=e289]: SDK
+            - generic [ref=e290]:
+              - generic [ref=e291]: May 19, 2026
+              - generic [ref=e293]: Product
+            - heading "Google Antigravity SDK" [level=4] [ref=e294]
+            - link "Read blog" [ref=e295] [cursor=pointer]:
+              - /url: "#"
+          - article [ref=e296]:
+            - img [ref=e298]
+            - generic [ref=e304]:
+              - generic [ref=e305]: May 19, 2026
+              - generic [ref=e307]: Enterprise
+            - heading "Google Antigravity in Gemini Enterprise" [level=4] [ref=e308]
+            - link "Read blog" [ref=e309] [cursor=pointer]:
+              - /url: "#"
+          - article [ref=e310]:
+            - img [ref=e312]:
+              - generic [ref=e314]: Gemini 3.5
+              - generic [ref=e315]: Flash
+            - generic [ref=e316]:
+              - generic [ref=e317]: May 19, 2026
+              - generic [ref=e319]: Product
+            - heading "Gemini 3.5 Flash in Google Antigravity" [level=4] [ref=e320]
+            - link "Read blog" [ref=e321] [cursor=pointer]:
+              - /url: "#"
+          - article [ref=e322]:
+            - img [ref=e324]
+            - generic [ref=e327]:
+              - generic [ref=e328]: Nov 18, 2025
+              - generic [ref=e330]: Product
+            - heading "Introducing Google Antigravity" [level=4] [ref=e331]
+            - link "Read blog" [ref=e332] [cursor=pointer]:
+              - /url: "#"
+        - generic [ref=e333]:
+          - button "Previous blogs" [ref=e334] [cursor=pointer]:
+            - generic [ref=e335]: keyboard_arrow_left
+          - button "Next blogs" [ref=e336] [cursor=pointer]:
+            - generic [ref=e337]: keyboard_arrow_right
+    - generic [ref=e340]:
+      - heading "Download Google Antigravity for MacOS" [level=2] [ref=e341]: Download Google Antigravity for MacOS
+      - generic [ref=e343]:
+        - link "Download for Apple Silicon" [ref=e344] [cursor=pointer]:
+          - /url: "#"
+        - link "Download for Intel" [ref=e345] [cursor=pointer]:
+          - /url: "#"
+    - generic [ref=e346]:
+      - generic [ref=e347]:
+        - heading "Experience liftoff" [level=3] [ref=e348]
+        - generic [ref=e349]:
+          - link "Download" [ref=e350] [cursor=pointer]:
+            - /url: "#download"
+          - link "Product" [ref=e351] [cursor=pointer]:
+            - /url: "#features"
+          - link "Docs" [ref=e352] [cursor=pointer]:
+            - /url: "#"
+          - link "Changelog" [ref=e353] [cursor=pointer]:
+            - /url: "#"
+          - link "Press" [ref=e354] [cursor=pointer]:
+            - /url: "#"
+          - link "Releases" [ref=e355] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e356]:
+          - link "Blog" [ref=e357] [cursor=pointer]:
+            - /url: "#blogs"
+          - link "Pricing" [ref=e358] [cursor=pointer]:
+            - /url: "#pricing"
+          - link "Use Cases" [ref=e359] [cursor=pointer]:
+            - /url: "#use-cases"
+      - generic [ref=e361]: Antigravity
+      - generic [ref=e362]:
+        - link "Google" [ref=e363] [cursor=pointer]:
+          - /url: https://google.com
+        - generic [ref=e364]:
+          - link "About Google" [ref=e365] [cursor=pointer]:
+            - /url: "#"
+          - link "Google Products" [ref=e366] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e367] [cursor=pointer]:
+            - /url: "#"
+          - link "Terms" [ref=e368] [cursor=pointer]:
+            - /url: "#"
+  - generic [ref=e369]:
+    - paragraph [ref=e370]: This site uses cookies from Google to deliver its services and to analyze traffic.
+    - button "OK" [ref=e371] [cursor=pointer]

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squad Labs — sites experimentais feitos com squads no Overclock</title>
+  <meta name="description" content="Landings, benchmarks e protótipos construídos com squads de agentes no Overclock.">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: #14141c;
+      --card-hover: #1b1b26;
+      --border: #26263a;
+      --text: #e8e8f0;
+      --muted: #8a8aa0;
+      --accent: #ffb300;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      padding: 48px 24px 80px;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; }
+    header { margin-bottom: 40px; }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    h1 { font-size: clamp(28px, 5vw, 44px); margin: 10px 0 12px; letter-spacing: -0.02em; }
+    .sub { color: var(--muted); max-width: 640px; line-height: 1.6; }
+    .sub a { color: var(--accent); text-decoration: none; }
+    .count { color: var(--muted); font-size: 13px; margin-top: 16px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .card {
+      display: block;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      background: var(--card-hover);
+      border-color: var(--accent);
+    }
+    .card h2 { font-size: 16px; margin-bottom: 6px; line-height: 1.35; }
+    .card p { color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .tag {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+    section h3 {
+      margin: 44px 0 4px;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    footer { margin-top: 64px; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Squad Labs</div>
+      <h1>Sites que os squads construíram</h1>
+      <p class="sub">Landings, benchmarks e protótipos gerados em sessões de vibe coding com squads de agentes no <a href="https://overclock.sh">Overclock</a>. Cada card abre o site funcionando.</p>
+      <p class="count" id="count"></p>
+    </header>
+
+    <section>
+      <h3>Marcas &amp; produtos fictícios</h3>
+      <div class="grid" data-group>
+        <a class="card" href="aura-pro/"><h2>Aura Pro</h2><p>Som além do silêncio — landing de fone premium.</p><span class="tag">landing</span></a>
+        <a class="card" href="orbe/"><h2>Orbe</h2><p>Anel inteligente de titânio.</p><span class="tag">landing</span></a>
+        <a class="card" href="barba-brava/"><h2>Barba Brava</h2><p>Cremes de barbear artesanais premium.</p><span class="tag">landing</span></a>
+        <a class="card" href="grao-nobre/"><h2>Grão Nobre</h2><p>O melhor café da cidade.</p><span class="tag">landing</span></a>
+        <a class="card" href="hotdog/"><h2>Barraquinha do Hot-Dog</h2><p>Cachorro-quente artesanal, com cardápio e modal de pedido.</p><span class="tag">landing</span></a>
+        <a class="card" href="riscado/"><h2>Riscado</h2><p>Estúdio de risografia.</p><span class="tag">landing</span></a>
+        <a class="card" href="scout-ia/"><h2>SCOUT-IA</h2><p>Seu email de vendas diário, escrito e enviado pela IA.</p><span class="tag">landing</span></a>
+        <a class="card" href="aurea/"><h2>AURÉA</h2><p>A essência toma forma — perfumaria conceitual.</p><span class="tag">next.js</span></a>
+        <a class="card" href="fluxo/"><h2>Fluxo</h2><p>Finanças pessoais sem ruído.</p><span class="tag">next.js</span></a>
+        <a class="card" href="crowdcast/"><h2>CROWDCAST</h2><p>Prediction markets da Copa do Mundo.</p><span class="tag">next.js</span></a>
+        <a class="card" href="ecommerce/"><h2>Retrô Football</h2><p>E-commerce de camisas clássicas de futebol.</p><span class="tag">next.js</span></a>
+        <a class="card" href="ultra-fc/"><h2>ULTRA FC</h2><p>O jogo que reinventa o futebol.</p><span class="tag">next.js</span></a>
+      </div>
+    </section>
+
+    <section>
+      <h3>Overclock &amp; educação</h3>
+      <div class="grid" data-group>
+        <a class="card" href="overclock-presentation/"><h2>Overclock 1.0 — Apresentação</h2><p>Três novidades. Um produto.</p><span class="tag">apresentação</span></a>
+        <a class="card" href="overclock-ade/"><h2>Overclock — the multi-agent ADE</h2><p>Landing conceito do ADE.</p><span class="tag">landing</span></a>
+        <a class="card" href="overclock-v2/"><h2>Overclock Web v2</h2><p>Versão experimental do site do Overclock em Next.js.</p><span class="tag">next.js</span></a>
+        <a class="card" href="do-zero-ao-piloto/"><h2>Do Zero ao Piloto</h2><p>Site da imersão de vibe coding.</p><span class="tag">next.js</span></a>
+        <a class="card" href="curso-sites/"><h2>Agência Zero</h2><p>Crie sites profissionais com IA e entregue para clientes reais.</p><span class="tag">landing</span></a>
+        <a class="card" href="vertical-loops/"><h2>Vertical Loops</h2><p>Engineering loops que voam sozinhos.</p><span class="tag">next.js</span></a>
+      </div>
+    </section>
+
+    <section>
+      <h3>Benchmarks de modelos</h3>
+      <div class="grid" data-group>
+        <a class="card" href="benchmark-modelos/"><h2>Benchmark de modelos de IA</h2><p>Site-placar com os outputs de cada modelo lado a lado.</p><span class="tag">benchmark</span></a>
+        <a class="card" href="benchmark-comparativos/"><h2>Overclock Bench — placar</h2><p>Comparativos head-to-head entre modelos.</p><span class="tag">benchmark</span></a>
+      </div>
+    </section>
+
+    <section>
+      <h3>Mini-testes de agente</h3>
+      <div class="grid" data-group>
+        <a class="card" href="overclock-ide/"><h2>Overclock — Multi-Agent IDE</h2><p>Variação de landing (teste de agente).</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="overclock-orchestrate/"><h2>Overclock — Orchestrate agents</h2><p>Variação de landing (teste de agente).</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="overclock-cockpit/"><h2>Overclock — Coding Cockpit</h2><p>Variação de landing (teste de agente).</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="flowbit/"><h2>Flowbit</h2><p>Ship ideas at the speed of thought.</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="flowsync/"><h2>FlowSync</h2><p>SaaS de sincronização de times.</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="flowdeck/"><h2>Flowdeck</h2><p>Ship faster. Think clearer.</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="flowdesk/"><h2>Flowdesk</h2><p>Async standups for modern teams.</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="acme/"><h2>Acme</h2><p>Landing genérica (teste de agente 10).</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="acme-v2/"><h2>Acme v2</h2><p>Landing genérica (teste de agente 13).</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="simplifio/"><h2>Simplifio</h2><p>SaaS de simplificação.</p><span class="tag">mini-teste</span></a>
+        <a class="card" href="product-landing/"><h2>Product Landing</h2><p>Landing de produto (teste de agente 14).</p><span class="tag">mini-teste</span></a>
+      </div>
+    </section>
+
+    <footer>
+      Feito com squads de agentes no <a href="https://overclock.sh">Overclock</a> · <a href="https://github.com/ustoppble/squad-labs">código no GitHub</a>
+    </footer>
+  </div>
+  <script>
+    const n = document.querySelectorAll('.card').length;
+    document.getElementById('count').textContent = n + ' sites no ar';
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic: ONDA 1
+    - generic:
+      - text: "0"
+      - generic: ABATES
+    - generic:
+      - generic: VIDA 100
+    - generic:
+      - generic: RIFLE
+      - generic: ∞
+      - generic: 1 RIFLE · 2 RPG · Q TROCAR
+  - generic [ref=e2] [cursor=pointer]:
+    - heading "FPS ARENA" [level=1] [ref=e3]
+    - paragraph [ref=e4]:
+      - text: WASD — mover · Mouse — mirar · Clique — atirar
+      - text: 1 / 2 / Q — trocar arma (Rifle / RPG) · Shift — correr · Espaço — pular
+      - text: Elimine as ondas de inimigos. Sobreviva.
+    - generic [ref=e5]: CLIQUE PARA JOGAR

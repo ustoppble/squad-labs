@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Fable 5 — Overclock Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="../index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="../index.html">Home</a>
+    <a href="../modelos.html" class="active">Modelos</a>
+    <a href="../benchmark.html">Benchmark</a>
+    <a href="../benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="../benchmark-gpt-5-6.html">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap narrow">
+  <div class="crumb"><a href="../modelos.html">Modelos</a> / Fable 5</div>
+  <div class="eyebrow brand" style="margin-top:16px">Anthropic · GA 09/06/2026 · redeploy 01/07/2026</div>
+  <h1>Claude <span class="hl">Fable 5</span></h1>
+  <p class="lede">Esqueça a ideia de que Fable 5 é "o Claude seguro e limitado". É o contrário: o <b>modelo mais forte que a Anthropic entrega pra todo mundo</b>, feito pra raciocínio pesado e agente que trabalha sozinho por horas. Fica <b>acima do Opus 4.8</b> — é pra ele que você migra. Fable é o gêmeo blindado (com safety classifiers) do <b>Mythos 5</b>: mesmo motor, mesmo preço, muda só o freio de segurança. <code>claude-fable-5</code></p>
+
+  <div class="spec-grid" style="margin-top:28px">
+    <div class="spec"><div class="l">Preço</div><div class="v"><b>US$10</b> in / <b>US$50</b> out<span style="color:var(--ov-dim)"> por M</span></div><div class="s">2× o Opus 4.8 ($5/$25) — novo topo da linha</div></div>
+    <div class="spec"><div class="l">Contexto / saída</div><div class="v"><b>1M</b> ctx · <b>128k</b> out</div><div class="s">Janela de 1M tokens por padrão</div></div>
+    <div class="spec"><div class="l">Disponibilidade</div><div class="v">GA em <b>09/06/2026</b></div><div class="s">API, AWS/Bedrock, Google Cloud, Microsoft Foundry</div></div>
+    <div class="spec"><div class="l">Thinking</div><div class="v">Adaptive, sempre on</div><div class="s">CoT cru nunca retornado · effort controla profundidade</div></div>
+  </div>
+
+  <section class="section">
+    <h2>O que a Anthropic comunicou</h2>
+    <ul class="insight">
+      <li><b>Modelo mais capaz de ampla disponibilidade.</b> Fable 5 (e o gêmeo Mythos 5) é o topo pra raciocínio exigente e agêntico de <b>longo horizonte</b> — sucessor de upgrade do Opus 4.8.</li>
+      <li><b>Trabalha sozinho por mais tempo.</b> "Fable 5 trabalha de forma autônoma por mais tempo que qualquer Claude anterior." A Stripe relatou migração de codebase Ruby de <b>50 milhões de linhas em 1 dia</b> — "meses de engenharia comprimidos em dias".</li>
+      <li><b>Recusas viram fluxo de produto.</b> Fable inclui safety classifiers que podem recusar pedidos: a API responde <code>stop_reason: "refusal"</code> como HTTP 200 (não erro), dizendo qual classificador barrou.</li>
+      <li><b>Fallback pro Opus 4.8.</b> Pedidos de cyber, bio/química ou distillation caem pro Opus 4.8. Segundo a Anthropic, <b>mais de 95%</b> das sessões do Fable não têm nenhum fallback. Retry via param <code>fallbacks</code> (server-side), middleware do SDK (client-side) ou manual.</li>
+      <li><b>Billing justo na recusa.</b> Você <b>não é cobrado</b> por request recusado antes de gerar output; no retry, o <b>fallback credit</b> reembolsa o custo de prompt-cache pra não pagar 2 vezes.</li>
+      <li><b>Ferramentas agênticas no lançamento:</b> effort, task budgets, memory tool, code execution, programmatic tool calling, context editing, compaction e vision.</li>
+      <li><b>Segurança auditada.</b> Bug bounty externo não achou <b>nenhum jailbreak universal em mais de 1.000 horas</b> de teste. Retenção de 30 dias, sem zero-data-retention (ambos "Covered Models"); pesquisadores do NIST avaliam as salvaguardas como "extraordinariamente fortes".</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>A fronteira do classificador — o trade-off</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:16px">O gráfico oficial explica <b>onde</b> o Fable 5 corta. Todo pedido cai num espectro: <b>benigno → margem de segurança → ambíguo → nocivo</b>. A "fronteira do classificador" decide o que passa. No Fable 5 essa fronteira <b>anda pra esquerda</b>: margem maior, mais seguro — ao custo de <b>bloquear algum uso benigno</b>. É por isso que o fallback existe.</p>
+
+    <div style="display:flex;flex-direction:column;gap:22px;margin:8px 0 4px">
+      <div>
+        <div style="font-size:11px;color:var(--ov-dim);margin-bottom:6px"><b style="color:var(--ov-ink,inherit)">A · Salvaguardas normais</b> — a fronteira só barra o nocivo</div>
+        <div style="display:flex;height:46px;border-radius:8px;overflow:hidden;font-size:11px;font-weight:700;text-align:center;position:relative">
+          <div style="flex:5;background:#c8ecd4;color:#1a5c33;display:flex;align-items:center;justify-content:center">Benigno</div>
+          <div style="flex:1.4;background:#f2efc4;color:#6b6420;display:flex;align-items:center;justify-content:center;border-left:2px dashed #7a1f1f">Margem</div>
+          <div style="flex:2;background:#f6c98a;color:#7a4a12;display:flex;align-items:center;justify-content:center">Ambíguo</div>
+          <div style="flex:1.4;background:#f4b6b6;color:#7a1f1f;display:flex;align-items:center;justify-content:center;border:2px solid #d05555">Nocivo</div>
+        </div>
+        <div style="display:flex;font-size:9px;color:var(--ov-dim);margin-top:4px">
+          <div style="flex:5;text-align:center">classificador permite</div>
+          <div style="flex:1.4;text-align:center">benigno, mas barrado</div>
+          <div style="flex:2;text-align:center">ex: achar vuln complexa</div>
+          <div style="flex:1.4;text-align:center">ex: montar exploit chain</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--ov-dim);margin-bottom:6px"><b style="color:var(--ov-accent)">B · Salvaguardas do Fable 5</b> — fronteira recua, margem cresce</div>
+        <div style="display:flex;height:46px;border-radius:8px;overflow:hidden;font-size:11px;font-weight:700;text-align:center;position:relative">
+          <div style="flex:3.4;background:#c8ecd4;color:#1a5c33;display:flex;align-items:center;justify-content:center">Benigno</div>
+          <div style="flex:3;background:#f2efc4;color:#6b6420;display:flex;align-items:center;justify-content:center;border-left:2px dashed #7a1f1f">Margem maior</div>
+          <div style="flex:2;background:#f6c98a;color:#7a4a12;display:flex;align-items:center;justify-content:center">Ambíguo</div>
+          <div style="flex:1.4;background:#f4b6b6;color:#7a1f1f;display:flex;align-items:center;justify-content:center;border:2px solid #d05555">Nocivo</div>
+        </div>
+        <div style="font-size:9px;color:var(--ov-dim);margin-top:4px">↑ a fronteira tracejada anda pra esquerda: bloqueia mais cedo, engole parte do benigno</div>
+      </div>
+    </div>
+    <div class="note"><b>Precision vs recall, na prática:</b> o Fable 5 escolhe errar pro lado seguro. Prefere barrar um pedido legítimo a deixar passar um ambíguo. O preço desse rigor é falso-positivo — pedido benigno recusado — e a resposta de produto pra isso é o par <b>recusa + fallback</b>: o request barrado cai pro Opus 4.8, com fallback credit pra não pagar 2 vezes.</div>
+  </section>
+
+  <section class="section">
+    <h2>Fable 5 vs Mythos 5 — os gêmeos</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Mesma capacidade, mesmas specs, mesmo preço. A <b>única</b> diferença é a blindagem: Fable tem safety classifiers, Mythos não. <span style="color:var(--green)">Verde</span> = o lado que te interessa (o público).</p>
+    <table class="rt">
+      <thead><tr><th>Dimensão</th><th>Fable 5<br><span style="font-weight:400;color:var(--ov-dim)">público</span></th><th>Mythos 5<br><span style="font-weight:400;color:var(--ov-dim)">restrito</span></th></tr></thead>
+      <tbody>
+        <tr><td>Model ID</td><td class="cst" style="color:var(--green)"><code>claude-fable-5</code></td><td><code>claude-mythos-5</code></td></tr>
+        <tr><td>Capacidade / specs / preço</td><td class="cst" style="color:var(--green)">idênticas</td><td>idênticas ($10/$50, 1M, 128k)</td></tr>
+        <tr><td>Safety classifiers</td><td class="cst" style="color:var(--green)">sim (pode recusar)</td><td>não (nunca recusa)</td></tr>
+        <tr><td>Quem pode usar</td><td class="cst" style="color:var(--green)">GA — API + todos os clouds</td><td>limitado · Project Glasswing</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Em uma frase:</b> Fable 5 e Mythos 5 são o <b>mesmo motor</b>. Fable vem com o freio de segurança de fábrica (classifiers que recusam); Mythos vem sem, e só é liberado a clientes aprovados no Project Glasswing via AWS/Google Cloud. Escolher entre os 2 é escolher <b>ter ou não ter recusa</b>, não ter mais ou menos capacidade.</div>
+    <div class="analysis">
+      <h4>Leitura aprofundada — a segurança virou API, não marketing</h4>
+      O detalhe que separa o Fable dos modelos antigos é <b>como</b> a recusa aparece: não é erro, é um <code>stop_reason: "refusal"</code> com HTTP 200, dizendo qual classificador barrou. Ou seja, a Anthropic transformou "o modelo disse não" num <b>estado de resposta que a tua integração trata</b>, com 3 saídas prontas: fallback server-side (param <code>fallbacks</code>), client-side (middleware do SDK) ou manual.<br><br>
+      E o billing acompanha a lógica: recusa <b>antes</b> de gerar output não é cobrada, e o fallback credit devolve o custo de prompt-cache no retry pra você não pagar o mesmo contexto 2 vezes. Isso é o oposto do "redeploy só de segurança" que o post de blog sugeria — na doc, a segurança do Fable é <b>infra de produto</b>: fronteira de classificador deliberadamente conservadora (bloqueia benigno na dúvida) + máquina de recuperação (recusa → fallback → crédito).
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Os testes oficiais (em português claro)</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">A Anthropic mede cada modelo em "provas" padronizadas. Quanto <b>maior o número, melhor</b>. Traduzi o nome técnico pra o que cada prova testa. A coluna do Fable/Mythos 5 mostra o maior dos 2 (a doc diz que ficam a 1–3 pontos um do outro). <span style="color:var(--green)">Verde</span> = onde o Fable 5 lidera.</p>
+    <table class="rt">
+      <thead><tr><th>O que a prova testa</th><th>Fable/Mythos 5<br><span style="font-weight:400;color:var(--ov-dim)">novo topo</span></th><th>Opus 4.8<br><span style="font-weight:400;color:var(--ov-dim)">anterior</span></th><th>GPT 5.5</th><th>Gemini 3.1</th></tr></thead>
+      <tbody>
+        <tr><td>Programar sozinho, tarefa agêntica de verdade<br><span style="color:var(--ov-dim);font-size:10px">SWE-Bench Pro</span></td><td class="cst" style="color:var(--green)">80,3%</td><td>69,2%</td><td>58,6%</td><td>54,2%</td></tr>
+        <tr><td>Resolver tarefa no terminal, do começo ao fim<br><span style="color:var(--ov-dim);font-size:10px">Terminal-Bench 2.1</span></td><td class="cst" style="color:var(--green)">88,0%*</td><td>82,7%</td><td>83,4%</td><td>70,7%</td></tr>
+        <tr><td>Código de fronteira, o mais difícil que existe<br><span style="color:var(--ov-dim);font-size:10px">FrontierCode Diamond (xhigh)</span></td><td class="cst" style="color:var(--green)">29,3%</td><td>13,4%</td><td>5,7%</td><td>—</td></tr>
+        <tr><td>Trabalho de escritório que vale dinheiro<br><span style="color:var(--ov-dim);font-size:10px">GDPval-AA (pontuação, não %)</span></td><td class="cst" style="color:var(--green)">1932 ▲</td><td>1890</td><td>1769</td><td>1314</td></tr>
+        <tr><td>Usar o computador como gente (clicar, navegar)<br><span style="color:var(--ov-dim);font-size:10px">OSWorld-Verified</span></td><td class="cst" style="color:var(--green)">85,0%</td><td>83,4%</td><td>78,7%</td><td>76,2%</td></tr>
+        <tr><td>Prova difícil de conhecimento, podendo pesquisar<br><span style="color:var(--ov-dim);font-size:10px">Humanity's Last Exam, com ferramentas</span></td><td class="cst" style="color:var(--green)">64,5%*</td><td>57,9%</td><td>52,2%</td><td>51,4%</td></tr>
+        <tr><td>Mesma prova, sem nenhuma ajuda<br><span style="color:var(--ov-dim);font-size:10px">Humanity's Last Exam, sem ferramentas</span></td><td class="cst" style="color:var(--green)">59,0%*</td><td>49,8%</td><td>41,4%</td><td>44,4%</td></tr>
+        <tr><td>Raciocínio espacial (ler plantas, mapas)<br><span style="color:var(--ov-dim);font-size:10px">Blueprint-Bench 2</span></td><td class="cst" style="color:var(--green)">38,6%</td><td>14,5%</td><td>36,2%</td><td>26,5%</td></tr>
+        <tr><td>Achar e explorar falha de segurança<br><span style="color:var(--ov-dim);font-size:10px">ExploitBench (Cap%)</span></td><td class="cst" style="color:var(--green)">78,0%*</td><td>40,0%</td><td>34,0%</td><td>—</td></tr>
+        <tr><td>Responder pergunta de saúde nível profissional<br><span style="color:var(--ov-dim);font-size:10px">HealthBench Professional</span></td><td class="cst" style="color:var(--green)">66,0%*</td><td>56,9%</td><td>51,8%</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>O que isso quer dizer, em 1 frase:</b> o Fable/Mythos 5 <b>lidera quase toda linha</b> — passa o Opus 4.8 em tudo, e abre vantagem enorme no código de fronteira (29,3% contra 13,4%) e no achar falha de segurança (78% contra 40%). É o novo estado-da-arte. <b>O asterisco (*)</b> importa: nessas provas o número é do Mythos 5 (sem freio). O Fable 5, com os safety classifiers, cai pro Opus 4.8 em cyber e bio — então <b>na prática o Fable pontua mais perto do Opus</b> nas linhas marcadas.</div>
+    <div class="analysis">
+      <h4>Leitura aprofundada — onde o freio muda o número</h4>
+      A tabela tem 2 leituras. Nas provas <b>sem asterisco</b> (programar, terminal, escritório, computador) o número vale pro Fable 5 direto: ele é o melhor, ponto. Nas provas <b>com asterisco</b> (cyber, bio, HLE) o número exibido é do Mythos 5 — o gêmeo sem salvaguarda. O Fable 5 nesses temas <b>não responde: cai pro Opus 4.8</b> via fallback. Ou seja, os 78% de ExploitBench são capacidade que existe no motor, mas o Fable <b>de propósito não entrega</b> — é a "margem de segurança maior" do gráfico anterior virando número.<br><br>
+      Tradução prática: pra código, agente e trabalho de conhecimento, Fable 5 é a fronteira e vale o preço. Pra qualquer coisa que toque cyber ofensivo ou bio, você recebe respostas nível Opus 4.8 — não porque o modelo não sabe, mas porque foi construído pra não fazer.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Nossos números no benchmark</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:8px">4 testes, modelo puro (<b>sem skill, sem subagente</b> — auditado no transcript), 1 chute só — mesma metodologia do Sonnet 5. Custo a preço oficial <b>$10/$50 por M</b>. Comparação lado a lado: <a href="../benchmark-fable-vs-opus.html" style="color:var(--ov-accent)">Fable 5 vs Opus 4.8 ↗</a>.</p>
+    <table class="rt">
+      <thead><tr><th>Teste</th><th>contexto</th><th>gerado</th><th>idas</th><th>Custo Fable</th><th>Opus 4.8</th><th>vs Opus</th></tr></thead>
+      <tbody>
+        <tr><td>001 · Sistema solar 3D</td><td>~52k</td><td>28k</td><td>29</td><td class="cst" style="color:var(--ov-accent)">$4,41</td><td>$0,80</td><td>5,5×</td></tr>
+        <tr><td>002 · UX (site Apple)</td><td>~43k</td><td>10k</td><td>6</td><td class="cst" style="color:var(--ov-accent)">$1,13</td><td>$0,47</td><td>2,4×</td></tr>
+        <tr><td>003 · Física com mouse</td><td>~45k</td><td>18k</td><td>23</td><td class="cst" style="color:var(--ov-accent)">$3,50</td><td>$0,60</td><td>5,8×</td></tr>
+        <tr><td>004 · FPS 3D</td><td>~68k</td><td>55k</td><td>22</td><td class="cst" style="color:var(--ov-accent)">$6,76</td><td>$1,61</td><td>4,2×</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total · 4 runs</td><td>—</td><td>110k</td><td>80</td><td class="cst" style="color:var(--ov-accent)">$15,81</td><td>$3,49</td><td>4,5×</td></tr></tfoot>
+    </table>
+    <div class="note"><b>O que os 4 testes revelaram:</b> o Fable 5 <b>confere o próprio trabalho como o Sonnet 5</b> — abriu o navegador em 3 dos 4 (solar, física, FPS), achou e corrigiu o próprio bug no solar e no FPS (1 Edit cada). Só o Apple ele escreveu e parou. Isso é comportamento de topo de linha — mais rigoroso que o Opus 4.8, que só testou o FPS. O preço dessa capacidade é <b>brutal</b>: a $10/$50 (2× o Opus por token) somado a mais idas de verificação e mais cache relido, o Fable saiu <b>4,5× o custo do Opus</b> na mesma bateria ($15,81 vs $3,49). É o modelo pra tarefa difícil que justifica o preço — não pra volume.</div>
+  </section>
+
+  <section class="section">
+    <h2>Conclusão</h2>
+    <ul class="insight">
+      <li><b>É o novo topo, não a versão segura.</b> A doc corrige o post: Fable 5 é o <b>modelo mais capaz de ampla disponibilidade</b>, upgrade sobre o Opus 4.8 — não um modelo de consumo abaixo dele.</li>
+      <li><b>Fable e Mythos são o mesmo motor.</b> Capacidade, specs e preço idênticos; a única diferença é o safety classifier. Escolher é escolher <b>ter recusa ou não</b>, não mais ou menos poder.</li>
+      <li><b>O mais caro da linha.</b> $10/$50 por M = 2× o Opus 4.8. Janela de 1M e saída de 128k, mas cada token dói — é o modelo pra <b>tarefa difícil que justifica o preço</b>, não pra rodar em volume.</li>
+      <li><b>Segurança virou infraestrutura.</b> Recusa é <code>stop_reason: "refusal"</code> (HTTP 200), não cobra se barra antes do output, e o fallback credit banca o retry. A fronteira do classificador é conservadora de propósito — bloqueia benigno na dúvida.</li>
+      <li><b>Capacidade confirmada no nosso benchmark.</b> Rodamos os 4 testes: Fable 5 acertou todos e <b>verificou o próprio output em 3 dos 4</b> (abriu o browser, achou e consertou o próprio bug no solar e no FPS) — mais rigoroso que o Opus 4.8, que só testou o FPS. É comportamento de topo de linha, igual Sonnet 5.</li>
+      <li><b>Foi a run mais cara que já fizemos.</b> $15,81 nos 4 testes contra $3,49 do Opus 4.8 — <b>4,5× o custo</b>. A $10/$50 (2× o Opus por token) somado a mais idas de verificação, cada run pesa. Capacidade de fronteira, preço de fronteira.</li>
+      <li><b>Veredito:</b> topo de linha real — verifica sozinho e entrega funcionando, mas só justifica em tarefa difícil que paga o preço. Comparação lado a lado no <a href="../benchmark-fable-vs-opus.html" style="color:var(--ov-accent)">Fable 5 vs Opus 4.8</a>.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Fontes: anúncio de lançamento Anthropic (claude-fable-5-mythos-5), post de redeploy (redeploying-fable-5) e doc oficial da Platform (introducing-claude-fable-5-and-claude-mythos-5). Benchmarks = tabela oficial (maior score entre Mythos 5 e Fable 5); * = provas com salvaguarda onde o Fable cai pro Opus 4.8. Nossos números entram quando as 4 runs forem feitas.
+  </footer>
+</div>
+</body>
+</html>

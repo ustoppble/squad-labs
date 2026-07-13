@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[39756,["/squad-labs/overclock-v2/_next/static/chunks/3-4llofl33113.js","/squad-labs/overclock-v2/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+3:I[37457,["/squad-labs/overclock-v2/_next/static/chunks/3-4llofl33113.js","/squad-labs/overclock-v2/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+4:[]
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"MRDjeykDxMIC3KXR3T8W0"}

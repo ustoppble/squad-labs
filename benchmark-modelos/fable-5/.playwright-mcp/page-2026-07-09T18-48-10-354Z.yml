@@ -1,0 +1,17 @@
+- generic [active] [ref=e1]:
+  - generic: ✕
+  - generic [ref=e2]:
+    - generic [ref=e3]: VIDA
+    - generic [ref=e7]: "100"
+  - generic [ref=e8]:
+    - generic [ref=e9]: ABATES
+    - generic [ref=e10]: "5"
+  - generic [ref=e11]:
+    - generic [ref=e12]: RIFLE
+    - generic [ref=e13]: 8 ∕ ∞
+    - generic [ref=e14]:
+      - generic [ref=e15]: 1 RIFLE
+      - generic [ref=e16]: 2 RPG
+  - generic [ref=e22] [cursor=pointer]:
+    - heading "PAUSADO" [level=1] [ref=e23]
+    - generic [ref=e24]: CLIQUE PARA CONTINUAR

@@ -1,0 +1,32 @@
+[
+  {
+    "item": "Cachorrão Completo",
+    "descricao": "O clássico raiz que não falha: salsicha grossa recheada de tudo que tem direito, empilhado com generosidade de barraca boa. Mordida de fim de tarde que aquece a alma.",
+    "ingredientes": ["Salsicha de pernil", "Purê de batata", "Milho verde", "Ervilha", "Batata palha", "Molho de tomate caseiro", "Maionese", "Mostarda", "Ketchup", "Parmesão ralado"]
+  },
+  {
+    "item": "Dog Prensado",
+    "descricao": "Pão crocante por fora, recheio quente e cremoso por dentro — o prensado sai da chapa chamando atenção de longe. Combinação irresistível que vicia na primeira mordida.",
+    "ingredientes": ["Salsicha defumada", "Queijo muçarela", "Maionese temperada", "Mostarda", "Ketchup", "Orégano"]
+  },
+  {
+    "item": "Dog Bacon Crocante",
+    "descricao": "Strips de bacon dourados no ponto certo abraçando a salsicha — o crocante que você ouve antes de morder. Para os amantes de defumado que não aceitam meias medidas.",
+    "ingredientes": ["Salsicha grossa", "Bacon crocante em tiras", "Queijo muçarela derretido", "Cebola caramelizada", "Maionese defumada", "Ketchup", "Batata palha"]
+  },
+  {
+    "item": "Dog Calabresa",
+    "descricao": "A calabresa apimentada dá o toque picante que transforma o hot-dog em experiência. Sabor marcante de churrasco de domingo direto no pão macio.",
+    "ingredientes": ["Salsicha de calabresa", "Vinagrete de pimentão", "Cebola roxa", "Molho de tomate apimentado", "Maionese", "Mostarda", "Parmesão ralado", "Batata palha"]
+  },
+  {
+    "item": "Dog Frango & Cream Cheese",
+    "descricao": "Frango desfiado temperadinho encontra o cream cheese cremoso em harmonia irresistível. Leve, diferente e impossível de parar na metade.",
+    "ingredientes": ["Salsicha de frango", "Frango desfiado temperado", "Cream cheese", "Milho verde", "Cebolinha", "Maionese", "Batata palha", "Queijo parmesão"]
+  },
+  {
+    "item": "Mini Combo Família",
+    "descricao": "Feito pra todo mundo comer junto e ninguém ficar de fora! Mini dogs variados, com os melhores sabores da casa, pra compartilhar e acabar na disputa do último.",
+    "ingredientes": ["4 mini salsichas sortidas", "Purê de batata", "Milho verde", "Bacon crocante", "Queijo muçarela", "Maionese", "Ketchup", "Mostarda", "Batata palha", "Molho especial da casa"]
+  }
+]

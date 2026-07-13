@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Opus 4.8 — Overclock Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="../index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="../index.html">Home</a>
+    <a href="../modelos.html" class="active">Modelos</a>
+    <a href="../benchmark.html">Benchmark</a>
+    <a href="../benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="../benchmark-gpt-5-6.html">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap narrow">
+  <div class="crumb"><a href="../modelos.html">Modelos</a> / Opus 4.8</div>
+  <div class="eyebrow brand" style="margin-top:16px">Anthropic · destronado pelo Fable 5</div>
+  <h1>Claude <span class="hl">Opus 4.8</span></h1>
+  <p class="lede">Era o topo da linha da Anthropic até o Fable 5 chegar. Agora é o <b>degrau do meio</b> — e é justamente onde mora o <b>melhor custo-benefício do topo</b>. <code>claude-opus-4-8</code></p>
+
+  <div class="spec-grid" style="margin-top:28px">
+    <div class="spec"><div class="l">Preço</div><div class="v"><b>US$5</b> in / <b>US$25</b> out<span style="color:var(--ov-dim)"> por M</span></div><div class="s">Metade do preço/token do Fable 5 ($10/$50)</div></div>
+    <div class="spec"><div class="l">Posição</div><div class="v">Destronado pelo <b>Fable 5</b></div><div class="s">Fable empilhou um degrau acima em vez de reprecificar o Opus</div></div>
+    <div class="spec"><div class="l">Custo nos nossos 4 testes</div><div class="v"><b>US$3,49</b></div><div class="s">4,5× menos que o Fable 5 ($15,81)</div></div>
+    <div class="spec"><div class="l">Comportamento</div><div class="v">Verificador <b>seletivo</b></div><div class="s">Só abriu o navegador no teste mais difícil (FPS)</div></div>
+  </div>
+
+  <section class="section">
+    <h2>O que ele é hoje</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">O Opus 4.8 foi o rei da linha Claude até o Fable 5 (e o gêmeo Mythos 5) assumirem o topo. A Anthropic não reprecificou o Opus pra baixo — só empilhou um degrau novo acima dele. Resultado: uma escada de 3 degraus, cada um dobrando o preço do anterior.</p>
+    <div class="note"><b>A escada de preço:</b> Sonnet 5 $2/$10 → Opus 4.8 $5/$25 → Fable 5 $10/$50 por M. O Opus ficou no meio — nem o mais barato, nem o mais caro, nem mais o mais capaz.</div>
+  </section>
+
+  <section class="section">
+    <h2>Os testes oficiais</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Números oficiais da Anthropic, extraídos da tabela do <a href="fable-5.html" style="color:var(--ov-accent)">Fable 5</a>. Quanto <b>maior o número, melhor</b>. <span style="color:var(--ov-accent)">Laranja</span> = onde o Fable 5 abre vantagem grande sobre o Opus 4.8.</p>
+    <table class="rt">
+      <thead><tr><th>O que a prova testa</th><th>Opus 4.8<br><span style="font-weight:400;color:var(--ov-dim)">rei anterior</span></th><th>Fable 5<br><span style="font-weight:400;color:var(--ov-dim)">topo atual</span></th></tr></thead>
+      <tbody>
+        <tr><td>Programar sozinho, tarefa agêntica de verdade<br><span style="color:var(--ov-dim);font-size:10px">SWE-Bench Pro</span></td><td class="cst">69,2%</td><td>80,3%</td></tr>
+        <tr><td>Resolver tarefa no terminal, do começo ao fim<br><span style="color:var(--ov-dim);font-size:10px">Terminal-Bench 2.1</span></td><td class="cst">82,7%</td><td>88,0%</td></tr>
+        <tr><td>Código de fronteira, o mais difícil que existe<br><span style="color:var(--ov-dim);font-size:10px">FrontierCode Diamond (xhigh)</span></td><td class="cst" style="color:var(--ov-accent)">13,4%</td><td>29,3%</td></tr>
+        <tr><td>Trabalho de escritório que vale dinheiro<br><span style="color:var(--ov-dim);font-size:10px">GDPval-AA (pontuação, não %)</span></td><td class="cst">1890</td><td>1932</td></tr>
+        <tr><td>Usar o computador como gente (clicar, navegar)<br><span style="color:var(--ov-dim);font-size:10px">OSWorld-Verified</span></td><td class="cst">83,4%</td><td>85,0%</td></tr>
+        <tr><td>Prova difícil de conhecimento, podendo pesquisar<br><span style="color:var(--ov-dim);font-size:10px">Humanity's Last Exam, com ferramentas</span></td><td class="cst">57,9%</td><td>64,5%</td></tr>
+        <tr><td>Mesma prova, sem nenhuma ajuda<br><span style="color:var(--ov-dim);font-size:10px">Humanity's Last Exam, sem ferramentas</span></td><td class="cst">49,8%</td><td>59,0%</td></tr>
+        <tr><td>Raciocínio espacial (ler plantas, mapas)<br><span style="color:var(--ov-dim);font-size:10px">Blueprint-Bench 2</span></td><td class="cst" style="color:var(--ov-accent)">14,5%</td><td>38,6%</td></tr>
+        <tr><td>Achar e explorar falha de segurança<br><span style="color:var(--ov-dim);font-size:10px">ExploitBench (Cap%)</span></td><td class="cst" style="color:var(--ov-accent)">40,0%</td><td>78,0%</td></tr>
+        <tr><td>Responder pergunta de saúde nível profissional<br><span style="color:var(--ov-dim);font-size:10px">HealthBench Professional</span></td><td class="cst">56,9%</td><td>66,0%</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Onde a distância dói mais:</b> <span style="color:var(--ov-accent)">FrontierCode Diamond</span> — 13,4% contra 29,3% do Fable, mais que o dobro. E <span style="color:var(--ov-accent)">ExploitBench</span> — 40,0% contra 78,0%, quase o dobro também. É onde o Fable 5 justifica ser um degrau acima, não só mais caro.</div>
+  </section>
+
+  <section class="section">
+    <h2>A divergência de número</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">No Terminal-Bench 2.1, a Anthropic reporta o Opus 4.8 em <b>82,7%</b>. A OpenAI, na tabela dela, reporta o <b>mesmo modelo no mesmo benchmark</b> em <b>78,9%</b>.</p>
+    <div class="note">Benchmark divulgado por laboratório é sempre auto-reportado — cada empresa roda a própria bateria, com a própria configuração de ferramentas e effort, e publica o número que sai. Não é acusação de má-fé de nenhum lado: é só o motivo pelo qual a gente roda os próprios 4 testes em vez de confiar só na tabela oficial de qualquer um.</div>
+  </section>
+
+  <section class="section">
+    <h2>Comportamento: o verificador seletivo</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Nos nossos 4 testes o Opus só abriu o navegador em <b>1 dos 4</b> — o FPS, o mais difícil. Escreveu e parou nos outros 3 (solar, Apple, física). É o comportamento mais enxuto do trio: verifica só quando a tarefa pede.</p>
+    <div class="note"><b>Contraste com Sonnet 5 e Fable 5:</b> o Sonnet 5 abriu o navegador em 2 dos 4 (solar e FPS); o Fable 5 em 3 dos 4 (solar, física e FPS), achando e corrigindo o próprio bug em 2 deles. O Opus é o mais seletivo dos três — e também o que <b>escreve menos linha</b>: 305 (solar), 382 (Apple), 233 (física), 704 (FPS), sempre abaixo ou perto dos outros modelos na mesma bateria.</div>
+  </section>
+
+  <section class="section">
+    <h2>Nossos números no benchmark</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:8px">4 testes, modelo puro (<b>sem skill, sem subagente</b> — auditado no transcript), 1 chute só. Custo a preço oficial <b>$5/$25 por M</b>. Comparação lado a lado: <a href="../benchmark-fable-vs-opus.html" style="color:var(--ov-accent)">Fable 5 vs Opus 4.8 ↗</a> · tabela completa em <a href="../benchmark.html" style="color:var(--ov-accent)">benchmark.html ↗</a>.</p>
+    <table class="rt">
+      <thead><tr><th>Teste</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead>
+      <tbody>
+        <tr><td>001 · Sistema solar 3D <span style="color:var(--ov-dim);font-size:10px">azM3KZ4t</span></td><td>68k</td><td>13k</td><td>305</td><td>130k</td><td>4</td><td>1,6min</td><td class="cst" style="color:var(--ov-accent)">$0,80</td></tr>
+        <tr><td>002 · UX (site Apple) <span style="color:var(--ov-dim);font-size:10px">yo80Y2kq</span></td><td>50k</td><td>6k</td><td>382</td><td>53k</td><td>2</td><td>1,3min</td><td class="cst" style="color:var(--ov-accent)">$0,47</td></tr>
+        <tr><td>003 · Física com mouse <span style="color:var(--ov-dim);font-size:10px">eOV5uqst</span></td><td>74k</td><td>5k</td><td>233</td><td>122k</td><td>4</td><td>1,2min</td><td class="cst" style="color:var(--ov-accent)">$0,60</td></tr>
+        <tr><td>004 · FPS 3D <span style="color:var(--ov-dim);font-size:10px">mYGgyEpQ</span></td><td>118k</td><td>29k</td><td>704</td><td>341k</td><td>8</td><td>3,9min</td><td class="cst" style="color:var(--ov-accent)">$1,61</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total · 4 runs</td><td>—</td><td>53k</td><td>—</td><td>—</td><td>18</td><td>—</td><td class="cst" style="color:var(--ov-accent)">$3,49</td></tr></tfoot>
+    </table>
+    <div class="note">Volume total: <b>0,36M</b> tokens novos, <b>53k</b> gerados. Custou 4,5× menos que o Fable 5 ($15,81) — mesmo cobrando mais por token que o Sonnet 5 ($3,49 vs $2,06), o Opus entrega capacidade de topo com poucas idas por teste.</div>
+  </section>
+
+  <section class="section">
+    <h2>Conclusão</h2>
+    <ul class="insight">
+      <li><b>Destronado, mas não reprecificado.</b> O Fable 5 empilhou um degrau acima ($10/$50) em vez de baixar o preço do Opus. O Opus continua em $5/$25 — o degrau do meio numa escada de 3: Sonnet 5 $2/$10 → Opus 4.8 $5/$25 → Fable 5 $10/$50.</li>
+      <li><b>Verificador seletivo, barato em idas.</b> Só abriu o navegador no teste mais difícil (FPS), 1 dos 4. Escreveu e parou nos outros 3 — menos idas, menos cache relido, menos custo de verificação.</li>
+      <li><b>O mais enxuto em linhas.</b> 305, 382, 233 e 704 linhas nos 4 testes — sempre entre os menores da bateria, sinal de código direto, sem prolixidade.</li>
+      <li><b>Na nossa bateria custou $3,49</b> contra <b>$15,81</b> do Fable 5 (4,5× menos) e <b>$2,06</b> do Sonnet 5.</li>
+      <li><b>Veredito:</b> melhor custo-benefício do topo hoje — capacidade de fronteira, preço do meio da escada, sem o excesso de verificação que encarece o Fable 5.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Fontes: benchmarks oficiais Anthropic extraídos da tabela em <a href="fable-5.html" style="color:var(--ov-accent)">modelos/fable-5.html</a>; número da OpenAI pro Terminal-Bench 2.1 extraído do dossiê de pesquisa (docs/research/gpt-5-6-dossier.md). Nossos números dos 4 testes = <a href="../benchmark.html" style="color:var(--ov-accent)">benchmark.html</a> e <a href="../benchmark-fable-vs-opus.html" style="color:var(--ov-accent)">benchmark-fable-vs-opus.html</a>, custos em USD, cumulativos (incluem cache).
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Empires of the Vale — RTS 3D</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:#0a0e14;font-family:'Inter',system-ui,sans-serif;color:#e8e4d9;user-select:none}
+  #c{display:block;width:100%;height:100%}
+  #selBox{position:fixed;border:1px solid rgba(120,200,90,.85);background:rgba(80,160,50,.12);pointer-events:none;display:none;z-index:20}
+  #hud{position:fixed;inset:0;pointer-events:none;z-index:10}
+  #topBar{position:absolute;top:0;left:0;right:0;height:48px;display:flex;align-items:center;justify-content:center;gap:28px;
+    background:linear-gradient(180deg,rgba(12,16,22,.92),rgba(12,16,22,.55) 70%,transparent);
+    pointer-events:auto;font-size:14px;font-weight:600;letter-spacing:.02em}
+  .res{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+  .res .ico{width:18px;height:18px;border-radius:50%;box-shadow:0 0 8px currentColor}
+  .res.food .ico{background:#c45c3e;color:#c45c3e}
+  .res.wood .ico{background:#6b8f4e;color:#6b8f4e}
+  .res.gold .ico{background:#d4a84b;color:#d4a84b}
+  .res.pop .ico{background:#5b8fd4;color:#5b8fd4}
+  .res span.v{min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
+  #title{font-family:'Cinzel',serif;font-size:15px;letter-spacing:.12em;color:#c9a84c;position:absolute;left:18px;top:14px}
+  #clock{position:absolute;right:18px;top:14px;font-size:13px;color:#9aa3b2}
+  #panel{position:absolute;bottom:0;left:0;right:0;height:150px;
+    background:linear-gradient(0deg,rgba(10,14,20,.96) 0%,rgba(14,18,26,.9) 55%,transparent);
+    display:flex;gap:12px;padding:16px 18px 14px;pointer-events:auto;align-items:stretch}
+  #minimapWrap{width:160px;height:120px;flex-shrink:0;border:2px solid #3a4558;border-radius:6px;overflow:hidden;position:relative;background:#1a2433;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+  #minimap{width:100%;height:100%;display:block;cursor:crosshair}
+  #mmCam{position:absolute;border:1px solid rgba(255,255,255,.7);pointer-events:none;box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+  #info{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+  #selInfo{min-height:28px;font-size:13px;color:#c8c4b8}
+  #selInfo b{color:#f0e6c8;font-family:'Cinzel',serif;font-weight:600}
+  #actions{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+  .btn{pointer-events:auto;border:1px solid #4a5568;background:linear-gradient(180deg,#2a3344,#1a2230);color:#e8e4d9;
+    padding:8px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+    min-width:100px;transition:border-color .15s,transform .1s,background .15s}
+  .btn:hover:not(:disabled){border-color:#c9a84c;background:linear-gradient(180deg,#344056,#222b3a)}
+  .btn:active:not(:disabled){transform:scale(.97)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn .cost{font-size:10px;color:#9aa3b2;font-weight:500}
+  .btn.hot{border-color:#6b8f4e}
+  #msg{position:absolute;top:60px;left:50%;transform:translateX(-50%);padding:8px 18px;border-radius:8px;
+    background:rgba(12,16,22,.85);border:1px solid rgba(201,168,76,.35);font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:15}
+  #msg.show{opacity:1}
+  #overlay{position:fixed;inset:0;background:radial-gradient(ellipse at center,rgba(12,16,22,.75),rgba(8,10,14,.92));
+    display:flex;align-items:center;justify-content:center;z-index:100;pointer-events:auto}
+  #overlay.hidden{display:none}
+  .card{width:min(520px,92vw);padding:36px 40px;border-radius:14px;background:linear-gradient(160deg,#1a2230,#121820);
+    border:1px solid #3a4558;box-shadow:0 20px 60px rgba(0,0,0,.55);text-align:center}
+  .card h1{font-family:'Cinzel',serif;font-size:28px;color:#c9a84c;margin-bottom:8px;letter-spacing:.08em}
+  .card p{color:#9aa3b2;font-size:14px;line-height:1.55;margin-bottom:12px}
+  .card ul{text-align:left;color:#c8c4b8;font-size:13px;line-height:1.7;margin:16px auto 22px;max-width:380px;list-style:none}
+  .card ul li::before{content:"▸ ";color:#c9a84c}
+  .card .start{pointer-events:auto;border:none;background:linear-gradient(180deg,#c9a84c,#9a7a30);color:#1a1408;
+    font-family:'Cinzel',serif;font-weight:700;font-size:15px;letter-spacing:.1em;padding:14px 36px;border-radius:8px;cursor:pointer}
+  .card .start:hover{filter:brightness(1.08)}
+  #hpBars{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+  .hpwrap{position:absolute;width:36px;height:5px;margin-left:-18px;background:rgba(0,0,0,.55);border-radius:2px;overflow:hidden}
+  .hpfill{height:100%;background:linear-gradient(90deg,#4caf50,#8bc34a);border-radius:2px;transform-origin:left}
+  .hpfill.enemy{background:linear-gradient(90deg,#c62828,#ef5350)}
+  #hint{position:absolute;bottom:160px;left:50%;transform:translateX(-50%);font-size:11px;color:rgba(200,196,184,.55);letter-spacing:.04em}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="selBox"></div>
+<div id="hpBars"></div>
+<div id="hud">
+  <div id="title">EMPIRES OF THE VALE</div>
+  <div id="topBar">
+    <div class="res food"><div class="ico"></div>Comida <span class="v" id="rFood">200</span></div>
+    <div class="res wood"><div class="ico"></div>Madeira <span class="v" id="rWood">200</span></div>
+    <div class="res gold"><div class="ico"></div>Ouro <span class="v" id="rGold">100</span></div>
+    <div class="res pop"><div class="ico"></div>Pop <span class="v" id="rPop">0/10</span></div>
+  </div>
+  <div id="clock">00:00</div>
+  <div id="msg"></div>
+  <div id="hint">WASD / bordas · Scroll zoom · Arrastar = selecionar · Botão direito = mover/atacar · B construir · H casas · Q quartel</div>
+  <div id="panel">
+    <div id="minimapWrap"><canvas id="minimap" width="160" height="120"></canvas><div id="mmCam"></div></div>
+    <div id="info">
+      <div id="selInfo">Nenhuma unidade selecionada</div>
+      <div id="actions"></div>
+    </div>
+  </div>
+</div>
+<div id="overlay">
+  <div class="card">
+    <h1>Empires of the Vale</h1>
+    <p>RTS 3D no espírito de Age of Empires. Expanda seu império, colete recursos e derrote o inimigo.</p>
+    <ul>
+      <li>Aldeões coletam comida, madeira e ouro</li>
+      <li>Construa casas e quartéis; treine soldados</li>
+      <li>IA inimiga produz e ataca</li>
+      <li>Box select, minimapa e câmera RTS</li>
+    </ul>
+    <button class="start" id="btnStart">INICIAR BATALHA</button>
+  </div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.162.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.162.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+// ═══════════════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════════════
+const MAP = 120;
+const HALF = MAP / 2;
+const TEAM = { PLAYER: 0, ENEMY: 1 };
+const COLORS = {
+  player: 0x3d7dd6,
+  enemy: 0xc43c3c,
+  playerLight: 0x6aabff,
+  enemyLight: 0xff6a6a,
+  grass: 0x4a7a38,
+  grassDark: 0x3a6230,
+  dirt: 0x8b6b45,
+  water: 0x1a5a7a,
+  wood: 0x5c3a1e,
+  gold: 0xd4a84b,
+  food: 0xc45c3e,
+};
+
+const COSTS = {
+  house: { food: 0, wood: 50, gold: 0 },
+  barracks: { food: 0, wood: 150, gold: 50 },
+  villager: { food: 50, wood: 0, gold: 0 },
+  soldier: { food: 60, wood: 0, gold: 20 },
+  archer: { food: 40, wood: 25, gold: 30 },
+};
+
+const BUILD_TIME = { house: 8, barracks: 14, villager: 10, soldier: 12, archer: 14 };
+const POP_CAP_PER_HOUSE = 5;
+const GATHER_RATE = 8; // resources per second near node
+const ATTACK_RANGE = { soldier: 2.2, archer: 10, villager: 1.8 };
+const ATTACK_DMG = { soldier: 12, archer: 9, villager: 4 };
+const ATTACK_CD = { soldier: 1.0, archer: 1.3, villager: 1.4 };
+const UNIT_HP = { villager: 40, soldier: 80, archer: 45 };
+const BLD_HP = { town: 600, house: 200, barracks: 350 };
+
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+const state = {
+  running: false,
+  time: 0,
+  resources: { food: 200, wood: 200, gold: 100 },
+  enemyRes: { food: 200, wood: 200, gold: 100 },
+  pop: 0,
+  popCap: 10,
+  entities: [],
+  selected: new Set(),
+  buildMode: null, // 'house' | 'barracks'
+  ghost: null,
+  nextId: 1,
+  msgTimer: 0,
+  winner: null,
+  keys: {},
+  edgePan: { l:0, r:0, u:0, d:0 },
+  box: { active:false, x0:0, y0:0, x1:0, y1:0 },
+  pointer: { x:0, y:0, ndc: new THREE.Vector2() },
+  lastClick: 0,
+};
+
+// ═══════════════════════════════════════════════════════════
+// RENDERER / SCENE
+// ═══════════════════════════════════════════════════════════
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87a0b8);
+scene.fog = new THREE.FogExp2(0x87a0b8, 0.0085);
+
+const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.5, 400);
+const camTarget = new THREE.Vector3(0, 0, 18);
+let camDist = 38;
+let camTheta = Math.PI / 4.2; // pitch-ish via height
+const camOffset = new THREE.Vector3();
+
+function updateCamera() {
+  camOffset.set(0, camDist * 0.72, camDist * 0.78);
+  camera.position.copy(camTarget).add(camOffset);
+  camera.lookAt(camTarget.x, 0.5, camTarget.z);
+}
+updateCamera();
+
+// Lights
+const hemi = new THREE.HemisphereLight(0xc8d8f0, 0x3a4a28, 0.55);
+scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xfff2d6, 1.35);
+sun.position.set(40, 70, 20);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.camera.near = 1;
+sun.shadow.camera.far = 180;
+sun.shadow.camera.left = -70;
+sun.shadow.camera.right = 70;
+sun.shadow.camera.top = 70;
+sun.shadow.camera.bottom = -70;
+sun.shadow.bias = -0.00025;
+sun.shadow.normalBias = 0.03;
+scene.add(sun);
+scene.add(sun.target);
+const fill = new THREE.DirectionalLight(0xa0c0ff, 0.25);
+fill.position.set(-30, 20, -40);
+scene.add(fill);
+
+// Post
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.18, 0.4, 0.85);
+composer.addPass(bloom);
+const smaa = new SMAAPass(innerWidth * devicePixelRatio, innerHeight * devicePixelRatio);
+composer.addPass(smaa);
+composer.addPass(new OutputPass());
+
+// ═══════════════════════════════════════════════════════════
+// TERRAIN + WATER + TREES
+// ═══════════════════════════════════════════════════════════
+const heightData = new Float32Array((MAP + 1) * (MAP + 1));
+
+function noise2(x, z) {
+  // multi-octave value noise (hash-based)
+  function hash(ix, iz) {
+    let n = ix * 374761393 + iz * 668265263;
+    n = (n ^ (n >> 13)) * 1274126177;
+    return ((n ^ (n >> 16)) & 0x7fffffff) / 0x7fffffff;
+  }
+  function smooth(x, z) {
+    const x0 = Math.floor(x), z0 = Math.floor(z);
+    const fx = x - x0, fz = z - z0;
+    const u = fx * fx * (3 - 2 * fx);
+    const v = fz * fz * (3 - 2 * fz);
+    const a = hash(x0, z0), b = hash(x0 + 1, z0);
+    const c = hash(x0, z0 + 1), d = hash(x0 + 1, z0 + 1);
+    return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+  }
+  let a = 0, f = 1, amp = 1, sum = 0;
+  for (let i = 0; i < 5; i++) {
+    a += smooth(x * f, z * f) * amp;
+    sum += amp;
+    f *= 2.05;
+    amp *= 0.5;
+  }
+  return a / sum;
+}
+
+function worldH(x, z) {
+  const nx = (x + HALF) / MAP;
+  const nz = (z + HALF) / MAP;
+  // lake near center-west, hills edges
+  const lake = Math.exp(-((x + 12) ** 2 + (z - 5) ** 2) / 180);
+  const n = noise2(nx * 4.2, nz * 4.2);
+  let h = (n - 0.48) * 6.5 - lake * 4.2;
+  // flatten bases
+  const dP = Math.hypot(x - 22, z - 22);
+  const dE = Math.hypot(x + 22, z + 22);
+  if (dP < 14) h = THREE.MathUtils.lerp(h, 0.15, 1 - dP / 14);
+  if (dE < 14) h = THREE.MathUtils.lerp(h, 0.15, 1 - dE / 14);
+  return h;
+}
+
+function sampleH(x, z) {
+  // clamp to map
+  x = THREE.MathUtils.clamp(x, -HALF + 0.5, HALF - 0.5);
+  z = THREE.MathUtils.clamp(z, -HALF + 0.5, HALF - 0.5);
+  return worldH(x, z);
+}
+
+// Terrain mesh
+const SEG = 128;
+const terrainGeo = new THREE.PlaneGeometry(MAP, MAP, SEG, SEG);
+terrainGeo.rotateX(-Math.PI / 2);
+const pos = terrainGeo.attributes.position;
+const colors = new Float32Array(pos.count * 3);
+const cTmp = new THREE.Color();
+for (let i = 0; i < pos.count; i++) {
+  const x = pos.getX(i), z = pos.getZ(i);
+  const h = worldH(x, z);
+  pos.setY(i, h);
+  // vertex colors by height / moisture
+  if (h < -0.6) cTmp.setHex(0x6b8f5a); // wet grass near water
+  else if (h < 0.8) cTmp.setHex(0x4f8a3a);
+  else if (h < 2.2) cTmp.setHex(0x6a9a48);
+  else if (h < 3.5) cTmp.setHex(0x8b7a4a);
+  else cTmp.setHex(0x9a9a92);
+  // subtle variation
+  const v = (noise2((x + 50) * 0.15, (z + 50) * 0.15) - 0.5) * 0.08;
+  cTmp.offsetHSL(0, 0, v);
+  colors[i * 3] = cTmp.r;
+  colors[i * 3 + 1] = cTmp.g;
+  colors[i * 3 + 2] = cTmp.b;
+}
+terrainGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+terrainGeo.computeVertexNormals();
+const terrainMat = new THREE.MeshStandardMaterial({
+  vertexColors: true,
+  roughness: 0.92,
+  metalness: 0.02,
+  flatShading: false,
+});
+const terrain = new THREE.Mesh(terrainGeo, terrainMat);
+terrain.receiveShadow = true;
+terrain.name = 'terrain';
+scene.add(terrain);
+
+// Water
+const waterGeo = new THREE.PlaneGeometry(MAP * 0.55, MAP * 0.55, 32, 32);
+waterGeo.rotateX(-Math.PI / 2);
+const waterMat = new THREE.MeshPhysicalMaterial({
+  color: 0x1e6a88,
+  roughness: 0.15,
+  metalness: 0.1,
+  transmission: 0.35,
+  thickness: 1.5,
+  transparent: true,
+  opacity: 0.88,
+  ior: 1.33,
+  side: THREE.DoubleSide,
+});
+const water = new THREE.Mesh(waterGeo, waterMat);
+water.position.set(-12, -0.55, 5);
+water.receiveShadow = true;
+scene.add(water);
+
+// Decorative rocks
+function addRock(x, z, s = 1) {
+  const geo = new THREE.DodecahedronGeometry(0.6 * s, 0);
+  const mat = new THREE.MeshStandardMaterial({ color: 0x6a6a62, roughness: 0.9, metalness: 0.05, flatShading: true });
+  const m = new THREE.Mesh(geo, mat);
+  m.position.set(x, sampleH(x, z) + 0.15 * s, z);
+  m.rotation.set(Math.random(), Math.random() * Math.PI, Math.random());
+  m.scale.set(1 + Math.random() * 0.4, 0.7 + Math.random() * 0.5, 1 + Math.random() * 0.4);
+  m.castShadow = true;
+  m.receiveShadow = true;
+  scene.add(m);
+}
+for (let i = 0; i < 40; i++) {
+  const a = Math.random() * Math.PI * 2;
+  const r = 8 + Math.random() * 48;
+  const x = Math.cos(a) * r, z = Math.sin(a) * r;
+  if (sampleH(x, z) > -0.2) addRock(x, z, 0.6 + Math.random());
+}
+
+// Ground ring (map edge)
+const edge = new THREE.Mesh(
+  new THREE.RingGeometry(HALF - 0.2, HALF + 4, 64),
+  new THREE.MeshStandardMaterial({ color: 0x2a3540, roughness: 1 })
+);
+edge.rotation.x = -Math.PI / 2;
+edge.position.y = -0.8;
+scene.add(edge);
+
+// ═══════════════════════════════════════════════════════════
+// MATERIALS / MESH FACTORIES
+// ═══════════════════════════════════════════════════════════
+const mats = {
+  playerBody: new THREE.MeshStandardMaterial({ color: COLORS.player, roughness: 0.55, metalness: 0.15 }),
+  enemyBody: new THREE.MeshStandardMaterial({ color: COLORS.enemy, roughness: 0.55, metalness: 0.15 }),
+  skin: new THREE.MeshStandardMaterial({ color: 0xc4a574, roughness: 0.7 }),
+  wood: new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.85 }),
+  leaf: new THREE.MeshStandardMaterial({ color: 0x2f6b2a, roughness: 0.8 }),
+  leaf2: new THREE.MeshStandardMaterial({ color: 0x3f8a35, roughness: 0.75 }),
+  stone: new THREE.MeshStandardMaterial({ color: 0x8a8580, roughness: 0.9, metalness: 0.05 }),
+  roof: new THREE.MeshStandardMaterial({ color: 0x6b3030, roughness: 0.75 }),
+  roofP: new THREE.MeshStandardMaterial({ color: 0x2a4a7a, roughness: 0.75 }),
+  roofE: new THREE.MeshStandardMaterial({ color: 0x7a2a2a, roughness: 0.75 }),
+  gold: new THREE.MeshStandardMaterial({ color: 0xd4a84b, roughness: 0.35, metalness: 0.75 }),
+  berry: new THREE.MeshStandardMaterial({ color: 0x8b2e5a, roughness: 0.6 }),
+  white: new THREE.MeshStandardMaterial({ color: 0xe8e4d9, roughness: 0.6 }),
+  dark: new THREE.MeshStandardMaterial({ color: 0x2a2a30, roughness: 0.7 }),
+  path: new THREE.MeshStandardMaterial({ color: 0xb89a6a, roughness: 0.95 }),
+  ghost: new THREE.MeshStandardMaterial({ color: 0x6aabff, transparent: true, opacity: 0.45, depth: 0.4 }),
+  ghostBad: new THREE.MeshStandardMaterial({ color: 0xff5555, transparent: true, opacity: 0.4, depth: 0.4 }),
+  selectRing: new THREE.MeshBasicMaterial({ color: 0x7dff5a, transparent: true, opacity: 0.85, depth: THREE.DoubleSide }),
+  selectRingE: new THREE.MeshBasicMaterial({ color: 0xff6a6a, transparent: true, opacity: 0.7, side: THREE.DoubleSide }),
+};
+
+function makeTree(scale = 1) {
+  const g = new THREE.Group();
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.18 * scale, 0.28 * scale, 1.4 * scale, 6), mats.wood);
+  trunk.position.y = 0.7 * scale;
+  trunk.castShadow = true;
+  g.add(trunk);
+  const leafMat = Math.random() > 0.5 ? mats.leaf : mats.leaf2;
+  const foliage = new THREE.Mesh(new THREE.ConeGeometry(1.1 * scale, 2.2 * scale, 7), leafMat);
+  foliage.position.y = 2.1 * scale;
+  foliage.castShadow = true;
+  foliage.receiveShadow = true;
+  g.add(foliage);
+  if (scale > 0.85) {
+    const f2 = new THREE.Mesh(new THREE.ConeGeometry(0.75 * scale, 1.4 * scale, 7), leafMat);
+    f2.position.y = 3.1 * scale;
+    f2.castShadow = true;
+    g.add(f2);
+  }
+  return g;
+}
+
+function makeGoldMine() {
+  const g = new THREE.Group();
+  const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(1.1, 0), mats.stone);
+  rock.scale.set(1.4, 0.9, 1.2);
+  rock.position.y = 0.5;
+  rock.castShadow = true;
+  g.add(rock);
+  for (let i = 0; i < 5; i++) {
+    const nug = new THREE.Mesh(new THREE.OctahedronGeometry(0.22 + Math.random() * 0.15, 0), mats.gold);
+    nug.position.set((Math.random() - 0.5) * 1.4, 0.6 + Math.random() * 0.6, (Math.random() - 0.5) * 1.4);
+    nug.castShadow = true;
+    g.add(nug);
+  }
+  return g;
+}
+
+function makeBerryBush() {
+  const g = new THREE.Group();
+  const bush = new THREE.Mesh(new THREE.SphereGeometry(0.7, 8, 6), mats.leaf2);
+  bush.scale.set(1.2, 0.8, 1.1);
+  bush.position.y = 0.45;
+  bush.castShadow = true;
+  g.add(bush);
+  for (let i = 0; i < 8; i++) {
+    const b = new THREE.Mesh(new THREE.SphereGeometry(0.08, 5, 4), mats.berry);
+    const a = (i / 8) * Math.PI * 2;
+    b.position.set(Math.cos(a) * 0.55, 0.5 + Math.random() * 0.3, Math.sin(a) * 0.5);
+    g.add(b);
+  }
+  return g;
+}
+
+function makeUnitMesh(type, team) {
+  const g = new THREE.Group();
+  const bodyMat = team === TEAM.PLAYER ? mats.playerBody : mats.enemyBody;
+  if (type === 'villager') {
+    const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.28, 0.45, 4, 8), bodyMat);
+    body.position.y = 0.7;
+    body.castShadow = true;
+    g.add(body);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 8), mats.skin);
+    head.position.y = 1.25;
+    head.castShadow = true;
+    g.add(head);
+    // tool
+    const tool = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 0.55), mats.wood);
+    tool.position.set(0.35, 0.75, 0.1);
+    tool.rotation.z = 0.4;
+    g.add(tool);
+  } else if (type === 'soldier') {
+    const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.32, 0.55, 4, 8), bodyMat);
+    body.position.y = 0.8;
+    body.castShadow = true;
+    g.add(body);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.22, 10, 8), mats.skin);
+    head.position.y = 1.4;
+    g.add(head);
+    const helm = new THREE.Mesh(new THREE.SphereGeometry(0.24, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), mats.dark);
+    helm.position.y = 1.48;
+    g.add(helm);
+    const shield = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.08, 10), mats.stone);
+    shield.rotation.z = Math.PI / 2;
+    shield.position.set(-0.4, 0.85, 0);
+    g.add(shield);
+    const sword = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.7, 0.08), mats.gold);
+    sword.position.set(0.4, 0.95, 0.15);
+    g.add(sword);
+  } else if (type === 'archer') {
+    const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.28, 0.5, 4, 8), bodyMat);
+    body.position.y = 0.75;
+    body.castShadow = true;
+    g.add(body);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 8), mats.skin);
+    head.position.y = 1.3;
+    g.add(head);
+    const bow = new THREE.Mesh(new THREE.TorusGeometry(0.35, 0.04, 6, 12, Math.PI), mats.wood);
+    bow.rotation.y = Math.PI / 2;
+    bow.position.set(0.35, 0.9, 0);
+    g.add(bow);
+  }
+  // selection ring
+  const ring = new THREE.Mesh(new THREE.RingGeometry(0.45, 0.55, 24), team === TEAM.PLAYER ? mats.selectRing : mats.selectRingE);
+  ring.rotation.x = -Math.PI / 2;
+  ring.position.y = 0.05;
+  ring.visible = false;
+  ring.name = 'ring';
+  g.add(ring);
+  return g;
+}
+
+function makeBuildingMesh(type, team) {
+  const g = new THREE.Group();
+  const roofMat = team === TEAM.PLAYER ? mats.roofP : mats.roofE;
+  if (type === 'town') {
+    const base = new THREE.Mesh(new THREE.BoxGeometry(5.5, 2.2, 5.5), mats.stone);
+    base.position.y = 1.1;
+    base.castShadow = true;
+    base.receiveShadow = true;
+    g.add(base);
+    const mid = new THREE.Mesh(new THREE.BoxGeometry(3.8, 1.6, 3.8), team === TEAM.PLAYER ? mats.playerBody : mats.enemyBody);
+    mid.position.y = 2.8;
+    mid.castShadow = true;
+    g.add(mid);
+    const roof = new THREE.Mesh(new THREE.ConeGeometry(3.4, 2.2, 4), roofMat);
+    roof.position.y = 4.5;
+    roof.rotation.y = Math.PI / 4;
+    roof.castShadow = true;
+    g.add(roof);
+    const flag = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.4, 0.08), mats.wood);
+    flag.position.set(0, 5.8, 0);
+    g.add(flag);
+    const banner = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.45), new THREE.MeshStandardMaterial({
+      color: team === TEAM.PLAYER ? COLORS.player : COLORS.enemy, side: THREE.DoubleSide
+    }));
+    banner.position.set(0.35, 5.5, 0);
+    g.add(banner);
+  } else if (type === 'house') {
+    const base = new THREE.Mesh(new THREE.BoxGeometry(3.2, 1.6, 3.2), mats.wood);
+    base.position.y = 0.8;
+    base.castShadow = true;
+    base.receiveShadow = true;
+    g.add(base);
+    const roof = new THREE.Mesh(new THREE.ConeGeometry(2.6, 1.5, 4), roofMat);
+    roof.position.y = 2.3;
+    roof.rotation.y = Math.PI / 4;
+    roof.castShadow = true;
+    g.add(roof);
+  } else if (type === 'barracks') {
+    const base = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.8, 4), mats.stone);
+    base.position.y = 0.9;
+    base.castShadow = true;
+    base.receiveShadow = true;
+    g.add(base);
+    const wall = new THREE.Mesh(new THREE.BoxGeometry(4.6, 1.2, 0.3), team === TEAM.PLAYER ? mats.playerBody : mats.enemyBody);
+    wall.position.set(0, 2.1, -1.8);
+    wall.castShadow = true;
+    g.add(wall);
+    const roof = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.3, 4.3), roofMat);
+    roof.position.y = 2.0;
+    roof.castShadow = true;
+    g.add(roof);
+    // training posts
+    for (let i = -1; i <= 1; i++) {
+      const p = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1.5, 6), mats.wood);
+      p.position.set(i * 1.1, 0.75, 1.6);
+      g.add(p);
+    }
+  }
+  const ring = new THREE.Mesh(new THREE.RingGeometry(type === 'town' ? 3.5 : type === 'barracks' ? 2.8 : 2.2, type === 'town' ? 3.7 : type === 'barracks' ? 3.0 : 2.4, 32),
+    team === TEAM.PLAYER ? mats.selectRing : mats.selectRingE);
+  ring.rotation.x = -Math.PI / 2;
+  ring.position.y = 0.08;
+  ring.visible = false;
+  ring.name = 'ring';
+  g.add(ring);
+  return g;
+}
+
+// ═══════════════════════════════════════════════════════════
+// ENTITY SYSTEM
+// ═══════════════════════════════════════════════════════════
+function createEntity(opts) {
+  const e = {
+    id: state.nextId++,
+    kind: opts.kind, // unit | building | resource
+    type: opts.type,
+    team: opts.team ?? null,
+    x: opts.x, z: opts.z,
+    y: 0,
+    hp: opts.hp ?? 100,
+    maxHp: opts.maxHp ?? opts.hp ?? 100,
+    mesh: null,
+    selected: false,
+    // unit
+    vx: 0, vz: 0,
+    targetX: null, targetZ: null,
+    speed: opts.speed ?? 3.5,
+    task: null, // 'gather' | 'build' | 'attack' | 'idle'
+    taskTarget: null,
+    carry: 0,
+    carryType: null,
+    lastGatherType: null,
+    attackCd: 0,
+    // building
+    buildProgress: opts.buildProgress ?? 1,
+    queue: [],
+    queueTimer: 0,
+    // resource
+    amount: opts.amount ?? 0,
+    alive: true,
+    radius: opts.radius ?? 0.5,
+  };
+  e.y = sampleH(e.x, e.z);
+
+  if (e.kind === 'unit') {
+    e.mesh = makeUnitMesh(e.type, e.team);
+    e.radius = 0.45;
+  } else if (e.kind === 'building') {
+    e.mesh = makeBuildingMesh(e.type, e.team);
+    e.radius = e.type === 'town' ? 3.2 : e.type === 'barracks' ? 2.6 : 2.0;
+    if (e.buildProgress < 1) e.mesh.scale.setScalar(0.3 + e.buildProgress * 0.7);
+  } else if (e.kind === 'resource') {
+    if (e.type === 'tree') {
+      e.mesh = makeTree(0.85 + Math.random() * 0.4);
+      e.radius = 0.6;
+      e.amount = e.amount || 100;
+    } else if (e.type === 'gold') {
+      e.mesh = makeGoldMine();
+      e.radius = 1.3;
+      e.amount = e.amount || 400;
+    } else if (e.type === 'food') {
+      e.mesh = makeBerryBush();
+      e.radius = 0.8;
+      e.amount = e.amount || 150;
+    }
+  }
+
+  e.mesh.position.set(e.x, e.y, e.z);
+  e.mesh.userData.entity = e;
+  scene.add(e.mesh);
+  state.entities.push(e);
+  return e;
+}
+
+function removeEntity(e) {
+  e.alive = false;
+  if (e.mesh) {
+    scene.remove(e.mesh);
+    e.mesh.traverse(c => {
+      if (c.geometry) c.geometry.dispose();
+    });
+  }
+  state.selected.delete(e);
+  const i = state.entities.indexOf(e);
+  if (i >= 0) state.entities.splice(i, 1);
+}
+
+function setSelected(list, additive = false) {
+  if (!additive) {
+    for (const e of state.selected) {
+      e.selected = false;
+      const ring = e.mesh?.getObjectByName('ring');
+      if (ring) ring.visible = false;
+    }
+    state.selected.clear();
+  }
+  for (const e of list) {
+    if (!e.alive || e.kind === 'resource') continue;
+    if (e.team !== TEAM.PLAYER && e.kind === 'unit') continue; // can select enemy buildings? no — only player entities for control
+    if (e.team !== TEAM.PLAYER) continue;
+    e.selected = true;
+    state.selected.add(e);
+    const ring = e.mesh?.getObjectByName('ring');
+    if (ring) ring.visible = true;
+  }
+  refreshUI();
+}
+
+function countPop(team) {
+  let p = 0, cap = team === TEAM.PLAYER ? 5 : 5; // base TC
+  for (const e of state.entities) {
+    if (!e.alive || e.team !== team) continue;
+    if (e.kind === 'unit') p++;
+    if (e.kind === 'building' && e.type === 'house' && e.buildProgress >= 1) cap += POP_CAP_PER_HOUSE;
+    if (e.kind === 'building' && e.type === 'town' && e.buildProgress >= 1) cap += 5;
+  }
+  return { pop: p, cap };
+}
+
+// ═══════════════════════════════════════════════════════════
+// WORLD SPAWN
+// ═══════════════════════════════════════════════════════════
+function spawnWorld() {
+  // Player base
+  createEntity({ kind: 'building', type: 'town', team: TEAM.PLAYER, x: 22, z: 22, hp: BLD_HP.town, maxHp: BLD_HP.town });
+  for (let i = 0; i < 4; i++) {
+    const a = (i / 4) * Math.PI * 2;
+    createEntity({ kind: 'unit', type: 'villager', team: TEAM.PLAYER, x: 22 + Math.cos(a) * 4, z: 22 + Math.sin(a) * 4, hp: UNIT_HP.villager, maxHp: UNIT_HP.villager, speed: 3.8 });
+  }
+  createEntity({ kind: 'unit', type: 'soldier', team: TEAM.PLAYER, x: 18, z: 20, hp: UNIT_HP.soldier, maxHp: UNIT_HP.soldier, speed: 3.2 });
+
+  // Enemy base
+  createEntity({ kind: 'building', type: 'town', team: TEAM.ENEMY, x: -22, z: -22, hp: BLD_HP.town, maxHp: BLD_HP.town });
+  createEntity({ kind: 'building', type: 'barracks', team: TEAM.ENEMY, x: -18, z: -26, hp: BLD_HP.barracks, maxHp: BLD_HP.barracks });
+  createEntity({ kind: 'building', type: 'house', team: TEAM.ENEMY, x: -26, z: -18, hp: BLD_HP.house, maxHp: BLD_HP.house });
+  for (let i = 0; i < 4; i++) {
+    const a = (i / 4) * Math.PI * 2;
+    createEntity({ kind: 'unit', type: 'villager', team: TEAM.ENEMY, x: -22 + Math.cos(a) * 4, z: -22 + Math.sin(a) * 4, hp: UNIT_HP.villager, maxHp: UNIT_HP.villager, speed: 3.8 });
+  }
+  for (let i = 0; i < 3; i++) {
+    createEntity({ kind: 'unit', type: 'soldier', team: TEAM.ENEMY, x: -20 + i * 2, z: -18, hp: UNIT_HP.soldier, maxHp: UNIT_HP.soldier, speed: 3.2 });
+  }
+
+  // Resource nodes — trees clusters
+  function scatter(type, cx, cz, n, spread, amount) {
+    for (let i = 0; i < n; i++) {
+      const x = cx + (Math.random() - 0.5) * spread;
+      const z = cz + (Math.random() - 0.5) * spread;
+      if (Math.hypot(x, z) > HALF - 3) continue;
+      if (sampleH(x, z) < -0.4) continue;
+      // keep off bases
+      if (Math.hypot(x - 22, z - 22) < 10 || Math.hypot(x + 22, z + 22) < 10) continue;
+      createEntity({ kind: 'resource', type, x, z, amount, hp: 1, maxHp: 1 });
+    }
+  }
+  scatter('tree', 8, 30, 18, 22, 100);
+  scatter('tree', 35, 5, 14, 18, 100);
+  scatter('tree', -8, -30, 16, 20, 100);
+  scatter('tree', -35, -5, 12, 16, 100);
+  scatter('tree', 0, 40, 10, 14, 100);
+  scatter('tree', 0, -40, 10, 14, 100);
+  scatter('food', 30, 30, 5, 10, 150);
+  scatter('food', 12, 14, 4, 8, 150);
+  scatter('food', -30, -30, 5, 10, 150);
+  scatter('food', -12, -14, 4, 8, 150);
+  scatter('gold', 38, 18, 3, 6, 400);
+  scatter('gold', -38, -18, 3, 6, 400);
+  scatter('gold', 5, -28, 2, 5, 400);
+  scatter('gold', -5, 28, 2, 5, 400);
+
+  // Decorative forest trees (non-harvestable visual density — reuse harvestable)
+  // paths near bases
+  for (const [bx, bz] of [[22, 22], [-22, -22]]) {
+    for (let i = 0; i < 8; i++) {
+      const p = new THREE.Mesh(new THREE.CircleGeometry(0.9, 10), mats.path);
+      p.rotation.x = -Math.PI / 2;
+      const t = i / 7;
+      const x = bx + (0 - bx) * t * 0.35 + (Math.random() - 0.5);
+      const z = bz + (0 - bz) * t * 0.35 + (Math.random() - 0.5);
+      p.position.set(x, sampleH(x, z) + 0.03, z);
+      p.receiveShadow = true;
+      scene.add(p);
+    }
+  }
+
+  refreshPop();
+}
+
+// ═══════════════════════════════════════════════════════════
+// ORDERS
+// ═══════════════════════════════════════════════════════════
+function issueMove(entities, x, z, attackMove = false) {
+  for (const e of entities) {
+    if (e.kind !== 'unit' || e.team !== TEAM.PLAYER) continue;
+    e.targetX = x + (Math.random() - 0.5) * 1.2;
+    e.targetZ = z + (Math.random() - 0.5) * 1.2;
+    e.task = attackMove ? 'attack' : 'move';
+    e.taskTarget = null;
+  }
+}
+
+function issueGather(entities, res) {
+  for (const e of entities) {
+    if (e.kind !== 'unit' || e.type !== 'villager' || e.team !== TEAM.PLAYER) continue;
+    e.task = 'gather';
+    e.taskTarget = res;
+    e.targetX = res.x;
+    e.targetZ = res.z;
+  }
+}
+
+function issueAttack(entities, target) {
+  for (const e of entities) {
+    if (e.kind !== 'unit' || e.team !== TEAM.PLAYER) continue;
+    e.task = 'attack';
+    e.taskTarget = target;
+    e.targetX = target.x;
+    e.targetZ = target.z;
+  }
+}
+
+function canAfford(cost, res = state.resources) {
+  return res.food >= cost.food && res.wood >= cost.wood && res.gold >= cost.gold;
+}
+function pay(cost, res = state.resources) {
+  res.food -= cost.food;
+  res.wood -= cost.wood;
+  res.gold -= cost.gold;
+}
+function refund(cost, res = state.resources) {
+  res.food += cost.food;
+  res.wood += cost.wood;
+  res.gold += cost.gold;
+}
+
+function queueTrain(building, unitType) {
+  const cost = COSTS[unitType];
+  if (!cost || !canAfford(cost)) { toast('Recursos insuficientes'); return; }
+  const { pop, cap } = countPop(TEAM.PLAYER);
+  if (pop + building.queue.length >= cap) { toast('População no limite — construa casas'); return; }
+  pay(cost);
+  building.queue.push(unitType);
+  if (building.queue.length === 1) building.queueTimer = BUILD_TIME[unitType];
+  refreshUI();
+  toast(`${unitType === 'villager' ? 'Aldeão' : unitType === 'soldier' ? 'Soldado' : 'Arqueiro'} na fila`);
+}
+
+function placeBuilding(type, x, z, team = TEAM.PLAYER) {
+  const cost = COSTS[type];
+  const res = team === TEAM.PLAYER ? state.resources : state.enemyRes;
+  if (!canAfford(cost, res)) {
+    if (team === TEAM.PLAYER) toast('Recursos insuficientes');
+    return null;
+  }
+  if (!canPlace(type, x, z)) {
+    if (team === TEAM.PLAYER) toast('Não é possível construir aqui');
+    return null;
+  }
+  pay(cost, res);
+  const e = createEntity({
+    kind: 'building', type, team, x, z,
+    hp: BLD_HP[type], maxHp: BLD_HP[type],
+    buildProgress: team === TEAM.ENEMY ? 1 : 0.05,
+  });
+  if (team === TEAM.PLAYER) {
+    // assign selected villagers to build
+    const vill = [...state.selected].filter(u => u.type === 'villager');
+    for (const v of vill) {
+      v.task = 'build';
+      v.taskTarget = e;
+      v.targetX = e.x;
+      v.targetZ = e.z;
+    }
+    if (!vill.length) toast('Selecione aldeões para construir');
+  }
+  refreshPop();
+  return e;
+}
+
+function canPlace(type, x, z) {
+  if (Math.abs(x) > HALF - 4 || Math.abs(z) > HALF - 4) return false;
+  if (sampleH(x, z) < -0.3) return false;
+  const r = type === 'barracks' ? 3 : 2.5;
+  for (const e of state.entities) {
+    if (!e.alive) continue;
+    if (e.kind === 'resource' && e.type !== 'tree') continue;
+    const dist = Math.hypot(e.x - x, e.z - z);
+    const er = e.radius + r;
+    if (e.kind === 'building' || e.kind === 'unit') {
+      if (dist < er) return false;
+    }
+    if (e.kind === 'resource' && e.type === 'tree' && dist < 1.5) return false;
+  }
+  // water check
+  if (sampleH(x, z) < -0.5) return false;
+  return true;
+}
+
+// ═══════════════════════════════════════════════════════════
+// COMBAT / AI HELPERS
+// ═══════════════════════════════════════════════════════════
+function findNearest(from, pred, maxDist = 999) {
+  let best = null, bd = maxDist;
+  for (const e of state.entities) {
+    if (!e.alive || e === from) continue;
+    if (!pred(e)) continue;
+    const d = Math.hypot(e.x - from.x, e.z - from.z);
+    if (d < bd) { bd = d; best = e; }
+  }
+  return best;
+}
+
+function dropOffBuilding(team) {
+  return findNearest({ x: 0, z: 0 }, e => e.kind === 'building' && e.team === team && e.type === 'town' && e.buildProgress >= 1, 999)
+    || findNearest({ x: 0, z: 0 }, e => e.kind === 'building' && e.team === team && e.buildProgress >= 1, 999);
+}
+
+function damage(target, dmg, attacker) {
+  if (!target.alive) return;
+  target.hp -= dmg;
+  // brief scale punch (avoids mutating shared materials)
+  if (target.mesh && target.kind === 'unit') {
+    const s = target.mesh.scale.x;
+    target.mesh.scale.setScalar(s * 1.12);
+    setTimeout(() => { if (target.alive && target.mesh) target.mesh.scale.setScalar(1); }, 70);
+  }
+  if (target.hp <= 0) {
+    if (target.kind === 'building' && target.type === 'town') {
+      state.winner = attacker?.team === TEAM.PLAYER ? 'player' : 'enemy';
+      endGame();
+    }
+    // death
+    if (target.kind === 'unit') {
+      // pop
+    }
+    removeEntity(target);
+    refreshPop();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// UPDATE LOOP
+// ═══════════════════════════════════════════════════════════
+function updateUnits(dt) {
+  for (const e of state.entities) {
+    if (!e.alive || e.kind !== 'unit') continue;
+    e.attackCd = Math.max(0, e.attackCd - dt);
+
+    // AI-ish auto acquire for military
+    if (e.task === 'idle' || e.task === 'move' || e.task === null) {
+      if (e.type !== 'villager') {
+        const foe = findNearest(e, t => t.team !== null && t.team !== e.team && t.alive && (t.kind === 'unit' || t.kind === 'building'), 12);
+        if (foe) {
+          e.task = 'attack';
+          e.taskTarget = foe;
+        }
+      }
+    }
+
+    if (e.task === 'attack' && e.taskTarget) {
+      if (!e.taskTarget.alive) {
+        e.task = 'idle';
+        e.taskTarget = null;
+        e.targetX = null;
+      } else {
+        const range = ATTACK_RANGE[e.type] || 2;
+        const d = Math.hypot(e.taskTarget.x - e.x, e.taskTarget.z - e.z);
+        if (d > range) {
+          e.targetX = e.taskTarget.x;
+          e.targetZ = e.taskTarget.z;
+        } else {
+          e.targetX = null;
+          // face & attack
+          const ang = Math.atan2(e.taskTarget.x - e.x, e.taskTarget.z - e.z);
+          e.mesh.rotation.y = ang;
+          if (e.attackCd <= 0) {
+            e.attackCd = ATTACK_CD[e.type] || 1;
+            damage(e.taskTarget, ATTACK_DMG[e.type] || 5, e);
+            // projectile visual for archer
+            if (e.type === 'archer' && e.taskTarget.alive) spawnArrow(e, e.taskTarget);
+          }
+        }
+      }
+    }
+
+    if (e.task === 'gather' && e.type === 'villager') {
+      if (e.carry >= 15) {
+        // return
+        const drop = findNearest(e, b => b.kind === 'building' && b.team === e.team && b.type === 'town' && b.buildProgress >= 1);
+        if (drop) {
+          const d = Math.hypot(drop.x - e.x, drop.z - e.z);
+          if (d < 3.5) {
+            const res = e.team === TEAM.PLAYER ? state.resources : state.enemyRes;
+            if (e.carryType === 'wood') res.wood += e.carry;
+            else if (e.carryType === 'gold') res.gold += e.carry;
+            else res.food += e.carry;
+            const prefer = e.lastGatherType;
+            e.carry = 0;
+            e.carryType = null;
+            if (e.taskTarget && e.taskTarget.alive && e.taskTarget.amount > 0) {
+              e.targetX = e.taskTarget.x;
+              e.targetZ = e.taskTarget.z;
+            } else {
+              const nr = findNearest(e, r => r.kind === 'resource' && r.amount > 0 && (!prefer || r.type === prefer), 40)
+                || findNearest(e, r => r.kind === 'resource' && r.amount > 0, 40);
+              e.taskTarget = nr;
+              if (nr) { e.targetX = nr.x; e.targetZ = nr.z; }
+              else e.task = 'idle';
+            }
+            refreshUI();
+          } else {
+            e.targetX = drop.x;
+            e.targetZ = drop.z;
+          }
+        }
+      } else if (e.taskTarget && e.taskTarget.alive && e.taskTarget.amount > 0) {
+        const d = Math.hypot(e.taskTarget.x - e.x, e.taskTarget.z - e.z);
+        if (d < e.taskTarget.radius + 1.2) {
+          e.targetX = null;
+          const rate = GATHER_RATE * dt;
+          const got = Math.min(rate, e.taskTarget.amount, 15 - e.carry);
+          e.taskTarget.amount -= got;
+          e.carry += got;
+          e.carryType = e.taskTarget.type === 'tree' ? 'wood' : e.taskTarget.type === 'gold' ? 'gold' : 'food';
+          e.lastGatherType = e.taskTarget.type;
+          // bob
+          e.mesh.position.y = e.y + Math.abs(Math.sin(state.time * 8)) * 0.05;
+          if (e.taskTarget.amount <= 0) {
+            removeEntity(e.taskTarget);
+            e.taskTarget = null;
+            if (e.carry > 0) {
+              // go deposit
+            } else {
+              const nr = findNearest(e, r => r.kind === 'resource' && r.amount > 0, 30);
+              e.taskTarget = nr;
+              if (nr) { e.targetX = nr.x; e.targetZ = nr.z; }
+              else e.task = 'idle';
+            }
+          }
+        } else {
+          e.targetX = e.taskTarget.x;
+          e.targetZ = e.taskTarget.z;
+        }
+      } else if (e.carry > 0) {
+        const drop = findNearest(e, b => b.kind === 'building' && b.team === e.team && b.type === 'town');
+        if (drop) { e.targetX = drop.x; e.targetZ = drop.z; }
+      } else {
+        e.task = 'idle';
+      }
+    }
+
+    if (e.task === 'build' && e.taskTarget) {
+      if (!e.taskTarget.alive) { e.task = 'idle'; e.taskTarget = null; }
+      else if (e.taskTarget.buildProgress >= 1) { e.task = 'idle'; e.taskTarget = null; }
+      else {
+        const d = Math.hypot(e.taskTarget.x - e.x, e.taskTarget.z - e.z);
+        if (d < e.taskTarget.radius + 1.0) {
+          e.targetX = null;
+          e.taskTarget.buildProgress = Math.min(1, e.taskTarget.buildProgress + dt / BUILD_TIME[e.taskTarget.type]);
+          e.taskTarget.mesh.scale.setScalar(0.3 + e.taskTarget.buildProgress * 0.7);
+          e.taskTarget.hp = e.taskTarget.maxHp * e.taskTarget.buildProgress;
+          if (e.taskTarget.buildProgress >= 1) {
+            e.taskTarget.mesh.scale.setScalar(1);
+            toast(e.taskTarget.type === 'house' ? 'Casa concluída' : 'Quartel concluído');
+            refreshPop();
+            e.task = 'idle';
+            e.taskTarget = null;
+          }
+        } else {
+          e.targetX = e.taskTarget.x;
+          e.targetZ = e.taskTarget.z;
+        }
+      }
+    }
+
+    // movement
+    if (e.targetX != null) {
+      const dx = e.targetX - e.x;
+      const dz = e.targetZ - e.z;
+      const dist = Math.hypot(dx, dz);
+      if (dist < 0.25) {
+        e.targetX = null;
+        e.targetZ = null;
+        if (e.task === 'move') e.task = 'idle';
+      } else {
+        const sp = e.speed * dt;
+        const nx = e.x + (dx / dist) * Math.min(sp, dist);
+        const nz = e.z + (dz / dist) * Math.min(sp, dist);
+        // soft collision
+        let fx = nx, fz = nz;
+        for (const o of state.entities) {
+          if (!o.alive || o === e || o.kind === 'resource') continue;
+          if (o.kind === 'building') {
+            const d = Math.hypot(o.x - fx, o.z - fz);
+            const min = o.radius + e.radius * 0.7;
+            if (d < min && d > 0.01) {
+              const push = (min - d) * 0.5;
+              fx -= ((o.x - fx) / d) * push;
+              fz -= ((o.z - fz) / d) * push;
+            }
+          } else if (o.kind === 'unit') {
+            const d = Math.hypot(o.x - fx, o.z - fz);
+            const min = 0.7;
+            if (d < min && d > 0.01) {
+              const push = (min - d) * 0.35;
+              fx -= ((o.x - fx) / d) * push;
+              fz -= ((o.z - fz) / d) * push;
+            }
+          }
+        }
+        e.x = THREE.MathUtils.clamp(fx, -HALF + 1, HALF - 1);
+        e.z = THREE.MathUtils.clamp(fz, -HALF + 1, HALF - 1);
+        e.y = sampleH(e.x, e.z);
+        e.mesh.position.set(e.x, e.y, e.z);
+        e.mesh.rotation.y = Math.atan2(dx, dz);
+        // walk bob
+        e.mesh.position.y = e.y + Math.abs(Math.sin(state.time * 10)) * 0.06;
+      }
+    } else {
+      e.y = sampleH(e.x, e.z);
+      if (e.task !== 'gather') e.mesh.position.set(e.x, e.y, e.z);
+    }
+  }
+}
+
+function updateBuildings(dt) {
+  for (const e of state.entities) {
+    if (!e.alive || e.kind !== 'building') continue;
+    if (e.buildProgress < 1) continue;
+    if (e.queue.length > 0) {
+      e.queueTimer -= dt;
+      if (e.queueTimer <= 0) {
+        const ut = e.queue.shift();
+        const { pop, cap } = countPop(e.team);
+        if (pop >= cap) {
+          // refund and cancel
+          if (e.team === TEAM.PLAYER) {
+            refund(COSTS[ut]);
+            toast('Sem espaço de população');
+          }
+        } else {
+          const ang = Math.random() * Math.PI * 2;
+          const r = e.radius + 1.2;
+          createEntity({
+            kind: 'unit', type: ut, team: e.team,
+            x: e.x + Math.cos(ang) * r,
+            z: e.z + Math.sin(ang) * r,
+            hp: UNIT_HP[ut], maxHp: UNIT_HP[ut],
+            speed: ut === 'villager' ? 3.8 : ut === 'archer' ? 3.4 : 3.2,
+          });
+          refreshPop();
+        }
+        if (e.queue.length) e.queueTimer = BUILD_TIME[e.queue[0]];
+        refreshUI();
+      }
+    }
+  }
+}
+
+// Simple projectiles
+const arrows = [];
+function spawnArrow(from, to) {
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.6, 4), mats.wood);
+  m.position.set(from.x, from.y + 1.2, from.z);
+  scene.add(m);
+  arrows.push({ mesh: m, x: from.x, y: from.y + 1.2, z: from.z, tx: to.x, ty: to.y + 1, tz: to.z, t: 0, life: 0.25 });
+}
+function updateArrows(dt) {
+  for (let i = arrows.length - 1; i >= 0; i--) {
+    const a = arrows[i];
+    a.t += dt / a.life;
+    if (a.t >= 1) {
+      scene.remove(a.mesh);
+      arrows.splice(i, 1);
+      continue;
+    }
+    a.mesh.position.set(
+      THREE.MathUtils.lerp(a.x, a.tx, a.t),
+      THREE.MathUtils.lerp(a.y, a.ty, a.t) + Math.sin(a.t * Math.PI) * 1.2,
+      THREE.MathUtils.lerp(a.z, a.tz, a.t)
+    );
+    a.mesh.lookAt(a.tx, a.ty, a.tz);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// ENEMY AI
+// ═══════════════════════════════════════════════════════════
+let aiTimer = 0;
+function updateAI(dt) {
+  aiTimer += dt;
+  if (aiTimer < 1.2) return;
+  aiTimer = 0;
+
+  const er = state.enemyRes;
+  const { pop, cap } = countPop(TEAM.ENEMY);
+  const town = state.entities.find(e => e.alive && e.team === TEAM.ENEMY && e.type === 'town');
+  const barracks = state.entities.filter(e => e.alive && e.team === TEAM.ENEMY && e.type === 'barracks' && e.buildProgress >= 1);
+  const houses = state.entities.filter(e => e.alive && e.team === TEAM.ENEMY && e.type === 'house').length;
+  const vill = state.entities.filter(e => e.alive && e.team === TEAM.ENEMY && e.type === 'villager');
+  const army = state.entities.filter(e => e.alive && e.team === TEAM.ENEMY && (e.type === 'soldier' || e.type === 'archer'));
+
+  // economy: idle villagers gather
+  for (const v of vill) {
+    if (v.task === 'idle' || v.task === null || (v.task === 'move' && !v.targetX)) {
+      const prefer = er.wood < 80 ? 'tree' : er.food < 80 ? 'food' : er.gold < 40 ? 'gold' : null;
+      let res;
+      if (prefer) res = findNearest(v, r => r.kind === 'resource' && r.type === prefer && r.amount > 0, 50);
+      if (!res) res = findNearest(v, r => r.kind === 'resource' && r.amount > 0, 50);
+      if (res) {
+        v.task = 'gather';
+        v.taskTarget = res;
+        v.targetX = res.x;
+        v.targetZ = res.z;
+      }
+    }
+  }
+
+  // build houses if pop tight
+  if (pop >= cap - 2 && houses < 6 && canAfford(COSTS.house, er) && town) {
+    const ang = Math.random() * Math.PI * 2;
+    const r = 8 + Math.random() * 6;
+    const x = town.x + Math.cos(ang) * r;
+    const z = town.z + Math.sin(ang) * r;
+    placeBuilding('house', x, z, TEAM.ENEMY);
+  }
+
+  // build barracks
+  if (barracks.length < 1 && canAfford(COSTS.barracks, er) && town) {
+    placeBuilding('barracks', town.x + 6, town.z - 4, TEAM.ENEMY);
+  }
+
+  // train villagers
+  if (town && town.queue.length < 2 && vill.length < 8 && pop < cap && canAfford(COSTS.villager, er)) {
+    pay(COSTS.villager, er);
+    town.queue.push('villager');
+    if (town.queue.length === 1) town.queueTimer = BUILD_TIME.villager;
+  }
+
+  // train military
+  for (const b of barracks) {
+    if (b.queue.length < 2 && pop < cap) {
+      const ut = Math.random() > 0.4 ? 'soldier' : 'archer';
+      if (canAfford(COSTS[ut], er)) {
+        pay(COSTS[ut], er);
+        b.queue.push(ut);
+        if (b.queue.length === 1) b.queueTimer = BUILD_TIME[ut];
+      }
+    }
+  }
+
+  // attack waves
+  if (army.length >= 4) {
+    const idleArmy = army.filter(u => u.task === 'idle' || u.task === null || u.task === 'move');
+    if (idleArmy.length >= 3) {
+      const target = findNearest(town || { x: -22, z: -22 }, t => t.team === TEAM.PLAYER && t.alive && (t.kind === 'building' || t.kind === 'unit'), 999);
+      if (target) {
+        for (const u of idleArmy) {
+          u.task = 'attack';
+          u.taskTarget = target;
+          u.targetX = target.x;
+          u.targetZ = target.z;
+        }
+      }
+    }
+  }
+
+  // defend: if player near base
+  if (town) {
+    const threat = findNearest(town, t => t.team === TEAM.PLAYER && t.kind === 'unit' && t.alive, 18);
+    if (threat) {
+      for (const u of army) {
+        if (u.task !== 'attack' || !u.taskTarget) {
+          u.task = 'attack';
+          u.taskTarget = threat;
+        }
+      }
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// INPUT
+// ═══════════════════════════════════════════════════════════
+const raycaster = new THREE.Raycaster();
+const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+
+function screenToGround(clientX, clientY) {
+  const ndc = new THREE.Vector2(
+    (clientX / innerWidth) * 2 - 1,
+    -(clientY / innerHeight) * 2 + 1
+  );
+  raycaster.setFromCamera(ndc, camera);
+  // intersect terrain
+  const hits = raycaster.intersectObject(terrain);
+  if (hits.length) return hits[0].point;
+  const p = new THREE.Vector3();
+  if (raycaster.ray.intersectPlane(groundPlane, p)) return p;
+  return null;
+}
+
+function pickEntity(clientX, clientY) {
+  const ndc = new THREE.Vector2(
+    (clientX / innerWidth) * 2 - 1,
+    -(clientY / innerHeight) * 2 + 1
+  );
+  raycaster.setFromCamera(ndc, camera);
+  const meshes = [];
+  for (const e of state.entities) {
+    if (!e.alive || !e.mesh) continue;
+    e.mesh.traverse(c => { if (c.isMesh) meshes.push(c); });
+  }
+  const hits = raycaster.intersectObjects(meshes, false);
+  for (const h of hits) {
+    let o = h.object;
+    while (o && !o.userData.entity) o = o.parent;
+    if (o?.userData.entity) return o.userData.entity;
+  }
+  return null;
+}
+
+const selBoxEl = document.getElementById('selBox');
+
+canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+canvas.addEventListener('pointerdown', e => {
+  if (!state.running || state.winner) return;
+  state.pointer.x = e.clientX;
+  state.pointer.y = e.clientY;
+
+  if (e.button === 0) {
+    if (state.buildMode) {
+      const p = screenToGround(e.clientX, e.clientY);
+      if (p) {
+        const b = placeBuilding(state.buildMode, p.x, p.z);
+        if (b) {
+          state.buildMode = null;
+          clearGhost();
+          toast('Construção iniciada');
+        }
+      }
+      return;
+    }
+    state.box.active = true;
+    state.box.x0 = state.box.x1 = e.clientX;
+    state.box.y0 = state.box.y1 = e.clientY;
+    selBoxEl.style.display = 'block';
+    updateSelBox();
+  } else if (e.button === 2) {
+    const target = pickEntity(e.clientX, e.clientY);
+    const units = [...state.selected].filter(u => u.kind === 'unit');
+    if (!units.length) return;
+    if (target && target.kind === 'resource') {
+      issueGather(units, target);
+      toast('Coletando recursos');
+    } else if (target && target.team === TEAM.ENEMY) {
+      issueAttack(units, target);
+      toast('Atacar!');
+    } else if (target && target.kind === 'building' && target.team === TEAM.PLAYER && target.buildProgress < 1) {
+      for (const u of units) {
+        if (u.type !== 'villager') continue;
+        u.task = 'build';
+        u.taskTarget = target;
+        u.targetX = target.x;
+        u.targetZ = target.z;
+      }
+      toast('Construindo…');
+    } else {
+      const p = screenToGround(e.clientX, e.clientY);
+      if (p) {
+        issueMove(units, p.x, p.z);
+        spawnMoveMarker(p.x, p.z);
+      }
+    }
+  }
+});
+
+canvas.addEventListener('pointermove', e => {
+  state.pointer.x = e.clientX;
+  state.pointer.y = e.clientY;
+  // edge pan zones
+  const m = 28;
+  state.edgePan.l = e.clientX < m ? 1 : 0;
+  state.edgePan.r = e.clientX > innerWidth - m ? 1 : 0;
+  state.edgePan.u = e.clientY < m ? 1 : 0;
+  state.edgePan.d = e.clientY > innerHeight - m ? 1 : 0;
+
+  if (state.box.active) {
+    state.box.x1 = e.clientX;
+    state.box.y1 = e.clientY;
+    updateSelBox();
+  }
+  if (state.buildMode && state.ghost) {
+    const p = screenToGround(e.clientX, e.clientY);
+    if (p) {
+      state.ghost.position.set(p.x, sampleH(p.x, p.z), p.z);
+      const ok = canPlace(state.buildMode, p.x, p.z);
+      state.ghost.traverse(c => {
+        if (c.isMesh) c.material = ok ? mats.ghost : mats.ghostBad;
+      });
+    }
+  }
+});
+
+canvas.addEventListener('pointerup', e => {
+  if (!state.running) return;
+  if (e.button === 0 && state.box.active) {
+    state.box.active = false;
+    selBoxEl.style.display = 'none';
+    const dx = Math.abs(state.box.x1 - state.box.x0);
+    const dy = Math.abs(state.box.y1 - state.box.y0);
+    if (dx < 6 && dy < 6) {
+      // click select
+      const ent = pickEntity(e.clientX, e.clientY);
+      const now = performance.now();
+      const dbl = now - state.lastClick < 280;
+      state.lastClick = now;
+      if (ent && ent.team === TEAM.PLAYER) {
+        if (dbl && ent.kind === 'unit') {
+          // select all same type on screen
+          const same = state.entities.filter(u => u.alive && u.team === TEAM.PLAYER && u.kind === 'unit' && u.type === ent.type);
+          setSelected(same);
+        } else {
+          setSelected([ent], e.shiftKey);
+        }
+      } else if (!e.shiftKey) {
+        setSelected([]);
+      }
+    } else {
+      // box select
+      const xMin = Math.min(state.box.x0, state.box.x1);
+      const xMax = Math.max(state.box.x0, state.box.x1);
+      const yMin = Math.min(state.box.y0, state.box.y1);
+      const yMax = Math.max(state.box.y0, state.box.y1);
+      const picked = [];
+      for (const ent of state.entities) {
+        if (!ent.alive || ent.team !== TEAM.PLAYER || ent.kind !== 'unit') continue;
+        const v = ent.mesh.position.clone();
+        v.project(camera);
+        const sx = (v.x * 0.5 + 0.5) * innerWidth;
+        const sy = (-v.y * 0.5 + 0.5) * innerHeight;
+        if (sx >= xMin && sx <= xMax && sy >= yMin && sy <= yMax) picked.push(ent);
+      }
+      setSelected(picked, e.shiftKey);
+    }
+  }
+});
+
+function updateSelBox() {
+  const x = Math.min(state.box.x0, state.box.x1);
+  const y = Math.min(state.box.y0, state.box.y1);
+  const w = Math.abs(state.box.x1 - state.box.x0);
+  const h = Math.abs(state.box.y1 - state.box.y0);
+  selBoxEl.style.left = x + 'px';
+  selBoxEl.style.top = y + 'px';
+  selBoxEl.style.width = w + 'px';
+  selBoxEl.style.height = h + 'px';
+}
+
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  camDist = THREE.MathUtils.clamp(camDist + e.deltaY * 0.03, 16, 70);
+  updateCamera();
+}, { passive: false });
+
+window.addEventListener('keydown', e => {
+  state.keys[e.code] = true;
+  if (!state.running) return;
+  if (e.code === 'Escape') {
+    state.buildMode = null;
+    clearGhost();
+    setSelected([]);
+  }
+  if (e.code === 'KeyH') startBuild('house');
+  if (e.code === 'KeyB' || e.code === 'KeyQ') startBuild('barracks');
+});
+window.addEventListener('keyup', e => { state.keys[e.code] = false; });
+
+function startBuild(type) {
+  if (!canAfford(COSTS[type])) { toast('Recursos insuficientes'); return; }
+  state.buildMode = type;
+  clearGhost();
+  state.ghost = makeBuildingMesh(type, TEAM.PLAYER);
+  state.ghost.traverse(c => {
+    if (c.isMesh) {
+      c.material = mats.ghost;
+      c.castShadow = false;
+    }
+  });
+  const ring = state.ghost.getObjectByName('ring');
+  if (ring) ring.visible = false;
+  scene.add(state.ghost);
+  toast(type === 'house' ? 'Posicione a Casa (clique esquerdo)' : 'Posicione o Quartel');
+}
+
+function clearGhost() {
+  if (state.ghost) {
+    scene.remove(state.ghost);
+    state.ghost = null;
+  }
+}
+
+// Move marker
+let moveMarker = null;
+function spawnMoveMarker(x, z) {
+  if (moveMarker) scene.remove(moveMarker);
+  const g = new THREE.Group();
+  const ring = new THREE.Mesh(new THREE.RingGeometry(0.3, 0.5, 20), new THREE.MeshBasicMaterial({ color: 0x7dff5a, transparent: true, opacity: 0.9, side: THREE.DoubleSide }));
+  ring.rotation.x = -Math.PI / 2;
+  g.add(ring);
+  g.position.set(x, sampleH(x, z) + 0.1, z);
+  scene.add(g);
+  moveMarker = g;
+  const start = state.time;
+  g.userData.t0 = start;
+}
+
+// ═══════════════════════════════════════════════════════════
+// MINIMAP
+// ═══════════════════════════════════════════════════════════
+const mm = document.getElementById('minimap');
+const mmCtx = mm.getContext('2d');
+const mmCam = document.getElementById('mmCam');
+
+function drawMinimap() {
+  const w = mm.width, h = mm.height;
+  mmCtx.fillStyle = '#1a2a1a';
+  mmCtx.fillRect(0, 0, w, h);
+  // water
+  mmCtx.fillStyle = '#1a4a5a';
+  const wx = ((-12 + HALF) / MAP) * w;
+  const wz = ((5 + HALF) / MAP) * h;
+  mmCtx.beginPath();
+  mmCtx.ellipse(wx, wz, 22, 18, 0, 0, Math.PI * 2);
+  mmCtx.fill();
+
+  for (const e of state.entities) {
+    if (!e.alive) continue;
+    const sx = ((e.x + HALF) / MAP) * w;
+    const sy = ((e.z + HALF) / MAP) * h;
+    if (e.kind === 'resource') {
+      mmCtx.fillStyle = e.type === 'tree' ? '#2d5a28' : e.type === 'gold' ? '#d4a84b' : '#a04060';
+      mmCtx.fillRect(sx - 1, sy - 1, 2, 2);
+    } else if (e.kind === 'building') {
+      mmCtx.fillStyle = e.team === TEAM.PLAYER ? '#5a9fff' : '#ff5555';
+      mmCtx.fillRect(sx - 3, sy - 3, 6, 6);
+    } else {
+      mmCtx.fillStyle = e.team === TEAM.PLAYER ? '#8ec0ff' : '#ff8888';
+      mmCtx.beginPath();
+      mmCtx.arc(sx, sy, 2, 0, Math.PI * 2);
+      mmCtx.fill();
+    }
+  }
+
+  // camera frustum approx
+  const camSX = ((camTarget.x + HALF) / MAP) * w;
+  const camSY = ((camTarget.z + HALF) / MAP) * h;
+  const viewW = (camDist / MAP) * w * 1.1;
+  const viewH = (camDist / MAP) * h * 0.85;
+  mmCam.style.left = (camSX - viewW / 2) + 'px';
+  mmCam.style.top = (camSY - viewH / 2) + 'px';
+  mmCam.style.width = viewW + 'px';
+  mmCam.style.height = viewH + 'px';
+}
+
+mm.addEventListener('pointerdown', onMm);
+mm.addEventListener('pointermove', e => { if (e.buttons === 1) onMm(e); });
+function onMm(e) {
+  if (!state.running) return;
+  const rect = mm.getBoundingClientRect();
+  const u = (e.clientX - rect.left) / rect.width;
+  const v = (e.clientY - rect.top) / rect.height;
+  camTarget.x = THREE.MathUtils.clamp(u * MAP - HALF, -HALF + 5, HALF - 5);
+  camTarget.z = THREE.MathUtils.clamp(v * MAP - HALF, -HALF + 5, HALF - 5);
+  updateCamera();
+}
+
+// ═══════════════════════════════════════════════════════════
+// HUD / UI
+// ═══════════════════════════════════════════════════════════
+function toast(msg) {
+  const el = document.getElementById('msg');
+  el.textContent = msg;
+  el.classList.add('show');
+  state.msgTimer = 2.2;
+}
+function refreshPop() {
+  const p = countPop(TEAM.PLAYER);
+  state.pop = p.pop;
+  state.popCap = p.cap;
+  document.getElementById('rPop').textContent = `${p.pop}/${p.cap}`;
+}
+function refreshUI() {
+  document.getElementById('rFood').textContent = Math.floor(state.resources.food);
+  document.getElementById('rWood').textContent = Math.floor(state.resources.wood);
+  document.getElementById('rGold').textContent = Math.floor(state.resources.gold);
+  refreshPop();
+
+  const info = document.getElementById('selInfo');
+  const actions = document.getElementById('actions');
+  actions.innerHTML = '';
+  const sel = [...state.selected];
+  if (!sel.length) {
+    info.innerHTML = 'Nenhuma unidade selecionada — <b>arraste</b> para selecionar';
+    // global build buttons
+    addBtn(actions, 'Casa (H)', costStr(COSTS.house), () => startBuild('house'), !canAfford(COSTS.house));
+    addBtn(actions, 'Quartel (B)', costStr(COSTS.barracks), () => startBuild('barracks'), !canAfford(COSTS.barracks));
+    return;
+  }
+  const units = sel.filter(e => e.kind === 'unit');
+  const blds = sel.filter(e => e.kind === 'building');
+  if (units.length) {
+    const types = {};
+    for (const u of units) types[u.type] = (types[u.type] || 0) + 1;
+    const names = { villager: 'Aldeão', soldier: 'Soldado', archer: 'Arqueiro' };
+    info.innerHTML = `<b>${units.length} selecionado(s)</b> — ` + Object.entries(types).map(([t, n]) => `${n}× ${names[t]}`).join(', ');
+    if (units.some(u => u.type === 'villager')) {
+      addBtn(actions, 'Casa (H)', costStr(COSTS.house), () => startBuild('house'), !canAfford(COSTS.house));
+      addBtn(actions, 'Quartel (B)', costStr(COSTS.barracks), () => startBuild('barracks'), !canAfford(COSTS.barracks));
+    }
+  } else if (blds.length === 1) {
+    const b = blds[0];
+    const names = { town: 'Centro da Cidade', house: 'Casa', barracks: 'Quartel' };
+    const prog = b.buildProgress < 1 ? ` · Construindo ${Math.floor(b.buildProgress * 100)}%` : '';
+    const q = b.queue.length ? ` · Fila: ${b.queue.length}` : '';
+    info.innerHTML = `<b>${names[b.type]}</b> · HP ${Math.ceil(b.hp)}/${b.maxHp}${prog}${q}`;
+    if (b.buildProgress >= 1) {
+      if (b.type === 'town') {
+        addBtn(actions, 'Aldeão', costStr(COSTS.villager), () => queueTrain(b, 'villager'), !canAfford(COSTS.villager));
+      }
+      if (b.type === 'barracks') {
+        addBtn(actions, 'Soldado', costStr(COSTS.soldier), () => queueTrain(b, 'soldier'), !canAfford(COSTS.soldier));
+        addBtn(actions, 'Arqueiro', costStr(COSTS.archer), () => queueTrain(b, 'archer'), !canAfford(COSTS.archer));
+      }
+    }
+  } else {
+    info.innerHTML = `<b>${blds.length} edifícios</b>`;
+  }
+}
+function costStr(c) {
+  const p = [];
+  if (c.food) p.push(`🍖${c.food}`);
+  if (c.wood) p.push(`🪵${c.wood}`);
+  if (c.gold) p.push(`🪙${c.gold}`);
+  return p.join(' ') || '—';
+}
+function addBtn(parent, label, cost, fn, disabled) {
+  const b = document.createElement('button');
+  b.className = 'btn';
+  b.disabled = !!disabled;
+  b.innerHTML = `${label}<span class="cost">${cost}</span>`;
+  b.addEventListener('click', fn);
+  parent.appendChild(b);
+}
+
+// HP bars
+const hpBars = document.getElementById('hpBars');
+function updateHpBars() {
+  hpBars.innerHTML = '';
+  for (const e of state.entities) {
+    if (!e.alive || e.kind === 'resource') continue;
+    if (e.hp >= e.maxHp && !e.selected && e.kind === 'unit') continue;
+    if (e.kind === 'building' && e.hp >= e.maxHp && e.buildProgress >= 1 && !e.selected) continue;
+    const v = e.mesh.position.clone();
+    v.y += e.kind === 'building' ? 4 : 1.8;
+    v.project(camera);
+    if (v.z > 1) continue;
+    const sx = (v.x * 0.5 + 0.5) * innerWidth;
+    const sy = (-v.y * 0.5 + 0.5) * innerHeight;
+    if (sx < 0 || sy < 0 || sx > innerWidth || sy > innerHeight - 150) continue;
+    const div = document.createElement('div');
+    div.className = 'hpwrap';
+    div.style.left = sx + 'px';
+    div.style.top = sy + 'px';
+    const fill = document.createElement('div');
+    fill.className = 'hpfill' + (e.team === TEAM.ENEMY ? ' enemy' : '');
+    fill.style.transform = `scaleX(${Math.max(0, e.hp / e.maxHp)})`;
+    div.appendChild(fill);
+    hpBars.appendChild(div);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// CAMERA UPDATE
+// ═══════════════════════════════════════════════════════════
+function updateCamInput(dt) {
+  const sp = camDist * 0.9 * dt;
+  let dx = 0, dz = 0;
+  if (state.keys['KeyA'] || state.keys['ArrowLeft'] || state.edgePan.l) dx -= 1;
+  if (state.keys['KeyD'] || state.keys['ArrowRight'] || state.edgePan.r) dx += 1;
+  if (state.keys['KeyW'] || state.keys['ArrowUp'] || state.edgePan.u) dz -= 1;
+  if (state.keys['KeyS'] || state.keys['ArrowDown'] || state.edgePan.d) dz += 1;
+  if (dx || dz) {
+    const len = Math.hypot(dx, dz) || 1;
+    camTarget.x = THREE.MathUtils.clamp(camTarget.x + (dx / len) * sp * 1.4, -HALF + 8, HALF - 8);
+    camTarget.z = THREE.MathUtils.clamp(camTarget.z + (dz / len) * sp * 1.4, -HALF + 8, HALF - 8);
+    updateCamera();
+  }
+  sun.target.position.copy(camTarget);
+  sun.position.set(camTarget.x + 40, 70, camTarget.z + 20);
+}
+
+// ═══════════════════════════════════════════════════════════
+// WATER ANIM + MOVE MARKER
+// ═══════════════════════════════════════════════════════════
+function updateEffects(dt) {
+  water.position.y = -0.55 + Math.sin(state.time * 0.7) * 0.04;
+  water.material.opacity = 0.82 + Math.sin(state.time * 0.5) * 0.05;
+  if (moveMarker) {
+    const age = state.time - (moveMarker.userData.t0 || 0);
+    moveMarker.scale.setScalar(1 + age * 2);
+    moveMarker.children[0].material.opacity = Math.max(0, 0.9 - age * 1.5);
+    if (age > 0.7) { scene.remove(moveMarker); moveMarker = null; }
+  }
+  if (state.msgTimer > 0) {
+    state.msgTimer -= dt;
+    if (state.msgTimer <= 0) document.getElementById('msg').classList.remove('show');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// GAME FLOW
+// ═══════════════════════════════════════════════════════════
+function endGame() {
+  state.running = false;
+  const ov = document.getElementById('overlay');
+  ov.classList.remove('hidden');
+  const card = ov.querySelector('.card');
+  if (state.winner === 'player') {
+    card.innerHTML = `<h1>Vitória!</h1><p>O Centro da Cidade inimigo caiu. Seu império reina no vale.</p>
+      <button class="start" onclick="location.reload()">JOGAR DE NOVO</button>`;
+  } else {
+    card.innerHTML = `<h1>Derrota</h1><p>Seu Centro da Cidade foi destruído. Reconstrua e tente novamente.</p>
+      <button class="start" onclick="location.reload()">TENTAR DE NOVO</button>`;
+  }
+}
+
+document.getElementById('btnStart').addEventListener('click', () => {
+  document.getElementById('overlay').classList.add('hidden');
+  state.running = true;
+  camTarget.set(22, 0, 26);
+  updateCamera();
+  toast('Bem-vindo, senhor — expanda seu domínio');
+  refreshUI();
+});
+
+// ═══════════════════════════════════════════════════════════
+// MAIN LOOP
+// ═══════════════════════════════════════════════════════════
+spawnWorld();
+camTarget.set(22, 0, 26);
+updateCamera();
+
+let last = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame);
+  const dt = Math.min(0.05, (now - last) / 1000);
+  last = now;
+
+  if (state.running && !state.winner) {
+    state.time += dt;
+    updateCamInput(dt);
+    updateUnits(dt);
+    updateBuildings(dt);
+    updateAI(dt);
+    updateArrows(dt);
+    updateEffects(dt);
+
+    // clock
+    const t = Math.floor(state.time);
+    document.getElementById('clock').textContent =
+      `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
+
+    // periodic UI resource refresh
+    if (Math.floor(state.time * 4) !== Math.floor((state.time - dt) * 4)) {
+      document.getElementById('rFood').textContent = Math.floor(state.resources.food);
+      document.getElementById('rWood').textContent = Math.floor(state.resources.wood);
+      document.getElementById('rGold').textContent = Math.floor(state.resources.gold);
+    }
+  } else {
+    updateCamInput(dt * 0.3);
+  }
+
+  drawMinimap();
+  updateHpBars();
+  composer.render();
+}
+requestAnimationFrame(frame);
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+  composer.setSize(innerWidth, innerHeight);
+  bloom.setSize(innerWidth, innerHeight);
+  smaa.setSize(innerWidth * devicePixelRatio, innerHeight * devicePixelRatio);
+});
+</script>
+</body>
+</html>

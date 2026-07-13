@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Física Interativa — Bolinhas</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0d0d14; }
+  canvas { display: block; touch-action: none; cursor: crosshair; }
+  #ui {
+    position: fixed; top: 16px; left: 16px; z-index: 10;
+    font: 13px/1.4 -apple-system, system-ui, sans-serif; color: #aab;
+    user-select: none; pointer-events: none;
+  }
+  #ui b { color: #fff; }
+  #drop {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 10; pointer-events: auto;
+    padding: 12px 26px; border: none; border-radius: 999px;
+    background: linear-gradient(135deg, #ff6b6b, #ffa94d);
+    color: #fff; font: 600 15px/1 -apple-system, system-ui, sans-serif;
+    cursor: pointer; box-shadow: 0 6px 24px rgba(255,107,107,.4);
+    transition: transform .1s ease, box-shadow .2s ease;
+  }
+  #drop:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 10px 32px rgba(255,107,107,.55); }
+  #drop:active { transform: translateX(-50%) scale(.95); }
+</style>
+</head>
+<body>
+<div id="ui">
+  Segure o <b>cursor</b> → atrai &nbsp;·&nbsp; <b>clique</b> → repele<br>
+  Bolinhas: <b id="count">0</b> &nbsp;·&nbsp; <b id="fps">0</b> fps
+</div>
+<button id="drop">+50 bolinhas</button>
+<canvas id="c"></canvas>
+
+<script>
+(() => {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const countEl = document.getElementById('count');
+  const fpsEl = document.getElementById('fps');
+
+  let W, H, DPR;
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // --- Física ---
+  const GRAVITY = 1400;       // px/s²
+  const RESTITUTION = 0.78;   // perda de energia no quique
+  const FRICTION = 0.992;     // atrito do ar
+  const FLOOR_FRICTION = 0.88;// atrito ao deslizar no chão
+  const ATTRACT = 2600;       // força segurando cursor
+  const REPEL = 90000;        // impulso ao clicar
+
+  const COLORS = ['#ff6b6b','#ffa94d','#ffd43b','#69db7c','#38d9a9','#4dabf7','#748ffc','#da77f2','#f783ac','#ff8787'];
+  const balls = [];
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+
+  function addBall(x, y) {
+    const r = rand(10, 26);
+    balls.push({
+      x, y,
+      vx: rand(-200, 200),
+      vy: rand(-100, 100),
+      r,
+      m: r * r,
+      color: COLORS[(Math.random() * COLORS.length) | 0],
+    });
+  }
+
+  function dropMany(n) {
+    for (let i = 0; i < n; i++) addBall(rand(40, W - 40), rand(-200, H * 0.3));
+  }
+
+  // --- Mouse / touch ---
+  const mouse = { x: 0, y: 0, down: false, active: false };
+
+  function pos(e) {
+    const t = e.touches ? e.touches[0] : e;
+    mouse.x = t.clientX; mouse.y = t.clientY;
+  }
+  canvas.addEventListener('mousemove', e => { pos(e); mouse.active = true; });
+  canvas.addEventListener('mousedown', e => { pos(e); mouse.down = true; mouse.active = true; doRepel(); });
+  window.addEventListener('mouseup', () => mouse.down = false);
+  canvas.addEventListener('mouseleave', () => mouse.active = false);
+
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); pos(e); mouse.down = true; mouse.active = true; doRepel(); }, {passive:false});
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); pos(e); }, {passive:false});
+  window.addEventListener('touchend', () => { mouse.down = false; mouse.active = false; });
+
+  // clique = repele forte num raio
+  function doRepel() {
+    for (const b of balls) {
+      const dx = b.x - mouse.x, dy = b.y - mouse.y;
+      const d2 = dx*dx + dy*dy;
+      const d = Math.sqrt(d2) || 1;
+      if (d < 280) {
+        const f = REPEL / (d + 40);
+        b.vx += (dx / d) * f / Math.sqrt(b.m) * 6;
+        b.vy += (dy / d) * f / Math.sqrt(b.m) * 6;
+      }
+    }
+  }
+
+  document.getElementById('drop').addEventListener('click', () => dropMany(50));
+
+  // --- Integração ---
+  function step(dt) {
+    // segurando cursor → atrai
+    if (mouse.down && mouse.active) {
+      for (const b of balls) {
+        const dx = mouse.x - b.x, dy = mouse.y - b.y;
+        const d = Math.sqrt(dx*dx + dy*dy) || 1;
+        if (d > 4) {
+          const f = ATTRACT / Math.max(d, 60);
+          b.vx += (dx / d) * f * dt;
+          b.vy += (dy / d) * f * dt;
+        }
+      }
+    }
+
+    for (const b of balls) {
+      b.vy += GRAVITY * dt;
+      b.vx *= FRICTION; b.vy *= FRICTION;
+      b.x += b.vx * dt;
+      b.y += b.vy * dt;
+
+      // paredes
+      if (b.x - b.r < 0) { b.x = b.r; b.vx = -b.vx * RESTITUTION; }
+      else if (b.x + b.r > W) { b.x = W - b.r; b.vx = -b.vx * RESTITUTION; }
+      if (b.y - b.r < 0) { b.y = b.r; b.vy = -b.vy * RESTITUTION; }
+      else if (b.y + b.r > H) {
+        b.y = H - b.r; b.vy = -b.vy * RESTITUTION;
+        b.vx *= FLOOR_FRICTION;
+        if (Math.abs(b.vy) < 30) b.vy = 0;
+      }
+    }
+
+    // colisões bola-bola
+    collide();
+  }
+
+  function collide() {
+    const n = balls.length;
+    for (let i = 0; i < n; i++) {
+      const a = balls[i];
+      for (let j = i + 1; j < n; j++) {
+        const b = balls[j];
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const min = a.r + b.r;
+        if (dist < min && dist > 0) {
+          const nx = dx / dist, ny = dy / dist;
+          const overlap = min - dist;
+          // separa proporcional à massa
+          const tm = a.m + b.m;
+          a.x -= nx * overlap * (b.m / tm);
+          a.y -= ny * overlap * (b.m / tm);
+          b.x += nx * overlap * (a.m / tm);
+          b.y += ny * overlap * (a.m / tm);
+          // velocidade relativa ao longo da normal
+          const rvx = b.vx - a.vx, rvy = b.vy - a.vy;
+          const vn = rvx * nx + rvy * ny;
+          if (vn < 0) {
+            const imp = -(1 + RESTITUTION) * vn / (1/a.m + 1/b.m);
+            const ix = imp * nx, iy = imp * ny;
+            a.vx -= ix / a.m; a.vy -= iy / a.m;
+            b.vx += ix / b.m; b.vy += iy / b.m;
+          }
+        }
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (const b of balls) {
+      const g = ctx.createRadialGradient(b.x - b.r*0.35, b.y - b.r*0.35, b.r*0.1, b.x, b.y, b.r);
+      g.addColorStop(0, '#ffffff');
+      g.addColorStop(0.25, b.color);
+      g.addColorStop(1, b.color);
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+    }
+    // halo no cursor quando segurando
+    if (mouse.down && mouse.active) {
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, 20, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(120,200,255,.6)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+  }
+
+  // --- Loop com dt fixo (estável a 60fps) ---
+  let last = performance.now();
+  let acc = 0;
+  const FIXED = 1/120;
+  let fpsT = 0, fpsC = 0;
+
+  function loop(now) {
+    let dt = (now - last) / 1000;
+    last = now;
+    if (dt > 0.05) dt = 0.05; // evita explosão após aba inativa
+    acc += dt;
+    while (acc >= FIXED) { step(FIXED); acc -= FIXED; }
+    draw();
+
+    fpsC++; fpsT += dt;
+    if (fpsT >= 0.5) { fpsEl.textContent = Math.round(fpsC / fpsT); fpsC = 0; fpsT = 0; }
+    countEl.textContent = balls.length;
+
+    requestAnimationFrame(loop);
+  }
+
+  dropMany(30);
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

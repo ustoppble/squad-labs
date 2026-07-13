@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Pro — Som além do silêncio</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f5f5f7;
+    --bg-dark: #000000;
+    --text: #1d1d1f;
+    --text-secondary: #86868b;
+    --text-on-dark: #f5f5f7;
+    --accent: #0071e3;
+    --accent-hover: #0077ed;
+    --nav-h: 48px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(251, 251, 253, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .nav-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+  }
+  .nav-logo {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    color: rgba(0,0,0,0.8);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    font-size: 12px;
+    color: #fff !important;
+    background: var(--accent);
+    padding: 5px 14px;
+    border-radius: 980px;
+  }
+  .nav-cta:hover { background: var(--accent-hover); color: #fff !important; }
+
+  @media (max-width: 734px) {
+    .nav-links li:not(:last-child) { display: none; }
+  }
+
+  /* ---------- Typographic scale ---------- */
+  .eyebrow {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+    margin-bottom: 12px;
+  }
+  .headline-xl {
+    font-size: clamp(48px, 9vw, 96px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .headline-lg {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+  .subhead {
+    font-size: clamp(19px, 2.5vw, 28px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .link-arrow {
+    font-size: 19px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .link-arrow:hover { text-decoration: underline; }
+  .link-arrow::after { content: " ›"; }
+
+  .btn {
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 12px 28px;
+    border-radius: 980px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary { color: var(--accent); border: 1px solid var(--accent); }
+  .btn-secondary:hover { background: var(--accent); color: #fff; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: calc(var(--nav-h) + 60px) 22px 40px;
+    background: var(--bg-alt);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .eyebrow { color: var(--text); font-size: 21px; }
+  .hero .subhead { max-width: 640px; margin: 20px auto 28px; }
+  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero-price {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .hero-product {
+    margin-top: 56px;
+    width: min(520px, 80vw);
+    filter: drop-shadow(0 40px 60px rgba(0,0,0,0.18));
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: 120px 22px; }
+  .section-inner { max-width: 980px; margin: 0 auto; text-align: center; }
+
+  .section-dark {
+    background: var(--bg-dark);
+    color: var(--text-on-dark);
+  }
+  .section-dark .subhead { color: #a1a1a6; }
+  .section-dark .eyebrow { color: #a1a1a6; }
+
+  .section-alt { background: var(--bg-alt); }
+
+  .feature-visual {
+    margin: 64px auto 0;
+    width: min(720px, 90vw);
+  }
+
+  /* gradient orb for audio section */
+  .orb {
+    width: min(420px, 70vw);
+    height: min(420px, 70vw);
+    margin: 64px auto 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #5e5ce6, #bf5af2 45%, #0a84ff 80%, transparent 100%);
+    filter: blur(2px);
+    position: relative;
+    animation: pulse 5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.06); opacity: 1; }
+  }
+
+  /* ---------- Bento grid ---------- */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 64px;
+    text-align: left;
+  }
+  .bento-card {
+    background: var(--bg);
+    border-radius: 28px;
+    padding: 40px 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease;
+  }
+  .bento-card:hover { transform: translateY(-4px); }
+  .bento-card.wide { grid-column: span 2; }
+  .bento-stat {
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #0a84ff, #bf5af2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bento-card h3 {
+    font-size: 21px;
+    font-weight: 600;
+    margin-top: 12px;
+    letter-spacing: -0.01em;
+  }
+  .bento-card p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  @media (max-width: 734px) {
+    .bento { grid-template-columns: 1fr; }
+    .bento-card.wide { grid-column: span 1; }
+  }
+
+  /* ---------- Battery bar ---------- */
+  .battery-wrap { margin-top: 64px; }
+  .battery-num {
+    font-size: clamp(80px, 14vw, 160px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    background: linear-gradient(90deg, #30d158, #66e388);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .battery-label { font-size: 21px; color: #a1a1a6; margin-top: 8px; }
+
+  /* ---------- Compare / CTA ---------- */
+  .cta-final {
+    background: var(--bg-alt);
+    text-align: center;
+  }
+  .cta-final .headline-lg { margin-bottom: 16px; }
+
+  footer {
+    background: var(--bg-alt);
+    border-top: 1px solid #d2d2d7;
+    padding: 24px 22px 48px;
+  }
+  .footer-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .footer-inner a { color: #515154; text-decoration: none; }
+  .footer-inner a:hover { text-decoration: underline; }
+  .footer-links { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-product, .orb { animation: none; }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Navegação principal">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Aura</a>
+    <ul class="nav-links">
+      <li><a href="#som">Som</a></li>
+      <li><a href="#silencio">Silêncio</a></li>
+      <li><a href="#bateria">Bateria</a></li>
+      <li><a href="#specs">Especificações</a></li>
+      <li><a href="#comprar" class="nav-cta">Comprar</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <p class="eyebrow">Aura Pro</p>
+  <h1 class="headline-xl">Som além<br>do silêncio.</h1>
+  <p class="subhead">O fone de ouvido que aprende como você escuta. Cancelamento de ruído adaptativo, áudio espacial e 40 horas de bateria.</p>
+  <div class="hero-actions">
+    <a href="#comprar" class="btn btn-primary">Comprar</a>
+    <a href="#som" class="btn btn-secondary">Saiba mais</a>
+  </div>
+  <p class="hero-price">A partir de R$ 2.499 ou 12x de R$ 208,25</p>
+
+  <svg class="hero-product" viewBox="0 0 400 400" role="img" aria-label="Fone de ouvido Aura Pro">
+    <defs>
+      <linearGradient id="band" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e8e8ed"/>
+        <stop offset="1" stop-color="#c7c7cc"/>
+      </linearGradient>
+      <linearGradient id="cup" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#3a3a3c"/>
+        <stop offset="0.5" stop-color="#1d1d1f"/>
+        <stop offset="1" stop-color="#0a0a0a"/>
+      </linearGradient>
+      <radialGradient id="cushion" cx="0.4" cy="0.35" r="0.9">
+        <stop offset="0" stop-color="#48484a"/>
+        <stop offset="1" stop-color="#1c1c1e"/>
+      </radialGradient>
+    </defs>
+    <!-- headband -->
+    <path d="M 80 210 C 80 90, 320 90, 320 210" fill="none" stroke="url(#band)" stroke-width="26" stroke-linecap="round"/>
+    <!-- arms -->
+    <rect x="68" y="200" width="24" height="52" rx="12" fill="#b9b9c0"/>
+    <rect x="308" y="200" width="24" height="52" rx="12" fill="#b9b9c0"/>
+    <!-- ear cups -->
+    <ellipse cx="80" cy="290" rx="52" ry="66" fill="url(#cup)"/>
+    <ellipse cx="320" cy="290" rx="52" ry="66" fill="url(#cup)"/>
+    <!-- cushions -->
+    <ellipse cx="80" cy="290" rx="34" ry="48" fill="url(#cushion)"/>
+    <ellipse cx="320" cy="290" rx="34" ry="48" fill="url(#cushion)"/>
+    <!-- highlight -->
+    <ellipse cx="66" cy="262" rx="10" ry="18" fill="rgba(255,255,255,0.12)"/>
+    <ellipse cx="306" cy="262" rx="10" ry="18" fill="rgba(255,255,255,0.12)"/>
+  </svg>
+</header>
+
+<!-- Som -->
+<section id="som" class="section-dark">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Áudio espacial personalizado</p>
+    <h2 class="headline-lg reveal">O som se move<br>com você.</h2>
+    <p class="subhead reveal" style="max-width: 620px; margin: 24px auto 0;">Rastreamento dinâmico de cabeça posiciona o som ao seu redor. Cada instrumento no seu lugar. Cada detalhe onde deveria estar.</p>
+    <p class="reveal" style="margin-top: 28px;"><a href="#specs" class="link-arrow">Como funciona o áudio espacial</a></p>
+    <div class="orb reveal" role="img" aria-label="Visualização do campo sonoro tridimensional"></div>
+  </div>
+</section>
+
+<!-- Silêncio -->
+<section id="silencio" class="section-alt">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Cancelamento ativo de ruído</p>
+    <h2 class="headline-lg reveal">O mundo lá fora.<br>Você aqui dentro.</h2>
+    <p class="subhead reveal" style="max-width: 600px; margin: 24px auto 0;">Oito microfones analisam o ambiente 200 vezes por segundo e apagam o ruído antes que ele chegue até você.</p>
+
+    <div class="bento">
+      <div class="bento-card wide reveal">
+        <div class="bento-stat">-45 dB</div>
+        <h3>Redução de ruído líder da categoria</h3>
+        <p>O chip Aura H2 processa o cancelamento em tempo real, adaptando-se de um voo lotado a um escritório silencioso sem que você perceba a transição.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-stat">8</div>
+        <h3>Microfones</h3>
+        <p>Seis externos para o ambiente, dois internos para calibrar o que você realmente ouve.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-stat">200x</div>
+        <h3>Por segundo</h3>
+        <p>Frequência de análise do ambiente para ajuste contínuo do cancelamento.</p>
+      </div>
+      <div class="bento-card wide reveal">
+        <div class="bento-stat">Modo Ambiente</div>
+        <h3>Ouça o que importa, quando importa</h3>
+        <p>Um toque deixa o mundo entrar — anúncios de voo, uma conversa rápida — sem tirar o fone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bateria -->
+<section id="bateria" class="section-dark">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Bateria</p>
+    <h2 class="headline-lg reveal">Toca o dia inteiro.<br>E o de amanhã também.</h2>
+    <div class="battery-wrap reveal">
+      <div class="battery-num" id="battery-counter">40h</div>
+      <p class="battery-label">de reprodução com cancelamento de ruído ativo</p>
+    </div>
+    <p class="subhead reveal" style="max-width: 560px; margin: 40px auto 0;">Cinco minutos de carga rendem quatro horas de música. Carregamento via USB-C ou sem fio.</p>
+  </div>
+</section>
+
+<!-- Specs -->
+<section id="specs" class="section-alt">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Especificações</p>
+    <h2 class="headline-lg reveal">Feito para durar.<br>Pensado para desaparecer.</h2>
+    <p class="subhead reveal" style="max-width: 600px; margin: 24px auto 0;">Alumínio anodizado, malha respirável e 248 gramas distribuídos para você esquecer que está usando.</p>
+
+    <div class="bento">
+      <div class="bento-card reveal">
+        <div class="bento-stat">248 g</div>
+        <h3>Leveza real</h3>
+        <p>Estrutura em alumínio e fibra de carbono.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-stat">USB-C</div>
+        <h3>Carga universal</h3>
+        <p>Um cabo para tudo. Áudio lossless via cabo incluído.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-stat">IPX4</div>
+        <h3>Resistência</h3>
+        <p>Protegido contra respingos e suor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA final -->
+<section id="comprar" class="cta-final">
+  <div class="section-inner">
+    <h2 class="headline-lg reveal">Aura Pro.</h2>
+    <p class="subhead reveal" style="margin-bottom: 32px;">Disponível em grafite, prata e azul-meia-noite.</p>
+    <div class="hero-actions reveal">
+      <a href="#" class="btn btn-primary">Comprar por R$ 2.499</a>
+    </div>
+    <p class="hero-price reveal">Frete grátis. Devolução gratuita em até 14 dias.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <p>* A duração da bateria varia conforme o uso e a configuração. O áudio espacial requer dispositivo compatível. Aura Pro é um produto fictício criado para demonstração de design.</p>
+    <div class="footer-links">
+      <a href="#">Privacidade</a>
+      <a href="#">Termos de uso</a>
+      <a href="#">Vendas e reembolsos</a>
+      <a href="#">Contato</a>
+    </div>
+    <p style="margin-top: 16px;">Copyright © 2026 Aura Inc. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>
+
+</body>
+</html>

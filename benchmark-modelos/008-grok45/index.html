@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Antigravity</title>
+  <meta name="description" content="Google Antigravity - Build the new way">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet">
+  <style>
+    :root {
+      --grey-0: #FFFFFF;
+      --grey-10: #F8F9FC;
+      --grey-15: #F0F1F5;
+      --grey-20: #EFF2F7;
+      --grey-50: #E6EAF0;
+      --grey-100: #E1E6EC;
+      --grey-200: #CDD4DC;
+      --grey-300: #B2BBC5;
+      --grey-400: #B7BFD9;
+      --grey-800: #45474D;
+      --grey-900: #2F3034;
+      --grey-1000: #212226;
+      --grey-1100: #18191D;
+      --grey-1200: #121317;
+      --on-surface: #121317;
+      --on-surface-variant: #45474D;
+      --surface: #FFFFFF;
+      --surface-container: #F8F9FC;
+      --outline: rgba(33, 34, 38, 0.12);
+      --outline-variant: rgba(33, 34, 38, 0.06);
+      --secondary-btn: rgba(183, 191, 217, 0.1);
+      --secondary-btn-strong: rgba(183, 191, 217, 0.2);
+      --disabled: #6A6A71;
+      --blue: #3279F9;
+      --max: 1280px;
+      --pad: 72px;
+      --radius-pill: 9999px;
+      --radius-card: 24px;
+      --radius-lg: 32px;
+      --nav-h: 64px;
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --font: "Google Sans Flex", "Google Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font);
+      font-weight: 400;
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    button, a { font-family: inherit; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: inherit;
+      font: inherit;
+    }
+    .material-symbols-outlined {
+      font-family: "Material Symbols Outlined";
+      font-weight: 300;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+      -webkit-font-smoothing: antialiased;
+      vertical-align: middle;
+      user-select: none;
+    }
+
+    /* ——— Layout ——— */
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+    @media (max-width: 960px) {
+      :root { --pad: 24px; }
+    }
+
+    /* ——— Buttons ——— */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 16px;
+      border-radius: var(--radius-pill);
+      font-size: 14.5px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .15s var(--ease), box-shadow .2s var(--ease);
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    .btn .material-symbols-outlined { font-size: 18px; }
+    .btn-primary {
+      background: var(--on-surface);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--grey-900); }
+    .btn-secondary {
+      background: var(--secondary-btn);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+    }
+    .btn-secondary:hover { background: var(--grey-15); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--on-surface);
+    }
+    .btn-ghost:hover { background: var(--secondary-btn); }
+    .btn-white {
+      background: #fff;
+      color: var(--on-surface);
+    }
+    .btn-white:hover { background: var(--grey-10); }
+    .btn-inverse-secondary {
+      background: var(--secondary-btn-strong);
+      color: #fff;
+      border-color: rgba(230, 234, 240, 0.06);
+    }
+    .btn-inverse-secondary:hover { background: rgba(183, 191, 217, 0.3); }
+    .btn-lg { height: 48px; padding: 0 24px; font-size: 15px; }
+    .btn-sm { height: 36px; padding: 0 14px; font-size: 13.5px; }
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--on-surface);
+      transition: opacity .2s;
+    }
+    .link-arrow:hover { opacity: 0.7; }
+    .link-arrow .material-symbols-outlined { font-size: 18px; }
+
+    /* ——— Rainbow logo mark ——— */
+    .logo-mark {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    .logo-mark.lg { width: 28px; height: 28px; }
+    .logo-word {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      color: var(--on-surface);
+    }
+    .logo-word .google { font-weight: 500; }
+    .logo-word .anti { font-weight: 400; color: var(--on-surface); }
+
+    /* ——— NAVBAR ——— */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+      border-bottom: 1px solid transparent;
+      transition: border-color .25s, background .25s;
+    }
+    .nav.scrolled { border-bottom-color: var(--outline-variant); }
+    .nav-inner {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .nav-brand span { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
+    .nav-item {
+      position: relative;
+    }
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 14.5px;
+      font-weight: 400;
+      color: var(--on-surface-variant);
+      transition: background .15s, color .15s;
+    }
+    .nav-link:hover, .nav-link.open {
+      background: var(--secondary-btn);
+      color: var(--on-surface);
+    }
+    .nav-link .material-symbols-outlined {
+      font-size: 18px;
+      transition: transform .2s var(--ease);
+    }
+    .nav-link.open .material-symbols-outlined { transform: rotate(180deg); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+    .nav-download { height: 36px; padding: 0 8px 0 16px; }
+    .menu-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-pill);
+      align-items: center;
+      justify-content: center;
+    }
+    .menu-toggle:hover { background: var(--secondary-btn); }
+
+    /* Dropdowns */
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      min-width: 320px;
+      background: #fff;
+      border: 1px solid var(--outline-variant);
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(18, 19, 23, 0.1), 0 2px 8px rgba(18, 19, 23, 0.04);
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+      pointer-events: none;
+    }
+    .dropdown.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .dropdown.wide { min-width: 420px; }
+    .dropdown-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 12px 16px;
+      border-bottom: 1px solid var(--outline-variant);
+      margin-bottom: 8px;
+    }
+    .dropdown-head p {
+      font-size: 13.5px;
+      color: var(--on-surface-variant);
+      line-height: 1.4;
+      max-width: 220px;
+    }
+    .dropdown-list { display: flex; flex-direction: column; gap: 2px; }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 450;
+      transition: background .15s;
+    }
+    .dropdown-item:hover { background: var(--grey-10); }
+    .dropdown-item .icon-chip {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--grey-10);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .dropdown-item .icon-chip .material-symbols-outlined { font-size: 20px; }
+    .dropdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: var(--nav-h) 0 0 0;
+      background: #fff;
+      z-index: 999;
+      overflow-y: auto;
+      padding: 8px 16px 40px;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-acc {
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .mobile-acc-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 8px;
+      font-size: 28px;
+      font-weight: 450;
+      letter-spacing: -0.02em;
+      text-align: left;
+    }
+    .mobile-acc-panel {
+      display: none;
+      padding: 0 8px 20px;
+    }
+    .mobile-acc.open .mobile-acc-panel { display: block; }
+    .mobile-acc.open .mobile-acc-btn .material-symbols-outlined { transform: rotate(180deg); }
+    .mobile-link {
+      display: block;
+      padding: 12px 0;
+      font-size: 16px;
+      color: var(--on-surface-variant);
+    }
+    .mobile-cta {
+      margin-top: 24px;
+      width: 100%;
+      height: 48px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-actions .nav-download { display: none; }
+      .menu-toggle { display: inline-flex; }
+    }
+
+    /* ——— HERO ——— */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-h) + 36px) var(--pad) 60px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      max-width: 920px;
+    }
+    .hero-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeUp .8s var(--ease) .1s forwards;
+    }
+    .hero h1 {
+      font-size: clamp(40px, 6.2vw, 80px);
+      font-weight: 450;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+      opacity: 0;
+      animation: fadeUp .9s var(--ease) .25s forwards;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp .9s var(--ease) .4s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ——— VIDEO ——— */
+    .video-section {
+      padding: 0 var(--pad) 40px;
+    }
+    .video-frame {
+      position: relative;
+      max-width: 1136px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #000;
+      cursor: pointer;
+      isolation: isolate;
+    }
+    .video-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(50, 80, 160, 0.15), transparent 70%),
+        #000;
+    }
+    .video-particles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .video-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .video-brand .fade { color: rgba(255,255,255,0.35); font-weight: 400; }
+    .video-play {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      z-index: 3;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      transition: background .2s, transform .2s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .video-frame:hover .video-play {
+      background: rgba(255,255,255,0.22);
+      transform: scale(1.05);
+    }
+    .video-play .material-symbols-outlined { font-size: 28px; font-variation-settings: "FILL" 1, "wght" 300; }
+    .play-label {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.75);
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .video-frame:hover .play-label { opacity: 1; }
+
+    /* ——— AGENT FIRST ——— */
+    .agent-first {
+      padding: 120px 0 88px;
+    }
+    .icon-rail {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      padding: 0 0 64px;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .icon-bubble {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--grey-10);
+      border: 1px solid var(--outline-variant);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: var(--on-surface);
+      transition: transform .3s var(--ease), background .2s;
+    }
+    .icon-bubble:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: var(--grey-15);
+    }
+    .icon-bubble .material-symbols-outlined { font-size: 22px; }
+    .agent-statement {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      text-align: left;
+    }
+    .agent-statement p {
+      font-size: clamp(28px, 4.2vw, 48px);
+      font-weight: 450;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+    .cursor-rainbow {
+      display: inline-block;
+      width: 3px;
+      height: 0.85em;
+      margin-left: 2px;
+      vertical-align: -0.05em;
+      border-radius: 1px;
+      background: linear-gradient(180deg, #EA4335, #FBBC04, #34A853, #4285F4);
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* ——— FEATURES ——— */
+    .features {
+      padding: 80px 0 120px;
+    }
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      max-width: var(--max);
+      margin: 0 auto 96px;
+      padding: 0 var(--pad);
+    }
+    .feature-row:last-child { margin-bottom: 0; }
+    .feature-row.reverse .feature-copy { order: 2; }
+    .feature-row.reverse .feature-media { order: 1; }
+    .feature-copy h3 {
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 450;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+    .feature-copy p {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--on-surface-variant);
+      max-width: 38ch;
+      margin-bottom: 24px;
+    }
+    .feature-media {
+      position: relative;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--grey-10);
+      aspect-ratio: 1 / 1;
+      max-height: 544px;
+      box-shadow: 0 0 0 1px var(--outline-variant);
+    }
+    .feature-media.tall { aspect-ratio: 544 / 616; }
+    .feature-media.glow {
+      box-shadow:
+        0 0 0 1px var(--outline-variant),
+        0 0 80px 20px rgba(100, 140, 255, 0.18),
+        0 0 120px 40px rgba(180, 120, 255, 0.1);
+    }
+    .feature-media.dark {
+      background: #0a0a0c;
+    }
+    .ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ph-ui {
+      width: 78%;
+      background: #f3f4f7;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .ph-ui .bar {
+      height: 40px;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--grey-100);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--disabled);
+      margin-bottom: 10px;
+    }
+    .ph-ui .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--grey-10);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 11px;
+      color: var(--on-surface-variant);
+    }
+    .ph-terminal {
+      width: 82%;
+      background: #1e1f24;
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px;
+      color: #c8ccd4;
+      line-height: 1.6;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .ph-terminal .prompt { color: #7ee787; }
+    .ph-terminal .dim { color: #6e7681; }
+    .ph-terminal .hl { color: #79c0ff; }
+    .ph-sdk {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 55%, #1a3a6e 0%, #0a1020 45%, #05060a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .ph-sdk::before {
+      content: "";
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(80,160,255,0.45) 0%, transparent 65%);
+      filter: blur(8px);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    .ph-sdk span {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 40px rgba(100,180,255,0.6);
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+    .ph-ide {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #0d0e12 0%, #161820 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .ph-ide-win {
+      width: 90%;
+      aspect-ratio: 16/11;
+      background: #1a1b20;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 48px 1fr 100px;
+    }
+    .ph-ide-win .side { background: #121317; border-right: 1px solid rgba(255,255,255,0.05); }
+    .ph-ide-win .main {
+      padding: 16px;
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 10px;
+      color: #9aa0a8;
+      line-height: 1.7;
+    }
+    .ph-ide-win .main .kw { color: #c792ea; }
+    .ph-ide-win .main .str { color: #c3e88d; }
+    .ph-ide-win .panel { background: #15161a; border-left: 1px solid rgba(255,255,255,0.05); }
+
+    @media (max-width: 800px) {
+      .feature-row,
+      .feature-row.reverse {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-bottom: 64px;
+      }
+      .feature-row.reverse .feature-copy,
+      .feature-row.reverse .feature-media { order: unset; }
+      .feature-media { max-height: none; aspect-ratio: 4/3; }
+    }
+
+    /* ——— USE CASES ——— */
+    .use-cases {
+      padding: 72px 0 120px;
+      border-top: 1px solid var(--outline-variant);
+    }
+    .use-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+      max-width: var(--max);
+      margin: 0 auto 48px;
+      padding: 0 var(--pad);
+    }
+    .use-header h2 {
+      font-size: clamp(32px, 3.5vw, 42px);
+      font-weight: 450;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+    }
+    .use-header p {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--on-surface-variant);
+      max-width: 42ch;
+      padding-top: 8px;
+    }
+    .carousel-wrap {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 0 var(--pad) 16px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .case-card {
+      flex: 0 0 min(520px, 78vw);
+      scroll-snap-align: start;
+    }
+    .case-thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #9aa0a8, #6a6e76);
+      margin-bottom: 20px;
+    }
+    .case-thumb .person {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 70%, rgba(255,255,255,0.15), transparent),
+        linear-gradient(180deg, #b0b4ba 0%, #7a7e86 100%);
+    }
+    .case-thumb .avatar {
+      width: 46%;
+      height: 70%;
+      background: linear-gradient(180deg, #c4a484 0%, #3a3a3c 55%, #2a2a2c 100%);
+      border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+      position: relative;
+      top: 10%;
+    }
+    .case-thumb .avatar.a2 {
+      background: linear-gradient(180deg, #8b6b4a 0%, #2d4a3e 50%, #1a2e28 100%);
+    }
+    .case-thumb .avatar.a3 {
+      background: linear-gradient(180deg, #d4b896 0%, #4a5568 55%, #2d3748 100%);
+    }
+    .case-play {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      display: grid;
+      place-items: center;
+      color: var(--on-surface);
+      transition: transform .2s;
+    }
+    .case-card:hover .case-play { transform: scale(1.08); }
+    .case-body h4 {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .case-body p {
+      font-size: 15px;
+      color: var(--on-surface-variant);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      max-width: 42ch;
+    }
+    .carousel-nav {
+      display: flex;
+      gap: 8px;
+      padding: 12px var(--pad) 0;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .carousel-nav button {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-pill);
+      background: var(--secondary-btn);
+      display: grid;
+      place-items: center;
+      transition: background .15s;
+    }
+    .carousel-nav button:hover { background: var(--grey-15); }
+    .carousel-nav button:disabled { opacity: 0.4; cursor: default; }
+
+    @media (max-width: 700px) {
+      .use-header { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    /* ——— SOLUTIONS ——— */
+    .solutions {
+      padding: 55px 0;
+    }
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+    .sol-card {
+      position: relative;
+      min-height: 520px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--grey-10);
+      border: 1px solid var(--outline-variant);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px 36px;
+      isolation: isolate;
+    }
+    .sol-card canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+    .sol-card > *:not(canvas) { position: relative; z-index: 1; }
+    .sol-badge {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      z-index: 2;
+      display: inline-flex;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--outline-variant);
+      font-size: 13px;
+      font-weight: 450;
+      color: var(--on-surface);
+      backdrop-filter: blur(8px);
+    }
+    .sol-card h3 {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      margin-bottom: 12px;
+    }
+    .sol-card .sol-title {
+      font-size: clamp(28px, 2.8vw, 36px);
+      font-weight: 450;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 28px;
+      max-width: 12ch;
+    }
+    @media (max-width: 800px) {
+      .solutions-grid { grid-template-columns: 1fr; }
+      .sol-card { min-height: 400px; }
+    }
+
+    /* ——— BLOGS ——— */
+    .blogs {
+      padding: 72px 0 40px;
+      border-top: 1px solid var(--outline-variant);
+    }
+    .blogs-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max);
+      margin: 0 auto 32px;
+      padding: 0 var(--pad);
+    }
+    .blogs-head h2 {
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 450;
+      letter-spacing: -0.025em;
+    }
+    .blog-card {
+      flex: 0 0 min(280px, 70vw);
+      scroll-snap-align: start;
+    }
+    .blog-thumb {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: #0a0a0c;
+      position: relative;
+    }
+    .blog-thumb svg { width: 100%; height: 100%; }
+    .blog-meta {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      margin-bottom: 6px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .blog-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--grey-300); }
+    .blog-card h4 {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .blog-card .read {
+      font-size: 14px;
+      color: var(--on-surface-variant);
+      font-weight: 450;
+    }
+    .blog-card .read:hover { color: var(--on-surface); }
+
+    /* ——— DOWNLOAD ——— */
+    .download-section {
+      padding: 40px var(--pad) 0;
+    }
+    .download-panel {
+      position: relative;
+      max-width: 1136px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--grey-1200);
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      padding: 64px 56px;
+      isolation: isolate;
+    }
+    .download-panel canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .download-content {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+    }
+    .download-content h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 450;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+    .download-content h2 .cursor-rainbow {
+      height: 0.8em;
+    }
+    .download-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    @media (max-width: 600px) {
+      .download-panel { padding: 48px 28px; min-height: 340px; }
+    }
+
+    /* ——— FOOTER ——— */
+    .footer {
+      padding: 64px 0 0;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 40px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px var(--pad) 40px;
+    }
+    .footer-top h3 {
+      font-size: 22px;
+      font-weight: 450;
+      letter-spacing: -0.02em;
+    }
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-top: 4px;
+    }
+    .footer-col a {
+      font-size: 14.5px;
+      color: var(--on-surface-variant);
+      transition: color .15s;
+    }
+    .footer-col a:hover { color: var(--on-surface); }
+    .footer-wordmark {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px var(--pad) 8px;
+      overflow: hidden;
+    }
+    .footer-wordmark span {
+      display: block;
+      font-size: clamp(64px, 14vw, 180px);
+      font-weight: 450;
+      letter-spacing: -0.045em;
+      line-height: 0.9;
+      color: var(--on-surface);
+      white-space: nowrap;
+    }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px var(--pad) 40px;
+    }
+    .footer-google {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+    .footer-legal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-legal a {
+      font-size: 13.5px;
+      color: var(--on-surface-variant);
+    }
+    .footer-legal a:hover { color: var(--on-surface); }
+    @media (max-width: 700px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-top h3 { grid-column: 1 / -1; }
+    }
+
+    /* ——— Modal ——— */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(18, 19, 23, 0.72);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal.open { display: flex; }
+    .modal-inner {
+      position: relative;
+      width: min(960px, 100%);
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      z-index: 2;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.22); }
+
+    /* ——— Reveal on scroll ——— */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ——— Cookie bar (decorative) ——— */
+    .cookie-bar {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1500;
+      width: min(640px, calc(100% - 32px));
+      background: var(--grey-1200);
+      color: #fff;
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+    .cookie-bar p { flex: 1; color: rgba(255,255,255,0.85); }
+    .cookie-bar.hidden { display: none; }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand" aria-label="Google Antigravity">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#EA4335"/>
+              <stop offset="35%" stop-color="#FBBC04"/>
+              <stop offset="65%" stop-color="#34A853"/>
+              <stop offset="100%" stop-color="#4285F4"/>
+            </linearGradient>
+          </defs>
+          <path d="M16 3C16 3 7 14.5 7 20.5C7 25.2 10.8 29 16 29C21.2 29 25 25.2 25 20.5C25 14.5 16 3 16 3Z" fill="url(#ag)"/>
+          <path d="M16 10C16 10 11.5 16.2 11.5 20C11.5 22.5 13.5 24.5 16 24.5C18.5 24.5 20.5 22.5 20.5 20C20.5 16.2 16 10 16 10Z" fill="white" opacity="0.35"/>
+        </svg>
+        <span>Google Antigravity</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <div class="nav-item">
+          <button class="nav-link" data-dropdown="products" aria-expanded="false">
+            Products <span class="material-symbols-outlined">keyboard_arrow_down</span>
+          </button>
+          <div class="dropdown wide" id="dd-products">
+            <div class="dropdown-head">
+              <p>Explore our next generation products</p>
+              <a href="#features" class="btn btn-secondary btn-sm">See overview</a>
+            </div>
+            <div class="dropdown-list">
+              <a href="#features" class="dropdown-item">
+                <span class="icon-chip"><span class="material-symbols-outlined">dashboard_customize</span></span>
+                Antigravity 2.0
+              </a>
+              <a href="#features" class="dropdown-item">
+                <span class="icon-chip"><span class="material-symbols-outlined">terminal</span></span>
+                Antigravity CLI
+              </a>
+              <a href="#features" class="dropdown-item">
+                <span class="icon-chip"><span class="material-symbols-outlined">code</span></span>
+                Antigravity IDE
+              </a>
+              <a href="#features" class="dropdown-item">
+                <span class="icon-chip"><span class="material-symbols-outlined">sdk</span></span>
+                Antigravity SDK
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link" data-dropdown="usecases" aria-expanded="false">
+            Use Cases <span class="material-symbols-outlined">keyboard_arrow_down</span>
+          </button>
+          <div class="dropdown wide" id="dd-usecases">
+            <div class="dropdown-head">
+              <p>Built for developers in the agent-first era</p>
+              <a href="#use-cases" class="btn btn-secondary btn-sm">See overview</a>
+            </div>
+            <div class="dropdown-grid">
+              <a href="#use-cases" class="dropdown-item">Enterprise</a>
+              <a href="#use-cases" class="dropdown-item">Frontend</a>
+              <a href="#use-cases" class="dropdown-item">Fullstack</a>
+              <a href="#use-cases" class="dropdown-item">Science</a>
+              <a href="#use-cases" class="dropdown-item">Marketer</a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#pricing">Pricing</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#blogs">Blog</a>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link" data-dropdown="resources" aria-expanded="false">
+            Resources <span class="material-symbols-outlined">keyboard_arrow_down</span>
+          </button>
+          <div class="dropdown" id="dd-resources">
+            <div class="dropdown-head">
+              <p>Everything you need to stay up-to-date and get help</p>
+            </div>
+            <div class="dropdown-list">
+              <a href="#" class="dropdown-item">Documentation <span class="material-symbols-outlined" style="margin-left:auto;font-size:18px;opacity:.5">keyboard_arrow_right</span></a>
+              <a href="#" class="dropdown-item">Changelog</a>
+              <a href="#" class="dropdown-item">Support</a>
+              <a href="#" class="dropdown-item">Press</a>
+              <a href="#" class="dropdown-item">Releases</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#download" class="btn btn-primary nav-download">
+          Download <span class="material-symbols-outlined">download</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span class="material-symbols-outlined" id="menuIcon">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-acc">
+      <button class="mobile-acc-btn" data-acc>Products <span class="material-symbols-outlined">keyboard_arrow_down</span></button>
+      <div class="mobile-acc-panel">
+        <a class="mobile-link" href="#features">Antigravity 2.0</a>
+        <a class="mobile-link" href="#features">Antigravity CLI</a>
+        <a class="mobile-link" href="#features">Antigravity IDE</a>
+        <a class="mobile-link" href="#features">Antigravity SDK</a>
+      </div>
+    </div>
+    <div class="mobile-acc">
+      <button class="mobile-acc-btn" data-acc>Use Cases <span class="material-symbols-outlined">keyboard_arrow_down</span></button>
+      <div class="mobile-acc-panel">
+        <a class="mobile-link" href="#use-cases">Enterprise</a>
+        <a class="mobile-link" href="#use-cases">Frontend</a>
+        <a class="mobile-link" href="#use-cases">Fullstack</a>
+        <a class="mobile-link" href="#use-cases">Science</a>
+        <a class="mobile-link" href="#use-cases">Marketer</a>
+      </div>
+    </div>
+    <div class="mobile-acc">
+      <a class="mobile-acc-btn" href="#pricing" style="display:block">Pricing</a>
+    </div>
+    <div class="mobile-acc">
+      <a class="mobile-acc-btn" href="#blogs" style="display:block">Blog</a>
+    </div>
+    <div class="mobile-acc">
+      <button class="mobile-acc-btn" data-acc>Resources <span class="material-symbols-outlined">keyboard_arrow_down</span></button>
+      <div class="mobile-acc-panel">
+        <a class="mobile-link" href="#">Documentation</a>
+        <a class="mobile-link" href="#">Changelog</a>
+        <a class="mobile-link" href="#">Support</a>
+        <a class="mobile-link" href="#">Press</a>
+        <a class="mobile-link" href="#">Releases</a>
+      </div>
+    </div>
+    <a href="#download" class="btn btn-primary mobile-cta">Download <span class="material-symbols-outlined">download</span></a>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <div class="hero-logo">
+          <svg class="logo-mark lg" viewBox="0 0 32 32" aria-hidden="true">
+            <defs>
+              <linearGradient id="ag2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#EA4335"/>
+                <stop offset="35%" stop-color="#FBBC04"/>
+                <stop offset="65%" stop-color="#34A853"/>
+                <stop offset="100%" stop-color="#4285F4"/>
+              </linearGradient>
+            </defs>
+            <path d="M16 3C16 3 7 14.5 7 20.5C7 25.2 10.8 29 16 29C21.2 29 25 25.2 25 20.5C25 14.5 16 3 16 3Z" fill="url(#ag2)"/>
+            <path d="M16 10C16 10 11.5 16.2 11.5 20C11.5 22.5 13.5 24.5 16 24.5C18.5 24.5 20.5 22.5 20.5 20C20.5 16.2 16 10 16 10Z" fill="white" opacity="0.35"/>
+          </svg>
+          Google Antigravity
+        </div>
+        <h1>Experience liftoff with the next-gen agent platform</h1>
+        <div class="hero-cta">
+          <a href="#download" class="btn btn-primary btn-lg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 16.94 2.93 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+            Download for MacOS
+          </a>
+          <a href="#use-cases" class="btn btn-secondary btn-lg">Explore use cases</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="video-section">
+      <div class="video-frame" id="videoFrame" role="button" tabindex="0" aria-label="Play intro video">
+        <div class="video-bg"></div>
+        <canvas class="video-particles" id="videoCanvas" aria-hidden="true"></canvas>
+        <div class="video-center">
+          <div class="video-brand">
+            <svg width="40" height="40" viewBox="0 0 32 32" aria-hidden="true">
+              <defs>
+                <linearGradient id="ag3" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#EA4335"/>
+                  <stop offset="35%" stop-color="#FBBC04"/>
+                  <stop offset="65%" stop-color="#34A853"/>
+                  <stop offset="100%" stop-color="#4285F4"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 3C16 3 7 14.5 7 20.5C7 25.2 10.8 29 16 29C21.2 29 25 25.2 25 20.5C25 14.5 16 3 16 3Z" fill="url(#ag3)"/>
+            </svg>
+            <span>Google</span>
+            <span class="fade">Antigravity</span>
+          </div>
+        </div>
+        <span class="play-label"><span class="material-symbols-outlined">play_arrow</span> Play intro</span>
+        <button class="video-play" aria-label="Play">
+          <span class="material-symbols-outlined">play_arrow</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- AGENT FIRST -->
+    <section class="agent-first">
+      <ul class="icon-rail" aria-hidden="true">
+        <li class="icon-bubble"><span class="material-symbols-outlined">dashboard_customize</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">keyboard_tab</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">check_circle</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">keyboard_command_key</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">data_object</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">file_copy</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">terminal</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">developer_mode_tv</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">folder</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">refresh</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">commit</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">search</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">code_blocks</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">code</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">keyboard_return</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">merge</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">deployed_code</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">auto_awesome</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">data_object</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">edit</span></li>
+        <li class="icon-bubble"><span class="material-symbols-outlined">device_hub</span></li>
+      </ul>
+      <div class="agent-statement reveal">
+        <p>Google Antigravity is our agentic development platform, allowing anyone to build in the agent-first era.<span class="cursor-rainbow" aria-hidden="true"></span></p>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+      <article class="feature-row reveal">
+        <div class="feature-copy">
+          <h3>Antigravity 2.0</h3>
+          <p>Your command center to manage multiple local agents in parallel. Group conversations into Projects, operate across multiple workspaces, and automate routine tasks with scheduled messages.</p>
+          <a href="#" class="btn btn-secondary">Explore Product</a>
+        </div>
+        <div class="feature-media glow">
+          <div class="ph">
+            <div class="ph-ui">
+              <div class="bar"><span class="chip">📁 new-project ▾</span></div>
+              <div class="bar" style="height:56px;color:#9aa0a8">Ask anything, @ to mention, / for actions</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <span class="chip">+ Gemini 3.5 Flash ▾</span>
+                <span class="chip">🌳 New Worktree ▾</span>
+                <span class="chip">main ▾</span>
+              </div>
+              <div class="bar" style="margin-top:10px;width:40%"><span class="chip">Local ▾</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-row reverse reveal">
+        <div class="feature-copy">
+          <h3>Antigravity CLI</h3>
+          <p>The lightweight, fast, terminal-first surface to work with Antigravity agents. Run autonomous coding agents, execute shell commands directly, and manage background subagents all from your keyboard.</p>
+          <a href="#" class="btn btn-secondary">Explore Product</a>
+        </div>
+        <div class="feature-media dark tall">
+          <div class="ph" style="background:#0a0a0c">
+            <div class="ph-terminal">
+              <div><span class="dim">$</span> agy theme list</div>
+              <div class="dim">light</div>
+              <div class="dim">solarized light</div>
+              <div><span class="prompt">›</span> dark</div>
+              <div class="dim">colorblind-friendly dark</div>
+              <div class="dim">tokyo night</div>
+              <div class="dim">terminal</div>
+              <div style="margin-top:12px" class="dim">[Next]</div>
+              <div style="margin-top:16px"><span class="hl">AGY:</span> Here's the change:</div>
+              <div><span class="hl">3</span>  import "fmt"</div>
+              <div style="color:#f85149">- func main() {</div>
+              <div style="color:#3fb950">+ func greet(name string) {</div>
+              <div>  fmt.Printf("Hello, %s\n", name)</div>
+              <div>}</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-row reveal">
+        <div class="feature-copy">
+          <h3>Antigravity SDK</h3>
+          <p>Prototype custom agents leveraging Antigravity's harness with minimal code. Simple Python scripts to iterate on agentic applications, automate software engineering tasks, and run evaluations on top of the Antigravity agent harness.</p>
+          <a href="#" class="btn btn-secondary">Explore Product</a>
+        </div>
+        <div class="feature-media dark">
+          <div class="ph-sdk"><span>Antigravity SDK</span></div>
+        </div>
+      </article>
+
+      <article class="feature-row reverse reveal">
+        <div class="feature-copy">
+          <h3>Antigravity IDE</h3>
+          <p>The fully-featured, agentic IDE. Complete with the agent manager, artifacts, and a deep understanding of your codebase.</p>
+          <a href="#" class="btn btn-secondary">Explore Product</a>
+        </div>
+        <div class="feature-media dark">
+          <div class="ph-ide">
+            <div class="ph-ide-win">
+              <div class="side"></div>
+              <div class="main">
+                <div><span class="kw">import</span> { useState } <span class="kw">from</span> <span class="str">"react"</span></div>
+                <div></div>
+                <div><span class="kw">export function</span> AgentPanel() {</div>
+                <div>&nbsp;&nbsp;<span class="kw">const</span> [open, setOpen] = useState(<span class="str">true</span>)</div>
+                <div>&nbsp;&nbsp;<span class="kw">return</span> (</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&lt;aside className=<span class="str">"panel"</span>&gt;</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{/* agent stream */}</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/aside&gt;</div>
+                <div>&nbsp;&nbsp;)</div>
+                <div>}</div>
+              </div>
+              <div class="panel"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- USE CASES -->
+    <section class="use-cases" id="use-cases">
+      <div class="use-header reveal">
+        <h2>Built for developers<br>for the agent-first era</h2>
+        <p>Google Antigravity is built for user trust, whether you're a professional developer working in a large enterprise codebase, a hobbyist vibe-coding in their spare time, or anyone in between.</p>
+      </div>
+      <div class="carousel-wrap">
+        <div class="carousel" id="caseCarousel">
+          <article class="case-card">
+            <div class="case-thumb">
+              <div class="person"><div class="avatar"></div></div>
+              <button class="case-play" aria-label="Watch case"><span class="material-symbols-outlined">play_arrow</span></button>
+            </div>
+            <div class="case-body">
+              <h4>Full stack developer</h4>
+              <p>Build production-ready applications with confidence with thoroughly designed artifacts and comprehensive verification tests.</p>
+              <a href="#" class="link-arrow">View case <span class="material-symbols-outlined">chevron_right</span></a>
+            </div>
+          </article>
+          <article class="case-card">
+            <div class="case-thumb">
+              <div class="person"><div class="avatar a2"></div></div>
+              <button class="case-play" aria-label="Watch case"><span class="material-symbols-outlined">play_arrow</span></button>
+            </div>
+            <div class="case-body">
+              <h4>Enterprise developer</h4>
+              <p>Google Antigravity empowers the next era of enterprise builders.</p>
+              <a href="#" class="link-arrow">View case <span class="material-symbols-outlined">chevron_right</span></a>
+            </div>
+          </article>
+          <article class="case-card">
+            <div class="case-thumb">
+              <div class="person"><div class="avatar a3"></div></div>
+              <button class="case-play" aria-label="Watch case"><span class="material-symbols-outlined">play_arrow</span></button>
+            </div>
+            <div class="case-body">
+              <h4>Frontend developer</h4>
+              <p>Streamline UX development by leveraging browser-in-the-loop agents to automate repetitive tasks.</p>
+              <a href="#" class="link-arrow">View case <span class="material-symbols-outlined">chevron_right</span></a>
+            </div>
+          </article>
+        </div>
+        <div class="carousel-nav">
+          <button id="casePrev" aria-label="Previous"><span class="material-symbols-outlined">keyboard_arrow_left</span></button>
+          <button id="caseNext" aria-label="Next"><span class="material-symbols-outlined">keyboard_arrow_right</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTIONS / PRICING CTA -->
+    <section class="solutions" id="pricing">
+      <div class="solutions-grid">
+        <article class="sol-card reveal">
+          <canvas id="solCanvas1" aria-hidden="true"></canvas>
+          <span class="sol-badge">Available at no charge</span>
+          <h3>For developers</h3>
+          <p class="sol-title">Achieve new heights</p>
+          <a href="#download" class="btn btn-primary">Download</a>
+        </article>
+        <article class="sol-card reveal">
+          <canvas id="solCanvas2" aria-hidden="true"></canvas>
+          <span class="sol-badge">Now Available!</span>
+          <h3>For organizations</h3>
+          <p class="sol-title">Level up your entire team</p>
+          <a href="#" class="btn btn-secondary">Read More</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- BLOGS -->
+    <section class="blogs" id="blogs">
+      <div class="blogs-head reveal">
+        <h2>Latest Blogs</h2>
+        <a href="#" class="btn btn-secondary">View blog</a>
+      </div>
+      <div class="carousel-wrap">
+        <div class="carousel" id="blogCarousel">
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="280" fill="#0a0a0c"/>
+                <circle cx="160" cy="90" r="50" fill="url(#g1)"/>
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#34A853"/><stop offset="50%" stop-color="#FBBC04"/><stop offset="100%" stop-color="#4285F4"/>
+                  </linearGradient>
+                </defs>
+                <path d="M100 220 L160 80 L220 220 Z" fill="url(#g1)" opacity="0.9"/>
+                <circle cx="140" cy="210" r="28" fill="#3DDC84"/>
+                <ellipse cx="128" cy="205" rx="4" ry="5" fill="#0a0a0c"/>
+                <ellipse cx="152" cy="205" rx="4" ry="5" fill="#0a0a0c"/>
+              </svg>
+            </div>
+            <div class="blog-meta"><span>May 19, 2026</span><span class="dot"></span><span>Product</span></div>
+            <h4>Google Antigravity @ I/O 2026</h4>
+            <a href="#" class="read">Read blog</a>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="280" fill="#0d0e12"/>
+                <rect x="40" y="70" width="200" height="140" rx="12" fill="#1a1b20" stroke="#2a2b30"/>
+                <text x="56" y="100" fill="#8b919a" font-family="system-ui" font-size="11">New Projects ▾</text>
+                <rect x="56" y="115" width="168" height="36" rx="8" fill="#121317"/>
+                <text x="68" y="138" fill="#5a6068" font-family="system-ui" font-size="10">Ask anything…</text>
+                <text x="90" y="200" fill="#fff" font-family="system-ui" font-size="16" font-weight="500">Antigravity 2.0</text>
+              </svg>
+            </div>
+            <div class="blog-meta"><span>May 19, 2026</span><span class="dot"></span><span>Product</span></div>
+            <h4>Introducing Google Antigravity 2.0</h4>
+            <a href="#" class="read">Read blog</a>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="280" fill="#0a0a0c"/>
+                <rect x="36" y="80" width="208" height="48" rx="10" fill="#1e1f24"/>
+                <text x="52" y="110" fill="#9aa0a8" font-family="system-ui" font-size="12">/teamwork-preview</text>
+                <text x="48" y="190" fill="#fff" font-family="system-ui" font-size="22" font-weight="500">Agent Teams</text>
+              </svg>
+            </div>
+            <div class="blog-meta"><span>May 19, 2026</span><span class="dot"></span><span>Product</span></div>
+            <h4>Google Antigravity Built an OS (and more)</h4>
+            <a href="#" class="read">Read blog</a>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="280" fill="#05060a"/>
+                <g transform="translate(70,50)">
+                  <rect x="50" y="0" width="40" height="30" fill="#EA4335"/>
+                  <rect x="30" y="30" width="80" height="30" fill="#FBBC04"/>
+                  <rect x="15" y="60" width="110" height="30" fill="#34A853"/>
+                  <rect x="0" y="90" width="140" height="30" fill="#4285F4"/>
+                  <rect x="20" y="120" width="100" height="30" fill="#4285F4" opacity="0.6"/>
+                </g>
+              </svg>
+            </div>
+            <div class="blog-meta"><span>May 19, 2026</span><span class="dot"></span><span>Product</span></div>
+            <h4>Google Antigravity CLI</h4>
+            <a href="#" class="read">Read blog</a>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="280" fill="#080a12"/>
+                <circle cx="140" cy="140" r="70" fill="none" stroke="url(#g2)" stroke-width="3"/>
+                <circle cx="140" cy="140" r="40" fill="url(#g2)" opacity="0.5"/>
+                <defs>
+                  <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#4285F4"/><stop offset="100%" stop-color="#A78BFA"/>
+                  </linearGradient>
+                </defs>
+                <text x="70" y="240" fill="#fff" font-family="system-ui" font-size="14">SDK</text>
+              </svg>
+            </div>
+            <div class="blog-meta"><span>May 19, 2026</span><span class="dot"></span><span>Product</span></div>
+            <h4>Google Antigravity SDK</h4>
+            <a href="#" class="read">Read blog</a>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="280" fill="#0a0a0c"/>
+                <rect x="50" y="90" width="180" height="100" rx="12" fill="#1a1b20"/>
+                <circle cx="90" cy="140" r="16" fill="#4285F4"/>
+                <rect x="120" y="128" width="90" height="10" rx="4" fill="#3a3b40"/>
+                <rect x="120" y="146" width="60" height="8" rx="4" fill="#2a2b30"/>
+              </svg>
+            </div>
+            <div class="blog-meta"><span>May 19, 2026</span><span class="dot"></span><span>Enterprise</span></div>
+            <h4>Google Antigravity in Gemini Enterprise</h4>
+            <a href="#" class="read">Read blog</a>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="280" fill="#0d1117"/>
+                <text x="40" y="140" fill="#79c0ff" font-family="ui-monospace,monospace" font-size="18">Gemini 3.5</text>
+                <text x="40" y="168" fill="#7ee787" font-family="ui-monospace,monospace" font-size="18">Flash</text>
+              </svg>
+            </div>
+            <div class="blog-meta"><span>May 19, 2026</span><span class="dot"></span><span>Product</span></div>
+            <h4>Gemini 3.5 Flash in Google Antigravity</h4>
+            <a href="#" class="read">Read blog</a>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+                <rect width="280" height="280" fill="#05060a"/>
+                <path d="M140 40C140 40 70 130 70 175C70 210 100 240 140 240C180 240 210 210 210 175C210 130 140 40 140 40Z" fill="url(#g3)"/>
+                <defs>
+                  <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#EA4335"/><stop offset="35%" stop-color="#FBBC04"/><stop offset="65%" stop-color="#34A853"/><stop offset="100%" stop-color="#4285F4"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="blog-meta"><span>Nov 18, 2025</span><span class="dot"></span><span>Product</span></div>
+            <h4>Introducing Google Antigravity</h4>
+            <a href="#" class="read">Read blog</a>
+          </article>
+        </div>
+        <div class="carousel-nav">
+          <button id="blogPrev" aria-label="Previous blogs"><span class="material-symbols-outlined">keyboard_arrow_left</span></button>
+          <button id="blogNext" aria-label="Next blogs"><span class="material-symbols-outlined">keyboard_arrow_right</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD -->
+    <section class="download-section" id="download">
+      <div class="download-panel">
+        <canvas id="dlCanvas" aria-hidden="true"></canvas>
+        <div class="download-content">
+          <h2>Download Google Antigravity for MacOS<span class="cursor-rainbow" aria-hidden="true"></span></h2>
+          <div class="download-btns">
+            <a href="#" class="btn btn-white btn-lg">Download for Apple Silicon</a>
+            <a href="#" class="btn btn-inverse-secondary btn-lg">Download for Intel</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-top">
+        <h3>Experience liftoff</h3>
+        <div class="footer-col">
+          <a href="#download">Download</a>
+          <a href="#features">Product</a>
+          <a href="#">Docs</a>
+          <a href="#">Changelog</a>
+          <a href="#">Press</a>
+          <a href="#">Releases</a>
+        </div>
+        <div class="footer-col">
+          <a href="#blogs">Blog</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#use-cases">Use Cases</a>
+        </div>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">
+        <span>Antigravity</span>
+      </div>
+      <div class="footer-bottom">
+        <a href="https://google.com" class="footer-google" target="_blank" rel="noopener">Google</a>
+        <div class="footer-legal">
+          <a href="#">About Google</a>
+          <a href="#">Google Products</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Video modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Intro video">
+    <div class="modal-inner">
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <div style="text-align:center;padding:24px">
+        <span class="material-symbols-outlined" style="font-size:48px;opacity:.5">play_circle</span>
+        <p style="margin-top:12px">Play intro — Google Antigravity</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie (dismissible, decorative) -->
+  <div class="cookie-bar" id="cookieBar">
+    <p>This site uses cookies from Google to deliver its services and to analyze traffic.</p>
+    <button class="btn btn-white btn-sm" id="cookieOk">OK</button>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+
+    /* ——— Nav scroll ——— */
+    const nav = document.getElementById("nav");
+    const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    /* ——— Dropdowns ——— */
+    const ddBtns = document.querySelectorAll("[data-dropdown]");
+    function closeAllDd(except) {
+      ddBtns.forEach((btn) => {
+        const id = btn.getAttribute("data-dropdown");
+        if (id === except) return;
+        btn.classList.remove("open");
+        btn.setAttribute("aria-expanded", "false");
+        const panel = document.getElementById("dd-" + id);
+        if (panel) panel.classList.remove("open");
+      });
+    }
+    ddBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute("data-dropdown");
+        const panel = document.getElementById("dd-" + id);
+        const isOpen = panel.classList.contains("open");
+        closeAllDd();
+        if (!isOpen) {
+          panel.classList.add("open");
+          btn.classList.add("open");
+          btn.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+    document.addEventListener("click", () => closeAllDd());
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeAllDd();
+        closeModal();
+        closeMobile();
+      }
+    });
+
+    /* ——— Mobile menu ——— */
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const menuIcon = document.getElementById("menuIcon");
+    function closeMobile() {
+      mobileMenu.classList.remove("open");
+      menuIcon.textContent = "menu";
+      document.body.style.overflow = "";
+    }
+    menuToggle.addEventListener("click", () => {
+      const open = mobileMenu.classList.toggle("open");
+      menuIcon.textContent = open ? "close" : "menu";
+      document.body.style.overflow = open ? "hidden" : "";
+    });
+    document.querySelectorAll("[data-acc]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.closest(".mobile-acc").classList.toggle("open");
+      });
+    });
+    mobileMenu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMobile);
+    });
+
+    /* ——— Carousels ——— */
+    function wireCarousel(elId, prevId, nextId) {
+      const el = document.getElementById(elId);
+      const prev = document.getElementById(prevId);
+      const next = document.getElementById(nextId);
+      if (!el) return;
+      const step = () => Math.min(el.clientWidth * 0.75, 560);
+      prev.addEventListener("click", () => el.scrollBy({ left: -step(), behavior: "smooth" }));
+      next.addEventListener("click", () => el.scrollBy({ left: step(), behavior: "smooth" }));
+    }
+    wireCarousel("caseCarousel", "casePrev", "caseNext");
+    wireCarousel("blogCarousel", "blogPrev", "blogNext");
+
+    /* ——— Modal ——— */
+    const modal = document.getElementById("modal");
+    function openModal() {
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    document.getElementById("videoFrame").addEventListener("click", openModal);
+    document.getElementById("videoFrame").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(); }
+    });
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+    document.querySelectorAll(".case-play").forEach((b) => b.addEventListener("click", openModal));
+
+    /* ——— Cookie ——— */
+    document.getElementById("cookieOk").addEventListener("click", () => {
+      document.getElementById("cookieBar").classList.add("hidden");
+    });
+
+    /* ——— Reveal on scroll ——— */
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add("in");
+            io.unobserve(en.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    /* ——— Particle systems ——— */
+    function particles(canvas, opts) {
+      if (!canvas) return;
+      const cfg = Object.assign(
+        {
+          count: 80,
+          colors: ["#4285F4", "#EA4335", "#FBBC04", "#34A853", "#A78BFA", "#121317"],
+          minR: 0.6,
+          maxR: 2.2,
+          speed: 0.25,
+          alpha: 0.85,
+          bg: null,
+          connect: false,
+          mouse: true,
+        },
+        opts || {}
+      );
+      const ctx = canvas.getContext("2d");
+      let w, h, dpr, dots, raf, mx = -9999, my = -9999;
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = rect.width;
+        h = rect.height;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (!dots || dots.length !== cfg.count) spawn();
+      }
+      function spawn() {
+        dots = Array.from({ length: cfg.count }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: cfg.minR + Math.random() * (cfg.maxR - cfg.minR),
+          vx: (Math.random() - 0.5) * cfg.speed,
+          vy: (Math.random() - 0.5) * cfg.speed,
+          c: cfg.colors[(Math.random() * cfg.colors.length) | 0],
+          a: 0.3 + Math.random() * cfg.alpha,
+        }));
+      }
+      function tick() {
+        ctx.clearRect(0, 0, w, h);
+        if (cfg.bg) {
+          ctx.fillStyle = cfg.bg;
+          ctx.fillRect(0, 0, w, h);
+        }
+        for (const d of dots) {
+          // mild mouse repulsion
+          if (cfg.mouse) {
+            const dx = d.x - mx;
+            const dy = d.y - my;
+            const dist = Math.hypot(dx, dy) || 1;
+            if (dist < 120) {
+              d.vx += (dx / dist) * 0.02;
+              d.vy += (dy / dist) * 0.02;
+            }
+          }
+          d.x += d.vx;
+          d.y += d.vy;
+          if (d.x < -4) d.x = w + 4;
+          if (d.x > w + 4) d.x = -4;
+          if (d.y < -4) d.y = h + 4;
+          if (d.y > h + 4) d.y = -4;
+          // soft damp
+          d.vx *= 0.995;
+          d.vy *= 0.995;
+          // keep drifting
+          d.vx += (Math.random() - 0.5) * 0.01;
+          d.vy += (Math.random() - 0.5) * 0.01;
+
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fillStyle = d.c;
+          ctx.globalAlpha = d.a;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+        raf = requestAnimationFrame(tick);
+      }
+
+      const parent = canvas.parentElement;
+      parent.addEventListener("mousemove", (e) => {
+        const r = canvas.getBoundingClientRect();
+        mx = e.clientX - r.left;
+        my = e.clientY - r.top;
+      });
+      parent.addEventListener("mouseleave", () => {
+        mx = -9999;
+        my = -9999;
+      });
+
+      const ro = new ResizeObserver(() => resize());
+      ro.observe(canvas.parentElement || canvas);
+      resize();
+      tick();
+
+      // pause when offscreen
+      const vis = new IntersectionObserver(
+        ([en]) => {
+          if (en.isIntersecting) {
+            if (!raf) tick();
+          } else {
+            cancelAnimationFrame(raf);
+            raf = null;
+          }
+        },
+        { threshold: 0 }
+      );
+      vis.observe(canvas);
+    }
+
+    // Hero — multicolor dust
+    particles(document.getElementById("heroCanvas"), {
+      count: 140,
+      colors: ["#4285F4", "#EA4335", "#FBBC04", "#34A853", "#A78BFA", "#121317", "#5B8DEF"],
+      minR: 0.5,
+      maxR: 2.4,
+      speed: 0.35,
+      alpha: 0.9,
+    });
+
+    // Video panel — blue stars on black
+    particles(document.getElementById("videoCanvas"), {
+      count: 90,
+      colors: ["#4C8DFF", "#7EB6FF", "#A0C4FF", "#ffffff"],
+      minR: 0.4,
+      maxR: 1.8,
+      speed: 0.2,
+      alpha: 0.7,
+      mouse: false,
+    });
+
+    // Solution cards — subtle grey dots
+    particles(document.getElementById("solCanvas1"), {
+      count: 70,
+      colors: ["#121317", "#45474D", "#B7BFD9"],
+      minR: 0.4,
+      maxR: 1.6,
+      speed: 0.15,
+      alpha: 0.45,
+      mouse: false,
+    });
+    particles(document.getElementById("solCanvas2"), {
+      count: 70,
+      colors: ["#121317", "#45474D", "#B7BFD9"],
+      minR: 0.4,
+      maxR: 1.6,
+      speed: 0.15,
+      alpha: 0.45,
+      mouse: false,
+    });
+
+    // Download panel — blue particles on dark
+    particles(document.getElementById("dlCanvas"), {
+      count: 110,
+      colors: ["#4C8DFF", "#3279F9", "#7EB6FF", "#A0C4FF"],
+      minR: 0.5,
+      maxR: 2.0,
+      speed: 0.22,
+      alpha: 0.85,
+    });
+  })();
+  </script>
+</body>
+</html>

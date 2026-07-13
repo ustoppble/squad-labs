@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orbe — Anel Inteligente de Titânio</title>
+<meta name="description" content="Orbe: o anel de titânio que monitora sua saúde, analisa seu sono e paga suas compras.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23f5f5f7' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ─── NAV GLOBAL ──────────────────────────────────────────────────────── -->
+<header class="nav" id="nav">
+  <nav class="nav__inner" aria-label="Navegação global">
+    <a class="nav__brand" href="#top">Builders Challenge</a>
+    <ul class="nav__items" id="nav-items">
+      <li><a href="#saude">Saúde</a></li>
+      <li><a href="#sono">Sono</a></li>
+      <li><a href="#pagamento">Pagamento</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#comprar">Comprar</a></li>
+      <li><a href="#suporte">Suporte</a></li>
+    </ul>
+    <button class="nav__toggle" id="nav-toggle" type="button"
+            aria-controls="nav-items" aria-expanded="false" aria-label="Abrir menu">
+      <span class="nav__toggle-bars" aria-hidden="true"></span>
+    </button>
+    <span class="nav__mark" aria-hidden="true"></span>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ─── HERO ──────────────────────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="hero__media" data-parallax="0.16">
+      <img src="./assets/hero-orbe.png" alt="Anel Orbe em titânio, flutuando sobre fundo escuro" fetchpriority="high" decoding="async">
+    </div>
+
+    <div class="hero__copy">
+      <p class="hero__eyebrow" data-reveal>Orbe</p>
+      <h1 class="hero__headline" data-reveal data-reveal-delay="60">Tudo em um círculo.</h1>
+      <p class="hero__sub" data-reveal data-reveal-delay="120">O anel de titânio que monitora sua saúde, analisa seu sono e paga suas compras.</p>
+      <p class="hero__offer" data-reveal data-reveal-delay="180">Cada participante do challenge recebe uma conta Overclock.</p>
+    </div>
+
+    <div class="hero__actions" data-reveal data-reveal-delay="240">
+      <a class="btn btn--pill" href="#comprar">Comprar — R$ 3.499</a>
+      <a class="link link--dark" href="#design">Saiba mais<span class="chev" aria-hidden="true">›</span></a>
+    </div>
+  </section>
+
+  <!-- ─── 1 · DESIGN E MATERIAIS ───────────────────────────────────────── -->
+  <section class="tile tile--dark" id="design">
+    <div class="tile__head">
+      <h2 class="h-display" data-reveal>Titânio. Nada menos.</h2>
+      <p class="sub sub--wide" data-reveal data-reveal-delay="80">
+        Forjado em titânio aeroespacial grau 5 — o mesmo material usado em aeronaves e implantes
+        médicos. Leve o suficiente para esquecer que está no dedo. Resistente o suficiente para
+        nunca lembrar disso. Três acabamentos para um objeto feito para durar.
+      </p>
+    </div>
+
+    <figure class="tile__media tile__media--finishes" data-reveal data-reveal-delay="120">
+      <img src="./assets/orbe-finishes.png" alt="Os três acabamentos do Orbe: titânio natural, grafite e dourado">
+    </figure>
+
+    <ol class="finishes">
+      <li data-reveal>
+        <h3>Titânio Natural</h3>
+        <p>O metal em sua forma mais honesta. Frio ao toque, eterno no visual.</p>
+      </li>
+      <li data-reveal data-reveal-delay="80">
+        <h3>Grafite</h3>
+        <p>Sombrio sem esforço. Para quem não precisa chamar atenção para chamar atenção.</p>
+      </li>
+      <li data-reveal data-reveal-delay="160">
+        <h3>Dourado</h3>
+        <p>Presença sem excesso. Ouro sobre titânio: o único luxo que faz sentido na mão.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ─── BANDA DE TEXTURA (parallax) ──────────────────────────────────── -->
+  <section class="band" aria-label="Textura escovada do titânio">
+    <div class="band__media" data-parallax="0.22">
+      <img src="./assets/orbe-detail.png" alt="Macro da superfície escovada do titânio do Orbe">
+    </div>
+    <p class="band__line" data-reveal>Três acabamentos. Um padrão.</p>
+  </section>
+
+  <!-- ─── 2 · SAÚDE ────────────────────────────────────────────────────── -->
+  <section class="tile tile--dark split" id="saude">
+    <figure class="split__media" data-reveal>
+      <img src="./assets/orbe-sensors.png" alt="Interior do Orbe com os sensores e trilhas de circuito à mostra">
+    </figure>
+
+    <div class="split__copy">
+      <h2 class="h-display" data-reveal>Seus sinais.<br>Todo o tempo.</h2>
+      <p class="sub" data-reveal data-reveal-delay="80">
+        Orbe monitora o que importa — continuamente, silenciosamente, com precisão clínica.
+        Uma pontuação diária de saúde sintetiza tudo em um número. Simples assim.
+      </p>
+
+      <dl class="features">
+        <div class="feature" data-reveal data-reveal-delay="120">
+          <dt>Frequência Cardíaca</dt>
+          <dd>Monitoramento contínuo, 24 horas. Orbe detecta variações antes que você as sinta.</dd>
+        </div>
+        <div class="feature" data-reveal data-reveal-delay="180">
+          <dt>Oxigenação do Sangue</dt>
+          <dd>SpO₂ medido ao longo do dia. Saber é diferente de suspeitar.</dd>
+        </div>
+        <div class="feature" data-reveal data-reveal-delay="240">
+          <dt>Temperatura Corporal</dt>
+          <dd>Tendências de temperatura que revelam o que os sintomas ainda não mostraram.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ─── 3 · SONO ─────────────────────────────────────────────────────── -->
+  <section class="tile tile--tertiary sleep" id="sono">
+    <div class="sleep__copy">
+      <h2 class="h-display" data-reveal>Durma melhor.<br>Acorde sabendo.</h2>
+      <p class="sub sub--narrow" data-reveal data-reveal-delay="80">
+        Orbe analisa cada fase do seu sono e entrega uma pontuação pela manhã. Não uma opinião —
+        dados reais sobre o que aconteceu enquanto você dormia e o que fazer diferente esta noite.
+        A única coisa que você precisa ler antes do café.
+      </p>
+    </div>
+
+    <!-- gráfico de fases do sono, autoral em CSS/SVG -->
+    <div class="sleep__chart" data-reveal data-reveal-delay="140" aria-hidden="true">
+      <div class="score">
+        <span class="score__num" data-count="92">0</span>
+        <span class="score__label">pontuação de sono</span>
+      </div>
+      <div class="stages">
+        <div class="stage" style="--h:34%"><span></span><em>Profundo</em></div>
+        <div class="stage" style="--h:62%"><span></span><em>REM</em></div>
+        <div class="stage" style="--h:100%"><span></span><em>Leve</em></div>
+        <div class="stage" style="--h:14%"><span></span><em>Acordado</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 4 · BATERIA E ÁGUA ───────────────────────────────────────────── -->
+  <section class="tile tile--dark water" id="bateria">
+    <div class="water__media" data-parallax="0.1">
+      <img src="./assets/orbe-water.png" alt="Orbe atravessando um respingo de água">
+    </div>
+
+    <div class="water__copy">
+      <h2 class="h-display" data-reveal>Sete dias. Cem metros.</h2>
+      <p class="sub sub--narrow" data-reveal data-reveal-delay="80">
+        Uma semana de monitoramento completo com uma única carga. Mergulhe, nade, tome banho —
+        Orbe foi certificado para até 100 metros de profundidade. Não precisa de tratamento
+        especial. Só use.
+      </p>
+
+      <div class="water__stats">
+        <p class="bigstat" data-reveal data-reveal-delay="140">
+          <span class="bigstat__num">7 dias</span>
+          <span class="bigstat__label">de autonomia por carga</span>
+        </p>
+        <p class="bigstat" data-reveal data-reveal-delay="200">
+          <span class="bigstat__num">100 m</span>
+          <span class="bigstat__label">de resistência à água</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 5 · PAGAMENTO ────────────────────────────────────────────────── -->
+  <section class="tile tile--light pay" id="pagamento">
+    <div class="pay__copy">
+      <h2 class="h-display" data-reveal>O toque que paga.</h2>
+      <p class="sub sub--narrow" data-reveal data-reveal-delay="80">
+        Aproxime o dedo. Pronto. Orbe tem pagamento por aproximação integrado — sem carteira,
+        sem celular, sem espera. Para quem já não quer parar para pagar nada.
+      </p>
+    </div>
+    <!-- ondas NFC, autoral em CSS -->
+    <div class="pay__nfc" data-reveal data-reveal-delay="140" aria-hidden="true">
+      <span class="ripple"></span><span class="ripple"></span><span class="ripple"></span>
+      <span class="ring"></span>
+    </div>
+  </section>
+
+  <!-- ─── 6 · TILES DE STATS ───────────────────────────────────────────── -->
+  <section class="stats" aria-label="Números do Orbe">
+    <article class="stat stat--light" data-reveal>
+      <p class="stat__label">Autonomia</p>
+      <p class="stat__value"><span data-count="7">0</span><span class="stat__unit">dias</span></p>
+      <p class="stat__caption">Uma carga por semana. Não por dia.</p>
+    </article>
+
+    <article class="stat stat--dark" data-reveal data-reveal-delay="80">
+      <p class="stat__label">Sensores</p>
+      <p class="stat__value"><span data-count="3">0</span><span class="stat__unit">sensores</span></p>
+      <p class="stat__caption">Cardíaco, oximetria e temperatura — integrados no anel.</p>
+    </article>
+
+    <article class="stat stat--dark" data-reveal>
+      <p class="stat__label">Peso</p>
+      <p class="stat__value"><span>~4</span><span class="stat__unit">g</span></p>
+      <p class="stat__caption">Mais leve do que a maioria dos anéis comuns.</p>
+    </article>
+
+    <article class="stat stat--light" data-reveal data-reveal-delay="80">
+      <p class="stat__label">Mensalidade</p>
+      <p class="stat__value"><span>R$0</span><span class="stat__unit">/mês</span></p>
+      <p class="stat__caption">Nenhuma. Para sempre. Comprou, é seu.</p>
+    </article>
+  </section>
+
+  <!-- ─── 7 · CTA FINAL ────────────────────────────────────────────────── -->
+  <section class="cta" id="comprar">
+    <h2 class="cta__headline" data-reveal>O anel que faz tudo.<br>Sem parecer que faz nada.</h2>
+
+    <p class="cta__price" data-reveal data-reveal-delay="80">
+      <span class="cta__full">R$ 3.499</span>
+      <span class="cta__installment">ou 12x de R$ 291,58 sem juros</span>
+    </p>
+
+    <div class="cta__actions" data-reveal data-reveal-delay="140">
+      <a class="btn btn--pill" href="#comprar">Comprar Orbe</a>
+      <a class="link" href="#design">Saiba mais<span class="chev" aria-hidden="true">›</span></a>
+    </div>
+
+    <p class="cta__subline" data-reveal data-reveal-delay="200">
+      Frete grátis para todo o Brasil · Troca gratuita em 30 dias · Sem mensalidade.
+    </p>
+  </section>
+
+</main>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────── -->
+<footer class="footer" id="suporte">
+  <div class="footer__inner">
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h3>Loja</h3>
+        <ul>
+          <li><a href="#comprar">Orbe</a></li>
+          <li><a href="#design">Acabamentos</a></li>
+          <li><a href="#comprar">Acessórios</a></li>
+          <li><a href="#comprar">Onde Comprar</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>Suporte</h3>
+        <ul>
+          <li><a href="#suporte">Central de Ajuda</a></li>
+          <li><a href="#suporte">Garantia</a></li>
+          <li><a href="#suporte">Troca e Devolução</a></li>
+          <li><a href="#suporte">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>Sobre</h3>
+        <ul>
+          <li><a href="#top">Nossa História</a></li>
+          <li><a href="#saude">Tecnologia</a></li>
+          <li><a href="#design">Sustentabilidade</a></li>
+          <li><a href="#top">Imprensa</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#suporte">Privacidade</a></li>
+          <li><a href="#suporte">Termos de Uso</a></li>
+          <li><a href="#suporte">Cookies</a></li>
+          <li><a href="#suporte">Licenças</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__disclaimer">
+      Este é um produto fictício criado para fins de demonstração. Nenhum dos produtos,
+      preços ou funcionalidades descritos representa uma oferta comercial real.
+    </p>
+
+    <div class="footer__bar">
+      <p>© 2026 Orbe. Todos os direitos reservados.</p>
+      <p class="footer__brand">Builders Challenge</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

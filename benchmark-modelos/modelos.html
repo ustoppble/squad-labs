@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelos — Overclock Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="modelos.html" class="active">Modelos</a>
+    <a href="benchmark.html">Benchmark</a>
+    <a href="benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="benchmark-gpt-5-6.html">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow brand">Por modelo</div>
+  <h1>Modelos</h1>
+  <p class="lede">Uma página dedicada por modelo: o que a empresa comunicou no lançamento, os principais insights e os números observados no benchmark. Clique pra abrir.</p>
+
+  <div class="scoreboard" style="grid-template-columns:repeat(5,1fr)">
+    <a class="model-card hero" href="modelos/fable-5.html">
+      <div class="name">Claude Fable 5</div>
+      <div class="role">Anthropic · o novo topo da linha</div>
+      <div class="price"><b>$10 / $50</b> por M<small>2× o Opus 4.8 · mais caro da linha</small></div>
+      <div class="tally"><span class="badge-ready">página pronta</span><span class="val" style="font-size:16px;color:var(--ov-accent)">$15,81</span></div>
+    </a>
+    <a class="model-card" href="modelos/sonnet-5.html">
+      <div class="name">Claude Sonnet 5</div>
+      <div class="role">Anthropic · lançado 30/06/2026</div>
+      <div class="price"><b>$2 / $10</b> por M<small>default grátis · promo até 31/08</small></div>
+      <div class="tally"><span class="badge-ready">página pronta</span><span class="val" style="font-size:16px">$2,06</span></div>
+    </a>
+    <div class="model-card">
+      <div class="name">Claude Sonnet 4.6</div>
+      <div class="role">O barato velho</div>
+      <div class="price"><b>$3 / $15</b> por M<small>régua de evolução</small></div>
+      <div class="tally"><span class="badge-soon">em breve</span><span class="val" style="font-size:16px">$2,27</span></div>
+    </div>
+    <div class="model-card">
+      <div class="name">Claude Opus 4.8</div>
+      <div class="role">O rei caro · só 1,7× o Sonnet 5</div>
+      <div class="price"><b>$5 / $25</b> por M<small>teto de capacidade</small></div>
+      <div class="tally"><span class="badge-soon">em breve</span><span class="val" style="font-size:16px;color:var(--ov-accent)">$3,49</span></div>
+    </div>
+    <a class="model-card" href="modelos/grok-4-5.html">
+      <div class="name">Grok 4.5</div>
+      <div class="role">xAI · lançado 08/07/2026</div>
+      <div class="price"><b>$2 / $6</b> por M<small>V9 1,5T · treinado com a Cursor</small></div>
+      <div class="tally"><span class="badge-ready">página pronta</span><span class="val" style="font-size:16px">~$1,58</span></div>
+    </a>
+  </div>
+
+  <footer>
+    Custo = total dos 4 testes do benchmark (dinheiro real, cumulativo; Grok 4.5 = estimado a preço oficial $2/$6, CLI não expõe billing). Fable 5, Sonnet 5 e Grok 4.5 com página pronta; Sonnet 4.6 e Opus 4.8 entram quando tiverem os insights compilados.
+  </footer>
+</div>
+</body>
+</html>

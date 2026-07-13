@@ -1,0 +1,264 @@
+- generic [ref=e3]:
+  - region "top of page"
+  - generic [ref=e10]:
+    - banner [ref=e11]:
+      - generic [ref=e22]:
+        - link [ref=e28] [cursor=pointer]:
+          - /url: https://www.singularcont.com.br
+          - img [ref=e30]
+        - navigation "Site" [ref=e46]:
+          - list [ref=e47]:
+            - listitem [ref=e48] [cursor=pointer]:
+              - link "Home" [ref=e49]:
+                - /url: https://www.singularcont.com.br
+                - paragraph [ref=e52]: Home
+            - listitem [ref=e53] [cursor=pointer]:
+              - link "Sobre" [ref=e54]:
+                - /url: https://www.singularcont.com.br
+                - paragraph [ref=e57]: Sobre
+            - listitem [ref=e58] [cursor=pointer]:
+              - link "História" [ref=e59]:
+                - /url: https://www.singularcont.com.br
+                - paragraph [ref=e62]: História
+            - listitem [ref=e63] [cursor=pointer]:
+              - link "Serviços" [ref=e64]:
+                - /url: https://www.singularcont.com.br
+                - paragraph [ref=e67]: Serviços
+            - listitem [ref=e68] [cursor=pointer]:
+              - link "Depoimentos" [ref=e69]:
+                - /url: https://www.singularcont.com.br
+                - paragraph [ref=e72]: Depoimentos
+            - listitem [ref=e73] [cursor=pointer]:
+              - link "Contato" [ref=e74]:
+                - /url: https://www.singularcont.com.br
+                - paragraph [ref=e77]: Contato
+    - main [ref=e78]:
+      - generic [ref=e83]:
+        - generic:
+          - generic:
+            - generic:
+              - generic [ref=e93]:
+                - generic:
+                  - generic:
+                    - heading "O futuro ao seu alcance" [level=1] [ref=e98]:
+                      - generic [ref=e99]:
+                        - generic [ref=e100]: O
+                        - generic [ref=e101]: futuro
+                        - generic [ref=e102]: ao seu alcance
+                    - paragraph [ref=e103]:
+                      - generic [ref=e105]: Especialistas em contabilidade com mais de
+                      - generic [ref=e107]: 30 anos de mercado
+                      - generic [ref=e109]: ", ajudamos empresas e profissionais a se estruturarem e se prepararem para um futuro seguro e próspero."
+                    - link [ref=e111] [cursor=pointer]:
+                      - /url: https://www.singularcont.com.br
+                      - img [ref=e113]
+              - generic [ref=e117]:
+                - generic:
+                  - generic:
+                    - region "Sobre"
+                    - heading "Contabilidade para você crescer" [level=2] [ref=e130]:
+                      - generic [ref=e131]:
+                        - generic [ref=e132]: Contabilidade
+                        - generic [ref=e133]: para você crescer
+                    - generic [ref=e138]:
+                      - generic [ref=e139]:
+                        - generic:
+                          - generic:
+                            - heading "Sobre nós" [level=3] [ref=e144]:
+                              - generic [ref=e145]: Sobre nós
+                            - generic:
+                              - paragraph [ref=e146]:
+                                - generic [ref=e147]: Especialistas em contabilidade com mais de 30 anos de mercado, ajudamos empresas e profissionais a se estruturarem e se prepararem para um futuro seguro e próspero.
+                              - paragraph [ref=e148]
+                              - paragraph [ref=e149]:
+                                - generic [ref=e151]: "Como experts na área contábil, possuímos um time preparado para atender de forma personalizada seu negócio, com confiança, experiência e conhecimento. Contamos ainda com duas frentes específicas: uma especialista na área da saúde, a Singular Care, e outra na contabilidade digital, a Singular One."
+                              - paragraph [ref=e152]
+                              - paragraph [ref=e153]:
+                                - generic [ref=e154]: Com a Singular, o futuro está ao seu alcance.
+                      - generic [ref=e155]:
+                        - generic:
+                          - generic:
+                            - img [ref=e162]
+                            - generic:
+                              - paragraph [ref=e176]:
+                                - generic [ref=e178]: O mundo mudou e a contabilidade também.
+                              - paragraph [ref=e179]
+                              - paragraph [ref=e180]:
+                                - generic [ref=e181]: "Somamos a expertise de mais de 30 anos em contabilidade com as inovações do mercado e criamos a Singular One: contabilidade digital com atendimento ainda mais rápido, prático e amplamente seguro."
+                            - link "Saiba mais" [ref=e183] [cursor=pointer]:
+                              - /url: https://www.singularcont.com.br/one
+                              - generic [ref=e184]: Saiba mais
+                            - img [ref=e187]
+                      - generic [ref=e190]:
+                        - generic:
+                          - generic:
+                            - img [ref=e197]
+                            - generic:
+                              - paragraph [ref=e212]:
+                                - generic [ref=e214]: Você cuida das pessoas. Nós cuidamos do seu negócio.
+                              - paragraph [ref=e215]
+                              - paragraph [ref=e216]:
+                                - generic [ref=e217]: "Na Singular Care, somos especialistas em contabilidade para área da saúde. Há mais de 30 anos, atuamos com médicos, dentistas, clínicas e hospitais, dando a segurança e tranquilidade para que eles foquem na sua missão de vida: cuidar das pessoas"
+                            - link "Saiba mais" [ref=e219] [cursor=pointer]:
+                              - /url: https://www.singularcont.com.br/care
+                              - generic [ref=e220]: Saiba mais
+                            - img [ref=e223]
+              - generic [ref=e226]:
+                - generic:
+                  - generic:
+                    - heading "A garantia de um futuro seguro" [level=2] [ref=e239]:
+                      - generic [ref=e240]:
+                        - generic [ref=e241]: A garantia de um
+                        - generic [ref=e242]: futuro seguro
+                    - region "História"
+                    - generic [ref=e247]:
+                      - generic [ref=e248]:
+                        - generic:
+                          - generic:
+                            - paragraph [ref=e252]: "+1.000"
+                            - paragraph [ref=e253]:
+                              - generic [ref=e254]: Clientes já atendidos com sucesso
+                      - generic [ref=e255]:
+                        - generic:
+                          - generic:
+                            - paragraph [ref=e259]: 30 anos
+                            - paragraph [ref=e260]:
+                              - generic [ref=e261]: de experiência no mercado
+                    - generic [ref=e267]:
+                      - img "Phone_Mockup.jpg" [ref=e272]
+                      - paragraph [ref=e273]:
+                        - generic [ref=e275]: Com a Singular, você tem acesso a uma plataforma exclusiva e personalizada para visualizar os documentos da empresa e as guias de pagamento em tempo real. Além disso, temos um time dedicado para te atender de forma próxima e consultiva.
+              - generic [ref=e276]:
+                - generic:
+                  - generic:
+                    - region "Serviços"
+                    - heading "Nossos serviços" [level=2] [ref=e289]:
+                      - generic [ref=e290]:
+                        - generic [ref=e291]: Nossos
+                        - generic [ref=e292]: serviços
+                    - generic [ref=e297]:
+                      - generic [ref=e298]:
+                        - generic:
+                          - generic:
+                            - heading "Assessoria" [level=3] [ref=e303]
+                            - generic:
+                              - paragraph [ref=e304]:
+                                - generic [ref=e305]: Para empresários que buscam uma assessoria completa nas áreas contábil, fiscal, RH e tributária.
+                              - paragraph [ref=e306]
+                              - paragraph [ref=e307]:
+                                - generic [ref=e308]: Atuamos no processo de constituição, alteração e baixa de empresas, bem como na contabilidade mensal, apuração dos impostos, elaboração da folha de pagamento e planejamento tributário periódico para melhor performance da empresa.
+                      - generic [ref=e309]:
+                        - generic:
+                          - generic:
+                            - heading "Consultoria" [level=3] [ref=e314]
+                            - paragraph [ref=e315]:
+                              - generic [ref=e316]: Foco em responder dúvidas e problemas pontuais que podem auxiliar na tomada de decisão e direcionar para melhores resultados, visando economia de impostos e projeção de crescimento.
+                      - generic [ref=e317]:
+                        - generic:
+                          - generic:
+                            - heading "Declaração IRPF & IRPJ" [level=3] [ref=e322]
+                            - paragraph [ref=e323]: Elaboração de declarações sobre a construção de patrimônio e clareza nas informações prestadas. Atendemos também casos de retificação e regularização após o prazo de entrega.
+                      - generic [ref=e324]:
+                        - generic:
+                          - generic:
+                            - heading "Perícia Trabalhista e Perícia Tributária" [level=3] [ref=e329]
+                            - paragraph [ref=e330]:
+                              - generic [ref=e331]: Análise de documentos e registros contábeis e trabalhistas para elaborar pareceres técnicos em processos judiciais ou extrajudiciais.
+                    - region "Depoimentos"
+                    - heading "O que os clientes dizem?" [level=2] [ref=e341]:
+                      - generic [ref=e342]:
+                        - generic [ref=e343]: O que os
+                        - generic [ref=e344]: clientes
+                        - generic [ref=e345]: dizem?
+                    - generic [ref=e350]:
+                      - generic [ref=e351]:
+                        - generic:
+                          - generic:
+                            - blockquote [ref=e356]:
+                              - generic [ref=e358]: "\"Somos clientes há mais de 15 anos e centralizamos todos os nossos serviços na Singular. Os prazos, a qualidade e a excelência são uma questão de prioridade. Estamos muito satisfeitos e esperamos manter por muitos anos nossa parceria!.\""
+                            - paragraph [ref=e359]: Bell Design
+                      - generic [ref=e360]:
+                        - generic:
+                          - generic:
+                            - blockquote [ref=e365]:
+                              - generic [ref=e367]: "\"A Singular está conosco desde o início da empresa. É um escritório sério, de qualidade e comprometido com a plena satisfação de seus clientes. O diferencial deles, além da ótima prestação de serviço, está na disponibilidade do suporte, a fim de sanar quaisquer dúvidas e inseguranças que enfrentamos no dia a dia.\""
+                            - paragraph [ref=e368]: Alphamed
+                      - generic [ref=e369]:
+                        - generic:
+                          - generic:
+                            - blockquote [ref=e374]:
+                              - generic [ref=e376]: "\"Recomendamos o Escritório Singular pela sua excelência e competência. Nossa parceria já dura muitos anos. Profissionais sempre prontos a nos ajudar. Uma equipe realmente muito experiente!\""
+                            - paragraph [ref=e377]: InterativaCom
+                    - region "Contato"
+    - contentinfo [ref=e378]:
+      - generic [ref=e382]:
+        - generic:
+          - generic:
+            - generic [ref=e387]:
+              - generic [ref=e388]:
+                - generic:
+                  - generic:
+                    - paragraph [ref=e392]:
+                      - link "contato@singularcont.com.br" [ref=e394] [cursor=pointer]:
+                        - /url: mailto:contato@singularcont.com.br
+                    - generic:
+                      - paragraph [ref=e395]:
+                        - link "(54) 9.9100-0520" [ref=e396] [cursor=pointer]:
+                          - /url: https://api.whatsapp.com/send?phone=5554991000520
+                      - paragraph [ref=e397]
+                      - paragraph [ref=e398]: (54) 3227-3679
+                    - generic:
+                      - paragraph [ref=e399]:
+                        - generic [ref=e400]: "Escritório:"
+                      - paragraph [ref=e401]
+                      - paragraph [ref=e402]: Marechal Floriano, 24/702
+                      - paragraph [ref=e403]: Pio X - Caxias do Sul - 95020-370
+                      - paragraph [ref=e404]
+                      - paragraph [ref=e405]: De segunda a sexta
+                      - paragraph [ref=e406]: Das 8h às 17h45
+                    - list "Redes sociais" [ref=e408]:
+                      - listitem [ref=e409]:
+                        - link "Instagram" [ref=e410] [cursor=pointer]:
+                          - /url: https://www.instagram.com/singularcontabilidade/
+                          - img "Instagram" [ref=e411]
+                      - listitem [ref=e412]:
+                        - link "Facebook" [ref=e413] [cursor=pointer]:
+                          - /url: https://www.facebook.com/singularcont/
+                          - img "Facebook" [ref=e414]
+                      - listitem [ref=e415]:
+                        - link "Whatsapp" [ref=e416] [cursor=pointer]:
+                          - /url: https://api.whatsapp.com/send?phone=5554991000520
+                          - img "Whatsapp" [ref=e417]
+              - generic [ref=e418]:
+                - generic:
+                  - generic:
+                    - paragraph [ref=e422]:
+                      - generic [ref=e423]: Informações de contato
+                    - paragraph [ref=e424]: Fale com nossa equipe de atendimento ao cliente. Use este formulário ou entre em contato direto por email ou telefone.
+                    - generic [ref=e426]:
+                      - generic:
+                        - generic:
+                          - generic [ref=e427]:
+                            - generic [ref=e428]: Nome *
+                            - textbox "Nome *" [ref=e430]:
+                              - /placeholder: " "
+                          - generic [ref=e431]:
+                            - generic [ref=e432]: Sobrenome *
+                            - textbox "Sobrenome *" [ref=e434]:
+                              - /placeholder: " "
+                          - generic [ref=e435]:
+                            - generic [ref=e436]: Telefone *
+                            - textbox "Telefone *" [ref=e438]:
+                              - /placeholder: ""
+                          - generic [ref=e439]:
+                            - generic [ref=e440]: Email *
+                            - textbox "Email *" [ref=e442]:
+                              - /placeholder: " "
+                          - generic [ref=e443]:
+                            - generic [ref=e444]: Mensagem
+                            - textbox "Mensagem" [ref=e445]:
+                              - /placeholder: ""
+                          - button "Enviar" [ref=e447] [cursor=pointer]:
+                            - generic [ref=e448]: Enviar
+            - paragraph [ref=e459]: © 2023 Singular Contabilidade | 16.949.837/0001-11
+  - region "bottom of page"

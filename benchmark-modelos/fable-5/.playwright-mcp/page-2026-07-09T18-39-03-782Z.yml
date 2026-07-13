@@ -1,0 +1,29 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - heading "Sistema Solar 3D" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Arraste para girar a câmera · Role para dar zoom · Clique num planeta (ou no Sol) para ver detalhes. Velocidades orbitais em proporção realista.
+  - generic [ref=e6]:
+    - button "⏸ Pausar" [ref=e7] [cursor=pointer]
+    - slider [ref=e8] [cursor=pointer]: "20"
+    - generic [ref=e9]: 20 dias/s
+    - generic [ref=e10] [cursor=pointer]:
+      - checkbox "Órbitas" [checked] [ref=e11]
+      - text: Órbitas
+    - generic [ref=e12] [cursor=pointer]:
+      - checkbox "Nomes" [checked] [ref=e13]
+      - text: Nomes
+    - button "Recentrar" [ref=e14] [cursor=pointer]
+  - generic [ref=e15]:
+    - button "×" [ref=e16] [cursor=pointer]
+    - heading [level=2] [ref=e17]
+    - generic [ref=e19]:
+      - term [ref=e20]: Diâmetro
+      - definition
+      - term [ref=e21]: Período orbital
+      - definition
+      - term [ref=e22]: Distância do Sol
+      - definition
+      - term [ref=e23]: Duração do dia
+      - definition
+      - term [ref=e24]: Curiosidade
+      - definition

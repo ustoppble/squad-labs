@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple</title>
+<style>
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --nav-h: 44px;
+    --bg-light: #f5f5f7;
+    --bg-white: #ffffff;
+    --bg-dark: #000000;
+    --text-dark: #1d1d1f;
+    --text-light: #f5f5f7;
+    --text-sub: #6e6e73;
+    --text-sub-dark: #a1a1a6;
+    --link: #0066cc;
+    --link-hover: #0077ed;
+    --gap: 12px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font);
+    color: var(--text-dark);
+    background: var(--bg-white);
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    overflow-x: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  ul { list-style: none; }
+  button {
+    font-family: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  img, svg { display: block; max-width: 100%; }
+
+  /* ========== NAVBAR ========== */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-h);
+    background: rgba(22, 22, 23, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 9999;
+    transition: background 0.3s ease;
+  }
+
+  .nav-inner {
+    max-width: 1024px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-list li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .nav-list a {
+    color: #f5f5f7;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.8;
+    padding: 0 8px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-list a:hover { opacity: 1; }
+
+  .nav-logo svg {
+    width: 14px;
+    height: 44px;
+    fill: #f5f5f7;
+  }
+
+  .nav-icon svg {
+    width: 15px;
+    height: 44px;
+    fill: #f5f5f7;
+  }
+
+  .nav-toggle {
+    display: none;
+    width: 40px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    color: #f5f5f7;
+    opacity: 0.8;
+  }
+
+  .nav-toggle:hover { opacity: 1; }
+
+  .nav-toggle span,
+  .nav-toggle span::before,
+  .nav-toggle span::after {
+    display: block;
+    width: 17px;
+    height: 1px;
+    background: currentColor;
+    position: relative;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+
+  .nav-toggle span::before,
+  .nav-toggle span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .nav-toggle span::before { top: -6px; }
+  .nav-toggle span::after { top: 6px; }
+
+  .navbar.open .nav-toggle span { background: transparent; }
+  .navbar.open .nav-toggle span::before { top: 0; transform: rotate(45deg); }
+  .navbar.open .nav-toggle span::after { top: 0; transform: rotate(-45deg); }
+
+  /* ========== HERO ========== */
+  .hero {
+    margin-top: var(--nav-h);
+    text-align: center;
+    padding: 52px 20px 0;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    overflow: hidden;
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 980px;
+    width: 100%;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s forwards;
+  }
+
+  .hero-title {
+    font-size: clamp(40px, 7.2vw, 56px);
+    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.005em;
+    margin-bottom: 6px;
+  }
+
+  .hero-sub {
+    font-size: clamp(19px, 2.8vw, 28px);
+    font-weight: 400;
+    line-height: 1.14;
+    letter-spacing: 0.007em;
+    color: var(--text-sub-dark);
+    margin-bottom: 18px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+
+  .cta {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--link);
+    letter-spacing: -0.022em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s ease, gap 0.25s ease;
+  }
+
+  .cta:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cta .arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+
+  .cta:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    animation: fadeUpScale 1.1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.35s forwards;
+  }
+
+  .hero-visual-inner {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16 / 10;
+    border-radius: 28px 28px 0 0;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .hero-visual-inner:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  .hero-visual-inner svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ========== PRODUCT GRID ========== */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+    padding: var(--gap);
+    background: var(--bg-white);
+  }
+
+  .product {
+    position: relative;
+    text-align: center;
+    padding: 56px 24px 0;
+    overflow: hidden;
+    min-height: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0;
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.75s cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform 0.75s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .product.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .product.light {
+    background: var(--bg-light);
+    color: var(--text-dark);
+  }
+
+  .product.dark {
+    background: var(--bg-dark);
+    color: var(--text-light);
+  }
+
+  .product.full {
+    grid-column: 1 / -1;
+    min-height: 640px;
+    padding-top: 64px;
+  }
+
+  .product-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.9;
+  }
+
+  .product-title {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0;
+    margin-bottom: 6px;
+  }
+
+  .product.full .product-title {
+    font-size: clamp(32px, 4.5vw, 48px);
+  }
+
+  .product-sub {
+    font-size: clamp(17px, 1.8vw, 21px);
+    font-weight: 400;
+    line-height: 1.19;
+    letter-spacing: 0.011em;
+    margin-bottom: 16px;
+    max-width: 420px;
+  }
+
+  .product.light .product-sub { color: var(--text-sub); }
+  .product.dark .product-sub { color: var(--text-sub-dark); }
+
+  .product .cta-row { margin-bottom: 28px; }
+
+  .product-visual {
+    width: 100%;
+    max-width: 520px;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: auto;
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .product:hover .product-visual {
+    transform: scale(1.03) translateY(-6px);
+  }
+
+  .product.full .product-visual {
+    max-width: 780px;
+  }
+
+  .product-visual svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    background: var(--bg-light);
+    color: var(--text-sub);
+    font-size: 12px;
+    line-height: 1.33337;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    padding: 0 0 24px;
+  }
+
+  .footer-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 17px 22px 0;
+  }
+
+  .footer-notes {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #d2d2d7;
+    margin-bottom: 16px;
+  }
+
+  .footer-notes p {
+    margin-bottom: 10px;
+    color: #6e6e73;
+  }
+
+  .footer-notes a {
+    color: #424245;
+  }
+
+  .footer-notes a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-columns {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px 12px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d2d2d7;
+    margin-bottom: 12px;
+  }
+
+  .footer-col h3 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-col ul li {
+    margin-bottom: 8px;
+  }
+
+  .footer-col a {
+    color: #424245;
+    font-size: 12px;
+    transition: color 0.15s ease;
+  }
+
+  .footer-col a:hover {
+    text-decoration: underline;
+    color: #1d1d1f;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 0;
+    padding-top: 4px;
+  }
+
+  .footer-copy {
+    color: #6e6e73;
+    margin-right: 20px;
+  }
+
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .footer-legal li {
+    position: relative;
+    padding: 0 10px;
+  }
+
+  .footer-legal li:first-child {
+    padding-left: 0;
+  }
+
+  .footer-legal li:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    bottom: 3px;
+    width: 1px;
+    background: #d2d2d7;
+  }
+
+  .footer-legal a {
+    color: #424245;
+  }
+
+  .footer-legal a:hover {
+    text-decoration: underline;
+    color: #1d1d1f;
+  }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeUpScale {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 1068px) {
+    .product {
+      min-height: 520px;
+      padding-top: 48px;
+    }
+
+    .product.full {
+      min-height: 560px;
+    }
+
+    .footer-columns {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 833px) {
+    .nav-list .nav-item {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-inner {
+      padding: 0 16px;
+    }
+
+    .nav-list {
+      justify-content: flex-start;
+      gap: 0;
+    }
+
+    .nav-list .nav-logo {
+      margin-right: auto;
+    }
+
+    .nav-list .nav-search,
+    .nav-list .nav-bag {
+      display: flex;
+    }
+
+    /* Mobile menu */
+    .navbar.open .nav-list {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #161617;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      padding: 0 40px 40px;
+      height: auto;
+      overflow-y: auto;
+      animation: menuIn 0.3s ease;
+    }
+
+    .navbar.open .nav-list .nav-item {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar.open .nav-list .nav-item a {
+      font-size: 17px;
+      font-weight: 600;
+      padding: 12px 0;
+      opacity: 1;
+      width: 100%;
+      height: auto;
+    }
+
+    .navbar.open .nav-list .nav-logo,
+    .navbar.open .nav-list .nav-search,
+    .navbar.open .nav-list .nav-bag {
+      display: none;
+    }
+
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .product,
+    .product.full {
+      min-height: 500px;
+      padding-top: 48px;
+    }
+
+    .hero {
+      min-height: auto;
+      padding-top: 40px;
+    }
+
+    .hero-visual-inner {
+      border-radius: 20px 20px 0 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    .footer-columns {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cta-row {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+    }
+
+    .hero-sub {
+      font-size: 19px;
+    }
+
+    .product-title {
+      font-size: 28px;
+    }
+
+    .product-sub {
+      font-size: 17px;
+    }
+
+    .footer-columns {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @keyframes menuIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .product {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar" aria-label="Global">
+  <div class="nav-inner">
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span>
+    </button>
+    <ul class="nav-list">
+      <li class="nav-logo">
+        <a href="#" aria-label="Apple">
+          <svg viewBox="0 0 14 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M13.0729 17.6823C12.7372 17.8852 11.1959 18.7563 11.1959 20.6667C11.1959 22.8917 13.184 23.7253 13.244 23.7448C13.2273 23.8337 12.9227 24.9202 12.1426 26.0274C11.4487 27.0102 10.7131 28 9.54798 28C8.3829 28 8.08612 27.3253 6.751 27.3253C5.45663 27.3253 4.98358 28 3.90241 28C2.82124 28 2.05065 27.0751 1.24824 25.9625C0.321665 24.6574 -0.38568 22.6272 -0.38568 20.6946C-0.38568 17.5969 1.66754 15.9579 3.68098 15.9579C4.8027 15.9579 5.73765 16.6885 6.44176 16.6885C7.10512 16.6885 8.15033 15.9171 9.44304 15.9171C9.9354 15.9171 11.7314 15.9579 13.0729 17.6823ZM9.05194 14.2336C9.5773 13.5903 9.94916 12.6948 9.94916 11.7993C9.94916 11.6777 9.9388 11.5524 9.9173 11.4453C9.05194 11.4783 8.0227 12.022 7.4356 12.7247C6.97425 13.2595 6.5249 14.155 6.5249 15.0642C6.5249 15.1995 6.54798 15.3348 6.55676 15.3781C6.60949 15.388 6.6952 15.4005 6.78091 15.4005C7.55988 15.4005 8.48213 14.8795 9.05194 14.2336Z" transform="translate(1, 8)"/>
+          </svg>
+        </a>
+      </li>
+      <li class="nav-item"><a href="#">Store</a></li>
+      <li class="nav-item"><a href="#">Mac</a></li>
+      <li class="nav-item"><a href="#">iPad</a></li>
+      <li class="nav-item"><a href="#">iPhone</a></li>
+      <li class="nav-item"><a href="#">Watch</a></li>
+      <li class="nav-item"><a href="#">Vision</a></li>
+      <li class="nav-item"><a href="#">AirPods</a></li>
+      <li class="nav-item"><a href="#">TV &amp; Casa</a></li>
+      <li class="nav-item"><a href="#">Entretenimento</a></li>
+      <li class="nav-item"><a href="#">Acessórios</a></li>
+      <li class="nav-item"><a href="#">Suporte</a></li>
+      <li class="nav-search">
+        <a href="#" aria-label="Buscar" class="nav-icon">
+          <svg viewBox="0 0 15 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14.298 27.202l-3.87-3.87c.701-.966 1.105-2.146 1.105-3.42 0-3.243-2.632-5.875-5.875-5.875S-.217 16.669-.217 19.912s2.632 5.875 5.875 5.875c1.274 0 2.454-.404 3.42-1.105l3.87 3.87a.75.75 0 001.06 0 .75.75 0 000-1.06zM1.283 19.912c0-2.415 1.965-4.375 4.375-4.375s4.375 1.96 4.375 4.375-1.965 4.375-4.375 4.375-4.375-1.96-4.375-4.375z"/>
+          </svg>
+        </a>
+      </li>
+      <li class="nav-bag">
+        <a href="#" aria-label="Sacola" class="nav-icon">
+          <svg viewBox="0 0 14 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M11.353 17.029h-1.06a3.292 3.292 0 00-6.496 0H2.737a1.01 1.01 0 00-1.01 1.01v10.802a1.01 1.01 0 001.01 1.01h8.616a1.01 1.01 0 001.01-1.01V18.039a1.01 1.01 0 00-1.01-1.01zm-4.308-1.52a2.282 2.282 0 012.238 1.52H4.807a2.282 2.282 0 012.238-1.52zm4.308 13.342H2.737V18.039h8.616v10.812z"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO: iPhone 16 Pro -->
+<section class="hero" aria-label="iPhone 16 Pro">
+  <div class="hero-content">
+    <h1 class="hero-title">iPhone 16 Pro</h1>
+    <p class="hero-sub">Incrivelmente. Pro.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Comprar <span class="arrow">›</span></a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-visual-inner">
+      <!-- iPhone Pro placeholder: titanium gradient device -->
+      <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="iPhone 16 Pro">
+        <defs>
+          <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a1a1c"/>
+            <stop offset="40%" stop-color="#0d0d0f"/>
+            <stop offset="100%" stop-color="#000"/>
+          </linearGradient>
+          <linearGradient id="phoneBody" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8a8a8e"/>
+            <stop offset="25%" stop-color="#5c5c60"/>
+            <stop offset="50%" stop-color="#3a3a3c"/>
+            <stop offset="75%" stop-color="#6b6b6f"/>
+            <stop offset="100%" stop-color="#4a4a4e"/>
+          </linearGradient>
+          <linearGradient id="phoneScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1c3a5f"/>
+            <stop offset="50%" stop-color="#0a1628"/>
+            <stop offset="100%" stop-color="#051018"/>
+          </linearGradient>
+          <linearGradient id="glow" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#1a5cff" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="camLens" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#2a2a2e"/>
+            <stop offset="60%" stop-color="#1a1a1c"/>
+            <stop offset="100%" stop-color="#0a0a0c"/>
+          </radialGradient>
+        </defs>
+        <rect width="900" height="560" fill="url(#heroBg)"/>
+        <!-- ambient glow -->
+        <ellipse cx="450" cy="480" rx="280" ry="60" fill="url(#glow)"/>
+        <!-- phone body -->
+        <rect x="310" y="40" width="280" height="500" rx="40" ry="40" fill="url(#phoneBody)"/>
+        <rect x="318" y="48" width="264" height="484" rx="34" ry="34" fill="#1a1a1c"/>
+        <!-- screen -->
+        <rect x="326" y="68" width="248" height="444" rx="28" ry="28" fill="url(#phoneScreen)"/>
+        <!-- Dynamic Island -->
+        <rect x="398" y="78" width="104" height="28" rx="14" ry="14" fill="#000"/>
+        <!-- camera island -->
+        <rect x="332" y="80" width="72" height="72" rx="16" ry="16" fill="#2c2c2e" opacity="0.9"/>
+        <circle cx="356" cy="104" r="14" fill="url(#camLens)"/>
+        <circle cx="380" cy="104" r="14" fill="url(#camLens)"/>
+        <circle cx="356" cy="128" r="10" fill="url(#camLens)"/>
+        <circle cx="356" cy="104" r="6" fill="#1a3a5c"/>
+        <circle cx="380" cy="104" r="6" fill="#1a3a5c"/>
+        <!-- screen content hint -->
+        <text x="450" y="280" text-anchor="middle" fill="#f5f5f7" font-family="var(--font), sans-serif" font-size="22" font-weight="600" opacity="0.9">9:41</text>
+        <rect x="360" y="320" width="180" height="8" rx="4" fill="#fff" opacity="0.15"/>
+        <rect x="390" y="340" width="120" height="8" rx="4" fill="#fff" opacity="0.1"/>
+        <!-- side buttons -->
+        <rect x="304" y="140" width="6" height="36" rx="2" fill="#6a6a6e"/>
+        <rect x="304" y="190" width="6" height="56" rx="2" fill="#6a6a6e"/>
+        <rect x="304" y="256" width="6" height="56" rx="2" fill="#6a6a6e"/>
+        <rect x="590" y="180" width="6" height="80" rx="2" fill="#6a6a6e"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT GRID -->
+<div class="product-grid">
+
+  <!-- iPhone 16 -->
+  <section class="product light" data-reveal>
+    <p class="product-eyebrow">Novo</p>
+    <h2 class="product-title">iPhone 16</h2>
+    <p class="product-sub">Olá, Apple Intelligence.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Comprar <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="iPhone 16">
+        <defs>
+          <linearGradient id="ip16bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e8f0fe"/>
+            <stop offset="100%" stop-color="#d0e0f8"/>
+          </linearGradient>
+          <linearGradient id="ip16body" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#5ac8fa"/>
+            <stop offset="50%" stop-color="#34aadc"/>
+            <stop offset="100%" stop-color="#007aff"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="360" fill="url(#ip16bg)"/>
+        <rect x="155" y="30" width="170" height="310" rx="28" fill="url(#ip16body)"/>
+        <rect x="162" y="42" width="156" height="286" rx="22" fill="#0a1628"/>
+        <rect x="215" y="50" width="50" height="14" rx="7" fill="#000"/>
+        <circle cx="200" cy="110" r="18" fill="#1a2a3a"/>
+        <circle cx="200" cy="110" r="8" fill="#0d2137"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- MacBook Pro -->
+  <section class="product dark" data-reveal>
+    <p class="product-eyebrow">Novo</p>
+    <h2 class="product-title">MacBook Pro</h2>
+    <p class="product-sub">Um monstro de potência.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Comprar <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MacBook Pro">
+        <defs>
+          <linearGradient id="mbpBg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1a1a1c"/>
+            <stop offset="100%" stop-color="#000"/>
+          </linearGradient>
+          <linearGradient id="mbpScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#2d4a6f"/>
+            <stop offset="100%" stop-color="#0d1a2a"/>
+          </linearGradient>
+          <linearGradient id="mbpBody" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#6e6e73"/>
+            <stop offset="100%" stop-color="#3a3a3c"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="360" fill="url(#mbpBg)"/>
+        <!-- lid -->
+        <rect x="60" y="50" width="360" height="230" rx="8" fill="#2c2c2e"/>
+        <rect x="72" y="62" width="336" height="200" rx="2" fill="url(#mbpScreen)"/>
+        <circle cx="240" cy="56" r="3" fill="#1a1a1c"/>
+        <!-- base -->
+        <path d="M40 280 L440 280 L460 310 L20 310 Z" fill="url(#mbpBody)"/>
+        <rect x="180" y="288" width="120" height="6" rx="2" fill="#4a4a4e"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Apple Watch -->
+  <section class="product dark" data-reveal>
+    <h2 class="product-title">Apple Watch Series 10</h2>
+    <p class="product-sub">Mais fino. Mais capaz. Mais do que nunca.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Comprar <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apple Watch">
+        <defs>
+          <linearGradient id="watchBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1c1c1e"/>
+            <stop offset="100%" stop-color="#000"/>
+          </linearGradient>
+          <linearGradient id="watchFace" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ff375f"/>
+            <stop offset="100%" stop-color="#ff2d55"/>
+          </linearGradient>
+          <linearGradient id="watchCase" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d4d4d8"/>
+            <stop offset="50%" stop-color="#8e8e93"/>
+            <stop offset="100%" stop-color="#aeaeb2"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="360" fill="url(#watchBg)"/>
+        <!-- band top -->
+        <rect x="195" y="20" width="90" height="70" rx="8" fill="#3a3a3c"/>
+        <!-- case -->
+        <rect x="175" y="80" width="130" height="160" rx="32" fill="url(#watchCase)"/>
+        <rect x="185" y="92" width="110" height="136" rx="24" fill="#000"/>
+        <rect x="190" y="100" width="100" height="120" rx="20" fill="url(#watchFace)"/>
+        <!-- watch face content -->
+        <text x="240" y="155" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="28" font-weight="600">10:09</text>
+        <circle cx="240" cy="185" r="16" fill="none" stroke="#fff" stroke-width="3" opacity="0.8"/>
+        <circle cx="240" cy="185" r="6" fill="#fff" opacity="0.9"/>
+        <!-- band bottom -->
+        <rect x="195" y="240" width="90" height="90" rx="8" fill="#3a3a3c"/>
+        <!-- crown -->
+        <rect x="305" y="130" width="8" height="28" rx="3" fill="#aeaeb2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- iPad Pro -->
+  <section class="product light" data-reveal>
+    <h2 class="product-title">iPad Pro</h2>
+    <p class="product-sub">Impossivelmente fino. Incrivelmente poderoso.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Comprar <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="iPad Pro">
+        <defs>
+          <linearGradient id="ipadBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f5f5f7"/>
+            <stop offset="100%" stop-color="#e8e8ed"/>
+          </linearGradient>
+          <linearGradient id="ipadScreen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#5e5ce6"/>
+            <stop offset="50%" stop-color="#bf5af2"/>
+            <stop offset="100%" stop-color="#ff375f"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="360" fill="url(#ipadBg)"/>
+        <rect x="90" y="40" width="300" height="280" rx="18" fill="#1d1d1f"/>
+        <rect x="100" y="50" width="280" height="260" rx="6" fill="url(#ipadScreen)"/>
+        <circle cx="240" cy="45" r="3" fill="#3a3a3c"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- AirPods Pro -->
+  <section class="product light" data-reveal>
+    <p class="product-eyebrow">Novo</p>
+    <h2 class="product-title">AirPods Pro 2</h2>
+    <p class="product-sub">Áudio adaptativo. Agora com USB‑C.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Comprar <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AirPods Pro">
+        <defs>
+          <linearGradient id="apBg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fbfbfd"/>
+            <stop offset="100%" stop-color="#e8e8ed"/>
+          </linearGradient>
+          <linearGradient id="apWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#e5e5ea"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="360" fill="url(#apBg)"/>
+        <!-- left bud -->
+        <ellipse cx="170" cy="140" rx="42" ry="50" fill="url(#apWhite)" stroke="#d2d2d7" stroke-width="1"/>
+        <rect x="155" y="175" width="30" height="70" rx="12" fill="url(#apWhite)" stroke="#d2d2d7" stroke-width="1"/>
+        <ellipse cx="170" cy="125" rx="18" ry="14" fill="#f5f5f7" stroke="#c7c7cc" stroke-width="1"/>
+        <!-- right bud -->
+        <ellipse cx="310" cy="140" rx="42" ry="50" fill="url(#apWhite)" stroke="#d2d2d7" stroke-width="1"/>
+        <rect x="295" y="175" width="30" height="70" rx="12" fill="url(#apWhite)" stroke="#d2d2d7" stroke-width="1"/>
+        <ellipse cx="310" cy="125" rx="18" ry="14" fill="#f5f5f7" stroke="#c7c7cc" stroke-width="1"/>
+        <!-- case hint -->
+        <rect x="200" y="270" width="80" height="50" rx="12" fill="url(#apWhite)" stroke="#d2d2d7" stroke-width="1"/>
+        <line x1="200" y1="290" x2="280" y2="290" stroke="#d2d2d7" stroke-width="1"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Apple Vision Pro -->
+  <section class="product dark" data-reveal>
+    <h2 class="product-title">Apple Vision Pro</h2>
+    <p class="product-sub">Bem-vindo à era da computação espacial.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Comprar <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apple Vision Pro">
+        <defs>
+          <linearGradient id="vpBg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1c1c1e"/>
+            <stop offset="100%" stop-color="#000"/>
+          </linearGradient>
+          <linearGradient id="vpGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8e8e93"/>
+            <stop offset="30%" stop-color="#d1d1d6"/>
+            <stop offset="60%" stop-color="#636366"/>
+            <stop offset="100%" stop-color="#aeaeb2"/>
+          </linearGradient>
+          <radialGradient id="vpLens" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4a90d9" stop-opacity="0.6"/>
+            <stop offset="70%" stop-color="#1a3a5c" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="0.8"/>
+          </radialGradient>
+        </defs>
+        <rect width="480" height="360" fill="url(#vpBg)"/>
+        <!-- headset body -->
+        <ellipse cx="240" cy="180" rx="160" ry="90" fill="url(#vpGlass)"/>
+        <ellipse cx="240" cy="180" rx="150" ry="80" fill="#2c2c2e"/>
+        <!-- lenses -->
+        <ellipse cx="185" cy="175" rx="50" ry="45" fill="url(#vpLens)"/>
+        <ellipse cx="295" cy="175" rx="50" ry="45" fill="url(#vpLens)"/>
+        <!-- band -->
+        <path d="M90 160 Q60 180 90 200" fill="none" stroke="#6e6e73" stroke-width="12" stroke-linecap="round"/>
+        <path d="M390 160 Q420 180 390 200" fill="none" stroke="#6e6e73" stroke-width="12" stroke-linecap="round"/>
+        <!-- light seal hint -->
+        <ellipse cx="240" cy="240" rx="100" ry="20" fill="#3a3a3c" opacity="0.5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Full-width: MacBook Air -->
+  <section class="product full light" data-reveal>
+    <h2 class="product-title">MacBook Air</h2>
+    <p class="product-sub">Leve. Veloz. Com o poder do chip M3.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Comprar <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 780 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MacBook Air">
+        <defs>
+          <linearGradient id="mbaBg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#f5f5f7"/>
+            <stop offset="100%" stop-color="#e8e8ed"/>
+          </linearGradient>
+          <linearGradient id="mbaScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#64d2ff"/>
+            <stop offset="40%" stop-color="#5e5ce6"/>
+            <stop offset="100%" stop-color="#bf5af2"/>
+          </linearGradient>
+          <linearGradient id="mbaBody" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#d2d2d7"/>
+            <stop offset="100%" stop-color="#a1a1a6"/>
+          </linearGradient>
+        </defs>
+        <rect width="780" height="340" fill="url(#mbaBg)"/>
+        <!-- open laptop -->
+        <rect x="140" y="30" width="500" height="220" rx="10" fill="#c7c7cc"/>
+        <rect x="152" y="42" width="476" height="196" rx="3" fill="url(#mbaScreen)"/>
+        <circle cx="390" cy="36" r="3" fill="#8e8e93"/>
+        <!-- base -->
+        <path d="M120 250 L660 250 L680 290 L100 290 Z" fill="url(#mbaBody)"/>
+        <ellipse cx="390" cy="265" rx="50" ry="5" fill="#8e8e93"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Trade In -->
+  <section class="product light" data-reveal>
+    <h2 class="product-title">Apple Trade In</h2>
+    <p class="product-sub">Troque seu smartphone e economize. É fácil e rápido.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba o valor do seu aparelho <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apple Trade In">
+        <defs>
+          <linearGradient id="tiBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e8f5e9"/>
+            <stop offset="100%" stop-color="#c8e6c9"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="300" fill="url(#tiBg)"/>
+        <!-- old phone -->
+        <rect x="100" y="60" width="90" height="160" rx="12" fill="#8e8e93" opacity="0.6" transform="rotate(-12 145 140)"/>
+        <!-- arrow -->
+        <path d="M220 140 L260 140 M250 128 L265 140 L250 152" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- new phone -->
+        <rect x="290" y="50" width="100" height="180" rx="16" fill="#1d1d1f"/>
+        <rect x="298" y="62" width="84" height="156" rx="10" fill="#007aff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Card -->
+  <section class="product dark" data-reveal>
+    <h2 class="product-title">Card</h2>
+    <p class="product-sub">Receba até 3% de cashback em tudo o que comprar com o Apple Card.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Saiba mais <span class="arrow">›</span></a>
+      <a href="#" class="cta">Solicitar <span class="arrow">›</span></a>
+    </div>
+    <div class="product-visual">
+      <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apple Card">
+        <defs>
+          <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1c1c1e"/>
+            <stop offset="100%" stop-color="#000"/>
+          </linearGradient>
+          <linearGradient id="cardFace" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f5f5f7"/>
+            <stop offset="50%" stop-color="#e8e8ed"/>
+            <stop offset="100%" stop-color="#d2d2d7"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="300" fill="url(#cardBg)"/>
+        <rect x="90" y="70" width="300" height="180" rx="16" fill="url(#cardFace)" transform="rotate(-6 240 160)"/>
+        <text x="130" y="140" fill="#1d1d1f" font-family="sans-serif" font-size="18" font-weight="600" transform="rotate(-6 130 140)"> Card</text>
+        <text x="130" y="200" fill="#6e6e73" font-family="sans-serif" font-size="12" transform="rotate(-6 130 200)">•••• 4242</text>
+      </svg>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-notes">
+      <p>1. A Apple Intelligence está disponível em versão beta em todos os modelos de iPhone 16, no iPhone 15 Pro, iPhone 15 Pro Max, iPad mini (A17 Pro) e em modelos de iPad e Mac com o chip M1 ou posterior, com Siri e idioma do dispositivo definidos para o mesmo idioma compatível, como parte de uma atualização do iOS 18, iPadOS 18 e macOS Sequoia.</p>
+      <p>Alguns recursos, aplicativos e serviços podem não estar disponíveis em todas as regiões ou em todos os idiomas.</p>
+    </div>
+
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3>Descobrir e Comprar</h3>
+        <ul>
+          <li><a href="#">Store</a></li>
+          <li><a href="#">Mac</a></li>
+          <li><a href="#">iPad</a></li>
+          <li><a href="#">iPhone</a></li>
+          <li><a href="#">Watch</a></li>
+          <li><a href="#">Vision</a></li>
+          <li><a href="#">AirPods</a></li>
+          <li><a href="#">TV &amp; Casa</a></li>
+          <li><a href="#">AirTag</a></li>
+          <li><a href="#">Acessórios</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Conta</h3>
+        <ul>
+          <li><a href="#">Gerenciar seu ID Apple</a></li>
+          <li><a href="#">Conta da Apple Store</a></li>
+          <li><a href="#">iCloud.com</a></li>
+        </ul>
+        <h3 style="margin-top:18px">Entretenimento</h3>
+        <ul>
+          <li><a href="#">Apple One</a></li>
+          <li><a href="#">Apple TV+</a></li>
+          <li><a href="#">Apple Music</a></li>
+          <li><a href="#">Apple Arcade</a></li>
+          <li><a href="#">Apple Podcasts</a></li>
+          <li><a href="#">Apple Books</a></li>
+          <li><a href="#">App Store</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Apple Store</h3>
+        <ul>
+          <li><a href="#">Encontre uma loja</a></li>
+          <li><a href="#">Genius Bar</a></li>
+          <li><a href="#">Today at Apple</a></li>
+          <li><a href="#">Apple Camp</a></li>
+          <li><a href="#">Apple Store App</a></li>
+          <li><a href="#">Financiamento</a></li>
+          <li><a href="#">Apple Trade In</a></li>
+          <li><a href="#">Status do pedido</a></li>
+          <li><a href="#">Ajuda para compras</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Para Empresas</h3>
+        <ul>
+          <li><a href="#">Apple e os negócios</a></li>
+          <li><a href="#">Comprar para a sua empresa</a></li>
+        </ul>
+        <h3 style="margin-top:18px">Para a Educação</h3>
+        <ul>
+          <li><a href="#">Apple e a Educação</a></li>
+          <li><a href="#">Comprar para a Educação Básica</a></li>
+          <li><a href="#">Comprar para a Faculdade</a></li>
+        </ul>
+        <h3 style="margin-top:18px">Para a Saúde</h3>
+        <ul>
+          <li><a href="#">Apple e a Saúde</a></li>
+          <li><a href="#">Saúde no Apple Watch</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Valores da Apple</h3>
+        <ul>
+          <li><a href="#">Acessibilidade</a></li>
+          <li><a href="#">Educação</a></li>
+          <li><a href="#">Meio ambiente</a></li>
+          <li><a href="#">Privacidade</a></li>
+          <li><a href="#">Cadeia de fornecimento</a></li>
+        </ul>
+        <h3 style="margin-top:18px">Sobre a Apple</h3>
+        <ul>
+          <li><a href="#">Newsroom</a></li>
+          <li><a href="#">Liderança da Apple</a></li>
+          <li><a href="#">Oportunidades de carreira</a></li>
+          <li><a href="#">Investidores</a></li>
+          <li><a href="#">Ética e Compliance</a></li>
+          <li><a href="#">Eventos</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">Copyright © 2026 Apple Inc. Todos os direitos reservados.</p>
+      <ul class="footer-legal">
+        <li><a href="#">Política de Privacidade</a></li>
+        <li><a href="#">Termos de Uso</a></li>
+        <li><a href="#">Vendas e Reembolsos</a></li>
+        <li><a href="#">Avisos legais</a></li>
+        <li><a href="#">Mapa do site</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Mobile nav toggle
+  var navbar = document.getElementById('navbar');
+  var toggle = document.getElementById('navToggle');
+
+  toggle.addEventListener('click', function () {
+    var open = navbar.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  // Close menu on link click (mobile)
+  navbar.querySelectorAll('.nav-item a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      navbar.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Scroll reveal for product cards
+  var products = document.querySelectorAll('[data-reveal]');
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    products.forEach(function (el, i) {
+      el.style.transitionDelay = (i % 2) * 0.1 + 's';
+      observer.observe(el);
+    });
+  } else {
+    products.forEach(function (el) {
+      el.classList.add('in-view');
+    });
+  }
+
+  // Subtle nav opacity on scroll
+  var lastY = 0;
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY || window.pageYOffset;
+    if (y > 10) {
+      navbar.style.background = 'rgba(22, 22, 23, 0.92)';
+    } else {
+      navbar.style.background = 'rgba(22, 22, 23, 0.8)';
+    }
+    lastY = y;
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Barraquinha do Hot-Dog — Cachorro-quente artesanal</title>
+<meta name="description" content="Hot-dog artesanal recheado, caprichado e pronto em minutos. Vem pra barraquinha!" />
+
+<!-- Fontes: melhoram online; fallbacks (Arial Black/Impact) garantem o visual "gordo" offline -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Baloo+2:wght@600;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="topo">
+  <video class="hero__video" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+    <source src="assets/hero.webm" type="video/webm" />
+    <source src="assets/hero.mp4" type="video/mp4" />
+  </video>
+  <div class="hero__scrim"></div>
+
+  <div class="hero__inner">
+    <p class="hero__eyebrow">🌭 Barraquinha do Hot-Dog · Vila Nova</p>
+    <h1 class="hero__headline">Aqui a fome passa rápido —<br />e a vontade de voltar<br /><span class="hl">não passa nunca.</span></h1>
+    <p class="hero__sub">Hot-dog artesanal do jeito que você gosta: recheado, caprichado e pronto em minutos. Vem pra barraquinha!</p>
+    <a class="hero__cta" href="#cardapio">Ver o cardápio</a>
+  </div>
+
+  <a class="hero__scroll" href="#cardapio" aria-label="Rolar para o cardápio">
+    <span></span>
+  </a>
+</header>
+
+<!-- ============ CARDÁPIO ============ -->
+<main>
+<section class="cardapio" id="cardapio">
+  <div class="band__head">
+    <span class="eyebrow">Feito na chapa, na sua frente</span>
+    <h2 class="band__title">Cardápio</h2>
+    <div class="squiggle" aria-hidden="true"></div>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <img class="card__img" src="assets/menu/cachorrao-completo.png" alt="Cachorrão Completo" loading="lazy" />
+      <div class="card__top">
+        <h3 class="card__name">Cachorrão Completo</h3>
+        <span class="ticket">R$ 18,00</span>
+      </div>
+      <p class="card__desc">Salsicha grossa, purê de batata, milho, ervilha, batata palha, ketchup, mostarda e maionese. O clássico do jeito certo.</p>
+    </article>
+
+    <article class="card">
+      <img class="card__img" src="assets/menu/dog-prensado.png" alt="Dog Prensado" loading="lazy" />
+      <div class="card__top">
+        <h3 class="card__name">Dog Prensado</h3>
+        <span class="ticket">R$ 16,00</span>
+      </div>
+      <p class="card__desc">Pão de hot-dog tostadinho na chapa, salsicha, queijo derretido e molho especial da casa. Crocante por fora, cremoso por dentro.</p>
+    </article>
+
+    <article class="card">
+      <img class="card__img" src="assets/menu/dog-bacon-crocante.png" alt="Dog Bacon Crocante" loading="lazy" />
+      <div class="card__top">
+        <h3 class="card__name">Dog Bacon Crocante</h3>
+        <span class="ticket">R$ 20,00</span>
+      </div>
+      <p class="card__desc">Salsicha com tiras de bacon grelhado, catupiry, batata palha e molho barbecue. Para quem gosta de intensidade.</p>
+    </article>
+
+    <article class="card">
+      <img class="card__img" src="assets/menu/dog-calabresa.png" alt="Dog Calabresa" loading="lazy" />
+      <div class="card__top">
+        <h3 class="card__name">Dog Calabresa</h3>
+        <span class="ticket">R$ 19,00</span>
+      </div>
+      <p class="card__desc">Rodelas de calabresa defumada, cebola caramelizada, molho de tomate e queijo ralado. Sabor de churrasco na mão.</p>
+    </article>
+
+    <article class="card">
+      <img class="card__img" src="assets/menu/dog-frango-cream-cheese.png" alt="Dog Frango &amp; Cream Cheese" loading="lazy" />
+      <div class="card__top">
+        <h3 class="card__name">Dog Frango &amp; Cream Cheese</h3>
+        <span class="ticket">R$ 19,00</span>
+      </div>
+      <p class="card__desc">Frango desfiado temperado, cream cheese, milho e cebolinha. Leve, cremoso e irresistível.</p>
+    </article>
+
+    <article class="card card--combo">
+      <img class="card__img" src="assets/menu/mini-combo-familia.png" alt="Mini Combo Família" loading="lazy" />
+      <div class="card__top">
+        <h3 class="card__name">Mini Combo Família</h3>
+        <span class="ticket">R$ 34,00</span>
+      </div>
+      <p class="card__desc">2 Cachorros-quentes Completos + 2 Refris lata (350 ml). Perfeito pra dividir (ou não).</p>
+      <span class="card__flag">Pra dividir</span>
+    </article>
+
+  </div>
+
+  <!-- Bebidas -->
+  <div class="bebidas">
+    <h3 class="bebidas__title">🥤 Pra acompanhar</h3>
+    <ul class="bebidas__list">
+      <li>
+        <span class="bebidas__name">Refri Lata <em>— Coca-Cola, Guaraná ou Fanta (350 ml)</em></span>
+        <span class="ticket ticket--sm">R$ 6,00</span>
+      </li>
+      <li>
+        <span class="bebidas__name">Água Mineral <em>— 500 ml</em></span>
+        <span class="ticket ticket--sm">R$ 4,00</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ HORÁRIO + LOCALIZAÇÃO ============ -->
+<section class="info" id="info">
+  <div class="info__grid">
+
+    <div class="info__card info__card--hours">
+      <span class="eyebrow eyebrow--dark">Quando</span>
+      <h2 class="info__title">Horário</h2>
+      <p class="info__big">De terça a domingo</p>
+      <p class="info__clock">🕔 17h às 23h</p>
+      <p class="info__note">Aos fins de semana a barraquinha costuma lotar — chega cedo!</p>
+    </div>
+
+    <div class="info__card info__card--place">
+      <span class="eyebrow eyebrow--dark">Onde</span>
+      <h2 class="info__title">Localização</h2>
+      <p class="info__big">Rua das Flores, esquina com a Av. Brasil</p>
+      <p class="info__addr">Em frente à Praça Central · Bairro Vila Nova — SP</p>
+      <p class="info__note">Referência: do ladinho da padaria Pão de Ouro, pertinho do ponto de ônibus.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="closer">
+  <h2 class="closer__title">Tá com fome?</h2>
+  <p class="closer__sub">Chama no Zap e a gente te atende na hora! 🌭</p>
+  <!-- IMPORTANTE: trocar 5511999999999 pelo número REAL do cliente (55 + DDD + número) antes de publicar -->
+  <a class="closer__btn" href="https://wa.me/5511999999999" target="_blank" rel="noopener">Fazer meu pedido no WhatsApp</a>
+  <p class="closer__support">Tire dúvidas, faça pedidos e fique por dentro das novidades.</p>
+</section>
+</main>
+
+<footer class="foot">
+  <p>Barraquinha do Hot-Dog · Vila Nova — SP</p>
+  <p class="foot__fine">Preços, horários e endereço ilustrativos.</p>
+</footer>
+
+<!-- ============ MODAL DE DETALHE DO ITEM (preenchido via modal.js) ============ -->
+<div class="modal" id="itemModal" role="dialog" aria-modal="true" aria-labelledby="modalName" hidden>
+  <div class="modal__backdrop" data-close></div>
+
+  <div class="modal__panel" role="document">
+    <button class="modal__close" type="button" data-close aria-label="Fechar detalhes">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true">
+        <path d="M5 5l14 14M19 5L5 19" />
+      </svg>
+    </button>
+
+    <div class="modal__media">
+      <img class="modal__img" id="modalImg" src="" alt="" />
+    </div>
+
+    <div class="modal__body">
+      <div class="modal__head">
+        <h2 class="modal__name" id="modalName"></h2>
+        <span class="ticket modal__price" id="modalPrice"></span>
+      </div>
+
+      <p class="modal__desc" id="modalDesc"></p>
+
+      <!-- RÉGUA DE TAMANHO — eixo 0–32 cm, barra = cm/32 (alinhada aos ticks por %) -->
+      <figure class="ruler" id="modalRuler">
+        <figcaption class="ruler__cap">Tamanho na régua</figcaption>
+        <div class="ruler__track" id="rulerTrack">
+          <div class="ruler__dog" id="rulerDog">
+            <span class="ruler__badge" id="rulerBadge"></span>
+          </div>
+          <div class="ruler__ticks" id="rulerTicks" aria-hidden="true"></div>
+        </div>
+      </figure>
+
+      <h3 class="modal__subtitle">No recheio</h3>
+      <ul class="modal__ingredients" id="modalIngredients"></ul>
+
+      <!-- 5511999999999 é placeholder — trocar pelo número REAL do cliente antes de publicar -->
+      <a class="modal__wa" id="modalWa" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+          <path d="M.06 24l1.69-6.16a11.86 11.86 0 01-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 018.41 3.49 11.82 11.82 0 013.48 8.41c0 6.56-5.34 11.9-11.9 11.9a11.9 11.9 0 01-5.69-1.45L.06 24zM6.6 20.13l.36.21a9.86 9.86 0 005.03 1.38h.01c5.45 0 9.89-4.43 9.89-9.88a9.82 9.82 0 00-2.9-7A9.82 9.82 0 0012.07 2c-5.46 0-9.9 4.43-9.9 9.88 0 1.87.53 3.7 1.51 5.28l.24.38-1 3.65 3.68-.96zM18 14.36c-.07-.12-.27-.2-.56-.34-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.76-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.91-2.2-.24-.57-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.47 0 1.46 1.06 2.86 1.21 3.06.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41z"/>
+        </svg>
+        Pedir no WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ BOTÃO FLUTUANTE WHATSAPP (sempre visível) ============ -->
+<!-- IMPORTANTE: trocar 5511999999999 pelo número REAL do cliente (55 + DDD + número) antes de publicar -->
+<a class="wa-float" href="https://wa.me/5511999999999" target="_blank" rel="noopener"
+   aria-label="Chamar no WhatsApp para fazer o pedido">
+  <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+    <path d="M.06 24l1.69-6.16a11.86 11.86 0 01-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 018.41 3.49 11.82 11.82 0 013.48 8.41c0 6.56-5.34 11.9-11.9 11.9a11.9 11.9 0 01-5.69-1.45L.06 24zM6.6 20.13l.36.21a9.86 9.86 0 005.03 1.38h.01c5.45 0 9.89-4.43 9.89-9.88a9.82 9.82 0 00-2.9-7A9.82 9.82 0 0012.07 2c-5.46 0-9.9 4.43-9.9 9.88 0 1.87.53 3.7 1.51 5.28l.24.38-1 3.65 3.68-.96zM18 14.36c-.07-.12-.27-.2-.56-.34-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.76-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.91-2.2-.24-.57-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.47 0 1.46 1.06 2.86 1.21 3.06.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41z"/>
+  </svg>
+  <span class="wa-float__label">Tá com fome? Chama no Zap! 🌭</span>
+</a>
+
+<script src="script.js"></script>
+<script src="modal.js"></script>
+</body>
+</html>

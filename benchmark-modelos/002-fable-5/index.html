@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple</title>
+<style>
+  :root {
+    --nav-h: 44px;
+    --bg-light: #f5f5f7;
+    --bg-dark: #000;
+    --text-dark: #1d1d1f;
+    --text-light: #f5f5f7;
+    --link-blue: #06c;
+    --gray: #86868b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+                 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #fff;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Navbar ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(22, 22, 23, 0.8);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    z-index: 9999;
+  }
+
+  nav ul {
+    max-width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 22px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    transition: color 0.32s cubic-bezier(0.4, 0, 0.6, 1);
+    display: flex;
+    align-items: center;
+    height: var(--nav-h);
+  }
+
+  nav a:hover { color: #fff; }
+
+  nav svg { display: block; }
+
+  @media (max-width: 833px) {
+    nav li.nav-item { display: none; }
+  }
+
+  /* ---------- Heros / seções ---------- */
+  .hero, .tile {
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero {
+    padding-top: calc(var(--nav-h) + 52px);
+    height: 692px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tile {
+    height: 580px;
+    padding-top: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dark  { background: var(--bg-dark);  color: var(--text-light); }
+  .light { background: var(--bg-light); color: var(--text-dark);  }
+
+  .headline {
+    font-size: 56px;
+    line-height: 1.07;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .tile .headline { font-size: 48px; }
+
+  .subhead {
+    font-size: 28px;
+    line-height: 1.14;
+    font-weight: 400;
+    letter-spacing: 0.007em;
+    margin-top: 6px;
+  }
+
+  .tile .subhead { font-size: 24px; }
+
+  .ctas {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 14px;
+    font-size: 21px;
+    line-height: 1.38;
+  }
+
+  .ctas a {
+    color: var(--link-blue);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .dark .ctas a { color: #2997ff; }
+
+  .ctas a:hover { text-decoration: underline; }
+
+  .ctas a::after {
+    content: " ›";
+    font-weight: 400;
+  }
+
+  .promo {
+    font-size: 17px;
+    color: var(--gray);
+    margin-top: 10px;
+  }
+
+  /* Imagem de produto (placeholder SVG/gradiente) */
+  .product-art {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 28px;
+  }
+
+  .product-art svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .hero:hover .product-art svg,
+  .tile:hover .product-art svg {
+    transform: scale(1.015);
+  }
+
+  /* ---------- Grid de tiles menores ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 12px;
+    max-width: 100%;
+    background: #fff;
+  }
+
+  .grid .tile { height: 500px; padding-top: 44px; }
+  .grid .tile .headline { font-size: 40px; }
+  .grid .tile .subhead  { font-size: 21px; }
+  .grid .tile .ctas     { font-size: 19px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--bg-light);
+    color: var(--gray);
+    font-size: 12px;
+    line-height: 1.33;
+  }
+
+  footer .inner {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 20px 22px;
+  }
+
+  footer p { padding: 12px 0; border-bottom: 1px solid #d2d2d7; }
+  footer p:last-child { border-bottom: none; }
+  footer a { color: #515154; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  footer .legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 30px;
+    padding: 12px 0 0;
+  }
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width: 1068px) {
+    .headline { font-size: 48px; }
+    .tile .headline { font-size: 40px; }
+    .subhead { font-size: 24px; }
+    .hero { height: 600px; }
+    .tile { height: 500px; }
+  }
+
+  @media (max-width: 734px) {
+    .headline { font-size: 40px; }
+    .tile .headline, .grid .tile .headline { font-size: 32px; }
+    .subhead, .tile .subhead { font-size: 19px; }
+    .ctas, .grid .tile .ctas { font-size: 17px; gap: 18px; }
+    .hero { height: 540px; padding-top: calc(var(--nav-h) + 40px); }
+    .tile, .grid .tile { height: 440px; padding-top: 40px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li>
+      <a href="#" aria-label="Apple">
+        <svg width="14" height="17" viewBox="0 0 14 17" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.05 12.9c-.32.74-.7 1.42-1.14 2.05-.6.86-1.1 1.45-1.48 1.78-.59.54-1.22.82-1.9.84-.49 0-1.07-.14-1.75-.42-.68-.28-1.31-.42-1.88-.42-.6 0-1.25.14-1.94.42-.7.28-1.26.43-1.68.44-.65.03-1.3-.26-1.94-.86C-.06 16.4-.58 15.79-1.2 14.9c-.67-.95-1.22-2.05-1.65-3.3C-3.31 10.24-3.54 8.93-3.54 7.68c0-1.43.31-2.66.93-3.7A5.44 5.44 0 0 1-.66 2.02 5.23 5.23 0 0 1 1.97 1.3c.52 0 1.19.16 2.03.47.84.31 1.38.47 1.61.47.17 0 .77-.19 1.78-.55.96-.34 1.77-.48 2.43-.42 1.8.15 3.15.85 4.05 2.13-1.61.97-2.4 2.34-2.39 4.09.02 1.36.51 2.5 1.48 3.4.44.42.93.74 1.47.97-.12.34-.24.66-.38.94zM10.03-2.63c0 1.07-.39 2.06-1.17 2.98-.94 1.1-2.07 1.73-3.3 1.63a3.32 3.32 0 0 1-.03-.4c0-1.02.45-2.12 1.24-3.02.4-.45.9-.83 1.51-1.13.61-.3 1.19-.46 1.73-.49.02.14.02.29.02.43z" transform="translate(3.6 3.1)"/>
+        </svg>
+      </a>
+    </li>
+    <li class="nav-item"><a href="#">Loja</a></li>
+    <li class="nav-item"><a href="#">Mac</a></li>
+    <li class="nav-item"><a href="#">iPad</a></li>
+    <li class="nav-item"><a href="#">iPhone</a></li>
+    <li class="nav-item"><a href="#">Watch</a></li>
+    <li class="nav-item"><a href="#">AirPods</a></li>
+    <li class="nav-item"><a href="#">TV e Casa</a></li>
+    <li class="nav-item"><a href="#">Entretenimento</a></li>
+    <li class="nav-item"><a href="#">Acessórios</a></li>
+    <li class="nav-item"><a href="#">Suporte</a></li>
+    <li>
+      <a href="#" aria-label="Buscar">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/>
+        </svg>
+      </a>
+    </li>
+    <li>
+      <a href="#" aria-label="Sacola">
+        <svg width="14" height="17" viewBox="0 0 14 17" fill="none" stroke="currentColor" stroke-width="1.3" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="5" width="12" height="11" rx="1.5"/><path d="M4.5 5V4a2.5 2.5 0 0 1 5 0v1"/>
+        </svg>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Hero principal: iPhone -->
+<section class="hero dark">
+  <h1 class="headline">iPhone 17 Pro</h1>
+  <p class="subhead">Titânio. Tão forte. Tão leve. Tão Pro.</p>
+  <div class="ctas">
+    <a href="#">Saiba mais</a>
+    <a href="#">Comprar</a>
+  </div>
+  <p class="promo">Feito para Apple Intelligence.</p>
+  <div class="product-art">
+    <svg width="560" height="420" viewBox="0 0 560 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="iPhone 17 Pro">
+      <defs>
+        <linearGradient id="phoneBody" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#3a3a3c"/><stop offset="50%" stop-color="#1c1c1e"/><stop offset="100%" stop-color="#2c2c2e"/>
+        </linearGradient>
+        <linearGradient id="phoneScreen" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#5e5ce6"/><stop offset="50%" stop-color="#bf5af2"/><stop offset="100%" stop-color="#ff375f"/>
+        </linearGradient>
+      </defs>
+      <rect x="180" y="30" width="200" height="410" rx="34" fill="url(#phoneBody)"/>
+      <rect x="188" y="38" width="184" height="394" rx="27" fill="url(#phoneScreen)"/>
+      <rect x="252" y="48" width="56" height="16" rx="8" fill="#000" opacity="0.85"/>
+      <circle cx="215" cy="80" r="14" fill="#1c1c1e" opacity="0.5"/>
+      <circle cx="250" cy="80" r="14" fill="#1c1c1e" opacity="0.5"/>
+      <circle cx="215" cy="115" r="14" fill="#1c1c1e" opacity="0.5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Hero secundário: MacBook -->
+<section class="hero light" style="height: 620px; padding-top: 52px;">
+  <h2 class="headline">MacBook Air</h2>
+  <p class="subhead">Fininho. Levinho. Poderosão com M4.</p>
+  <div class="ctas">
+    <a href="#">Saiba mais</a>
+    <a href="#">Comprar</a>
+  </div>
+  <div class="product-art">
+    <svg width="640" height="330" viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MacBook Air">
+      <defs>
+        <linearGradient id="macScreen" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0a84ff"/><stop offset="100%" stop-color="#bf5af2"/>
+        </linearGradient>
+        <linearGradient id="macBase" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e8e8ed"/><stop offset="100%" stop-color="#c7c7cc"/>
+        </linearGradient>
+      </defs>
+      <rect x="140" y="20" width="360" height="240" rx="14" fill="#1d1d1f"/>
+      <rect x="150" y="30" width="340" height="220" rx="6" fill="url(#macScreen)"/>
+      <path d="M100 262 h440 l18 34 a8 8 0 0 1 -8 10 H90 a8 8 0 0 1 -8 -10 z" fill="url(#macBase)"/>
+      <rect x="280" y="262" width="80" height="8" rx="4" fill="#aeaeb2"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Grid de tiles alternando claro/escuro -->
+<div class="grid">
+
+  <section class="tile dark">
+    <h2 class="headline">Watch</h2>
+    <p class="subhead">Ultra 3. Aventura em outro nível.</p>
+    <div class="ctas">
+      <a href="#">Saiba mais</a>
+      <a href="#">Comprar</a>
+    </div>
+    <div class="product-art">
+      <svg width="240" height="290" viewBox="0 0 240 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apple Watch">
+        <defs>
+          <linearGradient id="watchFace" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff9f0a"/><stop offset="100%" stop-color="#ff375f"/>
+          </linearGradient>
+        </defs>
+        <rect x="85" y="0" width="70" height="70" rx="10" fill="#48484a"/>
+        <rect x="85" y="220" width="70" height="70" rx="10" fill="#48484a"/>
+        <rect x="60" y="55" width="120" height="180" rx="34" fill="#8e8e93"/>
+        <rect x="70" y="65" width="100" height="160" rx="26" fill="url(#watchFace)"/>
+        <rect x="180" y="110" width="8" height="30" rx="4" fill="#aeaeb2"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="tile light">
+    <h2 class="headline">iPad Pro</h2>
+    <p class="subhead">Impossivelmente fino. Incrivelmente poderoso.</p>
+    <div class="ctas">
+      <a href="#">Saiba mais</a>
+      <a href="#">Comprar</a>
+    </div>
+    <div class="product-art">
+      <svg width="380" height="280" viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="iPad Pro">
+        <defs>
+          <linearGradient id="padScreen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#64d2ff"/><stop offset="100%" stop-color="#5e5ce6"/>
+          </linearGradient>
+        </defs>
+        <rect x="50" y="10" width="280" height="270" rx="20" fill="#1d1d1f"/>
+        <rect x="60" y="20" width="260" height="250" rx="12" fill="url(#padScreen)"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="tile light">
+    <h2 class="headline">AirPods Pro 3</h2>
+    <p class="subhead">Som adaptativo. Silêncio absoluto.</p>
+    <div class="ctas">
+      <a href="#">Saiba mais</a>
+      <a href="#">Comprar</a>
+    </div>
+    <div class="product-art">
+      <svg width="300" height="240" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AirPods Pro">
+        <defs>
+          <linearGradient id="podCase" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#d1d1d6"/>
+          </linearGradient>
+        </defs>
+        <rect x="90" y="70" width="120" height="110" rx="28" fill="url(#podCase)" stroke="#c7c7cc"/>
+        <rect x="90" y="70" width="120" height="44" rx="22" fill="#f2f2f7" stroke="#c7c7cc"/>
+        <ellipse cx="70" cy="60" rx="22" ry="30" fill="#fff" stroke="#c7c7cc"/>
+        <rect x="60" y="82" width="14" height="46" rx="7" fill="#fff" stroke="#c7c7cc"/>
+        <ellipse cx="230" cy="60" rx="22" ry="30" fill="#fff" stroke="#c7c7cc"/>
+        <rect x="226" y="82" width="14" height="46" rx="7" fill="#fff" stroke="#c7c7cc"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="tile dark">
+    <h2 class="headline">Apple TV+</h2>
+    <p class="subhead">Histórias que só a Apple conta.</p>
+    <div class="ctas">
+      <a href="#">Assista agora</a>
+      <a href="#">Assinar</a>
+    </div>
+    <div class="product-art">
+      <svg width="380" height="240" viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apple TV+">
+        <defs>
+          <linearGradient id="tvGlow" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff375f"/><stop offset="50%" stop-color="#bf5af2"/><stop offset="100%" stop-color="#0a84ff"/>
+          </linearGradient>
+        </defs>
+        <rect x="40" y="20" width="300" height="180" rx="12" fill="#1c1c1e" stroke="#3a3a3c"/>
+        <rect x="48" y="28" width="284" height="164" rx="6" fill="url(#tvGlow)" opacity="0.85"/>
+        <text x="190" y="122" text-anchor="middle" font-family="-apple-system, Helvetica, sans-serif" font-size="42" font-weight="600" fill="#fff"> tv+</text>
+      </svg>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="inner">
+    <p>1. Apple Intelligence disponível em versão beta. Alguns recursos podem não estar disponíveis em todas as regiões ou idiomas.</p>
+    <p>Mais formas de comprar: <a href="#">encontre uma loja</a> ou <a href="#">outro revendedor</a> perto de você. Ou ligue para 0800-761-0867.</p>
+    <div class="legal">
+      <span>Copyright © 2026 Apple Inc. Todos os direitos reservados.</span>
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Uso de Cookies</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Vendas e Reembolsos</a>
+      <a href="#">Avisos Legais</a>
+      <a href="#">Mapa do Site</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

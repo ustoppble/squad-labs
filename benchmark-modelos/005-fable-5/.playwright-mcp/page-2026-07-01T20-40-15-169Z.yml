@@ -1,0 +1,148 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Overclock" [ref=e3] [cursor=pointer]:
+      - /url: "#"
+    - link "Painéis" [ref=e4] [cursor=pointer]:
+      - /url: "#panes"
+    - link "Agentes" [ref=e5] [cursor=pointer]:
+      - /url: "#agentes"
+    - link "Voz" [ref=e6] [cursor=pointer]:
+      - /url: "#voz"
+    - link "Missões" [ref=e7] [cursor=pointer]:
+      - /url: "#missoes"
+    - link "Baixar" [ref=e8] [cursor=pointer]:
+      - /url: "#instalar"
+  - banner [ref=e9]:
+    - paragraph [ref=e10]: Overclock.sh
+    - heading "Um dev. Um exército de agentes." [level=1] [ref=e11]:
+      - text: Um dev.
+      - text: Um exército de agentes.
+    - paragraph [ref=e12]: A IDE multi-agente onde Claude, Codex e Gemini trabalham lado a lado — em um grid visual que você rege como maestro.
+    - generic [ref=e13]:
+      - link "Baixar para Mac" [ref=e14] [cursor=pointer]:
+        - /url: "#instalar"
+      - link "Ver como funciona ›" [ref=e15] [cursor=pointer]:
+        - /url: "#panes"
+    - generic [ref=e17]:
+      - generic [ref=e22]: overclock — ~/projeto · 5 agentes ativos
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - generic [ref=e25]: orchestrator · claude
+          - generic [ref=e27]: "› Plano aprovado. Delegando:"
+          - generic [ref=e28]: ──────────────────────
+          - generic [ref=e29]: → frontend · pane 2
+          - generic [ref=e30]: → backend · pane 3
+          - generic [ref=e31]: → testes · pane 4
+          - generic [ref=e32]: → review · pane 5
+          - generic [ref=e33]: ──────────────────────
+          - generic [ref=e34]: ✓ 3 tarefas concluídas
+          - generic [ref=e35]: › aguardando review▌
+        - generic [ref=e36]:
+          - generic [ref=e37]: frontend · claude
+          - generic [ref=e39]: ✓ Hero.tsx criado
+          - generic [ref=e40]: ✓ animações ok
+          - generic [ref=e41]: › polindo CSS▌
+        - generic [ref=e42]:
+          - generic [ref=e43]: backend · codex
+          - generic [ref=e45]: ✓ API /users
+          - generic [ref=e46]: ✓ migrations
+          - generic [ref=e47]: › rate limiting▌
+        - generic [ref=e48]:
+          - generic [ref=e49]: testes · gemini
+          - generic [ref=e51]: ✓ 42 passed
+          - generic [ref=e52]: › e2e rodando▌
+        - generic [ref=e53]:
+          - generic [ref=e54]: review · claude
+          - generic [ref=e56]: "! 2 sugestões"
+          - generic [ref=e57]: › lendo diff▌
+  - generic [ref=e59]:
+    - paragraph [ref=e60]: O grid
+    - heading "Todos os agentes. Uma tela." [level=2] [ref=e61]:
+      - text: Todos os agentes.
+      - text: Uma tela.
+    - paragraph [ref=e62]: Chega de alternar entre abas de terminal às cegas. No Overclock, cada agente vive em um painel visível. Você vê tudo, o tempo todo — quem trabalha, quem terminou, quem travou.
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e65]: "16"
+        - generic [ref=e66]:
+          - text: agentes em paralelo
+          - text: no mesmo workspace
+      - generic [ref=e67]:
+        - generic [ref=e68]: 3×
+        - generic [ref=e69]:
+          - text: mais rápido que
+          - text: uma sessão única
+      - generic [ref=e70]:
+        - generic [ref=e71]: "0"
+        - generic [ref=e72]:
+          - text: agentes invisíveis.
+          - text: Tudo na sua frente.
+  - generic [ref=e74]:
+    - paragraph [ref=e75]: Recursos
+    - heading "Feito para orquestrar." [level=2] [ref=e76]
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - heading "Qualquer modelo. Qualquer CLI." [level=3] [ref=e79]
+        - paragraph [ref=e80]: "Claude Code, Codex, Gemini e Antigravity rodam lado a lado. Misture modelos por tarefa: Opus para arquitetura, Sonnet para execução, Haiku para o trabalho braçal."
+        - generic [ref=e81]:
+          - generic [ref=e82]: Claude
+          - generic [ref=e84]: Codex
+          - generic [ref=e86]: Gemini
+          - generic [ref=e88]: Antigravity
+      - generic [ref=e90]:
+        - heading "Squads." [level=3] [ref=e91]
+        - paragraph [ref=e92]: Times pré-configurados de agentes com papéis definidos. Um comando, um time inteiro.
+        - generic [ref=e93]:
+          - text: › squad spawn fullstack
+          - text: ✓ 4 panes criados
+      - generic [ref=e94]:
+        - heading "Voz." [level=3] [ref=e95]
+        - paragraph [ref=e96]: Dite em português. O ClockVoice traduz e otimiza para execução. Suas mãos ficam no que importa.
+        - generic [ref=e97]:
+          - generic [ref=e98]: ⌘
+          - generic [ref=e99]: ⇧
+          - generic [ref=e100]: V
+      - generic [ref=e101]:
+        - heading "Missões." [level=3] [ref=e102]
+        - paragraph [ref=e103]: Objetivos de longo prazo que sobrevivem à sessão. Os agentes retomam de onde pararam.
+      - generic [ref=e104]:
+        - heading "Handoffs." [level=3] [ref=e105]
+        - paragraph [ref=e106]: Um agente termina, o próximo continua — com todo o contexto. Sem copiar e colar.
+      - generic [ref=e107]:
+        - heading "Todo list ao vivo." [level=3] [ref=e108]
+        - paragraph [ref=e109]: Milestones visíveis em tempo real. Você acompanha o progresso do time sem perguntar "e aí, como tá?".
+      - generic [ref=e110]:
+        - heading "Cron e rotinas." [level=3] [ref=e111]
+        - paragraph [ref=e112]: Agende agentes para rodar sozinhos. Deploy às 6h, review de PRs a cada hora, relatório toda sexta.
+        - generic [ref=e113]:
+          - text: › cron create "0 6 * * *" deploy
+          - text: ✓ rotina agendada
+  - generic [ref=e115]:
+    - blockquote [ref=e116]:
+      - text: "\"Você deixa de escrever código"
+      - text: e passa a reger quem escreve."
+    - paragraph [ref=e117]: A mudança de paradigma do desenvolvimento multi-agente.
+  - generic [ref=e119]:
+    - heading "Comece em 10 segundos." [level=2] [ref=e120]
+    - paragraph [ref=e121]: Grátis para começar. Traga suas próprias chaves de API.
+    - generic "Clique para copiar" [ref=e122] [cursor=pointer]:
+      - generic [ref=e123]: $
+      - text: curl -fsSL overclock.sh/install | sh
+    - paragraph [ref=e124]: Clique para copiar
+    - generic [ref=e125]:
+      - link "Baixar para Mac" [ref=e126] [cursor=pointer]:
+        - /url: "#"
+      - link "Documentação ›" [ref=e127] [cursor=pointer]:
+        - /url: "#"
+  - contentinfo [ref=e128]:
+    - generic [ref=e129]:
+      - generic [ref=e130]: © 2026 Overclock.sh — Feito para quem rege agentes.
+      - generic [ref=e131]:
+        - link "GitHub" [ref=e132] [cursor=pointer]:
+          - /url: "#"
+        - link "Docs" [ref=e133] [cursor=pointer]:
+          - /url: "#"
+        - link "Discord" [ref=e134] [cursor=pointer]:
+          - /url: "#"
+        - link "Privacidade" [ref=e135] [cursor=pointer]:
+          - /url: "#"

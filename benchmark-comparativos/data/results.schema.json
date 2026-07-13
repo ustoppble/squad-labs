@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://overclock.sh/benchmark/results.schema.json",
+  "title": "overclock-benchmark results",
+  "description": "Contrato público de dados do benchmark. FONTE ÚNICA dos números do site (docs/BLUEPRINT.md §2.3) e INSUMO do overclock-web (site 2.0). Doutrina: célula vazia é célula vazia — campo sem medição/julgamento é null, NUNCA inventado. Veredito vem exclusivamente do judge.json (rubrics/RUBRIC.md §3/§5), nunca de edição manual. Arquivo GERADO por tools/results_build.py a partir de manifests + judges no disco — editar à mão só site/data/config.json. Todos os paths são relativos à raiz do repo (BLUEPRINT §2.8).",
+  "type": "object",
+  "required": ["generated_at", "models", "tests", "results", "rounds_history"],
+  "additionalProperties": false,
+  "properties": {
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp ISO 8601 (com timezone) de quando este arquivo foi gerado."
+    },
+    "models": {
+      "type": "array",
+      "description": "Contenders do pool. Um harness/squad entra aqui como caixa-preta, mesma régua dos modelos crus.",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "vendor", "price_in", "price_out"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Slug estável, igual ao dir em runs/<id>/."
+          },
+          "name": { "type": "string", "description": "Nome de exibição." },
+          "vendor": { "type": "string", "description": "Lab/fabricante (Anthropic, OpenAI, xAI, Overclock...)." },
+          "price_in": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Preço oficial de input, USD por 1M tokens."
+          },
+          "price_out": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Preço oficial de output, USD por 1M tokens."
+          },
+          "badge": {
+            "type": "string",
+            "description": "Opcional: nota curta exibível (ex.: preço promocional, 'harness')."
+          }
+        }
+      }
+    },
+    "tests": {
+      "type": "array",
+      "description": "Bateria oficial, apresentada como atividades que um vibe coder pede (BLUEPRINT §4) — nunca jargão SWE.",
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "activity", "category", "track", "prompt_ref"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[0-9]{3}$", "description": "NNN, ex.: '001'." },
+          "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "activity": {
+            "type": "string",
+            "description": "A atividade como o vibe coder pede: 'Clona esse site', 'Faz um jogo', 'Quero um app 3D interativo', 'Brinquedo de física'."
+          },
+          "category": {
+            "type": "string",
+            "description": "Categoria pública do teste (ex.: '3D interativo', 'clone de site', 'jogo 3D') — exibida na capa, sidebar e páginas. Vive DENTRO da trilha (track)."
+          },
+          "track": {
+            "type": "string",
+            "enum": ["benchmark", "dia-a-dia", "squad"],
+            "description": "Trilha do teste: 'benchmark' = prompt único one-shot; 'dia-a-dia' = atividades reais do dia a dia do vibe coder; 'squad' = orquestração multi-agente."
+          },
+          "prompt_ref": {
+            "type": "string",
+            "description": "Path relativo à raiz do repo para o prompt canônico em prompts/ (nunca cópia)."
+          }
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "description": "Uma entrada por run canônico existente em runs/<modelo>/<NNN>/. Campos de julgamento/medição são null até o rig v2 produzir judge.json/manifest.json — null significa 'ainda não julgado/medido', não zero.",
+      "items": {
+        "type": "object",
+        "required": [
+          "test", "model", "run_ref", "verdict", "acabamento_score",
+          "cost_usd", "tokens_out", "rounds", "duration_s",
+          "verified_in_browser", "judge_ref"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "test": { "type": "string", "pattern": "^[0-9]{3}$", "description": "FK → tests[].id." },
+          "model": { "type": "string", "description": "FK → models[].id." },
+          "run_ref": {
+            "type": "string",
+            "description": "Path relativo à raiz do repo para o artefato canônico (runs/<modelo>/<NNN>/index.html)."
+          },
+          "verdict": {
+            "enum": ["entregou", "defeitos", "quebrou", null],
+            "description": "Veredito público (RUBRIC.md §3), derivado mecanicamente do judge.json. null = pendente de julgamento v2."
+          },
+          "acabamento_score": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9]+/[0-9]+$",
+            "description": "'X/Y' sobre os critérios de acabamento (RUBRIC.md §3). null = pendente."
+          },
+          "cost_usd": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Custo real do run em USD, fórmula universal (BLUEPRINT §2.4). null = não medido."
+          },
+          "tokens_out": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "Tokens de saída do run. null = não medido."
+          },
+          "rounds": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "Idas (turnos) do run, extraído do transcript. null = não medido."
+          },
+          "duration_s": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Duração do run em segundos. null = não medido."
+          },
+          "verified_in_browser": {
+            "type": ["boolean", "null"],
+            "description": "Fato medido do transcript (manifest v2): o contender verificou o próprio trabalho no browser. null = não extraído."
+          },
+          "judge_ref": {
+            "type": ["string", "null"],
+            "description": "Path relativo ao judge.json que sustenta o veredito. null = pendente."
+          },
+          "source": {
+            "type": "string",
+            "enum": ["v0-manifest", "measured", "estimated"],
+            "description": "Proveniência dos campos medidos (cost_usd/tokens_out). 'v0-manifest' = baseline de archive/runs-v0/<NNN>/<modelo>/manifest.json; 'measured' = manifest v2 em runs/<modelo>/<NNN>/manifest.json (substitui a baseline v0); 'estimated' = custo estimado do transcript (CLI não expõe usage, ex: Antigravity) — piso, não medido."
+          },
+          "source_note": {
+            "type": "string",
+            "description": "Ressalva de proveniência quando a medição não corresponde 1:1 ao artefato em run_ref."
+          }
+        }
+      }
+    },
+    "rounds_history": {
+      "type": "array",
+      "description": "A curva do harness entre rodadas (BLUEPRINT §0) — o artefato central de marketing. Vazio até a primeira rodada v2 fechar; o shape do item será congelado nesse momento.",
+      "items": {
+        "type": "object",
+        "required": ["round", "date"],
+        "additionalProperties": true,
+        "properties": {
+          "round": { "type": "integer", "minimum": 1 },
+          "date": { "type": "string", "format": "date" },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}

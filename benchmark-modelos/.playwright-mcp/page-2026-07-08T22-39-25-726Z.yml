@@ -1,0 +1,489 @@
+- generic [active] [ref=f10e1]:
+  - navigation [ref=f10e2]:
+    - generic [ref=f10e3]:
+      - link "k kibu" [ref=f10e4] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f10e5]: k
+        - text: kibu
+      - button "Menu" [ref=f10e6] [cursor=pointer]
+  - generic [ref=f10e10]:
+    - link "Documentation" [ref=f10e11] [cursor=pointer]:
+      - /url: "#documentation"
+    - link "Content" [ref=f10e12] [cursor=pointer]:
+      - /url: "#content"
+    - link "About" [ref=f10e13] [cursor=pointer]:
+      - /url: "#about"
+    - link "Contact" [ref=f10e14] [cursor=pointer]:
+      - /url: "#contact"
+    - link "Login" [ref=f10e15] [cursor=pointer]:
+      - /url: "#login"
+    - link "Get a demo" [ref=f10e16] [cursor=pointer]:
+      - /url: "#demo"
+  - banner [ref=f10e17]:
+    - generic [ref=f10e18]:
+      - generic [ref=f10e19]:
+        - generic [ref=f10e20]: New
+        - text: AI-powered documentation for IDD providers
+      - heading "Focus on Excellent Service. We'll Handle the Rest." [level=1] [ref=f10e21]
+      - paragraph [ref=f10e22]: Kibu transforms compliance, documentation, and reporting while providing content that service providers love.
+      - generic [ref=f10e23]:
+        - link "Get a demo" [ref=f10e24] [cursor=pointer]:
+          - /url: "#demo"
+          - text: Get a demo
+          - img [ref=f10e25]
+        - link "Explore content" [ref=f10e27] [cursor=pointer]:
+          - /url: "#content"
+      - paragraph [ref=f10e28]:
+        - img [ref=f10e29]
+        - text: Trusted by disability providers across the USA
+      - generic [ref=f10e32]:
+        - generic [ref=f10e37]:
+          - img [ref=f10e38]
+          - text: app.kibu.com/dashboard
+        - generic [ref=f10e42]:
+          - generic [ref=f10e43]:
+            - heading "Compliance Overview" [level=4] [ref=f10e44]
+            - generic [ref=f10e45]: All up to date
+          - generic [ref=f10e46]:
+            - generic [ref=f10e47]:
+              - generic [ref=f10e48]: Members
+              - generic [ref=f10e49]: "142"
+            - generic [ref=f10e50]:
+              - generic [ref=f10e51]: Notes today
+              - generic [ref=f10e52]: 38 ↑12%
+            - generic [ref=f10e53]:
+              - generic [ref=f10e54]: Compliance
+              - generic [ref=f10e55]: 99.2%
+          - generic [ref=f10e56]:
+            - generic [ref=f10e57]: Documentation completed
+            - img [ref=f10e58]
+  - generic [ref=f10e63]:
+    - paragraph [ref=f10e65]: Organizations We Serve · Trusted by Disability Providers across the USA
+    - generic [ref=f10e67]:
+      - generic [ref=f10e68]:
+        - generic [ref=f10e69]: T
+        - text: Target Community & Education
+      - generic [ref=f10e70]:
+        - generic [ref=f10e71]: A
+        - text: The ARC Caddo-Bossier
+      - generic [ref=f10e72]:
+        - generic [ref=f10e73]: W
+        - text: Woodfords Family Services
+      - generic [ref=f10e74]:
+        - generic [ref=f10e75]: F
+        - text: Family Resource Associates
+      - generic [ref=f10e76]:
+        - generic [ref=f10e77]: S
+        - text: SEMO Alliance for Disability
+      - generic [ref=f10e78]:
+        - generic [ref=f10e79]: T
+        - text: Target Community & Education
+      - generic [ref=f10e80]:
+        - generic [ref=f10e81]: A
+        - text: The ARC Caddo-Bossier
+      - generic [ref=f10e82]:
+        - generic [ref=f10e83]: W
+        - text: Woodfords Family Services
+      - generic [ref=f10e84]:
+        - generic [ref=f10e85]: F
+        - text: Family Resource Associates
+      - generic [ref=f10e86]:
+        - generic [ref=f10e87]: S
+        - text: SEMO Alliance for Disability
+  - generic [ref=f10e90]:
+    - generic [ref=f10e91]:
+      - generic [ref=f10e92]: Focus on People, Not Paper
+      - generic [ref=f10e93]: “
+      - blockquote [ref=f10e94]: Kibu gives DSPs the power to focus on delivering outstanding support — not on chasing paperwork.
+      - generic [ref=f10e95]:
+        - generic [ref=f10e96]: DC
+        - generic [ref=f10e97]:
+          - generic [ref=f10e98]: Daniel Caridi
+          - generic [ref=f10e99]: Co-Founder & CEO, Kibu
+    - generic [ref=f10e101]:
+      - generic [ref=f10e102]:
+        - generic [ref=f10e103]: JM
+        - generic [ref=f10e104]:
+          - generic [ref=f10e105]: Jordan M. · DSP
+          - generic [ref=f10e106]: Daily notes · 2 min ago
+      - generic [ref=f10e107]:
+        - img [ref=f10e109]
+        - text: Service note documented with AI
+      - generic [ref=f10e111]:
+        - img [ref=f10e113]
+        - text: Goals tracked automatically
+      - generic [ref=f10e115]:
+        - img [ref=f10e117]
+        - text: Attendance logged & compliant
+      - generic [ref=f10e119]:
+        - img [ref=f10e121]
+        - text: More time with members
+  - generic [ref=f10e124]:
+    - generic [ref=f10e125]:
+      - generic [ref=f10e126]: Documentation
+      - heading "Actually built for staff" [level=2] [ref=f10e127]
+      - paragraph [ref=f10e128]: "Kibu gives DSPs the power to focus on delivering outstanding support. Accessible features that save your organization time, while keeping up with regulations:"
+    - generic [ref=f10e129]:
+      - generic [ref=f10e130]:
+        - img [ref=f10e131]
+        - text: AI-Assisted Service Notes
+      - generic [ref=f10e133]:
+        - img [ref=f10e134]
+        - text: AI Reports
+      - generic [ref=f10e136]:
+        - img [ref=f10e137]
+        - text: Attendance
+      - generic [ref=f10e140]:
+        - img [ref=f10e141]
+        - text: Beautiful, Fast Reporting
+      - generic [ref=f10e143]:
+        - img [ref=f10e144]
+        - text: Built-In Translation
+      - generic [ref=f10e146]:
+        - img [ref=f10e147]
+        - text: Content
+      - generic [ref=f10e149]:
+        - img [ref=f10e150]
+        - text: Fun
+      - generic [ref=f10e153]:
+        - img [ref=f10e154]
+        - text: Life Plans
+      - generic [ref=f10e156]:
+        - img [ref=f10e157]
+        - text: Medication
+      - generic [ref=f10e159]:
+        - img [ref=f10e160]
+        - text: Notes
+      - generic [ref=f10e163]:
+        - img [ref=f10e164]
+        - text: Resources
+    - generic [ref=f10e166]:
+      - generic [ref=f10e167]:
+        - button "Notes" [ref=f10e168] [cursor=pointer]
+        - button "Attendance" [ref=f10e169] [cursor=pointer]
+        - button "Reporting" [ref=f10e170] [cursor=pointer]
+        - button "Life Plans & Tasks" [ref=f10e171] [cursor=pointer]
+      - generic [ref=f10e173]:
+        - generic [ref=f10e174]:
+          - img [ref=f10e176]
+          - heading "AI-Assisted Service Notes" [level=3] [ref=f10e178]
+          - paragraph [ref=f10e179]: Keep member records accurate and accessible. Let the magic pen turn a few words into a complete, compliant service note in seconds.
+          - list [ref=f10e180]:
+            - listitem [ref=f10e181]:
+              - img [ref=f10e182]
+              - text: Write notes 10x faster with AI
+            - listitem [ref=f10e184]:
+              - img [ref=f10e185]
+              - text: Records stay accurate and accessible
+            - listitem [ref=f10e187]:
+              - img [ref=f10e188]
+              - text: Built-in translation for every member
+        - generic [ref=f10e191]:
+          - generic [ref=f10e192]: Daily Service Note
+          - generic [ref=f10e193]:
+            - img [ref=f10e194]
+            - text: Magic pen
+  - generic [ref=f10e205]:
+    - generic [ref=f10e206]:
+      - generic [ref=f10e207]: Compliance in 60 Seconds
+      - heading "Directors Can Track Compliance Instantly. Anywhere, Anytime." [level=2] [ref=f10e208]
+      - paragraph [ref=f10e209]: Providers who use Kibu don't just meet standards — they set them.
+      - list [ref=f10e210]:
+        - listitem [ref=f10e211]:
+          - img [ref=f10e213]
+          - generic [ref=f10e216]:
+            - heading "Real-time visibility" [level=4] [ref=f10e217]
+            - paragraph [ref=f10e218]: See documentation and compliance status update live across every program.
+        - listitem [ref=f10e219]:
+          - img [ref=f10e221]
+          - generic [ref=f10e224]:
+            - heading "Audit-ready, always" [level=4] [ref=f10e225]
+            - paragraph [ref=f10e226]: Every note, goal and signature stays organized and ready for review.
+        - listitem [ref=f10e227]:
+          - img [ref=f10e229]
+          - generic [ref=f10e232]:
+            - heading "Anywhere, any device" [level=4] [ref=f10e233]
+            - paragraph [ref=f10e234]: Directors track compliance from the office, the field or their phone.
+    - generic [ref=f10e235]:
+      - generic [ref=f10e236]: 0%
+      - paragraph [ref=f10e237]: Kibu partners average over 99.2% compliance within their first 2 months.
+      - generic [ref=f10e238]: Set the standard — don't just meet it.
+  - generic [ref=f10e240]:
+    - generic [ref=f10e241]:
+      - generic [ref=f10e242]:
+        - generic [ref=f10e243]: Content Library
+        - heading "Content and Lesson Plans, Built for You" [level=2] [ref=f10e244]
+        - paragraph [ref=f10e245]: Never worry about finding your next video lesson or building your next lesson plan. We've already done the heavy lifting for you!
+        - generic [ref=f10e246]:
+          - generic [ref=f10e247]:
+            - img [ref=f10e249]
+            - heading "Aligned programming" [level=4] [ref=f10e251]
+            - paragraph [ref=f10e252]: Keep programming aligned for your members.
+          - generic [ref=f10e253]:
+            - img [ref=f10e255]
+            - heading "One platform" [level=4] [ref=f10e258]
+            - paragraph [ref=f10e259]: No more switching between different systems.
+          - generic [ref=f10e260]:
+            - img [ref=f10e262]
+            - heading "Zero confusion" [level=4] [ref=f10e265]
+            - paragraph [ref=f10e266]: Eliminate confusion from clunky, outdated platforms.
+          - generic [ref=f10e267]:
+            - img [ref=f10e269]
+            - heading "Personalized" [level=4] [ref=f10e271]
+            - paragraph [ref=f10e272]: Personalized for every member of your organization.
+      - generic [ref=f10e274]:
+        - generic [ref=f10e275]:
+          - generic [ref=f10e276]: On-Demand Classes
+          - generic [ref=f10e277]: 600+ lessons
+        - generic [ref=f10e278]:
+          - generic [ref=f10e279]:
+            - img [ref=f10e282]
+            - generic [ref=f10e284]:
+              - generic [ref=f10e285]: Cooking Basics
+              - generic [ref=f10e286]: Life Skills · 12 min
+          - generic [ref=f10e287]:
+            - img [ref=f10e290]
+            - generic [ref=f10e292]:
+              - generic [ref=f10e293]: Money & Budgeting
+              - generic [ref=f10e294]: Independence · 9 min
+          - generic [ref=f10e295]:
+            - img [ref=f10e298]
+            - generic [ref=f10e300]:
+              - generic [ref=f10e301]: Social Skills
+              - generic [ref=f10e302]: Community · 15 min
+          - generic [ref=f10e303]:
+            - img [ref=f10e306]
+            - generic [ref=f10e308]:
+              - generic [ref=f10e309]: Healthy Habits
+              - generic [ref=f10e310]: Wellness · 11 min
+    - generic [ref=f10e311]:
+      - generic [ref=f10e312]: Elevate Content with Intelligent Features
+      - paragraph [ref=f10e313]: Combining content and documentation is what makes our platform extraordinary. Educate members and track progress automatically, all in one place.
+  - generic [ref=f10e315]:
+    - generic [ref=f10e316]:
+      - generic [ref=f10e317]: Onboarding
+      - heading "We'll Walk You Through Every Step." [level=2] [ref=f10e318]
+      - paragraph [ref=f10e319]: Start strong with personalized onboarding tailored for your organization.
+    - generic [ref=f10e320]:
+      - generic [ref=f10e321]:
+        - generic [ref=f10e322]: "1"
+        - heading "Discovery call" [level=4] [ref=f10e323]
+        - paragraph [ref=f10e324]: We learn how your organization works and what compliance you need.
+      - generic [ref=f10e325]:
+        - generic [ref=f10e326]: "2"
+        - heading "Tailored setup" [level=4] [ref=f10e327]
+        - paragraph [ref=f10e328]: Kibu is configured around your programs, members and workflows.
+      - generic [ref=f10e329]:
+        - generic [ref=f10e330]: "3"
+        - heading "Team training" [level=4] [ref=f10e331]
+        - paragraph [ref=f10e332]: Hands-on training gets every DSP and director confident, fast.
+      - generic [ref=f10e333]:
+        - generic [ref=f10e334]: "4"
+        - heading "Go live & grow" [level=4] [ref=f10e335]
+        - paragraph [ref=f10e336]: Launch with ongoing support — we're with you every step.
+  - generic [ref=f10e339]:
+    - img [ref=f10e345]
+    - generic [ref=f10e348]:
+      - generic [ref=f10e349]: Security
+      - heading "HIPAA Compliant. Fully Encrypted." [level=2] [ref=f10e350]
+      - paragraph [ref=f10e351]: With Kibu, security comes standard — your member data stays safe, no matter what.
+      - generic [ref=f10e352]:
+        - generic [ref=f10e353]:
+          - img [ref=f10e355]
+          - generic [ref=f10e357]:
+            - heading "HIPAA Compliant" [level=4] [ref=f10e358]
+            - paragraph [ref=f10e359]: Meets healthcare privacy standards
+        - generic [ref=f10e360]:
+          - img [ref=f10e362]
+          - generic [ref=f10e365]:
+            - heading "End-to-End Encryption" [level=4] [ref=f10e366]
+            - paragraph [ref=f10e367]: Data encrypted in transit & at rest
+        - generic [ref=f10e368]:
+          - img [ref=f10e370]
+          - generic [ref=f10e373]:
+            - heading "99.9% Uptime" [level=4] [ref=f10e374]
+            - paragraph [ref=f10e375]: Reliable access when you need it
+        - generic [ref=f10e376]:
+          - img [ref=f10e378]
+          - generic [ref=f10e380]:
+            - heading "Role-Based Access" [level=4] [ref=f10e381]
+            - paragraph [ref=f10e382]: Granular permissions for every role
+  - generic [ref=f10e384]:
+    - generic [ref=f10e385]:
+      - generic [ref=f10e386]: Customer Stories
+      - heading "Real People, Real Results." [level=2] [ref=f10e387]
+      - paragraph [ref=f10e388]: See how organizations like yours are leveling up with Kibu!
+    - generic [ref=f10e389]:
+      - generic [ref=f10e390]:
+        - generic [ref=f10e392]:
+          - generic [ref=f10e393]: T
+          - text: Target Community & Education
+        - generic [ref=f10e394]:
+          - generic [ref=f10e395]:
+            - generic [ref=f10e396]: 99.4%
+            - generic [ref=f10e397]: Compliance rate
+          - generic [ref=f10e398]:
+            - generic [ref=f10e399]: 6 hrs
+            - generic [ref=f10e400]: Saved / week / DSP
+      - generic [ref=f10e401]:
+        - generic [ref=f10e402]: Success Story
+        - blockquote [ref=f10e403]: “Using Kibu has allowed our staff to take the lead and has empowered them with tools to succeed.”
+        - link "Read one of our customer stories from our blog" [ref=f10e404] [cursor=pointer]:
+          - /url: "#blog"
+          - text: Read one of our customer stories from our blog
+          - img [ref=f10e405]
+  - generic [ref=f10e408]:
+    - generic [ref=f10e409]:
+      - generic [ref=f10e410]: Wall of Love
+      - heading "Providers who use Kibu set the standard." [level=2] [ref=f10e411]
+      - paragraph [ref=f10e412]: Don't just take our word for it — hear from the DSPs, directors and families who use Kibu every day.
+    - generic [ref=f10e414]:
+      - generic [ref=f10e415]:
+        - generic [ref=f10e416]:
+          - img [ref=f10e417]
+          - img [ref=f10e419]
+          - img [ref=f10e421]
+          - img [ref=f10e423]
+          - img [ref=f10e425]
+        - paragraph [ref=f10e427]: “When I found Kibu, I think I had a tear in my eye. It was the first digital platform I've seen that is actually built for people with IDD.”
+        - generic [ref=f10e428]:
+          - generic [ref=f10e429]: DE
+          - generic [ref=f10e430]:
+            - generic [ref=f10e431]: Director of Engagement
+            - generic [ref=f10e432]: "& Marketing"
+      - generic [ref=f10e433]:
+        - generic [ref=f10e434]:
+          - img [ref=f10e435]
+          - img [ref=f10e437]
+          - img [ref=f10e439]
+          - img [ref=f10e441]
+          - img [ref=f10e443]
+        - paragraph [ref=f10e445]: “Kibu's lesson plans make things so much easier… It allows us to focus on engaging with our members instead of searching for materials.”
+        - generic [ref=f10e446]:
+          - generic [ref=f10e447]: DS
+          - generic [ref=f10e448]:
+            - generic [ref=f10e449]: Direct Support Professional
+            - generic [ref=f10e450]: Family Resource Associates
+      - generic [ref=f10e451]:
+        - generic [ref=f10e452]:
+          - img [ref=f10e453]
+          - img [ref=f10e455]
+          - img [ref=f10e457]
+          - img [ref=f10e459]
+          - img [ref=f10e461]
+        - paragraph [ref=f10e463]: “We are crazy about Kibu!”
+        - generic [ref=f10e464]:
+          - generic [ref=f10e465]: SA
+          - generic [ref=f10e466]:
+            - generic [ref=f10e467]: SEMO Alliance
+            - generic [ref=f10e468]: for Disability Independence
+      - generic [ref=f10e469]:
+        - generic [ref=f10e470]:
+          - img [ref=f10e471]
+          - img [ref=f10e473]
+          - img [ref=f10e475]
+          - img [ref=f10e477]
+          - img [ref=f10e479]
+        - paragraph [ref=f10e481]: “When I found Kibu, I think I had a tear in my eye. It was the first digital platform I've seen that is actually built for people with IDD.”
+        - generic [ref=f10e482]:
+          - generic [ref=f10e483]: DE
+          - generic [ref=f10e484]:
+            - generic [ref=f10e485]: Director of Engagement
+            - generic [ref=f10e486]: "& Marketing"
+      - generic [ref=f10e487]:
+        - generic [ref=f10e488]:
+          - img [ref=f10e489]
+          - img [ref=f10e491]
+          - img [ref=f10e493]
+          - img [ref=f10e495]
+          - img [ref=f10e497]
+        - paragraph [ref=f10e499]: “Kibu's lesson plans make things so much easier… It allows us to focus on engaging with our members instead of searching for materials.”
+        - generic [ref=f10e500]:
+          - generic [ref=f10e501]: DS
+          - generic [ref=f10e502]:
+            - generic [ref=f10e503]: Direct Support Professional
+            - generic [ref=f10e504]: Family Resource Associates
+      - generic [ref=f10e505]:
+        - generic [ref=f10e506]:
+          - img [ref=f10e507]
+          - img [ref=f10e509]
+          - img [ref=f10e511]
+          - img [ref=f10e513]
+          - img [ref=f10e515]
+        - paragraph [ref=f10e517]: “We are crazy about Kibu!”
+        - generic [ref=f10e518]:
+          - generic [ref=f10e519]: SA
+          - generic [ref=f10e520]:
+            - generic [ref=f10e521]: SEMO Alliance
+            - generic [ref=f10e522]: for Disability Independence
+  - generic [ref=f10e526]:
+    - heading "Compliance Shouldn't Stand in the Way of Exceptional Care" [level=2] [ref=f10e527]
+    - paragraph [ref=f10e528]: See how Kibu helps IDD providers focus on people, not paperwork. Book a demo and we'll walk you through every step.
+    - generic [ref=f10e529]:
+      - link "Get a demo" [ref=f10e530] [cursor=pointer]:
+        - /url: "#"
+        - text: Get a demo
+        - img [ref=f10e531]
+      - link "Contact us" [ref=f10e533] [cursor=pointer]:
+        - /url: "#contact"
+  - contentinfo [ref=f10e534]:
+    - generic [ref=f10e535]:
+      - generic [ref=f10e536]:
+        - generic [ref=f10e537]:
+          - link "k kibu" [ref=f10e538] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=f10e539]: k
+            - text: kibu
+          - paragraph [ref=f10e540]: Kibu builds modern tools for disability providers who want to focus on people, not paperwork. Documentation, content, and compliance — all in one place.
+          - generic [ref=f10e541]:
+            - text: 78 Harvard Ave, Floor 3
+            - text: Stamford, CT 06902
+          - generic [ref=f10e542]:
+            - link "LinkedIn" [ref=f10e543] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=f10e544]
+            - link "X" [ref=f10e546] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=f10e547]
+            - link "Instagram" [ref=f10e549] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=f10e550]
+        - generic [ref=f10e554]:
+          - heading "Product" [level=5] [ref=f10e555]
+          - link "Documentation" [ref=f10e556] [cursor=pointer]:
+            - /url: "#documentation"
+          - link "Content" [ref=f10e557] [cursor=pointer]:
+            - /url: "#content"
+          - link "Blog" [ref=f10e558] [cursor=pointer]:
+            - /url: "#"
+          - link "Resource Center" [ref=f10e559] [cursor=pointer]:
+            - /url: "#"
+          - link "Changelog" [ref=f10e560] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=f10e561]:
+          - heading "Company" [level=5] [ref=f10e562]
+          - link "About" [ref=f10e563] [cursor=pointer]:
+            - /url: "#about"
+          - link "Contact" [ref=f10e564] [cursor=pointer]:
+            - /url: "#contact"
+          - link "Careers" [ref=f10e565] [cursor=pointer]:
+            - /url: "#"
+          - link "Submit RFP" [ref=f10e566] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=f10e567]:
+          - heading "Legal" [level=5] [ref=f10e568]
+          - link "Privacy Policy" [ref=f10e569] [cursor=pointer]:
+            - /url: "#"
+          - link "Terms of Service" [ref=f10e570] [cursor=pointer]:
+            - /url: "#"
+          - link "Member Code of Conduct" [ref=f10e571] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f10e572]:
+        - generic [ref=f10e573]: © 2026 Kibu. All rights reserved.
+        - generic [ref=f10e574]:
+          - generic [ref=f10e575]:
+            - img [ref=f10e576]
+            - text: HIPAA Compliant
+          - generic [ref=f10e578]:
+            - img [ref=f10e579]
+            - text: Fully Encrypted

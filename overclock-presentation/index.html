@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OVERCLOCK* 1.0 — Três novidades. Um produto.</title>
+  <meta name="description" content="O primeiro ADE onde o time de IA é visível, se organiza sozinho e atende pela voz. Do primeiro objetivo ao produto entregue — com você no comando." />
+  <meta name="color-scheme" content="dark" />
+  <meta property="og:title" content="OVERCLOCK* 1.0 — Três novidades. Um produto." />
+  <meta property="og:description" content="Um time de IA que se organiza sozinho. Um assistente de voz. Um orquestrador inteligente. Não são três produtos. É um." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- scroll progress -->
+  <div class="progress" aria-hidden="true"><span class="progress__bar" id="progressBar"></span></div>
+
+  <a class="skip-link" href="#beat-04">Pular para o produto</a>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#beat-01" class="brand" aria-label="Overclock 1.0, início">
+        OVERCLOCK<span class="ast" aria-hidden="true">*</span>
+        <span class="brand__ver">1.0</span>
+      </a>
+      <nav class="nav__links" aria-label="Seções">
+        <a href="#beat-04">Modo Agêntico</a>
+        <a href="#beat-06">Jarvis</a>
+        <a href="#beat-11">Planos</a>
+      </nav>
+      <a href="#beat-11" class="btn btn-primary nav__cta">Ver os planos</a>
+    </div>
+  </header>
+
+  <!-- ================= BEAT RAIL ================= -->
+  <nav class="rail" aria-label="Navegação por seção">
+    <ol class="rail__list" id="rail"></ol>
+  </nav>
+
+  <main id="main">
+
+    <!-- ======================================================= BEAT 01 — HERO -->
+    <section class="beat hero" id="beat-01" aria-labelledby="h1" data-beat="01" data-label="Abertura">
+      <div class="hero__grid wrap">
+        <div class="hero__lede">
+          <p class="eyebrow reveal">Overclock 1.0</p>
+          <h1 id="h1" class="t-massive hero__title reveal">Três novidades.<br />Um produto.</h1>
+          <p class="hero__intro t-body reveal">
+            De tempos em tempos aparece um produto que muda a forma como você trabalha com IA.
+          </p>
+
+          <ol class="rule-of-three reveal" aria-label="As três novidades">
+            <li>
+              <span class="rot__n" aria-hidden="true">01</span>
+              <p>Um time de agentes de IA que se organiza sozinho — você diz o objetivo, ele monta o time, divide o trabalho e entrega.</p>
+            </li>
+            <li>
+              <span class="rot__n" aria-hidden="true">02</span>
+              <p>Um assistente que atende quando você chama — por voz, sem tocar no teclado, sabendo tudo que está acontecendo no seu workspace.</p>
+            </li>
+            <li>
+              <span class="rot__n" aria-hidden="true">03</span>
+              <p>Um orquestrador que escolhe o cérebro certo pra cada tarefa — sem você decidir modelo, sem desperdiçar poder de processamento em trabalho mecânico.</p>
+            </li>
+          </ol>
+
+          <div class="hero__cta reveal">
+            <a href="#beat-04" class="btn btn-primary">Ver o time trabalhar</a>
+            <a href="#beat-11" class="btn btn-ghost">Conhecer os planos</a>
+          </div>
+        </div>
+
+        <!-- SIGNATURE: cockpit ao vivo -->
+        <div class="hero__cockpit reveal" aria-hidden="true">
+          <div class="mac-desktop">
+            <div class="mac-window">
+              <div class="mac-bar">
+                <span class="mac-dots"><i></i><i></i><i></i></span>
+                <span class="mac-title">workspace · missão ativa</span>
+                <span class="mac-live"><span class="dot-live"></span>ao vivo</span>
+              </div>
+              <div class="panes">
+                <div class="pane pane-piloto">
+                  <span class="scan"></span>
+                  <div class="pane__head"><span class="pane__role">PILOTO</span><span class="dot-live"></span></div>
+                  <p class="pane__line">▸ objetivo recebido</p>
+                  <p class="pane__line">▸ montando o plano</p>
+                  <p class="pane__line pane__line--dim">▸ lançando o squad…</p>
+                </div>
+                <div class="pane pane-scout">
+                  <span class="scan" style="animation-delay:.6s"></span>
+                  <div class="pane__head"><span class="pane__role">SCOUT</span><span class="dot-live"></span></div>
+                  <p class="pane__line">▸ explorando repo</p>
+                  <p class="pane__line">▸ 42 arquivos lidos</p>
+                  <p class="pane__line pane__line--dim">▸ handoff pronto</p>
+                </div>
+                <div class="pane pane-builder">
+                  <span class="scan" style="animation-delay:1.2s"></span>
+                  <div class="pane__head"><span class="pane__role">BUILDER</span><span class="dot-live"></span></div>
+                  <p class="pane__line">▸ escrevendo componente</p>
+                  <p class="pane__line">▸ typecheck ok</p>
+                  <p class="pane__line pane__line--dim">▸ commit citando ID</p>
+                </div>
+                <div class="pane pane-executor">
+                  <span class="scan" style="animation-delay:1.8s"></span>
+                  <div class="pane__head"><span class="pane__role">EXECUTOR</span><span class="dot-live"></span></div>
+                  <p class="pane__line">▸ rodando testes</p>
+                  <p class="pane__line">▸ 18/18 verde</p>
+                  <p class="pane__line pane__line--dim">▸ entrega gravada</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STINGER -->
+      <div class="stinger wrap reveal">
+        <p class="stinger__lead">Um time que se organiza. Um assistente de voz. Um orquestrador inteligente.</p>
+        <p class="stinger__q">Vocês entenderam? Não são três produtos.</p>
+        <p class="stinger__punch t-h1">É <span class="brand-red">UM</span>.</p>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true"><span>scroll</span><span class="scroll-hint__line"></span></div>
+    </section>
+
+    <!-- ======================================================= BEAT 02 — PROBLEM -->
+    <section class="beat" id="beat-02" aria-labelledby="h2" data-beat="02" data-label="Como era">
+      <div class="wrap split">
+        <div class="split__head">
+          <p class="eyebrow reveal">Como era</p>
+          <h2 id="h2" class="t-h1 reveal">Um dev.<br />Uma janela.<br />Uma IA.</h2>
+        </div>
+        <div class="split__body">
+          <p class="lead reveal">
+            A maioria de vocês trabalha assim: um dev, uma janela de chat, uma IA. Você pergunta, ela responde, você copia, você cola, você testa, você volta pra pergunta de novo. Um cérebro, uma conversa de cada vez.
+          </p>
+          <ol class="loop reveal" aria-label="O ciclo de uma janela só">
+            <li>pergunta</li>
+            <li>resposta</li>
+            <li>copia</li>
+            <li>cola</li>
+            <li>testa</li>
+            <li class="loop__back">volta</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 03 — FLIP -->
+    <section class="beat beat--center" id="beat-03" aria-labelledby="h3" data-beat="03" data-label="Como é agora">
+      <div class="wrap center-col">
+        <p class="eyebrow reveal">Como é agora</p>
+        <h2 id="h3" class="t-h1 reveal">Você comanda o time.<br />Não maneja prompt.</h2>
+        <p class="lead lead--wide reveal">
+          O Overclock vira isso de cabeça pra baixo: você abre um workspace e assiste um <strong>time inteiro</strong> de agentes trabalhar — cada um visível, lado a lado, na sua tela. Nada escondido rodando em background.
+        </p>
+        <div class="flip-tags reveal" aria-hidden="true">
+          <span class="tag tag--cyan">SCOUT</span>
+          <span class="tag tag--red">PILOTO</span>
+          <span class="tag tag--blue">BUILDER</span>
+          <span class="tag tag--purple">REVIEWER</span>
+          <span class="tag tag--yellow">EXECUTOR</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 04 — AGENTIC MODE -->
+    <section class="beat" id="beat-04" aria-labelledby="h4" data-beat="04" data-label="Modo Agêntico">
+      <div class="wrap feature">
+        <div class="feature__head">
+          <p class="eyebrow eyebrow--brand reveal">Modo Agêntico</p>
+          <h2 id="h4" class="t-h2 reveal">Diga o objetivo.<br />O Overclock monta o time.</h2>
+        </div>
+        <div class="feature__body">
+          <p class="lead reveal">
+            Você não escreve um prompt gigante. Você conversa com um piloto, que faz uma entrevista curta e adaptativa — pula o que você já respondeu — e transforma isso num plano de execução com um time completo por trás.
+          </p>
+          <p class="lead reveal">
+            Dentro do time, cada <strong>chefe de área</strong> delega, cobra e revisa o que os workers entregam — exatamente como você faria com um time humano.
+          </p>
+          <ul class="bullets reveal">
+            <li>Piloto entrevista, monta o plano, lança o squad</li>
+            <li>Chefes de área coordenam workers com autonomia</li>
+            <li>Estilos de orquestração: do mais guiado ao mais autônomo — autonomia é um controle, não um interruptor</li>
+          </ul>
+          <div class="punchset reveal">
+            <p class="punch">"Você não escreve prompt. Você dá um objetivo."</p>
+            <p class="punch">"Não é um bot respondendo. É um time se coordenando."</p>
+            <p class="punch punch--brand">"Autonomia é um controle, não um interruptor."</p>
+          </div>
+        </div>
+
+        <!-- autonomy slider signature -->
+        <div class="autonomy reveal" aria-hidden="true">
+          <div class="autonomy__track">
+            <span class="autonomy__label autonomy__label--l">guiado</span>
+            <span class="autonomy__knob"></span>
+            <span class="autonomy__label autonomy__label--r">autônomo</span>
+          </div>
+          <p class="autonomy__cap">autonomia é um controle, não um interruptor</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 05 — HARNESS -->
+    <section class="beat beat--center" id="beat-05" aria-labelledby="h5" data-beat="05" data-label="Harness por tarefa">
+      <div class="wrap center-col">
+        <p class="eyebrow reveal">Harness por tarefa</p>
+        <h2 id="h5" class="t-h1 reveal">Pare de escolher modelo.<br />Comece a escolher resultado.</h2>
+        <p class="lead lead--wide reveal">
+          Nem toda tarefa merece o modelo mais caro, e nenhuma merece o modelo errado. Cada tipo de trabalho ganha automaticamente a combinação certa de modelo, esforço, habilidades e agente.
+        </p>
+
+        <div class="harness reveal" aria-hidden="true">
+          <div class="harness__row">
+            <span class="harness__task">tarefa mecânica</span>
+            <span class="harness__arrow">→</span>
+            <span class="chip chip--dim">modelo leve</span>
+            <span class="chip chip--dim">effort baixo</span>
+            <span class="harness__note">rápido · barato</span>
+          </div>
+          <div class="harness__row harness__row--heavy">
+            <span class="harness__task">raciocínio pesado</span>
+            <span class="harness__arrow">→</span>
+            <span class="chip chip--brand">modelo mais forte</span>
+            <span class="chip chip--brand">effort alto</span>
+            <span class="harness__note">sem você decidir</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 06 — JARVIS + CLOCKVOICE -->
+    <section class="beat" id="beat-06" aria-labelledby="h6" data-beat="06" data-label="Jarvis · ClockVoice">
+      <div class="wrap feature">
+        <div class="feature__head">
+          <p class="eyebrow eyebrow--brand reveal">Jarvis · ClockVoice</p>
+          <h2 id="h6" class="t-h2 reveal">O primeiro workspace que atende quando você chama.</h2>
+        </div>
+        <div class="feature__body">
+          <p class="lead reveal">
+            Fale com o Overclock como fala com uma pessoa: pergunte o que está acontecendo, mande executar, peça status — tudo por voz. O Jarvis sabe quais agentes estão rodando e o que cada um já entregou.
+          </p>
+          <p class="lead reveal">
+            <strong>ClockVoice</strong> fecha o ciclo: você fala, o pane digita, o time executa. Suas mãos ficam livres.
+          </p>
+          <div class="punchset reveal">
+            <p class="punch punch--brand">"O primeiro workspace que atende quando você chama."</p>
+            <p class="punch">"Suas mãos ficam livres. Sua voz vira comando."</p>
+          </div>
+        </div>
+
+        <!-- voice waveform signature -->
+        <div class="voice reveal" aria-hidden="true">
+          <div class="voice__wave" id="voiceWave"></div>
+          <p class="voice__cap">você fala · o pane digita · o time executa</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 07 — MISSIONS -->
+    <section class="beat beat--center" id="beat-07" aria-labelledby="h7" data-beat="07" data-label="Missões">
+      <div class="wrap center-col">
+        <p class="eyebrow reveal">Missões</p>
+        <h2 id="h7" class="t-h1 reveal">Você fecha o laptop.<br />O trabalho não se perde.</h2>
+        <p class="lead lead--wide reveal">
+          Todo agente sabe em qual missão está. Feche o app, abra de novo: as sessões voltam de onde pararam.
+        </p>
+        <div class="persist reveal" aria-hidden="true">
+          <span class="persist__state">fecha</span>
+          <span class="persist__gap">···</span>
+          <span class="persist__state persist__state--on">abre → restaurado</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 08 — SQUADS + CATALOG -->
+    <section class="beat" id="beat-08" aria-labelledby="h8" data-beat="08" data-label="Squads · Catálogo">
+      <div class="wrap feature">
+        <div class="feature__head">
+          <p class="eyebrow eyebrow--brand reveal">Squads · Catálogo · Marketplace</p>
+          <h2 id="h8" class="t-h2 reveal">O time já vem montado. E cresce sem você abrir um terminal.</h2>
+        </div>
+        <div class="feature__body">
+          <p class="lead reveal">
+            Em vez de montar um time do zero, você escolhe um <strong>squad pronto</strong> pra sua tarefa — agentes, skills e fluxo prontos pra rodar.
+          </p>
+          <p class="lead reveal">
+            Instale novos agentes e habilidades de um <strong>marketplace</strong>, direto de dentro do produto — sem sair configurando arquivo por arquivo.
+          </p>
+          <div class="punchset reveal">
+            <p class="punch">"O time já vem montado. Você só liga."</p>
+            <p class="punch punch--brand">"Seu time cresce sem você abrir um terminal."</p>
+          </div>
+        </div>
+
+        <div class="catalog reveal" aria-hidden="true">
+          <article class="catalog__card"><span class="catalog__tag">SQUAD</span><span class="catalog__name">build · frontend</span><span class="catalog__meta">4 agentes · pronto</span></article>
+          <article class="catalog__card"><span class="catalog__tag">SQUAD</span><span class="catalog__name">pesquisa · deep</span><span class="catalog__meta">3 agentes · pronto</span></article>
+          <article class="catalog__card"><span class="catalog__tag">SKILL</span><span class="catalog__name">frontend-design</span><span class="catalog__meta">marketplace · instalar</span></article>
+          <article class="catalog__card catalog__card--add"><span class="catalog__plus">+</span><span class="catalog__name">marketplace</span><span class="catalog__meta">sem tocar em arquivo</span></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 09 — DEPTH LAYER -->
+    <section class="beat" id="beat-09" aria-labelledby="h9" data-beat="09" data-label="Mídia · Handoffs · Remoto">
+      <div class="wrap">
+        <div class="feature__head feature__head--full">
+          <p class="eyebrow eyebrow--brand reveal">Mídia · Handoffs · Controle Remoto</p>
+          <h2 id="h9" class="t-h2 reveal">Um time que gera, passa adiante, e não para.</h2>
+        </div>
+        <div class="depth reveal">
+          <article class="depth__col">
+            <span class="depth__n" aria-hidden="true">01</span>
+            <h3 class="t-h3">Mídia</h3>
+            <p>O mesmo workspace que coordena código gera <strong>imagem, vídeo e narração</strong> — parte do mesmo time, não uma ferramenta separada.</p>
+            <p class="depth__punch">"Mídia não é outro app. É outro membro do time."</p>
+          </article>
+          <article class="depth__col">
+            <span class="depth__n" aria-hidden="true">02</span>
+            <h3 class="t-h3">Handoffs</h3>
+            <p>Quando um agente termina, ele não manda uma mensagem solta — entrega um <strong>ponteiro pro resultado gravado</strong>. Sobrevive a restart, a troca de pane, a qualquer coisa.</p>
+            <p class="depth__punch">"Nada se perde entre um agente e outro."</p>
+          </article>
+          <article class="depth__col">
+            <span class="depth__n" aria-hidden="true">03</span>
+            <h3 class="t-h3">Controle Remoto</h3>
+            <p>Quando você sai da mesa: um <strong>cliente instalável (PWA)</strong> pra acompanhar e comandar seu workspace direto do celular.</p>
+            <p class="depth__punch">"Seu time de IA trabalha mesmo quando você não está na mesa."</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 10 — RUNTIME -->
+    <section class="beat beat--center" id="beat-10" aria-labelledby="h10" data-beat="10" data-label="Runtime">
+      <div class="wrap center-col">
+        <p class="eyebrow reveal">Runtime</p>
+        <h2 id="h10" class="t-h1 reveal">A base ficou invisível de tão estável.</h2>
+        <p class="lead lead--wide reveal">
+          Por baixo de tudo isso, o app foi refeito num runtime mais leve e mais confiável, com atualização automática em qualquer plataforma — você nunca fica numa versão velha sem saber.
+        </p>
+        <div class="platforms reveal" aria-hidden="true">
+          <span>macOS</span><span class="platforms__sep">·</span><span>Windows</span><span class="platforms__sep">·</span><span>Linux</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 11 — PLANS -->
+    <section class="beat" id="beat-11" aria-labelledby="h11" data-beat="11" data-label="One more thing">
+      <div class="wrap">
+        <div class="feature__head feature__head--full">
+          <p class="eyebrow eyebrow--brand reveal">One more thing</p>
+          <h2 id="h11" class="t-h1 reveal">Cresce com você.</h2>
+          <p class="lead lead--wide reveal">
+            Tudo isso — o time que se organiza, o assistente de voz, o orquestrador inteligente — cresce com você. Três planos, cada um destravando um superpoder a mais.
+          </p>
+        </div>
+
+        <div class="plans reveal">
+          <article class="plan">
+            <header class="plan__top"><span class="plan__name">BOOST</span><span class="plan__rank">01</span></header>
+            <p class="plan__what">O motor completo: workspaces, missões, panes multi-agente, catálogo.</p>
+            <ul class="plan__feats">
+              <li>Workspaces</li><li>Missões</li><li>Panes multi-agente</li><li>Catálogo</li>
+            </ul>
+          </article>
+          <article class="plan plan--mid">
+            <header class="plan__top"><span class="plan__name">PRO</span><span class="plan__rank">02</span></header>
+            <p class="plan__what">BOOST + <strong>Squads</strong> (times prontos) + <strong>ClockVoice</strong> (ditado por voz).</p>
+            <ul class="plan__feats">
+              <li>Tudo do BOOST</li><li class="plan__new">Squads — times prontos</li><li class="plan__new">ClockVoice — ditado por voz</li>
+            </ul>
+          </article>
+          <article class="plan plan--top">
+            <header class="plan__top"><span class="plan__name">ULTRA</span><span class="plan__rank">03</span></header>
+            <p class="plan__what">PRO + <strong>Harness</strong> (orquestração calibrada + Receitas) + <strong>Jarvis</strong> (mordomo de voz).</p>
+            <ul class="plan__feats">
+              <li>Tudo do PRO</li><li class="plan__new">Harness — orquestração calibrada + Receitas</li><li class="plan__new">Jarvis — mordomo de voz</li>
+            </ul>
+          </article>
+        </div>
+        <p class="plans__foot reveal">Você começa com o motor. Cresce até o time completo com voz.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================= BEAT 12 — CLOSING -->
+    <section class="beat beat--closing" id="beat-12" aria-labelledby="h12" data-beat="12" data-label="Overclock 1.0">
+      <div class="wrap center-col">
+        <p class="eyebrow reveal">Overclock 1.0</p>
+        <h2 id="h12" class="t-massive closing__title reveal">
+          O primeiro ADE onde o time de IA é <span class="brand-red">visível</span>, se <span class="brand-red">organiza sozinho</span> e atende pela <span class="brand-red">voz</span>.
+        </h2>
+        <p class="lead lead--wide reveal">
+          Do primeiro objetivo ao produto entregue — com você no comando, não no meio do caminho.
+        </p>
+        <div class="hero__cta reveal">
+          <a href="#beat-04" class="btn btn-primary">Começar com o motor</a>
+          <a href="#beat-11" class="btn btn-ghost">Ver os planos</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__inner">
+      <span class="brand brand--sm">OVERCLOCK<span class="ast" aria-hidden="true">*</span></span>
+      <span class="foot__tag">Um time que se organiza. Um assistente de voz. Um orquestrador inteligente. É um.</span>
+      <span class="foot__ver">v1.0</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+{
+  "_comment": "Config editada à mão do results_build.py. models/tests/rounds_history entram verbatim no results.json gerado; source_notes ('<teste>/<modelo>') vira source_note da entrada correspondente. NUNCA editar site/data/results.json direto — ele é gerado.",
+  "models": [
+    {
+      "id": "sonnet-5",
+      "name": "Sonnet 5",
+      "vendor": "Anthropic",
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "badge": "preço promocional até 31/08/2026 (depois $3/$15)"
+    },
+    {
+      "id": "sonnet-4-6",
+      "name": "Sonnet 4.6",
+      "vendor": "Anthropic",
+      "price_in": 3.0,
+      "price_out": 15.0
+    },
+    {
+      "id": "opus-4-8",
+      "name": "Opus 4.8",
+      "vendor": "Anthropic",
+      "price_in": 5.0,
+      "price_out": 25.0
+    },
+    {
+      "id": "fable-5",
+      "name": "Fable 5",
+      "vendor": "Anthropic",
+      "price_in": 10.0,
+      "price_out": 50.0
+    },
+    {
+      "id": "gpt-5-6-luna",
+      "name": "GPT-5.6 Luna",
+      "vendor": "OpenAI",
+      "price_in": 1.0,
+      "price_out": 6.0
+    },
+    {
+      "id": "gpt-5-6-terra",
+      "name": "GPT-5.6 Terra",
+      "vendor": "OpenAI",
+      "price_in": 2.5,
+      "price_out": 15.0
+    },
+    {
+      "id": "gpt-5-6-sol",
+      "name": "GPT-5.6 Sol",
+      "vendor": "OpenAI",
+      "price_in": 5.0,
+      "price_out": 30.0
+    },
+    {
+      "id": "grok-4-5",
+      "name": "Grok 4.5",
+      "vendor": "xAI",
+      "price_in": 2.0,
+      "price_out": 6.0
+    },
+    {
+      "id": "haiku-4-5",
+      "name": "Haiku 4.5",
+      "vendor": "Anthropic",
+      "price_in": 1.0,
+      "price_out": 5.0
+    },
+    {
+      "id": "gpt-5-5",
+      "name": "GPT-5.5",
+      "vendor": "OpenAI",
+      "price_in": 5.0,
+      "price_out": 30.0
+    },
+    {
+      "id": "gpt-5-4",
+      "name": "GPT-5.4",
+      "vendor": "OpenAI",
+      "price_in": 2.5,
+      "price_out": 15.0
+    },
+    {
+      "id": "gpt-5-4-mini",
+      "name": "GPT-5.4 Mini",
+      "vendor": "OpenAI",
+      "price_in": 0.75,
+      "price_out": 4.5
+    },
+    {
+      "id": "gpt-5-3-codex-spark",
+      "name": "GPT-5.3 Codex Spark",
+      "vendor": "OpenAI",
+      "price_in": 1.75,
+      "price_out": 14.0
+    },
+    {
+      "id": "grok-composer-2-5-fast",
+      "name": "Grok Composer 2.5 Fast",
+      "vendor": "xAI",
+      "price_in": 0.5,
+      "price_out": 2.5
+    },
+    {
+      "id": "glm-5-2",
+      "name": "GLM 5.2",
+      "vendor": "Zhipu",
+      "price_in": 1.4,
+      "price_out": 4.4
+    },
+    {
+      "id": "glm-5-turbo",
+      "name": "GLM 5 Turbo",
+      "vendor": "Zhipu",
+      "price_in": 1.2,
+      "price_out": 4.0
+    },
+    {
+      "id": "gemini-3-5-flash",
+      "name": "Gemini 3.5 Flash",
+      "vendor": "Google",
+      "price_in": 1.5,
+      "price_out": 9.0
+    }
+  ],
+  "tests": [
+    {
+      "id": "001",
+      "slug": "sistema-solar-3d",
+      "activity": "Quero um app 3D interativo",
+      "category": "3D interativo",
+      "track": "benchmark",
+      "prompt_ref": "prompts/001-sistema-solar-3d.md"
+    },
+    {
+      "id": "002",
+      "slug": "site-apple",
+      "activity": "Clona esse site",
+      "category": "clone de site",
+      "track": "benchmark",
+      "prompt_ref": "prompts/002-site-apple.md"
+    },
+    {
+      "id": "003",
+      "slug": "fisica-mouse",
+      "activity": "Brinquedo de física",
+      "category": "física/canvas",
+      "track": "benchmark",
+      "prompt_ref": "prompts/003-fisica-mouse.md"
+    },
+    {
+      "id": "004",
+      "slug": "fps",
+      "activity": "Faz um jogo",
+      "category": "jogo 3D",
+      "track": "benchmark",
+      "prompt_ref": "prompts/004-fps.md"
+    },
+    {
+      "id": "101",
+      "slug": "caca-bug",
+      "activity": "Acha esse bug pra mim",
+      "category": "debug",
+      "track": "dia-a-dia",
+      "prompt_ref": "prompts/101-caca-bug.md"
+    },
+    {
+      "id": "103",
+      "slug": "feature-alheia",
+      "activity": "Adiciona um filtro no meu app",
+      "category": "feature em código existente",
+      "track": "dia-a-dia",
+      "prompt_ref": "prompts/103-feature-alheia.md"
+    },
+    {
+      "id": "104",
+      "slug": "css-mobile",
+      "activity": "Conserta o mobile sem mexer no desktop",
+      "category": "CSS responsivo",
+      "track": "dia-a-dia",
+      "prompt_ref": "prompts/104-css-mobile.md"
+    },
+    {
+      "id": "105",
+      "slug": "revisar-codigo",
+      "activity": "Revisa esse código antes de eu subir",
+      "category": "code review",
+      "track": "dia-a-dia",
+      "prompt_ref": "prompts/105-revisar-codigo.md"
+    },
+    {
+      "id": "108",
+      "slug": "dado-sujo",
+      "activity": "Gera um relatório desse CSV zoado",
+      "category": "dados",
+      "track": "dia-a-dia",
+      "prompt_ref": "prompts/108-dado-sujo.md"
+    }
+  ],
+  "rounds_history": [],
+  "source_notes": {
+    "001/fable-5": "Custo medido do re-run canônico de 09/jul (runs/fable-5/001/manifest.json). Substitui o $4,41 da v0, que media a 1ª geração de 01/jul (archive/runs-fable5-01jul) — são runs diferentes, os números não são comparáveis.",
+    "002/fable-5": "Custo/tokens da 1ª geração Fable 5 (01/jul, archive/runs-fable5-01jul); o artefato canônico em run_ref é o re-run de 09/jul, cujo custo não foi medido.",
+    "003/fable-5": "Custo/tokens da 1ª geração Fable 5 (01/jul, archive/runs-fable5-01jul); o artefato canônico em run_ref é o re-run de 09/jul, cujo custo não foi medido.",
+    "004/fable-5": "Custo/tokens da 1ª geração Fable 5 (01/jul, archive/runs-fable5-01jul); o artefato canônico em run_ref é o re-run de 09/jul, cujo custo não foi medido."
+  }
+}

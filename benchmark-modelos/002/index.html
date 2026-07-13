@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple</title>
+<style>
+  :root{
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --nav-h: 44px;
+    --light-bg2: #f5f5f7;
+    --blue: #2997ff;
+    --text-dark: #1d1d1f;
+    --text-light: #f5f5f7;
+    --text-gray: #86868b;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing:antialiased; }
+  html{ scroll-behavior:smooth; }
+  body{ font-family: var(--font); background:#fff; color: var(--text-dark); overflow-x:hidden; }
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; border:none; background:none; cursor:pointer; }
+
+  /* ---------- NAVBAR ---------- */
+  .navbar{
+    position: fixed;
+    top:0; left:0; right:0;
+    height: var(--nav-h);
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-inner{
+    max-width: 1024px;
+    margin: 0 auto;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 0 16px;
+  }
+  .nav-logo{ width: 44px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .nav-logo svg{ width:14px; height:18px; fill:#1d1d1f; }
+  .nav-links{ flex:1; display:flex; justify-content:center; gap: 34px; }
+  .nav-links li a{ font-size: 12px; font-weight:400; color:#1d1d1f; opacity:.8; transition: opacity .2s ease; white-space:nowrap; }
+  .nav-links li a:hover{ opacity:1; }
+  .nav-icons{ display:flex; align-items:center; gap: 18px; flex-shrink:0; width: 60px; justify-content:flex-end; }
+  .nav-icons svg{ width:15px; height:15px; stroke:#1d1d1f; fill:none; opacity:.85; transition:opacity .2s ease; cursor:pointer; }
+  .nav-icons svg:hover{ opacity:1; }
+
+  @media (max-width: 833px){ .nav-links{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: calc(var(--nav-h) + 40px) 20px 60px;
+    text-align:center;
+    background: linear-gradient(180deg,#fbfbfd 0%, #ffffff 100%);
+    overflow:hidden;
+  }
+  .hero-eyebrow{ font-size: 21px; font-weight:600; color:#1d1d1f; margin-bottom: 6px; }
+  .hero-title{
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight:600;
+    letter-spacing:-0.015em;
+    line-height:1.05;
+    background: linear-gradient(180deg, #1d1d1f 0%, #6e6e73 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom: 8px;
+  }
+  .hero-sub{ font-size: clamp(18px, 2.4vw, 28px); font-weight:400; color:#6e6e73; margin-bottom: 18px; }
+  .hero-links{ display:flex; gap: 28px; justify-content:center; margin-bottom: 40px; font-size: 19px; }
+  .hero-links a{ color: var(--blue); transition: text-decoration .15s ease; }
+  .hero-links a:hover{ text-decoration: underline; }
+
+  .hero-visual{
+    max-width: 980px;
+    height: clamp(260px, 45vw, 560px);
+    margin: 0 auto;
+    border-radius: 28px;
+    overflow:hidden;
+    background: radial-gradient(circle at 30% 20%, #3a3a3c, #0a0a0a 70%);
+    transition: transform .6s ease, box-shadow .6s ease;
+  }
+  .hero-visual:hover{ transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,.25); }
+  .hero-visual svg{ width:100%; height:100%; display:block; }
+
+  /* ---------- PRODUCT SECTIONS ---------- */
+  .product{ padding: 100px 20px; text-align:center; position: relative; }
+  .product.light{ background: var(--light-bg2); color: var(--text-dark); }
+  .product.dark{ background: #000; color: var(--text-light); }
+
+  .product-eyebrow{ font-size: 19px; font-weight:600; margin-bottom: 6px; }
+  .product.dark .product-eyebrow{ color: #f5f5f7; }
+  .product.light .product-eyebrow{ color: #1d1d1f; }
+
+  .product-title{ font-size: clamp(32px, 5vw, 56px); font-weight:600; letter-spacing:-0.01em; line-height:1.07; margin-bottom: 10px; }
+
+  .product-sub{ font-size: clamp(16px, 1.8vw, 21px); font-weight:400; margin-bottom: 24px; }
+  .product.light .product-sub{ color:#6e6e73; }
+  .product.dark .product-sub{ color:#a1a1a6; }
+
+  .product-links{ display:flex; gap: 26px; justify-content:center; margin-bottom: 50px; font-size: 17px; }
+  .product-links a{ color: var(--blue); }
+  .product-links a:hover{ text-decoration: underline; }
+
+  .product-visual{
+    max-width: 920px;
+    height: clamp(220px, 38vw, 460px);
+    margin: 0 auto;
+    border-radius: 22px;
+    overflow:hidden;
+    opacity:0;
+    transform: translateY(40px) scale(.97);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .product-visual.in-view{ opacity:1; transform: translateY(0) scale(1); }
+  .product-visual svg{ width:100%; height:100%; display:block; transition: transform .5s ease; }
+  .product-visual:hover svg{ transform: scale(1.03); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background: var(--light-bg2); color: var(--text-gray); font-size: 12px; padding: 40px 20px; }
+  .footer-inner{ max-width: 1024px; margin: 0 auto; }
+  footer hr{ border:none; border-top: 1px solid #d2d2d7; margin-bottom: 20px; }
+  footer p{ margin-bottom: 12px; line-height:1.5; }
+  .footer-links{ display:flex; flex-wrap:wrap; gap: 6px 0; }
+  .footer-links li{ position:relative; padding: 0 10px; }
+  .footer-links li:not(:first-child)::before{
+    content:"";
+    position:absolute;
+    left:0; top:2px; bottom:2px;
+    width:1px;
+    background:#d2d2d7;
+  }
+  .footer-links a:hover{ text-decoration:underline; color:#1d1d1f; }
+
+  @media (max-width: 600px){
+    .hero-links, .product-links{ flex-direction:column; gap:10px; }
+    .product{ padding: 70px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <svg viewBox="0 0 170 170" aria-label="Apple">
+        <path d="M150.4,128.5c-2.7,6.2-5.9,11.9-9.7,17.2c-5.2,7.3-9.4,12.4-12.7,15.2c-5.1,4.6-10.6,7-16.4,7.2
+        c-4.2,0-9.3-1.2-15.2-3.6c-5.9-2.4-11.4-3.6-16.3-3.6c-5.2,0-10.8,1.2-16.9,3.6c-6.1,2.4-11,3.7-14.8,3.8
+        c-5.6,0.2-11.2-2.3-16.9-7.5c-3.6-3.1-8-8.4-13.2-16c-5.6-8.1-10.2-17.5-13.8-28.2c-3.9-11.6-5.9-22.8-5.9-33.7
+        c0-12.5,2.7-23.3,8.1-32.3c4.3-7.3,9.9-13,17-17.2c7.1-4.2,14.7-6.3,22.9-6.5c4.5,0,10.3,1.4,17.6,4.2
+        c7.3,2.8,11.9,4.2,14,4.2c1.6,0,6.8-1.6,15.4-4.9c8.2-3,15.1-4.3,20.8-3.8c15.3,1.2,26.9,7.3,34.5,18.3
+        c-13.7,8.3-20.5,19.9-20.4,34.8c0.1,11.6,4.3,21.2,12.6,28.9c3.8,3.6,8,6.4,12.7,8.3C153.5,121.1,152.1,124.9,150.4,128.5z
+        M120.6,4.4c0,9.3-3.4,18-10.1,26c-8.1,9.5-17.9,15-28.5,14.2c-0.1-1.1-0.2-2.3-0.2-3.5c0-9,3.9-18.6,10.8-26.5
+        c3.5-4,7.9-7.3,13.2-9.9c5.3-2.6,10.3-4,15-4.2C120.5,1.7,120.6,3,120.6,4.4z"/>
+      </svg>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Store</a></li>
+      <li><a href="#">Mac</a></li>
+      <li><a href="#">iPad</a></li>
+      <li><a href="#">iPhone</a></li>
+      <li><a href="#">Watch</a></li>
+      <li><a href="#">Vision</a></li>
+      <li><a href="#">AirPods</a></li>
+      <li><a href="#">TV e Casa</a></li>
+      <li><a href="#">Entretenimento</a></li>
+      <li><a href="#">Acessórios</a></li>
+      <li><a href="#">Suporte</a></li>
+    </ul>
+    <div class="nav-icons">
+      <svg viewBox="0 0 17 17"><path d="M16.7,15.6l-4.4-4.4c0.9-1.2,1.5-2.6,1.5-4.2c0-3.9-3.1-7-7-7s-7,3.1-7,7s3.1,7,7,7c1.6,0,3-0.6,4.2-1.5l4.4,4.4
+      L16.7,15.6z M2.3,7c0-2.6,2.1-4.7,4.7-4.7s4.7,2.1,4.7,4.7s-2.1,4.7-4.7,4.7S2.3,9.6,2.3,7z" stroke-width="0" fill="#1d1d1f"></path></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2 C9 2 7 5 7 9 L5 9 L4 22 L20 22 L19 9 L17 9 C17 5 15 2 12 2 Z M12 4 C13.7 4 15 6 15 9 L9 9 C9 6 10.3 4 12 4 Z" stroke-width="0" fill="#1d1d1f"></path></svg>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">iPhone 17 Pro</p>
+  <h1 class="hero-title">Titânio.<br>Tão forte. Tão leve. Tão Pro.</h1>
+  <p class="hero-sub">Câmera Fusion de 48MP. Chip A19 Pro. Bateria o dia todo.</p>
+  <div class="hero-links">
+    <a href="#">Saiba mais &rsaquo;</a>
+    <a href="#">Comprar &rsaquo;</a>
+  </div>
+  <div class="hero-visual">
+    <svg viewBox="0 0 800 460" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="heroGlow" cx="50%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#5a5a60"/>
+          <stop offset="55%" stop-color="#1c1c1e"/>
+          <stop offset="100%" stop-color="#000000"/>
+        </radialGradient>
+        <linearGradient id="phoneBody" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#e8e8ea"/>
+          <stop offset="50%" stop-color="#9a9aa0"/>
+          <stop offset="100%" stop-color="#6b6b70"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="460" fill="url(#heroGlow)"/>
+      <g transform="translate(400,230)">
+        <rect x="-95" y="-185" width="190" height="370" rx="48" fill="url(#phoneBody)"/>
+        <rect x="-85" y="-175" width="170" height="350" rx="40" fill="#0b0b0c"/>
+        <rect x="-65" y="-150" width="50" height="50" rx="14" fill="#1d1d1f" stroke="#3a3a3c" stroke-width="2"/>
+        <circle cx="-40" cy="-125" r="12" fill="#2b2b2d"/>
+        <rect x="-30" y="160" width="60" height="6" rx="3" fill="#3a3a3c"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- PRODUCT GRID -->
+<section class="product dark" data-section>
+  <p class="product-eyebrow">MacBook Pro</p>
+  <h2 class="product-title">Mac. Levado pelo M5.</h2>
+  <p class="product-sub">Desempenho extremo para fluxos de trabalho extremos.</p>
+  <div class="product-links">
+    <a href="#">Saiba mais &rsaquo;</a>
+    <a href="#">Comprar &rsaquo;</a>
+  </div>
+  <div class="product-visual">
+    <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="mbBg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#2c2c2e"/>
+          <stop offset="100%" stop-color="#000"/>
+        </linearGradient>
+        <linearGradient id="mbLid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c4c4c8"/>
+          <stop offset="100%" stop-color="#7d7d82"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="400" fill="url(#mbBg)"/>
+      <g transform="translate(400,210)">
+        <path d="M-220,-110 L220,-110 L240,30 L-240,30 Z" fill="url(#mbLid)"/>
+        <path d="M-205,-98 L205,-98 L222,18 L-222,18 Z" fill="#0a0a0c"/>
+        <path d="M-260,30 L260,30 L290,55 L-290,55 Z" fill="#b5b5ba"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="product light" data-section>
+  <p class="product-eyebrow">Apple Watch</p>
+  <h2 class="product-title">Watch Series 11.<br>Mais sobre sua saúde.</h2>
+  <p class="product-sub">Hypertension Notifications. Sleep Score. Bateria de até 18 horas.</p>
+  <div class="product-links">
+    <a href="#">Saiba mais &rsaquo;</a>
+    <a href="#">Comprar &rsaquo;</a>
+  </div>
+  <div class="product-visual">
+    <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="watchBg" cx="50%" cy="50%" r="70%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="100%" stop-color="#e2e2e6"/>
+        </radialGradient>
+        <linearGradient id="watchCase" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ff7a45"/>
+          <stop offset="100%" stop-color="#d94f1e"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="400" fill="url(#watchBg)"/>
+      <g transform="translate(400,200)">
+        <rect x="-90" y="-150" width="40" height="40" rx="8" fill="#b3b3b8"/>
+        <rect x="-90" y="110" width="40" height="40" rx="8" fill="#b3b3b8"/>
+        <rect x="-110" y="-120" width="220" height="240" rx="56" fill="url(#watchCase)"/>
+        <rect x="-92" y="-102" width="184" height="204" rx="40" fill="#0a0a0c"/>
+        <circle cx="0" cy="0" r="60" fill="none" stroke="#34c759" stroke-width="6"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="product dark" data-section>
+  <p class="product-eyebrow">AirPods Pro</p>
+  <h2 class="product-title">Áudio adaptativo. Silêncio sob medida.</h2>
+  <p class="product-sub">Cancelamento de ruído ativo de última geração.</p>
+  <div class="product-links">
+    <a href="#">Saiba mais &rsaquo;</a>
+    <a href="#">Comprar &rsaquo;</a>
+  </div>
+  <div class="product-visual">
+    <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="apBg" cx="50%" cy="40%" r="75%">
+          <stop offset="0%" stop-color="#3a3a3c"/>
+          <stop offset="100%" stop-color="#000"/>
+        </radialGradient>
+      </defs>
+      <rect width="800" height="400" fill="url(#apBg)"/>
+      <g transform="translate(330,200)">
+        <ellipse cx="0" cy="0" rx="42" ry="58" fill="#f5f5f7"/>
+        <rect x="-10" y="40" width="20" height="70" rx="10" fill="#f5f5f7"/>
+      </g>
+      <g transform="translate(470,200)">
+        <ellipse cx="0" cy="0" rx="42" ry="58" fill="#f5f5f7"/>
+        <rect x="-10" y="40" width="20" height="70" rx="10" fill="#f5f5f7"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="product light" data-section>
+  <p class="product-eyebrow">iPad Pro</p>
+  <h2 class="product-title">Inacreditavelmente fino. Absurdamente rápido.</h2>
+  <p class="product-sub">Chip M5. Display Ultra Retina XDR.</p>
+  <div class="product-links">
+    <a href="#">Saiba mais &rsaquo;</a>
+    <a href="#">Comprar &rsaquo;</a>
+  </div>
+  <div class="product-visual">
+    <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="ipadBg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#eef0f3"/>
+          <stop offset="100%" stop-color="#d3d6db"/>
+        </linearGradient>
+        <linearGradient id="ipadBody" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#cfd1d6"/>
+          <stop offset="100%" stop-color="#9a9ca1"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="400" fill="url(#ipadBg)"/>
+      <g transform="translate(400,200)">
+        <rect x="-150" y="-160" width="300" height="320" rx="28" fill="url(#ipadBody)"/>
+        <rect x="-138" y="-148" width="276" height="296" rx="18" fill="#0a0a0c"/>
+        <circle cx="0" cy="-130" r="3" fill="#3a3a3c"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <hr>
+    <p>As compras estão sujeitas aos Termos de Vendas e Garantia da Apple. Os preços podem variar.</p>
+    <p>Mais formas de comprar: encontre uma <a href="#" style="color:#06c;">Apple Store</a> ou outro revendedor próximo de você. Ou ligue para 0800-761-0867.</p>
+    <p>Copyright &copy; 2026 Apple Inc. Todos os direitos reservados.</p>
+    <ul class="footer-links">
+      <li><a href="#">Política de Privacidade</a></li>
+      <li><a href="#">Termos de Uso</a></li>
+      <li><a href="#">Vendas e Reembolsos</a></li>
+      <li><a href="#">Mapa do Site</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.product-visual');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.2 });
+  sections.forEach(s => observer.observe(s));
+
+  let lastScroll = 0;
+  const nav = document.querySelector('.navbar');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.style.background = y > 4 ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.8)';
+    lastScroll = y;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kibu - Focus on Excellent Service. We Handle The Rest.</title>
+<meta name="description" content="Kibu helps IDD providers focus on people, not paperwork. AI-powered documentation, 600+ on-demand classes, and compliance tools in one platform." />
+<style>
+/* ============ RESET & TOKENS ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#328cff;
+  --blue-600:#2b7ae0;
+  --blue-700:#1e4d8f;
+  --blue-tint:#eaf2ff;
+  --blue-tint-2:#f4f8ff;
+  --ink:#101828;
+  --ink-2:#1d2939;
+  --body:#4a5565;
+  --muted:#6b7280;
+  --faint:#99a1af;
+  --line:#e5e7eb;
+  --line-2:#eef0f3;
+  --bg:#ffffff;
+  --bg-2:#fbfbfb;
+  --bg-3:#f5f5f7;
+  --red:#9e2a28;
+  --amber:#f59e0b;
+  --green:#12b76a;
+  --radius:22px;
+  --radius-sm:14px;
+  --radius-lg:28px;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05), 0 1px 3px rgba(16,24,40,.04);
+  --shadow:0 4px 8px rgba(16,24,40,.04), 0 16px 40px rgba(16,24,40,.08);
+  --shadow-lg:0 24px 60px -12px rgba(16,24,40,.18), 0 8px 24px rgba(16,24,40,.06);
+  --shadow-blue:0 18px 40px -12px rgba(50,140,255,.5);
+  --container:1200px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --font:"Inter","Inter Placeholder",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font);
+  color:var(--body);
+  background:var(--bg);
+  line-height:1.6;
+  font-size:17px;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{color:var(--ink);line-height:1.1;letter-spacing:-.02em;font-weight:700}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+::selection{background:var(--blue);color:#fff}
+
+/* ============ LAYOUT HELPERS ============ */
+.container{width:100%;max-width:var(--container);margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.section-sm{padding:64px 0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--blue);
+  background:var(--blue-tint);
+  padding:7px 14px;border-radius:100px;
+  margin-bottom:20px;
+}
+.eyebrow.gray{color:var(--muted);background:var(--bg-3)}
+.h-sec{font-size:clamp(30px,4.4vw,50px);font-weight:750;letter-spacing:-.03em}
+.sub-sec{font-size:clamp(17px,2vw,20px);color:var(--body);max-width:640px;margin-top:18px;line-height:1.55}
+.center{text-align:center}
+.center .sub-sec{margin-left:auto;margin-right:auto}
+.text-blue{color:var(--blue)}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-weight:600;font-size:16px;
+  padding:14px 26px;border-radius:100px;
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .2s, color .2s;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(50,140,255,.35)}
+.btn-primary:hover{background:var(--blue-600);transform:translateY(-2px);box-shadow:var(--shadow-blue)}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+.btn-white{background:#fff;color:var(--blue-700)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btn-lg{padding:16px 32px;font-size:17px}
+.btn svg{width:18px;height:18px}
+
+/* ============ NAVBAR ============ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .3s, box-shadow .3s, border-color .3s, padding .3s;
+  padding:16px 0;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(255,255,255,.82);
+  backdrop-filter:saturate(180%) blur(16px);
+  -webkit-backdrop-filter:saturate(180%) blur(16px);
+  border-bottom-color:var(--line);
+  padding:10px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:24px;color:var(--ink);letter-spacing:-.04em}
+.logo .mark{
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,var(--blue),var(--blue-700));
+  display:grid;place-items:center;color:#fff;font-size:18px;font-weight:800;
+  box-shadow:0 4px 10px rgba(50,140,255,.4);
+}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{
+  padding:9px 14px;border-radius:10px;font-size:15px;font-weight:500;color:var(--ink-2);
+  transition:background .2s,color .2s;
+}
+.nav-links a:hover{background:var(--bg-3);color:var(--blue)}
+.nav-actions{display:flex;align-items:center;gap:14px}
+.nav-actions .login{font-weight:600;font-size:15px;color:var(--ink-2);padding:8px 6px}
+.nav-actions .login:hover{color:var(--blue)}
+.nav-actions .btn{padding:11px 22px;font-size:15px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;flex-direction:column;gap:5px;align-items:center;justify-content:center;background:var(--bg-3)}
+.burger span{width:20px;height:2px;background:var(--ink);border-radius:2px;transition:.3s var(--ease)}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{
+  position:fixed;top:0;right:0;bottom:0;width:min(84vw,340px);z-index:99;
+  background:#fff;box-shadow:-20px 0 60px rgba(16,24,40,.18);
+  padding:96px 24px 32px;
+  transform:translateX(105%);transition:transform .4s var(--ease);
+  display:flex;flex-direction:column;gap:6px;
+}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{padding:14px 16px;border-radius:12px;font-size:18px;font-weight:600;color:var(--ink-2)}
+.mobile-menu a:hover{background:var(--bg-3)}
+.mobile-menu .btn{margin-top:14px}
+.scrim{position:fixed;inset:0;background:rgba(16,24,40,.4);z-index:98;opacity:0;visibility:hidden;transition:.3s}
+.scrim.open{opacity:1;visibility:visible}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;padding:150px 0 80px;text-align:center;overflow:hidden;
+  background:
+    radial-gradient(1100px 520px at 50% -8%, var(--blue-tint) 0%, rgba(234,242,255,0) 62%),
+    linear-gradient(180deg,#fff 0%,var(--bg-2) 100%);
+}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(900px 500px at 50% 0%,#000,transparent 75%);
+  mask-image:radial-gradient(900px 500px at 50% 0%,#000,transparent 75%);
+  opacity:.6;
+}
+.hero .container{position:relative;z-index:1}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:9px;
+  background:#fff;border:1px solid var(--line);border-radius:100px;
+  padding:7px 8px 7px 14px;font-size:14px;font-weight:500;color:var(--ink-2);
+  box-shadow:var(--shadow-sm);margin-bottom:28px;
+}
+.hero-pill .tag{background:var(--blue-tint);color:var(--blue);font-weight:700;font-size:12px;padding:3px 10px;border-radius:100px}
+.hero h1{
+  font-size:clamp(40px,6.6vw,76px);font-weight:800;letter-spacing:-.04em;line-height:1.02;
+  max-width:15ch;margin:0 auto;
+}
+.hero h1 .grad{
+  background:linear-gradient(100deg,var(--blue) 10%,var(--blue-700) 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.lead{font-size:clamp(18px,2.3vw,22px);color:var(--body);max-width:620px;margin:26px auto 0;line-height:1.5}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.hero-note{margin-top:20px;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center;justify-content:center}
+.hero-note svg{width:16px;height:16px;color:var(--green)}
+
+/* ---- product mockup ---- */
+.mockup-wrap{position:relative;margin-top:64px;perspective:2000px}
+.mockup{
+  position:relative;max-width:1060px;margin:0 auto;
+  background:#fff;border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow-lg);overflow:hidden;
+  transform:rotateX(4deg);transform-origin:center top;
+}
+.mockup-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--line-2);background:var(--bg-2)}
+.mockup-bar .dot{width:11px;height:11px;border-radius:50%}
+.mockup-bar .dot:nth-child(1){background:#ff5f57}
+.mockup-bar .dot:nth-child(2){background:#febc2e}
+.mockup-bar .dot:nth-child(3){background:#28c840}
+.mockup-bar .url{margin-left:14px;flex:1;max-width:280px;height:24px;border-radius:7px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;padding:0 10px;font-size:12px;color:var(--faint);gap:6px}
+.mockup-bar .url svg{width:12px;height:12px}
+.app{display:grid;grid-template-columns:210px 1fr;min-height:460px;text-align:left}
+.app-side{background:var(--bg-2);border-right:1px solid var(--line-2);padding:18px 14px;display:flex;flex-direction:column;gap:4px}
+.app-side .brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--ink);font-size:17px;padding:6px 8px 14px;letter-spacing:-.03em}
+.app-side .brand .mark{width:24px;height:24px;font-size:13px;border-radius:7px}
+.snav{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:13.5px;font-weight:500;color:var(--muted)}
+.snav svg{width:17px;height:17px}
+.snav.active{background:var(--blue-tint);color:var(--blue);font-weight:600}
+.app-main{padding:22px 24px;background:#fff}
+.app-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.app-h h4{font-size:18px}
+.app-h .badge{background:#e8f8f0;color:var(--green);font-size:12px;font-weight:700;padding:6px 12px;border-radius:100px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.stat{border:1px solid var(--line-2);border-radius:14px;padding:14px}
+.stat .lbl{font-size:12px;color:var(--muted);font-weight:500}
+.stat .val{font-size:26px;font-weight:800;color:var(--ink);margin-top:4px;letter-spacing:-.03em}
+.stat .val small{font-size:14px;color:var(--green);font-weight:700}
+.chart{border:1px solid var(--line-2);border-radius:14px;padding:18px;position:relative}
+.chart .ct{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:12px}
+.spark{width:100%;height:130px}
+.ring-card{position:absolute;right:26px;bottom:26px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 16px;display:flex;align-items:center;gap:12px}
+.ring{width:52px;height:52px}
+.ring-card .rt{font-size:12px;color:var(--muted);font-weight:500}
+.ring-card .rv{font-size:20px;font-weight:800;color:var(--ink)}
+
+/* floating chips near mockup */
+.float{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 14px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--ink);z-index:2}
+.float svg{width:18px;height:18px}
+.float .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff}
+.float.f1{top:60px;left:-6px;animation:floaty 6s ease-in-out infinite}
+.float.f2{top:180px;right:-10px;animation:floaty 7s ease-in-out infinite .8s}
+.float.f3{bottom:40px;left:24px;animation:floaty 6.5s ease-in-out infinite .4s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* ============ LOGO STRIP / ORGS ============ */
+.orgs{padding:70px 0;background:var(--bg);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.orgs .kicker{text-align:center;color:var(--muted);font-size:15px;font-weight:600;margin-bottom:34px}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee-track{display:flex;gap:64px;width:max-content;animation:scrollx 34s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+.org-logo{display:flex;align-items:center;gap:12px;color:var(--faint);font-weight:700;font-size:20px;letter-spacing:-.02em;white-space:nowrap;opacity:.85;transition:.3s}
+.org-logo:hover{color:var(--ink-2);opacity:1}
+.org-logo .glyph{width:38px;height:38px;border-radius:10px;border:2px solid currentColor;display:grid;place-items:center;font-size:16px;flex:none}
+
+/* ============ FOUNDER / PEOPLE NOT PAPER ============ */
+.founder{background:linear-gradient(180deg,var(--bg-2),#fff)}
+.founder .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.quote-block .qmark{font-size:64px;line-height:.5;color:var(--blue);font-weight:800;height:34px;display:block}
+.quote-block blockquote{font-size:clamp(22px,2.6vw,30px);font-weight:600;color:var(--ink);line-height:1.35;letter-spacing:-.02em;margin:8px 0 26px}
+.quote-block .byline{display:flex;align-items:center;gap:14px}
+.avatar{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:20px;flex:none}
+.byline .n{font-weight:700;color:var(--ink)}
+.byline .r{font-size:14px;color:var(--muted)}
+.founder-visual{position:relative}
+.founder-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+.founder-card .fc-h{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.founder-card .fc-h .dspav{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px}
+.founder-card .row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line-2);font-size:14px;color:var(--body)}
+.founder-card .row .chk{width:22px;height:22px;border-radius:50%;background:#e8f8f0;display:grid;place-items:center;flex:none}
+.founder-card .row .chk svg{width:13px;height:13px;color:var(--green)}
+
+/* ============ FEATURE TABS (built for staff) ============ */
+.staff{background:var(--bg)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:820px;margin:26px auto 0}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;border-radius:100px;border:1px solid var(--line);
+  font-size:14px;font-weight:600;color:var(--ink-2);background:#fff;transition:.2s var(--ease);
+}
+.chip svg{width:15px;height:15px;color:var(--blue)}
+.chip:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+
+.tabs{margin-top:56px}
+.tab-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:34px}
+.tab-btn{
+  padding:11px 20px;border-radius:100px;font-size:15px;font-weight:600;
+  color:var(--muted);background:var(--bg-3);transition:.25s var(--ease);
+}
+.tab-btn.active{background:var(--ink);color:#fff}
+.tab-panels{position:relative}
+.panel{display:none;animation:fade .5s var(--ease)}
+.panel.active{display:grid}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel{grid-template-columns:1fr 1.15fr;gap:56px;align-items:center;
+  background:linear-gradient(135deg,var(--bg-2),#fff);border:1px solid var(--line-2);border-radius:var(--radius-lg);padding:48px}
+.panel .p-ico{width:52px;height:52px;border-radius:14px;background:var(--blue-tint);color:var(--blue);display:grid;place-items:center;margin-bottom:20px}
+.panel .p-ico svg{width:26px;height:26px}
+.panel h3{font-size:clamp(24px,3vw,32px);margin-bottom:14px}
+.panel p{font-size:18px;color:var(--body);margin-bottom:22px}
+.panel .plist{display:flex;flex-direction:column;gap:12px}
+.panel .plist li{display:flex;align-items:center;gap:11px;font-size:15px;color:var(--ink-2);font-weight:500}
+.panel .plist svg{width:20px;height:20px;color:var(--blue);flex:none}
+.panel-visual{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;min-height:300px}
+
+/* mini note mockup */
+.note-ui .nu-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.note-ui .nu-h .t{font-weight:700;color:var(--ink)}
+.magic{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(100deg,var(--blue),var(--blue-700));color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:100px;box-shadow:var(--shadow-blue)}
+.magic svg{width:14px;height:14px}
+.note-line{height:12px;border-radius:6px;background:var(--line-2);margin-bottom:11px}
+.note-line.blue{background:linear-gradient(90deg,var(--blue-tint),var(--blue));opacity:.55}
+.note-typing{display:inline-block;width:8px;height:15px;background:var(--blue);vertical-align:middle;animation:blink 1s step-end infinite;border-radius:1px}
+@keyframes blink{50%{opacity:0}}
+.mini-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
+.mini-cal .d{aspect-ratio:1;border-radius:9px;background:var(--bg-3);display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--muted)}
+.mini-cal .d.on{background:var(--blue-tint);color:var(--blue)}
+.mini-cal .d.today{background:var(--blue);color:#fff}
+.mini-cal .dow{aspect-ratio:auto;background:none;color:var(--faint);font-size:11px}
+.bars{display:flex;align-items:flex-end;gap:12px;height:180px;padding-top:20px}
+.bars .bar{flex:1;border-radius:8px 8px 0 0;background:linear-gradient(180deg,var(--blue),#9dc7ff);animation:grow 1.1s var(--ease) both}
+@keyframes grow{from{height:0}}
+.tasklist .tk{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid var(--line-2);border-radius:12px;margin-bottom:10px;font-size:14px;color:var(--ink-2);font-weight:500}
+.tasklist .box{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);flex:none}
+.tasklist .tk.done .box{background:var(--green);border-color:var(--green);display:grid;place-items:center}
+.tasklist .tk.done .box svg{width:12px;height:12px;color:#fff}
+.tasklist .tk.done span{color:var(--faint);text-decoration:line-through}
+
+/* ============ COMPLIANCE 60s ============ */
+.compliance{background:linear-gradient(160deg,#0b1f3a,#132c52 60%,#1e4d8f);color:#fff;position:relative;overflow:hidden}
+.compliance::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 15% 20%,rgba(50,140,255,.35),transparent 40%),radial-gradient(circle at 85% 80%,rgba(50,140,255,.25),transparent 45%)}
+.compliance .container{position:relative;z-index:1}
+.compliance .eyebrow{background:rgba(50,140,255,.2);color:#8fc0ff}
+.compliance .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.compliance h2{color:#fff}
+.compliance .sub-sec{color:rgba(255,255,255,.72)}
+.big-stat{text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);padding:48px 32px;backdrop-filter:blur(6px)}
+.big-stat .num{font-size:clamp(64px,10vw,110px);font-weight:800;letter-spacing:-.04em;line-height:1;background:linear-gradient(180deg,#fff,#8fc0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big-stat .num .u{font-size:.45em}
+.big-stat .cap{color:rgba(255,255,255,.75);font-size:17px;margin-top:14px;max-width:340px;margin-inline:auto}
+.big-stat .tagline{margin-top:24px;font-size:15px;font-weight:600;color:#8fc0ff}
+.comp-list{display:flex;flex-direction:column;gap:18px;margin-top:8px}
+.comp-list li{display:flex;gap:14px;align-items:flex-start}
+.comp-list .ci{width:40px;height:40px;border-radius:11px;background:rgba(50,140,255,.2);color:#8fc0ff;display:grid;place-items:center;flex:none}
+.comp-list .ci svg{width:20px;height:20px}
+.comp-list h4{color:#fff;font-size:17px;margin-bottom:3px}
+.comp-list p{color:rgba(255,255,255,.65);font-size:14.5px;margin:0}
+
+/* ============ CONTENT & LESSONS ============ */
+.content-sec{background:var(--bg-2)}
+.content-sec .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.feat-card{background:#fff;border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:22px;transition:.3s var(--ease)}
+.feat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line)}
+.feat-card .fi{width:42px;height:42px;border-radius:11px;background:var(--blue-tint);color:var(--blue);display:grid;place-items:center;margin-bottom:14px}
+.feat-card .fi svg{width:21px;height:21px}
+.feat-card h4{font-size:16px;margin-bottom:6px}
+.feat-card p{font-size:14px;color:var(--muted);margin:0}
+.lesson-lib{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.lesson-lib .ll-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.lesson-lib .ll-h .t{font-weight:700;color:var(--ink)}
+.lesson-lib .count{font-size:13px;font-weight:700;color:var(--blue);background:var(--blue-tint);padding:5px 12px;border-radius:100px}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.lesson{border:1px solid var(--line-2);border-radius:14px;overflow:hidden;transition:.3s var(--ease)}
+.lesson:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
+.lesson .thumb{aspect-ratio:16/10;display:grid;place-items:center;position:relative}
+.lesson .thumb .play{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+.lesson .thumb .play svg{width:16px;height:16px;color:var(--blue);margin-left:2px}
+.lesson .meta{padding:11px 13px}
+.lesson .meta .lt{font-size:13px;font-weight:600;color:var(--ink)}
+.lesson .meta .ls{font-size:11px;color:var(--faint);margin-top:2px}
+
+/* ============ ONBOARDING STEPS ============ */
+.onboard{background:var(--bg)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;counter-reset:step;position:relative}
+.step{position:relative;padding:8px 4px}
+.step .num{width:52px;height:52px;border-radius:16px;background:var(--blue-tint);color:var(--blue);display:grid;place-items:center;font-weight:800;font-size:22px;margin-bottom:20px;position:relative;z-index:1}
+.step:not(:last-child)::after{content:"";position:absolute;top:26px;left:64px;right:-12px;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 16px)}
+.step h4{font-size:18px;margin-bottom:8px}
+.step p{font-size:14.5px;color:var(--muted);margin:0}
+
+/* ============ SECURITY ============ */
+.security{background:linear-gradient(180deg,#fff,var(--bg-2))}
+.security .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.shield-wrap{display:grid;place-items:center;position:relative;min-height:320px}
+.shield{width:200px;height:200px;position:relative;z-index:1;filter:drop-shadow(0 20px 40px rgba(50,140,255,.35))}
+.shield-rings{position:absolute;inset:0;display:grid;place-items:center}
+.shield-rings span{position:absolute;border:1px solid var(--blue);border-radius:50%;opacity:.25;animation:pulse 3s ease-out infinite}
+.shield-rings span:nth-child(1){width:240px;height:240px}
+.shield-rings span:nth-child(2){width:330px;height:330px;animation-delay:1s}
+.shield-rings span:nth-child(3){width:420px;height:420px;animation-delay:2s}
+@keyframes pulse{0%{transform:scale(.85);opacity:.35}100%{transform:scale(1.05);opacity:0}}
+.trust-badges{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.tbadge{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:18px}
+.tbadge .ti{width:44px;height:44px;border-radius:12px;background:var(--blue-tint);color:var(--blue);display:grid;place-items:center;flex:none}
+.tbadge .ti svg{width:22px;height:22px}
+.tbadge h4{font-size:15px;margin-bottom:2px}
+.tbadge p{font-size:13px;color:var(--muted);margin:0}
+
+/* ============ CUSTOMER STORY ============ */
+.results{background:var(--bg-3)}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);margin-top:48px}
+.story-media{background:linear-gradient(135deg,var(--blue),var(--blue-700));padding:48px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:340px}
+.story-media .sl{font-weight:700;font-size:24px;letter-spacing:-.02em}
+.story-media .metrics{display:flex;gap:32px;margin-top:auto}
+.story-media .metrics .m .mv{font-size:36px;font-weight:800;letter-spacing:-.03em}
+.story-media .metrics .m .ml{font-size:13px;opacity:.8}
+.story-body{padding:48px;display:flex;flex-direction:column;justify-content:center}
+.story-body .eyebrow{align-self:flex-start}
+.story-body blockquote{font-size:22px;font-weight:600;color:var(--ink);line-height:1.4;letter-spacing:-.02em;margin-bottom:24px}
+.story-body .link{color:var(--blue);font-weight:700;display:inline-flex;align-items:center;gap:6px}
+.story-body .link svg{width:17px;height:17px;transition:transform .2s}
+.story-body .link:hover svg{transform:translateX(4px)}
+
+/* ============ WALL OF LOVE ============ */
+.wall{background:var(--bg);overflow:hidden}
+.wall-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;max-height:720px;overflow:hidden;position:relative;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(180deg,transparent,#000 8%,#000 92%,transparent)}
+.wall-col{display:flex;flex-direction:column;gap:20px;animation:scrolly 40s linear infinite}
+.wall-col.rev{animation-direction:reverse;animation-duration:48s}
+.wall-col.slow{animation-duration:56s}
+.wall-cols:hover .wall-col{animation-play-state:paused}
+@keyframes scrolly{to{transform:translateY(-50%)}}
+.tcard{background:#fff;border:1px solid var(--line-2);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);transition:.3s var(--ease)}
+.tcard:hover{box-shadow:var(--shadow);border-color:var(--line);transform:translateY(-2px)}
+.tcard .stars{display:flex;gap:3px;margin-bottom:14px;color:var(--amber)}
+.tcard .stars svg{width:16px;height:16px}
+.tcard p{font-size:15.5px;color:var(--ink-2);line-height:1.55;margin-bottom:18px}
+.tcard .who{display:flex;align-items:center;gap:12px}
+.tcard .who .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;flex:none}
+.tcard .who .n{font-weight:700;color:var(--ink);font-size:14px}
+.tcard .who .o{font-size:13px;color:var(--muted)}
+
+/* ============ FINAL CTA ============ */
+.cta{padding:64px 0}
+.cta-box{
+  background:linear-gradient(130deg,var(--blue) 0%,var(--blue-600) 45%,var(--blue-700) 100%);
+  border-radius:var(--radius-lg);padding:72px 48px;text-align:center;color:#fff;position:relative;overflow:hidden;
+  box-shadow:var(--shadow-blue);
+}
+.cta-box::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(255,255,255,.18),transparent 30%),radial-gradient(circle at 80% 90%,rgba(255,255,255,.12),transparent 35%)}
+.cta-box .container{position:relative;z-index:1;padding:0}
+.cta-box h2{color:#fff;font-size:clamp(28px,4.4vw,48px);max-width:16ch;margin:0 auto 18px}
+.cta-box p{color:rgba(255,255,255,.85);font-size:19px;max-width:520px;margin:0 auto 32px}
+.cta-box .hero-cta{margin-top:0}
+
+/* ============ FOOTER ============ */
+.footer{background:#0b1220;color:#9aa6b8;padding:72px 0 36px}
+.footer .top{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer .logo{color:#fff;margin-bottom:16px}
+.footer .blurb{font-size:14.5px;max-width:280px;line-height:1.6}
+.footer .addr{margin-top:20px;font-size:14px;line-height:1.6;color:#748297}
+.footer .socials{display:flex;gap:10px;margin-top:20px}
+.footer .socials a{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);display:grid;place-items:center;transition:.2s;color:#9aa6b8}
+.footer .socials a:hover{background:var(--blue);color:#fff}
+.footer .socials svg{width:18px;height:18px}
+.footer .col h5{color:#fff;font-size:14px;font-weight:700;margin-bottom:16px;letter-spacing:.02em}
+.footer .col a{display:block;font-size:14.5px;padding:6px 0;color:#9aa6b8;transition:color .2s}
+.footer .col a:hover{color:#fff}
+.footer .bottom{display:flex;align-items:center;justify-content:space-between;padding-top:28px;gap:16px;flex-wrap:wrap;font-size:13.5px;color:#748297}
+.footer .bottom .badges{display:flex;gap:10px;align-items:center}
+.footer .bottom .pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 12px;font-size:12px;font-weight:600;color:#c7d0dd;display:inline-flex;gap:6px;align-items:center}
+.footer .bottom .pill svg{width:13px;height:13px;color:var(--green)}
+
+/* ============ REVEAL ANIMATION ============ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}
+.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}
+.reveal.d4{transition-delay:.32s}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:960px){
+  .nav-links,.nav-actions .login,.nav-actions .btn{display:none}
+  .nav-actions{display:none}
+  .burger{display:flex}
+  .founder .grid,.compliance .grid,.content-sec .grid,.security .grid,.story{grid-template-columns:1fr;gap:40px}
+  .panel{grid-template-columns:1fr;gap:32px;padding:32px}
+  .panel-visual{order:2}
+  .steps{grid-template-columns:1fr 1fr;gap:32px}
+  .step:not(:last-child)::after{display:none}
+  .app{grid-template-columns:1fr}
+  .app-side{display:none}
+  .wall-cols{grid-template-columns:1fr 1fr}
+  .wall-col.slow{display:none}
+  .story-media{min-height:240px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .section{padding:68px 0}
+  .container{padding:0 18px}
+  .hero{padding:120px 0 60px}
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn{width:100%}
+  .mockup{transform:none}
+  .stat-row{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .lesson-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .trust-badges{grid-template-columns:1fr}
+  .wall-cols{grid-template-columns:1fr;max-height:640px}
+  .wall-col.rev{display:none}
+  .story-media,.story-body{padding:32px}
+  .cta-box{padding:48px 24px}
+  .footer .top{grid-template-columns:1fr 1fr;gap:32px}
+  .footer .top .brand-col{grid-column:1/-1}
+  .ring-card{display:none}
+  .float{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo"><span class="mark">k</span>kibu</a>
+    <div class="nav-links">
+      <a href="#documentation">Documentation</a>
+      <a href="#content">Content</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#login" class="login">Login</a>
+      <a href="#demo" class="btn btn-primary">Get a demo</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="scrim" id="scrim"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#documentation">Documentation</a>
+  <a href="#content">Content</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="#login">Login</a>
+  <a href="#demo" class="btn btn-primary btn-lg">Get a demo</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="container">
+    <span class="hero-pill reveal"><span class="tag">New</span> AI-powered documentation for IDD providers</span>
+    <h1 class="reveal d1">Focus on Excellent Service. <span class="grad">We'll Handle the Rest.</span></h1>
+    <p class="lead reveal d2">Kibu transforms compliance, documentation, and reporting while providing content that service providers love.</p>
+    <div class="hero-cta reveal d3">
+      <a href="#demo" class="btn btn-primary btn-lg">Get a demo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#content" class="btn btn-ghost btn-lg">Explore content</a>
+    </div>
+    <p class="hero-note reveal d3">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      Trusted by disability providers across the USA
+    </p>
+
+    <!-- product mockup -->
+    <div class="mockup-wrap reveal d2">
+      <div class="float f1"><span class="ico" style="background:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>AI service notes</div>
+      <div class="float f2"><span class="ico" style="background:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg></span>99.2% compliant</div>
+      <div class="float f3"><span class="ico" style="background:var(--blue-700)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Attendance tracked</div>
+      <div class="mockup">
+        <div class="mockup-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>app.kibu.com/dashboard</span>
+        </div>
+        <div class="app">
+          <aside class="app-side">
+            <div class="brand"><span class="mark">k</span>kibu</div>
+            <div class="snav active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
+            <div class="snav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6"/></svg>Notes</div>
+            <div class="snav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Attendance</div>
+            <div class="snav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7h18v-7a2 2 0 0 0-2-2h-4M12 3v8M8 7l4 4 4-4"/></svg>Life Plans</div>
+            <div class="snav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M8 14l3-3 3 3 4-5"/></svg>Reporting</div>
+            <div class="snav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m2 3 3 9-3 9 19-9z"/></svg>Content</div>
+          </aside>
+          <div class="app-main">
+            <div class="app-h">
+              <h4>Compliance Overview</h4>
+              <span class="badge">All up to date</span>
+            </div>
+            <div class="stat-row">
+              <div class="stat"><div class="lbl">Members</div><div class="val">142</div></div>
+              <div class="stat"><div class="lbl">Notes today</div><div class="val">38 <small>↑12%</small></div></div>
+              <div class="stat"><div class="lbl">Compliance</div><div class="val">99.2<small>%</small></div></div>
+            </div>
+            <div class="chart">
+              <div class="ct">Documentation completed</div>
+              <svg class="spark" viewBox="0 0 500 130" preserveAspectRatio="none">
+                <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#328cff" stop-opacity=".28"/><stop offset="1" stop-color="#328cff" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0,110 L60,96 L120,102 L180,74 L240,80 L300,52 L360,58 L420,30 L500,18 L500,130 L0,130 Z" fill="url(#g1)"/>
+                <path d="M0,110 L60,96 L120,102 L180,74 L240,80 L300,52 L360,58 L420,30 L500,18" fill="none" stroke="#328cff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="500" cy="18" r="5" fill="#328cff"/><circle cx="500" cy="18" r="9" fill="#328cff" opacity=".2"/>
+              </svg>
+              <div class="ring-card">
+                <svg class="ring" viewBox="0 0 36 36">
+                  <path d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31" fill="none" stroke="#eef0f3" stroke-width="4"/>
+                  <path d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31" fill="none" stroke="#12b76a" stroke-width="4" stroke-linecap="round" stroke-dasharray="97.4" stroke-dashoffset="0.8" transform="rotate(-90 18 18)"/>
+                </svg>
+                <div><div class="rt">Audit ready</div><div class="rv">99.2%</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ORGANIZATIONS ============ -->
+<section class="orgs" id="about">
+  <div class="container">
+    <p class="kicker reveal">Organizations We Serve &middot; Trusted by Disability Providers across the USA</p>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="org-logo"><span class="glyph">T</span>Target Community &amp; Education</span>
+      <span class="org-logo"><span class="glyph">A</span>The ARC Caddo-Bossier</span>
+      <span class="org-logo"><span class="glyph">W</span>Woodfords Family Services</span>
+      <span class="org-logo"><span class="glyph">F</span>Family Resource Associates</span>
+      <span class="org-logo"><span class="glyph">S</span>SEMO Alliance for Disability</span>
+      <!-- duplicate for seamless loop -->
+      <span class="org-logo"><span class="glyph">T</span>Target Community &amp; Education</span>
+      <span class="org-logo"><span class="glyph">A</span>The ARC Caddo-Bossier</span>
+      <span class="org-logo"><span class="glyph">W</span>Woodfords Family Services</span>
+      <span class="org-logo"><span class="glyph">F</span>Family Resource Associates</span>
+      <span class="org-logo"><span class="glyph">S</span>SEMO Alliance for Disability</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOCUS ON PEOPLE, NOT PAPER ============ -->
+<section class="section founder">
+  <div class="container">
+    <div class="grid">
+      <div class="quote-block reveal">
+        <span class="eyebrow">Focus on People, Not Paper</span>
+        <span class="qmark">&ldquo;</span>
+        <blockquote>Kibu gives DSPs the power to focus on delivering outstanding support &mdash; not on chasing paperwork.</blockquote>
+        <div class="byline">
+          <span class="avatar" style="background:linear-gradient(135deg,#328cff,#1e4d8f)">DC</span>
+          <div>
+            <div class="n">Daniel Caridi</div>
+            <div class="r">Co-Founder &amp; CEO, Kibu</div>
+          </div>
+        </div>
+      </div>
+      <div class="founder-visual reveal d2">
+        <div class="founder-card">
+          <div class="fc-h">
+            <span class="dspav" style="background:linear-gradient(135deg,#12b76a,#0e8a52)">JM</span>
+            <div>
+              <div style="font-weight:700;color:var(--ink);font-size:15px">Jordan M. &middot; DSP</div>
+              <div style="font-size:13px;color:var(--muted)">Daily notes &middot; 2 min ago</div>
+            </div>
+          </div>
+          <div class="row"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Service note documented with AI</div>
+          <div class="row"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Goals tracked automatically</div>
+          <div class="row"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Attendance logged &amp; compliant</div>
+          <div class="row"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>More time with members</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUILT FOR STAFF (TABS) ============ -->
+<section class="section staff" id="documentation">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow reveal">Documentation</span>
+      <h2 class="h-sec reveal d1">Actually built for staff</h2>
+      <p class="sub-sec reveal d2">Kibu gives DSPs the power to focus on delivering outstanding support. Accessible features that save your organization time, while keeping up with regulations:</p>
+    </div>
+    <div class="chips reveal d2">
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>AI-Assisted Service Notes</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M8 14l3-3 3 3 4-5"/></svg>AI Reports</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Attendance</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M8 14l3-3 3 3 4-5"/></svg>Beautiful, Fast Reporting</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></svg>Built-In Translation</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m2 3 3 9-3 9 19-9z"/></svg>Content</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>Fun</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7h18v-7a2 2 0 0 0-2-2h-4M12 3v8M8 7l4 4 4-4"/></svg>Life Plans</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5-6-6a4.95 4.95 0 1 1 7-7l6 6a4.95 4.95 0 1 1-7 7ZM8.5 8.5l7 7"/></svg>Medication</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Notes</span>
+      <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>Resources</span>
+    </div>
+
+    <div class="tabs reveal d2">
+      <div class="tab-btns" id="tabBtns">
+        <button class="tab-btn active" data-tab="0">Notes</button>
+        <button class="tab-btn" data-tab="1">Attendance</button>
+        <button class="tab-btn" data-tab="2">Reporting</button>
+        <button class="tab-btn" data-tab="3">Life Plans &amp; Tasks</button>
+      </div>
+      <div class="tab-panels">
+        <!-- Panel 0: Notes -->
+        <div class="panel active" data-panel="0">
+          <div>
+            <span class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+            <h3>AI-Assisted Service Notes</h3>
+            <p>Keep member records accurate and accessible. Let the magic pen turn a few words into a complete, compliant service note in seconds.</p>
+            <ul class="plist">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Write notes 10x faster with AI</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Records stay accurate and accessible</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Built-in translation for every member</li>
+            </ul>
+          </div>
+          <div class="panel-visual note-ui">
+            <div class="nu-h"><span class="t">Daily Service Note</span><span class="magic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3M5 5l2 2m10 10 2 2M3 12h3m12 0h3M5 19l2-2m10-10 2-2"/></svg>Magic pen</span></div>
+            <div class="note-line" style="width:92%"></div>
+            <div class="note-line blue" style="width:80%"></div>
+            <div class="note-line" style="width:96%"></div>
+            <div class="note-line blue" style="width:70%"></div>
+            <div class="note-line" style="width:88%"></div>
+            <div class="note-line" style="width:60%;margin-bottom:0"><span class="note-typing"></span></div>
+          </div>
+        </div>
+        <!-- Panel 1: Attendance -->
+        <div class="panel" data-panel="1">
+          <div>
+            <span class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+            <h3>Attendance &amp; Scheduling</h3>
+            <p>Never miss a pickup or appointment again. Track attendance, transportation and schedules from any device.</p>
+            <ul class="plist">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Real-time attendance from any device</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Never miss a pickup or appointment</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Auto-synced with billing &amp; reporting</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <div class="nu-h" style="margin-bottom:16px"><span class="t">July 2026</span><span class="count" style="font-size:13px;font-weight:700;color:var(--blue);background:var(--blue-tint);padding:5px 12px;border-radius:100px">142 present</span></div>
+            <div class="mini-cal">
+              <span class="d dow">S</span><span class="d dow">M</span><span class="d dow">T</span><span class="d dow">W</span><span class="d dow">T</span><span class="d dow">F</span><span class="d dow">S</span>
+              <span class="d">29</span><span class="d on">30</span><span class="d on">1</span><span class="d on">2</span><span class="d on">3</span><span class="d">4</span><span class="d">5</span>
+              <span class="d">6</span><span class="d on">7</span><span class="d today">8</span><span class="d">9</span><span class="d">10</span><span class="d">11</span><span class="d">12</span>
+              <span class="d">13</span><span class="d">14</span><span class="d">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span><span class="d">19</span>
+            </div>
+          </div>
+        </div>
+        <!-- Panel 2: Reporting -->
+        <div class="panel" data-panel="2">
+          <div>
+            <span class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M8 14l3-3 3 3 4-5"/></svg></span>
+            <h3>Beautiful, Fast Reporting</h3>
+            <p>No more complex Excel work &mdash; we'll do the math for you. Generate audit-ready reports with a single click.</p>
+            <ul class="plist">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>One-click, audit-ready reports</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>No more complex Excel work</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Directors track compliance instantly</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <div class="nu-h" style="margin-bottom:8px"><span class="t">Weekly compliance</span></div>
+            <div class="bars">
+              <div class="bar" style="height:55%"></div>
+              <div class="bar" style="height:72%"></div>
+              <div class="bar" style="height:64%"></div>
+              <div class="bar" style="height:85%"></div>
+              <div class="bar" style="height:78%"></div>
+              <div class="bar" style="height:95%"></div>
+              <div class="bar" style="height:99%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Panel 3: Life Plans -->
+        <div class="panel" data-panel="3">
+          <div>
+            <span class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7h18v-7a2 2 0 0 0-2-2h-4M12 3v8M8 7l4 4 4-4"/></svg></span>
+            <h3>Life Plans &amp; Tasks</h3>
+            <p>Adapt Kibu's platform to fit your needs. Assign, track, and complete tasks quickly &mdash; keeping programming aligned for every member.</p>
+            <ul class="plist">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Assign, track and complete tasks quickly</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Personalized for every member</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Programming stays aligned &amp; on track</li>
+            </ul>
+          </div>
+          <div class="panel-visual">
+            <div class="tasklist">
+              <div class="tk done"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span><span>Morning check-in completed</span></div>
+              <div class="tk done"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span><span>Community outing logged</span></div>
+              <div class="tk"><span class="box"></span><span>Skill-building session &middot; 2:00 PM</span></div>
+              <div class="tk"><span class="box"></span><span>Update life plan goals</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPLIANCE IN 60 SECONDS ============ -->
+<section class="section compliance">
+  <div class="container">
+    <div class="grid">
+      <div class="reveal">
+        <span class="eyebrow">Compliance in 60 Seconds</span>
+        <h2 class="h-sec">Directors Can Track Compliance Instantly. Anywhere, Anytime.</h2>
+        <p class="sub-sec">Providers who use Kibu don't just meet standards &mdash; they set them.</p>
+        <ul class="comp-list">
+          <li>
+            <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+            <div><h4>Real-time visibility</h4><p>See documentation and compliance status update live across every program.</p></div>
+          </li>
+          <li>
+            <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></span>
+            <div><h4>Audit-ready, always</h4><p>Every note, goal and signature stays organized and ready for review.</p></div>
+          </li>
+          <li>
+            <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+            <div><h4>Anywhere, any device</h4><p>Directors track compliance from the office, the field or their phone.</p></div>
+          </li>
+        </ul>
+      </div>
+      <div class="big-stat reveal d2">
+        <div class="num"><span data-count="99.2" data-decimals="1">0</span><span class="u">%</span></div>
+        <p class="cap">Kibu partners average over 99.2% compliance within their first 2 months.</p>
+        <div class="tagline">Set the standard &mdash; don't just meet it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTENT & LESSON PLANS ============ -->
+<section class="section content-sec" id="content">
+  <div class="container">
+    <div class="grid">
+      <div class="reveal">
+        <span class="eyebrow">Content Library</span>
+        <h2 class="h-sec">Content and Lesson Plans, Built for You</h2>
+        <p class="sub-sec">Never worry about finding your next video lesson or building your next lesson plan. We've already done the heavy lifting for you!</p>
+        <div class="feat-grid">
+          <div class="feat-card">
+            <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <h4>Aligned programming</h4><p>Keep programming aligned for your members.</p>
+          </div>
+          <div class="feat-card">
+            <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+            <h4>One platform</h4><p>No more switching between different systems.</p>
+          </div>
+          <div class="feat-card">
+            <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></span>
+            <h4>Zero confusion</h4><p>Eliminate confusion from clunky, outdated platforms.</p>
+          </div>
+          <div class="feat-card">
+            <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+            <h4>Personalized</h4><p>Personalized for every member of your organization.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="lesson-lib">
+          <div class="ll-h"><span class="t">On-Demand Classes</span><span class="count">600+ lessons</span></div>
+          <div class="lesson-grid">
+            <div class="lesson"><div class="thumb" style="background:linear-gradient(135deg,#328cff,#1e4d8f)"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div><div class="meta"><div class="lt">Cooking Basics</div><div class="ls">Life Skills &middot; 12 min</div></div></div>
+            <div class="lesson"><div class="thumb" style="background:linear-gradient(135deg,#12b76a,#0e8a52)"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div><div class="meta"><div class="lt">Money &amp; Budgeting</div><div class="ls">Independence &middot; 9 min</div></div></div>
+            <div class="lesson"><div class="thumb" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div><div class="meta"><div class="lt">Social Skills</div><div class="ls">Community &middot; 15 min</div></div></div>
+            <div class="lesson"><div class="thumb" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div><div class="meta"><div class="lt">Healthy Habits</div><div class="ls">Wellness &middot; 11 min</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="center reveal d2" style="margin-top:72px;max-width:760px;margin-inline:auto">
+      <span class="eyebrow">Elevate Content with Intelligent Features</span>
+      <p class="sub-sec" style="margin-inline:auto">Combining content and documentation is what makes our platform extraordinary. Educate members and track progress automatically, all in one place.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ONBOARDING ============ -->
+<section class="section onboard">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow reveal">Onboarding</span>
+      <h2 class="h-sec reveal d1">We'll Walk You Through Every Step.</h2>
+      <p class="sub-sec reveal d2">Start strong with personalized onboarding tailored for your organization.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">1</div><h4>Discovery call</h4><p>We learn how your organization works and what compliance you need.</p></div>
+      <div class="step reveal d1"><div class="num">2</div><h4>Tailored setup</h4><p>Kibu is configured around your programs, members and workflows.</p></div>
+      <div class="step reveal d2"><div class="num">3</div><h4>Team training</h4><p>Hands-on training gets every DSP and director confident, fast.</p></div>
+      <div class="step reveal d3"><div class="num">4</div><h4>Go live &amp; grow</h4><p>Launch with ongoing support &mdash; we're with you every step.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECURITY ============ -->
+<section class="section security">
+  <div class="container">
+    <div class="grid">
+      <div class="shield-wrap reveal">
+        <div class="shield-rings"><span></span><span></span><span></span></div>
+        <svg class="shield" viewBox="0 0 120 120" fill="none">
+          <defs><linearGradient id="sh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#328cff"/><stop offset="1" stop-color="#1e4d8f"/></linearGradient></defs>
+          <path d="M60 8 18 24v34c0 27 18 44 42 54 24-10 42-27 42-54V24L60 8Z" fill="url(#sh)"/>
+          <path d="M42 60l12 12 24-26" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="reveal d2">
+        <span class="eyebrow">Security</span>
+        <h2 class="h-sec">HIPAA Compliant. Fully Encrypted.</h2>
+        <p class="sub-sec">With Kibu, security comes standard &mdash; your member data stays safe, no matter what.</p>
+        <div class="trust-badges">
+          <div class="tbadge"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></span><div><h4>HIPAA Compliant</h4><p>Meets healthcare privacy standards</p></div></div>
+          <div class="tbadge"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><div><h4>End-to-End Encryption</h4><p>Data encrypted in transit &amp; at rest</p></div></div>
+          <div class="tbadge"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2ZM2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></span><div><h4>99.9% Uptime</h4><p>Reliable access when you need it</p></div></div>
+          <div class="tbadge"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/></svg></span><div><h4>Role-Based Access</h4><p>Granular permissions for every role</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS / CUSTOMER STORY ============ -->
+<section class="section results">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow reveal">Customer Stories</span>
+      <h2 class="h-sec reveal d1">Real People, Real Results.</h2>
+      <p class="sub-sec reveal d2">See how organizations like yours are leveling up with Kibu!</p>
+    </div>
+    <div class="story reveal d2">
+      <div class="story-media">
+        <div class="sl"><span style="display:inline-flex;align-items:center;gap:10px"><span class="avatar" style="width:44px;height:44px;background:rgba(255,255,255,.2);font-size:18px">T</span>Target Community &amp; Education</span></div>
+        <div class="metrics">
+          <div class="m"><div class="mv">99.4%</div><div class="ml">Compliance rate</div></div>
+          <div class="m"><div class="mv">6 hrs</div><div class="ml">Saved / week / DSP</div></div>
+        </div>
+      </div>
+      <div class="story-body">
+        <span class="eyebrow">Success Story</span>
+        <blockquote>&ldquo;Using Kibu has allowed our staff to take the lead and has empowered them with tools to succeed.&rdquo;</blockquote>
+        <a href="#blog" class="link">Read one of our customer stories from our blog
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WALL OF LOVE ============ -->
+<section class="section wall">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow reveal">Wall of Love</span>
+      <h2 class="h-sec reveal d1">Providers who use Kibu set the standard.</h2>
+      <p class="sub-sec reveal d2">Don't just take our word for it &mdash; hear from the DSPs, directors and families who use Kibu every day.</p>
+    </div>
+    <div class="wall-cols reveal d2" id="wall">
+      <!-- Column 1 -->
+      <div class="wall-col">
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;When I found Kibu, I think I had a tear in my eye. It was the first digital platform I've seen that is actually built for people with IDD.&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#328cff,#1e4d8f)">DE</span><div><div class="n">Director of Engagement</div><div class="o">&amp; Marketing</div></div></div></div>
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;Kibu's lesson plans make things so much easier&hellip; It allows us to focus on engaging with our members instead of searching for materials.&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#12b76a,#0e8a52)">DS</span><div><div class="n">Direct Support Professional</div><div class="o">Family Resource Associates</div></div></div></div>
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;We are crazy about Kibu!&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#f59e0b,#d97706)">SA</span><div><div class="n">SEMO Alliance</div><div class="o">for Disability Independence</div></div></div></div>
+      </div>
+      <!-- Column 2 -->
+      <div class="wall-col rev">
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;Having Kibu is a true highlight daily for the people we serve. We are having soooo much fun with it and learning a lot as well!&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">TC</span><div><div class="n">Target Community</div><div class="o">&amp; Education</div></div></div></div>
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;Kibu gives us the flexibility to meet each person where they are while keeping things engaging, structured, and fun.&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#328cff,#1e4d8f)">DS</span><div><div class="n">Direct Support Professional</div><div class="o">Kibu partner</div></div></div></div>
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;Using the magic pen on daily notes makes things a lot more efficient and easier. So no secret, we just really like Kibu!&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#12b76a,#0e8a52)">DS</span><div><div class="n">Direct Support Professional</div><div class="o">Kibu partner</div></div></div></div>
+      </div>
+      <!-- Column 3 -->
+      <div class="wall-col slow">
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;It's all about working smarter, not harder. Kibu lets us do that.&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#f59e0b,#d97706)">KP</span><div><div class="n">Kibu Partner</div><div class="o">Program Director</div></div></div></div>
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;These are real tools that engage [clients] without feeling childish. That makes all the difference.&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">DS</span><div><div class="n">Direct Support Professional</div><div class="o">Kibu partner</div></div></div></div>
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;&hellip;this has made my life soooo much easier, you have no idea how much time this is saving me.&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#328cff,#1e4d8f)">AD</span><div><div class="n">Administrator</div><div class="o">Kibu partner</div></div></div></div>
+        <div class="tcard"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div><p>&ldquo;Kibu gives us one more tool to teach real-life skills, making learning engaging and impactful.&rdquo;</p><div class="who"><span class="av" style="background:linear-gradient(135deg,#12b76a,#0e8a52)">ED</span><div><div class="n">Educator</div><div class="o">Kibu partner</div></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="cta" id="demo">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="container">
+        <h2>Compliance Shouldn't Stand in the Way of Exceptional Care</h2>
+        <p>See how Kibu helps IDD providers focus on people, not paperwork. Book a demo and we'll walk you through every step.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-white btn-lg">Get a demo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-lg" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="top">
+      <div class="brand-col">
+        <a href="#" class="logo"><span class="mark">k</span>kibu</a>
+        <p class="blurb">Kibu builds modern tools for disability providers who want to focus on people, not paperwork. Documentation, content, and compliance &mdash; all in one place.</p>
+        <div class="addr">78 Harvard Ave, Floor 3<br>Stamford, CT 06902</div>
+        <div class="socials">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM.5 8h4V24h-4V8Zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.37-3.9-2.38 0-2.74 1.85-2.74 3.77V24h-4V8Z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-7-6.2 7H1.4l8.1-9.3L1 2h7l4.9 6.5L18.9 2Zm-2.4 18h1.9L7.6 4H5.6l10.9 16Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div class="col">
+        <h5>Product</h5>
+        <a href="#documentation">Documentation</a>
+        <a href="#content">Content</a>
+        <a href="#">Blog</a>
+        <a href="#">Resource Center</a>
+        <a href="#">Changelog</a>
+      </div>
+      <div class="col">
+        <h5>Company</h5>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#">Careers</a>
+        <a href="#">Submit RFP</a>
+      </div>
+      <div class="col">
+        <h5>Legal</h5>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Member Code of Conduct</a>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>&copy; 2026 Kibu. All rights reserved.</span>
+      <div class="badges">
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>HIPAA Compliant</span>
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Fully Encrypted</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---- Navbar scroll state ---- */
+  var nav=document.getElementById('nav');
+  var onScroll=function(){ nav.classList.toggle('scrolled', window.scrollY>10); };
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* ---- Mobile menu ---- */
+  var burger=document.getElementById('burger'),
+      menu=document.getElementById('mobileMenu'),
+      scrim=document.getElementById('scrim');
+  function toggleMenu(open){
+    burger.classList.toggle('open',open);
+    menu.classList.toggle('open',open);
+    scrim.classList.toggle('open',open);
+    document.body.style.overflow=open?'hidden':'';
+  }
+  burger.addEventListener('click',function(){ toggleMenu(!menu.classList.contains('open')); });
+  scrim.addEventListener('click',function(){ toggleMenu(false); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ toggleMenu(false); }); });
+
+  /* ---- Feature tabs ---- */
+  var tabBtns=document.querySelectorAll('.tab-btn'),
+      panels=document.querySelectorAll('.panel');
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var i=btn.getAttribute('data-tab');
+      tabBtns.forEach(function(b){ b.classList.remove('active'); });
+      panels.forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelector('.panel[data-panel="'+i+'"]').classList.add('active');
+    });
+  });
+
+  /* ---- Reveal on scroll ---- */
+  var reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---- Animated counter ---- */
+  var counted=false;
+  function runCounters(){
+    if(counted) return; counted=true;
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      var target=parseFloat(el.getAttribute('data-count')),
+          dec=parseInt(el.getAttribute('data-decimals')||'0',10),
+          start=null, dur=1600;
+      function step(ts){
+        if(!start) start=ts;
+        var p=Math.min((ts-start)/dur,1),
+            eased=1-Math.pow(1-p,3),
+            val=(target*eased).toFixed(dec);
+        el.textContent=val;
+        if(p<1) requestAnimationFrame(step);
+        else el.textContent=target.toFixed(dec);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var statEl=document.querySelector('[data-count]');
+  if(statEl && 'IntersectionObserver' in window){
+    var io2=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ runCounters(); io2.disconnect(); } });
+    },{threshold:0.5});
+    io2.observe(statEl.closest('.big-stat'));
+  } else { runCounters(); }
+
+  /* ---- Wall of love: duplicate cards for seamless vertical loop ---- */
+  document.querySelectorAll('.wall-col').forEach(function(col){
+    col.innerHTML+=col.innerHTML;
+  });
+})();
+</script>
+</body>
+</html>

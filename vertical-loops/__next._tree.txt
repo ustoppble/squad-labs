@@ -1,0 +1,4 @@
+:HL["/squad-labs/vertical-loops/_next/static/chunks/17epw4yq2l9s0.css","style"]
+:HL["/squad-labs/vertical-loops/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/squad-labs/vertical-loops/_next/static/media/c41ca59f1c34ba31-s.p.2y2uoi4t910qy.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"xJ2sxQB_els2NkzLVqhy1"}

@@ -1,0 +1,5 @@
+:HL["/squad-labs/ecommerce/_next/static/chunks/1jqsu1xxxt1pb.css","style"]
+:HL["/squad-labs/ecommerce/_next/static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/squad-labs/ecommerce/_next/static/media/6ad1cda2f16975ee-s.p.2j22bd4n1tlhh.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/squad-labs/ecommerce/_next/static/media/7ddd198311ba7843-s.p.3kq6k02b2ysv1.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"products","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"barcelona-1992","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"D1Ccpp1dyqW5R6HLC_kJf"}

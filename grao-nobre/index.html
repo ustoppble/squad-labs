@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grão Nobre — O melhor café da cidade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --dark:    #2C1810;
+      --brown:   #8B4513;
+      --cream:   #F5F0E8;
+      --gold:    #D4A853;
+      --white:   #FFFFFF;
+      --text:    #3a2210;
+      --muted:   #7a6352;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Lato', system-ui, sans-serif;
+
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-lg: 20px;
+
+      --shadow-card: 0 4px 24px rgba(44,24,16,.10);
+      --shadow-lift: 0 12px 36px rgba(44,24,16,.18);
+
+      --ease: cubic-bezier(.25,.46,.45,.94);
+      --nav-h: 72px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Skip link ── */
+    .skip-link {
+      position: absolute;
+      top: -99px;
+      left: 1rem;
+      background: var(--dark);
+      color: var(--cream);
+      padding: .5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: .875rem;
+      z-index: 9999;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(44,24,16,.96);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      border-bottom: 1px solid rgba(212,168,83,.18);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: .03em;
+    }
+    .nav-links {
+      display: flex;
+      gap: clamp(1rem, 2.5vw, 2.2rem);
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: .875rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,.75);
+      transition: color .25s var(--ease);
+    }
+    .nav-links a:hover, .nav-links a:focus { color: var(--gold); outline: none; }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: .25rem;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: transform .3s var(--ease), opacity .3s;
+    }
+
+    /* ── Sections base ── */
+    section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem); }
+    .section-label {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .divider {
+      width: 56px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Hero ── */
+    #inicio {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--nav-h) 1.5rem 0;
+      overflow: hidden;
+      background: var(--dark);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139,69,19,.55) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(212,168,83,.15) 0%, transparent 60%),
+        linear-gradient(160deg, #1a0d08 0%, #2C1810 50%, #3d2010 100%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+      opacity: .4;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(212,168,83,.4);
+      border-radius: 999px;
+      padding: .35rem 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    #inicio h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      letter-spacing: -.01em;
+      margin-bottom: .75rem;
+    }
+    #inicio h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 300;
+      color: rgba(245,240,232,.75);
+      letter-spacing: .02em;
+      margin-bottom: 2.5rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-size: .875rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 1rem 2.4rem;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--gold);
+      cursor: pointer;
+      transition: background .25s var(--ease), color .25s var(--ease), transform .2s var(--ease), box-shadow .25s var(--ease);
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background: transparent;
+      color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(212,168,83,.3);
+      outline: none;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      color: rgba(245,240,232,.4);
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, rgba(212,168,83,.6), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: .4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* ── Sobre ── */
+    #sobre {
+      background: var(--white);
+    }
+    .sobre-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .sobre-visual {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #8B4513 0%, #2C1810 100%);
+      overflow: hidden;
+      box-shadow: var(--shadow-lift);
+    }
+    .sobre-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 70%, rgba(212,168,83,.25) 0%, transparent 55%),
+        radial-gradient(circle at 80% 20%, rgba(245,240,232,.08) 0%, transparent 40%);
+    }
+    .sobre-visual-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      color: rgba(245,240,232,.3);
+      font-family: var(--font-display);
+      font-size: 5rem;
+    }
+    .sobre-visual-inner span {
+      font-size: .8rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+    }
+    .sobre-badge {
+      position: absolute;
+      bottom: 2rem;
+      right: -1.5rem;
+      background: var(--gold);
+      color: var(--dark);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-display);
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+    .sobre-badge strong { display: block; font-size: 2rem; line-height: 1; }
+    .sobre-badge span { font-size: .75rem; font-family: var(--font-body); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .sobre-text p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.85;
+    }
+    .sobre-text p:last-child { margin-bottom: 0; }
+
+    /* ── Menu ── */
+    #menu {
+      background: var(--cream);
+    }
+    .menu-inner { max-width: 1100px; margin: 0 auto; }
+    .menu-header { text-align: center; }
+    .menu-header .divider { margin: 0 auto 2rem; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .menu-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lift);
+    }
+    .menu-card-thumb {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .menu-card-thumb.espresso   { background: linear-gradient(135deg, #2C1810, #4a2615); }
+    .menu-card-thumb.cappuccino { background: linear-gradient(135deg, #8B4513, #c4752b); }
+    .menu-card-thumb.croissant  { background: linear-gradient(135deg, #D4A853, #e8c070); }
+    .menu-card-thumb.latte      { background: linear-gradient(135deg, #6b3510, #8B4513); }
+    .menu-card-body { padding: 1.5rem; }
+    .menu-card-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: .4rem;
+    }
+    .menu-card-desc {
+      font-size: .875rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .menu-card-price {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    /* ── Galeria ── */
+    #galeria {
+      background: var(--dark);
+      padding-bottom: clamp(4rem, 8vw, 7rem);
+    }
+    #galeria .section-title { color: var(--cream); }
+    #galeria .section-label { color: var(--gold); }
+    .galeria-header { max-width: 1100px; margin: 0 auto 2.5rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      position: relative;
+      cursor: pointer;
+      transition: transform .35s var(--ease);
+    }
+    .gallery-item:hover { transform: scale(1.025); }
+    .gallery-item:nth-child(1) { background: linear-gradient(135deg, #3d1f0d, #6b3010); }
+    .gallery-item:nth-child(2) { background: linear-gradient(135deg, #8B4513, #a05018); aspect-ratio: 1/1; }
+    .gallery-item:nth-child(3) { background: linear-gradient(135deg, #2C1810, #4a2010); grid-row: span 2; aspect-ratio: unset; }
+    .gallery-item:nth-child(4) { background: linear-gradient(135deg, #D4A853, #b8903a); }
+    .gallery-item:nth-child(5) { background: linear-gradient(135deg, #5c2d0e, #8B4513); }
+    .gallery-item:nth-child(6) { background: linear-gradient(135deg, #1a0d05, #2C1810); }
+    .gallery-item-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .4rem;
+      color: rgba(245,240,232,.35);
+      font-size: 2.5rem;
+      background: rgba(0,0,0,.08);
+    }
+    .gallery-item-label span {
+      font-size: .7rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* ── Depoimentos ── */
+    #depoimentos {
+      background: var(--cream);
+    }
+    .depoimentos-inner { max-width: 1100px; margin: 0 auto; }
+    .depoimentos-header { text-align: center; }
+    .depoimentos-header .divider { margin: 0 auto 2rem; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    blockquote {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    blockquote:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lift);
+    }
+    blockquote::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: .25;
+      position: absolute;
+      top: -.5rem;
+      left: 1.25rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .quote-text {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .quote-footer {
+      display: flex;
+      align-items: center;
+      gap: .875rem;
+    }
+    .quote-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--cream);
+      flex-shrink: 0;
+    }
+    .quote-avatar.a { background: linear-gradient(135deg, var(--brown), var(--dark)); }
+    .quote-avatar.b { background: linear-gradient(135deg, var(--gold), var(--brown)); }
+    .quote-avatar.c { background: linear-gradient(135deg, var(--dark), var(--brown)); }
+    .quote-name {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--dark);
+      font-style: normal;
+    }
+    .quote-stars {
+      color: var(--gold);
+      font-size: .8rem;
+      letter-spacing: .05em;
+    }
+
+    /* ── Contato / Footer ── */
+    #contato {
+      background: var(--dark);
+      padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+    }
+    .contato-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: start;
+    }
+    #contato .section-title { color: var(--cream); }
+    #contato .divider { margin-bottom: 2rem; }
+    .contato-info { display: flex; flex-direction: column; gap: 1.25rem; }
+    .contato-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .contato-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(212,168,83,.12);
+      border: 1px solid rgba(212,168,83,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contato-item-text strong {
+      display: block;
+      color: var(--cream);
+      font-size: .875rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      margin-bottom: .15rem;
+    }
+    .contato-item-text span {
+      color: rgba(245,240,232,.55);
+      font-size: .9rem;
+    }
+    .contato-map {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1a0d08, #3d2010);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .75rem;
+      color: rgba(245,240,232,.25);
+      font-size: 2.5rem;
+      border: 1px solid rgba(212,168,83,.1);
+    }
+    .contato-map span {
+      font-size: .75rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      background: #1a0d08;
+      border-top: 1px solid rgba(212,168,83,.12);
+      padding: 2rem clamp(1.5rem, 6vw, 5rem);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .footer-copy {
+      font-size: .8rem;
+      color: rgba(245,240,232,.35);
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: .8rem;
+      color: rgba(245,240,232,.4);
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .hero-scroll-line { animation: none; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .sobre-inner { grid-template-columns: 1fr; }
+      .sobre-visual { max-width: 400px; margin: 0 auto; }
+      .sobre-badge { right: 0; }
+      .contato-inner { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(3) { grid-row: auto; aspect-ratio: 4/3; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        background: rgba(28,14,8,.98);
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid rgba(212,168,83,.15);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1rem; }
+      .nav-toggle { display: flex; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:nth-child(3) { grid-row: auto; aspect-ratio: 4/3; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#inicio" class="skip-link">Ir para o conteúdo principal</a>
+
+  <!-- Nav -->
+  <nav role="navigation" aria-label="Menu principal">
+    <span class="nav-logo">Grão Nobre</span>
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu" id="nav-toggle">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="inicio" aria-label="Bem-vindo ao Grão Nobre">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-badge" aria-hidden="true">Desde 2008 · São Paulo</div>
+      <h1>Grão <em>Nobre</em></h1>
+      <p class="hero-tagline">O melhor café da cidade</p>
+      <a href="#contato" class="btn-primary">Reserve sua mesa</a>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+      <span>Descubra</span>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" aria-labelledby="sobre-titulo">
+    <div class="sobre-inner">
+      <div class="sobre-visual" aria-hidden="true">
+        <div class="sobre-visual-inner">
+          ☕
+          <span>Café &amp; Sabor</span>
+        </div>
+        <div class="sobre-badge">
+          <strong>18</strong>
+          <span>Anos de tradição</span>
+        </div>
+      </div>
+      <div class="sobre-text">
+        <span class="section-label">Nossa história</span>
+        <h2 class="section-title" id="sobre-titulo">Paixão em cada xícara</h2>
+        <div class="divider" aria-hidden="true"></div>
+        <p>
+          Fundado em 2008 no coração de São Paulo, o Grão Nobre nasceu do sonho de oferecer uma experiência de café verdadeiramente excepcional. Trabalhamos diretamente com produtores das melhores regiões cafeeiras do Brasil — Cerrado Mineiro, Sul de Minas e Mogiana — selecionando grãos especiais de altitude que revelam notas únicas a cada torra.
+        </p>
+        <p>
+          Nossa equipe de baristas certificados pelo SCA domina cada etapa do processo, da imersão ao espresso perfeito. Mais do que um café, somos um espaço de encontro, acolhimento e cultura. Venha descobrir por que mais de 50 000 clientes escolhem o Grão Nobre como seu segundo lar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu" aria-labelledby="menu-titulo">
+    <div class="menu-inner">
+      <div class="menu-header reveal">
+        <span class="section-label">Cardápio</span>
+        <h2 class="section-title" id="menu-titulo">O que preparamos para você</h2>
+        <div class="divider" aria-hidden="true"></div>
+      </div>
+      <div class="menu-grid" role="list">
+
+        <article class="menu-card reveal" role="listitem">
+          <div class="menu-card-thumb espresso" aria-hidden="true">☕</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Espresso</h3>
+            <p class="menu-card-desc">Grão especial de altitude, torra média-escura, extração precisa em 25 segundos.</p>
+            <span class="menu-card-price">R$ 8</span>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" role="listitem">
+          <div class="menu-card-thumb cappuccino" aria-hidden="true">🍵</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Cappuccino</h3>
+            <p class="menu-card-desc">Espresso duplo com leite vaporizado e espuma cremosa no ponto certo.</p>
+            <span class="menu-card-price">R$ 12</span>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" role="listitem">
+          <div class="menu-card-thumb croissant" aria-hidden="true">🥐</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Croissant</h3>
+            <p class="menu-card-desc">Massa folhada amanteigada, assada diariamente, crocante por fora e macia por dentro.</p>
+            <span class="menu-card-price">R$ 9</span>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" role="listitem">
+          <div class="menu-card-thumb latte" aria-hidden="true">🧋</div>
+          <div class="menu-card-body">
+            <h3 class="menu-card-name">Latte</h3>
+            <p class="menu-card-desc">Espresso suave coberto com leite texturizado em latte art personalizado.</p>
+            <span class="menu-card-price">R$ 14</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria -->
+  <section id="galeria" aria-labelledby="galeria-titulo">
+    <div class="galeria-header reveal">
+      <span class="section-label">Galeria</span>
+      <h2 class="section-title" id="galeria-titulo">Nossos momentos</h2>
+    </div>
+    <div class="gallery-grid" role="list">
+      <div class="gallery-item reveal" role="listitem" aria-label="Foto do ambiente interno">
+        <div class="gallery-item-label" aria-hidden="true">🪑 <span>Ambiente</span></div>
+      </div>
+      <div class="gallery-item reveal" role="listitem" aria-label="Foto do nosso espresso">
+        <div class="gallery-item-label" aria-hidden="true">☕ <span>Espresso</span></div>
+      </div>
+      <div class="gallery-item reveal" role="listitem" aria-label="Foto da área de lounge">
+        <div class="gallery-item-label" aria-hidden="true">🛋️ <span>Lounge</span></div>
+      </div>
+      <div class="gallery-item reveal" role="listitem" aria-label="Foto dos nossos grãos">
+        <div class="gallery-item-label" aria-hidden="true">🫘 <span>Grãos</span></div>
+      </div>
+      <div class="gallery-item reveal" role="listitem" aria-label="Foto do bar de cafés">
+        <div class="gallery-item-label" aria-hidden="true">🍫 <span>Bar</span></div>
+      </div>
+      <div class="gallery-item reveal" role="listitem" aria-label="Foto da vitrine de doces">
+        <div class="gallery-item-label" aria-hidden="true">🥐 <span>Vitrine</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos" aria-labelledby="depoimentos-titulo">
+    <div class="depoimentos-inner">
+      <div class="depoimentos-header reveal">
+        <span class="section-label">Depoimentos</span>
+        <h2 class="section-title" id="depoimentos-titulo">O que nossos clientes dizem</h2>
+        <div class="divider" aria-hidden="true"></div>
+      </div>
+      <div class="testimonials-grid">
+
+        <blockquote class="reveal">
+          <p class="quote-text">
+            "O melhor café que já tomei em São Paulo, sem exagero. O espresso tem uma complexidade incrível, com notas de chocolate amargo e frutas vermelhas. O ambiente é aconchegante e a equipe é extremamente atenciosa."
+          </p>
+          <footer class="quote-footer">
+            <div class="quote-avatar a" aria-hidden="true">A</div>
+            <div>
+              <cite class="quote-name">Ana Paula Ferreira</cite>
+              <div class="quote-stars" aria-label="5 estrelas">★★★★★</div>
+            </div>
+          </footer>
+        </blockquote>
+
+        <blockquote class="reveal">
+          <p class="quote-text">
+            "Trabalho perto e venho toda manhã antes do expediente. O cappuccino é simplesmente perfeito — equilibrado, cremoso e com aquele café de qualidade que você sente na primeira gole. Virou ritual obrigatório."
+          </p>
+          <footer class="quote-footer">
+            <div class="quote-avatar b" aria-hidden="true">R</div>
+            <div>
+              <cite class="quote-name">Ricardo Mendonça</cite>
+              <div class="quote-stars" aria-label="5 estrelas">★★★★★</div>
+            </div>
+          </footer>
+        </blockquote>
+
+        <blockquote class="reveal">
+          <p class="quote-text">
+            "Trouxe meus clientes para uma reunião aqui e todos ficaram encantados. O espaço tem o tom certo para conversas de negócio — elegante, silencioso e com um café que impressiona. Com certeza voltamos!"
+          </p>
+          <footer class="quote-footer">
+            <div class="quote-avatar c" aria-hidden="true">M</div>
+            <div>
+              <cite class="quote-name">Mariana Cavalcante</cite>
+              <div class="quote-stars" aria-label="5 estrelas">★★★★★</div>
+            </div>
+          </footer>
+        </blockquote>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" aria-labelledby="contato-titulo">
+    <div class="contato-inner">
+      <div>
+        <span class="section-label">Venha nos visitar</span>
+        <h2 class="section-title" id="contato-titulo">Onde nos encontrar</h2>
+        <div class="divider" aria-hidden="true"></div>
+        <div class="contato-info">
+          <div class="contato-item">
+            <div class="contato-icon" aria-hidden="true">📍</div>
+            <div class="contato-item-text">
+              <strong>Endereço</strong>
+              <span>Rua do Café, 123 — Pinheiros, São Paulo, SP</span>
+            </div>
+          </div>
+          <div class="contato-item">
+            <div class="contato-icon" aria-hidden="true">🕖</div>
+            <div class="contato-item-text">
+              <strong>Horário de funcionamento</strong>
+              <span>Seg–Dom, 7h às 22h</span>
+            </div>
+          </div>
+          <div class="contato-item">
+            <div class="contato-icon" aria-hidden="true">📞</div>
+            <div class="contato-item-text">
+              <strong>Telefone &amp; WhatsApp</strong>
+              <span>(11) 9999-9999</span>
+            </div>
+          </div>
+          <div class="contato-item">
+            <div class="contato-icon" aria-hidden="true">✉️</div>
+            <div class="contato-item-text">
+              <strong>E-mail</strong>
+              <span>contato@graonobre.com.br</span>
+            </div>
+          </div>
+        </div>
+        <a href="#contato" class="btn-primary" style="display:inline-block;margin-top:2rem">Reserve sua mesa</a>
+      </div>
+      <div class="contato-map reveal" aria-label="Mapa — Rua do Café 123">
+        <span aria-hidden="true">🗺️</span>
+        <span>Rua do Café, 123</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">Grão Nobre</span>
+      <p class="footer-copy">© 2026 Grão Nobre · Rua do Café, 123 · Seg–Dom 7h–22h · (11) 9999-9999</p>
+      <ul class="footer-links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const menu   = document.getElementById('nav-menu');
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Overclock — the multi-agent ADE</title>
+<meta name="description" content="Overclock is a multi-agent Agentic Development Environment. An orchestrator spawns AI worker agents in a live grid of visible terminal panes, delegates every change, and wakes on handoff. You watch and steer — never a black box." />
+<meta name="color-scheme" content="dark" />
+<meta property="og:title" content="Overclock — the multi-agent ADE" />
+<meta property="og:description" content="A squad of AI agents working in parallel, in front of you. Orchestrated, visible, steerable." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============================================================ NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Overclock home">
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      Overclock
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-link" href="#what">What it is</a>
+      <a class="nav-link" href="#capabilities">Capabilities</a>
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="nav-link" href="#why">Why different</a>
+      <a class="btn btn-ghost" href="#get">Get Overclock</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- =========================================================== HERO -->
+<section class="section hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Agentic Development Environment</span>
+      <h1 id="hero-title">A squad of AI agents.<br />Working in parallel.<br /><span class="accent">In front of you.</span></h1>
+      <p class="lead">Overclock is a multi-agent ADE. An orchestrator spawns workers on demand, delegates every file and shell change to them, and wakes automatically when they hand off results — all in a live grid of terminal panes you can watch and steer.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#get">
+          Get Overclock
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <div class="hero-meta" aria-label="Product facts">
+        <span><b>Tauri + Rust</b> desktop app</span>
+        <span><b>Multi-provider</b> · bring your own logins</span>
+        <span><b>35</b> orchestration tools</span>
+        <span><b>v0.8.0</b></span>
+      </div>
+    </div>
+
+    <!-- SIGNATURE: live workspace grid -->
+    <div class="console" role="img" aria-label="A live workspace: an orchestrator pane coordinating three worker agents that cycle through booting, running and done states, with results handed off back to the orchestrator.">
+      <div class="console-bar">
+        <span class="title">mission · build-landing</span>
+        <span class="console-cost"><span class="lbl">squad cost</span> <span id="cost">$0.84</span></span>
+      </div>
+      <div class="panes" id="panes">
+        <div class="pane is-orchestrator" data-state="run" data-pane="orchestrator">
+          <div class="pane-head">
+            <span class="pane-id"><i class="dot"></i>opus · orchestrator</span>
+            <span class="status">orchestrating</span>
+          </div>
+          <div class="pane-body">
+            <span class="ln cmd">› delegating to 3 workers…</span>
+            <span class="ln">awaiting handoff</span>
+          </div>
+          <div class="meter"><i style="width:54%"></i></div>
+        </div>
+
+        <div class="pane" data-state="run" data-pane="w1">
+          <div class="pane-head">
+            <span class="pane-id"><i class="dot"></i>sonnet · scout</span>
+            <span class="status">running</span>
+          </div>
+          <div class="pane-body">
+            <span class="ln cmd">› reading facts/INDEX.md</span>
+            <span class="ln">12 sources mapped</span>
+          </div>
+          <div class="meter"><i style="width:48%"></i></div>
+        </div>
+
+        <div class="pane" data-state="boot" data-pane="w2">
+          <div class="pane-head">
+            <span class="pane-id"><i class="dot"></i>codex · executor</span>
+            <span class="status">booting</span>
+          </div>
+          <div class="pane-body">
+            <span class="ln cmd">› spawn pty…</span>
+            <span class="ln">loading skills</span>
+          </div>
+          <div class="meter"><i style="width:8%"></i></div>
+        </div>
+
+        <div class="pane" data-state="done" data-pane="w3">
+          <div class="pane-head">
+            <span class="pane-id"><i class="dot"></i>gemini · reviewer</span>
+            <span class="status">done</span>
+          </div>
+          <div class="pane-body">
+            <span class="ln cmd">› handoff_submit ✓</span>
+            <span class="ln">0 issues found</span>
+          </div>
+          <div class="meter"><i style="width:100%"></i></div>
+        </div>
+
+        <span class="handoff" id="handoff" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== WHAT IT IS -->
+<section class="section what" id="what" aria-labelledby="what-title">
+  <div class="wrap what-grid">
+    <div>
+      <span class="eyebrow">What it is</span>
+      <h2 id="what-title" class="what-quote" style="margin-top: var(--s4)">
+        Not an editor. Not a black-box generator. An environment that <span class="hl">orchestrates existing AI</span> — Claude, Codex, Gemini and local models — as visible, steerable agents.
+      </h2>
+    </div>
+    <div class="what-points">
+      <div class="what-point">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+        <div>
+          <h3>A grid, not a chat box</h3>
+          <p>Each agent runs in its own isolated PTY pane inside a dynamic 2-column grid that grows from 1×1 to 2×3 as you add panes. You see every agent at once.</p>
+        </div>
+      </div>
+      <div class="what-point">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></span>
+        <div>
+          <h3>You orchestrate, AI executes</h3>
+          <p>A conductor agent decomposes the work and delegates it to a squad. Overclock coordinates AI you already trust — it doesn't replace Claude Code, Codex or Gemini.</p>
+        </div>
+      </div>
+      <div class="what-point">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 5v4h4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <h3>Event-driven by design</h3>
+          <p>Workers wake the orchestrator the moment they hand off. No polling, no blocking — the conductor delegates, steps back, and resumes on its own.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== CAPABILITIES -->
+<section class="section capabilities" id="capabilities" aria-labelledby="cap-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Core capabilities</span>
+      <h2 id="cap-title">Built to run a team of agents, not a single assistant.</h2>
+      <p class="lead">Every piece exists to keep work parallel, visible, and under your control.</p>
+    </div>
+    <div class="cap-grid">
+
+      <article class="card" style="--accent: var(--run)">
+        <span class="card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+        <h3>Visible agent panes</h3>
+        <p>Each agent runs in its own xterm.js PTY pane in a dynamic 2-column grid. States are color-coded — booting, running, idle, done, error, hibernated — and every pane carries a live token and cost meter.</p>
+        <span class="tag">grid · 1×1 → 2×3</span>
+      </article>
+
+      <article class="card" style="--accent: var(--conductor)">
+        <span class="card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v6M12 9l-6 4M12 9l6 4"/><circle cx="12" cy="3" r="1.6"/><circle cx="6" cy="14" r="1.6"/><circle cx="18" cy="14" r="1.6"/><circle cx="6" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M6 15.6v2.8M18 15.6v2.8"/></svg></span>
+        <h3>Orchestrator + worker squads</h3>
+        <p>A canonical orchestrator spawns alone, then invokes workers on demand. Roles — orchestrator, executor, scout, reviewer — run in sequence: scouts first, reviewers last, with a one-redo QA cap.</p>
+        <span class="tag">roles · 4</span>
+      </article>
+
+      <article class="card" style="--accent: var(--done)">
+        <span class="card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h11M11 7l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 5v14" stroke-linecap="round"/></svg></span>
+        <h3>Handoff-driven delegation</h3>
+        <p>Orchestration is fully event-driven. A worker calls handoff_submit; the result is typed straight into the orchestrator's input, waking it. No polling — blocking waits are disabled by design.</p>
+        <span class="tag">no polling</span>
+      </article>
+
+      <article class="card" style="--accent: var(--hib)">
+        <span class="card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/><path d="M12 11v9M12 11L4 6.5M12 11l8-4.5"/></svg></span>
+        <h3>MCP tools, skills & missions</h3>
+        <p>35 in-process MCP tools cover pane lifecycle, mission management, the handoff protocol and media generation. Skills add domain capabilities; missions scope work into panes with their own status and optional worktree.</p>
+        <span class="tag">35 mcp__overclock__*</span>
+      </article>
+
+      <article class="card" style="--accent: var(--boot)">
+        <span class="card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3M7 9l2 2-2 2M12 13h4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>Squad presets & originals</h3>
+        <p>Squad presets define a roster of agents — CLI, model, role and provider per worker. Built-in Overclock Originals ship ready to run: Squad Former, QA Vision Lab, Cinema Crew, Cinema Site and Absurd Landing Squad.</p>
+        <span class="tag">presets · squads.json</span>
+      </article>
+
+      <article class="card" style="--accent: var(--err)">
+        <span class="card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l2.5 5.2L20 9l-4 4 1 6-5-2.8L7 19l1-6-4-4 5.5-.8L12 3z"/></svg></span>
+        <h3>Multi-provider, per-pane control</h3>
+        <p>Run Claude via OAuth plus Codex, Gemini, Antigravity, OpenRouter, Fireworks, DeepSeek, Ollama, LM Studio and more — the right model per function. Per-pane permission modes: Danger, Auto, Pend, Plan.</p>
+        <span class="tag">modes · 4</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== HOW IT WORKS -->
+<section class="section how" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2 id="how-title">The spawn → brief → handoff loop.</h2>
+      <p class="lead">A real sequence, not a metaphor. This is the cycle the orchestrator runs for every unit of work.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="num">01</span>
+        <h3>Spawn</h3>
+        <p>The orchestrator opens a visible worker pane bound to the active workspace, or invokes a worker on demand.</p>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <h3>Brief</h3>
+        <p>Once the pane has booted, the orchestrator sends a clear task to the worker — then ends its turn. No waiting.</p>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <h3>Hand off</h3>
+        <p>The worker does the job and calls handoff_submit. Its result is delivered straight to the orchestrator's input.</p>
+      </div>
+      <div class="step">
+        <span class="num">04</span>
+        <h3>Synthesize</h3>
+        <span class="loop-tag">↻ loop</span>
+        <p>The orchestrator wakes, reads the handoff, and synthesizes. The worker auto-closes shortly after a clean handoff.</p>
+      </div>
+    </div>
+    <p class="how-note"><b>↻</b>&nbsp; The orchestrator never polls or blocks — it delegates, steps back, and is woken by the handoff itself.</p>
+  </div>
+</section>
+
+<!-- ==================================================== WHY DIFFERENT -->
+<section class="section why" id="why" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why it's different</span>
+      <h2 id="why-title">A single assistant works for you. A squad works with you.</h2>
+    </div>
+    <div class="compare">
+      <div class="col them">
+        <h3>Single-agent assistant</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg> One agent, working serially — one task at a time.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg> Subagents run invisibly; you can't watch or steer them.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg> One model for everything, whether it fits or not.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg> Spend is opaque until the bill arrives.</li>
+        </ul>
+      </div>
+      <div class="col us">
+        <h3>Overclock</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Multiple agents run side by side in one grid — parallel by design.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Every agent is a visible pane you can read and steer — you're the pilot.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Mix Claude, Codex, Gemini and local models — the right one per function.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg> An orchestrator that can't cheat: a hard gate forces it to delegate, not do.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false"><path d="M5 12l5 5L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg> Live per-pane and aggregate squad cost meters — spend is always visible.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== FINAL CTA -->
+<section class="section cta-final" id="get" aria-labelledby="get-title">
+  <div class="wrap">
+    <div class="cta-card">
+      <span class="eyebrow" style="justify-content:center;display:flex">Ready when you are</span>
+      <h2 id="get-title">Stop watching one agent type. Conduct a squad.</h2>
+      <p class="lead">Overclock is a desktop ADE for developers who want to orchestrate AI instead of babysitting it. Bring your own provider logins and put a whole team to work — in panes you can see.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#top">
+          Get Overclock
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#capabilities">Explore capabilities</a>
+      </div>
+      <p class="tiers">Subscription · Boost & Pro tiers · macOS desktop</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========================================================= FOOTER -->
+<footer>
+  <div class="wrap foot-inner">
+    <a class="brand" href="#top">
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      Overclock
+    </a>
+    <div class="foot-meta">
+      <span>Agentic Development Environment</span>
+      <span>v0.8.0</span>
+      <span>Tauri · Rust · Node</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

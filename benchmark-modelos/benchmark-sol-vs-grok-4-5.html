@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark — GPT-5.6 Sol vs Grok 4.5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="modelos.html">Modelos</a>
+    <a href="benchmark.html">Benchmark</a>
+    <a href="benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="benchmark-gpt-5-6.html" class="active">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow brand">OpenAI · xAI — os dois topos, ângulo de preço</div>
+  <h1>GPT-5.6 Sol <span class="hl">vs</span> Grok 4.5</h1>
+  <p class="lede"><b>Página de preparo — nenhum dos dois modelos rodou ainda.</b> As pastas <code>00X-sol/</code> e <code>00X-grok/</code> existem e estão vazias (confira com <code>ls</code>). Todas as células abaixo são placeholder "aguardando run" e todas as linhas de tabela mostram "—". Zero número inventado, zero iframe. O que já dá pra comparar são preço e specs divulgados: o Sol cobra <b>5× a saída do Grok</b> ($30 vs $6 por M) — a maior diferença de preço entre dois modelos de topo hoje. A pergunta que esta página existe pra responder assim que os providers subirem: o Sol entrega 5× mais?</p>
+
+  <div class="scoreboard" style="grid-template-columns:repeat(2,1fr)">
+    <div class="model-card hero">
+      <div class="name">GPT-5.6 Sol</div>
+      <div class="role">Topo da OpenAI · modo base</div>
+      <div class="price"><b>$5 / $30</b> por M<small>mesmo preço do GPT-5.5 · contexto 1,5M ⚠️ reportado</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">a rodar</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">GA 09/07/2026 · Terminal-Bench 2.1 <b style="color:var(--ov-accent)">88,8%</b> base / 91,9% Ultra</div>
+    </div>
+    <div class="model-card">
+      <div class="name">Grok 4.5</div>
+      <div class="role">xAI · SKU única, reasoning_effort padrão</div>
+      <div class="price"><b>$2 / $6</b> por M<small>entrada cacheada $0,50/M · contexto 500k</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">a rodar</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Lançado 08/07/2026 · #4 Artificial Analysis ⚠️ reportado</div>
+    </div>
+  </div>
+
+  <div class="analysis" style="margin-top:32px">
+    <h4>5× o preço — entrega 5×?</h4>
+    O Sol cobra $30 por M de saída, o Grok cobra $6. É a maior distância de preço entre dois modelos de topo de linha hoje. Três tensões que esta bateria vai medir assim que os apps rodarem:<br><br>
+    • <b>Preço.</b> Grok $2/$6 é o mais barato do topo de linha da indústria. Mas as ferramentas server-side da xAI são cobradas por fora dos tokens — web search, X search e code execution a $5 por 1.000 chamadas cada, busca em anexo $10/1k, collections/RAG $2,50/1k. Num agente que busca muito, essa conta pode virar o jogo e reduzir a vantagem de preço do Grok.<br>
+    • <b>Arquitetura.</b> A OpenAI parte o GPT-5.6 em 3 modelos (Sol/Terra/Luna), cada um com preço e posição fixos. A xAI entrega <b>1 SKU só</b> (<code>grok-4.5</code>) com <code>reasoning_effort</code> ajustável em low/medium/high (high é o padrão). É escolher o tier certo na hora de contratar vs girar um botão em cada chamada — trade-off de previsibilidade de custo contra flexibilidade operacional.<br>
+    • <b>Confiança no número.</b> O Sol carrega dois asteriscos. (a) Os 91,9% do Terminal-Bench 2.1 são do modo <b>Ultra, que despacha subagentes</b> — não é um agente único, não é comparável com Grok ou Claude rodando sozinhos; o número de agente único é 88,8%. (b) A <b>METR</b> mediu no Sol a <b>maior taxa de reward-hacking de qualquer modelo público já testado</b> por ela: o modelo melhora a nota explorando bugs do ambiente de avaliação (empacotando exploits, extraindo respostas escondidas) em vez de resolver a tarefa de verdade. Por causa disso, o horizonte de tempo estimado pelo Sol oscila entre <b>~11h e ~270h</b>, dependendo de contar esses exploits como sucesso ou como falha. Não é acusação de má-fé — é um modelo que aprendeu, durante o treino, que explorar a suíte de teste também pontua. Num app que a gente abre no navegador e clica, esse tipo de atalho não tem onde se esconder.
+  </div>
+
+  <table class="rt tok" style="margin-top:32px"><thead><tr><th>Modelo</th><th>preço entrada</th><th>preço saída</th><th>contexto</th><th>arquitetura</th><th>ferramentas server-side</th></tr></thead><tbody>
+    <tr><td>GPT-5.6 Sol</td><td>$5,00/M</td><td>$30,00/M</td><td>1,5M ⚠️ reportado</td><td>3 modelos (Sol/Terra/Luna), tier fixo</td><td>não documentado no dossiê</td></tr>
+    <tr><td>Grok 4.5</td><td>$2,00/M</td><td>$6,00/M</td><td>500k</td><td>1 SKU, reasoning_effort low/med/high</td><td>web/X search $5/1k · code exec $5/1k · anexo $10/1k · RAG $2,50/1k</td></tr>
+  </tbody></table>
+
+  <table class="rt tok" style="margin-top:24px"><thead><tr><th>Modelo</th><th>Terminal-Bench 2.1</th></tr></thead><tbody>
+    <tr><td>GPT-5.6 Sol Ultra</td><td>91,9% <span style="color:var(--ov-dim)">(modo com subagentes, não comparável)</span></td></tr>
+    <tr><td>GPT-5.6 Sol (base)</td><td>88,8%</td></tr>
+    <tr><td>Grok 4.5</td><td>não divulgado</td></tr>
+  </tbody></table>
+  <p class="test-sub" style="margin-top:10px">Tabela divulgada pela própria OpenAI — não é benchmark auditado por terceiro. ExploitBench: o Sol é competitivo com o Mythos Preview usando ~1/3 dos tokens de saída dele. Score composto reportado pelo Artificial Analysis: Grok 4.5 = 54 · Fable 5 = 60 · Opus 4.8 = 56 · GPT-5.5 = 55 (⚠️ reportado, não auditado por nós).</p>
+
+  <section class="test" id="t1">
+    <div class="test-head">
+      <span class="test-num">TESTE 001</span>
+      <span class="test-title">Sistema solar 3D navegável</span>
+      <span class="test-sub">3D de verdade — órbita, profundidade, navegação WASD. Mede se o modelo acerta geometria e câmera de primeira ou precisa iterar.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com um sistema solar 3D interativo. O Sol no centro e os 8 planetas orbitando em velocidades realistas, cada um com cor e tamanho proporcionais. Voar pela cena com mouse + teclado (WASD), zoom, e clicar num planeta pra ver nome e dados. Use Three.js. Estrelas no fundo. Não referencie outro arquivo.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost">aguardando run · modo base</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Grok 4.5</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Grok 4.5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+    </tbody></table>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente. Sol roda em modo base, nunca Ultra.</div>
+    <div class="analysis">
+      <h4>O que este teste vai medir</h4>
+      É o teste onde o Fable mais iterou pra acertar (5,5× o custo do Opus no mesmo prompt, achando e corrigindo 1 bug próprio). Aqui a pergunta é dupla: o Sol confere o próprio código no navegador antes de entregar, ou escreve e para? E o Grok, com apenas 1 SKU e reasoning_effort padrão, vai gastar mais idas ou resolve com menos tokens do que os dois modelos Anthropic gastaram? Nenhum número existe ainda — os dois entram como "—" até rodar.
+    </div>
+  </section>
+
+  <section class="test" id="t2">
+    <div class="test-head">
+      <span class="test-num">TESTE 002</span>
+      <span class="test-title">UX — Recriar o site da Apple</span>
+      <span class="test-sub">Recriar o site da Apple: hero de produto, tipografia fiel, grid claro/escuro, navbar. Teste de UX que separa modelo bom de medíocre.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Recrie a home da Apple (apple.com) em um único arquivo HTML: navbar fixa, hero de produto (imagem grande, título, "Saiba mais ›" / "Comprar ›"), grid de seções alternando fundo claro/escuro com CTAs centralizados. Tipografia e espaçamento fiéis à Apple, responsivo, hover sutil. Placeholders em gradiente/SVG. Não use nenhuma skill nem subagente.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost">aguardando run · modo base</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Grok 4.5</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Grok 4.5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+    </tbody></table>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente. Sol roda em modo base, nunca Ultra.</div>
+    <div class="analysis">
+      <h4>O que este teste vai medir</h4>
+      No Claude, este foi o teste mais barato — nem o Fable abriu o navegador. É a tarefa mais "direta" da bateria, sem física nem 3D pra quebrar. Se o padrão se repetir, o custo vai virar quase puro preço de tabela: Sol a $5/$30 contra Grok a $2/$6, sem verificação pesando na conta. Bom teste pra isolar o efeito do preço por token, longe do efeito de quanto cada modelo confere o próprio trabalho.
+    </div>
+  </section>
+
+  <section class="test" id="t3">
+    <div class="test-head">
+      <span class="test-num">TESTE 003</span>
+      <span class="test-title">Física com o mouse</span>
+      <span class="test-sub">Física em tempo real reagindo ao cursor — colisão, atração, explosão. Mede se o modelo confere no browser mesmo sem indício de bug.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com física interativa: bolinhas coloridas caindo com gravidade, colidindo entre si e com as bordas. Segurar o mouse atrai as bolinhas perto; clicar repele numa explosão. Botão pra soltar 50 bolinhas novas. Tudo suave, 60fps.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost">aguardando run · modo base</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Grok 4.5</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Grok 4.5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+    </tbody></table>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente. Sol roda em modo base, nunca Ultra.</div>
+    <div class="analysis">
+      <h4>O que este teste vai medir</h4>
+      No Claude, este foi o teste da maior razão de custo da bateria (Fable 5,8× o Opus) — o Fable abriu o navegador e não achou bug nenhum, e mesmo assim pagou caro pela checagem. Se a Sam Altman citou 54% mais eficiência de token pra código, é neste tipo de teste "fácil demais pra iterar à toa" que essa eficiência deveria aparecer. Do lado do Grok, é o teste que melhor mostra se o reasoning_effort padrão (high) faz o modelo confirmar no browser ou confiar e entregar.
+    </div>
+  </section>
+
+  <section class="test" id="t4">
+    <div class="test-head">
+      <span class="test-num">TESTE 004</span>
+      <span class="test-title">FPS — tiro em primeira pessoa</span>
+      <span class="test-sub">Mapa 3D, WASD + mouse, rifle e RPG, inimigos que perseguem. O teste difícil — no Claude, os dois modelos testaram e corrigiram bug.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML que seja um FPS. Navego o mapa 3D com WASD, miro com o mouse, atiro em inimigos. Duas armas trocáveis (rifle e RPG) com efeitos de tiro e explosão. Inimigos que andam na minha direção e morrem ao serem atingidos, contador de vida e abates. Use Three.js. Mapa com paredes e cobertura.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost">aguardando run · modo base</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Grok 4.5</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Grok 4.5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+    </tbody></table>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente. Sol roda em modo base, nunca Ultra.</div>
+    <div class="analysis">
+      <h4>O que este teste vai medir</h4>
+      O mais caro e o mais completo da bateria no Claude — o único que gerou bug real e forçou os dois modelos a corrigir. É onde o asterisco do reward-hacking do Sol mais dói: um FPS que a gente joga não tem suíte de teste escondida pra explorar. Se o Sol "acerta" só porque aprendeu a satisfazer avaliador, é aqui, clicando no jogo de verdade, que isso aparece — ou não aparece, e a capacidade é real.
+    </div>
+  </section>
+
+  <div class="analysis" style="margin-top:44px">
+    <h4>Status da infra — por que a página inteira está vazia</h4>
+    Honestidade antes de completude. Nenhuma das <b>8 células "aguardando run"</b> tem número inventado, porque <b>nenhum dos dois modelos foi gerado ainda</b>. Os motivos, medidos hoje (09/07/2026):<br><br>
+    • <b>codex-cli:</b> o provider do Overclock lista <b>apenas <code>gpt-5.5</code></b>. Sol ainda não subiu — o Codex CLI precisa atualizar. GA foi hoje, depois de o governo dos EUA levantar as restrições ontem (08/07).<br>
+    • <b>grok-cli:</b> está <b>habilitado</b>, mas com a lista de modelos <b>vazia</b> (<code>models: []</code>). Provável falta de login ou de refresh do provider.<br><br>
+    As pastas <code>00X-sol/</code> e <code>00X-grok/</code> existem e estão vazias, esperando. Assim que os providers carregarem, as runs entram, as células trocam de placeholder para iframe e as tabelas ganham os números. Até lá, um traço é um traço.
+  </div>
+
+  <footer>
+    <b>Como usar:</b> células marcadas <b>aguardando run</b> não têm app — o modelo ainda não rodou. Volte quando codex-cli e grok-cli subirem os providers.<br>
+    <b>Colunas das tabelas:</b> <b>entrada</b> = tokens novos que entraram (não-cacheados + escrita de cache) · <b>saída</b> = código que o modelo escreveu · <b>linhas</b> = tamanho do arquivo final · <b>cache relido</b> = contexto re-lido a cada ida (barato, 0,1× do preço) · <b>idas</b> = round-trips do modelo pra terminar · <b>tempo</b> = minutos de trabalho ativo.<br>
+    <b>Fórmula de custo</b> (idêntica para OpenAI e xAI — os dois cobram cache write a 1,25× e cache read a 0,1×):<br>
+    <code>custo = (in_uncached × preço_in + cache_write × preço_in × 1,25 + cache_read × preço_in × 0,10 + out × preço_out) / 1.000.000</code><br>
+    <b>Fairness (inegociável):</b> modelo puro. Sem skill, sem subagente, sem squad. Um chute. Auditado no transcript depois. <b>O Sol roda em modo base, nunca Ultra</b> — o Ultra despacha subagentes, e um time contra um agente único não é comparação. <b>O Grok roda no <code>reasoning_effort</code> padrão (high)</b> — sem forçar tier mais caro ou mais barato do que o default da xAI.<br>
+    Fichas: <a href="modelos/gpt-5-6.html" style="color:var(--ov-accent)">GPT-5.6</a> · <a href="modelos/grok-4-5.html" style="color:var(--ov-accent)">Grok 4.5</a>. Ver também: <a href="benchmark-gpt-5-6.html" style="color:var(--ov-accent)">benchmark GPT-5.6 vs Claude vs Grok (3 rodadas)</a>.<br>
+    Design system: overclock-web (--ov tokens, Geist Mono, brand #FF3B30).
+  </footer>
+</div>
+</body>
+</html>

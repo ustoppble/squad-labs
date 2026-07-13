@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark — GPT-5.6 Terra vs Opus 4.8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="modelos.html">Modelos</a>
+    <a href="benchmark.html">Benchmark</a>
+    <a href="benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="benchmark-gpt-5-6.html">GPT-5.6</a>
+    <a href="benchmark-terra-vs-opus-4-8.html" class="active">Terra vs Opus 4.8</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow brand">OpenAI · Anthropic — pareados no tier médio</div>
+  <h1>GPT-5.6 Terra <span class="hl">vs</span> Opus 4.8</h1>
+  <p class="lede">O duelo do tier médio, isolado da rodada completa: <b>Terra</b> ($2,50/$15), o intermediário da OpenAI que se vende como "performance competitiva com o GPT-5.5" por metade do preço, contra o <b>Opus 4.8</b> ($5/$25), o rei anterior da Anthropic que virou custo-benefício. Os 4 apps do Opus já rodaram e estão nos quadros abaixo; os do Terra entram assim que o Codex CLI subir o modelo. Modelo puro: <b>zero skill, zero subagente</b>, auditado no transcript.</p>
+
+  <div class="scoreboard" style="grid-template-columns:repeat(2,1fr)">
+    <div class="model-card hero">
+      <div class="name">GPT-5.6 Terra</div>
+      <div class="role">Intermediário · desafiante mais barato</div>
+      <div class="price"><b>$2,50 / $15</b> por M<small>metade da entrada e 60% da saída do Opus 4.8</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val" style="color:var(--ov-accent)">a rodar</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Posição declarada: "performance competitiva com o GPT-5.5" · tier de alto volume — suporte, ferramentas internas, análise de documento</div>
+    </div>
+    <div class="model-card">
+      <div class="name">Opus 4.8</div>
+      <div class="role">O rei destronado · custo-benefício</div>
+      <div class="price"><b>$5 / $25</b> por M<small>2× a entrada, 1,67× a saída do Terra</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">$3,49</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Volume: <b style="color:var(--ov-muted)">0,36M</b> tokens novos · 53k gerados</div>
+    </div>
+  </div>
+
+  <div class="analysis" style="margin-top:32px">
+    <h4>Metade do preço, e diz passar no papel</h4>
+    O Terra cobra <b>metade do Opus 4.8 na entrada</b> ($2,50 vs $5) e <b>60% na saída</b> ($15 vs $25). E, no número divulgado pela própria OpenAI, o Terra passa o Opus no Terminal-Bench 2.1 (82,5% vs 78,9%). É o duelo mais interessante do meio: o desafiante mais barato contra o rei destronado que virou custo-benefício.<br><br>
+    Duas ressalvas honestas antes de comemorar o Terra:<br><br>
+    <b>1. O número do Opus 4.8 diverge conforme quem publica.</b> A Anthropic reporta <b>82,7%</b> no Terminal-Bench 2.1 pro Opus 4.8; a OpenAI, na tabela dela, reporta <b>78,9%</b> pro mesmo modelo no mesmo benchmark. Não é acusação de má-fé de nenhum dos dois lados — é só o fato: benchmark divulgado por laboratório é sempre auto-reportado, com metodologia própria e incentivo pra aparecer bem. É por isso que a gente roda os próprios testes.<br><br>
+    <b>2. O Opus é econômico em idas.</b> Ele verifica seletivamente — 2 a 8 idas por teste nesta bateria — enquanto modelos que verificam sempre acabam relendo cache a cada rodada de checagem. Preço por token não é a conta final: o total (idas × cache relido × preço) é o que importa.
+  </div>
+
+  <div class="analysis" style="margin-top:22px">
+    <h4>Terminal-Bench 2.1 — números divulgados pela própria OpenAI</h4>
+    <b>Ressalva obrigatória:</b> a tabela abaixo é a avaliação <b>fornecida pela OpenAI</b>, não um benchmark independente de terceiros. Nenhum destes números foi auditado por nós.
+  </div>
+  <table class="rt" style="margin-top:14px"><thead><tr><th>Modelo</th><th>Score</th><th>Observação</th></tr></thead><tbody>
+    <tr><td>GPT-5.6 Terra</td><td>82,5%</td><td>número da OpenAI · rodada deste duelo</td></tr>
+    <tr><td>Claude Opus 4.8</td><td>78,9%</td><td>número da OpenAI, mesma tabela</td></tr>
+    <tr><td>Claude Opus 4.8</td><td>82,7%</td><td>número da <b>Anthropic</b> pro mesmo benchmark — divergência de fonte, ver ressalva 1 acima</td></tr>
+  </tbody></table>
+
+  <h2 style="margin-top:44px">Os 4 testes</h2>
+  <p class="lede">Mesmos 4 prompts do resto da bateria. Terra em placeholder até o Codex CLI subir o modelo; Opus 4.8 com os 4 apps já rodados.</p>
+
+  <section class="test" id="t1">
+    <div class="test-head">
+      <span class="test-num">TESTE 001</span>
+      <span class="test-title">Sistema solar 3D navegável</span>
+      <span class="test-sub">O Opus resolveu em 4 idas e não abriu o navegador — escreveu e confiou.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com um sistema solar 3D interativo. O Sol no centro e os 8 planetas orbitando em velocidades realistas, cada um com cor e tamanho proporcionais. Voar pela cena com mouse + teclado (WASD), zoom, e clicar num planeta pra ver nome e dados. Use Three.js. Estrelas no fundo. Não referencie outro arquivo.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Terra</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~55k ctx · $0,80 · azM3KZ4t</span><a class="open" href="001-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="001-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Terra</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Opus 4.8</td><td>68k</td><td>13k</td><td>305</td><td>130k</td><td>4</td><td>1,6min</td><td class="cst">$0,80</td></tr>
+    </tbody></table>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Opus escreveu e parou no escuro</h4>
+      4 idas, zero navegador aberto, 305 linhas em 1,6min — o mais rápido do Solar em toda a bateria original. $0,80 a $5/$25. Esperamos do Terra: se a OpenAI cumprir a promessa de eficiência de token do GPT-5.6, ele deveria fechar perto de metade desse custo — desde que também confie e não itere de mais.
+    </div>
+  </section>
+
+  <section class="test" id="t2">
+    <div class="test-head">
+      <span class="test-num">TESTE 002</span>
+      <span class="test-title">UX — Recriar o site da Apple</span>
+      <span class="test-sub">O teste mais enxuto do Opus: 1 ferramenta, 2 idas.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Recrie a home da Apple (apple.com) em um único arquivo HTML: navbar fixa, hero de produto (imagem grande, título, "Saiba mais ›" / "Comprar ›"), grid de seções alternando fundo claro/escuro com CTAs centralizados. Tipografia e espaçamento fiéis à Apple, responsivo, hover sutil. Placeholders em gradiente/SVG. Não use nenhuma skill nem subagente.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Terra</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~54k ctx · $0,47 · yo80Y2kq</span><a class="open" href="002-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="002-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Terra</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Opus 4.8</td><td>50k</td><td>6k</td><td>382</td><td>53k</td><td>2</td><td>1,3min</td><td class="cst">$0,47</td></tr>
+    </tbody></table>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Tarefa fácil — preço de tabela deveria decidir</h4>
+      O Opus é o mais enxuto da bateria aqui: 6k de saída, 382 linhas, 2 idas. Mesmo assim custou $0,47. Sem verificação pesando dos dois lados, este é o teste mais limpo pra medir só o preço por token: o Terra cobra metade da entrada do Opus, então deveria fechar perto de $0,24 se escrever volume parecido.
+    </div>
+  </section>
+
+  <section class="test" id="t3">
+    <div class="test-head">
+      <span class="test-num">TESTE 003</span>
+      <span class="test-title">Física com o mouse</span>
+      <span class="test-sub">233 linhas, 4 idas, sem browser — o código mais curto do Opus na bateria.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com física interativa: bolinhas coloridas caindo com gravidade, colidindo entre si e com as bordas. Segurar o mouse atrai as bolinhas perto; clicar repele numa explosão. Botão pra soltar 50 bolinhas novas. Tudo suave, 60fps.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Terra</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~52k ctx · $0,60 · eOV5uqst</span><a class="open" href="003-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="003-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Terra</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Opus 4.8</td><td>74k</td><td>5k</td><td>233</td><td>122k</td><td>4</td><td>1,2min</td><td class="cst">$0,60</td></tr>
+    </tbody></table>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Simulação contida, sem verificação dos dois lados</h4>
+      Física é tarefa curta pro Opus: 233 linhas, 4 idas, zero navegador. $0,60. Esperamos do Terra: se ele também não iterar, o resultado deveria vir quase só do preço de tabela — a metade da entrada e 60% da saída do Opus favorecem o Terra direto.
+    </div>
+  </section>
+
+  <section class="test" id="t4">
+    <div class="test-head">
+      <span class="test-num">TESTE 004</span>
+      <span class="test-title">FPS — tiro em primeira pessoa</span>
+      <span class="test-sub">O único teste da bateria original que gerou erro real — o Opus caçou e corrigiu.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML que seja um FPS. Navego o mapa 3D com WASD, miro com o mouse, atiro em inimigos. Duas armas trocáveis (rifle e RPG) com efeitos de tiro e explosão. Inimigos que andam na minha direção e morrem ao serem atingidos, contador de vida e abates. Use Three.js. Mapa com paredes e cobertura.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Terra</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~63k ctx · $1,61 · mYGgyEpQ</span><a class="open" href="004-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="004-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Terra</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Opus 4.8</td><td>118k</td><td>29k</td><td>704</td><td>341k</td><td>8</td><td>3,9min</td><td class="cst">$1,61</td></tr>
+    </tbody></table>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>O teste difícil — aqui o Opus quebrou a regra e verificou</h4>
+      O FPS é o único da bateria em que o Opus <b>abriu o navegador</b> — achou 1 erro e fez 2 correções (2 Edits), 8 idas, o dobro do resto dos testes dele. $1,61, o teste mais caro do Opus na bateria. É o teste que mais separa: se o Terra achar o Terminal-Bench de verdade (82,5% vs 78,9% do Opus), é aqui — no jogo mais difícil de acertar de primeira — que a vantagem deveria aparecer.
+    </div>
+  </section>
+
+  <div class="analysis" style="margin-top:44px">
+    <h4>Status da infra — por que metade desta página está vazia</h4>
+    Honestidade antes de completude. <b>Nenhuma célula "aguardando run" tem número inventado</b>, porque nenhum app do Terra foi gerado ainda. Confirmado com <code>ls</code>: as pastas <code>001-terra/</code> a <code>004-terra/</code> existem e estão vazias.<br><br>
+    O motivo: o provider <b>codex-cli</b> no Overclock lista apenas <code>gpt-5.5</code>. Sol, Terra e Luna ainda não subiram — o Codex CLI precisa atualizar. Assim que o Terra carregar, as 4 células trocam de placeholder para iframe e as tabelas ganham os números reais. Até lá, um traço é um traço.
+  </div>
+
+  <footer>
+    <b>Como usar:</b> interaja com o app do Opus no quadro ou clique em <b>abrir ↗</b> pra tela cheia. Troque a pill <b>pendente</b> por <b>pass</b>/<b>fail</b> no veredito de cada célula. Células marcadas <b>aguardando run</b> não têm app — o Terra ainda não rodou.<br>
+    <b>Colunas das tabelas:</b> <b>entrada</b> = tokens novos que entraram (não-cacheados + escrita de cache) · <b>saída</b> = código que o modelo escreveu · <b>linhas</b> = tamanho do arquivo final · <b>cache relido</b> = contexto re-lido a cada ida (barato, 0,1× do preço) · <b>idas</b> = round-trips do modelo pra terminar · <b>tempo</b> = minutos de trabalho ativo.<br>
+    <b>Fórmula de custo</b> (idêntica para OpenAI e Anthropic — os dois cobram cache write a 1,25× e cache read a 0,1×):<br>
+    <code>custo = (in_uncached × preço_in + cache_write × preço_in × 1,25 + cache_read × preço_in × 0,10 + out × preço_out) / 1.000.000</code><br>
+    <b>Fairness (inegociável):</b> modelo puro. <b>Sem skill, sem subagente, sem squad. Um chute.</b> Auditado no transcript depois. A mesma regra que proíbe subagente para o Claude vale para o GPT.<br>
+    <b>Procedência dos números:</b> tudo que está preenchido nesta página vem de run real do Opus 4.8 (mesmos números do <a href="benchmark.html" style="color:var(--ov-accent)">benchmark.html</a>) ou de fonte citada no dossiê. A tabela do Terminal-Bench 2.1 é <b>divulgada pela própria OpenAI</b>, não auditada por terceiros — e o próprio número do Opus diverge entre a tabela da OpenAI (78,9%) e o reportado pela Anthropic (82,7%).<br>
+    Fichas: <a href="modelos/gpt-5-6.html" style="color:var(--ov-accent)">GPT-5.6</a> · <a href="modelos/opus-4-8.html" style="color:var(--ov-accent)">Opus 4.8</a>. Ver também: <a href="benchmark-gpt-5-6.html" style="color:var(--ov-accent)">GPT-5.6 vs Claude vs Grok (bateria completa)</a>.<br>
+    Design system: overclock-web (--ov tokens, Geist Mono, brand #FF3B30).
+  </footer>
+</div>
+</body>
+</html>

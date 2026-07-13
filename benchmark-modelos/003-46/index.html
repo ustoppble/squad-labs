@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics Balls</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; overflow: hidden; font-family: sans-serif; }
+  canvas { display: block; }
+  #ui {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    z-index: 10;
+  }
+  button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    backdrop-filter: blur(10px);
+    transition: background 0.2s;
+  }
+  button:hover { background: rgba(255,255,255,0.2); }
+  #info {
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div id="ui">
+  <button id="addBtn">+ 50 bolinhas</button>
+  <span id="info">segure: atrai | clique: explode</span>
+</div>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W, H;
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const GRAVITY = 0.4;
+const DAMPING = 0.78;
+const FRICTION = 0.99;
+const ATTRACT_RADIUS = 150;
+const ATTRACT_FORCE = 0.35;
+const REPEL_FORCE = 18;
+const REPEL_RADIUS = 200;
+
+const COLORS = [
+  '#ff6b6b','#ff8e53','#ffd93d','#6bcb77',
+  '#4d96ff','#c77dff','#ff6bce','#00f5d4',
+  '#f72585','#7209b7','#3a0ca3','#4cc9f0',
+];
+
+class Ball {
+  constructor(x, y, r) {
+    this.x = x ?? Math.random() * W;
+    this.y = y ?? -Math.random() * H;
+    this.r = r ?? 8 + Math.random() * 14;
+    this.vx = (Math.random() - 0.5) * 4;
+    this.vy = Math.random() * 2;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    this.mass = this.r * this.r;
+  }
+
+  update(mouse) {
+    this.vy += GRAVITY;
+    this.vx *= FRICTION;
+    this.vy *= FRICTION;
+
+    // Mouse interaction
+    if (mouse.down) {
+      const dx = mouse.x - this.x;
+      const dy = mouse.y - this.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < ATTRACT_RADIUS && dist > 1) {
+        const f = (ATTRACT_RADIUS - dist) / ATTRACT_RADIUS * ATTRACT_FORCE;
+        this.vx += dx / dist * f;
+        this.vy += dy / dist * f;
+      }
+    }
+
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Wall collisions
+    if (this.x - this.r < 0) {
+      this.x = this.r;
+      this.vx = Math.abs(this.vx) * DAMPING;
+    } else if (this.x + this.r > W) {
+      this.x = W - this.r;
+      this.vx = -Math.abs(this.vx) * DAMPING;
+    }
+    if (this.y + this.r > H) {
+      this.y = H - this.r;
+      this.vy = -Math.abs(this.vy) * DAMPING;
+      this.vx *= 0.92;
+    }
+    if (this.y - this.r < 0) {
+      this.y = this.r;
+      this.vy = Math.abs(this.vy) * DAMPING;
+    }
+  }
+
+  draw() {
+    const grad = ctx.createRadialGradient(
+      this.x - this.r * 0.3, this.y - this.r * 0.3, this.r * 0.1,
+      this.x, this.y, this.r
+    );
+    grad.addColorStop(0, '#ffffff88');
+    grad.addColorStop(0.3, this.color);
+    grad.addColorStop(1, this.color + '44');
+
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+  }
+}
+
+let balls = [];
+function spawnBalls(n) {
+  for (let i = 0; i < n; i++) {
+    balls.push(new Ball());
+  }
+}
+spawnBalls(40);
+
+const mouse = { x: 0, y: 0, down: false };
+
+canvas.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+canvas.addEventListener('mousedown', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  mouse.down = true;
+});
+canvas.addEventListener('mouseup', e => {
+  mouse.down = false;
+});
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
+}, { passive: false });
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
+  mouse.down = true;
+}, { passive: false });
+canvas.addEventListener('touchend', () => { mouse.down = false; });
+
+canvas.addEventListener('click', e => {
+  const cx = e.clientX, cy = e.clientY;
+  for (const b of balls) {
+    const dx = b.x - cx;
+    const dy = b.y - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < REPEL_RADIUS && dist > 0.1) {
+      const f = (REPEL_RADIUS - dist) / REPEL_RADIUS * REPEL_FORCE;
+      b.vx += dx / dist * f;
+      b.vy += dy / dist * f;
+    }
+  }
+  // Shockwave visual
+  shockwaves.push({ x: cx, y: cy, r: 0, alpha: 1 });
+});
+
+document.getElementById('addBtn').addEventListener('click', e => {
+  e.stopPropagation();
+  spawnBalls(50);
+});
+
+const shockwaves = [];
+
+function resolveCollisions() {
+  for (let i = 0; i < balls.length; i++) {
+    for (let j = i + 1; j < balls.length; j++) {
+      const a = balls[i], b = balls[j];
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const distSq = dx * dx + dy * dy;
+      const minDist = a.r + b.r;
+      if (distSq >= minDist * minDist) continue;
+
+      const dist = Math.sqrt(distSq);
+      const nx = dx / dist;
+      const ny = dy / dist;
+
+      // Separate
+      const overlap = (minDist - dist) * 0.5;
+      a.x -= nx * overlap;
+      a.y -= ny * overlap;
+      b.x += nx * overlap;
+      b.y += ny * overlap;
+
+      // Elastic collision
+      const dvx = a.vx - b.vx;
+      const dvy = a.vy - b.vy;
+      const dot = dvx * nx + dvy * ny;
+      if (dot <= 0) continue;
+
+      const impulse = (2 * dot) / (a.mass + b.mass) * 0.85;
+      a.vx -= impulse * b.mass * nx;
+      a.vy -= impulse * b.mass * ny;
+      b.vx += impulse * a.mass * nx;
+      b.vy += impulse * a.mass * ny;
+    }
+  }
+}
+
+function loop() {
+  ctx.fillStyle = 'rgba(10,10,15,0.25)';
+  ctx.fillRect(0, 0, W, H);
+
+  // Shockwaves
+  for (let i = shockwaves.length - 1; i >= 0; i--) {
+    const s = shockwaves[i];
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(255,255,255,${s.alpha})`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    s.r += 8;
+    s.alpha -= 0.04;
+    if (s.alpha <= 0) shockwaves.splice(i, 1);
+  }
+
+  // Mouse glow when holding
+  if (mouse.down) {
+    const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, ATTRACT_RADIUS);
+    g.addColorStop(0, 'rgba(100,180,255,0.12)');
+    g.addColorStop(1, 'rgba(100,180,255,0)');
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, ATTRACT_RADIUS, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+  }
+
+  for (const b of balls) b.update(mouse);
+  resolveCollisions();
+  for (const b of balls) b.draw();
+
+  // Ball count
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.font = '12px sans-serif';
+  ctx.fillText(`${balls.length} bolinhas`, 12, H - 12);
+
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>

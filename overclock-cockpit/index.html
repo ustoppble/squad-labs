@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Overclock — Multi-agent IDE cockpit. Orchestrate a squad of AI agents in parallel, each in a visible pane. Run Claude, Gemini, GPT-4o side by side.">
+  <title>Overclock — Multi-Agent Coding Cockpit</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav-wrapper">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a href="#" class="nav-logo" aria-label="Overclock home">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M10.5 2L4 10H9L7.5 16L14 8H9L10.5 2Z" fill="var(--accent)" stroke="var(--accent)" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+        <span>Overclock</span>
+      </a>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="nav-menu" role="list">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#how-it-works" class="nav-link">How it works</a></li>
+        <li><a href="#models" class="nav-link">Models</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+
+      <a href="#cta" class="btn btn-primary nav-cta">Get started</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-bg-grid" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="container hero-inner">
+        <div class="hero-text reveal">
+          <p class="eyebrow">// multi-agent coding cockpit</p>
+          <h1 id="hero-heading" class="hero-h1">
+            Orchestrate a squad of <span class="text-gradient">AI agents.</span>
+          </h1>
+          <p class="hero-subhead">
+            Overclock turns your IDE into a parallel command center. Spawn specialized agents, route each task to the best model, and watch every step happen live — in your own pane.
+          </p>
+          <div class="hero-actions">
+            <a href="#cta" class="btn btn-primary btn-lg">Get started</a>
+            <a href="#" class="btn btn-ghost btn-lg">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- CSS workspace mockup -->
+        <div class="hero-mockup reveal reveal-delay-1" role="img" aria-label="Overclock workspace showing four agent panes running in parallel">
+          <div class="workspace">
+            <div class="workspace-bar" aria-hidden="true">
+              <div class="ws-dots">
+                <span class="ws-dot ws-dot-red"></span>
+                <span class="ws-dot ws-dot-yellow"></span>
+                <span class="ws-dot ws-dot-green"></span>
+              </div>
+              <span class="ws-title">Overclock Workspace</span>
+              <div class="ws-dots-spacer"></div>
+            </div>
+            <div class="workspace-grid" aria-hidden="true">
+
+              <div class="pane">
+                <div class="pane-header">
+                  <span class="pane-id">[scout-01]</span>
+                  <span class="pane-badge badge-running">RUNNING</span>
+                </div>
+                <div class="pane-body">
+                  <p class="pane-line"><span class="pane-prompt">›</span> Analyzing repo…</p>
+                  <p class="pane-line pane-dim"><span class="pane-prompt">›</span> Found 247 components</p>
+                  <p class="pane-line"><span class="pane-prompt">›</span> Mapping deps<span class="pane-cursor"></span></p>
+                </div>
+              </div>
+
+              <div class="pane">
+                <div class="pane-header">
+                  <span class="pane-id">[builder-02]</span>
+                  <span class="pane-badge badge-running">RUNNING</span>
+                </div>
+                <div class="pane-body">
+                  <p class="pane-line"><span class="pane-prompt">›</span> Writing middleware</p>
+                  <p class="pane-line pane-dim"><span class="pane-prompt">›</span> Token refresh ✓</p>
+                  <p class="pane-line"><span class="pane-prompt">›</span> Rate limiting…</p>
+                </div>
+              </div>
+
+              <div class="pane">
+                <div class="pane-header">
+                  <span class="pane-id">[reviewer-03]</span>
+                  <span class="pane-badge badge-done">DONE</span>
+                </div>
+                <div class="pane-body">
+                  <p class="pane-line pane-dim"><span class="pane-prompt">›</span> 3 issues found</p>
+                  <p class="pane-line pane-dim"><span class="pane-prompt">›</span> SQL injection ✓</p>
+                  <p class="pane-line pane-dim"><span class="pane-prompt">›</span> Report → synth</p>
+                </div>
+              </div>
+
+              <div class="pane">
+                <div class="pane-header">
+                  <span class="pane-id">[pilot]</span>
+                  <span class="pane-badge badge-waiting">WAITING</span>
+                </div>
+                <div class="pane-body">
+                  <p class="pane-line pane-dim"><span class="pane-prompt">›</span> Awaiting builder</p>
+                  <p class="pane-line pane-dim"><span class="pane-prompt">›</span> reviewer-03 ✓</p>
+                  <p class="pane-line pane-dim"><span class="pane-prompt">›</span> Ready to merge…</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats" aria-label="Key metrics">
+      <div class="container">
+        <dl class="stats-grid">
+          <div class="stat-item reveal">
+            <dt class="stat-label">Agents in parallel</dt>
+            <dd class="stat-value">4<span class="stat-sup">+</span></dd>
+          </div>
+          <div class="stat-item reveal reveal-delay-1">
+            <dt class="stat-label">Supported models</dt>
+            <dd class="stat-value">6</dd>
+          </div>
+          <div class="stat-item reveal reveal-delay-2">
+            <dt class="stat-label">Pane spawn time</dt>
+            <dd class="stat-value">&lt;100<span class="stat-unit">ms</span></dd>
+          </div>
+          <div class="stat-item reveal reveal-delay-3">
+            <dt class="stat-label">Unified cockpit</dt>
+            <dd class="stat-value">1</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="section features" id="features" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">// capabilities</p>
+          <h2 id="features-heading">Everything you need to run at full speed</h2>
+        </div>
+
+        <ul class="features-grid" role="list">
+
+          <li class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Parallel Agents</h3>
+            <p class="card-desc">Spawn multiple specialized agents simultaneously. Scout, build, and review happen at the same time.</p>
+          </li>
+
+          <li class="card reveal reveal-delay-1">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Visible Panes</h3>
+            <p class="card-desc">Every agent runs in its own visible pane. No black-box background work — watch every step live.</p>
+          </li>
+
+          <li class="card reveal reveal-delay-2">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="12" rx="10" ry="4"/><path d="M2 12c0 4.418 4.477 8 10 8s10-3.582 10-8"/>
+                <path d="M12 2v20"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Multi-Model</h3>
+            <p class="card-desc">Route each task to the right model. Claude, Gemini, GPT-4, Codex — all in one cockpit.</p>
+          </li>
+
+          <li class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="19" r="2"/>
+                <line x1="8" y1="11" x2="16" y2="6"/><line x1="8" y1="13" x2="16" y2="18"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Smart Delegation</h3>
+            <p class="card-desc">The pilot agent reads context, breaks tasks, and delegates. You stay in control of the strategy.</p>
+          </li>
+
+          <li class="card reveal reveal-delay-1">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Live Task Tracking</h3>
+            <p class="card-desc">Built-in milestone and task tracking. See exactly what each agent is doing and what is done.</p>
+          </li>
+
+          <li class="card reveal reveal-delay-2">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Runs Everywhere</h3>
+            <p class="card-desc">CLI, desktop app, web, and IDE extensions. Your cockpit, your environment.</p>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="section how" id="how-it-works" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">// workflow</p>
+          <h2 id="how-heading">From idea to shipped, in parallel</h2>
+        </div>
+
+        <ol class="steps" role="list">
+
+          <li class="step reveal">
+            <div class="step-num" aria-hidden="true">01</div>
+            <div class="step-body">
+              <h3 class="step-title">Delegate</h3>
+              <p class="step-desc">Break your task into focused sub-problems. The pilot agent reads your context and routes each piece to the right specialist.</p>
+            </div>
+          </li>
+
+          <li class="step-arrow" aria-hidden="true">
+            <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+              <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1" stroke-dasharray="4 3"/>
+              <polyline points="28,4 36,8 28,12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            </svg>
+          </li>
+
+          <li class="step reveal reveal-delay-1">
+            <div class="step-num" aria-hidden="true">02</div>
+            <div class="step-body">
+              <h3 class="step-title">Agents Work</h3>
+              <p class="step-desc">Multiple agents execute in parallel — each in a visible pane. Scout, build, review, all at once. No waiting in line.</p>
+            </div>
+          </li>
+
+          <li class="step-arrow" aria-hidden="true">
+            <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+              <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1" stroke-dasharray="4 3"/>
+              <polyline points="28,4 36,8 28,12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            </svg>
+          </li>
+
+          <li class="step reveal reveal-delay-2">
+            <div class="step-num" aria-hidden="true">03</div>
+            <div class="step-body">
+              <h3 class="step-title">Synthesize</h3>
+              <p class="step-desc">The orchestrator collects handoffs, resolves conflicts, and delivers the final result. One coherent output from many parallel minds.</p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== MODELS ===== -->
+    <section class="section models" id="models" aria-labelledby="models-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">// model routing</p>
+          <h2 id="models-heading">Pick the right brain for every task</h2>
+          <p class="section-sub">Overclock runs any model — mix and match per agent.</p>
+        </div>
+
+        <ul class="models-list reveal" role="list">
+          <li class="model-chip">
+            <span class="model-dot model-dot--claude-opus" aria-hidden="true"></span>
+            <span class="model-name">Claude Opus 4.8</span>
+          </li>
+          <li class="model-chip">
+            <span class="model-dot model-dot--claude-sonnet" aria-hidden="true"></span>
+            <span class="model-name">Claude Sonnet 4.6</span>
+          </li>
+          <li class="model-chip">
+            <span class="model-dot model-dot--claude-haiku" aria-hidden="true"></span>
+            <span class="model-name">Claude Haiku 4.5</span>
+          </li>
+          <li class="model-chip">
+            <span class="model-dot model-dot--gemini" aria-hidden="true"></span>
+            <span class="model-name">Gemini 2.0 Flash</span>
+          </li>
+          <li class="model-chip">
+            <span class="model-dot model-dot--gpt4o" aria-hidden="true"></span>
+            <span class="model-name">GPT-4o</span>
+          </li>
+          <li class="model-chip">
+            <span class="model-dot model-dot--codex" aria-hidden="true"></span>
+            <span class="model-name">Codex</span>
+          </li>
+          <li class="model-chip model-chip-more">
+            <span class="model-name">+ more</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section faq" id="faq" aria-labelledby="faq-heading">
+      <div class="container faq-inner">
+        <div class="section-header reveal">
+          <p class="eyebrow">// questions</p>
+          <h2 id="faq-heading">Frequently asked questions</h2>
+        </div>
+
+        <dl class="faq-list reveal">
+
+          <div class="faq-item">
+            <dt>
+              <button class="faq-btn" aria-expanded="false" aria-controls="faq-a1">
+                What is Overclock?
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-a1" hidden>
+              Overclock is a multi-agent IDE and coding cockpit. It lets you orchestrate many AI coding agents in parallel, each running in its own visible pane. A pilot agent reads your context, breaks down tasks, and delegates to specialists — scout, builder, reviewer — then synthesizes the results. You see every step, in real time.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <button class="faq-btn" aria-expanded="false" aria-controls="faq-a2">
+                Which models are supported?
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-a2" hidden>
+              Overclock supports Claude Opus 4.8, Claude Sonnet 4.6, Claude Haiku 4.5, Gemini 2.0 Flash, GPT-4o, and Codex — with more being added. You can route different agents to different models and mix them freely within the same workspace.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <button class="faq-btn" aria-expanded="false" aria-controls="faq-a3">
+                How is this different from Cursor or Copilot?
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-a3" hidden>
+              Cursor and Copilot are single-agent tools: one model, one conversation, one pane. Overclock is a multi-agent orchestration layer. Tasks fan out to specialized workers running concurrently — visible, inspectable, and controllable. The difference is like comparing a single developer to a coordinated engineering team.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <button class="faq-btn" aria-expanded="false" aria-controls="faq-a4">
+                Does it work offline?
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-a4" hidden>
+              Overclock requires internet connectivity to reach model APIs. The cockpit UI, workspace layout, and task tracking work offline, but agents need API access to function. Self-hosted model support via Ollama is on the roadmap.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <button class="faq-btn" aria-expanded="false" aria-controls="faq-a5">
+                How do I get started?
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-a5" hidden>
+              Install the CLI with <code>npm i -g @overclock/cli</code>, run <code>overclock init</code> in your project, and spawn your first agent squad with <code>overclock run</code>. The desktop app and VS Code extension are available for those who prefer a GUI.
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===== CTA BAND ===== -->
+    <section class="section cta-band" id="cta" aria-labelledby="cta-heading">
+      <div class="container">
+        <div class="cta-card reveal">
+          <p class="eyebrow">// ready?</p>
+          <h2 id="cta-heading" class="cta-h2">Ready to run at full speed?</h2>
+          <p class="cta-sub">Join developers shipping faster with parallel AI agents.</p>
+          <a href="#" class="btn btn-primary btn-lg">Get started for free</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" aria-label="Overclock home">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M10.5 2L4 10H9L7.5 16L14 8H9L10.5 2Z" fill="var(--accent)" stroke="var(--accent)" stroke-width="1" stroke-linejoin="round"/>
+          </svg>
+          <span>Overclock</span>
+        </a>
+        <p class="footer-tagline">The multi-agent coding cockpit for serious developers.</p>
+      </div>
+
+      <nav class="footer-cols" aria-label="Footer navigation">
+        <div class="footer-col">
+          <h3 class="footer-col-title">Product</h3>
+          <ul role="list">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#models">Models</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Resources</h3>
+          <ul role="list">
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Discord</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Company</h3>
+          <ul role="list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Overclock. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

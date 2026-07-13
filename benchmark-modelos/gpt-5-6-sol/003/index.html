@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080910" />
+    <title>Gravidade — Playground de partículas</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f7f7fb;
+        --muted: rgba(247, 247, 251, 0.56);
+        --line: rgba(255, 255, 255, 0.12);
+        --panel: rgba(13, 14, 24, 0.7);
+        --accent: #d8ff3e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        background:
+          radial-gradient(circle at 18% 14%, rgba(94, 70, 255, 0.17), transparent 34%),
+          radial-gradient(circle at 82% 72%, rgba(0, 207, 255, 0.1), transparent 33%),
+          #080910;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        user-select: none;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+        background-size: 44px 44px;
+        content: "";
+        pointer-events: none;
+        -webkit-mask-image: linear-gradient(to bottom, black, transparent 82%);
+        mask-image: linear-gradient(to bottom, black, transparent 82%);
+      }
+
+      main {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        isolation: isolate;
+      }
+
+      canvas {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        cursor: crosshair;
+        outline: none;
+        touch-action: none;
+      }
+
+      canvas:focus-visible {
+        box-shadow: inset 0 0 0 2px var(--accent);
+      }
+
+      .topbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        padding: clamp(20px, 3.2vw, 44px);
+        pointer-events: none;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+      }
+
+      .brand-mark {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.62);
+        border-radius: 50%;
+      }
+
+      .brand-mark::after {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 12px rgba(216, 255, 62, 0.75);
+        content: "";
+      }
+
+      .brand-copy {
+        display: grid;
+        gap: 2px;
+      }
+
+      .brand-title {
+        margin: 0;
+        font-size: 11px;
+        font-weight: 760;
+        letter-spacing: 0.2em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .brand-subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        pointer-events: auto;
+      }
+
+      .stat {
+        display: flex;
+        align-items: center;
+        height: 42px;
+        gap: 8px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--panel);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        color: var(--muted);
+        font-size: 10px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      .stat strong {
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 760;
+      }
+
+      .live-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #63e6a6;
+        box-shadow: 0 0 9px rgba(99, 230, 166, 0.72);
+      }
+
+      .drop-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 42px;
+        gap: 11px;
+        overflow: hidden;
+        padding: 0 18px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 12px 34px rgba(216, 255, 62, 0.12);
+        color: #111308;
+        cursor: pointer;
+        font: inherit;
+        font-size: 10px;
+        font-weight: 850;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+      }
+
+      .drop-button::before {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(110deg, transparent 28%, rgba(255, 255, 255, 0.62), transparent 68%);
+        content: "";
+        transform: translateX(-130%);
+      }
+
+      .drop-button:hover {
+        box-shadow: 0 16px 42px rgba(216, 255, 62, 0.22);
+        filter: brightness(1.04);
+        transform: translateY(-2px);
+      }
+
+      .drop-button:hover::before {
+        transform: translateX(130%);
+        transition: transform 620ms ease;
+      }
+
+      .drop-button:active,
+      .drop-button.is-dropping {
+        transform: translateY(0) scale(0.96);
+      }
+
+      .drop-button:focus-visible {
+        outline: 3px solid rgba(216, 255, 62, 0.35);
+        outline-offset: 4px;
+      }
+
+      .plus {
+        position: relative;
+        width: 12px;
+        height: 12px;
+      }
+
+      .plus::before,
+      .plus::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 1px;
+        background: currentColor;
+        content: "";
+        transform: translate(-50%, -50%);
+      }
+
+      .plus::before {
+        width: 12px;
+        height: 2px;
+      }
+
+      .plus::after {
+        width: 2px;
+        height: 12px;
+      }
+
+      .instructions {
+        position: absolute;
+        bottom: clamp(18px, 3.2vw, 40px);
+        left: 50%;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 11px 15px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(10, 11, 19, 0.58);
+        box-shadow: 0 14px 42px rgba(0, 0, 0, 0.18);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        color: var(--muted);
+        font-size: 9px;
+        font-weight: 640;
+        letter-spacing: 0.09em;
+        line-height: 1;
+        pointer-events: none;
+        text-transform: uppercase;
+        transform: translateX(-50%);
+        white-space: nowrap;
+      }
+
+      .instruction {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .instruction strong {
+        color: rgba(255, 255, 255, 0.94);
+        font-weight: 760;
+      }
+
+      .instruction-icon {
+        position: relative;
+        width: 14px;
+        height: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 50%;
+      }
+
+      .instruction-icon.hold::after {
+        position: absolute;
+        inset: 3px;
+        border-radius: 50%;
+        background: #72dbff;
+        content: "";
+        opacity: 0.86;
+      }
+
+      .instruction-icon.click::before,
+      .instruction-icon.click::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #ff6f91;
+        content: "";
+        transform: translate(-50%, -50%);
+      }
+
+      .instruction-icon.click::before {
+        width: 8px;
+        height: 1px;
+      }
+
+      .instruction-icon.click::after {
+        width: 1px;
+        height: 8px;
+      }
+
+      .divider {
+        width: 1px;
+        height: 14px;
+        background: var(--line);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        clip-path: inset(50%);
+      }
+
+      @media (max-width: 680px) {
+        .topbar {
+          align-items: center;
+        }
+
+        .brand-subtitle,
+        .stat .fps-label {
+          display: none;
+        }
+
+        .controls {
+          gap: 7px;
+        }
+
+        .stat {
+          height: 38px;
+          padding: 0 11px;
+        }
+
+        .drop-button {
+          width: 42px;
+          height: 42px;
+          padding: 0;
+        }
+
+        .drop-button .button-label {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          clip-path: inset(50%);
+        }
+
+        .instructions {
+          gap: 12px;
+          padding: 10px 13px;
+          letter-spacing: 0.06em;
+        }
+
+        .instructions .optional-copy {
+          display: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .drop-button,
+        .drop-button::before {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <canvas
+        id="world"
+        tabindex="0"
+        aria-label="Simulação interativa de bolinhas. Clique para repelir ou mantenha pressionado para atrair."
+      ></canvas>
+
+      <header class="topbar">
+        <div class="brand" aria-label="Gravidade Playground">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div class="brand-copy">
+            <p class="brand-title">Gravidade</p>
+            <p class="brand-subtitle">Playground de partículas</p>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="stat" aria-live="polite">
+            <span class="live-dot" aria-hidden="true"></span>
+            <strong id="ball-count">0</strong>
+            <span>bolinhas</span>
+            <span class="fps-label">· <strong id="fps">60</strong> fps</span>
+          </div>
+          <button class="drop-button" id="drop-button" type="button" aria-label="Soltar 50 bolinhas novas">
+            <span class="plus" aria-hidden="true"></span>
+            <span class="button-label">Soltar +50</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="instructions" aria-hidden="true">
+        <span class="instruction">
+          <span class="instruction-icon hold"></span>
+          <strong>Segure</strong>
+          <span class="optional-copy">para atrair</span>
+        </span>
+        <span class="divider"></span>
+        <span class="instruction">
+          <span class="instruction-icon click"></span>
+          <strong>Clique</strong>
+          <span class="optional-copy">para explodir</span>
+        </span>
+      </div>
+
+      <p class="sr-only" id="interaction-help">
+        Também é possível focar a área e pressionar espaço ou enter para criar uma explosão no centro.
+      </p>
+    </main>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const canvas = document.querySelector("#world");
+        const context = canvas.getContext("2d", { alpha: true, desynchronized: true });
+        const dropButton = document.querySelector("#drop-button");
+        const countElement = document.querySelector("#ball-count");
+        const fpsElement = document.querySelector("#fps");
+
+        const palette = [
+          ["#ff5f82", "#ffb0c1", "#9b2747"],
+          ["#ffb23f", "#ffe09c", "#a75e14"],
+          ["#55d9ff", "#bcf2ff", "#167ea7"],
+          ["#8871ff", "#c8bdff", "#4b35ad"],
+          ["#58e6a2", "#b9f8d7", "#1b9360"],
+          ["#ff7559", "#ffc0b2", "#ae3628"],
+          ["#e4f052", "#f8fbbb", "#8e9824"],
+          ["#f071e8", "#f8c0f4", "#9b2e95"],
+        ];
+
+        const balls = [];
+        const shockwaves = [];
+        const spriteCache = new Map();
+        const spatialGrid = new Map();
+
+        const settings = {
+          gravity: 1080,
+          airDrag: 0.9992,
+          wallBounce: 0.76,
+          ballBounce: 0.8,
+          floorFriction: 0.992,
+          cellSize: 38,
+          fixedStep: 1 / 120,
+          maxBalls: 650,
+          attractionRadius: 225,
+          explosionRadius: 280,
+        };
+
+        const pointer = {
+          x: 0,
+          y: 0,
+          downX: 0,
+          downY: 0,
+          isDown: false,
+          isInside: false,
+          downAt: 0,
+          moved: 0,
+        };
+
+        let width = 0;
+        let height = 0;
+        let pixelRatio = 1;
+        let lastTime = performance.now();
+        let accumulator = 0;
+        let fpsFrames = 0;
+        let fpsStartedAt = performance.now();
+        let ballId = 0;
+
+        const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+        const randomBetween = (min, max) => min + Math.random() * (max - min);
+
+        function createBallSprite(radius, colors) {
+          const key = `${radius}:${colors[0]}`;
+          if (spriteCache.has(key)) return spriteCache.get(key);
+
+          const scale = 2;
+          const padding = 5;
+          const displaySize = radius * 2 + padding * 2;
+          const sprite = document.createElement("canvas");
+          sprite.width = displaySize * scale;
+          sprite.height = displaySize * scale;
+
+          const spriteContext = sprite.getContext("2d");
+          spriteContext.scale(scale, scale);
+          const center = radius + padding;
+
+          const glow = spriteContext.createRadialGradient(center, center, radius * 0.55, center, center, radius + 4);
+          glow.addColorStop(0, "rgba(0, 0, 0, 0.18)");
+          glow.addColorStop(0.68, "rgba(0, 0, 0, 0.12)");
+          glow.addColorStop(1, "rgba(0, 0, 0, 0)");
+          spriteContext.fillStyle = glow;
+          spriteContext.beginPath();
+          spriteContext.arc(center + 1, center + 2, radius + 4, 0, Math.PI * 2);
+          spriteContext.fill();
+
+          const fill = spriteContext.createRadialGradient(
+            center - radius * 0.35,
+            center - radius * 0.42,
+            radius * 0.08,
+            center,
+            center,
+            radius * 1.05,
+          );
+          fill.addColorStop(0, colors[1]);
+          fill.addColorStop(0.3, colors[0]);
+          fill.addColorStop(1, colors[2]);
+          spriteContext.fillStyle = fill;
+          spriteContext.beginPath();
+          spriteContext.arc(center, center, radius, 0, Math.PI * 2);
+          spriteContext.fill();
+
+          spriteContext.strokeStyle = "rgba(255, 255, 255, 0.22)";
+          spriteContext.lineWidth = 0.75;
+          spriteContext.stroke();
+
+          spriteContext.fillStyle = "rgba(255, 255, 255, 0.68)";
+          spriteContext.beginPath();
+          spriteContext.arc(center - radius * 0.32, center - radius * 0.38, Math.max(1.1, radius * 0.12), 0, Math.PI * 2);
+          spriteContext.fill();
+
+          const cached = { image: sprite, displaySize, offset: radius + padding };
+          spriteCache.set(key, cached);
+          return cached;
+        }
+
+        function makeBall(x, y, radius, colorIndex) {
+          const colors = palette[colorIndex];
+          return {
+            id: ballId++,
+            x,
+            y,
+            previousX: x,
+            previousY: y,
+            vx: randomBetween(-58, 58),
+            vy: randomBetween(4, 42),
+            radius,
+            mass: radius * radius,
+            hasEnteredWorld: y - radius >= 0,
+            sprite: createBallSprite(radius, colors),
+          };
+        }
+
+        function spawnBalls(amount, initial = false) {
+          const total = Math.min(amount, settings.maxBalls);
+          if (total === 0) return;
+
+          const overflow = Math.max(0, balls.length + total - settings.maxBalls);
+          if (overflow > 0) balls.splice(0, overflow);
+
+          const sidePadding = Math.min(44, width * 0.08);
+          for (let index = 0; index < total; index += 1) {
+            const radius = Math.round(randomBetween(7, 15));
+            const x = randomBetween(sidePadding + radius, Math.max(sidePadding + radius, width - sidePadding - radius));
+            const y = initial
+              ? randomBetween(-height * 0.12, Math.max(radius, height * 0.62))
+              : -radius - randomBetween(8, Math.min(520, height * 0.72)) - index * 1.7;
+            balls.push(makeBall(x, y, radius, Math.floor(Math.random() * palette.length)));
+          }
+
+          updateCount();
+        }
+
+        function updateCount() {
+          countElement.textContent = String(balls.length);
+        }
+
+        function resizeCanvas() {
+          const rect = canvas.getBoundingClientRect();
+          width = Math.max(1, rect.width);
+          height = Math.max(1, rect.height);
+          pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.round(width * pixelRatio);
+          canvas.height = Math.round(height * pixelRatio);
+          context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+          for (const ball of balls) {
+            ball.x = clamp(ball.x, ball.radius, width - ball.radius);
+            ball.y = Math.min(ball.y, height - ball.radius);
+            ball.previousX = ball.x;
+            ball.previousY = ball.y;
+            if (ball.y - ball.radius >= 0) ball.hasEnteredWorld = true;
+          }
+
+          if (!pointer.isInside) {
+            pointer.x = width / 2;
+            pointer.y = height / 2;
+          }
+        }
+
+        function gridKey(column, row) {
+          return row * 100000 + column;
+        }
+
+        function rebuildSpatialGrid() {
+          spatialGrid.clear();
+          for (let index = 0; index < balls.length; index += 1) {
+            const ball = balls[index];
+            const column = Math.floor(ball.x / settings.cellSize);
+            const row = Math.floor(ball.y / settings.cellSize);
+            const key = gridKey(column, row);
+            let cell = spatialGrid.get(key);
+            if (!cell) {
+              cell = [];
+              spatialGrid.set(key, cell);
+            }
+            cell.push(index);
+          }
+        }
+
+        function resolvePair(first, second) {
+          let dx = second.x - first.x;
+          let dy = second.y - first.y;
+          const minimumDistance = first.radius + second.radius;
+          const distanceSquared = dx * dx + dy * dy;
+
+          if (distanceSquared >= minimumDistance * minimumDistance) return;
+
+          let distance = Math.sqrt(distanceSquared);
+          if (distance < 0.0001) {
+            const angle = ((first.id * 2.399963) % (Math.PI * 2));
+            dx = Math.cos(angle);
+            dy = Math.sin(angle);
+            distance = 1;
+          }
+
+          const normalX = dx / distance;
+          const normalY = dy / distance;
+          const inverseMassFirst = 1 / first.mass;
+          const inverseMassSecond = 1 / second.mass;
+          const inverseMassSum = inverseMassFirst + inverseMassSecond;
+          const overlap = minimumDistance - distance;
+          const correction = Math.max(overlap - 0.02, 0) * 0.84 / inverseMassSum;
+
+          first.x -= normalX * correction * inverseMassFirst;
+          first.y -= normalY * correction * inverseMassFirst;
+          second.x += normalX * correction * inverseMassSecond;
+          second.y += normalY * correction * inverseMassSecond;
+
+          const relativeX = second.vx - first.vx;
+          const relativeY = second.vy - first.vy;
+          const velocityAlongNormal = relativeX * normalX + relativeY * normalY;
+          if (velocityAlongNormal >= 0) return;
+
+          const bounce = Math.abs(velocityAlongNormal) < 55 ? 0.16 : settings.ballBounce;
+          const impulseMagnitude = (-(1 + bounce) * velocityAlongNormal) / inverseMassSum;
+          const impulseX = impulseMagnitude * normalX;
+          const impulseY = impulseMagnitude * normalY;
+
+          first.vx -= impulseX * inverseMassFirst;
+          first.vy -= impulseY * inverseMassFirst;
+          second.vx += impulseX * inverseMassSecond;
+          second.vy += impulseY * inverseMassSecond;
+
+          const tangentXRaw = relativeX - velocityAlongNormal * normalX;
+          const tangentYRaw = relativeY - velocityAlongNormal * normalY;
+          const tangentLength = Math.hypot(tangentXRaw, tangentYRaw);
+          if (tangentLength > 0.0001) {
+            const tangentX = tangentXRaw / tangentLength;
+            const tangentY = tangentYRaw / tangentLength;
+            let frictionImpulse = -(relativeX * tangentX + relativeY * tangentY) / inverseMassSum;
+            const maximumFriction = impulseMagnitude * 0.1;
+            frictionImpulse = clamp(frictionImpulse, -maximumFriction, maximumFriction);
+            first.vx -= frictionImpulse * tangentX * inverseMassFirst;
+            first.vy -= frictionImpulse * tangentY * inverseMassFirst;
+            second.vx += frictionImpulse * tangentX * inverseMassSecond;
+            second.vy += frictionImpulse * tangentY * inverseMassSecond;
+          }
+        }
+
+        function solveBallCollisions() {
+          rebuildSpatialGrid();
+
+          for (let index = 0; index < balls.length; index += 1) {
+            const ball = balls[index];
+            const column = Math.floor(ball.x / settings.cellSize);
+            const row = Math.floor(ball.y / settings.cellSize);
+
+            for (let offsetY = -1; offsetY <= 1; offsetY += 1) {
+              for (let offsetX = -1; offsetX <= 1; offsetX += 1) {
+                const candidates = spatialGrid.get(gridKey(column + offsetX, row + offsetY));
+                if (!candidates) continue;
+
+                for (const otherIndex of candidates) {
+                  if (otherIndex <= index) continue;
+                  resolvePair(ball, balls[otherIndex]);
+                }
+              }
+            }
+          }
+        }
+
+        function resolveBounds(ball) {
+          if (ball.x - ball.radius < 0) {
+            ball.x = ball.radius;
+            if (ball.vx < 0) ball.vx *= -settings.wallBounce;
+          } else if (ball.x + ball.radius > width) {
+            ball.x = width - ball.radius;
+            if (ball.vx > 0) ball.vx *= -settings.wallBounce;
+          }
+
+          if (!ball.hasEnteredWorld && ball.y - ball.radius >= 0) {
+            ball.hasEnteredWorld = true;
+          }
+
+          if (ball.y + ball.radius > height) {
+            ball.y = height - ball.radius;
+            if (ball.vy > 0) {
+              ball.vy *= -settings.wallBounce;
+              if (Math.abs(ball.vy) < 24) ball.vy = 0;
+            }
+            ball.vx *= settings.floorFriction;
+          } else if (ball.hasEnteredWorld && ball.y - ball.radius < 0) {
+            ball.y = ball.radius;
+            if (ball.vy < 0) ball.vy *= -settings.wallBounce;
+          }
+        }
+
+        function applyPointerAttraction(ball, deltaTime) {
+          if (!pointer.isDown) return;
+
+          const dx = pointer.x - ball.x;
+          const dy = pointer.y - ball.y;
+          const distanceSquared = dx * dx + dy * dy;
+          const radiusSquared = settings.attractionRadius * settings.attractionRadius;
+          if (distanceSquared > radiusSquared || distanceSquared < 9) return;
+
+          const distance = Math.sqrt(distanceSquared);
+          const falloff = 1 - distance / settings.attractionRadius;
+          const acceleration = 1850 * falloff * falloff + 180 * falloff;
+          ball.vx += (dx / distance) * acceleration * deltaTime;
+          ball.vy += (dy / distance) * acceleration * deltaTime;
+        }
+
+        function simulate(deltaTime) {
+          const drag = Math.pow(settings.airDrag, deltaTime * 120);
+
+          for (const ball of balls) {
+            ball.previousX = ball.x;
+            ball.previousY = ball.y;
+            applyPointerAttraction(ball, deltaTime);
+            ball.vy += settings.gravity * deltaTime;
+            ball.vx *= drag;
+            ball.vy *= drag;
+
+            const speed = Math.hypot(ball.vx, ball.vy);
+            if (speed > 1850) {
+              const velocityScale = 1850 / speed;
+              ball.vx *= velocityScale;
+              ball.vy *= velocityScale;
+            }
+
+            ball.x += ball.vx * deltaTime;
+            ball.y += ball.vy * deltaTime;
+            resolveBounds(ball);
+          }
+
+          solveBallCollisions();
+
+          for (const ball of balls) resolveBounds(ball);
+        }
+
+        function explode(x, y) {
+          const radius = settings.explosionRadius;
+
+          for (const ball of balls) {
+            let dx = ball.x - x;
+            let dy = ball.y - y;
+            let distance = Math.hypot(dx, dy);
+            if (distance >= radius) continue;
+
+            if (distance < 2) {
+              const angle = Math.random() * Math.PI * 2;
+              dx = Math.cos(angle) * 2;
+              dy = Math.sin(angle) * 2;
+              distance = 2;
+            }
+
+            const force = 230 + 820 * Math.pow(1 - distance / radius, 0.55);
+            ball.vx += (dx / distance) * force;
+            ball.vy += (dy / distance) * force - 45;
+          }
+
+          shockwaves.push({ x, y, radius: 8, life: 0, duration: 0.58 });
+        }
+
+        function updateShockwaves(deltaTime) {
+          for (let index = shockwaves.length - 1; index >= 0; index -= 1) {
+            const wave = shockwaves[index];
+            wave.life += deltaTime;
+            const progress = wave.life / wave.duration;
+            wave.radius = 8 + settings.explosionRadius * (1 - Math.pow(1 - Math.min(progress, 1), 3));
+            if (progress >= 1) shockwaves.splice(index, 1);
+          }
+        }
+
+        function drawShockwaves() {
+          context.save();
+          context.globalCompositeOperation = "screen";
+          for (const wave of shockwaves) {
+            const progress = wave.life / wave.duration;
+            const alpha = (1 - progress) * 0.72;
+            context.strokeStyle = `rgba(255, 115, 148, ${alpha})`;
+            context.lineWidth = 1.4 + (1 - progress) * 2.4;
+            context.beginPath();
+            context.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
+            context.stroke();
+
+            context.strokeStyle = `rgba(255, 220, 130, ${alpha * 0.34})`;
+            context.lineWidth = 8 * (1 - progress);
+            context.beginPath();
+            context.arc(wave.x, wave.y, wave.radius * 0.8, 0, Math.PI * 2);
+            context.stroke();
+          }
+          context.restore();
+        }
+
+        function drawPointerField(timestamp) {
+          if (!pointer.isInside && !pointer.isDown) return;
+
+          context.save();
+          context.translate(pointer.x, pointer.y);
+
+          if (pointer.isDown) {
+            const elapsed = Math.min((timestamp - pointer.downAt) / 600, 1);
+            const pulse = Math.sin(timestamp * 0.008) * 4;
+            const fieldRadius = 28 + elapsed * 34 + pulse;
+            const field = context.createRadialGradient(0, 0, 2, 0, 0, fieldRadius);
+            field.addColorStop(0, "rgba(89, 218, 255, 0.2)");
+            field.addColorStop(0.55, "rgba(89, 218, 255, 0.06)");
+            field.addColorStop(1, "rgba(89, 218, 255, 0)");
+            context.fillStyle = field;
+            context.beginPath();
+            context.arc(0, 0, fieldRadius, 0, Math.PI * 2);
+            context.fill();
+
+            context.strokeStyle = `rgba(113, 225, 255, ${0.3 + elapsed * 0.34})`;
+            context.lineWidth = 1.2;
+            context.setLineDash([3, 6]);
+            context.lineDashOffset = -timestamp * 0.015;
+            context.beginPath();
+            context.arc(0, 0, Math.min(settings.attractionRadius, 54 + elapsed * 54), 0, Math.PI * 2);
+            context.stroke();
+          } else {
+            context.fillStyle = "rgba(255, 255, 255, 0.75)";
+            context.beginPath();
+            context.arc(0, 0, 1.8, 0, Math.PI * 2);
+            context.fill();
+            context.strokeStyle = "rgba(255, 255, 255, 0.22)";
+            context.lineWidth = 1;
+            context.beginPath();
+            context.arc(0, 0, 8, 0, Math.PI * 2);
+            context.stroke();
+          }
+
+          context.restore();
+        }
+
+        function render(interpolation, timestamp) {
+          context.clearRect(0, 0, width, height);
+
+          for (const ball of balls) {
+            const drawX = ball.previousX + (ball.x - ball.previousX) * interpolation;
+            const drawY = ball.previousY + (ball.y - ball.previousY) * interpolation;
+            const sprite = ball.sprite;
+            context.drawImage(
+              sprite.image,
+              drawX - sprite.offset,
+              drawY - sprite.offset,
+              sprite.displaySize,
+              sprite.displaySize,
+            );
+          }
+
+          drawShockwaves();
+          drawPointerField(timestamp);
+        }
+
+        function updateFps(timestamp) {
+          fpsFrames += 1;
+          const elapsed = timestamp - fpsStartedAt;
+          if (elapsed < 500) return;
+
+          const fps = Math.round((fpsFrames * 1000) / elapsed);
+          fpsElement.textContent = String(clamp(fps, 0, 99));
+          fpsFrames = 0;
+          fpsStartedAt = timestamp;
+        }
+
+        function animate(timestamp) {
+          const frameTime = Math.min((timestamp - lastTime) / 1000, 0.04);
+          lastTime = timestamp;
+          accumulator += frameTime;
+
+          let steps = 0;
+          while (accumulator >= settings.fixedStep && steps < 5) {
+            simulate(settings.fixedStep);
+            accumulator -= settings.fixedStep;
+            steps += 1;
+          }
+          if (steps === 5) accumulator = 0;
+
+          updateShockwaves(frameTime);
+          render(accumulator / settings.fixedStep, timestamp);
+          updateFps(timestamp);
+          requestAnimationFrame(animate);
+        }
+
+        function updatePointerPosition(event) {
+          const rect = canvas.getBoundingClientRect();
+          const x = clamp(event.clientX - rect.left, 0, rect.width);
+          const y = clamp(event.clientY - rect.top, 0, rect.height);
+          if (pointer.isDown) {
+            pointer.moved = Math.max(pointer.moved, Math.hypot(x - pointer.downX, y - pointer.downY));
+          }
+          pointer.x = x;
+          pointer.y = y;
+        }
+
+        function isPointerInsideCanvas(event) {
+          const rect = canvas.getBoundingClientRect();
+          return (
+            event.clientX >= rect.left &&
+            event.clientX <= rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY <= rect.bottom
+          );
+        }
+
+        canvas.addEventListener("pointerenter", (event) => {
+          pointer.isInside = true;
+          updatePointerPosition(event);
+        });
+
+        canvas.addEventListener("pointermove", (event) => {
+          pointer.isInside = isPointerInsideCanvas(event) || pointer.isDown;
+          updatePointerPosition(event);
+        });
+
+        canvas.addEventListener("pointerleave", () => {
+          if (!pointer.isDown) pointer.isInside = false;
+        });
+
+        canvas.addEventListener("pointerdown", (event) => {
+          if (event.button !== 0 && event.pointerType === "mouse") return;
+          event.preventDefault();
+          canvas.setPointerCapture(event.pointerId);
+          updatePointerPosition(event);
+          pointer.isInside = true;
+          pointer.isDown = true;
+          pointer.downX = pointer.x;
+          pointer.downY = pointer.y;
+          pointer.downAt = performance.now();
+          pointer.moved = 0;
+        });
+
+        canvas.addEventListener("pointerup", (event) => {
+          if (!pointer.isDown) return;
+          updatePointerPosition(event);
+          const heldFor = performance.now() - pointer.downAt;
+          const wasClick = heldFor < 240 && pointer.moved < 10;
+          pointer.isDown = false;
+          pointer.isInside = isPointerInsideCanvas(event);
+          if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+          if (wasClick) explode(pointer.x, pointer.y);
+        });
+
+        canvas.addEventListener("pointercancel", (event) => {
+          pointer.isDown = false;
+          pointer.isInside = false;
+          if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+        });
+
+        canvas.addEventListener("contextmenu", (event) => event.preventDefault());
+
+        canvas.addEventListener("keydown", (event) => {
+          if (event.key !== " " && event.key !== "Enter") return;
+          event.preventDefault();
+          pointer.x = width / 2;
+          pointer.y = height / 2;
+          pointer.isInside = true;
+          explode(pointer.x, pointer.y);
+        });
+
+        dropButton.addEventListener("click", () => {
+          spawnBalls(50);
+          dropButton.classList.remove("is-dropping");
+          void dropButton.offsetWidth;
+          dropButton.classList.add("is-dropping");
+          window.setTimeout(() => dropButton.classList.remove("is-dropping"), 180);
+        });
+
+        window.addEventListener("resize", resizeCanvas, { passive: true });
+        document.addEventListener("visibilitychange", () => {
+          lastTime = performance.now();
+          accumulator = 0;
+        });
+
+        resizeCanvas();
+        const initialAmount = clamp(Math.round((width * height) / 15000), 42, 88);
+        spawnBalls(initialAmount, true);
+        requestAnimationFrame(animate);
+      })();
+    </script>
+  </body>
+</html>

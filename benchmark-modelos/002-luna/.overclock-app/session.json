@@ -1,0 +1,52 @@
+{
+  "id": "latest",
+  "workspacePath": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/002-luna",
+  "savedAt": 1783620450103,
+  "panes": [
+    {
+      "id": "pane-924",
+      "workspacePath": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/002-luna",
+      "savedAt": 1783620450103,
+      "agent": "codex",
+      "cwd": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/002-luna",
+      "cols": 80,
+      "rows": 24,
+      "args": [
+        "--model",
+        "gpt-5.6-luna",
+        "--sandbox",
+        "workspace-write",
+        "--ask-for-approval",
+        "on-request",
+        "-c",
+        "mcp_servers.overclock.url=\"http://127.0.0.1:56265/mcp/codex?model=gpt-5.6-luna&providerId=codex-cli&callerPaneId=pane-924\"",
+        "-c",
+        "mcp_servers.overclock.default_tools_approval_mode=\"approve\""
+      ],
+      "missionId": "sKC3G9pY0py2",
+      "model": "gpt-5.6-luna",
+      "providerId": "codex-cli",
+      "permissionMode": "auto",
+      "env": {
+        "OVERCLOCK_PANE_ID": "pane-924",
+        "OVERCLOCK_MISSION_ID": "sKC3G9pY0py2"
+      },
+      "lastLines": [
+        "",
+        "╭──────────────────────────────────────────────────────╮",
+        "│ >_ OpenAI Codex (v0.144.0)                           │",
+        "│                                                      │",
+        "│ model:     gpt-5.6-luna ultra   /model to change     │",
+        "│ directory: ~/vibe-coding/benchmark/sonnet-5/002-luna │",
+        "╰──────────────────────────────────────────────────────╯",
+        "",
+        "  Tip: Run codex app to open Codex Desktop (it installs on macOS if needed).",
+        "",
+        "",
+        "› Improve documentation in @filename",
+        "",
+        "  gpt-5.6-luna ultra · ~/vibe-coding/benchmark/sonnet-5/002-luna"
+      ]
+    }
+  ]
+}

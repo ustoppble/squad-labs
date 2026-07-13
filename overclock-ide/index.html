@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Overclock — The multi-agent IDE for parallel AI orchestration. Spawn squads, delegate tasks, ship faster." />
+  <title>Overclock — Multi-Agent IDE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Skip Link -->
+  <a class="skip-link" href="#hero">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════════════════
+       1. STICKY NAV
+  ════════════════════════════════════════════════ -->
+  <header id="nav" role="banner">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="#hero" class="nav-logo" aria-label="Overclock home">
+        <svg class="logo-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.5 2L4 11h6l-1.5 7L16 9h-6l1.5-7z" fill="url(#bolt-gradient)" stroke="url(#bolt-gradient)" stroke-width="0.5" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="bolt-gradient" x1="4" y1="2" x2="16" y2="18" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#a78bfa"/>
+              <stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-wordmark">Overclock</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+
+      <a href="#pricing" class="btn btn-primary btn-sm nav-cta" aria-label="Get early access to Overclock">Get Early Access</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
+      <ul role="list">
+        <li><a href="#features" class="mobile-link">Features</a></li>
+        <li><a href="#how-it-works" class="mobile-link">How It Works</a></li>
+        <li><a href="#pricing" class="mobile-link">Pricing</a></li>
+        <li><a href="#pricing" class="btn btn-primary mobile-cta">Get Early Access</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════════
+         2. HERO
+    ════════════════════════════════════════════════ -->
+    <section id="hero" aria-labelledby="hero-heading">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-overlay"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div class="eyebrow-badge" role="note">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Multi-Agent IDE — Now in Early Access
+        </div>
+
+        <h1 id="hero-heading">
+          Orchestrate a squad of AI agents.<br>
+          <span class="gradient-text">Ship faster.</span>
+        </h1>
+
+        <p class="hero-subheadline">
+          Stop chatting with one AI. Command many. Overclock is the IDE built for parallel agent orchestration — Pilot decomposes, workers execute, you ship.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-primary btn-lg" aria-label="Get early access to Overclock — it's free">
+            Get Early Access →
+          </a>
+          <a href="#how-it-works" class="btn btn-ghost btn-lg" aria-label="Watch Overclock demo video">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/>
+            </svg>
+            Watch demo
+          </a>
+        </div>
+
+        <p class="social-proof-micro" role="note">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 1l1.236 2.505L10 3.902l-2 1.949.472 2.752L6 7.25 3.528 8.603 4 5.851 2 3.902l2.764-.397L6 1z" fill="#a78bfa"/>
+          </svg>
+          Trusted by <strong>500+ engineers</strong> in beta
+        </p>
+
+        <!-- Hero visual: animated multi-pane agent grid -->
+        <div class="hero-grid-visual" aria-label="Animated preview of Overclock agent panes" role="img">
+          <div class="hero-pane-grid">
+
+            <div class="agent-pane pane-pilot">
+              <div class="pane-header">
+                <span class="pane-status-dot active" aria-hidden="true"></span>
+                <span class="pane-name">Pilot</span>
+                <span class="pane-badge">Orchestrating</span>
+              </div>
+              <div class="pane-body">
+                <pre><code><span class="c-dim">$</span> <span class="c-purple">overclock</span> run mission
+<span class="c-dim">→ Decomposing task...</span>
+<span class="c-green">✓</span> <span class="c-white">Subtask 1 → Builder</span>
+<span class="c-green">✓</span> <span class="c-white">Subtask 2 → Scout</span>
+<span class="c-yellow">⟳</span> <span class="c-white">Subtask 3 → Reviewer</span>
+<span class="c-dim typing-line">▌</span></code></pre>
+              </div>
+            </div>
+
+            <div class="agent-pane pane-builder">
+              <div class="pane-header">
+                <span class="pane-status-dot active" aria-hidden="true"></span>
+                <span class="pane-name">Builder</span>
+                <span class="pane-badge">Coding</span>
+              </div>
+              <div class="pane-body">
+                <pre><code><span class="c-blue">function</span> <span class="c-green">processQueue</span>() {
+  <span class="c-blue">const</span> tasks = <span class="c-yellow">await</span>
+    queue.<span class="c-green">drain</span>();
+  <span class="c-blue">return</span> tasks.<span class="c-green">map</span>(
+    t => dispatch(t)
+  );
+<span class="c-dim typing-line">}▌</span></code></pre>
+              </div>
+            </div>
+
+            <div class="agent-pane pane-scout">
+              <div class="pane-header">
+                <span class="pane-status-dot thinking" aria-hidden="true"></span>
+                <span class="pane-name">Scout</span>
+                <span class="pane-badge thinking">Thinking…</span>
+              </div>
+              <div class="pane-body">
+                <pre><code><span class="c-dim">Searching codebase...</span>
+<span class="c-green">✓</span> <span class="c-white">Found 3 references</span>
+<span class="c-dim">→ src/queue.ts:42</span>
+<span class="c-dim">→ src/worker.ts:18</span>
+<span class="c-dim">→ tests/queue.spec</span>
+<span class="c-dim typing-line">▌</span></code></pre>
+              </div>
+            </div>
+
+            <div class="agent-pane pane-reviewer">
+              <div class="pane-header">
+                <span class="pane-status-dot active" aria-hidden="true"></span>
+                <span class="pane-name">Reviewer</span>
+                <span class="pane-badge">Reviewing</span>
+              </div>
+              <div class="pane-body">
+                <pre><code><span class="c-dim">Reviewing diff...</span>
+<span class="c-green">✓</span> <span class="c-white">No security issues</span>
+<span class="c-green">✓</span> <span class="c-white">Types are correct</span>
+<span class="c-yellow">⚠</span> <span class="c-white">Add error boundary</span>
+<span class="c-dim">Suggestion ready</span>
+<span class="c-dim typing-line">▌</span></code></pre>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         3. SOCIAL PROOF / LOGOS STRIP
+    ════════════════════════════════════════════════ -->
+    <section id="social-proof" aria-labelledby="social-proof-heading">
+      <div class="container">
+        <p id="social-proof-heading" class="logos-label">Works with your favorite models</p>
+        <div class="logos-strip" role="list" aria-label="Supported AI model providers">
+
+          <div class="logo-badge" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9S4.86 16.5 9 16.5 16.5 13.14 16.5 9 13.14 1.5 9 1.5zm0 2.1a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1zM6.75 7.5h4.5c.414 0 .75.336.75.75v5.25H10.5V9H7.5v4.5H6v-5.25c0-.414.336-.75.75-.75z" fill="#d4a574"/>
+            </svg>
+            <span>Claude</span>
+          </div>
+
+          <div class="logo-badge" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="14" height="14" rx="3" stroke="#74aa9c" stroke-width="1.5" fill="none"/>
+              <path d="M5.5 9h7M9 5.5v7" stroke="#74aa9c" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>GPT-4o</span>
+          </div>
+
+          <div class="logo-badge" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2z" stroke="#4285f4" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+              <circle cx="9" cy="9" r="2.5" fill="#4285f4"/>
+            </svg>
+            <span>Gemini</span>
+          </div>
+
+          <div class="logo-badge" role="listitem">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 13L6 5h2l1.5 4.5L11 5h2l3 8h-2l-1.5-4.5L11 13H9.5L8 8.5 6.5 13H3z" fill="#9ca3af"/>
+            </svg>
+            <span>Codex</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         4. FEATURES GRID
+    ════════════════════════════════════════════════ -->
+    <section id="features" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 id="features-heading">Everything you need to orchestrate AI</h2>
+          <p class="section-subtitle">Not a copilot. An IDE built for commanding many agents at once.</p>
+        </div>
+
+        <div class="features-grid" role="list">
+
+          <!-- Feature 1: Multi-Pane Agent Grid -->
+          <article class="feature-card reveal" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="12" y="2" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="2" y="12" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="12" y="12" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>Multi-Pane Agent Grid</h3>
+            <p>Spawn multiple agents in visible side-by-side panes. Watch them work in parallel, not in sequence.</p>
+          </article>
+
+          <!-- Feature 2: Pilot + Squad Orchestration -->
+          <article class="feature-card reveal" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="11" y1="6" x2="11" y2="10" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="11" y1="10" x2="5" y2="14" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="11" y1="10" x2="17" y2="14" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="5" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="11" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="17" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="11" y1="10" x2="11" y2="14" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>Pilot + Squad Orchestration</h3>
+            <p>A lead Pilot agent decomposes your task and delegates to specialized workers: Builders, Scouts, Reviewers.</p>
+          </article>
+
+          <!-- Feature 3: Skills & Marketplace -->
+          <article class="feature-card reveal" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 2h-4a1 1 0 00-1 1v1H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-3V3a1 1 0 00-1-1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M9 11h4M9 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M9 4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Skills &amp; Marketplace</h3>
+            <p>Install reusable agents and skills from the Overclock marketplace. Bind specific skills to specific agents.</p>
+          </article>
+
+          <!-- Feature 4: Parallel Delegation -->
+          <article class="feature-card reveal" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L5 11.5h5.5L9 20l8-10h-5.5L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+            <h3>Parallel Delegation</h3>
+            <p>Independent subtasks run concurrently across panes. Real throughput, not sequential chat.</p>
+          </article>
+
+          <!-- Feature 5: Multi-Model Flexibility -->
+          <article class="feature-card reveal" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="6" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M9 2v4M13 2v4M9 16v4M13 16v4M2 9h4M2 13h4M16 9h4M16 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="9" y="9" width="4" height="4" rx="0.5" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Multi-Model Flexibility</h3>
+            <p>Use the right model per task. Fast model for lookups, deep model for reasoning. Claude, Gemini, Codex, Antigravity.</p>
+          </article>
+
+          <!-- Feature 6: Missions & Handoffs -->
+          <article class="feature-card reveal" role="listitem">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 5h14M4 9h14M4 13h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="16" cy="16" r="4" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M14 16l1.5 1.5L18 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Missions &amp; Handoffs</h3>
+            <p>Track multi-step work with live task lists, structured agent handoffs, and evidence trails.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         5. HOW IT WORKS
+    ════════════════════════════════════════════════ -->
+    <section id="how-it-works" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 id="how-heading">From task to shipped, in parallel</h2>
+        </div>
+
+        <div class="steps-flow" role="list">
+
+          <article class="step-card reveal" role="listitem">
+            <div class="step-number" aria-label="Step 1">1</div>
+            <div class="step-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M14 14v4M14 18l-5 4M14 18l5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Pilot Decomposes</h3>
+            <p>Describe your goal. The Pilot agent breaks it into subtasks and routes each to the right specialist.</p>
+          </article>
+
+          <div class="step-connector" aria-hidden="true">
+            <svg class="connector-svg" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <line x1="0" y1="12" x2="72" y2="12" stroke="url(#conn-grad)" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <path d="M70 7l6 5-6 5" stroke="url(#conn-grad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="conn-grad" x1="0" y1="0" x2="80" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#a78bfa"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <article class="step-card reveal" role="listitem">
+            <div class="step-number" aria-label="Step 2">2</div>
+            <div class="step-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="6" width="11" height="16" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="15" y="6" width="11" height="16" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M5 11h5M5 14h5M18 11h5M18 14h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Agents Work in Parallel</h3>
+            <p>Builder, Scout, Reviewer panes light up simultaneously. Each agent runs its subtask with full context and the right model.</p>
+          </article>
+
+          <div class="step-connector" aria-hidden="true">
+            <svg class="connector-svg" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <line x1="0" y1="12" x2="72" y2="12" stroke="url(#conn-grad-2)" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <path d="M70 7l6 5-6 5" stroke="url(#conn-grad-2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="conn-grad-2" x1="0" y1="0" x2="80" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#a78bfa"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <article class="step-card reveal" role="listitem">
+            <div class="step-number" aria-label="Step 3">3</div>
+            <div class="step-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 14l5 5L22 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>Synthesize &amp; Ship</h3>
+            <p>Results flow back to Pilot. Evidence collected, handoffs resolved, PR ready. You review and ship.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         6. GRID VISUAL
+    ════════════════════════════════════════════════ -->
+    <section id="grid-visual" aria-labelledby="grid-visual-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 id="grid-visual-heading">See your agents work</h2>
+          <p class="section-subtitle">Real-time visibility into every agent's activity</p>
+        </div>
+
+        <div class="grid-visual-wrap reveal" aria-label="Detailed preview of Overclock's multi-pane agent grid interface" role="img">
+          <div class="grid-visual-glow" aria-hidden="true"></div>
+          <div class="big-pane-grid">
+
+            <div class="big-pane pane-pilot">
+              <div class="pane-header">
+                <div class="pane-header-left">
+                  <span class="pane-status-dot active" aria-hidden="true"></span>
+                  <span class="pane-name">Pilot</span>
+                </div>
+                <span class="pane-status-text active">Active</span>
+              </div>
+              <div class="pane-body">
+                <pre><code><span class="c-dim">Mission: Refactor queue system</span>
+<span class="c-dim">────────────────────────────</span>
+<span class="c-purple">▸ Analyzing codebase structure</span>
+<span class="c-green">✓</span> Found 12 files to update
+<span class="c-green">✓</span> Subtasks created: 3
+<span class="c-white">→ Delegating to squad...</span>
+<span class="c-dim">  [1] refactor/core → Builder</span>
+<span class="c-dim">  [2] search/deps   → Scout</span>
+<span class="c-dim">  [3] review/diff   → Reviewer</span>
+<span class="c-dim typing-line">▌</span></code></pre>
+              </div>
+            </div>
+
+            <div class="big-pane pane-builder">
+              <div class="pane-header">
+                <div class="pane-header-left">
+                  <span class="pane-status-dot active" aria-hidden="true"></span>
+                  <span class="pane-name">Builder</span>
+                </div>
+                <span class="pane-status-text active">Active</span>
+              </div>
+              <div class="pane-body">
+                <pre><code><span class="c-dim">// src/queue/processor.ts</span>
+<span class="c-blue">export class</span> <span class="c-green">QueueProcessor</span> {
+  <span class="c-blue">private</span> workers: Worker[];
+
+  <span class="c-blue">async</span> <span class="c-green">drain</span>() {
+    <span class="c-blue">const</span> batch = <span class="c-yellow">await</span>
+      <span class="c-white">this</span>.queue.<span class="c-green">take</span>(<span class="c-orange">50</span>);
+    <span class="c-blue">return</span> <span class="c-white">Promise</span>.<span class="c-green">all</span>(
+      batch.<span class="c-green">map</span>(j => <span class="c-white">this</span>.<span class="c-green">run</span>(j))
+    );
+<span class="c-dim typing-line">  }▌</span></code></pre>
+              </div>
+            </div>
+
+            <div class="big-pane pane-scout">
+              <div class="pane-header">
+                <div class="pane-header-left">
+                  <span class="pane-status-dot thinking" aria-hidden="true"></span>
+                  <span class="pane-name">Scout</span>
+                </div>
+                <span class="pane-status-text thinking">Thinking...</span>
+              </div>
+              <div class="pane-body">
+                <pre><code><span class="c-dim">Scanning for queue references</span>
+<span class="c-dim">────────────────────────────</span>
+<span class="c-green">✓</span> <span class="c-white">src/queue/index.ts</span>
+<span class="c-green">✓</span> <span class="c-white">src/workers/pool.ts</span>
+<span class="c-green">✓</span> <span class="c-white">src/api/jobs.ts</span>
+<span class="c-green">✓</span> <span class="c-white">tests/queue.spec.ts</span>
+<span class="c-yellow">⚠</span> <span class="c-white">Circular dep found</span>
+<span class="c-dim">  workers → queue → workers</span>
+<span class="c-dim typing-line">▌</span></code></pre>
+              </div>
+            </div>
+
+            <div class="big-pane pane-reviewer">
+              <div class="pane-header">
+                <div class="pane-header-left">
+                  <span class="pane-status-dot active" aria-hidden="true"></span>
+                  <span class="pane-name">Reviewer</span>
+                </div>
+                <span class="pane-status-text active">Active</span>
+              </div>
+              <div class="pane-body">
+                <pre><code><span class="c-dim">Review: queue/processor.ts</span>
+<span class="c-dim">────────────────────────────</span>
+<span class="c-green">✓</span> <span class="c-white">Types: all correct</span>
+<span class="c-green">✓</span> <span class="c-white">No SQL injection risk</span>
+<span class="c-green">✓</span> <span class="c-white">Error handling: good</span>
+<span class="c-yellow">⚠</span> <span class="c-white">Missing retry logic</span>
+<span class="c-yellow">⚠</span> <span class="c-white">No rate limit guard</span>
+<span class="c-blue">→</span> <span class="c-white">2 suggestions queued</span>
+<span class="c-dim typing-line">▌</span></code></pre>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         7. PRICING / CTA BAND
+    ════════════════════════════════════════════════ -->
+    <section id="pricing" aria-labelledby="pricing-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 id="pricing-heading">Join the beta. Ship faster today.</h2>
+          <p class="section-subtitle">Early access is free while we're in beta. No credit card required.</p>
+        </div>
+
+        <div class="pricing-grid" role="list">
+
+          <article class="pricing-card pricing-free reveal" role="listitem" aria-label="Free Beta plan">
+            <div class="pricing-header">
+              <h3>Free Beta</h3>
+              <div class="pricing-amount">
+                <span class="price-value">$0</span>
+                <span class="price-period">/mo</span>
+              </div>
+              <p class="pricing-desc">Full access during our beta. Forever free until we say otherwise.</p>
+            </div>
+            <ul class="pricing-features" aria-label="Features included in Free Beta plan">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Unlimited agents
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                3 providers
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Community skills marketplace
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                5 concurrent panes
+              </li>
+            </ul>
+            <a href="#" class="btn btn-primary btn-full" aria-label="Get free early access to Overclock">Get Early Access — It's Free</a>
+          </article>
+
+          <article class="pricing-card pricing-pro reveal" role="listitem" aria-label="Pro plan — coming soon">
+            <div class="pricing-coming-soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="pricing-header">
+              <h3>Pro</h3>
+              <div class="pricing-amount">
+                <span class="price-value">$29</span>
+                <span class="price-period">/mo</span>
+              </div>
+              <p class="pricing-desc">Everything in Free, plus power features for serious teams.</p>
+            </div>
+            <ul class="pricing-features" aria-label="Features included in Pro plan">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Everything in Free
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Priority compute
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Private skill vault
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                20 concurrent panes
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3.5 3.5L13 4.5" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Team missions
+              </li>
+            </ul>
+            <button class="btn btn-ghost btn-full" disabled aria-label="Pro plan coming soon — not yet available">Notify Me When Available</button>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         8. FAQ
+    ════════════════════════════════════════════════ -->
+    <section id="faq" aria-labelledby="faq-heading">
+      <div class="container faq-container">
+        <div class="section-header reveal">
+          <h2 id="faq-heading">Frequently asked questions</h2>
+        </div>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button
+              class="faq-question"
+              aria-expanded="false"
+              aria-controls="faq-answer-1"
+              id="faq-btn-1"
+            >
+              <span>Is Overclock an extension or a standalone IDE?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 7L9 11.5 13.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-btn-1">
+              <p>Standalone. It runs as a desktop app or in your browser and connects to the AI providers you already use.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button
+              class="faq-question"
+              aria-expanded="false"
+              aria-controls="faq-answer-2"
+              id="faq-btn-2"
+            >
+              <span>Which AI models does it support?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 7L9 11.5 13.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-btn-2">
+              <p>Claude (Anthropic), GPT-4o (OpenAI), Gemini (Google), Codex, and Antigravity — with more providers on the roadmap.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button
+              class="faq-question"
+              aria-expanded="false"
+              aria-controls="faq-answer-3"
+              id="faq-btn-3"
+            >
+              <span>How is this different from Cursor or GitHub Copilot?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 7L9 11.5 13.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-btn-3">
+              <p>Those are single-agent copilots. Overclock is an orchestration layer — you run many agents simultaneously in parallel panes, with a Pilot coordinating them.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button
+              class="faq-question"
+              aria-expanded="false"
+              aria-controls="faq-answer-4"
+              id="faq-btn-4"
+            >
+              <span>Do I need my own API keys?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 7L9 11.5 13.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-btn-4">
+              <p>Yes. Overclock connects to your existing provider accounts. We never store your keys.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       9. FOOTER
+  ════════════════════════════════════════════════ -->
+  <footer id="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo footer-logo" aria-label="Overclock home">
+          <svg class="logo-icon" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.5 2L4 11h6l-1.5 7L16 9h-6l1.5-7z" fill="url(#bolt-footer)" stroke="url(#bolt-footer)" stroke-width="0.5" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="bolt-footer" x1="4" y1="2" x2="16" y2="18" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#a78bfa"/>
+                <stop offset="100%" stop-color="#6366f1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-wordmark">Overclock</span>
+        </a>
+        <p class="footer-tagline">Orchestrate. Delegate. Ship.</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="https://overclock.sh" aria-label="Overclock documentation">Docs</a>
+        <a href="https://overclock.sh" aria-label="Overclock GitHub repository">GitHub</a>
+      </nav>
+
+      <p class="footer-copy">© 2026 Overclock. Built by engineers, for engineers.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

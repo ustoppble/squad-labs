@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kibu — Focus on Excellent Service. We'll Handle the Rest.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:       #FFFFFF;
+  --bg-alt:   #EEF1F5;
+  --surface:  #FFFFFF;
+  --ink:      #192837;
+  --ink-soft: #5E6E7D;
+  --pine:     #0A6E5E;
+  --pine-lt:  #0D9980;
+  --mist:     #E5F3F0;
+  --sun:      #F2B234;
+  --sun-d:    #C9891A;
+  --border:   #D2D8DF;
+  --nav-bg:   #192837;
+  --nav-txt:  #FFFFFF;
+  --on-dark:  rgba(255,255,255,.65);
+  --green-hi: #dcfce7;
+  --green-tx: #166534;
+  --amber-hi: #fef3c7;
+  --amber-tx: #92400e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:       #0D1B24;
+    --bg-alt:   #131F29;
+    --surface:  #152130;
+    --ink:      #E2EAF0;
+    --ink-soft: #8897A5;
+    --pine:     #18B896;
+    --pine-lt:  #28D4AC;
+    --mist:     #091F1B;
+    --sun:      #F2B234;
+    --sun-d:    #E5A820;
+    --border:   #1E2E3C;
+    --nav-bg:   #0A1520;
+    --nav-txt:  #E2EAF0;
+    --on-dark:  rgba(255,255,255,.55);
+    --green-hi: #052e16;
+    --green-tx: #86efac;
+    --amber-hi: #451a03;
+    --amber-tx: #fcd34d;
+  }
+}
+
+:root[data-theme="light"] {
+  --bg:#FFFFFF;--bg-alt:#EEF1F5;--surface:#FFFFFF;--ink:#192837;--ink-soft:#5E6E7D;
+  --pine:#0A6E5E;--pine-lt:#0D9980;--mist:#E5F3F0;--sun:#F2B234;--sun-d:#C9891A;
+  --border:#D2D8DF;--nav-bg:#192837;--nav-txt:#FFFFFF;--on-dark:rgba(255,255,255,.65);
+  --green-hi:#dcfce7;--green-tx:#166534;--amber-hi:#fef3c7;--amber-tx:#92400e;
+}
+:root[data-theme="dark"] {
+  --bg:#0D1B24;--bg-alt:#131F29;--surface:#152130;--ink:#E2EAF0;--ink-soft:#8897A5;
+  --pine:#18B896;--pine-lt:#28D4AC;--mist:#091F1B;--sun:#F2B234;--sun-d:#E5A820;
+  --border:#1E2E3C;--nav-bg:#0A1520;--nav-txt:#E2EAF0;--on-dark:rgba(255,255,255,.55);
+  --green-hi:#052e16;--green-tx:#86efac;--amber-hi:#451a03;--amber-tx:#fcd34d;
+}
+
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Sora',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;outline:none;font-family:inherit;background:none}
+img{max-width:100%;display:block}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);padding:0 32px;transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.25)}
+.nav-inner{max-width:1220px;margin:0 auto;display:flex;align-items:center;height:64px;gap:32px}
+.nav-logo{font-size:21px;font-weight:800;color:#fff;letter-spacing:-.3px;flex-shrink:0}
+.nav-logo em{font-style:normal;color:var(--sun)}
+.nav-links{display:flex;align-items:center;gap:24px;flex:1}
+.nav-link{font-size:14px;font-weight:500;color:var(--on-dark);transition:color .2s}
+.nav-link:hover{color:#fff}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn-ghost-nav{font-size:14px;font-weight:500;color:var(--on-dark);padding:7px 14px;border-radius:7px;transition:color .2s,background .2s}
+.btn-ghost-nav:hover{color:#fff;background:rgba(255,255,255,.1)}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;background:var(--sun);color:#192837;font-size:14px;font-weight:700;padding:8px 18px;border-radius:8px;transition:background .2s,transform .15s}
+.btn-cta:hover{background:var(--sun-d);transform:translateY(-1px)}
+.btn-cta:active{transform:none}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px;margin-left:auto}
+.hamburger span{display:block;width:20px;height:2px;background:rgba(255,255,255,.8);border-radius:2px}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--nav-bg);padding:12px 24px 20px;flex-direction:column;gap:2px;z-index:99;border-top:1px solid rgba(255,255,255,.1)}
+.mobile-menu.open{display:flex}
+.mobile-link{display:block;padding:11px 12px;border-radius:7px;font-size:15px;font-weight:500;color:var(--on-dark)}
+.mobile-link:hover{background:rgba(255,255,255,.08);color:#fff}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:64px}
+.hero-left{background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:80px 56px 80px 80px}
+.hero-right{background:var(--mist);display:flex;align-items:center;justify-content:center;padding:64px 56px;position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;top:-40%;right:-30%;width:80%;padding-top:80%;background:radial-gradient(circle,rgba(13,153,128,.15),transparent 65%);border-radius:50%;pointer-events:none}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--pine);letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--pine);flex-shrink:0}
+
+.hero-h1{font-size:clamp(36px,4.8vw,62px);font-weight:800;line-height:1.08;letter-spacing:-2px;color:var(--ink);margin-bottom:22px;text-wrap:balance}
+.hero-h1 mark{background:none;color:var(--pine)}
+
+.hero-sub{font-size:17px;color:var(--ink-soft);line-height:1.75;max-width:430px;margin-bottom:36px}
+
+.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.btn-cta-lg{display:inline-flex;align-items:center;gap:9px;background:var(--sun);color:#192837;font-size:16px;font-weight:700;padding:14px 28px;border-radius:10px;box-shadow:0 4px 16px rgba(242,178,52,.3);transition:background .2s,transform .2s,box-shadow .2s}
+.btn-cta-lg:hover{background:var(--sun-d);transform:translateY(-2px);box-shadow:0 6px 24px rgba(242,178,52,.4)}
+.btn-outline-lg{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-size:15px;font-weight:600;padding:13px 22px;border-radius:10px;border:1.5px solid var(--border);background:transparent;transition:border-color .2s,color .2s}
+.btn-outline-lg:hover{border-color:var(--pine);color:var(--pine)}
+
+.hero-proof{display:flex;align-items:center;gap:14px}
+.av-stack{display:flex}
+.av{width:34px;height:34px;border-radius:50%;border:2px solid var(--bg);margin-left:-9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.av:first-child{margin-left:0}
+.proof-txt{font-size:13px;color:var(--ink-soft);font-weight:500}
+.proof-txt strong{color:var(--ink);font-weight:700}
+
+/* ── HERO MOCKUP ── */
+.mockup{background:var(--surface);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.14),0 0 0 1px rgba(0,0,0,.06);overflow:hidden;width:100%;max-width:520px;position:relative;z-index:1}
+.mockup-bar{background:var(--bg-alt);border-bottom:1px solid var(--border);padding:11px 14px;display:flex;align-items:center;gap:10px}
+.m-dots{display:flex;gap:5px}
+.m-dot{width:10px;height:10px;border-radius:50%}
+.m-url{flex:1;height:20px;background:var(--border);border-radius:5px}
+.mockup-body{display:grid;grid-template-columns:160px 1fr;gap:0}
+.m-side{background:var(--bg-alt);border-right:1px solid var(--border);padding:14px;display:flex;flex-direction:column;gap:7px;min-height:320px}
+.m-si{height:28px;border-radius:5px;background:var(--border)}
+.m-si.hi{background:var(--mist);border-left:3px solid var(--pine)}
+.m-content{padding:14px;display:flex;flex-direction:column;gap:12px}
+.m-stat-row{display:flex;gap:8px}
+.m-stat{flex:1;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:7px}
+.m-sl{height:6px;width:55%;border-radius:3px;background:var(--border)}
+.m-sv{height:16px;width:40%;border-radius:3px}
+.m-table{border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.m-thead{background:var(--bg-alt);border-bottom:1px solid var(--border);height:32px;padding:0 10px;display:flex;align-items:center;gap:10px}
+.m-tc{height:7px;border-radius:3px;background:var(--border)}
+.m-row{height:40px;border-bottom:1px solid var(--border);padding:0 10px;display:flex;align-items:center;gap:9px}
+.m-row:last-child{border-bottom:none}
+.m-av{width:26px;height:26px;border-radius:50%;flex-shrink:0}
+.m-pill{margin-left:auto;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;white-space:nowrap}
+
+.hero-float{position:absolute;background:var(--surface);border-radius:10px;padding:10px 14px;box-shadow:0 8px 24px rgba(0,0,0,.12),0 0 0 1px var(--border);display:flex;align-items:center;gap:10px}
+.hf-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hf-t{font-size:12px;font-weight:700;color:var(--ink)}
+.hf-s{font-size:11px;color:var(--ink-soft);margin-top:1px}
+
+/* ── TRUST ── */
+.trust{background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:32px 32px}
+.trust-inner{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px}
+.trust-label{font-size:11px;font-weight:700;color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase}
+.trust-logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:32px}
+.t-logo{font-size:13px;font-weight:700;color:var(--border);letter-spacing:.04em;transition:color .2s;display:flex;align-items:center;gap:6px}
+.t-logo:hover{color:var(--ink-soft)}
+.t-sq{width:20px;height:20px;border-radius:4px;background:var(--border);display:flex;align-items:center;justify-content:center}
+
+/* ── LAYOUT PRIMITIVES ── */
+.wrap{max-width:1220px;margin:0 auto;padding:0 32px}
+.section{padding:96px 32px}
+.section-alt{background:var(--bg-alt)}
+.label{font-size:11px;font-weight:700;color:var(--pine);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.h2{font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:-1px;line-height:1.15;color:var(--ink);margin-bottom:16px;text-wrap:balance}
+.lead{font-size:17px;color:var(--ink-soft);line-height:1.75}
+.sec-head{text-align:center;margin-bottom:60px}
+.sec-head .lead{max-width:560px;margin:0 auto}
+
+/* ── TABS ── */
+.tab-nav{display:flex;border-bottom:2px solid var(--border);margin-bottom:48px;gap:0;overflow-x:auto;scrollbar-width:none}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-btn{display:flex;align-items:center;gap:7px;padding:12px 20px;font-size:14px;font-weight:600;color:var(--ink-soft);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .2s,border-color .2s;background:none}
+.tab-btn.active{color:var(--pine);border-color:var(--pine)}
+.tab-btn:hover:not(.active){color:var(--ink)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.panel-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:56px;align-items:center}
+.panel-h3{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:13px;color:var(--ink)}
+.panel-p{font-size:16px;color:var(--ink-soft);line-height:1.75;margin-bottom:22px}
+.panel-list{display:flex;flex-direction:column;gap:9px}
+.pli{display:flex;align-items:flex-start;gap:9px;font-size:15px;color:var(--ink)}
+.pli-check{width:18px;height:18px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.panel-vis{border-radius:16px;overflow:hidden;aspect-ratio:16/10;box-shadow:0 18px 56px rgba(0,0,0,.1),0 0 0 1px var(--border);background:var(--bg-alt);display:flex;align-items:center;justify-content:center}
+
+/* ── PEOPLE SECTION ── */
+.people{background:var(--pine);color:#fff;padding:96px 32px;position:relative;overflow:hidden}
+.people::after{content:'';position:absolute;bottom:-80px;right:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);border-radius:50%;pointer-events:none}
+.people-inner{max-width:780px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.people-kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:20px}
+.people-q{font-size:clamp(24px,3.5vw,40px);font-weight:800;line-height:1.2;letter-spacing:-.5px;margin-bottom:24px;text-wrap:balance}
+.people-q em{font-style:normal;color:var(--sun)}
+.people-body{font-size:17px;color:rgba(255,255,255,.7);line-height:1.8;max-width:600px;margin:0 auto 36px}
+.people-sig{display:flex;align-items:center;justify-content:center;gap:14px}
+.sig-av{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.1));border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700}
+.sig-name{font-weight:700;font-size:15px;color:#fff}
+.sig-role{font-size:13px;color:rgba(255,255,255,.55);margin-top:1px}
+
+/* ── FEAT CARDS ── */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feat-card{border:1px solid var(--border);border-radius:14px;padding:32px 28px;background:var(--surface);transition:box-shadow .25s,transform .25s}
+.feat-card:hover{box-shadow:0 10px 36px rgba(0,0,0,.08);transform:translateY(-3px)}
+.feat-icon{width:48px;height:48px;background:var(--mist);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.feat-h3{font-size:19px;font-weight:700;color:var(--ink);margin-bottom:9px}
+.feat-p{font-size:15px;color:var(--ink-soft);line-height:1.7}
+
+/* ── COMPLIANCE — two-half full-bleed ── */
+.comp{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.comp-left{background:var(--ink);padding:80px;display:flex;flex-direction:column;justify-content:center}
+.comp-right{background:var(--pine);padding:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.comp-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(255,255,255,.07),transparent 60%);pointer-events:none}
+.comp-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:14px}
+.comp-h2{font-size:clamp(26px,3vw,38px);font-weight:800;letter-spacing:-.8px;color:#fff;margin-bottom:10px;line-height:1.15;text-wrap:balance}
+.comp-sub{font-size:16px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:36px;max-width:340px}
+.comp-list{display:flex;flex-direction:column;gap:13px}
+.ci{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:rgba(255,255,255,.85)}
+.ci-check{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+.comp-num{font-size:clamp(80px,12vw,128px);font-weight:800;color:var(--sun);letter-spacing:-4px;line-height:.9;margin-bottom:8px;position:relative;z-index:1}
+.comp-num-label{font-size:17px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:24px;position:relative;z-index:1}
+.comp-divider{width:60px;height:2px;background:rgba(255,255,255,.2);margin:0 auto 24px;position:relative;z-index:1}
+.comp-note{font-size:14px;color:rgba(255,255,255,.55);line-height:1.6;max-width:280px;position:relative;z-index:1}
+.comp-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:700;color:rgba(255,255,255,.85);margin-top:20px;position:relative;z-index:1}
+
+/* ── CONTENT CATS ── */
+.cat-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
+.cat-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:100px;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all .2s}
+.cat-btn:hover,.cat-btn.active{border-color:var(--pine);color:var(--pine);background:var(--mist)}
+.content-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.c-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.c-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
+.c-thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:36px}
+.c-body{padding:12px 14px}
+.c-cat{font-size:10px;font-weight:700;color:var(--pine);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.c-title{font-size:13px;font-weight:600;color:var(--ink);line-height:1.4}
+
+/* ── ELEVATE ── */
+.elev-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.elev-feats{display:flex;flex-direction:column;gap:24px;margin-top:30px}
+.ef{display:flex;gap:14px}
+.ef-icon{width:42px;height:42px;background:var(--mist);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ef-h4{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.ef-p{font-size:14px;color:var(--ink-soft);line-height:1.6}
+.elev-vis{background:var(--mist);border-radius:18px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+
+/* ── SECURITY ── */
+.sec-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.support-vis{background:var(--mist);border-radius:18px;padding:48px;display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;flex-direction:column;text-align:center;gap:16px}
+.sv-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--pine),var(--pine-lt));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(10,110,94,.3)}
+.badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.sec-badge{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:700;color:#fff}
+.sb-green{background:#15803d}
+.sb-blue{background:#1d4ed8}
+.sb-pine{background:var(--pine)}
+
+/* ── CASES ── */
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.case-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.case-card:hover{box-shadow:0 12px 36px rgba(0,0,0,.09);transform:translateY(-3px)}
+.case-thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:44px}
+.case-body{padding:22px}
+.case-org{font-size:10px;font-weight:700;color:var(--pine);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.case-title{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.3}
+.case-p{font-size:13px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px}
+.case-link{font-size:13px;font-weight:700;color:var(--pine);display:inline-flex;align-items:center;gap:5px;transition:gap .15s}
+.case-link:hover{gap:9px}
+
+/* ── TESTI ── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.t-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px;transition:box-shadow .2s}
+.t-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.07)}
+.t-stars{color:#f59e0b;font-size:14px;letter-spacing:2px;margin-bottom:12px}
+.t-q{font-size:14px;color:var(--ink-soft);line-height:1.7;margin-bottom:18px;font-style:italic}
+.t-author{display:flex;align-items:center;gap:10px}
+.t-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
+.t-name{font-weight:700;font-size:14px;color:var(--ink)}
+.t-role{font-size:12px;color:var(--ink-soft)}
+
+/* ── WALL OF LOVE ── */
+.love-outer{overflow:hidden;position:relative;padding:8px 0}
+.love-outer::before,.love-outer::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
+.love-outer::before{left:0;background:linear-gradient(to right,var(--bg-alt),transparent)}
+.love-outer::after{right:0;background:linear-gradient(to left,var(--bg-alt),transparent)}
+.love-track{display:flex;gap:16px;animation:scrollleft 48s linear infinite;width:max-content}
+.love-track:hover{animation-play-state:paused}
+@keyframes scrollleft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.love-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;min-width:280px;max-width:280px;flex-shrink:0}
+.love-q{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-bottom:12px}
+.love-by{font-size:12px;font-weight:600;color:var(--pine)}
+
+/* ── CTA ── */
+.cta-section{background:var(--pine);padding:96px 32px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,.07),transparent 50%),radial-gradient(ellipse at 70% 50%,rgba(255,255,255,.05),transparent 50%);pointer-events:none}
+.cta-h2{font-size:clamp(30px,4vw,50px);font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:12px;text-wrap:balance;position:relative}
+.cta-sub{font-size:17px;color:rgba(255,255,255,.7);margin-bottom:36px;position:relative}
+
+/* ── FOOTER ── */
+.footer{background:var(--ink);color:rgba(255,255,255,.65);padding:64px 32px 36px}
+.footer-inner{max-width:1220px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.09);margin-bottom:32px}
+.f-logo{font-size:20px;font-weight:800;color:#fff;margin-bottom:12px;display:block}
+.f-logo em{font-style:normal;color:var(--sun)}
+.f-desc{font-size:13px;line-height:1.75;color:rgba(255,255,255,.5);margin-bottom:18px}
+.f-address{font-size:12px;line-height:1.8;color:rgba(255,255,255,.35);font-style:normal}
+.f-col-title{font-size:11px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+.f-links{display:flex;flex-direction:column;gap:9px}
+.f-link{font-size:13px;color:rgba(255,255,255,.5);transition:color .2s}
+.f-link:hover{color:#fff}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.f-copy{font-size:12px;color:rgba(255,255,255,.3)}
+.f-legal{display:flex;gap:18px}
+.f-social{display:flex;gap:8px}
+.f-soc{width:34px;height:34px;background:rgba(255,255,255,.07);border-radius:7px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);transition:background .2s,color .2s}
+.f-soc:hover{background:var(--pine);color:#fff}
+
+/* ── SCROLL ANIM ── */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-left{padding:64px 40px 64px 56px}
+  .feat-grid{grid-template-columns:repeat(2,1fr)}
+  .content-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .comp-left,.comp-right{padding:60px 40px}
+}
+@media(max-width:768px){
+  .nav-links,.nav-right{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:64px 24px 56px}
+  .hero-right{display:none}
+  .panel-grid{grid-template-columns:1fr}
+  .comp{grid-template-columns:1fr}
+  .comp-left,.comp-right{padding:56px 28px}
+  .elev-grid,.sec-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .cases-grid,.testi-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr;gap:28px}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .section{padding:72px 20px}
+  .elev-vis,.support-vis{display:none}
+}
+@media(max-width:480px){
+  .content-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .tab-btn{padding:10px 14px;font-size:13px}
+  .comp-num{font-size:80px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">ki<em>bu</em></a>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Documentation</a>
+      <a href="#" class="nav-link">Content</a>
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn-ghost-nav">Login</button>
+      <a href="#" class="btn-cta">Get a demo</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" class="mobile-link">Documentation</a>
+  <a href="#" class="mobile-link">Content</a>
+  <a href="#" class="mobile-link">About</a>
+  <a href="#" class="mobile-link">Contact</a>
+  <a href="#" class="mobile-link">Login</a>
+  <a href="#" class="mobile-link" style="color:var(--sun);font-weight:700">Get a demo →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Built for Disability Service Providers</div>
+    <h1 class="hero-h1">Focus on <mark>Excellent Service</mark>. We'll Handle the Rest.</h1>
+    <p class="hero-sub">Kibu transforms compliance, documentation, and reporting into a seamless experience — giving DSPs the platform and content that funders appreciate.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-cta-lg">Get a demo</a>
+      <a href="#" class="btn-outline-lg">
+        See how it works
+        <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="hero-proof">
+      <div class="av-stack">
+        <div class="av" style="background:linear-gradient(135deg,#34d399,#059669)">S</div>
+        <div class="av" style="background:linear-gradient(135deg,#f472b6,#be185d)">M</div>
+        <div class="av" style="background:linear-gradient(135deg,#60a5fa,#2563eb)">K</div>
+        <div class="av" style="background:linear-gradient(135deg,#fbbf24,#d97706)">J</div>
+      </div>
+      <p class="proof-txt"><strong>200+ organizations</strong> trust Kibu daily</p>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="m-dots">
+          <div class="m-dot" style="background:#ff5f57"></div>
+          <div class="m-dot" style="background:#febc2e"></div>
+          <div class="m-dot" style="background:#28c840"></div>
+        </div>
+        <div class="m-url"></div>
+      </div>
+      <div class="mockup-body">
+        <div class="m-side">
+          <div class="m-si hi"></div>
+          <div class="m-si"></div>
+          <div class="m-si"></div>
+          <div class="m-si"></div>
+          <div class="m-si"></div>
+          <div class="m-si"></div>
+        </div>
+        <div class="m-content">
+          <div class="m-stat-row">
+            <div class="m-stat" style="background:var(--mist);border:1px solid rgba(10,110,94,.15)">
+              <div class="m-sl"></div>
+              <div class="m-sv" style="background:var(--pine-lt)"></div>
+            </div>
+            <div class="m-stat" style="background:#eff6ff;border:1px solid #bfdbfe">
+              <div class="m-sl"></div>
+              <div class="m-sv" style="background:#3b82f6"></div>
+            </div>
+            <div class="m-stat" style="background:#fefce8;border:1px solid #fde68a">
+              <div class="m-sl"></div>
+              <div class="m-sv" style="background:var(--sun)"></div>
+            </div>
+          </div>
+          <div class="m-table">
+            <div class="m-thead">
+              <div class="m-tc" style="width:76px"></div>
+              <div class="m-tc" style="width:52px"></div>
+              <div class="m-tc" style="width:44px"></div>
+            </div>
+            <div class="m-row">
+              <div class="m-av" style="background:linear-gradient(135deg,#93c5fd,#6366f1)"></div>
+              <div class="m-tc" style="width:84px"></div>
+              <div class="m-tc" style="width:54px;background:var(--border)"></div>
+              <div class="m-pill" style="background:var(--mist);color:var(--pine)">✓ Complete</div>
+            </div>
+            <div class="m-row">
+              <div class="m-av" style="background:linear-gradient(135deg,#34d399,#059669)"></div>
+              <div class="m-tc" style="width:100px"></div>
+              <div class="m-tc" style="width:46px;background:var(--border)"></div>
+              <div class="m-pill" style="background:#dcfce7;color:#166534">On Track</div>
+            </div>
+            <div class="m-row">
+              <div class="m-av" style="background:linear-gradient(135deg,#fbbf24,#d97706)"></div>
+              <div class="m-tc" style="width:70px"></div>
+              <div class="m-tc" style="width:58px;background:var(--border)"></div>
+              <div class="m-pill" style="background:#fef3c7;color:#92400e">⏳ Pending</div>
+            </div>
+            <div class="m-row">
+              <div class="m-av" style="background:linear-gradient(135deg,#f472b6,#be185d)"></div>
+              <div class="m-tc" style="width:92px"></div>
+              <div class="m-tc" style="width:50px;background:var(--border)"></div>
+              <div class="m-pill" style="background:var(--mist);color:var(--pine)">✓ Complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- floaters -->
+    <div class="hero-float" style="top:18%;right:-4%;transform:translateX(8px)">
+      <div class="hf-icon" style="background:#dcfce7">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#166534" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div><div class="hf-t">99.2% Compliance</div><div class="hf-s">avg. within 2 months</div></div>
+    </div>
+    <div class="hero-float" style="bottom:18%;left:-4%;transform:translateX(-8px)">
+      <div style="font-size:20px;line-height:1">⚡</div>
+      <div><div class="hf-t">60 Seconds</div><div class="hf-s">to compliance reporting</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-inner">
+    <p class="trust-label">Trusted by leading organizations</p>
+    <div class="trust-logos">
+      <span class="t-logo"><span class="t-sq"></span>Chimes</span>
+      <span class="t-logo"><span class="t-sq"></span>The ARC</span>
+      <span class="t-logo"><span class="t-sq"></span>YMCA</span>
+      <span class="t-logo"><span class="t-sq"></span>UCP</span>
+      <span class="t-logo"><span class="t-sq"></span>Easterseals</span>
+      <span class="t-logo"><span class="t-sq"></span>Glenwood</span>
+      <span class="t-logo"><span class="t-sq"></span>Spectrum</span>
+      <span class="t-logo"><span class="t-sq"></span>PathPoint</span>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURE TABS -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <p class="label">Platform Features</p>
+      <h2 class="h2">Everything Your Team Needs</h2>
+      <p class="lead">One platform covering every aspect of service delivery — from attendance to AI-powered reports.</p>
+    </div>
+
+    <div class="tab-nav fade-in">
+      <button class="tab-btn active" data-tab="attendance">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Attendance
+      </button>
+      <button class="tab-btn" data-tab="notes">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/><path d="M14 2v6h6M16 13H8M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Notes
+      </button>
+      <button class="tab-btn" data-tab="ai">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        AI Reports
+      </button>
+      <button class="tab-btn" data-tab="lifeplans">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Life Plans
+      </button>
+      <button class="tab-btn" data-tab="medication">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Medication
+      </button>
+      <button class="tab-btn" data-tab="content-tab">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Content
+      </button>
+    </div>
+
+    <!-- ATTENDANCE -->
+    <div id="tab-attendance" class="tab-panel active">
+      <div class="panel-grid">
+        <div>
+          <h3 class="panel-h3">Simple, Accurate Attendance Tracking</h3>
+          <p class="panel-p">Streamline daily check-ins and check-outs. Auto-populate data for billing and reporting without extra steps.</p>
+          <ul class="panel-list">
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>One-tap check-in / check-out for DSPs</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Auto-sync with billing systems</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Real-time member roster view</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Signature capture &amp; audit trail</li>
+          </ul>
+        </div>
+        <div class="panel-vis" style="background:var(--mist)">
+          <div style="background:var(--surface);border-radius:12px;padding:18px;width:82%;box-shadow:0 8px 28px rgba(0,0,0,.09);border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:13px">Today's Attendance</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px;background:var(--mist);border-radius:9px">
+                <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#93c5fd,#6366f1);flex-shrink:0"></div>
+                <div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ink)">Sarah A.</div><div style="font-size:11px;color:var(--ink-soft)">Checked in 9:02 AM</div></div>
+                <div style="padding:3px 9px;background:var(--green-hi);border-radius:100px;font-size:10px;font-weight:700;color:var(--green-tx)">✓ Present</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px;padding:9px;background:var(--bg-alt);border-radius:9px">
+                <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#34d399,#059669);flex-shrink:0"></div>
+                <div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ink)">Marcus J.</div><div style="font-size:11px;color:var(--ink-soft)">Checked in 9:15 AM</div></div>
+                <div style="padding:3px 9px;background:var(--green-hi);border-radius:100px;font-size:10px;font-weight:700;color:var(--green-tx)">✓ Present</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:9px;padding:9px;background:var(--bg-alt);border-radius:9px">
+                <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#fbbf24,#d97706);flex-shrink:0"></div>
+                <div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--ink)">Kim L.</div><div style="font-size:11px;color:var(--ink-soft)">Expected arrival</div></div>
+                <div style="padding:3px 9px;background:var(--amber-hi);border-radius:100px;font-size:10px;font-weight:700;color:var(--amber-tx)">⏳ Pending</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div id="tab-notes" class="tab-panel">
+      <div class="panel-grid">
+        <div>
+          <h3 class="panel-h3">Service Notes Made Simple</h3>
+          <p class="panel-p">Write compliant, comprehensive service notes in seconds using guided templates that ensure nothing is missed.</p>
+          <ul class="panel-list">
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Guided templates by service type</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Compliance validation before submission</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Built-in translation — 40+ languages</li>
+          </ul>
+        </div>
+        <div class="panel-vis" style="background:var(--bg-alt)">
+          <div style="background:var(--surface);border-radius:12px;padding:20px;width:82%;box-shadow:0 8px 28px rgba(0,0,0,.09);border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px">Service Note</div>
+            <div style="font-size:11px;color:var(--ink-soft);margin-bottom:13px">Community Day — Sarah A.</div>
+            <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:7px;padding:10px;font-size:12px;color:var(--ink-soft);line-height:1.7;margin-bottom:10px">Member participated in cooking activity. Demonstrated improvement in multi-step instructions. Required 2 verbal prompts. Mood: positive throughout session...</div>
+            <div style="display:flex;gap:7px">
+              <div style="flex:1;height:32px;background:var(--pine);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">Submit Note</div>
+              <div style="height:32px;padding:0 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;font-size:12px;color:var(--ink-soft)">Save Draft</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI REPORTS -->
+    <div id="tab-ai" class="tab-panel">
+      <div class="panel-grid">
+        <div>
+          <h3 class="panel-h3">AI-Powered Reports in Seconds</h3>
+          <p class="panel-p">Generate beautiful, compliant reports automatically from your data. What used to take hours now takes seconds.</p>
+          <ul class="panel-list">
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Auto-generated from service notes</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Funder-ready formatting</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Review and edit before export</li>
+          </ul>
+        </div>
+        <div class="panel-vis" style="background:linear-gradient(135deg,#f5f3ff,#ede9fe)">
+          <div style="background:var(--surface);border-radius:12px;padding:20px;width:82%;box-shadow:0 8px 28px rgba(0,0,0,.09);border:1px solid var(--border)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+              <div style="font-size:12px;font-weight:700;color:var(--ink)">Monthly Progress Report</div>
+              <div style="padding:3px 9px;background:var(--mist);border-radius:100px;font-size:10px;font-weight:700;color:var(--pine)">✨ AI Generated</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:11px">
+              <div style="flex:1;background:var(--mist);border-radius:7px;padding:9px;text-align:center"><div style="font-size:19px;font-weight:800;color:var(--pine)">24</div><div style="font-size:10px;color:var(--ink-soft)">Sessions</div></div>
+              <div style="flex:1;background:#f0fdf4;border-radius:7px;padding:9px;text-align:center"><div style="font-size:19px;font-weight:800;color:#166534">92%</div><div style="font-size:10px;color:var(--ink-soft)">Goals Met</div></div>
+              <div style="flex:1;background:#faf5ff;border-radius:7px;padding:9px;text-align:center"><div style="font-size:19px;font-weight:800;color:#7c3aed">↑18%</div><div style="font-size:10px;color:var(--ink-soft)">Progress</div></div>
+            </div>
+            <div style="background:var(--bg-alt);border-radius:7px;padding:10px;font-size:11px;color:var(--ink-soft);line-height:1.7">Member showed significant improvement in self-care goals this month. Independent dressing skills improved from 40% to 78%...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIFE PLANS -->
+    <div id="tab-lifeplans" class="tab-panel">
+      <div class="panel-grid">
+        <div>
+          <h3 class="panel-h3">Comprehensive Life Plan Management</h3>
+          <p class="panel-p">Build and track personalized life plans aligned with each member's goals — all in one place.</p>
+          <ul class="panel-list">
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Person-centered goal setting</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Progress tracking over time</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Family and team collaboration</li>
+          </ul>
+        </div>
+        <div class="panel-vis" style="background:linear-gradient(135deg,#fff7ed,#ffedd5)">
+          <div style="background:var(--surface);border-radius:12px;padding:20px;width:82%;box-shadow:0 8px 28px rgba(0,0,0,.09);border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:13px">Life Plan — Marcus J.</div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <div style="padding:9px;background:#fff7ed;border-radius:7px;border-left:3px solid #f97316">
+                <div style="font-size:11px;font-weight:600;color:var(--ink)">Independent Living Skills</div>
+                <div style="margin-top:6px;height:5px;background:var(--bg-alt);border-radius:3px;overflow:hidden"><div style="width:72%;height:100%;background:#f97316;border-radius:3px"></div></div>
+                <div style="font-size:10px;color:var(--ink-soft);margin-top:4px">72% complete</div>
+              </div>
+              <div style="padding:9px;background:var(--mist);border-radius:7px;border-left:3px solid var(--pine)">
+                <div style="font-size:11px;font-weight:600;color:var(--ink)">Employment Readiness</div>
+                <div style="margin-top:6px;height:5px;background:var(--bg-alt);border-radius:3px;overflow:hidden"><div style="width:45%;height:100%;background:var(--pine);border-radius:3px"></div></div>
+                <div style="font-size:10px;color:var(--ink-soft);margin-top:4px">45% complete</div>
+              </div>
+              <div style="padding:9px;background:#f0fdf4;border-radius:7px;border-left:3px solid #16a34a">
+                <div style="font-size:11px;font-weight:600;color:var(--ink)">Social Skills Development</div>
+                <div style="margin-top:6px;height:5px;background:var(--bg-alt);border-radius:3px;overflow:hidden"><div style="width:88%;height:100%;background:#16a34a;border-radius:3px"></div></div>
+                <div style="font-size:10px;color:var(--ink-soft);margin-top:4px">88% complete</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDICATION -->
+    <div id="tab-medication" class="tab-panel">
+      <div class="panel-grid">
+        <div>
+          <h3 class="panel-h3">Safe Medication Management</h3>
+          <p class="panel-p">Track medication administration with precision and accountability. Never miss a dose or a note.</p>
+          <ul class="panel-list">
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Digital MAR (Medication Administration Record)</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Dosage reminders and alerts</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>E-signature documentation</li>
+          </ul>
+        </div>
+        <div class="panel-vis" style="background:linear-gradient(135deg,#ecfeff,#cffafe)">
+          <div style="background:var(--surface);border-radius:12px;padding:20px;width:82%;box-shadow:0 8px 28px rgba(0,0,0,.09);border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px">Medication Log</div>
+            <div style="font-size:11px;color:var(--ink-soft);margin-bottom:13px">Kim L. — Today</div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:#dcfce7;border-radius:7px"><div style="width:7px;height:7px;border-radius:50%;background:#16a34a;flex-shrink:0"></div><div style="flex:1;font-size:11px;font-weight:500;color:var(--ink)">Metformin 500mg — 8:00 AM</div><div style="font-size:10px;font-weight:700;color:#166534">Given ✓</div></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:#dcfce7;border-radius:7px"><div style="width:7px;height:7px;border-radius:50%;background:#16a34a;flex-shrink:0"></div><div style="flex:1;font-size:11px;font-weight:500;color:var(--ink)">Lisinopril 10mg — 8:00 AM</div><div style="font-size:10px;font-weight:700;color:#166534">Given ✓</div></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:#fef9c3;border-radius:7px"><div style="width:7px;height:7px;border-radius:50%;background:#ca8a04;flex-shrink:0"></div><div style="flex:1;font-size:11px;font-weight:500;color:var(--ink)">Vitamins — 12:00 PM</div><div style="font-size:10px;font-weight:700;color:#92400e">Due Soon</div></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--bg-alt);border:1px solid var(--border);border-radius:7px"><div style="width:7px;height:7px;border-radius:50%;background:var(--border);flex-shrink:0"></div><div style="flex:1;font-size:11px;font-weight:500;color:var(--ink-soft)">Aspirin 81mg — 6:00 PM</div><div style="font-size:10px;font-weight:700;color:var(--ink-soft)">Upcoming</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT TAB -->
+    <div id="tab-content-tab" class="tab-panel">
+      <div class="panel-grid">
+        <div>
+          <h3 class="panel-h3">A World-Class Content Library</h3>
+          <p class="panel-p">Access thousands of curated lesson plans across life skills, fitness, arts, and more — ready for use.</p>
+          <ul class="panel-list">
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>1,000+ pre-built lesson plans</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Auto-tracks toward member goals</li>
+            <li class="pli"><div class="pli-check"><svg width="9" height="9" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Build your own custom content</li>
+          </ul>
+        </div>
+        <div class="panel-vis" style="background:linear-gradient(135deg,#fdf4ff,#fae8ff)">
+          <div style="background:var(--surface);border-radius:12px;padding:20px;width:82%;box-shadow:0 8px 28px rgba(0,0,0,.09);border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:13px">Content Library</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px">
+              <div style="background:var(--mist);border-radius:8px;padding:11px;text-align:center"><div style="font-size:20px;margin-bottom:4px">💃</div><div style="font-size:10px;font-weight:700;color:var(--pine)">Dance</div></div>
+              <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center"><div style="font-size:20px;margin-bottom:4px">🍳</div><div style="font-size:10px;font-weight:700;color:#166534">Cooking</div></div>
+              <div style="background:#fdf4ff;border-radius:8px;padding:11px;text-align:center"><div style="font-size:20px;margin-bottom:4px">🎨</div><div style="font-size:10px;font-weight:700;color:#7c3aed">Arts</div></div>
+              <div style="background:#fffbeb;border-radius:8px;padding:11px;text-align:center"><div style="font-size:20px;margin-bottom:4px">💪</div><div style="font-size:10px;font-weight:700;color:#d97706">Fitness</div></div>
+              <div style="background:#faf5ff;border-radius:8px;padding:11px;text-align:center"><div style="font-size:20px;margin-bottom:4px">📚</div><div style="font-size:10px;font-weight:700;color:#7c3aed">Life Skills</div></div>
+              <div style="background:#ecfeff;border-radius:8px;padding:11px;text-align:center"><div style="font-size:20px;margin-bottom:4px">🧘</div><div style="font-size:10px;font-weight:700;color:#0e7490">Yoga</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE NOT PAPER -->
+<section class="people">
+  <div class="people-inner fade-in">
+    <p class="people-kicker">From the founder</p>
+    <h2 class="people-q">"Our mission has always been to <em>focus on people</em>, not paper."</h2>
+    <p class="people-body">When we built Kibu, we watched incredible DSPs spend hours every day on paperwork instead of connecting with the people they serve. We knew there had to be a better way — technology that gets out of the way and lets great care happen.</p>
+    <div class="people-sig">
+      <div class="sig-av">D</div>
+      <div>
+        <div class="sig-name">Daniel Goldstein</div>
+        <div class="sig-role">Founder &amp; CEO, Kibu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE HIGHLIGHTS -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <p class="label">Why Kibu</p>
+      <h2 class="h2">Designed Around Your Workflow</h2>
+      <p class="lead">Purpose-built for disability service providers — not adapted from generic software.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card fade-in d1">
+        <div class="feat-icon">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="var(--pine)"/></svg>
+        </div>
+        <h3 class="feat-h3">Personalized for Each Organization</h3>
+        <p class="feat-p">Custom workflows, roles, and settings tailored to how your organization actually operates — not a generic template.</p>
+      </div>
+      <div class="feat-card fade-in d2">
+        <div class="feat-icon">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="feat-h3">Fast &amp; Easy to Use</h3>
+        <p class="feat-p">Designed for DSPs — not tech experts. Intuitive interface means less training time and more time with the people you serve.</p>
+      </div>
+      <div class="feat-card fade-in d3">
+        <div class="feat-icon">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" stroke="var(--pine)" stroke-width="2"/><path d="M12 18h.01" stroke="var(--pine)" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="feat-h3">Mobile-Ready by Design</h3>
+        <p class="feat-p">Works seamlessly on any device. Staff can complete documentation from day programs, community outings, and beyond.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE — full-bleed two-half -->
+<div class="comp">
+  <div class="comp-left fade-in">
+    <p class="comp-label">Compliance</p>
+    <h2 class="comp-h2">Compliance in 60 Seconds</h2>
+    <p class="comp-sub">Our platform guides every interaction toward compliance — so you're always audit-ready without the extra effort.</p>
+    <ul class="comp-list">
+      <li class="ci"><div class="ci-check"><svg width="10" height="10" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Built-In Translation — 40+ languages</li>
+      <li class="ci"><div class="ci-check"><svg width="10" height="10" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>AI-Assisted Service Notes</li>
+      <li class="ci"><div class="ci-check"><svg width="10" height="10" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Beautiful, Fast Reporting</li>
+      <li class="ci"><div class="ci-check"><svg width="10" height="10" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Complete Member Records</li>
+      <li class="ci"><div class="ci-check"><svg width="10" height="10" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Task Assignment &amp; Tracking</li>
+      <li class="ci"><div class="ci-check"><svg width="10" height="10" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Appointments &amp; Transport Management</li>
+      <li class="ci"><div class="ci-check"><svg width="10" height="10" fill="none" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Custom Role Controls &amp; Permissions</li>
+    </ul>
+  </div>
+  <div class="comp-right fade-in d1">
+    <div class="comp-num">84.3%</div>
+    <p class="comp-num-label">Average Compliance Rate</p>
+    <div class="comp-divider"></div>
+    <p class="comp-note">Organizations achieve this score within 2 months — compared to the industry average of 61%.</p>
+    <div class="comp-badge">
+      <svg width="13" height="13" fill="none" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      99.2% avg within 2 months
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT LIBRARY -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <p class="label">Content Library</p>
+      <h2 class="h2">Thousands of Ready-to-Use Activities</h2>
+      <p class="lead">Engage members with curated, goal-aligned lesson plans across every category imaginable.</p>
+    </div>
+    <div class="cat-row fade-in">
+      <button class="cat-btn active">💃 Dance</button>
+      <button class="cat-btn">📚 Life Skills</button>
+      <button class="cat-btn">💼 Job Development</button>
+      <button class="cat-btn">💪 General Fitness</button>
+      <button class="cat-btn">🧘 Yoga</button>
+      <button class="cat-btn">🍳 Cooking</button>
+      <button class="cat-btn">🎨 Enrichment &amp; Arts</button>
+      <button class="cat-btn">🎮 Games</button>
+      <button class="cat-btn">👥 Staff Training</button>
+    </div>
+    <div class="content-grid fade-in">
+      <div class="c-card"><div class="c-thumb" style="background:linear-gradient(135deg,#fef9c3,#fde68a)">🔥</div><div class="c-body"><div class="c-cat">Life Skills</div><div class="c-title">Fire Safety at Home</div></div></div>
+      <div class="c-card"><div class="c-thumb" style="background:linear-gradient(135deg,var(--mist),#a7f3d0)">✍️</div><div class="c-body"><div class="c-cat">Life Skills</div><div class="c-title">How to Write a Check</div></div></div>
+      <div class="c-card"><div class="c-thumb" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🚌</div><div class="c-body"><div class="c-cat">Community</div><div class="c-title">Navigating Public Transit</div></div></div>
+      <div class="c-card"><div class="c-thumb" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)">🎨</div><div class="c-body"><div class="c-cat">Enrichment</div><div class="c-title">Watercolor Painting</div></div></div>
+      <div class="c-card"><div class="c-thumb" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe)">💵</div><div class="c-body"><div class="c-cat">Life Skills</div><div class="c-title">Financial Literacy 101</div></div></div>
+      <div class="c-card"><div class="c-thumb" style="background:linear-gradient(135deg,#ecfeff,#cffafe)">🧘</div><div class="c-body"><div class="c-cat">Yoga</div><div class="c-title">Morning Stretch Routine</div></div></div>
+      <div class="c-card"><div class="c-thumb" style="background:linear-gradient(135deg,#fff7ed,#fed7aa)">🍝</div><div class="c-body"><div class="c-cat">Cooking</div><div class="c-title">Easy Pasta Dinner</div></div></div>
+      <div class="c-card"><div class="c-thumb" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0)">🎯</div><div class="c-body"><div class="c-cat">Games</div><div class="c-title">Team Trivia Challenge</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ELEVATE -->
+<section class="section">
+  <div class="wrap">
+    <div class="elev-grid">
+      <div class="fade-in">
+        <p class="label">Intelligent Features</p>
+        <h2 class="h2">Elevate Content with Intelligent Features</h2>
+        <div class="elev-feats">
+          <div class="ef">
+            <div class="ef-icon"><svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><div class="ef-h4">Automated Tracking &amp; Goal Alignment</div><p class="ef-p">Every activity automatically links to member goals and generates documentation — no manual entry needed.</p></div>
+          </div>
+          <div class="ef">
+            <div class="ef-icon"><svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke="var(--pine)" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div><div class="ef-h4">Unified Platform — No System Switching</div><p class="ef-p">Content, attendance, notes, and reports all in one place. Your team stays focused without jumping between apps.</p></div>
+          </div>
+          <div class="ef">
+            <div class="ef-icon"><svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke="var(--pine)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><div class="ef-h4">Custom Dashboards per Role</div><p class="ef-p">DSPs, program directors, and admins each see exactly what they need — no more, no less.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="elev-vis fade-in d1">
+        <div style="background:var(--surface);border-radius:14px;padding:20px;width:86%;box-shadow:0 12px 36px rgba(0,0,0,.09);border:1px solid var(--border);position:relative;z-index:1">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div style="font-size:12px;font-weight:700;color:var(--ink)">Program Dashboard</div>
+            <div style="font-size:11px;color:var(--ink-soft)">June 2026</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+            <div style="background:var(--mist);border-radius:9px;padding:13px">
+              <div style="font-size:10px;color:var(--ink-soft);margin-bottom:3px">Active Members</div>
+              <div style="font-size:24px;font-weight:800;color:var(--pine);font-variant-numeric:tabular-nums">142</div>
+              <div style="font-size:10px;color:#16a34a;margin-top:2px">↑ 8 this month</div>
+            </div>
+            <div style="background:#f0fdf4;border-radius:9px;padding:13px">
+              <div style="font-size:10px;color:var(--ink-soft);margin-bottom:3px">Compliance Rate</div>
+              <div style="font-size:24px;font-weight:800;color:#166534;font-variant-numeric:tabular-nums">91%</div>
+              <div style="font-size:10px;color:#16a34a;margin-top:2px">↑ 3% vs last month</div>
+            </div>
+          </div>
+          <div style="background:var(--bg-alt);border-radius:9px;padding:13px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+              <div style="font-size:11px;font-weight:600;color:var(--ink)">Notes Submitted Today</div>
+              <div style="font-size:11px;font-weight:700;color:var(--pine);font-variant-numeric:tabular-nums">38/42</div>
+            </div>
+            <div style="height:7px;background:var(--border);border-radius:4px;overflow:hidden"><div style="width:90%;height:100%;background:var(--pine);border-radius:4px"></div></div>
+            <div style="margin-top:6px;font-size:10px;color:var(--ink-soft)">4 notes still outstanding</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="sec-grid">
+      <div class="support-vis fade-in">
+        <div class="sv-avatar">
+          <svg width="44" height="44" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#fff" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div style="font-size:16px;font-weight:700;color:var(--ink)">Personalized Onboarding</div>
+        <div style="font-size:13px;color:var(--ink-soft);text-align:center;line-height:1.6;max-width:220px">Dedicated support from day one. Our team trains your staff and sets up your account to match your workflow.</div>
+        <div style="display:flex;align-items:center;gap:7px">
+          <div style="width:7px;height:7px;border-radius:50%;background:#16a34a"></div>
+          <div style="font-size:12px;font-weight:600;color:#166534">Average setup: 2 weeks</div>
+        </div>
+      </div>
+      <div class="fade-in d1">
+        <p class="label">Security &amp; Support</p>
+        <h2 class="h2">HIPAA-Compliant &amp; Fully Supported</h2>
+        <p class="lead">Your members' data is protected with enterprise-grade security. And your team is never alone — we're here every step of the way.</p>
+        <div class="badge-row">
+          <div class="sec-badge sb-green">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            HIPAA Compliant
+          </div>
+          <div class="sec-badge sb-blue">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#fff" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            256-bit Encryption
+          </div>
+          <div class="sec-badge sb-pine">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            SOC 2 Type II
+          </div>
+        </div>
+        <div style="margin-top:28px;padding:22px;background:var(--mist);border-radius:12px;border:1px solid rgba(10,110,94,.15)">
+          <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px">Free, Unlimited Support</div>
+          <p style="font-size:13px;color:var(--ink-soft);line-height:1.7">Live chat, email, and phone support — included for every customer at no extra cost. Average response time: under 2 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head fade-in">
+      <p class="label">Customer Stories</p>
+      <h2 class="h2">Real People, Real Results</h2>
+      <p class="lead">See how organizations like yours are transforming care with Kibu.</p>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card fade-in d1">
+        <div class="case-thumb" style="background:var(--mist)">🏢</div>
+        <div class="case-body">
+          <div class="case-org">Chimes International</div>
+          <div class="case-title">From 61% to 94% Compliance in 6 Weeks</div>
+          <p class="case-p">Chimes transformed their documentation process and eliminated hours of paperwork per DSP per week.</p>
+          <a href="#" class="case-link">Read case study <svg width="13" height="13" fill="none" viewBox="0 0 16 16"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card fade-in d2">
+        <div class="case-thumb" style="background:#f0fdf4">🌟</div>
+        <div class="case-body">
+          <div class="case-org">The ARC of the Midlands</div>
+          <div class="case-title">Staff Turnover Cut by 30% After Switching</div>
+          <p class="case-p">DSPs report spending 2+ fewer hours per shift on paperwork — time now spent directly with members.</p>
+          <a href="#" class="case-link">Read case study <svg width="13" height="13" fill="none" viewBox="0 0 16 16"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+      <div class="case-card fade-in d3">
+        <div class="case-thumb" style="background:#faf5ff">🎯</div>
+        <div class="case-body">
+          <div class="case-org">YMCA of Greater Hartford</div>
+          <div class="case-title">Content Library Drives 40% Higher Engagement</div>
+          <p class="case-p">Members participate in more activities than ever, with every session automatically documented.</p>
+          <a href="#" class="case-link">Read case study <svg width="13" height="13" fill="none" viewBox="0 0 16 16"><path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WALL OF LOVE -->
+<section class="section-alt" style="padding:72px 0">
+  <div class="wrap" style="margin-bottom:40px">
+    <div class="sec-head fade-in" style="margin-bottom:0">
+      <p class="label">Wall of Love</p>
+      <h2 class="h2">Loved by DSPs Everywhere</h2>
+    </div>
+  </div>
+  <div class="love-outer">
+    <div class="love-track">
+      <div class="love-card"><p class="love-q">"Using Kibu has allowed our staff to take the lead and empowered them with the tools to succeed."</p><div class="love-by">— Sarah M., Service Manager</div></div>
+      <div class="love-card"><p class="love-q">"I used to dread end-of-day notes. Now I finish them in 5 minutes. It's genuinely changed my work life."</p><div class="love-by">— Marcus T., DSP</div></div>
+      <div class="love-card"><p class="love-q">"Our audit compliance went from a stressful guessing game to a confident, data-backed presentation."</p><div class="love-by">— Kim L., Program Director</div></div>
+      <div class="love-card"><p class="love-q">"The content library alone is worth it. Our members are more engaged than they've ever been."</p><div class="love-by">— Jennifer R., Activity Coordinator</div></div>
+      <div class="love-card"><p class="love-q">"Kibu made onboarding new staff so much faster. The learning curve is practically nonexistent."</p><div class="love-by">— David K., HR Manager</div></div>
+      <div class="love-card"><p class="love-q">"We went from three separate systems to one. The time we've saved is remarkable."</p><div class="love-by">— Patricia W., Operations Director</div></div>
+      <div class="love-card"><p class="love-q">"The AI reports are unbelievable. What took our team hours each week now takes minutes."</p><div class="love-by">— Anthony B., Executive Director</div></div>
+      <div class="love-card"><p class="love-q">"I can check compliance in real time instead of waiting for the monthly review. Game changer."</p><div class="love-by">— Lisa H., Quality Assurance</div></div>
+      <!-- duplicated for infinite scroll -->
+      <div class="love-card"><p class="love-q">"Using Kibu has allowed our staff to take the lead and empowered them with the tools to succeed."</p><div class="love-by">— Sarah M., Service Manager</div></div>
+      <div class="love-card"><p class="love-q">"I used to dread end-of-day notes. Now I finish them in 5 minutes. It's genuinely changed my work life."</p><div class="love-by">— Marcus T., DSP</div></div>
+      <div class="love-card"><p class="love-q">"Our audit compliance went from a stressful guessing game to a confident, data-backed presentation."</p><div class="love-by">— Kim L., Program Director</div></div>
+      <div class="love-card"><p class="love-q">"The content library alone is worth it. Our members are more engaged than they've ever been."</p><div class="love-by">— Jennifer R., Activity Coordinator</div></div>
+      <div class="love-card"><p class="love-q">"Kibu made onboarding new staff so much faster. The learning curve is practically nonexistent."</p><div class="love-by">— David K., HR Manager</div></div>
+      <div class="love-card"><p class="love-q">"We went from three separate systems to one. The time we've saved is remarkable."</p><div class="love-by">— Patricia W., Operations Director</div></div>
+      <div class="love-card"><p class="love-q">"The AI reports are unbelievable. What took our team hours each week now takes minutes."</p><div class="love-by">— Anthony B., Executive Director</div></div>
+      <div class="love-card"><p class="love-q">"I can check compliance in real time instead of waiting for the monthly review. Game changer."</p><div class="love-by">— Lisa H., Quality Assurance</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="wrap">
+    <div class="testi-grid">
+      <div class="t-card fade-in d1">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-q">"Kibu has completely transformed how we document services. Our DSPs are happier and our compliance scores have never been better."</p>
+        <div class="t-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#93c5fd,#6366f1)">R</div>
+          <div><div class="t-name">Rebecca C.</div><div class="t-role">Program Director, Easterseals</div></div>
+        </div>
+      </div>
+      <div class="t-card fade-in d2">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-q">"The content library has been a complete game-changer for our day programs. Members are engaged, and sessions document themselves."</p>
+        <div class="t-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#34d399,#059669)">J</div>
+          <div><div class="t-name">James M.</div><div class="t-role">Day Program Manager, UCP</div></div>
+        </div>
+      </div>
+      <div class="t-card fade-in d3">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-q">"We passed our last audit with flying colors. The auditor literally commented on how organized our documentation was. That's Kibu."</p>
+        <div class="t-author">
+          <div class="t-av" style="background:linear-gradient(135deg,#f472b6,#be185d)">T</div>
+          <div><div class="t-name">Theresa N.</div><div class="t-role">Compliance Officer, The ARC</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap" style="position:relative;z-index:1">
+    <h2 class="cta-h2">Ready to Focus on People, Not Paper?</h2>
+    <p class="cta-sub">Join 200+ organizations delivering better care with Kibu.</p>
+    <a href="#" class="btn-cta-lg">Get a demo</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="#" class="f-logo">ki<em style="font-style:normal;color:var(--sun)">bu</em></a>
+        <p class="f-desc">The platform for disability service providers — simplifying compliance, documentation, and content delivery so your team can focus on what matters.</p>
+        <address class="f-address">78 Harvard Ave, Floor 3<br>Stamford, CT 06902</address>
+      </div>
+      <div>
+        <div class="f-col-title">Solutions</div>
+        <div class="f-links">
+          <a href="#" class="f-link">Documentation</a>
+          <a href="#" class="f-link">Content Library</a>
+          <a href="#" class="f-link">Compliance</a>
+          <a href="#" class="f-link">Life Plans</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-col-title">Resources</div>
+        <div class="f-links">
+          <a href="#" class="f-link">Blog</a>
+          <a href="#" class="f-link">Help Center</a>
+          <a href="#" class="f-link">About</a>
+          <a href="#" class="f-link">Contact</a>
+          <a href="#" class="f-link">Careers</a>
+          <a href="#" class="f-link">Submit RFP</a>
+          <a href="#" class="f-link">Changelog</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-col-title">Connect</div>
+        <div class="f-social" style="margin-bottom:18px">
+          <a href="#" class="f-soc" aria-label="LinkedIn"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="f-soc" aria-label="Instagram"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="f-soc" aria-label="Facebook"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="#" class="f-soc" aria-label="YouTube"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="var(--ink)"/></svg></a>
+        </div>
+        <a href="#" class="btn-cta" style="font-size:13px">Get a demo</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="f-copy">© 2026 kibu. All rights reserved.</p>
+      <div class="f-legal">
+        <a href="#" class="f-link">Privacy Policy</a>
+        <a href="#" class="f-link">Terms of Service</a>
+        <a href="#" class="f-link">Member Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), {passive:true});
+
+// Mobile menu
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById('tab-' + id);
+    if (panel) panel.classList.add('active');
+  });
+});
+
+// Category pills
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Scroll-triggered fade-in
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, {threshold: 0.1, rootMargin: '0px 0px -32px 0px'});
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

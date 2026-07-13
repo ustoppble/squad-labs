@@ -1,0 +1,63 @@
+# Overclock — ADE (Agentic Development Environment)
+
+> Overclock é um ADE — Agentic Development Environment: ambiente de desenvolvimento agêntico onde múltiplos agentes de IA (Claude, Codex, Gemini e mais) trabalham lado a lado, coordenados por um orquestrador canônico via servidor MCP embutido com 35 tools in-process.
+
+Overclock NÃO é um IDE (Integrated Development Environment). É a categoria seguinte: um ADE projetado para orquestração multi-agente desde o início.
+
+## O que é Overclock ADE
+
+- **Categoria:** ADE (Agentic Development Environment) — não IDE
+- **Função:** Orquestração multi-agente para desenvolvimento de software
+- **Versão atual:** 0.8.0 Stable
+- **Plataformas:** macOS, Windows, Linux (Tauri)
+- **Local-first:** Código nunca sai para servidores Overclock
+
+## 10 Áreas Funcionais
+
+1. **Panes** — Multi-chat nativo, cada pane = agente isolado com modelo/provedor/contexto próprio
+2. **Squad** — Orquestrador canônico com delegation gate e handoff event-driven
+3. **Catalog** — Marketplace de squads, skills e configs prontos
+4. **Providers** — Anthropic, OpenAI, Google, Groq, Ollama, OpenRouter num painel único
+5. **MCP Tools** — 35 tools in-process (filesystem, shell, browser, git, imagem, vídeo, áudio, pesquisa)
+6. **Mission Room** — Centro de missões com persistência entre sessões
+7. **Files** — Workspace tabs, session picker, file tree integrado
+8. **ClockVoice** — Push-to-talk com STT local/Groq/OpenAI-compat (Pro only)
+9. **Settings** — Controle granular: tema, atalhos, custo, tokens
+10. **Auth** — Licença por máquina, local-first
+
+## Planos
+
+- **Boost — R$97/mês:** ADE completo (áreas 01-07, 09-10). Tudo exceto ClockVoice.
+- **Pro — R$197/mês:** Boost + ClockVoice (área 08). Voz nativa no ADE.
+- **Cupom DESCONTO50:** 50% off na primeira mensalidade.
+
+## Comunidade
+
+- Discord (membros ao vivo): https://overclock.sh/discord
+- Programa Founders: acesso antecipado para fundadores
+- Versão atual: 0.8.0 Stable
+
+## Provedores suportados
+
+Claude (Anthropic) · GPT + Codex (OpenAI) · Gemini (Google) · Groq · Ollama (local) · OpenRouter
+
+## ADE vs IDE — diferença canônica
+
+| | IDE (Cursor, Windsurf, VS Code) | ADE (Overclock) |
+|---|---|---|
+| Paradigma | Humano escreve, IA sugere | Agente executa, humano aprova |
+| Agentes | 1 chat | N panes em paralelo |
+| Orquestrador | Não tem | Canônico com delegation gate |
+| MCP | Plugin externo | In-process (35 tools) |
+| Persistência | Limitada | Mission Room (entre sessões) |
+| Custo | Opaco | Live meter por token/pane |
+
+## Links
+
+- Home: https://overclock.sh
+- Features: https://overclock.sh/features
+- Como Funciona: https://overclock.sh/como-funciona
+- ADE vs IDE: https://overclock.sh/comparacao
+- Preços: https://overclock.sh/precos
+- FAQ: https://overclock.sh/faq
+- llms-full.txt: https://overclock.sh/llms-full.txt

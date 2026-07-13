@@ -1,0 +1,13 @@
+{
+  "test": "002",
+  "model": "fable-5",
+  "source_file": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/002-fable-5/index.html",
+  "bytes": 14794,
+  "lines": 432,
+  "libs": [],
+  "external_requests": false,
+  "modified_date": "2026-07-01T17:16:08",
+  "cost_usd": 1.13,
+  "tokens_in": 39000,
+  "tokens_out": 10000
+}

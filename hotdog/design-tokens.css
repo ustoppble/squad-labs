@@ -1,0 +1,295 @@
+/* ============================================================================
+   SINGULAR CONTABILIDADE — DESIGN TOKENS
+   System: "Ledger Observatory" — dark sci-fi mission-control for accounting.
+   Brand-fused: Singular electric-green accent + Poppins, modal.com discipline.
+   Framework-agnostic CSS custom properties. Drop into the global stylesheet.
+
+   Token contract is STABLE. Downstream builders consume these names verbatim.
+   Naming: --<category>-<role>[-<state/variant>]
+
+   FUSED DIRECTION (see DESIGN-SYSTEM.md → FUSION DELTA):
+   - Accent is Singular brand green #02DF5F (was ice-blue #5AD2FF). ONE accent,
+     used with modal.com restraint: interactive/focus/selection only.
+   - Fonts: Poppins (brand display + UI) + IBM Plex Mono (tabular money figures).
+   - Glow is mono-hue green, incl. corner radial glow on hero/dashboard cards.
+   - Financial-positive is a SOFT MINT, deliberately distinct from the electric
+     accent green, so "interactive" never reads as "credit". Always sign-paired.
+   ============================================================================ */
+
+:root {
+  /* ------------------------------------------------------------------ */
+  /* 1. COLOR — LAYERED DARK BACKGROUNDS                                 */
+  /* Blue-cool undertone for depth. Stack: inset < base < surface <     */
+  /* elevated < overlay (each step lighter = closer to viewer).         */
+  /* ------------------------------------------------------------------ */
+  --bg-inset:     #05080C; /* recessed wells: inputs, table body behind rows */
+  --bg-base:      #080B11; /* app canvas / deepest backdrop */
+  --bg-surface:   #0E131B; /* sidebar, panels, primary containers */
+  --bg-elevated:  #161D27; /* cards, stat tiles, table header, popover */
+  --bg-overlay:   #1E2733; /* hover surfaces, menus, raised affordances */
+  --bg-scrim:     rgba(5, 8, 12, 0.72); /* modal backdrop */
+
+  /* Ambient depth wash — optional radial behind hero/dashboard.
+     Restrained: low-alpha green accent bloom, never full-bleed gamer glow.
+     Modal-technique "horizon" wash — single hue, fades fully to 0. */
+  --bg-glow-wash: radial-gradient(
+    120% 80% at 50% -10%,
+    rgba(2, 223, 95, 0.06) 0%,
+    rgba(2, 223, 95, 0.00) 60%
+  );
+
+  /* ------------------------------------------------------------------ */
+  /* 2. COLOR — STROKES / SCI-FI HAIRLINES                              */
+  /* Cool blue-tinted, NOT pure white — reads as backlit glass edge.    */
+  /* ------------------------------------------------------------------ */
+  --stroke-subtle:  rgba(148, 176, 214, 0.07); /* zebra dividers, faint splits */
+  --stroke-default: rgba(148, 176, 214, 0.12); /* card & input borders */
+  --stroke-strong:  rgba(148, 176, 214, 0.20); /* emphasized / hovered borders */
+  --stroke-accent:  rgba(2, 223, 95, 0.50);    /* active/selected edge — brand green */
+
+  /* Backlit top-edge highlight — inset into card/button for glass feel */
+  --hairline-top:   inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* ------------------------------------------------------------------ */
+  /* 3. COLOR — BRAND ACCENT (Singular electric green, used w/ restraint) */
+  /* THE accent = Singular's real brand green #02DF5F. Reserved for       */
+  /* interactivity, focus, selection, the one primary action — NEVER     */
+  /* decoration. Modal.com discipline: ≤ a handful per screen.           */
+  /* Financial-positive is a DIFFERENT, softer mint (§6) so a credit is  */
+  /* never confused with an interactive control.                         */
+  /* ------------------------------------------------------------------ */
+  --accent:        #02DF5F; /* Singular brand green — links, active, primary btn */
+  --accent-bright: #3DEE83; /* hover / highlight peak (lighter) */
+  --accent-strong: #01953F; /* Singular dark green — pressed states */
+  --accent-muted:  rgba(2, 223, 95, 0.14); /* tint fills, selected rows */
+  --accent-faint:  rgba(2, 223, 95, 0.06); /* hover wash on rows/menu items */
+
+  /* ------------------------------------------------------------------ */
+  /* 4. COLOR — TEXT (AA+ contrast on dark surfaces)                    */
+  /* ------------------------------------------------------------------ */
+  --text-primary:   #EAF0F7; /* headings, key data — ~16:1 on --bg-base */
+  --text-secondary: #A7B4C6; /* body, secondary cells — ~9:1 */
+  --text-tertiary:  #7C8A9E; /* captions, muted labels — ~5:1 (AA normal) */
+  --text-disabled:  #49515F; /* disabled — decorative contrast only */
+  --text-on-accent: #03130A; /* dark text on green accent fills — AA+ (white-on-green fails AA) */
+  --text-accent:    #5BEE96; /* accent-colored text (lighter green for dark-bg AA) */
+  --text-inverse:   #080B11; /* on light/inverted surfaces */
+
+  /* ------------------------------------------------------------------ */
+  /* 5. COLOR — SEMANTIC (tuned for dark; each has fg text + soft bg)    */
+  /* ------------------------------------------------------------------ */
+  --success:        #46D38A;
+  --success-text:   #74E3A8; /* AA on dark */
+  --success-bg:     rgba(70, 211, 138, 0.13);
+  --success-border: rgba(70, 211, 138, 0.38);
+
+  --warning:        #E8B14C;
+  --warning-text:   #F2C76E;
+  --warning-bg:     rgba(232, 177, 76, 0.13);
+  --warning-border: rgba(232, 177, 76, 0.38);
+
+  --danger:         #F2585B;
+  --danger-text:    #FF8A8C;
+  --danger-bg:      rgba(242, 88, 91, 0.13);
+  --danger-border:  rgba(242, 88, 91, 0.40);
+
+  --info:           #7BA0FF; /* periwinkle — distinct from the green accent */
+  --info-text:      #A6BEFF;
+  --info-bg:        rgba(123, 160, 255, 0.13);
+  --info-border:    rgba(123, 160, 255, 0.38);
+
+  /* ------------------------------------------------------------------ */
+  /* 6. COLOR — FINANCIAL SIGN (THE SIGNATURE)                          */
+  /* Accounting's debit/credit convention as first-class tokens.        */
+  /* Use ONLY for monetary/numeric sign, never general UI state.        */
+  /* Soft MINT, deliberately desaturated vs the electric brand accent   */
+  /* (#02DF5F) — a "data green", not an "action green". Always paired   */
+  /* with a +/− sign + right-align so color is never the sole signal.   */
+  /* ------------------------------------------------------------------ */
+  --value-positive: #5EE0A0; /* credits, gains, paid — soft mint (≠ brand accent) */
+  --value-negative: #FF7A7C; /* debits, losses, overdue */
+  --value-neutral:  #A7B4C6; /* zero / not applicable */
+  --value-pending:  #F2C76E; /* awaiting reconciliation */
+
+  /* ============================================================ */
+  /* 7. ELEVATION — SHADOWS & GLOW (glow capped for daily use)    */
+  /* ============================================================ */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.60);
+
+  /* Glow — RESTRAINED, mono-hue green. Tier 1 default (focus/active),
+     Tier 2 hero CTA only. Single hue is what keeps it premium, not gamery. */
+  --glow-accent:        0 0 0 1px rgba(2, 223, 95, 0.24),
+                        0 0 18px rgba(2, 223, 95, 0.16);
+  --glow-accent-strong: 0 0 24px rgba(2, 223, 95, 0.30); /* CTA hover ONLY */
+  --glow-success:       0 0 16px rgba(70, 211, 138, 0.20);
+  --glow-danger:        0 0 16px rgba(242, 88, 91, 0.22);
+
+  /* Modal-technique CORNER RADIAL GLOW — mono-hue green, for hero/dashboard
+     cards & stat tiles ONLY. Apply as a background layer over --bg-elevated;
+     vary which corner per tile so cards don't read as the same stamp.
+     Capped low alpha (~0.16) for a tool used all day — never on data tables. */
+  --card-glow-tl: radial-gradient(60% 80% at -8% 0%,   rgba(2, 223, 95, 0.16), rgba(2, 223, 95, 0) 65%);
+  --card-glow-tr: radial-gradient(60% 80% at 108% 14%, rgba(2, 223, 95, 0.15), rgba(2, 223, 95, 0) 65%);
+  --card-glow-br: radial-gradient(55% 75% at 100% 115%, rgba(2, 223, 95, 0.15), rgba(2, 223, 95, 0) 60%);
+
+  /* Composed card elevation: drop shadow + backlit glass top edge */
+  --elevation-card: var(--shadow-md), var(--hairline-top);
+  --elevation-pop:  var(--shadow-lg), var(--hairline-top);
+
+  /* ============================================================ */
+  /* 8. RADIUS                                                    */
+  /* ============================================================ */
+  --radius-xs:   3px;  /* chips inner, tags */
+  --radius-sm:   5px;  /* inputs, small buttons */
+  --radius-md:   8px;  /* buttons, fields, table container */
+  --radius-lg:   12px; /* cards, stat tiles */
+  --radius-xl:   16px; /* modals, large panels */
+  --radius-full: 999px;/* status pills, avatars */
+
+  /* ============================================================ */
+  /* 9. SPACING (4px base unit)                                   */
+  /* ============================================================ */
+  --space-0: 0;
+  --space-1: 0.25rem; /* 4  */
+  --space-2: 0.5rem;  /* 8  */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem;    /* 16 */
+  --space-5: 1.5rem;  /* 24 */
+  --space-6: 2rem;    /* 32 */
+  --space-7: 3rem;    /* 48 */
+  --space-8: 4rem;    /* 64 */
+  --space-9: 6rem;    /* 96 */
+
+  /* ============================================================ */
+  /* 10. TYPOGRAPHY  (Singular brand font = Poppins)              */
+  /* Display: Poppins (Singular brand voice, used with restraint).*/
+  /* UI: Poppins (brand consistency, sentence-case legibility).   */
+  /* Data: IBM Plex Mono (tabular figures, money, CNPJ, IDs).     */
+  /* ============================================================ */
+  --font-display: "Poppins", "Space Grotesk", system-ui, sans-serif;
+  --font-ui:      "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* Type scale — compact for dense data, base 14px UI */
+  --text-2xs:  0.6875rem; /* 11 — micro meta, table sub-labels */
+  --text-xs:   0.75rem;   /* 12 — captions, chip text */
+  --text-sm:   0.8125rem; /* 13 — dense table cells, secondary UI */
+  --text-base: 0.875rem;  /* 14 — body / UI default */
+  --text-md:   1rem;      /* 16 — emphasized body, inputs */
+  --text-lg:   1.125rem;  /* 18 — card titles */
+  --text-xl:   1.375rem;  /* 22 — section headings */
+  --text-2xl:  1.75rem;   /* 28 — page titles */
+  --text-3xl:  2.25rem;   /* 36 — dashboard headings */
+  --text-4xl:  3rem;      /* 48 — hero stat */
+  --text-5xl:  4rem;      /* 64 — dominant dashboard number */
+
+  /* Weights */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Line-heights */
+  --leading-tight:   1.05; /* display / big numbers — modal-tight, confident hero */
+  --leading-snug:    1.3;  /* table rows, headings */
+  --leading-normal:  1.5;  /* body copy */
+  --leading-relaxed: 1.65; /* long-form help text */
+
+  /* Letter-spacing */
+  --tracking-display: -0.01em; /* large display, slight tighten */
+  --tracking-normal:  0;
+  --tracking-label:   0.08em;  /* uppercase eyebrows / labels */
+  --tracking-mono:    0.01em;  /* mono data legibility */
+
+  /* ============================================================ */
+  /* 11. MOTION (subtle, fast, purposeful — capped)              */
+  /* ============================================================ */
+  --dur-instant: 80ms;  /* press feedback */
+  --dur-fast:    140ms; /* hover, focus, micro */
+  --dur-base:    200ms; /* default transitions */
+  --dur-slow:    320ms; /* section/panel transitions (CAP for daily views) */
+  --dur-slower:  480ms; /* modal/overlay entrance only */
+
+  --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);   /* default in-views */
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ============================================================ */
+  /* 12. FOCUS & HIT AREAS (a11y)                                 */
+  /* ============================================================ */
+  --ring-focus:  0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
+  --hit-min:     2.5rem;  /* 40px minimum interactive target */
+  --row-height:  2.75rem; /* 44px table row touch-comfortable */
+
+  /* ============================================================ */
+  /* 13. LAYOUT PRIMITIVES                                        */
+  /* ============================================================ */
+  --sidebar-width:    16rem;   /* 256px */
+  --sidebar-collapsed: 4rem;   /* 64px  */
+  --topbar-height:    3.5rem;  /* 56px  */
+  --content-max:      90rem;   /* 1440px content cap */
+  --z-base: 0;
+  --z-sticky: 100;
+  --z-topbar: 200;
+  --z-sidebar: 300;
+  --z-popover: 800;
+  --z-modal: 1000;
+  --z-toast: 1100;
+}
+
+/* ============================================================ */
+/* GLOBAL HOOKUP (optional defaults the builder may keep)       */
+/* ============================================================ */
+html {
+  color-scheme: dark;
+}
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tabular figures helper — apply to any numeric/money column */
+.tnum {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-mono);
+}
+
+/* Uppercase eyebrow/label helper */
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* Focus-visible: consistent accent ring everywhere */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================ */
+/* REDUCED MOTION — honor user preference (hard cap)            */
+/* ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

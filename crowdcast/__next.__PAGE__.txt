@@ -1,0 +1,12 @@
+1:"$Sreact.fragment"
+2:I[42724,["/squad-labs/crowdcast/_next/static/chunks/0vhu4-_69dp7n.js","/squad-labs/crowdcast/_next/static/chunks/158myu8e_yme3.js","/squad-labs/crowdcast/_next/static/chunks/1weim2cnpfam0.js"],"default"]
+3:I[83889,["/squad-labs/crowdcast/_next/static/chunks/0vhu4-_69dp7n.js","/squad-labs/crowdcast/_next/static/chunks/158myu8e_yme3.js","/squad-labs/crowdcast/_next/static/chunks/1weim2cnpfam0.js"],"default"]
+4:I[92556,["/squad-labs/crowdcast/_next/static/chunks/0vhu4-_69dp7n.js","/squad-labs/crowdcast/_next/static/chunks/158myu8e_yme3.js","/squad-labs/crowdcast/_next/static/chunks/1weim2cnpfam0.js"],"default"]
+5:I[82450,["/squad-labs/crowdcast/_next/static/chunks/0vhu4-_69dp7n.js","/squad-labs/crowdcast/_next/static/chunks/158myu8e_yme3.js","/squad-labs/crowdcast/_next/static/chunks/1weim2cnpfam0.js"],"default"]
+6:I[70755,["/squad-labs/crowdcast/_next/static/chunks/0vhu4-_69dp7n.js","/squad-labs/crowdcast/_next/static/chunks/158myu8e_yme3.js","/squad-labs/crowdcast/_next/static/chunks/1weim2cnpfam0.js"],"default"]
+7:I[30366,["/squad-labs/crowdcast/_next/static/chunks/0vhu4-_69dp7n.js","/squad-labs/crowdcast/_next/static/chunks/158myu8e_yme3.js","/squad-labs/crowdcast/_next/static/chunks/1weim2cnpfam0.js"],"default"]
+8:I[56691,["/squad-labs/crowdcast/_next/static/chunks/0vhu4-_69dp7n.js","/squad-labs/crowdcast/_next/static/chunks/158myu8e_yme3.js","/squad-labs/crowdcast/_next/static/chunks/1weim2cnpfam0.js"],"default"]
+9:I[97367,["/squad-labs/crowdcast/_next/static/chunks/0vhu4-_69dp7n.js","/squad-labs/crowdcast/_next/static/chunks/158myu8e_yme3.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[[["$","$L2",null,{}],["$","main",null,{"children":[["$","$L3",null,{}],["$","$L4",null,{}],["$","$L5",null,{}],["$","$L6",null,{}],["$","$L7",null,{}]]}],["$","$L8",null,{}]],[["$","script","script-0",{"src":"/squad-labs/crowdcast/_next/static/chunks/1weim2cnpfam0.js","async":true}]],["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"1ps-FZD6QyTw5f2s5mzFD"}
+b:null

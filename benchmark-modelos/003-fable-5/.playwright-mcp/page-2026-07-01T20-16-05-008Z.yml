@@ -1,0 +1,5 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e3]:
+    - button "+50 bolinhas" [ref=f2e4] [cursor=pointer]
+    - generic [ref=f2e5]: 50 bolinhas
+  - generic: "segure o mouse: atrai · clique rápido: explosão"

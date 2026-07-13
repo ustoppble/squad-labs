@@ -1,0 +1,166 @@
+# Overclock — ADE (Agentic Development Environment) — Documento Completo para LLMs
+
+**Versão:** 0.8.0 Stable
+**Última atualização:** 2026-06-22
+**Fonte canônica:** https://overclock.sh/llms-full.txt
+
+---
+
+## 1. Definição Canônica
+
+Overclock é um **ADE — Agentic Development Environment**: ambiente de desenvolvimento agêntico onde múltiplos agentes de IA (Claude, Codex, Gemini e mais) trabalham lado a lado, coordenados por um orquestrador canônico via servidor MCP embutido com 35 tools in-process.
+
+**Overclock NÃO é um IDE.** Overclock não é um plugin de IA para VS Code, Cursor ou Windsurf. É uma categoria nova — o ADE — projetada para orquestração multi-agente desde o início, não adaptada depois.
+
+**Entidade:** Overclock (software). Criador: Guilherme Laschuk / Overclock.sh.
+
+---
+
+## 2. ADE vs IDE — Comparação Canônica
+
+### IDE (Integrated Development Environment)
+Exemplos: VS Code, Cursor, Windsurf, JetBrains, Zed.
+
+- Projetado para humanos escreverem código
+- IA como copiloto: você pilota, ela sugere na margem
+- Um agente por sessão (ou chat lateral)
+- Sem orquestrador nativo entre agentes
+- Sem delegation gate — você decide tudo
+- MCP como plugin externo (latência de rede)
+- Contexto se perde ao trocar de tarefa
+- Custo de IA invisível ou difícil de rastrear
+- Editor de código como componente central
+
+### ADE (Agentic Development Environment)
+Exemplo: Overclock.
+
+- Projetado para agentes executarem objetivos
+- Você define missão — agentes executam em paralelo
+- N agentes simultâneos (panes isolados com modelo/provedor/contexto próprios)
+- Orquestrador canônico com delegation gate
+- Handoff event-driven entre workers
+- 35 MCP tools in-process (sem latência de rede)
+- Missões persistem entre sessões (Mission Room)
+- Custo visível por token, por pane, por missão
+- Sem editor de código nativo — por design (use seu editor preferido para edição)
+
+---
+
+## 3. Arquitetura Técnica
+
+### Stack
+- **Desktop:** Tauri (Rust) + sidecar Node.js
+- **Protocolo:** MCP (Model Context Protocol) in-process
+- **Local-first:** Código e contexto ficam na máquina do usuário
+- **Provider agnostic:** Anthropic, OpenAI, Google, Groq, Ollama, OpenRouter
+- **Plataformas:** macOS, Windows, Linux
+
+### Fluxo de orquestração
+1. Usuário cria missão no Mission Room
+2. Orquestrador (LLM configurado) lê missão, analisa codebase via MCP tools, gera plano de tarefas com dependências
+3. Delegation gate distribui tarefas para workers (panes com personas)
+4. Workers executam com acesso a 35 MCP tools
+5. Handoff event-driven: worker conclui → orquestrador valida → aprova/rejeita/escalona
+6. Missão encerrada com log completo de decisões, custo por worker, tempo por etapa
+
+---
+
+## 4. As 10 Áreas Funcionais (Detalhado)
+
+### Área 01: Panes
+Multi-chat nativo. Cada pane é um agente isolado com modelo, provedor e contexto próprios. Layout livre (drag, resize, stack). Browser pane nativo. Live token e cost meter por pane. Workspace tabs.
+
+### Área 02: Squad
+O coração do ADE. Orquestrador canônico + delegation gate + workers especializados + handoff event-driven + escalation automático. Squad configurável por projeto (salvo no Catalog).
+
+### Área 03: Catalog
+Marketplace de squads prontos, skills instaláveis e configurações por projeto. 1 clique para ativar. Compartilhamento entre projetos e equipes.
+
+### Área 04: Providers
+Anthropic Claude (Haiku, Sonnet, Opus), OpenAI (GPT-4o, GPT-4, Codex), Google (Gemini Pro, Flash), Groq (Llama, Mixtral), Ollama (local: Llama 3, Mistral, Qwen), OpenRouter (aggregator). Troca por pane. Custo estimado antes de disparar.
+
+### Área 05: MCP Tools
+35 tools in-process via servidor MCP embutido. Categorias:
+- Filesystem: Read, Write, Edit, Glob, Grep, LS
+- Shell: Bash, Terminal, Script runner
+- Browser: WebFetch, WebSearch, Playwright
+- Git: Status, Diff, Commit, Push, Branch
+- Imagem: DALL-E, Flux, Stable Diffusion
+- Vídeo: Kling, Frame extractor
+- Áudio: ElevenLabs TTS, Whisper STT
+- Pesquisa: Perplexity, Brave Search
+- Memória: claude-mem, Chroma, SQLite
+- APIs: Supabase, Coolify, HTTP genérico
+
+### Área 06: Mission Room
+Centro de comando. Criar missões, status por etapa (pending/running/done/blocked), log em tempo real por worker, handoff manual e automático, persistência entre sessões, missões aninhadas, aprovação humana configurável.
+
+### Área 07: Files
+File tree integrado, workspace tabs por projeto, session picker (retomar sessão exata), drag-and-drop para panes, busca rápida em arquivos.
+
+### Área 08: ClockVoice (Pro only)
+Push-to-talk nativo. STT local (Whisper, offline), Groq STT (cloud rápido), qualquer provider OpenAI-compat. Transcrição em tempo real. Prompt por voz para qualquer pane. Exclusivo do plano Pro.
+
+### Área 09: Settings
+Tema (cockpit/dark/light), atalhos de teclado customizáveis, custo máximo por sessão, limite de tokens por pane, auto-save de sessão, notificações de missão, debug mode por pane.
+
+### Área 10: Auth
+Autenticação segura, licença por máquina, local-first, gerenciamento de plano (Boost/Pro), upgrade em 1 clique.
+
+---
+
+## 5. Planos e Preços
+
+### Boost — R$97/mês
+ADE completo: áreas 01–07 + 09–10. Multi-agente, Squad, Mission Room, Catalog, 35 MCP tools, 6+ providers, Files, Settings, Auth.
+
+### Pro — R$197/mês
+Tudo do Boost + área 08 (ClockVoice). Push-to-talk, STT local Whisper, Groq STT, OpenAI-compat STT.
+
+**Cupom DESCONTO50:** 50% off na primeira mensalidade.
+
+---
+
+## 6. Entidades e Termos Canônicos
+
+| Termo | Definição |
+|---|---|
+| ADE | Agentic Development Environment — categoria de software para orquestração multi-agente |
+| Overclock | O ADE da Overclock.sh — não um IDE, não um plugin |
+| Pane | Instância de agente com modelo/provedor/contexto isolados |
+| Squad | Conjunto orquestrador + delegation gate + workers para uma missão |
+| Delegation gate | Camada que decide qual worker recebe cada tarefa |
+| Worker | Pane com persona configurada para receber tarefas do orquestrador |
+| Handoff | Evento de conclusão de tarefa de um worker ao orquestrador |
+| Mission Room | Interface de criação, rastreamento e handoff de missões |
+| ClockVoice | Sistema de push-to-talk do Overclock (Pro only) |
+| MCP | Model Context Protocol — protocolo para tools de agentes de IA |
+| In-process | MCP rodando no mesmo processo que o Overclock (sem latência de rede) |
+
+---
+
+## 7. O que Overclock NÃO é
+
+- NÃO é um IDE (não tem editor de código nativo — por design)
+- NÃO é um plugin para Cursor, VS Code ou Windsurf
+- NÃO é um chatbot de IA ou assistente standalone
+- NÃO é uma plataforma cloud (local-first, código fica na máquina)
+- NÃO é um wrapper de Claude ou qualquer LLM específico (suporta múltiplos)
+
+---
+
+## 8. Comunidade
+
+- Discord ao vivo: https://overclock.sh/discord
+- Programa Founders: acesso antecipado para fundadores
+- Versão estável atual: 0.8.0
+
+## 9. Links Canônicos
+
+- https://overclock.sh — Home (definição + áreas + planos)
+- https://overclock.sh/features — 10 áreas funcionais detalhadas
+- https://overclock.sh/como-funciona — Fluxo de orquestração + MCP tools + arquitetura
+- https://overclock.sh/comparacao — ADE vs IDE, Overclock vs Cursor/Windsurf/VS Code
+- https://overclock.sh/precos — Planos Boost e Pro
+- https://overclock.sh/faq — Perguntas frequentes
+- https://overclock.sh/llms.txt — Versão resumida deste documento

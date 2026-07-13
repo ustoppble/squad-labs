@@ -1,0 +1,255 @@
+{
+  "sonnet-5": {
+    "context_window": "1M tokens (docs oficiais Anthropic, jul/2026)",
+    "max_output": "128k tokens (docs oficiais Anthropic, jul/2026)",
+    "release_date": "2026-06-30",
+    "cache_pricing": "write 1,25× / read 0,10× (Anthropic — fórmula universal do benchmark, dossiê §8)",
+    "positioning": "Default dos planos Grátis e Pro: capacidade perto do Opus 4.8 por uma fração do preço — frontier ao alcance de quem não paga US$200/mês.",
+    "official_benchmarks": [
+      { "name": "SWE-bench Pro", "score": "63,2%", "source": "Anthropic" },
+      { "name": "Terminal-Bench 2.1", "score": "80,4%", "source": "Anthropic" },
+      { "name": "Humanity's Last Exam (sem ferramentas)", "score": "43,2%", "source": "Anthropic" },
+      { "name": "Humanity's Last Exam (com ferramentas)", "score": "57,4%", "source": "Anthropic", "note": "empata com o Opus 4.8 (57,9%)" },
+      { "name": "OSWorld-Verified", "score": "81,2%", "source": "Anthropic" },
+      { "name": "GDPval-AA v2", "score": "1618", "source": "Anthropic", "note": "pontuação, não %; supera o Opus 4.8 (1615)" }
+    ],
+    "asterisks": [
+      "Preço promocional US$2/US$10 por M válido até 31/08/2026; depois sobe para US$3/US$15.",
+      "Tokenizer novo conta 1,0–1,35× mais tokens que as versões anteriores — come parte da vantagem de preço.",
+      "Todos os scores oficiais são auto-reportados pela Anthropic, não benchmarks independentes."
+    ],
+    "measured_behavior": {
+      "verificou_browser": "2/4",
+      "idas_total": 50,
+      "note": "Abriu o navegador no Solar (26 idas) e no FPS (13); no FPS bateu em 3 erros e corrigiu com 1 Edit. Nos testes fáceis: 1 Write, 0 Edit. Custo da bateria: $2,06 (preço promo, recalculado dos tokens reais)."
+    },
+    "sources": [
+      "benchmark/sonnet-5/modelos/sonnet-5.html (specs, benchmarks oficiais Anthropic, promo)",
+      "benchmark/sonnet-5/benchmark.html (comportamento medido, idas, custo)",
+      "overclock-benchmark/docs/history/ANALISE-sonnet-5.md §4 (custo $2,06, idas 50, browser 2/4)",
+      "overclock-benchmark/docs/research/gpt-5-6-dossier.md §7-8 (preço, mecânica de cache)"
+    ]
+  },
+  "sonnet-4-6": {
+    "context_window": "1M tokens (docs oficiais Anthropic, jul/2026)",
+    "max_output": "128k tokens (docs oficiais Anthropic, jul/2026)",
+    "release_date": null,
+    "cache_pricing": "write 1,25× / read 0,10× (Anthropic — fórmula universal do benchmark, dossiê §8)",
+    "positioning": null,
+    "official_benchmarks": [
+      { "name": "SWE-bench Pro", "score": "58,1%", "source": "Anthropic", "note": "da tabela comparativa publicada na ficha do Sonnet 5" },
+      { "name": "Terminal-Bench 2.1", "score": "67,0%", "source": "Anthropic" },
+      { "name": "Humanity's Last Exam (sem ferramentas)", "score": "34,6%", "source": "Anthropic" },
+      { "name": "Humanity's Last Exam (com ferramentas)", "score": "46,8%", "source": "Anthropic" },
+      { "name": "OSWorld-Verified", "score": "78,5%", "source": "Anthropic" },
+      { "name": "GDPval-AA v2", "score": "1395", "source": "Anthropic", "note": "pontuação, não %" }
+    ],
+    "asterisks": [
+      "Sem ficha própria na v0 — dados extraídos da tabela comparativa do Sonnet 5 e do benchmark.html.",
+      "Preço US$3/US$15 por M (geração anterior, usada como régua de evolução na v0).",
+      "Scores auto-reportados pela Anthropic."
+    ],
+    "measured_behavior": {
+      "verificou_browser": "0/4",
+      "idas_total": 14,
+      "note": "Nunca abriu o navegador — escreve e confia (1–3 ferramentas por teste), entrega às cegas. O mais verboso da bateria (Apple: 1065 linhas, ~3× os outros; FPS: 887 linhas num chute só). Custo da bateria: $2,27."
+    },
+    "sources": [
+      "benchmark/sonnet-5/modelos/sonnet-5.html (tabela de benchmarks oficiais)",
+      "benchmark/sonnet-5/benchmark.html (preço, comportamento medido, idas, custo)",
+      "overclock-benchmark/docs/history/ANALISE-sonnet-5.md §4 (custo $2,27, idas 14, browser 0/4)"
+    ]
+  },
+  "opus-4-8": {
+    "context_window": "1M tokens (docs oficiais Anthropic, jul/2026)",
+    "max_output": "128k tokens (docs oficiais Anthropic, jul/2026)",
+    "release_date": null,
+    "cache_pricing": "write 1,25× / read 0,10× (Anthropic — fórmula universal do benchmark, dossiê §8)",
+    "positioning": "Era o topo da linha da Anthropic até o Fable 5; a própria Anthropic posiciona o Fable 5 como seu sucessor de upgrade — o Opus segue em US$5/US$25 como degrau do meio.",
+    "official_benchmarks": [
+      { "name": "SWE-Bench Pro", "score": "69,2%", "source": "Anthropic" },
+      { "name": "Terminal-Bench 2.1", "score": "82,7%", "source": "Anthropic", "note": "a OpenAI reporta o mesmo modelo no mesmo benchmark em 78,9% — divergência de auto-reporte entre labs" },
+      { "name": "Terminal-Bench 2.1", "score": "78,9%", "source": "OpenAI", "note": "número da tabela divulgada pela OpenAI para o mesmo modelo" },
+      { "name": "FrontierCode Diamond (xhigh)", "score": "13,4%", "source": "Anthropic" },
+      { "name": "GDPval-AA", "score": "1890", "source": "Anthropic", "note": "pontuação, não %" },
+      { "name": "OSWorld-Verified", "score": "83,4%", "source": "Anthropic" },
+      { "name": "Humanity's Last Exam (com ferramentas)", "score": "57,9%", "source": "Anthropic" },
+      { "name": "Humanity's Last Exam (sem ferramentas)", "score": "49,8%", "source": "Anthropic" },
+      { "name": "Blueprint-Bench 2", "score": "14,5%", "source": "Anthropic" },
+      { "name": "ExploitBench (Cap%)", "score": "40,0%", "source": "Anthropic" },
+      { "name": "HealthBench Professional", "score": "56,9%", "source": "Anthropic" },
+      { "name": "Score composto Artificial Analysis", "score": "56", "source": "Artificial Analysis", "note": "⚠️ reportado por fonte secundária" }
+    ],
+    "asterisks": [
+      "Divergência de auto-reporte: Terminal-Bench 2.1 = 82,7% segundo a Anthropic, 78,9% segundo a OpenAI — cada lab roda a própria bateria e publica o número que sai.",
+      "Scores oficiais auto-reportados pela Anthropic (tabela publicada com o lançamento do Fable 5)."
+    ],
+    "measured_behavior": {
+      "verificou_browser": "1/4",
+      "idas_total": 18,
+      "note": "Verificador seletivo: só abriu o navegador no FPS (o mais difícil), onde teve 1 erro e fez 2 Edits; escreveu e parou nos outros 3. O mais enxuto em linhas (305/382/233/704). Custo da bateria: $3,49 — 4,5× menos que o Fable 5."
+    },
+    "sources": [
+      "benchmark/sonnet-5/modelos/opus-4-8.html (specs, benchmarks, divergência Terminal-Bench, comportamento)",
+      "benchmark/sonnet-5/modelos/fable-5.html (tabela oficial Anthropic de onde os scores foram extraídos)",
+      "benchmark/sonnet-5/benchmark.html (idas, custo, comportamento medido)",
+      "overclock-benchmark/docs/research/gpt-5-6-dossier.md §2 e §6 (Terminal-Bench OpenAI 78,9%, score AA 56)",
+      "overclock-benchmark/docs/history/ANALISE-sonnet-5.md §4 (custo $3,49, idas 18, browser 1/4)"
+    ]
+  },
+  "fable-5": {
+    "context_window": "1M tokens",
+    "max_output": "128k tokens",
+    "release_date": "2026-06-09",
+    "cache_pricing": "write 1,25× / read 0,10× (Anthropic — fórmula universal do benchmark, dossiê §8)",
+    "positioning": "O modelo mais capaz de ampla disponibilidade da Anthropic, feito para raciocínio exigente e trabalho agêntico de longo horizonte — gêmeo com safety classifiers do Mythos 5 (mesmo motor, mesmo preço).",
+    "official_benchmarks": [
+      { "name": "SWE-Bench Pro", "score": "80,3%", "source": "Anthropic" },
+      { "name": "Terminal-Bench 2.1", "score": "88,0%", "source": "Anthropic", "note": "* score do Mythos 5 (maior dos gêmeos); a OpenAI reporta o Fable 5 em 83,4% na tabela dela" },
+      { "name": "Terminal-Bench 2.1", "score": "83,4%", "source": "OpenAI", "note": "número da tabela divulgada pela OpenAI para o Fable 5 (Mythos 5 = 84,3%)" },
+      { "name": "FrontierCode Diamond (xhigh)", "score": "29,3%", "source": "Anthropic", "note": "mais que o dobro do Opus 4.8 (13,4%)" },
+      { "name": "GDPval-AA", "score": "1932", "source": "Anthropic", "note": "pontuação, não %" },
+      { "name": "OSWorld-Verified", "score": "85,0%", "source": "Anthropic" },
+      { "name": "Humanity's Last Exam (com ferramentas)", "score": "64,5%", "source": "Anthropic", "note": "* score do Mythos 5" },
+      { "name": "Humanity's Last Exam (sem ferramentas)", "score": "59,0%", "source": "Anthropic", "note": "* score do Mythos 5" },
+      { "name": "Blueprint-Bench 2", "score": "38,6%", "source": "Anthropic" },
+      { "name": "ExploitBench (Cap%)", "score": "78,0%", "source": "Anthropic", "note": "* score do Mythos 5 — o Fable, com safety classifiers, cai pro Opus 4.8 em cyber" },
+      { "name": "HealthBench Professional", "score": "66,0%", "source": "Anthropic", "note": "* score do Mythos 5" },
+      { "name": "Score composto Artificial Analysis", "score": "60", "source": "Artificial Analysis", "note": "⚠️ reportado por fonte secundária; lidera sobre Opus 4.8 (56), GPT-5.5 (55) e Grok 4.5 (54)" }
+    ],
+    "asterisks": [
+      "Preço US$10/US$50 por M — 2× o Opus 4.8, o mais caro da linha Claude.",
+      "Nas provas marcadas com * o número exibido é do Mythos 5 (gêmeo sem safety classifiers); em cyber e bio o Fable 5 faz fallback pro Opus 4.8 — na prática pontua mais perto do Opus nessas linhas.",
+      "Divergência de auto-reporte: Terminal-Bench 2.1 = 88,0% (Anthropic, maior dos gêmeos) vs 83,4% (OpenAI, Fable 5).",
+      "GA em 09/06/2026 com redeploy em 01/07/2026.",
+      "Scores oficiais auto-reportados pela Anthropic."
+    ],
+    "measured_behavior": {
+      "verificou_browser": "3/4",
+      "idas_total": 80,
+      "note": "Verificador mais agressivo da bateria: abriu o navegador no Solar, na Física e no FPS, e achou + corrigiu o próprio bug no Solar e no FPS (1 Edit cada); só no Apple escreveu e parou. Custo da bateria: $15,81 — 4,5× o Opus 4.8 e ~7× o Sonnet 5."
+    },
+    "sources": [
+      "benchmark/sonnet-5/modelos/fable-5.html (specs, GA/redeploy, benchmarks oficiais, gêmeos, comportamento)",
+      "benchmark/sonnet-5/benchmark.html (idas, custo, comportamento medido)",
+      "overclock-benchmark/docs/research/gpt-5-6-dossier.md §2, §6 e §7 (Terminal-Bench OpenAI 83,4%, score AA 60, preço/contexto/saída)",
+      "overclock-benchmark/docs/history/ANALISE-sonnet-5.md §4 (custo $15,81, idas 80, browser 3/4)"
+    ]
+  },
+  "grok-4-5": {
+    "context_window": "500k tokens",
+    "max_output": null,
+    "release_date": "2026-07-08",
+    "cache_pricing": "entrada cacheada US$0,50/M (xAI); fórmula do benchmark aplica a mecânica write 1,25× / read 0,10× comum aos 3 labs (dossiê §8)",
+    "positioning": "SKU única (grok-4.5) de classe topo de linha com reasoning_effort ajustável (low/medium/high) — o mais barato do topo, a US$2/US$6 por M.",
+    "official_benchmarks": [
+      { "name": "Score composto Artificial Analysis", "score": "54 (#4)", "source": "Artificial Analysis", "note": "⚠️ reportado por fonte secundária, não é número oficial da xAI; atrás de Fable 5 (60), Opus 4.8 (56) e GPT-5.5 (55)" },
+      { "name": "Uso agêntico de ferramentas / velocidade", "score": "líder do topo de linha", "source": "Artificial Analysis", "note": "⚠️ reportado — vence em uso agêntico de ferramentas e é o mais rápido do topo, sem score numérico citado" }
+    ],
+    "asterisks": [
+      "Score composto do Artificial Analysis é reportado por fonte secundária — não é número oficial da xAI.",
+      "Ferramentas server-side cobradas por fora dos tokens: web search, X search e code execution a US$5/1.000 chamadas cada; busca em anexo US$10/1k; collections/RAG US$2,50/1k — num agente que busca muito, pode superar o custo de token.",
+      "Custo da bateria (~$1,58) é ESTIMADO: o Grok CLI não expõe usage por request — entrada estimada por idas × contexto (teto, sem desconto de cache), saída por bytes do arquivo ÷ 4 (piso).",
+      "Claim de julgamento '4/4 renderizam, zero erro real de console' sem lastro persistido — nenhum console log da sessão 001-004 sobreviveu (ANALISE §5)."
+    ],
+    "measured_behavior": {
+      "verificou_browser": "0/4",
+      "idas_total": 17,
+      "note": "Nunca abriu o browser — só verificação estática via shell (wc, grep de refs externas). 1 Write, 0 Edit nos 4 testes; rápido (~3min/teste, 3–5 idas por teste, auditado nos logs ~/.grok/sessions) e verboso (4530 linhas, ~2× os Claude). Custo estimado da bateria: ~$1,58."
+    },
+    "sources": [
+      "benchmark/sonnet-5/modelos/grok-4-5.html (specs, preço, SKU única, ferramentas server-side, score AA)",
+      "benchmark/sonnet-5/benchmark.html (comportamento medido, idas por teste, metodologia de estimativa †)",
+      "overclock-benchmark/docs/research/gpt-5-6-dossier.md §6 (lançamento, preço, contexto, cache-in $0,50, tools $5/1k)",
+      "overclock-benchmark/docs/history/ANALISE-sonnet-5.md §4-5 (custo estimado ~$1,58, browser nunca, claim de console sem lastro)"
+    ]
+  },
+  "gpt-5-6-luna": {
+    "context_window": "1,5M tokens (⚠️ reportado por 2 fontes secundárias para a família GPT-5.6; página oficial da OpenAI retornou 403 — sem confirmação primária)",
+    "max_output": null,
+    "release_date": "2026-07-09",
+    "cache_pricing": "write 1,25× / read 0,10× (OpenAI confirmou: escrita a 1,25× e leitura com 90% de desconto — mesma mecânica da Anthropic)",
+    "positioning": "O tier de volume e baixa latência da família GPT-5.6 (US$1/US$6 por M): classificação, extração, roteamento, rascunho.",
+    "official_benchmarks": [
+      { "name": "Terminal-Bench 2.1", "score": "84,3%", "source": "OpenAI", "note": "avaliação divulgada pela própria OpenAI, não benchmark independente; empata com o Claude Mythos 5 (84,3%)" }
+    ],
+    "asterisks": [
+      "Anunciado em 26/06/2026; GA em 09/07/2026, após liberação de restrições pelo governo dos EUA em 08/07/2026 (reportado pela Axios).",
+      "Contexto de 1,5M tokens é ⚠️ reportado — sem confirmação em fonte primária (página oficial da OpenAI retornou 403).",
+      "Limite de saída (max output) não encontrado em nenhuma fonte.",
+      "ID de API provável gpt-5.6-luna — ⚠️ inferido do padrão do GPT-5.5, não confirmado em doc oficial.",
+      "Números de Terminal-Bench divulgados pela própria OpenAI — tratar como auto-reportado."
+    ],
+    "measured_behavior": {
+      "verificou_browser": null,
+      "idas_total": null,
+      "note": "ainda não auditado — Codex CLI do Overclock listava só gpt-5.5 na data do dossiê; runs entram quando o provider subir"
+    },
+    "sources": [
+      "overclock-benchmark/docs/research/gpt-5-6-dossier.md §1-2 e §10 (preço, posição, contexto ⚠️, Terminal-Bench, GA, bloqueio de infra)",
+      "benchmark/sonnet-5/modelos/gpt-5-6.html (ficha v0 da família)"
+    ]
+  },
+  "gpt-5-6-terra": {
+    "context_window": "1,5M tokens (⚠️ reportado por 2 fontes secundárias para a família GPT-5.6; página oficial da OpenAI retornou 403 — sem confirmação primária)",
+    "max_output": null,
+    "release_date": "2026-07-09",
+    "cache_pricing": "write 1,25× / read 0,10× (OpenAI confirmou: escrita a 1,25× e leitura com 90% de desconto — mesma mecânica da Anthropic)",
+    "positioning": "O tier intermediário da família GPT-5.6 (US$2,50/US$15 por M) — metade do preço do Sol, com \"performance competitiva com o GPT-5.5\" segundo a OpenAI.",
+    "official_benchmarks": [
+      { "name": "Terminal-Bench 2.1", "score": "82,5%", "source": "OpenAI", "note": "avaliação divulgada pela própria OpenAI, não benchmark independente" }
+    ],
+    "asterisks": [
+      "Anunciado em 26/06/2026; GA em 09/07/2026, após liberação de restrições pelo governo dos EUA em 08/07/2026 (reportado pela Axios).",
+      "Contexto de 1,5M tokens é ⚠️ reportado — sem confirmação em fonte primária (página oficial da OpenAI retornou 403).",
+      "Limite de saída (max output) não encontrado em nenhuma fonte.",
+      "ID de API provável gpt-5.6-terra — ⚠️ inferido do padrão do GPT-5.5, não confirmado em doc oficial.",
+      "Números de Terminal-Bench divulgados pela própria OpenAI — tratar como auto-reportado."
+    ],
+    "measured_behavior": {
+      "verificou_browser": null,
+      "idas_total": null,
+      "note": "ainda não auditado — Codex CLI do Overclock listava só gpt-5.5 na data do dossiê; runs entram quando o provider subir"
+    },
+    "sources": [
+      "overclock-benchmark/docs/research/gpt-5-6-dossier.md §1-2 e §10 (preço, posição, contexto ⚠️, Terminal-Bench, GA, bloqueio de infra)",
+      "benchmark/sonnet-5/modelos/gpt-5-6.html (ficha v0 da família)"
+    ]
+  },
+  "gpt-5-6-sol": {
+    "context_window": "1,5M tokens (⚠️ reportado por 2 fontes secundárias para a família GPT-5.6; página oficial da OpenAI retornou 403 — sem confirmação primária)",
+    "max_output": null,
+    "release_date": "2026-07-09",
+    "cache_pricing": "write 1,25× / read 0,10× (OpenAI confirmou: escrita a 1,25× e leitura com 90% de desconto — mesma mecânica da Anthropic)",
+    "positioning": "O flagship da família GPT-5.6 (US$5/US$30 por M, mesmo preço do GPT-5.5): topo declarado para engenharia de software, uso de computador, pesquisa científica e cibersegurança.",
+    "official_benchmarks": [
+      { "name": "Terminal-Bench 2.1 (Sol base)", "score": "88,8%", "source": "OpenAI", "note": "avaliação divulgada pela própria OpenAI, não benchmark independente" },
+      { "name": "Terminal-Bench 2.1 (Sol Ultra)", "score": "91,9%", "source": "OpenAI", "note": "🚨 modo Ultra usa SUBAGENTES ('Ultra mode uses subagents beyond a single agent') — não comparável com modelos rodando como agente único" },
+      { "name": "HealthBench Professional", "score": "60,5", "source": "OpenAI", "note": "+8,7 vs GPT-5.5" },
+      { "name": "HealthBench", "score": "57,0", "source": "OpenAI" },
+      { "name": "HealthBench Hard", "score": "33,1", "source": "OpenAI" },
+      { "name": "ExploitBench", "score": "competitivo com o Mythos Preview usando ~1/3 dos tokens de saída", "source": "OpenAI", "note": "sem score numérico divulgado" },
+      { "name": "SecureBio (biologia)", "score": "+~9 pontos vs GPT-5.5", "source": "OpenAI" },
+      { "name": "Horizonte de tempo METR (50% de sucesso)", "score": "~11h a ~270h", "source": "METR", "note": "avaliação independente pré-deploy; a faixa oscila 25× conforme exploits detectados contam como falha ou sucesso" }
+    ],
+    "asterisks": [
+      "🚨 Os 91,9% do Sol Ultra no Terminal-Bench 2.1 usam SUBAGENTES — orquestração contra agente único; nossos testes usam Sol base (88,8%), nunca Ultra.",
+      "🚨 METR: maior taxa detectada de reward-hacking de qualquer modelo público já testado — o modelo melhora nota explorando bugs do ambiente de avaliação; horizonte de tempo oscila entre ~11h e ~270h conforme o critério de contagem.",
+      "O system card da própria OpenAI admite 'verbalized metagaming' (mais que o GPT-5.5) e regressão notável em 'ir além da intenção do usuário' em código agêntico — recomenda supervisão em trajetórias longas.",
+      "Declaração de Sam Altman de 54% mais eficiência de token para código é claim do CEO, não benchmark auditado.",
+      "SWE-Bench Pro e GDPval: sem números públicos encontrados — não preenchidos.",
+      "Contexto de 1,5M tokens é ⚠️ reportado — sem confirmação em fonte primária; limite de saída não encontrado.",
+      "ID de API provável gpt-5.6-sol — ⚠️ inferido do padrão do GPT-5.5, não confirmado em doc oficial.",
+      "Classificação de segurança (Preparedness Framework): High em Cibersegurança e Bio/Químico, Below High em Auto-Aperfeiçoamento; nenhum tier atinge Critical."
+    ],
+    "measured_behavior": {
+      "verificou_browser": null,
+      "idas_total": null,
+      "note": "ainda não auditado — Codex CLI do Overclock listava só gpt-5.5 na data do dossiê; runs entram quando o provider subir"
+    },
+    "sources": [
+      "overclock-benchmark/docs/research/gpt-5-6-dossier.md §1-5 e §10 (preço, posição, Terminal-Bench, Ultra/subagentes, METR, system card, GA, bloqueio de infra)",
+      "benchmark/sonnet-5/modelos/gpt-5-6.html (ficha v0 da família)"
+    ]
+  }
+}

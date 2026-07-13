@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Sonnet 5 — Overclock Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="../index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="../index.html">Home</a>
+    <a href="../modelos.html" class="active">Modelos</a>
+    <a href="../benchmark.html">Benchmark</a>
+    <a href="../benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="../benchmark-gpt-5-6.html">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap narrow">
+  <div class="crumb"><a href="../modelos.html">Modelos</a> / Sonnet 5</div>
+  <div class="eyebrow brand" style="margin-top:16px">Anthropic · lançado 30/06/2026</div>
+  <h1>Claude <span class="hl">Sonnet 5</span></h1>
+  <p class="lede">O barato novo. Default dos planos Grátis e Pro, perto do Opus 4.8 por uma fração do preço. A promessa: capacidade de frontier ao alcance de quem não paga US$200/mês.</p>
+
+  <div class="spec-grid" style="margin-top:28px">
+    <div class="spec"><div class="l">Preço promo (até 31/08)</div><div class="v"><b>US$2</b> in / <b>US$10</b> out<span style="color:var(--ov-dim)"> por M</span></div><div class="s">Depois sobe pra $3 / $15 por M</div></div>
+    <div class="spec"><div class="l">Disponibilidade</div><div class="v">Default · Grátis e Pro</div><div class="s">Também em Max, Team, Enterprise, Claude Code, API</div></div>
+    <div class="spec"><div class="l">Posição</div><div class="v">Perto do <b>Opus 4.8</b></div><div class="s">Ainda abaixo do Opus em tarefa de alta precisão</div></div>
+    <div class="spec"><div class="l">Pegadinha do tokenizer</div><div class="v">1,0–1,35× <span style="color:var(--ov-dim)">tokens</span></div><div class="s">Tokenizer novo conta mais tokens que versões antigas</div></div>
+  </div>
+
+  <section class="section">
+    <h2>O que a Anthropic comunicou</h2>
+    <ul class="insight">
+      <li><b>Agêntico de verdade.</b> Uso autônomo de browser e terminal; completa tarefas multi-step onde os Sonnets anteriores paravam no meio.</li>
+      <li><b>Confere o próprio output</b> sem instrução explícita — revisa o que produziu antes de entregar.</li>
+      <li><b>Salto sobre o Sonnet 4.6</b> em raciocínio, uso de ferramenta, código e trabalho de conhecimento.</li>
+      <li><b>BrowseComp (busca agêntica):</b> melhora estrita sobre o 4.6, a um custo menor que o Opus 4.8.</li>
+      <li><b>Mais seguro:</b> menos comportamento desalinhado, menos alucinação e bajulação que o 4.6; melhor em recusar pedido malicioso e resistir a prompt injection. Cyber safeguards ligados por padrão; não desenvolve exploits completos.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Os testes oficiais (em português claro)</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">A Anthropic mede cada modelo em "provas" padronizadas. Quanto <b>maior o número, melhor</b>. Traduzi o nome técnico pra o que cada prova realmente testa. <span style="color:var(--green)">Verde</span> = o Sonnet 5 (barato) empata ou ganha do Opus (caro).</p>
+    <table class="rt">
+      <thead><tr><th>O que a prova testa</th><th>Sonnet 5<br><span style="font-weight:400;color:var(--ov-dim)">barato</span></th><th>Sonnet 4.6<br><span style="font-weight:400;color:var(--ov-dim)">antigo</span></th><th>Opus 4.8<br><span style="font-weight:400;color:var(--ov-dim)">caro</span></th></tr></thead>
+      <tbody>
+        <tr><td>Consertar bugs em código de verdade<br><span style="color:var(--ov-dim);font-size:10px">SWE-bench Pro</span></td><td class="cst">63,2%</td><td>58,1%</td><td>69,2%</td></tr>
+        <tr><td>Resolver tarefas no computador sozinho, via terminal<br><span style="color:var(--ov-dim);font-size:10px">Terminal-Bench 2.1</span></td><td class="cst">80,4%</td><td>67,0%</td><td>82,7%</td></tr>
+        <tr><td>Prova difícil de conhecimento geral (sem ajuda)<br><span style="color:var(--ov-dim);font-size:10px">Humanity's Last Exam, sem ferramentas</span></td><td class="cst">43,2%</td><td>34,6%</td><td>49,8%</td></tr>
+        <tr><td>Mesma prova, mas podendo pesquisar<br><span style="color:var(--ov-dim);font-size:10px">Humanity's Last Exam, com ferramentas</span></td><td class="cst" style="color:var(--green)">57,4%</td><td>46,8%</td><td>57,9%</td></tr>
+        <tr><td>Usar um computador como gente (clicar, navegar telas)<br><span style="color:var(--ov-dim);font-size:10px">OSWorld-Verified</span></td><td class="cst">81,2%</td><td>78,5%</td><td>83,4%</td></tr>
+        <tr><td>Tarefas de escritório que valem dinheiro de verdade<br><span style="color:var(--ov-dim);font-size:10px">GDPval-AA v2 (pontuação, não %)</span></td><td class="cst" style="color:var(--green)">1618 ▲</td><td>1395</td><td>1615</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>O que isso quer dizer, em uma frase:</b> o Sonnet 5 (barato) fica <b>pouco atrás do Opus (caro)</b> em programar e usar o computador — perde por uns 3 a 6 pontos. Mas <b>empata</b> quando o assunto é pesquisar pra responder, e <b>ganha do Opus</b> no "trabalho de escritório" (1618 contra 1615). E deixa o Sonnet 4.6 (a versão antiga) bem pra trás em tudo. Resumo: quase tão bom quanto o modelo caro, pagando bem menos.</div>
+    <div class="analysis">
+      <h4>Leitura aprofundada — onde o gap aparece e onde some</h4>
+      O formato do gap conta uma história. O Sonnet 5 fica <b>~6 pontos atrás do Opus em programação pura</b> (SWE-bench Pro 63,2 vs 69,2) e ~2 em usar o computador (81,2 vs 83,4). <b>Mas o gap some quando entra raciocínio + ferramentas</b>: na prova difícil com pesquisa empata (57,4 vs 57,9) e no trabalho de escritório <b>passa o Opus</b> (1618 vs 1615).<br><br>
+      Tradução: o Opus ainda lidera quando é <b>escrever código complexo de primeira, sozinho</b>. Mas quando o modelo pode <b>pesquisar, usar ferramenta e verificar</b>, o Sonnet 5 alcança. <b>E foi exatamente o que vimos nos nossos testes:</b> no FPS (o mais difícil) o Sonnet 5 achou e corrigiu o próprio bug igual ao Opus, e foi o que mais abriu o navegador pra conferir. A força "com ferramentas" do gráfico apareceu ao vivo. O salto sobre o Sonnet 4.6 (antigo) é enorme em todas as linhas — essa é a evolução real.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Nossos números no benchmark</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:8px">4 testes, modelo puro (sem skill/subagente), um chute só. Custo a preço oficial Anthropic, recalculado dos tokens reais.</p>
+    <table class="rt">
+      <thead><tr><th>Teste</th><th>contexto</th><th>Custo oficial</th><th>vs Opus</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>001 · Sistema solar 3D</td><td>~59k</td><td class="cst">$0,87</td><td>Opus $0,80</td><td><a href="../001/index.html" target="_blank">abrir ↗</a></td></tr>
+        <tr><td>002 · UX (site Apple)</td><td>~71k</td><td class="cst">$0,31</td><td>Opus $0,47</td><td><a href="../002/index.html" target="_blank">abrir ↗</a></td></tr>
+        <tr><td>003 · Física com mouse</td><td>~64k</td><td class="cst">$0,36</td><td>Opus $0,60</td><td><a href="../003/index.html" target="_blank">abrir ↗</a></td></tr>
+        <tr><td>004 · FPS 3D</td><td>~71k</td><td class="cst">$0,52</td><td>Opus $1,61</td><td><a href="../004/index.html" target="_blank">abrir ↗</a></td></tr>
+      </tbody>
+      <tfoot><tr><td>Total (4 runs)</td><td>—</td><td class="cst">$2,06</td><td>Opus $3,49</td><td></td></tr></tfoot>
+    </table>
+    <div class="note">Custo a <b>preço oficial Anthropic</b> (promo $2/$10), recalculado dos tokens reais — a coluna cost_usd da app Overclock estava errada (cobrava Opus 3× e Sonnet 5 1,5× a mais). Todas as 4 runs do Sonnet 5 rodaram com <b>modelo puro</b> (sem skill/subagente, auditado). Em 2 dos 4 testes (001 solar, 002 Apple) o Sonnet 5 custou MAIS que o Opus — porque foi mais minucioso (contexto maior).</div>
+  </section>
+
+  <section class="section">
+    <h2>Conclusão</h2>
+    <ul class="insight">
+      <li><b>Capacidade quase-Opus, de fato.</b> Nos benchmarks oficiais o Sonnet 5 fica só ~6 pts abaixo do Opus em coding, <b>empata no HLE-com-tools e supera no trabalho de conhecimento</b> (GDPval 1618 vs 1615). O "perto do Opus" se confirma — e some o Sonnet 4.6, que fica bem atrás.</li>
+      <li><b>O "fração do preço do Opus" é real no papel, menor na prática.</b> Por token o Opus custa 2,5× o Sonnet 5 (promo), mas usa MENOS tokens (mais eficiente) — no nosso benchmark agêntico o custo total ficou só <b>1,7×</b> ($3,49 vs $2,06), não 2,5×.</li>
+      <li><b>Sonnet 5 ≈ Sonnet 4.6 em custo</b> ($2,06 vs $2,27) — o ganho do Sonnet 5 é capacidade, não economia. O tokenizer novo (+30% tokens) come parte da vantagem de preço.</li>
+      <li><b>Mais minucioso = às vezes mais caro.</b> Em 2 dos 4 testes o Sonnet 5 gastou mais que o Opus, por abrir contexto maior. Capacidade perto do Opus a um preço próximo — mas nem sempre mais barato por tarefa.</li>
+      <li><b>Custo ≠ contexto.</b> O "59k tokens" no rodapé do pane é o contexto atual (snapshot), não a soma faturada.</li>
+      <li><b>Veredito de qualidade visual:</b> a preencher após revisão lado a lado no <a href="../benchmark.html" style="color:var(--ov-accent)">benchmark</a> (solar / Apple / física / FPS) — todos gerados em um chute, modelo puro.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Fontes: anúncio oficial Anthropic (claude-sonnet-5) + telemetria de tokens dos panes do workspace. Custos em USD, cumulativos (incluem cache).
+  </footer>
+</div>
+</body>
+</html>

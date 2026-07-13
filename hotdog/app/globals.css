@@ -1,0 +1,215 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ── Ground: cool cinematic near-black, layered ── */
+  --bg: #06070a;
+  --bg-1: #0a0c11;
+  --bg-2: #11141c;
+  /* ── Ink ── */
+  --ink: #f3f5f2;
+  --ink-dim: #a6adb9;
+  --muted: #6a7180;
+  --line: rgba(255, 255, 255, 0.09);
+  /* ── Single warm contrast in a cool field ── */
+  --accent: #ff5a36;
+  --accent-2: #54e9d2;
+  /* ── Chromatic aurora = spectrum of light (a video tool's identity) ── */
+  --glow-teal: #1fb6c9;
+  --glow-blue: #356bff;
+  --glow-ember: #ff5a36;
+  /* ── Type ── */
+  --font-display: "Inter Tight";
+  --font-mono: "JetBrains Mono";
+  --font-serif: "Instrument Serif";
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+/* Lenis owns scroll; never let the browser smooth-scroll on top of it. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Custom scrollbar (webkit) — thin, on-brand */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #20242e;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2c313d;
+}
+
+/* ── Reusable layout helpers ── */
+.shell {
+  width: 100%;
+  max-width: var(--max-shell, 1480px);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+}
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* Chromatic light sweep used for accent text/strokes */
+.text-spectrum {
+  background: linear-gradient(
+    100deg,
+    var(--glow-teal),
+    var(--glow-blue) 45%,
+    var(--glow-ember)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hairline {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* ── Aurora field (pure CSS, no asset downloads) ── */
+.aurora {
+  position: absolute;
+  inset: -30% -10% -10% -10%;
+  background:
+    radial-gradient(40% 55% at 20% 30%, rgba(31, 182, 201, 0.5), transparent 60%),
+    radial-gradient(45% 50% at 78% 28%, rgba(53, 107, 255, 0.45), transparent 60%),
+    radial-gradient(40% 45% at 60% 75%, rgba(255, 90, 54, 0.4), transparent 62%),
+    radial-gradient(35% 40% at 30% 80%, rgba(84, 233, 210, 0.28), transparent 60%);
+  filter: blur(40px) saturate(140%);
+  animation: aurora-drift 22s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(-4%, -2%, 0) scale(1.05) rotate(-2deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(3%, 2%, 0) scale(1.15) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(5%, -3%, 0) scale(1.08) rotate(-1deg);
+    opacity: 0.8;
+  }
+}
+
+/* Fine film grain overlay (SVG noise, no network) */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 28s) linear infinite;
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Clip reveal used for headline lines */
+@keyframes line-rise {
+  from {
+    transform: translateY(102%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.noise-grid {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ── Respect reduced motion globally ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .aurora {
+    animation: none !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+
+/* Hide native cursor only on devices that have our custom one (fine pointer) */
+@media (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button {
+    cursor: none;
+  }
+}

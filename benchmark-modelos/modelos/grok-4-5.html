@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grok 4.5 — Overclock Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="../index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="../index.html">Home</a>
+    <a href="../modelos.html" class="active">Modelos</a>
+    <a href="../benchmark.html">Benchmark</a>
+    <a href="../benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="../benchmark-gpt-5-6.html">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap narrow">
+  <div class="crumb"><a href="../modelos.html">Modelos</a> / Grok 4.5</div>
+  <div class="eyebrow brand" style="margin-top:16px">xAI · lançado 08/07/2026</div>
+  <h1>Grok <span class="hl">4.5</span></h1>
+  <p class="lede">O modelo classe-Opus da xAI, lançado em <b>08/07/2026</b> — 1 dia antes do GA do GPT-5.6. É o <b>mais barato do topo de linha</b>: $2 de entrada / $6 de saída por 1M de tokens, enquanto o Sol (GPT-5.6) cobra <b>5× o valor da saída</b> ($30). Não tem 3 tamanhos como a OpenAI nem famílias como a Anthropic — é 1 SKU só, <code>grok-4.5</code>, com profundidade de raciocínio ajustável por parâmetro.</p>
+
+  <div class="spec-grid" style="margin-top:28px">
+    <div class="spec"><div class="l">Preço</div><div class="v"><b>US$2</b> in / <b>US$6</b> out<span style="color:var(--ov-dim)"> por M</span></div><div class="s">Entrada cacheada: US$0,50/M</div></div>
+    <div class="spec"><div class="l">Contexto</div><div class="v"><b>500k</b> tokens</div><div class="s">Metade do Fable 5 (1M)</div></div>
+    <div class="spec"><div class="l">Arquitetura</div><div class="v">SKU única</div><div class="s"><code>reasoning_effort</code>: low / medium / <b>high</b> (padrão)</div></div>
+    <div class="spec"><div class="l">Lançamento</div><div class="v"><b>08/07/2026</b></div><div class="s">1 dia antes do GA do GPT-5.6</div></div>
+  </div>
+
+  <section class="section">
+    <h2>A escolha de arquitetura: uma SKU só</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">A OpenAI parte o GPT-5.6 em 3 modelos (Sol, Terra, Luna) — cada um com seu preço e seu <code>model_id</code>. A Anthropic faz o mesmo por família (Sonnet, Opus, Fable). A xAI aposta diferente: <b>1 modelo, <code>grok-4.5</code></b>, e você troca profundidade de raciocínio por velocidade dentro do mesmo modelo, via parâmetro <code>reasoning_effort</code> (low / medium / high — high é o padrão).</p>
+    <div class="note"><b>O trade-off pro leitor:</b> nos modelos com 3 SKUs, trocar de tarefa barata pra difícil significa trocar de <i>modelo</i> (e de preço de tabela). No Grok 4.5, é trocar de <i>parâmetro</i> — o preço por token não muda entre <code>low</code> e <code>high</code>, só o volume de tokens gasto (e o tempo). Simplifica a decisão de integração: 1 endpoint, 1 preço, ajuste fino em runtime — mas perde a flexibilidade de ter um modelo dedicado e mais barato ainda pra tarefa de volume (tipo o Luna a $1/$6).</div>
+  </section>
+
+  <section class="section">
+    <h2>O custo escondido: ferramentas server-side</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Isso é pouco falado e importa pra quem monta agente: <b>web search</b>, <b>X search</b> e <b>code execution</b> custam <b>US$5 por 1.000 chamadas cada</b> — cobrado <b>por fora</b> dos tokens de entrada/saída. Busca em anexo de arquivo sai a US$10/1.000. Busca em collections/RAG, US$2,50/1.000.</p>
+    <div class="note"><b>A conta, pro leitor:</b> 1.000 chamadas de web search = US$5, <b>independente de quantos tokens</b> a resposta usou. Pra comparar: US$5 equivalem a ~833 mil tokens de saída no preço do próprio Grok ($6/M). Num agente que faz busca com frequência — 1 web search a cada 2–3 passos, por exemplo — o custo de ferramenta pode <b>superar o custo de token</b> na mesma sessão. Vale somar as 2 linhas de billing antes de comparar preço "só de token" entre modelos.</div>
+  </section>
+
+  <section class="section">
+    <h2>Onde ele se posiciona</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Score composto do <b>Artificial Analysis</b>, reportado por fonte secundária — <b>não é número oficial da xAI</b>.</p>
+    <table class="rt">
+      <thead><tr><th>Modelo</th><th>Score composto <span style="font-weight:400;color:var(--ov-dim)">(⚠️ reportado)</span></th></tr></thead>
+      <tbody>
+        <tr><td>Claude Fable 5</td><td class="cst">60</td></tr>
+        <tr><td>Claude Opus 4.8</td><td class="cst">56</td></tr>
+        <tr><td>GPT-5.5</td><td class="cst">55</td></tr>
+        <tr><td>Grok 4.5 <span style="color:var(--ov-dim);font-size:10px">· #4</span></td><td class="cst" style="color:var(--ov-accent)">54</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Nota:</b> o composto reportado deixa o Grok 4.5 em #4, atrás dos 3 acima. Mas o mesmo levantamento reporta que ele <b>vence em uso agêntico de ferramentas</b> e é o <b>mais rápido do topo de linha</b> — combinação que faz dele boa escolha pra trabalho agêntico sensível a custo, mesmo sem liderar o score geral.</div>
+  </section>
+
+  <section class="section">
+    <h2>Preço lado a lado</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Saída por 1M de tokens — onde a diferença de custo mais aparece.</p>
+    <table class="rt">
+      <thead><tr><th>Modelo</th><th>Saída / 1M</th></tr></thead>
+      <tbody>
+        <tr><td>Grok 4.5</td><td class="cst" style="color:var(--green)">US$6</td></tr>
+        <tr><td>Claude Sonnet 5</td><td class="cst">US$10</td></tr>
+        <tr><td>Claude Opus 4.8</td><td class="cst">US$25</td></tr>
+        <tr><td>GPT-5.6 Sol</td><td class="cst">US$30</td></tr>
+        <tr><td>Claude Fable 5</td><td class="cst">US$50</td></tr>
+      </tbody>
+    </table>
+    <div class="note">O Grok 4.5 é o <b>mais barato do topo de linha</b> em saída — menos de 1/8 do preço do Fable 5, e menos de 1/5 do Sol.</div>
+  </section>
+
+  <section class="section">
+    <h2>Nossos números no benchmark</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:8px">4 testes, modelo puro (sem skill, sem subagente), mesma metodologia dos demais. O provider <code>grok-cli</code> está habilitado no Overclock, mas com a lista de modelos <b>vazia</b> — as runs entram assim que o provider carregar. Comparação de rodada 3 (Sol vs Fable 5 vs Grok 4.5): <a href="../benchmark-gpt-5-6.html" style="color:var(--ov-accent)">GPT-5.6 ↗</a>.</p>
+    <table class="rt">
+      <thead><tr><th>Teste</th><th>contexto</th><th>gerado</th><th>idas</th><th>Custo</th></tr></thead>
+      <tbody>
+        <tr><td>001 · Sistema solar 3D</td><td>a rodar</td><td>a rodar</td><td>a rodar</td><td class="cst">a rodar</td></tr>
+        <tr><td>002 · UX (site Apple)</td><td>a rodar</td><td>a rodar</td><td>a rodar</td><td class="cst">a rodar</td></tr>
+        <tr><td>003 · Física com mouse</td><td>a rodar</td><td>a rodar</td><td>a rodar</td><td class="cst">a rodar</td></tr>
+        <tr><td>004 · FPS 3D</td><td>a rodar</td><td>a rodar</td><td>a rodar</td><td class="cst">a rodar</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Conclusão</h2>
+    <ul class="insight">
+      <li><b>Mais barato do topo de linha.</b> $2/$6 por M — o Sol da OpenAI cobra 5× a saída dele, o Fable 5 mais de 8×.</li>
+      <li><b>SKU única é simplicidade real.</b> 1 modelo, <code>reasoning_effort</code> ajusta profundidade sem trocar de endpoint nem de preço de tabela — ao custo de não ter um irmão ainda mais barato pra volume.</li>
+      <li><b>O custo de ferramenta server-side é a pegadinha.</b> Web search, X search e code execution saem por fora dos tokens, $5/1.000 chamadas cada — num agente que busca muito, isso pode pesar mais que o token.</li>
+      <li><b>Score composto abaixo do Fable, mas vence em agêntico.</b> #4 no Artificial Analysis (⚠️ reportado), atrás de Fable 5, Opus 4.8 e GPT-5.5 — mas reportado como líder em uso de ferramentas e o mais rápido do topo.</li>
+      <li><b>Veredito: a medir.</b> Provider <code>grok-cli</code> ainda sem modelos carregados no Overclock — os 4 testes entram quando a run rodar.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Fontes: OpenRouter — Grok 4.5 (openrouter.ai/x-ai/grok-4.5) e Artificial Analysis — Grok 4.5 (artificialanalysis.ai/models/grok-4-5/providers). Nossos números: 4 testes a rodar — provider grok-cli habilitado no Overclock, lista de modelos ainda vazia.
+  </footer>
+</div>
+</body>
+</html>

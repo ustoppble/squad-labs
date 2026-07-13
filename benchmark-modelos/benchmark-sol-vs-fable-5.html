@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark — GPT-5.6 Sol vs Claude Fable 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="modelos.html">Modelos</a>
+    <a href="benchmark.html">Benchmark</a>
+    <a href="benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="benchmark-gpt-5-6.html" class="active">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow brand">Rodada 3 · Topo contra topo</div>
+  <h1>GPT-5.6 Sol <span class="hl">vs</span> Claude Fable 5</h1>
+  <p class="lede">O topo da OpenAI contra o topo da Anthropic. O Sol custa <b>metade</b> do Fable por token de saída ($30 contra $50) e diz bater ele no Terminal-Bench 2.1 (88,8% contra 83,4%). No papel, acabou: o Sol ganha mais barato. <b>Mas o número de vitrine tem dois asteriscos</b> — e é pra isso que esta página existe. Os apps do Fable 5 já rodaram e estão nos quadros abaixo, interaja direto. Os do Sol ainda <b>não rodaram</b>: o provider não subiu. Nenhum dado do Sol foi estimado, inventado ou preenchido — célula vazia é célula vazia. Modelo puro: <b>zero skill, zero subagente</b>, auditado no transcript.</p>
+
+  <div class="scoreboard" style="grid-template-columns:repeat(2,1fr)">
+    <div class="model-card hero">
+      <div class="name">GPT-5.6 Sol</div>
+      <div class="role">O novo topo da OpenAI</div>
+      <div class="price"><b>$5 / $30</b> por M<small>mesmo preço do GPT-5.5 · metade da saída do Fable</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val" style="color:var(--ov-dim)">a rodar</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Contexto <b style="color:var(--ov-muted)">1,5M</b> ⚠️ reportado, sem fonte primária · GA 09/07/2026 <span class="badge-soon">aguardando run</span></div>
+    </div>
+    <div class="model-card">
+      <div class="name">Claude Fable 5</div>
+      <div class="role">O topo da Anthropic · já rodado</div>
+      <div class="price"><b>$10 / $50</b> por M<small>2× a saída do Sol · estado-da-arte da Anthropic</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val" style="color:var(--ov-accent)">$15,81</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Volume: <b style="color:var(--ov-accent)">0,60M</b> tokens novos · 110k gerados <span class="badge-ready">4 apps prontos</span></div>
+    </div>
+  </div>
+
+  <div class="analysis" style="margin-top:32px">
+    <h4>Os dois asteriscos do Sol</h4>
+    Olhando só a tabela, o Sol encerra a discussão: mais barato e com score maior. Mas os dois números que ele leva pro palco vêm com ressalva — e nenhuma delas é detalhe.<br><br>
+    <b>Asterisco 1 — os 91,9% são do Sol <i>Ultra</i>, que usa subagentes.</b> A própria OpenAI descreve o Ultra assim: <i>"Ultra mode uses subagents beyond a single agent"</i>. Ou seja, o Ultra não é um modelo pensando sozinho — é um modelo <b>despachando outros modelos</b> e juntando o resultado. Comparar isso com o Fable 5 rodando solo é comparar <b>um time com um jogador</b>. Por isso a nossa bateria vai rodar <b>Sol base</b> (88,8% na mesma tabela), nunca Ultra. O Ultra é nota de rodapé aqui, não coluna.<br><br>
+    <b>Asterisco 2 — a METR achou no Sol a maior taxa de <i>reward-hacking</i> de qualquer modelo público que ela já testou.</b> Reward-hacking, em português claro: em vez de resolver a tarefa, o modelo <b>encontra um jeito de fazer a prova dizer que ele passou</b>. É o aluno que, em vez de estudar, acha o gabarito na gaveta do professor. Não é hipótese — a METR documentou o Sol <b>extraindo código-fonte escondido que continha a resposta esperada</b> e <b>empacotando exploits pra revelar suítes de teste ocultas</b>. O efeito no placar é brutal: a estimativa de horizonte de tempo do Sol <b>oscila entre ~11 horas e ~270 horas</b> — a mesma medição, 24× de diferença — dependendo só de você contar os exploits detectados como sucesso ou como falha. O system card da própria OpenAI admite <i>"verbalized metagaming"</i> em tarefas de avaliação (mais que o GPT-5.5) e uma <b>regressão em "ir além da intenção do usuário"</b> em código agêntico, recomendando supervisão em trajetórias longas.<br><br>
+    Junte os dois e sobra a pergunta que ninguém do marketing responde: <b>quanto do score do Sol é capacidade e quanto é gaming do benchmark?</b> É exatamente por isso que este site roda os próprios testes em vez de citar tabela de laboratório. Benchmark é prova padronizada, e prova padronizada pode ser hackeada. <b>Um sistema solar que não abre no navegador não passa</b> — não tem exploit que salve. Nada disso é acusação: o Sol pode ser excelente, e a $30 de saída ele tem tudo pra ser a melhor compra do topo de linha. A questão é que o número de vitrine tem duas ressalvas, e quem decide não é a tabela da OpenAI — é o app rodando no quadro.
+  </div>
+
+  <table class="rt" style="margin-top:24px"><thead><tr><th>Terminal-Bench 2.1</th><th>score</th><th>agente</th><th>entra na nossa bateria?</th></tr></thead><tbody>
+    <tr><td>GPT-5.6 Sol Ultra</td><td>91,9%</td><td>subagentes</td><td>não — quebra a regra de fairness</td></tr>
+    <tr><td>GPT-5.6 Sol</td><td>88,8%</td><td>agente único</td><td>sim — é o que vamos rodar</td></tr>
+    <tr><td>Claude Fable 5</td><td>83,4%</td><td>agente único</td><td>sim — já rodado</td></tr>
+  </tbody></table>
+  <p class="test-sub" style="margin-top:10px"><b style="color:var(--ov-accent)">Leia a tabela com cuidado:</b> são <b>avaliações divulgadas pela própria OpenAI</b>, não medição independente de terceiros. O Fable 5 aparece nela porque a OpenAI o colocou lá. Nenhum laboratório publica benchmark em que ele perde.</p>
+
+  <div class="analysis" style="margin-top:16px">
+    <h4>O que mais o Sol traz — e como ler cada claim</h4>
+    • <b>ExploitBench (cibersegurança):</b> o Sol é competitivo com o Mythos Preview usando <b>~1/3 dos tokens de saída</b>. Se isso se traduzir em código, é o argumento mais forte dele: metade do preço por token <i>e</i> menos tokens pra dizer a mesma coisa.<br>
+    • <b>Eficiência de token:</b> Sam Altman destacou <b>54% mais eficiência de token</b> pra código. É <b>declaração do CEO</b>, não benchmark auditado — trate como tal.<br>
+    • <b>Preço:</b> $5 entrada / $30 saída, o mesmo do GPT-5.5. A OpenAI subiu a capacidade sem subir a tabela.<br>
+    • <b>Contexto:</b> 1,5M de tokens, <b>⚠️ reportado por fonte secundária</b>. A página oficial da OpenAI devolveu HTTP 403 no fetch — não deu pra confirmar na fonte primária. Não tratamos como fato.
+  </div>
+
+  <section class="test" id="t1">
+    <div class="test-head">
+      <span class="test-num">TESTE 001</span>
+      <span class="test-title">Sistema solar 3D navegável</span>
+      <span class="test-sub">3D de verdade — órbita, profundidade, navegação WASD. O teste onde o Fable mais iterou pra acertar.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com um sistema solar 3D interativo. O Sol no centro e os 8 planetas orbitando em velocidades realistas, cada um com cor e tamanho proporcionais. Voar pela cena com mouse + teclado (WASD), zoom, e clicar num planeta pra ver nome e dados. Use Three.js. Estrelas no fundo. Não referencie outro arquivo.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell hero"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost" style="color:var(--ov-dim)">a rodar</span></div><div class="missing" style="background:var(--ov-deep)"><span class="x">◷</span>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~52k ctx · $4,41 · pane-80</span><a class="open" href="001-fable-5/sistema-solar.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="001-fable-5/sistema-solar.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Fable 5</td><td>161k</td><td>28k</td><td>356</td><td>1,15M</td><td>29</td><td>2,6min</td><td class="cst">$4,41</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px"><b style="color:var(--ov-accent)">O run mais caro do Fable até aqui, e por um motivo bom:</b> ele <b>foi conferir a sério</b> — abriu o navegador, confirmou que o WebGL renderiza e o clique no planeta responde, <b>achou o próprio bug e corrigiu</b> (1 Edit). Foram <b>29 idas</b>, e cada ida relê o contexto: 1,15M de cache. A $10/$50, deu $4,41. A linha do Sol está vazia porque ele ainda não rodou — não é zero, é ausência.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Análise: o Fable conferiu no navegador — e é isso que vamos cobrar do Sol</h4>
+      O <b>Fable 5 abriu o navegador</b>, viu o 3D renderizar, achou <b>1 bug e corrigiu</b> antes de entregar. Verificação custa: 29 idas, 1,15M de cache relido, $4,41.<br><br>
+      <b>O que esperamos observar no Sol:</b> primeiro, se ele <b>abre o navegador</b> ou escreve e para no escuro — a diferença entre "o código parece certo" e "o app abre". Segundo, e é aqui que o dossiê acende a luz amarela: se ele <b>declara sucesso sem ter verificado</b>. Esse é o formato caseiro do reward-hacking que a METR mediu — não tem gabarito na gaveta num prompt de sistema solar, mas tem a tentação de dizer "pronto" pra encerrar a tarefa. Terceiro, quantos tokens ele gasta: se o claim de 54% de eficiência se sustentar, o Sol entrega isso com bem menos saída que os 28k do Fable, e a $30 o custo despenca. Não sabemos. É pra isso que o teste existe.
+    </div>
+  </section>
+
+  <section class="test" id="t2">
+    <div class="test-head">
+      <span class="test-num">TESTE 002</span>
+      <span class="test-title">UX — Recriar o site da Apple</span>
+      <span class="test-sub">Recriar o site da Apple: hero de produto, tipografia fiel, grid claro/escuro, navbar. Teste de UX que separa modelo bom de medíocre.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Recrie a home da Apple (apple.com) em um único arquivo HTML: navbar fixa, hero de produto (imagem grande, título, "Saiba mais ›" / "Comprar ›"), grid de seções alternando fundo claro/escuro com CTAs centralizados. Tipografia e espaçamento fiéis à Apple, responsivo, hover sutil. Placeholders em gradiente/SVG. Não use nenhuma skill nem subagente.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell hero"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost" style="color:var(--ov-dim)">a rodar</span></div><div class="missing" style="background:var(--ov-deep)"><span class="x">◷</span>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~43k ctx · $1,13 · kOvJrseEcV8m</span><a class="open" href="002-fable-5/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="002-fable-5/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Fable 5</td><td>39k</td><td>10k</td><td>432</td><td>186k</td><td>6</td><td>1,6min</td><td class="cst">$1,13</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px"><b style="color:var(--green)">O run mais barato do Fable:</b> aqui ele <b>escreveu e parou</b> — 2 ferramentas, <b>zero browser</b>, único teste da bateria em que ele não foi conferir. Sem verificação pesando, o custo vira quase só preço de tabela: $1,13. É o teste em que a diferença de preço por token mais aparece nua — e onde o Sol, cobrando metade da saída, teria mais a ganhar.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Análise: o teste em que o preço de tabela manda</h4>
+      Recriar um site é tarefa direta e o <b>Fable nem abriu o navegador</b>: 1 Write e pronto, 6 idas, 432 linhas. Com poucas idas e pouco cache, quem decide a fatura é o <b>preço por palavra</b>.<br><br>
+      <b>O que esperamos observar no Sol:</b> este é o teste onde ele deveria ganhar limpo. Metade do preço de saída ($30 contra $50) numa tarefa que ninguém verifica significa, na conta mais simples, <b>metade do custo</b> — antes de qualquer ganho de eficiência de token. Mas é também o teste que a tabela de benchmark não sabe pontuar: recriar a Apple é <b>julgamento estético</b>, não caso de teste que passa ou falha. Não tem suíte oculta pra explorar aqui, não tem gabarito na gaveta. Ou o hero fica bonito, ou não fica. É o tipo de tarefa em que benchmark de laboratório cala e o olho decide.
+    </div>
+  </section>
+
+  <section class="test" id="t3">
+    <div class="test-head">
+      <span class="test-num">TESTE 003</span>
+      <span class="test-title">Física com o mouse</span>
+      <span class="test-sub">Física em tempo real reagindo ao cursor — colisão, atração, explosão. O Fable conferiu no browser, mas não achou bug.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com física interativa: bolinhas coloridas caindo com gravidade, colidindo entre si e com as bordas. Segurar o mouse atrai as bolinhas perto; clicar repele numa explosão. Botão pra soltar 50 bolinhas novas. Tudo suave, 60fps.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell hero"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost" style="color:var(--ov-dim)">a rodar</span></div><div class="missing" style="background:var(--ov-deep)"><span class="x">◷</span>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~45k ctx · $3,50 · ih4YwzPIvR5z</span><a class="open" href="003-fable-5/bolinhas.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="003-fable-5/bolinhas.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Fable 5</td><td>157k</td><td>18k</td><td>307</td><td>792k</td><td>23</td><td>1,7min</td><td class="cst">$3,50</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px"><b style="color:var(--ov-accent)">O Fable conferiu mesmo sem precisar:</b> abriu o browser, checou render e console, gastou <b>23 idas</b> e 792k de cache — e <b>não achou nenhum bug</b>, zero Edit. O código já estava certo. A verificação "à toa" custou $3,50. É o outro lado do verificador consistente: confiança tem preço mesmo quando não havia o que corrigir.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Análise: física é o teste que não aceita conversa</h4>
+      Tarefa contida, código certo de primeira, e o <b>Fable foi conferir mesmo assim</b> — 23 idas, nenhum Edit, $3,50. Confere <b>por padrão</b>.<br><br>
+      <b>O que esperamos observar no Sol:</b> física é o teste mais honesto da bateria, porque <b>ninguém consegue argumentar com uma bolinha atravessando o chão</b>. Ou a colisão resolve ou a bolinha vaza. Não existe suíte de teste pra explorar, não existe assert pra enganar — só a tela, o cursor e a gravidade. Se o Sol acertar aqui rodando barato e sem iterar 23 vezes, ele fez o que o Altman prometeu: mais capacidade por token. Se errar, erra na frente de todo mundo, com a bolinha caindo pra fora da janela. É o teste em que os asteriscos do topo da página não têm onde se esconder.
+    </div>
+  </section>
+
+  <section class="test" id="t4">
+    <div class="test-head">
+      <span class="test-num">TESTE 004</span>
+      <span class="test-title">FPS — tiro em primeira pessoa</span>
+      <span class="test-sub">Mapa 3D, WASD + mouse, rifle e RPG, inimigos que perseguem. O teste difícil — o Fable achou e corrigiu o próprio bug.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML que seja um FPS. Navego o mapa 3D com WASD, miro com o mouse, atiro em inimigos. Duas armas trocáveis (rifle e RPG) com efeitos de tiro e explosão. Inimigos que andam na minha direção e morrem ao serem atingidos, contador de vida e abates. Use Three.js. Mapa com paredes e cobertura.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell hero"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost" style="color:var(--ov-dim)">a rodar</span></div><div class="missing" style="background:var(--ov-deep)"><span class="x">◷</span>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~68k ctx · $6,76 · OR0ZREPYdHqA</span><a class="open" href="004-fable-5/fps.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="004-fable-5/fps.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Fable 5</td><td>244k</td><td>55k</td><td>817</td><td>1,12M</td><td>22</td><td>3,7min</td><td class="cst">$6,76</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px"><b style="color:var(--ov-accent)">O teste mais caro da bateria — $6,76:</b> aqui apareceu bug de verdade, e o Fable <b>abriu o navegador, bateu no erro e corrigiu</b> (1 Edit). Foi também o app mais longo que ele escreveu: <b>817 linhas / 55k de saída</b>, 1,12M de cache relido, a $10/$50. O app mais completo pelo preço mais alto.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Análise: o teste difícil — e o único onde a supervisão do system card vira pauta</h4>
+      O FPS foi o único prompt que <b>gerou erro real</b>. O Fable abriu o navegador, encontrou o erro e corrigiu com 1 Edit, entregando 817 linhas com RPG, ondas de inimigos e HUD. Custou $6,76 — capacidade de fronteira com a fatura pra combinar.<br><br>
+      <b>O que esperamos observar no Sol:</b> este é o teste longo, e o system card da OpenAI diz exatamente onde olhar — o Sol tem <b>regressão em "ir além da intenção do usuário"</b> em código agêntico, e a recomendação oficial é <b>supervisionar trajetórias longas</b>. Traduzindo: em tarefa comprida, ele tende a decidir sozinho o que você quis dizer. Aqui isso pode virar coisa boa (um FPS mais rico do que o pedido) ou coisa ruim (um FPS que resolveu ser outra coisa). Vamos observar três pontos: se ele <b>bate no mesmo bug</b> e o corrige, se ele <b>declara vitória sem abrir o navegador</b>, e se o app entregue é <b>o app pedido</b>. É a tarefa mais longa da bateria — se o padrão descrito pela METR e pelo system card aparecer em algum lugar, aparece aqui.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Status da infra — por que metade desta página está vazia</h2>
+    <p class="lede" style="max-width:820px">Sem enrolação: <b>o Sol não rodou porque ainda não dá pra rodar</b>. O <code>codex-cli</code> dentro do Overclock lista apenas <code>gpt-5.5</code> — <b>Sol, Terra e Luna não subiram no provider</b>. O GA foi em 09/07/2026, hoje, depois da liberação do governo dos EUA. O CLI precisa atualizar.</p>
+    <ul class="insight" style="margin-top:18px">
+      <li><b>4 apps do Fable 5 rodaram de verdade</b> e estão nos quadros acima. São arquivos reais, você interage neles.</li>
+      <li><b>4 apps do Sol não existem.</b> As pastas <code>001-sol/</code> a <code>004-sol/</code> estão criadas e <b>vazias</b>. Nenhum iframe aponta pra elas.</li>
+      <li><b>Nenhum número do Sol foi estimado.</b> Toda coluna da linha dele é "—". Não tem custo projetado, não tem token inferido, não tem tempo chutado. Preferimos a página incompleta à página bonita e falsa.</li>
+      <li><b>Quando o provider subir</b>, os 4 runs entram com a mesma regra dos outros: <b>Sol base, um chute só, zero skill, zero subagente</b>, transcript auditado depois. Aí a tabela fecha.</li>
+    </ul>
+    <div class="note">Publicar uma página que diz "aguardando run" custa menos que publicar um número inventado. Um site sobre não confiar em benchmark de laboratório não pode fabricar o próprio benchmark.</div>
+  </section>
+
+  <footer>
+    <b>Como usar:</b> interaja com cada app do Fable no quadro ou clique em <b>abrir ↗</b> pra tela cheia. Troque a pill <b>pendente</b> por <b>pass</b>/<b>fail</b> no veredito de cada célula. As células do Sol abrem quando os runs rodarem.<br>
+    <b>Colunas das tabelas:</b> <b>entrada</b> = tokens novos que entraram (prompt + código escrito no cache) · <b>saída</b> = código que o modelo escreveu · <b>linhas</b> = tamanho do arquivo final · <b>cache relido</b> = contexto re-lido a cada ida (barato, 0,1× do preço) · <b>idas</b> = round-trips do modelo pra terminar · <b>tempo</b> = minutos de trabalho ativo · <b>custo</b> = fórmula abaixo.<br>
+    <b>Fórmula de custo (idêntica pros dois labs):</b> <code>custo = (in_uncached × preço_in + cache_write × preço_in × 1,25 + cache_read × preço_in × 0,10 + out × preço_out) / 1.000.000</code>. OpenAI e Anthropic usam a <b>mesma mecânica de cache</b> — escrita a 1,25× e leitura a 0,1× — então a conta vale pros dois sem ajuste. Preços oficiais: Sol $5/$30, Fable 5 $10/$50.<br>
+    <b>Fairness (inegociável):</b> modelo puro, um chute só, sem skill, sem subagente, sem squad — auditado no transcript. <b>O Sol roda em modo base, nunca Ultra</b>: o Ultra despacha subagentes e por isso não compete com um agente único. Fable rodou via <code>claude-fable-5</code>.<br>
+    <b>A leitura em 1 frase:</b> no papel o Sol ganha — metade do preço de saída e 88,8% contra 83,4% no Terminal-Bench. Mas os 91,9% de manchete são do Ultra com subagentes, e a METR mediu no Sol a <b>maior taxa de reward-hacking de qualquer modelo público que ela já testou</b>. Quem desempata é o app rodando no quadro, não a tabela do fabricante.<br>
+    <b>Ressalvas de fonte:</b> a tabela do Terminal-Bench 2.1 é <b>divulgada pela própria OpenAI</b>, não é avaliação independente. O contexto de 1,5M é <b>reportado por fonte secundária</b> (a página oficial devolveu HTTP 403). Os 54% de eficiência de token são <b>declaração do Sam Altman</b>, não benchmark auditado.<br>
+    Ver também: <a href="modelos/gpt-5-6.html" style="color:var(--ov-accent)">ficha do GPT-5.6</a> · <a href="modelos/fable-5.html" style="color:var(--ov-accent)">ficha do Fable 5</a> · <a href="benchmark-gpt-5-6.html" style="color:var(--ov-accent)">benchmark completo: GPT-5.6 vs Claude vs Grok</a>.<br>
+    Design system: overclock-web (--ov tokens, Geist Mono, brand #FF3B30).
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+:HL["/squad-labs/ultra-fc/_next/static/chunks/1yod1-gmud4bs.css","style"]
+:HL["/squad-labs/ultra-fc/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/squad-labs/ultra-fc/_next/static/media/fabcf92ba1ccea36-s.p.1w_qz2ahumqmz.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"sFlS77B57H5pCrbqUBIKr"}

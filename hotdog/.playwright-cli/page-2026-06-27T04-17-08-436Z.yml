@@ -1,0 +1,149 @@
+- generic [ref=e3]:
+  - region "top of page" [active]
+  - generic [ref=e10]:
+    - main [ref=e11]:
+      - generic [ref=e16]:
+        - generic:
+          - generic:
+            - generic:
+              - generic [ref=e26]:
+                - img "Vacina" [ref=e31]
+                - generic:
+                  - generic:
+                    - img [ref=e34]
+                    - img [ref=e39]
+                    - paragraph [ref=e54]:
+                      - generic [ref=e56]: "A contabilidade especializada na área da saúde para você focar na sua maior missão: cuidar das pessoas."
+                    - link "Quero a Singular Care" [ref=e58] [cursor=pointer]:
+                      - /url: https://www.singularcont.com.br/care
+                      - generic [ref=e59]: Quero a Singular Care
+              - generic [ref=e60]:
+                - generic:
+                  - generic:
+                    - heading "Contabilidade para você crescer" [level=2] [ref=e73]:
+                      - generic [ref=e74]:
+                        - generic [ref=e75]: Contabilidade
+                        - generic [ref=e76]: para você crescer
+                    - generic [ref=e82]:
+                      - generic:
+                        - generic:
+                          - heading "O futuro ao seu alcance" [level=3] [ref=e87]:
+                            - generic [ref=e89]: O
+                            - generic [ref=e90]: futuro
+                            - generic [ref=e92]: ao seu alcance
+                          - generic:
+                            - paragraph [ref=e93]:
+                              - generic [ref=e94]: "Na Singular Care, somos especialistas em contabilidade para área da saúde. Há mais de 30 anos, atuamos com médicos, dentistas, clínicas e hospitais, dando a segurança e tranquilidade para que eles foquem na sua missão de vida: cuidar das pessoas."
+                            - paragraph [ref=e95]
+                            - paragraph [ref=e96]:
+                              - generic [ref=e97]: Com a Singular, o futuro está ao seu alcance.
+                          - link "Quero a Singular Care" [ref=e99] [cursor=pointer]:
+                            - /url: https://www.singularcont.com.br/care
+                            - generic [ref=e100]: Quero a Singular Care
+              - generic [ref=e101]:
+                - generic:
+                  - generic:
+                    - heading "A garantia de um futuro seguro" [level=2] [ref=e114]:
+                      - generic [ref=e115]:
+                        - generic [ref=e116]: A garantia de um
+                        - generic [ref=e117]: futuro seguro
+                    - generic [ref=e122]:
+                      - generic [ref=e123]:
+                        - generic:
+                          - generic:
+                            - paragraph [ref=e127]: "+1.000"
+                            - paragraph [ref=e128]:
+                              - generic [ref=e129]: Clientes já atendidos com sucesso
+                      - generic [ref=e130]:
+                        - generic:
+                          - generic:
+                            - paragraph [ref=e134]: 30 anos
+                            - paragraph [ref=e135]:
+                              - generic [ref=e136]: de experiência no mercado
+                    - generic [ref=e142]:
+                      - generic:
+                        - generic:
+                          - paragraph [ref=e147]:
+                            - generic [ref=e149]: A
+                            - generic [ref=e151]: segurança
+                            - generic [ref=e153]: e
+                            - generic [ref=e155]: tranquilidade
+                            - generic [ref=e157]: "para que você foque na sua missão de vida: cuidar das pessoas."
+                          - link "Quero a Singular Care" [ref=e159] [cursor=pointer]:
+                            - /url: https://www.singularcont.com.br/care
+                            - generic [ref=e160]: Quero a Singular Care
+              - generic [ref=e161]:
+                - generic:
+                  - generic:
+                    - region "Serviços"
+                    - heading "Nossos serviços" [level=2] [ref=e174]:
+                      - generic [ref=e175]:
+                        - generic [ref=e176]: Nossos
+                        - generic [ref=e177]: serviços
+                    - generic [ref=e182]:
+                      - generic [ref=e183]:
+                        - generic:
+                          - generic:
+                            - heading "Assessoria" [level=3] [ref=e188]
+                            - generic:
+                              - paragraph [ref=e189]: Para empresários que buscam uma assessoria completa nas áreas contábil, fiscal, RH e tributária.
+                              - paragraph [ref=e190]
+                              - paragraph [ref=e191]: Atuamos no processo de constituição, alteração e baixa de empresas, bem como na contabilidade mensal, apuração dos impostos, elaboração da folha de pagamento e planejamento tributário periódico para melhor performance da empresa.
+                      - generic [ref=e192]:
+                        - generic:
+                          - generic:
+                            - heading "Consultoria" [level=3] [ref=e197]
+                            - paragraph [ref=e198]:
+                              - generic [ref=e199]: Foco em responder dúvidas e problemas pontuais que podem auxiliar na tomada de decisão e direcionar para melhores resultados, visando economia de impostos e projeção de crescimento.
+                      - generic [ref=e200]:
+                        - generic:
+                          - generic:
+                            - heading "Declaração IRPF & IRPJ" [level=3] [ref=e205]
+                            - paragraph [ref=e206]: Elaboração de declarações sobre a construção de patrimônio e clareza nas informações prestadas. Atendemos também casos de retificação e regularização após o prazo de entrega.
+                      - generic [ref=e207]:
+                        - generic:
+                          - generic:
+                            - heading "Perícia Trabalhista e Perícia Tributária" [level=3] [ref=e212]
+                            - paragraph [ref=e213]:
+                              - generic [ref=e214]: Análise de documentos e registros contábeis e trabalhistas para elaborar pareceres técnicos em processos judiciais ou extrajudiciais.
+                    - region "Depoimentos"
+                    - heading "O que os clientes dizem?" [level=2] [ref=e224]:
+                      - generic [ref=e225]:
+                        - generic [ref=e226]: O que os
+                        - generic [ref=e227]: clientes
+                        - generic [ref=e228]: dizem?
+                    - generic [ref=e233]:
+                      - generic [ref=e234]:
+                        - generic:
+                          - generic:
+                            - img [ref=e241]
+                            - blockquote [ref=e248]:
+                              - generic [ref=e250]: "\"Somos clientes há mais de 15 anos e centralizamos todos os nossos serviços na Singular. Os prazos, a qualidade e a excelência são uma questão de prioridade. Estamos muito satisfeitos e esperamos manter por muitos anos nossa parceria!.\""
+                            - paragraph [ref=e251]: Bell Design
+                      - generic [ref=e252]:
+                        - generic:
+                          - generic:
+                            - blockquote [ref=e257]:
+                              - generic [ref=e259]: "\"A Singular está conosco desde o início da empresa. É um escritório sério, de qualidade e comprometido com a plena satisfação de seus clientes. O diferencial deles, além da ótima prestação de serviço, está na disponibilidade do suporte, a fim de sanar quaisquer dúvidas e inseguranças que enfrentamos no dia a dia.\""
+                            - paragraph [ref=e260]: Alphamed
+                            - img [ref=e263]
+                      - generic [ref=e270]:
+                        - generic:
+                          - generic:
+                            - img [ref=e277]
+                            - blockquote [ref=e284]:
+                              - generic [ref=e286]: "\"Recomendamos o Escritório Singular pela sua excelência e competência. Nossa parceria já dura muitos anos. Profissionais sempre prontos a nos ajudar. Uma equipe realmente muito experiente!\""
+                            - paragraph [ref=e287]: InterativaCom
+              - generic [ref=e297]:
+                - generic:
+                  - generic:
+                    - img [ref=e303]
+                    - paragraph [ref=e306]:
+                      - generic [ref=e307]: Vamos cuidar do futuro do seu negócio?
+                    - paragraph [ref=e308]:
+                      - generic [ref=e310]: Clique no botão abaixo e chame agora uma especialista da Singular Care.
+                    - link "Chamar a Singular Care" [ref=e312] [cursor=pointer]:
+                      - /url: https://api.whatsapp.com/send?phone=5554991000520&text=Ol%C3%A1,%20Singular%20Care.%20Quero%20mais%20informa%C3%A7%C3%B5es!
+                      - generic [ref=e313]: Chamar a Singular Care
+    - text: "* * * *"
+  - region "bottom of page"

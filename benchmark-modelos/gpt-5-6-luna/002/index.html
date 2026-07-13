@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fafafc" />
+    <meta
+      name="description"
+      content="Descubra produtos que transformam o jeito de trabalhar, criar e se conectar."
+    />
+    <title>Apple — Inovação que se sente</title>
+    <style>
+      :root {
+        --nav-height: 48px;
+        --ink: #1d1d1f;
+        --muted: #6e6e73;
+        --blue: #06c;
+        --dark: #000;
+        --dark-soft: #101010;
+        --paper: #f5f5f7;
+        --white: #fff;
+        --radius: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      button {
+        color: inherit;
+        font: inherit;
+      }
+
+      svg {
+        display: block;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: -100px;
+        left: 16px;
+        z-index: 200;
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--white);
+        font-size: 14px;
+        font-weight: 600;
+        transition: top 180ms ease;
+      }
+
+      .skip-link:focus {
+        top: 12px;
+      }
+
+      .site-header {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 100;
+        height: var(--nav-height);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(250, 250, 252, 0.82);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+      }
+
+      .nav-shell {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(100% - 40px, 1040px);
+        height: 100%;
+        margin: 0 auto;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 28px;
+        color: var(--ink);
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .brand:hover {
+        opacity: 0.68;
+        transform: scale(1.06);
+      }
+
+      .brand svg {
+        width: 18px;
+        height: 22px;
+      }
+
+      .nav-links,
+      .nav-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-links {
+        gap: 31px;
+        margin-left: 30px;
+        margin-right: auto;
+      }
+
+      .nav-links a,
+      .nav-action,
+      .menu-toggle {
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+
+      .nav-links a {
+        color: rgba(0, 0, 0, 0.82);
+        transition: color 180ms ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        color: var(--blue);
+      }
+
+      .nav-actions {
+        gap: 26px;
+      }
+
+      .nav-action,
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        color: var(--ink);
+      }
+
+      .nav-action {
+        width: 18px;
+        height: 28px;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .nav-action:hover,
+      .nav-action:focus-visible {
+        opacity: 0.58;
+        transform: translateY(-1px);
+      }
+
+      .nav-action svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      .menu-toggle {
+        display: none;
+        width: 24px;
+        height: 28px;
+      }
+
+      .menu-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        padding: 12px 20px 24px;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(250, 250, 252, 0.97);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+      }
+
+      .mobile-menu a {
+        display: block;
+        padding: 14px 0;
+        color: var(--ink);
+        font-size: 20px;
+        letter-spacing: -0.03em;
+      }
+
+      .mobile-menu a + a {
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .mobile-menu:not([hidden]) {
+        display: block;
+      }
+
+      main {
+        padding-top: var(--nav-height);
+      }
+
+      .hero {
+        position: relative;
+        display: flex;
+        min-height: min(850px, calc(100svh - var(--nav-height)));
+        overflow: hidden;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--dark);
+        color: var(--white);
+        text-align: center;
+      }
+
+      .hero-copy {
+        position: relative;
+        z-index: 1;
+        padding: clamp(64px, 8vw, 96px) 24px 0;
+      }
+
+      .eyebrow {
+        margin: 0 0 11px;
+        font-size: clamp(18px, 2vw, 21px);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .hero h1,
+      .product-card h2 {
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: -0.055em;
+      }
+
+      .hero h1 {
+        font-size: clamp(46px, 6.7vw, 80px);
+        line-height: 0.98;
+      }
+
+      .hero-subtitle {
+        margin: 16px 0 0;
+        color: #f5f5f7;
+        font-size: clamp(20px, 2.7vw, 32px);
+        letter-spacing: -0.04em;
+        line-height: 1.16;
+      }
+
+      .cta-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        margin-top: 23px;
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--blue);
+        font-size: 17px;
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+        transition: color 180ms ease;
+      }
+
+      .cta::after {
+        content: "";
+        width: 0;
+        height: 1px;
+        margin-left: 0;
+        background: currentColor;
+        transition: width 180ms ease, margin-left 180ms ease;
+      }
+
+      .cta:hover,
+      .cta:focus-visible {
+        color: #2997ff;
+      }
+
+      .cta:hover::after,
+      .cta:focus-visible::after {
+        width: 100%;
+        margin-left: 4px;
+      }
+
+      .cta--light {
+        color: #2997ff;
+      }
+
+      .hero-art {
+        display: flex;
+        width: min(1100px, 100%);
+        margin-top: 18px;
+        align-items: flex-end;
+        justify-content: center;
+        flex: 1;
+      }
+
+      .hero-art svg {
+        width: min(1120px, 112vw);
+        height: auto;
+        margin-bottom: -2px;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding: 12px;
+        background: var(--white);
+      }
+
+      .product-card {
+        position: relative;
+        display: flex;
+        min-height: 680px;
+        overflow: hidden;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+      }
+
+      .product-card--light {
+        background: var(--white);
+        color: var(--ink);
+      }
+
+      .product-card--paper {
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .product-card--dark {
+        background: var(--dark);
+        color: var(--white);
+      }
+
+      .product-card--midnight {
+        background: #050b17;
+        color: var(--white);
+      }
+
+      .card-copy {
+        position: relative;
+        z-index: 2;
+        padding: 60px 24px 0;
+      }
+
+      .product-card h2 {
+        font-size: clamp(35px, 4vw, 54px);
+        line-height: 1;
+      }
+
+      .product-card .eyebrow {
+        font-size: clamp(24px, 3vw, 34px);
+        line-height: 1;
+      }
+
+      .card-lede {
+        max-width: 390px;
+        margin: 13px auto 0;
+        font-size: clamp(19px, 2vw, 25px);
+        letter-spacing: -0.035em;
+        line-height: 1.18;
+      }
+
+      .card-note {
+        max-width: 360px;
+        margin: 12px auto 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .product-card--dark .card-note,
+      .product-card--midnight .card-note {
+        color: #a1a1a6;
+      }
+
+      .product-card .cta-group {
+        margin-top: 21px;
+      }
+
+      .product-visual {
+        display: flex;
+        width: 100%;
+        min-height: 360px;
+        padding: 0 22px;
+        align-items: flex-end;
+        justify-content: center;
+        flex: 1;
+      }
+
+      .product-visual svg {
+        width: min(650px, 100%);
+        height: auto;
+        transform: translateY(1px);
+        transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .product-card:hover .product-visual svg {
+        transform: translateY(-8px) scale(1.018);
+      }
+
+      .product-card--wide {
+        grid-column: 1 / -1;
+        min-height: 700px;
+      }
+
+      .product-card--wide .product-visual svg {
+        width: min(900px, 100%);
+      }
+
+      .section-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 15px;
+        color: #bf4800;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
+      .section-kicker .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .footer {
+        padding: 45px 24px 30px;
+        background: var(--paper);
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .footer-inner {
+        width: min(100%, 1020px);
+        margin: 0 auto;
+      }
+
+      .footer-note {
+        max-width: 780px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #d2d2d7;
+      }
+
+      .footer-links {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 28px;
+        padding: 25px 0 30px;
+      }
+
+      .footer-column h3 {
+        margin: 0 0 12px;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .footer-column a {
+        display: block;
+        width: fit-content;
+        margin: 0 0 8px;
+        transition: color 180ms ease;
+      }
+
+      .footer-column a:hover,
+      .footer-column a:focus-visible {
+        color: var(--ink);
+        text-decoration: underline;
+      }
+
+      .footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding-top: 18px;
+        border-top: 1px solid #d2d2d7;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgba(0, 102, 204, 0.45);
+        outline-offset: 4px;
+      }
+
+      @media (max-width: 760px) {
+        .nav-shell {
+          width: min(100% - 32px, 1040px);
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .nav-actions {
+          gap: 18px;
+          margin-left: auto;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+        }
+
+        .mobile-menu {
+          display: none;
+        }
+
+        .hero {
+          min-height: 720px;
+        }
+
+        .hero-copy {
+          padding-top: 60px;
+        }
+
+        .hero-art svg {
+          width: 150vw;
+          max-width: none;
+        }
+
+        .product-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          padding: 10px;
+        }
+
+        .product-card,
+        .product-card--wide {
+          min-height: 600px;
+        }
+
+        .product-card--wide {
+          grid-column: auto;
+        }
+
+        .card-copy {
+          padding-top: 55px;
+        }
+
+        .product-visual {
+          min-height: 310px;
+        }
+
+        .footer-links {
+          grid-template-columns: repeat(2, 1fr);
+          row-gap: 30px;
+        }
+
+        .footer-bottom {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 5px;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .nav-shell {
+          width: min(100% - 24px, 1040px);
+        }
+
+        .hero {
+          min-height: 660px;
+        }
+
+        .hero-copy {
+          padding-top: 52px;
+        }
+
+        .hero-subtitle {
+          max-width: 280px;
+          margin-right: auto;
+          margin-left: auto;
+        }
+
+        .cta-group {
+          gap: 20px;
+        }
+
+        .cta {
+          font-size: 15px;
+        }
+
+        .product-card,
+        .product-card--wide {
+          min-height: 570px;
+        }
+
+        .card-copy {
+          padding-right: 16px;
+          padding-left: 16px;
+        }
+
+        .product-visual {
+          min-height: 270px;
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="Navegação principal">
+        <a class="brand" href="#top" aria-label="Apple — início">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.09.8 1.2-.24 2.35-.93 3.63-.84 1.54.12 2.7.73 3.45 1.83-3.18 1.9-2.43 6.07.49 7.24-.58 1.53-1.33 3.04-2.66 3.94zM12.03 7.25C11.88 4.97 13.73 3.09 15.85 2.96c.29 2.62-2.37 4.6-3.82 4.29z" />
+          </svg>
+        </a>
+
+        <div class="nav-links">
+          <a href="#mac">Loja</a>
+          <a href="#mac">Mac</a>
+          <a href="#ipad">iPad</a>
+          <a href="#watch">Watch</a>
+          <a href="#airpods">AirPods</a>
+          <a href="#intelligence">Apple Intelligence</a>
+          <a href="#support">Suporte</a>
+        </div>
+
+        <div class="nav-actions">
+          <button class="nav-action" type="button" aria-label="Buscar" title="Buscar">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="10.8" cy="10.8" r="6.6" stroke="currentColor" stroke-width="1.7" />
+              <path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+            </svg>
+          </button>
+          <button class="nav-action" type="button" aria-label="Sacola" title="Sacola">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5.8 8.5h12.4l.9 11.2H4.9L5.8 8.5Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
+              <path d="M8.5 9V6.8a3.5 3.5 0 0 1 7 0V9" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" />
+            </svg>
+          </button>
+          <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu" title="Menu">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 8h14M5 16h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <div class="mobile-menu" id="mobile-menu" hidden>
+        <a href="#mac">Loja</a>
+        <a href="#mac">Mac</a>
+        <a href="#ipad">iPad</a>
+        <a href="#watch">Watch</a>
+        <a href="#airpods">AirPods</a>
+        <a href="#intelligence">Apple Intelligence</a>
+        <a href="#support">Suporte</a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">iPhone 16 Pro</p>
+          <h1 id="hero-title">Titânio. Tão forte.<br />Tão leve. Tão Pro.</h1>
+          <p class="hero-subtitle">A inteligência por trás de tudo.</p>
+          <div class="cta-group">
+            <a class="cta cta--light" href="#iphone">Saiba mais <span aria-hidden="true">›</span></a>
+            <a class="cta cta--light" href="#iphone">Comprar <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+
+        <div class="hero-art" id="iphone" aria-hidden="true">
+          <svg viewBox="0 0 1200 680" role="img" aria-label="Representação abstrata de um iPhone Pro em titânio escuro">
+            <defs>
+              <radialGradient id="heroGlow" cx="50%" cy="45%" r="58%">
+                <stop offset="0" stop-color="#574e8c" stop-opacity=".95" />
+                <stop offset=".36" stop-color="#292442" stop-opacity=".58" />
+                <stop offset="1" stop-color="#000" stop-opacity="0" />
+              </radialGradient>
+              <linearGradient id="heroAura" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#d1a3ff" />
+                <stop offset=".42" stop-color="#7862c8" />
+                <stop offset="1" stop-color="#17152b" />
+              </linearGradient>
+              <linearGradient id="phoneShell" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#7f8190" />
+                <stop offset=".16" stop-color="#252733" />
+                <stop offset=".52" stop-color="#090b12" />
+                <stop offset=".84" stop-color="#3b3d49" />
+                <stop offset="1" stop-color="#9697a2" />
+              </linearGradient>
+              <linearGradient id="phoneScreen" x1="0" y1="0" x2=".8" y2="1">
+                <stop offset="0" stop-color="#373758" />
+                <stop offset=".25" stop-color="#171722" />
+                <stop offset=".62" stop-color="#08090e" />
+                <stop offset="1" stop-color="#2c1b44" />
+              </linearGradient>
+              <filter id="blurHero" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="34" />
+              </filter>
+              <filter id="shadowHero" x="-40%" y="-30%" width="180%" height="190%">
+                <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#000" flood-opacity=".75" />
+              </filter>
+            </defs>
+            <ellipse cx="600" cy="390" rx="475" ry="280" fill="url(#heroGlow)" filter="url(#blurHero)" />
+            <path d="M250 428c114-126 187-183 318-220 162-45 307 21 374 104 65 80 41 194-87 232-151 45-489 49-605-11-47-24-42-65 0-105Z" fill="url(#heroAura)" opacity=".45" filter="url(#blurHero)" />
+            <g transform="translate(462 42) rotate(8 140 295)" filter="url(#shadowHero)">
+              <rect x="0" y="0" width="276" height="570" rx="45" fill="url(#phoneShell)" stroke="#aaaab5" stroke-opacity=".42" stroke-width="3" />
+              <rect x="10" y="10" width="256" height="550" rx="37" fill="url(#phoneScreen)" stroke="#010106" stroke-width="6" />
+              <path d="M48 310c40-140 121-220 184-244v283c-70 13-131 35-184 84Z" fill="#7f75c5" opacity=".3" />
+              <path d="M17 218c62 38 147 54 249 20v80c-79 37-171 22-249-21Z" fill="#252445" opacity=".78" />
+              <path d="M194 10h-112c-10 0-18 8-18 18v1c0 10 8 18 18 18h112c10 0 18-8 18-18v-1c0-10-8-18-18-18Z" fill="#020207" />
+              <circle cx="90" cy="30" r="5" fill="#161620" />
+              <circle cx="180" cy="30" r="5" fill="#161620" />
+              <g transform="translate(22 52)">
+                <circle cx="35" cy="35" r="28" fill="#242633" stroke="#747482" stroke-width="3" />
+                <circle cx="35" cy="35" r="16" fill="#080a12" />
+                <circle cx="84" cy="35" r="28" fill="#242633" stroke="#747482" stroke-width="3" />
+                <circle cx="84" cy="35" r="16" fill="#080a12" />
+                <circle cx="59" cy="84" r="28" fill="#242633" stroke="#747482" stroke-width="3" />
+                <circle cx="59" cy="84" r="16" fill="#080a12" />
+              </g>
+              <path d="M-2 154h5M-2 199h5M273 176h5" stroke="#c5c5ce" stroke-width="3" stroke-linecap="round" />
+              <path d="M128 546h20" stroke="#d1d1d8" stroke-width="2" stroke-linecap="round" opacity=".35" />
+            </g>
+            <g opacity=".8">
+              <circle cx="218" cy="526" r="2" fill="#bbaaff" />
+              <circle cx="982" cy="188" r="2" fill="#9278ff" />
+              <circle cx="1025" cy="420" r="1.5" fill="#fff" />
+              <circle cx="312" cy="178" r="1.5" fill="#fff" />
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="product-grid" aria-label="Destaques de produtos">
+        <article class="product-card product-card--light" id="mac" aria-labelledby="mac-title">
+          <div class="card-copy">
+            <h2 id="mac-title">MacBook Air</h2>
+            <p class="card-lede">Feito para ir longe.</p>
+            <p class="card-note">Superfino. Super-rápido. Com o chip M4.</p>
+            <div class="cta-group">
+              <a class="cta" href="#support">Saiba mais <span aria-hidden="true">›</span></a>
+              <a class="cta" href="#support">Comprar <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+          <div class="product-visual" aria-hidden="true">
+            <svg viewBox="0 0 700 450">
+              <defs>
+                <linearGradient id="macLid" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#e9f2fb" />
+                  <stop offset=".48" stop-color="#a9c1d5" />
+                  <stop offset="1" stop-color="#71899c" />
+                </linearGradient>
+                <linearGradient id="macScreen" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#b6ddff" />
+                  <stop offset=".42" stop-color="#5572dd" />
+                  <stop offset=".78" stop-color="#f5b3d2" />
+                  <stop offset="1" stop-color="#ff8c75" />
+                </linearGradient>
+                <linearGradient id="macBase" x1="0" y1="0" x2="0" y2="1">
+                  <stop stop-color="#d8e7f3" />
+                  <stop offset="1" stop-color="#8fa7b8" />
+                </linearGradient>
+                <filter id="macShadow" x="-20%" y="-30%" width="140%" height="180%">
+                  <feDropShadow dx="0" dy="20" stdDeviation="17" flood-color="#8d9ba5" flood-opacity=".32" />
+                </filter>
+              </defs>
+              <ellipse cx="350" cy="404" rx="260" ry="17" fill="#aeb9c2" opacity=".32" />
+              <g filter="url(#macShadow)">
+                <path d="M167 86c0-16 13-29 29-29h308c16 0 29 13 29 29v213H167V86Z" fill="url(#macLid)" />
+                <path d="M181 86c0-8 7-15 15-15h308c8 0 15 7 15 15v192H181V86Z" fill="#101722" />
+                <rect x="195" y="93" width="310" height="171" rx="2" fill="url(#macScreen)" />
+                <path d="M195 226c71-20 129-37 183-89 47-44 85-67 127-72v199H195Z" fill="#dacbff" opacity=".22" />
+                <path d="M195 185c86-25 144-11 198 25 50 33 70 38 112 34v20H195Z" fill="#f8dbdc" opacity=".2" />
+                <path d="M138 302h424l37 41c7 8 1 20-10 20H150c-11 0-17-12-10-20l35-41Z" fill="url(#macBase)" />
+                <path d="M138 302h424" stroke="#f5fbff" stroke-width="2" opacity=".82" />
+                <path d="M293 311h115l5 8H288l5-8Z" fill="#8397a8" opacity=".75" />
+                <path d="M299 319h103" stroke="#dbe9f3" stroke-width="1.5" opacity=".55" />
+              </g>
+            </svg>
+          </div>
+        </article>
+
+        <article class="product-card product-card--dark" id="ipad" aria-labelledby="ipad-title">
+          <div class="card-copy">
+            <h2 id="ipad-title">iPad Pro</h2>
+            <p class="card-lede">Impossivelmente fino.<br />Incrivelmente poderoso.</p>
+            <p class="card-note">Com o chip M4 e uma tela que faz tudo ganhar vida.</p>
+            <div class="cta-group">
+              <a class="cta cta--light" href="#support">Saiba mais <span aria-hidden="true">›</span></a>
+              <a class="cta cta--light" href="#support">Comprar <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+          <div class="product-visual" aria-hidden="true">
+            <svg viewBox="0 0 700 450">
+              <defs>
+                <linearGradient id="ipadShell" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#676d7b" />
+                  <stop offset=".44" stop-color="#171b26" />
+                  <stop offset="1" stop-color="#8d91a0" />
+                </linearGradient>
+                <linearGradient id="ipadScreen" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#1c193e" />
+                  <stop offset=".36" stop-color="#4635bd" />
+                  <stop offset=".6" stop-color="#a047e3" />
+                  <stop offset="1" stop-color="#ff7759" />
+                </linearGradient>
+                <filter id="ipadGlow" x="-30%" y="-30%" width="160%" height="180%">
+                  <feGaussianBlur stdDeviation="22" />
+                </filter>
+                <filter id="ipadShadow" x="-30%" y="-30%" width="160%" height="190%">
+                  <feDropShadow dx="0" dy="22" stdDeviation="20" flood-color="#000" flood-opacity=".65" />
+                </filter>
+              </defs>
+              <ellipse cx="350" cy="394" rx="206" ry="18" fill="#000" opacity=".6" />
+              <ellipse cx="370" cy="220" rx="210" ry="160" fill="#6b58e0" opacity=".35" filter="url(#ipadGlow)" />
+              <g transform="rotate(-8 350 230)" filter="url(#ipadShadow)">
+                <rect x="218" y="39" width="264" height="365" rx="25" fill="url(#ipadShell)" stroke="#b3b5bf" stroke-opacity=".46" stroke-width="2" />
+                <rect x="229" y="50" width="242" height="343" rx="18" fill="#04050b" />
+                <rect x="239" y="60" width="222" height="323" rx="13" fill="url(#ipadScreen)" />
+                <path d="M239 243c51-32 93-95 123-183 49 24 75 62 99 112v211H239Z" fill="#ffa5da" opacity=".22" />
+                <path d="M239 205c49 27 104 22 222-76v84c-93 59-162 79-222 47Z" fill="#5be4ff" opacity=".18" />
+                <circle cx="350" cy="56" r="2" fill="#aeb2c0" />
+                <path d="M218 181h3M479 235h3" stroke="#d5d6de" stroke-width="2" stroke-linecap="round" opacity=".7" />
+              </g>
+            </svg>
+          </div>
+        </article>
+
+        <article class="product-card product-card--midnight" id="watch" aria-labelledby="watch-title">
+          <div class="card-copy">
+            <p class="section-kicker"><span class="dot"></span> NOVO</p>
+            <h2 id="watch-title">Apple Watch Series 10</h2>
+            <p class="card-lede">Mais fino. Mais inteligente.<br />Mais brilhante.</p>
+            <div class="cta-group">
+              <a class="cta cta--light" href="#support">Saiba mais <span aria-hidden="true">›</span></a>
+              <a class="cta cta--light" href="#support">Comprar <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+          <div class="product-visual" aria-hidden="true">
+            <svg viewBox="0 0 700 450">
+              <defs>
+                <linearGradient id="watchBand" x1="0" y1="0" x2="1" y2="0">
+                  <stop stop-color="#2c303d" />
+                  <stop offset=".5" stop-color="#777c8b" />
+                  <stop offset="1" stop-color="#282c39" />
+                </linearGradient>
+                <radialGradient id="watchFace" cx="34%" cy="28%" r="80%">
+                  <stop stop-color="#ff9674" />
+                  <stop offset=".28" stop-color="#dd3c61" />
+                  <stop offset=".62" stop-color="#35206f" />
+                  <stop offset="1" stop-color="#060811" />
+                </radialGradient>
+                <linearGradient id="watchEdge" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#f4f6ff" />
+                  <stop offset=".2" stop-color="#8d93a7" />
+                  <stop offset=".56" stop-color="#3d4251" />
+                  <stop offset=".9" stop-color="#b4b6c3" />
+                  <stop offset="1" stop-color="#f9f9ff" />
+                </linearGradient>
+                <filter id="watchShadow" x="-30%" y="-30%" width="160%" height="190%">
+                  <feDropShadow dx="0" dy="26" stdDeviation="20" flood-color="#000" flood-opacity=".7" />
+                </filter>
+              </defs>
+              <ellipse cx="350" cy="398" rx="160" ry="18" fill="#000" opacity=".55" />
+              <g filter="url(#watchShadow)">
+                <path d="M281 74c0-19 15-34 34-34h70c19 0 34 15 34 34v92h-138V74ZM281 283h138v93c0 19-15 34-34 34h-70c-19 0-34-15-34-34v-93Z" fill="url(#watchBand)" />
+                <rect x="252" y="137" width="196" height="191" rx="48" fill="url(#watchEdge)" />
+                <rect x="267" y="151" width="166" height="163" rx="38" fill="#05060d" />
+                <rect x="278" y="162" width="144" height="141" rx="31" fill="url(#watchFace)" />
+                <path d="M281 261c35-61 69-74 139-77v119H281Z" fill="#ffad73" opacity=".17" />
+                <path d="M306 256c17-24 44-34 84-31" fill="none" stroke="#ffcc99" stroke-width="6" stroke-linecap="round" opacity=".72" />
+                <path d="M361 178v53l26 17" fill="none" stroke="#fff7f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="361" cy="231" r="6" fill="#fff8ee" />
+                <circle cx="446" cy="220" r="13" fill="#737888" stroke="#d4d6df" stroke-width="3" />
+                <path d="M446 207v26" stroke="#171a25" stroke-width="2" />
+              </g>
+            </svg>
+          </div>
+        </article>
+
+        <article class="product-card product-card--paper" id="airpods" aria-labelledby="airpods-title">
+          <div class="card-copy">
+            <h2 id="airpods-title">AirPods Pro 2</h2>
+            <p class="card-lede">O som que te envolve.</p>
+            <p class="card-note">Cancelamento ativo de ruído. Áudio adaptativo. Um novo jeito de ouvir.</p>
+            <div class="cta-group">
+              <a class="cta" href="#support">Saiba mais <span aria-hidden="true">›</span></a>
+              <a class="cta" href="#support">Comprar <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+          <div class="product-visual" aria-hidden="true">
+            <svg viewBox="0 0 700 450">
+              <defs>
+                <linearGradient id="podsCase" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#fff" />
+                  <stop offset=".48" stop-color="#eef1f5" />
+                  <stop offset="1" stop-color="#cdd3db" />
+                </linearGradient>
+                <linearGradient id="podStem" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#fff" />
+                  <stop offset=".62" stop-color="#e8ebef" />
+                  <stop offset="1" stop-color="#b9c1ca" />
+                </linearGradient>
+                <radialGradient id="podGlow">
+                  <stop stop-color="#9bd8ff" stop-opacity=".75" />
+                  <stop offset="1" stop-color="#9bd8ff" stop-opacity="0" />
+                </radialGradient>
+                <filter id="podsShadow" x="-30%" y="-30%" width="160%" height="190%">
+                  <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#98a1ad" flood-opacity=".3" />
+                </filter>
+              </defs>
+              <ellipse cx="350" cy="386" rx="205" ry="22" fill="#a6afb8" opacity=".24" />
+              <circle cx="252" cy="199" r="142" fill="url(#podGlow)" filter="url(#podsShadow)" />
+              <g filter="url(#podsShadow)">
+                <path d="M183 168c0-51 39-89 88-89s88 38 88 89v91c0 52-39 88-88 88s-88-36-88-88v-91Z" fill="url(#podsCase)" />
+                <path d="M198 167c0-42 32-73 73-73s73 31 73 73v84c0 42-32 72-73 72s-73-30-73-72v-84Z" fill="#e6e9ed" />
+                <path d="M215 177c0-31 25-55 56-55s56 24 56 55v67c0 31-25 54-56 54s-56-23-56-54v-67Z" fill="#f9fafb" />
+                <circle cx="271" cy="178" r="24" fill="#d4d9df" />
+                <circle cx="271" cy="178" r="15" fill="#a7b1bc" opacity=".5" />
+                <path d="M428 96c-28 0-48 22-48 49v47c0 26 20 48 48 48s48-22 48-48v-47c0-27-20-49-48-49Z" fill="url(#podStem)" />
+                <path d="M387 212v112c0 35 16 54 41 54s41-19 41-54V212Z" fill="url(#podStem)" />
+                <ellipse cx="428" cy="196" rx="38" ry="37" fill="#edf0f4" />
+                <circle cx="428" cy="190" r="15" fill="#c4cbd3" opacity=".65" />
+                <path d="M418 333h20" stroke="#a4adb7" stroke-width="4" stroke-linecap="round" />
+              </g>
+            </svg>
+          </div>
+        </article>
+
+        <article class="product-card product-card--wide product-card--light" id="intelligence" aria-labelledby="intelligence-title">
+          <div class="card-copy">
+            <p class="section-kicker"><span class="dot"></span> APPLE INTELLIGENCE</p>
+            <h2 id="intelligence-title">Pessoal. Privada.<br />Poderosa.</h2>
+            <p class="card-lede">Uma nova forma de fazer mais — sem perder o que faz você, você.</p>
+            <div class="cta-group">
+              <a class="cta" href="#support">Saiba mais <span aria-hidden="true">›</span></a>
+              <a class="cta" href="#support">Veja os recursos <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+          <div class="product-visual" aria-hidden="true">
+            <svg viewBox="0 0 1000 460">
+              <defs>
+                <radialGradient id="aiCore" cx="50%" cy="50%" r="50%">
+                  <stop stop-color="#fff6e0" />
+                  <stop offset=".22" stop-color="#ff9e87" />
+                  <stop offset=".52" stop-color="#c283ff" />
+                  <stop offset=".8" stop-color="#6b9cff" />
+                  <stop offset="1" stop-color="#6b9cff" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="aiRibbon" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#ff8869" />
+                  <stop offset=".28" stop-color="#f6c375" />
+                  <stop offset=".52" stop-color="#9d7cff" />
+                  <stop offset=".78" stop-color="#62cfff" />
+                  <stop offset="1" stop-color="#88e3cb" />
+                </linearGradient>
+                <filter id="aiBlur" x="-40%" y="-60%" width="180%" height="220%">
+                  <feGaussianBlur stdDeviation="28" />
+                </filter>
+                <filter id="aiShadow" x="-20%" y="-30%" width="140%" height="190%">
+                  <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#acb2d5" flood-opacity=".26" />
+                </filter>
+              </defs>
+              <ellipse cx="500" cy="260" rx="260" ry="150" fill="url(#aiCore)" filter="url(#aiBlur)" />
+              <g fill="none" stroke="url(#aiRibbon)" stroke-linecap="round" filter="url(#aiShadow)">
+                <path d="M208 246c54-128 195-190 300-116 77 54 129 184 266 174 61-5 98-40 111-81" stroke-width="18" opacity=".65" />
+                <path d="M248 313c89-92 166-113 239-74 88 47 135 123 258 93 57-14 91-51 106-100" stroke-width="11" opacity=".82" />
+                <path d="M330 126c71 1 119 23 153 75 52 79 113 155 224 122 73-22 104-83 107-143" stroke-width="7" opacity=".7" />
+                <path d="M381 350c36-83 111-133 184-110 90 27 112 123 187 134 43 6 84-13 110-49" stroke-width="5" opacity=".56" />
+              </g>
+              <circle cx="500" cy="226" r="72" fill="url(#aiCore)" opacity=".9" />
+              <circle cx="500" cy="226" r="19" fill="#fff7ed" opacity=".92" />
+              <g fill="#fff" opacity=".8">
+                <circle cx="190" cy="282" r="4" />
+                <circle cx="794" cy="148" r="4" />
+                <circle cx="823" cy="340" r="3" />
+                <circle cx="295" cy="126" r="3" />
+              </g>
+            </svg>
+          </div>
+        </article>
+
+        <article class="product-card product-card--wide product-card--dark" id="trade-in" aria-labelledby="trade-title">
+          <div class="card-copy">
+            <h2 id="trade-title">Apple Trade In</h2>
+            <p class="card-lede">Troque seu dispositivo.<br />Ganhe crédito para um novo.</p>
+            <p class="card-note">É bom para você. É bom para o planeta.</p>
+            <div class="cta-group">
+              <a class="cta cta--light" href="#support">Veja quanto vale <span aria-hidden="true">›</span></a>
+            </div>
+          </div>
+          <div class="product-visual" aria-hidden="true">
+            <svg viewBox="0 0 1000 460">
+              <defs>
+                <linearGradient id="tradePhone" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#8fd2a4" />
+                  <stop offset=".46" stop-color="#32745f" />
+                  <stop offset="1" stop-color="#122d32" />
+                </linearGradient>
+                <linearGradient id="tradeScreen" x1="0" y1="0" x2="1" y2="1">
+                  <stop stop-color="#e0ffd2" />
+                  <stop offset=".38" stop-color="#65bd8d" />
+                  <stop offset="1" stop-color="#103e4a" />
+                </linearGradient>
+                <radialGradient id="tradeGlow">
+                  <stop stop-color="#79d89d" stop-opacity=".55" />
+                  <stop offset="1" stop-color="#79d89d" stop-opacity="0" />
+                </radialGradient>
+                <filter id="tradeBlur" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="32" />
+                </filter>
+                <filter id="tradeShadow" x="-30%" y="-30%" width="160%" height="190%">
+                  <feDropShadow dx="0" dy="26" stdDeviation="22" flood-color="#000" flood-opacity=".6" />
+                </filter>
+              </defs>
+              <ellipse cx="500" cy="365" rx="265" ry="24" fill="#000" opacity=".62" />
+              <circle cx="500" cy="220" r="195" fill="url(#tradeGlow)" filter="url(#tradeBlur)" />
+              <g transform="translate(368 16) rotate(16 132 230)" filter="url(#tradeShadow)">
+                <rect x="0" y="0" width="264" height="432" rx="42" fill="url(#tradePhone)" stroke="#b1e8bd" stroke-opacity=".46" stroke-width="2" />
+                <rect x="12" y="12" width="240" height="408" rx="32" fill="#051820" />
+                <rect x="25" y="25" width="214" height="382" rx="24" fill="url(#tradeScreen)" />
+                <path d="M25 281c54-82 112-146 214-185v310H25Z" fill="#d2ffb2" opacity=".19" />
+                <path d="M25 145c71 26 131 14 214-33v79c-71 44-143 48-214 18Z" fill="#1d645d" opacity=".38" />
+                <rect x="77" y="12" width="110" height="25" rx="13" fill="#031117" />
+                <g transform="translate(38 58)">
+                  <circle cx="35" cy="35" r="26" fill="#244f4a" stroke="#9ddcb0" stroke-width="3" />
+                  <circle cx="35" cy="35" r="14" fill="#07252b" />
+                  <circle cx="83" cy="35" r="26" fill="#244f4a" stroke="#9ddcb0" stroke-width="3" />
+                  <circle cx="83" cy="35" r="14" fill="#07252b" />
+                  <circle cx="59" cy="82" r="26" fill="#244f4a" stroke="#9ddcb0" stroke-width="3" />
+                  <circle cx="59" cy="82" r="14" fill="#07252b" />
+                </g>
+              </g>
+              <g fill="#96efad" opacity=".75">
+                <circle cx="240" cy="183" r="4" />
+                <circle cx="742" cy="150" r="3" />
+                <circle cx="794" cy="301" r="4" />
+              </g>
+            </svg>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer" id="support">
+      <div class="footer-inner">
+        <p class="footer-note">
+          A Apple transforma tecnologia em experiências simples, poderosas e pessoais. Alguns recursos e produtos apresentados podem variar por região.
+        </p>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Descobrir</h3>
+            <a href="#mac">Mac</a>
+            <a href="#ipad">iPad</a>
+            <a href="#watch">Apple Watch</a>
+            <a href="#airpods">AirPods</a>
+          </div>
+          <div class="footer-column">
+            <h3>Comprar</h3>
+            <a href="#mac">Loja</a>
+            <a href="#trade-in">Apple Trade In</a>
+            <a href="#support">Financiamento</a>
+            <a href="#support">Status do pedido</a>
+          </div>
+          <div class="footer-column">
+            <h3>Serviços</h3>
+            <a href="#support">Apple Music</a>
+            <a href="#support">Apple TV+</a>
+            <a href="#support">iCloud</a>
+            <a href="#support">Apple One</a>
+          </div>
+          <div class="footer-column">
+            <h3>Conta</h3>
+            <a href="#support">Gerenciar sua Conta Apple</a>
+            <a href="#support">iCloud.com</a>
+            <a href="#support">Privacidade</a>
+          </div>
+          <div class="footer-column">
+            <h3>Sobre a Apple</h3>
+            <a href="#support">Newsroom</a>
+            <a href="#support">Liderança</a>
+            <a href="#support">Meio ambiente</a>
+            <a href="#support">Carreiras</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>Copyright © 2025 Apple Inc. Todos os direitos reservados.</span>
+          <span>Brasil &nbsp;·&nbsp; Privacidade &nbsp;·&nbsp; Termos de uso</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuButton = document.querySelector('.menu-toggle');
+      const mobileMenu = document.querySelector('#mobile-menu');
+
+      if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', () => {
+          const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+          menuButton.setAttribute('aria-expanded', String(!isOpen));
+          menuButton.setAttribute('aria-label', isOpen ? 'Abrir menu' : 'Fechar menu');
+          mobileMenu.hidden = isOpen;
+        });
+
+        mobileMenu.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.setAttribute('aria-label', 'Abrir menu');
+            mobileMenu.hidden = true;
+          });
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 760) {
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.setAttribute('aria-label', 'Abrir menu');
+            mobileMenu.hidden = true;
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulação de Física — Bolinhas</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 0%, #1a1f3a 0%, #0a0e1a 70%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  canvas {
+    display: block;
+    cursor: crosshair;
+  }
+  #ui {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  #spawnBtn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  #spawnBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(99, 102, 241, 0.55);
+  }
+  #spawnBtn:active {
+    transform: translateY(0);
+  }
+  #info {
+    color: rgba(255,255,255,0.55);
+    font-size: 13px;
+    background: rgba(255,255,255,0.06);
+    padding: 10px 16px;
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+  }
+  #fps {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    font-family: monospace;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<div id="ui">
+  <button id="spawnBtn">+ 50 bolinhas</button>
+  <div id="info">Segure o mouse: atrai &nbsp;|&nbsp; Clique: explosão</div>
+</div>
+<div id="fps"></div>
+<canvas id="canvas"></canvas>
+
+<script>
+(function () {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const spawnBtn = document.getElementById('spawnBtn');
+  const fpsEl = document.getElementById('fps');
+
+  let W, H;
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const GRAVITY = 1400;        // px/s^2
+  const RESTITUTION = 0.78;    // perda de energia em colisao
+  const WALL_RESTITUTION = 0.72;
+  const FRICTION_AIR = 0.0006;
+  const ATTRACT_RADIUS = 260;
+  const ATTRACT_STRENGTH = 2600;
+  const EXPLOSION_RADIUS = 320;
+  const EXPLOSION_STRENGTH = 1400;
+  const MAX_BALLS = 600;
+
+  const COLORS = [
+    '#ff5e7a', '#ff9f5a', '#ffd95a', '#7bed8c',
+    '#5ad1ff', '#7c8bff', '#c77bff', '#ff7bd6'
+  ];
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+
+  class Ball {
+    constructor(x, y) {
+      this.r = rand(8, 22);
+      this.x = x !== undefined ? x : rand(this.r, W - this.r);
+      this.y = y !== undefined ? y : rand(-H, -this.r);
+      this.vx = rand(-120, 120);
+      this.vy = rand(-50, 50);
+      this.mass = this.r * this.r;
+      this.color = COLORS[(Math.random() * COLORS.length) | 0];
+      this.spin = 0;
+    }
+  }
+
+  let balls = [];
+  function spawnBalls(n) {
+    const room = MAX_BALLS - balls.length;
+    const count = Math.min(n, room);
+    for (let i = 0; i < count; i++) {
+      balls.push(new Ball(rand(20, W - 20), rand(-H * 0.5, -20)));
+    }
+  }
+  spawnBalls(80);
+
+  spawnBtn.addEventListener('click', () => spawnBalls(50));
+
+  // Mouse state
+  const mouse = { x: -9999, y: -9999, down: false, held: false };
+  let holdTimer = null;
+
+  canvas.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  canvas.addEventListener('mouseleave', () => {
+    mouse.x = -9999; mouse.y = -9999;
+    mouse.held = false;
+  });
+
+  canvas.addEventListener('mousedown', (e) => {
+    mouse.down = true;
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    // distingue "clique" (explosao) de "segurar" (atracao)
+    holdTimer = setTimeout(() => { mouse.held = true; }, 160);
+  });
+
+  window.addEventListener('mouseup', (e) => {
+    if (mouse.down && !mouse.held) {
+      explode(mouse.x, mouse.y);
+    }
+    mouse.down = false;
+    mouse.held = false;
+    clearTimeout(holdTimer);
+  });
+
+  // Touch support basico
+  canvas.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    mouse.x = t.clientX; mouse.y = t.clientY;
+    mouse.down = true;
+    holdTimer = setTimeout(() => { mouse.held = true; }, 160);
+  }, { passive: true });
+  canvas.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    mouse.x = t.clientX; mouse.y = t.clientY;
+  }, { passive: true });
+  window.addEventListener('touchend', () => {
+    if (mouse.down && !mouse.held) explode(mouse.x, mouse.y);
+    mouse.down = false; mouse.held = false; mouse.x = -9999; mouse.y = -9999;
+    clearTimeout(holdTimer);
+  });
+
+  function explode(cx, cy) {
+    for (const b of balls) {
+      const dx = b.x - cx;
+      const dy = b.y - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+      if (dist < EXPLOSION_RADIUS) {
+        const falloff = 1 - dist / EXPLOSION_RADIUS;
+        const force = EXPLOSION_STRENGTH * falloff;
+        b.vx += (dx / dist) * force;
+        b.vy += (dy / dist) * force;
+      }
+    }
+    sparks.push({ x: cx, y: cy, r: 4, alpha: 1 });
+  }
+
+  // efeito visual simples de onda de choque
+  let sparks = [];
+
+  function updatePhysics(dt) {
+    // forcas: gravidade, atrito do ar, atracao do mouse
+    for (const b of balls) {
+      b.vy += GRAVITY * dt;
+      b.vx *= (1 - FRICTION_AIR);
+      b.vy *= (1 - FRICTION_AIR);
+
+      if (mouse.held) {
+        const dx = mouse.x - b.x;
+        const dy = mouse.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+        if (dist < ATTRACT_RADIUS && dist > b.r) {
+          const force = ATTRACT_STRENGTH * (1 - dist / ATTRACT_RADIUS);
+          b.vx += (dx / dist) * force * dt;
+          b.vy += (dy / dist) * force * dt;
+        }
+      }
+
+      b.x += b.vx * dt;
+      b.y += b.vy * dt;
+      b.spin += b.vx * dt * 0.01;
+    }
+
+    // colisao com paredes
+    for (const b of balls) {
+      if (b.x - b.r < 0) {
+        b.x = b.r;
+        b.vx = -b.vx * WALL_RESTITUTION;
+      } else if (b.x + b.r > W) {
+        b.x = W - b.r;
+        b.vx = -b.vx * WALL_RESTITUTION;
+      }
+      if (b.y - b.r < 0) {
+        b.y = b.r;
+        b.vy = -b.vy * WALL_RESTITUTION;
+      } else if (b.y + b.r > H) {
+        b.y = H - b.r;
+        b.vy = -b.vy * WALL_RESTITUTION;
+        if (Math.abs(b.vx) < 4) b.vx *= 0.9; // descanso no chao
+      }
+    }
+
+    // colisao bola-bola (grade espacial pra performance)
+    resolveCollisions();
+
+    // sparks fade
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      sparks[i].r += 600 * dt;
+      sparks[i].alpha -= dt * 2.2;
+      if (sparks[i].alpha <= 0) sparks.splice(i, 1);
+    }
+  }
+
+  // grade espacial simples pra reduzir checagens O(n^2)
+  function resolveCollisions() {
+    const cellSize = 48;
+    const grid = new Map();
+
+    function cellKey(cx, cy) { return cx + ',' + cy; }
+
+    for (let i = 0; i < balls.length; i++) {
+      const b = balls[i];
+      const cx = Math.floor(b.x / cellSize);
+      const cy = Math.floor(b.y / cellSize);
+      const key = cellKey(cx, cy);
+      if (!grid.has(key)) grid.set(key, []);
+      grid.get(key).push(i);
+    }
+
+    const checked = new Set();
+
+    for (let i = 0; i < balls.length; i++) {
+      const b = balls[i];
+      const cx = Math.floor(b.x / cellSize);
+      const cy = Math.floor(b.y / cellSize);
+
+      for (let ox = -1; ox <= 1; ox++) {
+        for (let oy = -1; oy <= 1; oy++) {
+          const key = cellKey(cx + ox, cy + oy);
+          const bucket = grid.get(key);
+          if (!bucket) continue;
+          for (const j of bucket) {
+            if (j <= i) continue;
+            const pairKey = i + '_' + j;
+            if (checked.has(pairKey)) continue;
+            checked.add(pairKey);
+            collidePair(b, balls[j]);
+          }
+        }
+      }
+    }
+  }
+
+  function collidePair(a, b) {
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    const distSq = dx * dx + dy * dy;
+    const minDist = a.r + b.r;
+    if (distSq >= minDist * minDist || distSq === 0) return;
+
+    const dist = Math.sqrt(distSq);
+    const nx = dx / dist;
+    const ny = dy / dist;
+
+    // separa sobreposicao
+    const overlap = minDist - dist;
+    const totalMass = a.mass + b.mass;
+    const aPush = overlap * (b.mass / totalMass);
+    const bPush = overlap * (a.mass / totalMass);
+    a.x -= nx * aPush;
+    a.y -= ny * aPush;
+    b.x += nx * bPush;
+    b.y += ny * bPush;
+
+    // velocidade relativa na normal
+    const rvx = b.vx - a.vx;
+    const rvy = b.vy - a.vy;
+    const velAlongNormal = rvx * nx + rvy * ny;
+    if (velAlongNormal > 0) return; // ja se afastando
+
+    const restitution = RESTITUTION;
+    let jImpulse = -(1 + restitution) * velAlongNormal;
+    jImpulse /= (1 / a.mass + 1 / b.mass);
+
+    const ix = jImpulse * nx;
+    const iy = jImpulse * ny;
+
+    a.vx -= ix / a.mass;
+    a.vy -= iy / a.mass;
+    b.vx += ix / b.mass;
+    b.vy += iy / b.mass;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // raio de atracao do mouse (visual sutil)
+    if (mouse.held) {
+      const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, ATTRACT_RADIUS);
+      grad.addColorStop(0, 'rgba(124, 139, 255, 0.18)');
+      grad.addColorStop(1, 'rgba(124, 139, 255, 0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, ATTRACT_RADIUS, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    for (const b of balls) {
+      ctx.save();
+      ctx.translate(b.x, b.y);
+
+      const grad = ctx.createRadialGradient(
+        -b.r * 0.35, -b.r * 0.35, b.r * 0.15,
+        0, 0, b.r
+      );
+      grad.addColorStop(0, lighten(b.color, 0.5));
+      grad.addColorStop(1, b.color);
+
+      ctx.beginPath();
+      ctx.arc(0, 0, b.r, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.shadowColor = b.color;
+      ctx.shadowBlur = 12;
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    // ondas de explosao
+    for (const s of sparks) {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255,255,255,${Math.max(s.alpha, 0)})`;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+  }
+
+  function lighten(hex, amt) {
+    const num = parseInt(hex.slice(1), 16);
+    let r = (num >> 16) + 255 * amt;
+    let g = ((num >> 8) & 0xff) + 255 * amt;
+    let b = (num & 0xff) + 255 * amt;
+    r = Math.min(255, r) | 0;
+    g = Math.min(255, g) | 0;
+    b = Math.min(255, b) | 0;
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // loop com timestep fixo pra fisica estavel em 60fps
+  const FIXED_DT = 1 / 60;
+  let accumulator = 0;
+  let lastTime = performance.now();
+  let frameCount = 0;
+  let fpsTimer = 0;
+
+  function loop(now) {
+    let delta = (now - lastTime) / 1000;
+    lastTime = now;
+    if (delta > 0.25) delta = 0.25; // evita spiral of death (tab inativa)
+    accumulator += delta;
+
+    while (accumulator >= FIXED_DT) {
+      updatePhysics(FIXED_DT);
+      accumulator -= FIXED_DT;
+    }
+
+    draw();
+
+    frameCount++;
+    fpsTimer += delta;
+    if (fpsTimer >= 0.5) {
+      fpsEl.textContent = Math.round(frameCount / fpsTimer) + ' fps · ' + balls.length + ' bolinhas';
+      frameCount = 0;
+      fpsTimer = 0;
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

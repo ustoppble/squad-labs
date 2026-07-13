@@ -1,0 +1,13 @@
+{
+  "test": "004",
+  "model": "sonnet-4.6",
+  "source_file": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/004-46/fps-game.html",
+  "bytes": 31878,
+  "lines": 887,
+  "libs": ["three.js"],
+  "external_requests": true,
+  "modified_date": "2026-06-30T15:43:25",
+  "cost_usd": 1.32,
+  "tokens_in": 38000,
+  "tokens_out": 76000
+}

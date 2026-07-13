@@ -1,0 +1,808 @@
+- generic [active] [ref=f3e1]:
+  - navigation [ref=f3e2]:
+    - generic [ref=f3e3]:
+      - link "kibu" [ref=f3e4] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=f3e5]:
+        - link "Documentation" [ref=f3e6] [cursor=pointer]:
+          - /url: "#documentation"
+        - link "Content" [ref=f3e7] [cursor=pointer]:
+          - /url: "#content"
+        - link "About" [ref=f3e8] [cursor=pointer]:
+          - /url: "#about"
+        - link "Contact" [ref=f3e9] [cursor=pointer]:
+          - /url: "#contact"
+        - button "Resources" [ref=f3e11] [cursor=pointer]:
+          - text: Resources
+          - img [ref=f3e12]
+        - button "Fun" [ref=f3e15] [cursor=pointer]:
+          - text: Fun
+          - img [ref=f3e16]
+      - generic [ref=f3e18]:
+        - link "Login" [ref=f3e19] [cursor=pointer]:
+          - /url: https://app.kibu.com/
+        - link "Get a demo" [ref=f3e20] [cursor=pointer]:
+          - /url: "#demo"
+          - generic [ref=f3e21]: Get a demo
+          - img [ref=f3e22]
+  - main [ref=f3e26]:
+    - generic [ref=f3e27]:
+      - generic [ref=f3e29]:
+        - heading "Focus on Excellent Service. We'll Handle the Rest." [level=1] [ref=f3e30]:
+          - text: Focus on Excellent Service.
+          - text: We'll Handle the Rest.
+        - paragraph [ref=f3e31]: Kibu transforms compliance, documentation, and reporting while providing content that service providers love.
+        - link "Get a demo" [ref=f3e33] [cursor=pointer]:
+          - /url: "#demo"
+          - generic [ref=f3e34]: Get a demo
+          - img [ref=f3e35]
+      - generic [ref=f3e39]:
+        - tablist "Product features" [ref=f3e40]:
+          - tab "Attendance" [selected] [ref=f3e42] [cursor=pointer]:
+            - img [ref=f3e43]
+            - paragraph [ref=f3e46]: Attendance
+          - tab "Notes" [ref=f3e48] [cursor=pointer]:
+            - img [ref=f3e49]
+            - paragraph [ref=f3e52]: Notes
+          - tab "AI Reports" [ref=f3e54] [cursor=pointer]:
+            - img [ref=f3e55]
+            - paragraph [ref=f3e57]: AI Reports
+          - tab "Life Plans" [ref=f3e60] [cursor=pointer]:
+            - img [ref=f3e61]
+            - paragraph [ref=f3e64]: Life Plans
+          - tab "Medication" [ref=f3e66] [cursor=pointer]:
+            - img [ref=f3e67]
+            - paragraph [ref=f3e70]: Medication
+          - tab "Content" [ref=f3e72] [cursor=pointer]:
+            - img [ref=f3e73]
+            - paragraph [ref=f3e76]: Content
+        - generic [ref=f3e79]:
+          - complementary [ref=f3e80]:
+            - generic [ref=f3e81]: kibu
+            - generic [ref=f3e82]:
+              - generic [ref=f3e83]: ◎
+              - text: New Chat
+            - generic [ref=f3e84]:
+              - generic [ref=f3e85]: ✦
+              - text: AI Reports
+            - generic [ref=f3e86]: Recent
+            - generic [ref=f3e87]: Athena's Quarterly Life Plan
+            - generic [ref=f3e88]: Milton's Quarterly Review
+            - generic [ref=f3e89]: Kyron's Monthly Progress
+            - generic [ref=f3e90]: Grace's Last Month
+            - generic [ref=f3e92]:
+              - generic [ref=f3e93]: ⌂
+              - text: Analytics
+            - generic [ref=f3e94]:
+              - generic [ref=f3e95]: ⚙
+              - text: Settings
+          - generic [ref=f3e96]:
+            - generic [ref=f3e97]:
+              - generic [ref=f3e98]: Athena's Annual Life Plan ▾
+              - generic [ref=f3e99]: Documentation
+            - generic [ref=f3e101]:
+              - generic [ref=f3e102]: 😊
+              - generic [ref=f3e103]:
+                - heading "Hi! I'm Clara, your AI Report Assistant" [level=4] [ref=f3e104]
+                - paragraph [ref=f3e105]: Select a member, group, resources, and time range. Include any key details or format preferences, and I'll draft a report for your review and export.
+            - generic [ref=f3e106]:
+              - generic [ref=f3e107]: Athena Hall
+              - generic [ref=f3e109]: Day Habilitation
+              - generic [ref=f3e111]: Service Records, Life Plan Tasks
+              - generic [ref=f3e113]: Quarter to Date
+            - generic [ref=f3e115]: Make a summary of Athena's quarter, with an emphasis on her goal progress.
+            - generic [ref=f3e116]:
+              - heading "◎ Life Plan Goal Progress Summary" [level=3] [ref=f3e117]:
+                - generic [ref=f3e118]: ◎
+                - text: Life Plan Goal Progress Summary
+              - generic [ref=f3e119]:
+                - text: "Reporting Period: Jan 1, 2025 – Mar 22, 2025"
+                - text: "Date Generated: March 22, 2025"
+              - list [ref=f3e120]:
+                - listitem [ref=f3e121]: "Overall Goal Completion Rate: 75%"
+                - listitem [ref=f3e122]: "Most Improved Area: Independent Living Skills (+21%)"
+                - listitem [ref=f3e123]: "Least Progress Made: Employment Readiness (41%)"
+              - table [ref=f3e124]:
+                - rowgroup [ref=f3e125]:
+                  - row "Goal Area % Progress Completed Notes Logged" [ref=f3e126]:
+                    - columnheader "Goal Area" [ref=f3e127]
+                    - columnheader "% Progress Completed" [ref=f3e128]
+                    - columnheader "Notes Logged" [ref=f3e129]
+                - rowgroup [ref=f3e130]:
+                  - row "Social Skills 82% 97" [ref=f3e131]:
+                    - cell "Social Skills" [ref=f3e132]
+                    - cell "82%" [ref=f3e133]
+                    - cell "97" [ref=f3e134]
+                  - row "Independent Living 79% 104" [ref=f3e135]:
+                    - cell "Independent Living" [ref=f3e136]
+                    - cell "79%" [ref=f3e137]
+                    - cell "104" [ref=f3e138]
+                  - row "Employment Readiness 41% 56" [ref=f3e139]:
+                    - cell "Employment Readiness" [ref=f3e140]
+                    - cell "41%" [ref=f3e141]
+                    - cell "56" [ref=f3e142]
+                  - row "Health & Wellness 91% 132" [ref=f3e143]:
+                    - cell "Health & Wellness" [ref=f3e144]
+                    - cell "91%" [ref=f3e145]
+                    - cell "132" [ref=f3e146]
+              - generic [ref=f3e147]:
+                - generic [ref=f3e148]: Reply to Clara…
+                - generic [ref=f3e149]: ↑
+    - generic [ref=f3e150]:
+      - generic [ref=f3e151]:
+        - heading "Organizations We Serve" [level=2] [ref=f3e152]
+        - paragraph [ref=f3e153]: Trusted by Disability Providers across the USA
+      - generic [ref=f3e155]:
+        - generic [ref=f3e156]: Chimes
+        - generic [ref=f3e157]: The ARC
+        - generic [ref=f3e158]: YMCA
+        - generic [ref=f3e159]: UCP
+        - generic [ref=f3e160]: Jewish Federation
+        - generic [ref=f3e161]: CP Unlimited
+        - generic [ref=f3e162]: Woodfords
+        - generic [ref=f3e163]: Chimes
+        - generic [ref=f3e164]: The ARC
+        - generic [ref=f3e165]: YMCA
+        - generic [ref=f3e166]: UCP
+        - generic [ref=f3e167]: Jewish Federation
+        - generic [ref=f3e168]: CP Unlimited
+        - generic [ref=f3e169]: Woodfords
+      - generic [ref=f3e171]:
+        - generic [ref=f3e172]: Mission Road
+        - generic [ref=f3e173]: Corner of Determination
+        - generic [ref=f3e174]: Catholic Guardian
+        - generic [ref=f3e175]: Active Day
+        - generic [ref=f3e176]: Babcock
+        - generic [ref=f3e177]: Elwyn
+        - generic [ref=f3e178]: Mission Road
+        - generic [ref=f3e179]: Corner of Determination
+        - generic [ref=f3e180]: Catholic Guardian
+        - generic [ref=f3e181]: Active Day
+        - generic [ref=f3e182]: Babcock
+        - generic [ref=f3e183]: Elwyn
+      - link "Get a demo" [ref=f3e184] [cursor=pointer]:
+        - /url: "#demo"
+    - generic [ref=f3e186]:
+      - heading "Focus on People, Not Paper" [level=2] [ref=f3e187]
+      - generic [ref=f3e188]:
+        - paragraph [ref=f3e189]:
+          - generic [ref=f3e190]: Disability
+          - generic [ref=f3e191]: providers
+          - generic [ref=f3e192]: know
+          - generic [ref=f3e193]: firsthand
+          - generic [ref=f3e194]: the
+          - generic [ref=f3e195]: challenges
+          - generic [ref=f3e196]: facing
+          - generic [ref=f3e197]: individuals
+          - generic [ref=f3e198]: with
+          - generic [ref=f3e199]: intellectual
+          - generic [ref=f3e200]: and
+          - generic [ref=f3e201]: developmental
+          - generic [ref=f3e202]: disabilities
+          - generic [ref=f3e203]: —
+          - generic [ref=f3e204]: social
+          - generic [ref=f3e205]: isolation,
+          - generic [ref=f3e206]: communication
+          - generic [ref=f3e207]: barriers,
+          - generic [ref=f3e208]: limited
+          - generic [ref=f3e209]: resources,
+          - generic [ref=f3e210]: and
+          - generic [ref=f3e211]: the
+          - generic [ref=f3e212]: constant
+          - generic [ref=f3e213]: struggle
+          - generic [ref=f3e214]: for
+          - generic [ref=f3e215]: independence.
+          - generic [ref=f3e216]: Still,
+          - generic [ref=f3e217]: outdated
+          - generic [ref=f3e218]: systems
+          - generic [ref=f3e219]: and
+          - generic [ref=f3e220]: never-ending
+          - generic [ref=f3e221]: compliance
+          - generic [ref=f3e222]: requirements
+          - generic [ref=f3e223]: shift
+          - generic [ref=f3e224]: your
+          - generic [ref=f3e225]: focus,
+          - generic [ref=f3e226]: limiting
+          - generic [ref=f3e227]: the
+          - generic [ref=f3e228]: time
+          - generic [ref=f3e229]: and
+          - generic [ref=f3e230]: energy
+          - generic [ref=f3e231]: you
+          - generic [ref=f3e232]: have
+          - generic [ref=f3e233]: to
+          - generic [ref=f3e234]: support
+          - generic [ref=f3e235]: meaningful
+          - generic [ref=f3e236]: progress.
+        - paragraph [ref=f3e237]:
+          - generic [ref=f3e238]: Kibu
+          - generic [ref=f3e239]: was
+          - generic [ref=f3e240]: founded
+          - generic [ref=f3e241]: to
+          - generic [ref=f3e242]: help
+          - generic [ref=f3e243]: disability
+          - generic [ref=f3e244]: providers
+          - generic [ref=f3e245]: overcome
+          - generic [ref=f3e246]: these
+          - generic [ref=f3e247]: hurdles
+          - generic [ref=f3e248]: to
+          - generic [ref=f3e249]: focus
+          - generic [ref=f3e250]: "on"
+          - generic [ref=f3e251]: what
+          - generic [ref=f3e252]: really
+          - generic [ref=f3e253]: "matters:"
+          - generic [ref=f3e254]: supporting
+          - generic [ref=f3e255]: individuals
+          - generic [ref=f3e256]: living
+          - generic [ref=f3e257]: with
+          - generic [ref=f3e258]: IDD.
+      - generic [ref=f3e259]:
+        - img "Daniel Caridi Signature" [ref=f3e260]
+        - heading "Daniel Caridi, Co-Founder & CEO" [level=3] [ref=f3e263]
+    - generic [ref=f3e265]:
+      - heading "Actually built for staff" [level=2] [ref=f3e266]
+      - paragraph [ref=f3e267]: Kibu gives DSPs the power to focus on delivering outstanding support.
+      - generic [ref=f3e268]:
+        - generic [ref=f3e269]:
+          - generic [ref=f3e271]:
+            - heading "Good morning, Irena" [level=5] [ref=f3e272]
+            - paragraph [ref=f3e273]:
+              - text: You have
+              - generic [ref=f3e274]: "5"
+              - text: notes to complete
+            - generic [ref=f3e275]:
+              - generic [ref=f3e277]: Athena Hall
+              - generic [ref=f3e278]: Open
+            - generic [ref=f3e281]: Marcus Lee
+            - generic [ref=f3e284]: Sofia Reyes
+          - paragraph [ref=f3e285]: Personalized
+        - generic [ref=f3e286]:
+          - generic [ref=f3e288]:
+            - paragraph [ref=f3e289]: "@Athena Hall went to the grocery store and shopped around. She helped @Donovan Tucker pick his ingredients for the upcoming bake sale. Both were able to pay without assistance."
+            - generic [ref=f3e291]: Save
+          - paragraph [ref=f3e292]: Fast & Easy
+        - generic [ref=f3e293]:
+          - generic [ref=f3e296]:
+            - generic [ref=f3e297]: Scan to download
+            - generic [ref=f3e299]:
+              - strong [ref=f3e300]: Athena Hall
+              - text: Day Habilitation
+            - generic [ref=f3e301]: Attendance · Present ✓
+            - generic [ref=f3e302]: Time Tracking · 08:13:00
+          - paragraph [ref=f3e303]: Mobile-Ready
+    - generic [ref=f3e306]:
+      - generic [ref=f3e307]:
+        - heading "Compliance in 60 Seconds" [level=2] [ref=f3e308]
+        - paragraph [ref=f3e309]: "Accessible features that save your organization time, while keeping up with regulations:"
+        - generic [ref=f3e310]:
+          - button "Built-In Translation" [ref=f3e311] [cursor=pointer]:
+            - generic [ref=f3e313]: Built-In Translation
+          - button "AI-Assisted Service Notes" [ref=f3e314] [cursor=pointer]:
+            - generic [ref=f3e316]: AI-Assisted Service Notes
+          - button "Beautiful, Fast Reporting" [ref=f3e317] [cursor=pointer]:
+            - generic [ref=f3e319]: Beautiful, Fast Reporting
+      - generic [ref=f3e322]:
+        - paragraph [ref=f3e323]: Athena Hall fue al supermercado y estuvo mirando. Ayudó a Donovan Tucker a escoger sus ingredientes para la próxima venta de pasteles. Ambos pudieron pagar sin asistencia.
+        - generic [ref=f3e324]:
+          - generic [ref=f3e325]: 🎤 🌐
+          - generic [ref=f3e326]: Save
+    - generic [ref=f3e329]:
+      - generic [ref=f3e330]:
+        - generic [ref=f3e331]:
+          - img [ref=f3e332]
+          - text: Member Records
+        - paragraph [ref=f3e335]: Keep member records accurate and accessible.
+      - generic [ref=f3e336]:
+        - generic [ref=f3e337]:
+          - img [ref=f3e338]
+          - text: Tasks
+        - paragraph [ref=f3e341]: Assign, track, and complete tasks quickly.
+      - generic [ref=f3e342]:
+        - generic [ref=f3e343]:
+          - img [ref=f3e344]
+          - text: Appointments/Transports
+        - paragraph [ref=f3e347]: Never miss a pickup or appointment again.
+      - generic [ref=f3e348]:
+        - generic [ref=f3e349]:
+          - img [ref=f3e350]
+          - text: Custom Controls
+        - paragraph [ref=f3e353]: Adapt Kibu's platform to fit your needs.
+      - generic [ref=f3e354]:
+        - heading "Directors Can Track Compliance Instantly. Anywhere, Anytime." [level=3] [ref=f3e355]
+        - paragraph [ref=f3e356]: No more complex Excel work - we'll do the math for you.
+        - generic [ref=f3e357]:
+          - heading "Good morning, Amy" [level=4] [ref=f3e358]
+          - generic [ref=f3e359]:
+            - text: Your organization is
+            - generic [ref=f3e360]: 99%
+            - text: compliant
+          - generic [ref=f3e361]:
+            - generic [ref=f3e362]: 100%
+            - text: 🏠 Day Habilitation · 100% (0 incomplete)
+          - generic [ref=f3e363]:
+            - generic [ref=f3e364]: 97%
+            - text: 🌱 Employment Services · 97% (4 incomplete)
+          - generic [ref=f3e365]:
+            - generic [ref=f3e366]: 94%
+            - text: ❤️ Respite · 94% (2 incomplete)
+      - generic [ref=f3e367]:
+        - heading "Providers who use Kibu don't just meet standards — they set them." [level=3] [ref=f3e368]
+        - paragraph [ref=f3e369]: Kibu partners average over 99.2% compliance within their first 2 months.
+        - generic [ref=f3e371]:
+          - generic [ref=f3e372]: ">"
+          - generic [ref=f3e373]: "84.3"
+          - generic [ref=f3e374]: "%"
+    - generic [ref=f3e375]:
+      - generic [ref=f3e376]:
+        - heading "Content and Lesson Plans, Built for You" [level=2] [ref=f3e377]
+        - paragraph [ref=f3e378]: Never worry about finding your next video lesson or building your next lesson plan. We've already done the heavy lifting for you!
+        - link "Get a demo" [ref=f3e379] [cursor=pointer]:
+          - /url: "#demo"
+      - generic [ref=f3e381]:
+        - generic [ref=f3e382]: Dance
+        - generic [ref=f3e384]: Life Skills
+        - generic [ref=f3e386]: Job Development
+        - generic [ref=f3e388]: General Fitness
+        - generic [ref=f3e390]: Yoga
+        - generic [ref=f3e392]: Cooking
+        - generic [ref=f3e394]: Enrichment & Arts
+        - generic [ref=f3e396]: Games
+        - generic [ref=f3e398]: Staff Training
+        - generic [ref=f3e400]: Dance
+        - generic [ref=f3e402]: Life Skills
+        - generic [ref=f3e404]: Job Development
+        - generic [ref=f3e406]: General Fitness
+        - generic [ref=f3e408]: Yoga
+        - generic [ref=f3e410]: Cooking
+        - generic [ref=f3e412]: Enrichment & Arts
+        - generic [ref=f3e414]: Games
+        - generic [ref=f3e416]: Staff Training
+      - generic [ref=f3e418]:
+        - generic [ref=f3e419]:
+          - generic [ref=f3e420]:
+            - generic [ref=f3e421]: Life Skills
+            - generic [ref=f3e422]: 🚌
+            - generic [ref=f3e423]: How to Ride the Bus
+          - generic [ref=f3e424]:
+            - generic [ref=f3e425]: Dance
+            - generic [ref=f3e426]: 🕺
+            - generic [ref=f3e427]: kibu slide
+          - generic [ref=f3e428]:
+            - generic [ref=f3e429]: Arts
+            - generic [ref=f3e430]: 🎨
+            - generic [ref=f3e431]: let's color
+          - generic [ref=f3e432]:
+            - generic [ref=f3e433]: Life Skills
+            - generic [ref=f3e434]: 💳
+            - generic [ref=f3e435]: what's the difference?
+          - generic [ref=f3e436]:
+            - generic [ref=f3e437]: Safety
+            - generic [ref=f3e438]: 🔥
+            - generic [ref=f3e439]: Fire Safety
+          - generic [ref=f3e440]:
+            - generic [ref=f3e441]: Life Skills
+            - generic [ref=f3e442]: ✍️
+            - generic [ref=f3e443]: How to Write a Check
+          - generic [ref=f3e444]:
+            - generic [ref=f3e445]: Life Skills
+            - generic [ref=f3e446]: 🚌
+            - generic [ref=f3e447]: How to Ride the Bus
+          - generic [ref=f3e448]:
+            - generic [ref=f3e449]: Dance
+            - generic [ref=f3e450]: 🕺
+            - generic [ref=f3e451]: kibu slide
+          - generic [ref=f3e452]:
+            - generic [ref=f3e453]: Arts
+            - generic [ref=f3e454]: 🎨
+            - generic [ref=f3e455]: let's color
+          - generic [ref=f3e456]:
+            - generic [ref=f3e457]: Life Skills
+            - generic [ref=f3e458]: 💳
+            - generic [ref=f3e459]: what's the difference?
+          - generic [ref=f3e460]:
+            - generic [ref=f3e461]: Safety
+            - generic [ref=f3e462]: 🔥
+            - generic [ref=f3e463]: Fire Safety
+          - generic [ref=f3e464]:
+            - generic [ref=f3e465]: Life Skills
+            - generic [ref=f3e466]: ✍️
+            - generic [ref=f3e467]: How to Write a Check
+        - generic [ref=f3e468]:
+          - generic [ref=f3e469]:
+            - generic [ref=f3e470]: Arts
+            - generic [ref=f3e471]: ✂️
+            - generic [ref=f3e472]: Arts & Crafts
+          - generic [ref=f3e473]:
+            - generic [ref=f3e474]: Job Skills
+            - generic [ref=f3e475]: 🤝
+            - generic [ref=f3e476]: community service tips
+          - generic [ref=f3e477]:
+            - generic [ref=f3e478]: Life Skills
+            - generic [ref=f3e479]: 🏥
+            - generic [ref=f3e480]: Urgent Care vs. ER
+          - generic [ref=f3e481]:
+            - generic [ref=f3e482]: Safety
+            - generic [ref=f3e483]: 🌪️
+            - generic [ref=f3e484]: disaster safety
+          - generic [ref=f3e485]:
+            - generic [ref=f3e486]: Life Skills
+            - generic [ref=f3e487]: 🚿
+            - generic [ref=f3e488]: Showering & Bathing
+          - generic [ref=f3e489]:
+            - generic [ref=f3e490]: Safety
+            - generic [ref=f3e491]: 🐕
+            - generic [ref=f3e492]: Dog Safety
+          - generic [ref=f3e493]:
+            - generic [ref=f3e494]: Arts
+            - generic [ref=f3e495]: ✂️
+            - generic [ref=f3e496]: Arts & Crafts
+          - generic [ref=f3e497]:
+            - generic [ref=f3e498]: Job Skills
+            - generic [ref=f3e499]: 🤝
+            - generic [ref=f3e500]: community service tips
+          - generic [ref=f3e501]:
+            - generic [ref=f3e502]: Life Skills
+            - generic [ref=f3e503]: 🏥
+            - generic [ref=f3e504]: Urgent Care vs. ER
+          - generic [ref=f3e505]:
+            - generic [ref=f3e506]: Safety
+            - generic [ref=f3e507]: 🌪️
+            - generic [ref=f3e508]: disaster safety
+          - generic [ref=f3e509]:
+            - generic [ref=f3e510]: Life Skills
+            - generic [ref=f3e511]: 🚿
+            - generic [ref=f3e512]: Showering & Bathing
+          - generic [ref=f3e513]:
+            - generic [ref=f3e514]: Safety
+            - generic [ref=f3e515]: 🐕
+            - generic [ref=f3e516]: Dog Safety
+    - generic [ref=f3e518]:
+      - heading "Elevate Content with Intelligent Features" [level=2] [ref=f3e519]
+      - paragraph [ref=f3e520]: Combining content and documentation is what makes our platform extraordinary. Educate members and track progress automatically, all in one place.
+      - generic [ref=f3e522]:
+        - generic [ref=f3e523]:
+          - img [ref=f3e525]
+          - generic [ref=f3e527]:
+            - heading "Grocery Shopping Tips" [level=4] [ref=f3e528]
+            - paragraph [ref=f3e529]: Coach Billy Blanks Jr · Kibu Instructor
+        - generic [ref=f3e530]:
+          - heading "Up next" [level=5] [ref=f3e531]
+          - generic [ref=f3e534]:
+            - strong [ref=f3e535]: Debit Card Usage Guide
+            - text: Coach Tayler · 8 min
+          - heading "Related videos" [level=5] [ref=f3e536]
+          - generic [ref=f3e539]:
+            - strong [ref=f3e540]: Sandwich-Making Basics
+            - text: Coach Billy · 5 min
+          - generic [ref=f3e543]:
+            - strong [ref=f3e544]: Bed-Making Basics
+            - text: Coach Tayler · 9 min
+          - generic [ref=f3e547]:
+            - strong [ref=f3e548]: How to Read Food Labels
+            - text: Coach Jordyn · 14 min
+    - generic [ref=f3e550]:
+      - generic [ref=f3e551]:
+        - generic [ref=f3e552]:
+          - generic [ref=f3e553]:
+            - img [ref=f3e554]
+            - text: Tracking & Goals
+          - paragraph [ref=f3e557]: Keep programming aligned for your members.
+        - generic [ref=f3e558]:
+          - generic [ref=f3e559]:
+            - img [ref=f3e560]
+            - text: Full Platform
+          - paragraph [ref=f3e563]: No more switching between different systems.
+        - generic [ref=f3e564]:
+          - generic [ref=f3e565]:
+            - img [ref=f3e566]
+            - text: Easy to use
+          - paragraph [ref=f3e569]: Eliminate confusion from clunky, outdated platforms.
+        - generic [ref=f3e570]:
+          - generic [ref=f3e571]:
+            - img [ref=f3e572]
+            - text: Custom dashboard
+          - paragraph [ref=f3e575]: Personalized for every member of your organization.
+      - generic [ref=f3e576]:
+        - generic [ref=f3e577]:
+          - heading "We'll Walk You Through Every Step." [level=3] [ref=f3e578]
+          - paragraph [ref=f3e579]: Start strong with personalized onboarding tailored for your organization.
+          - generic [ref=f3e581]:
+            - generic [ref=f3e582]: 👩‍💼
+            - generic [ref=f3e583]:
+              - generic [ref=f3e584]: 💬
+              - generic [ref=f3e585]: 💬
+              - generic [ref=f3e586]: 💬
+        - generic [ref=f3e587]:
+          - heading "HIPAA Compliant. Fully Encrypted." [level=3] [ref=f3e588]
+          - paragraph [ref=f3e589]: With Kibu, security comes standard - your member data stays safe, no matter what.
+          - generic [ref=f3e591]:
+            - generic [ref=f3e592]: ⚕
+            - strong [ref=f3e593]: HIPAA
+            - text: COMPLIANT
+    - generic [ref=f3e595]:
+      - heading "Real People, Real Results." [level=2] [ref=f3e596]
+      - paragraph [ref=f3e597]: Read one of our customer stories from our blog.
+      - generic [ref=f3e598]:
+        - link "TARGET Target Community & Education" [ref=f3e599] [cursor=pointer]:
+          - /url: "#blog"
+          - generic [ref=f3e601]:
+            - generic [ref=f3e602]: TARGET
+            - paragraph [ref=f3e603]: Target Community & Education
+        - link "ARC The ARC Caddo-Bossier" [ref=f3e604] [cursor=pointer]:
+          - /url: "#blog"
+          - generic [ref=f3e606]:
+            - generic [ref=f3e607]: ARC
+            - paragraph [ref=f3e608]: The ARC Caddo-Bossier
+        - link "WOOD Woodfords Family Services" [ref=f3e609] [cursor=pointer]:
+          - /url: "#blog"
+          - generic [ref=f3e611]:
+            - generic [ref=f3e612]: WOOD
+            - paragraph [ref=f3e613]: Woodfords Family Services
+    - generic [ref=f3e614]:
+      - generic [ref=f3e615]:
+        - heading "Wall of Love" [level=2] [ref=f3e616]
+        - paragraph [ref=f3e617]: See how organizations like yours are leveling up with Kibu!
+      - generic [ref=f3e619]:
+        - generic [ref=f3e620]:
+          - generic [ref=f3e621]:
+            - generic [ref=f3e622]:
+              - generic [ref=f3e623]: TA
+              - generic [ref=f3e624]:
+                - paragraph [ref=f3e625]: Barbara Yates
+                - paragraph [ref=f3e626]: Service Manager
+                - paragraph [ref=f3e627]: The Arc of North Florida
+            - paragraph [ref=f3e628]: “Using Kibu has allowed our staff to take the lead and has empowered them with tools to succeed.”
+          - generic [ref=f3e629]:
+            - generic [ref=f3e630]:
+              - generic [ref=f3e631]: LC
+              - generic [ref=f3e632]:
+                - paragraph [ref=f3e633]: Cortney Lucente
+                - paragraph [ref=f3e634]: Director of Day Services
+                - paragraph [ref=f3e635]: Little City Foundation
+            - paragraph [ref=f3e636]: “Kibu gives us the flexibility to meet each person where they are while keeping things engaging, structured, and fun.”
+          - generic [ref=f3e637]:
+            - generic [ref=f3e638]:
+              - generic [ref=f3e639]: IC
+              - generic [ref=f3e640]:
+                - paragraph [ref=f3e641]: Alethea Breidenbaugh
+                - paragraph [ref=f3e642]: Life Skills DSP
+                - paragraph [ref=f3e643]: Inspire Central Florida
+            - paragraph [ref=f3e644]: “These are real tools that engage clients without feeling childish. That makes all the difference.”
+          - generic [ref=f3e645]:
+            - generic [ref=f3e646]:
+              - generic [ref=f3e647]: T-
+              - generic [ref=f3e648]:
+                - paragraph [ref=f3e649]: Erica Null Pellegrin
+                - paragraph [ref=f3e650]: Director of Engagement & Marketing
+                - paragraph [ref=f3e651]: TARC - Terrebonne ARC
+            - paragraph [ref=f3e652]: “Having Kibu is a true highlight daily for the people we serve. We are having soooo much fun with it and learning a lot as well!”
+          - generic [ref=f3e653]:
+            - generic [ref=f3e654]:
+              - generic [ref=f3e655]: TA
+              - generic [ref=f3e656]:
+                - paragraph [ref=f3e657]: Barbara Yates
+                - paragraph [ref=f3e658]: Service Manager
+                - paragraph [ref=f3e659]: The Arc of North Florida
+            - paragraph [ref=f3e660]: “Using Kibu has allowed our staff to take the lead and has empowered them with tools to succeed.”
+          - generic [ref=f3e661]:
+            - generic [ref=f3e662]:
+              - generic [ref=f3e663]: LC
+              - generic [ref=f3e664]:
+                - paragraph [ref=f3e665]: Cortney Lucente
+                - paragraph [ref=f3e666]: Director of Day Services
+                - paragraph [ref=f3e667]: Little City Foundation
+            - paragraph [ref=f3e668]: “Kibu gives us the flexibility to meet each person where they are while keeping things engaging, structured, and fun.”
+          - generic [ref=f3e669]:
+            - generic [ref=f3e670]:
+              - generic [ref=f3e671]: IC
+              - generic [ref=f3e672]:
+                - paragraph [ref=f3e673]: Alethea Breidenbaugh
+                - paragraph [ref=f3e674]: Life Skills DSP
+                - paragraph [ref=f3e675]: Inspire Central Florida
+            - paragraph [ref=f3e676]: “These are real tools that engage clients without feeling childish. That makes all the difference.”
+          - generic [ref=f3e677]:
+            - generic [ref=f3e678]:
+              - generic [ref=f3e679]: T-
+              - generic [ref=f3e680]:
+                - paragraph [ref=f3e681]: Erica Null Pellegrin
+                - paragraph [ref=f3e682]: Director of Engagement & Marketing
+                - paragraph [ref=f3e683]: TARC - Terrebonne ARC
+            - paragraph [ref=f3e684]: “Having Kibu is a true highlight daily for the people we serve. We are having soooo much fun with it and learning a lot as well!”
+        - generic [ref=f3e685]:
+          - generic [ref=f3e686]:
+            - generic [ref=f3e687]:
+              - generic [ref=f3e688]: D/
+              - generic [ref=f3e689]:
+                - paragraph [ref=f3e690]: Crystal Stone
+                - paragraph [ref=f3e691]: Program Director
+                - paragraph [ref=f3e692]: Daybreak / CareGiver
+            - paragraph [ref=f3e693]: “We are crazy about Kibu!”
+          - generic [ref=f3e694]:
+            - generic [ref=f3e695]:
+              - generic [ref=f3e696]: FR
+              - generic [ref=f3e697]:
+                - paragraph [ref=f3e698]: Brian DeLeon
+                - paragraph [ref=f3e699]: Direct Support Professional
+                - paragraph [ref=f3e700]: Family Resource Associates
+            - paragraph [ref=f3e701]: “It's all about working smarter, not harder. Kibu lets us do that.”
+          - generic [ref=f3e702]:
+            - generic [ref=f3e703]:
+              - generic [ref=f3e704]: UA
+              - generic [ref=f3e705]:
+                - paragraph [ref=f3e706]: Aretha Harper
+                - paragraph [ref=f3e707]: Assistant Director
+                - paragraph [ref=f3e708]: Unique Abilities
+            - paragraph [ref=f3e709]: “Using the magic pen on daily notes makes things a lot more efficient and easier. So no secret, we just really like Kibu!”
+          - generic [ref=f3e710]:
+            - generic [ref=f3e711]:
+              - generic [ref=f3e712]: SA
+              - generic [ref=f3e713]:
+                - paragraph [ref=f3e714]: Sara Umfleet
+                - paragraph [ref=f3e715]: Special Needs Coordinator
+                - paragraph [ref=f3e716]: SEMO Alliance for Disability Independence
+            - paragraph [ref=f3e717]: “…this has made my life soooo much easier, you have no idea how much time this is saving me.”
+          - generic [ref=f3e718]:
+            - generic [ref=f3e719]:
+              - generic [ref=f3e720]: D/
+              - generic [ref=f3e721]:
+                - paragraph [ref=f3e722]: Crystal Stone
+                - paragraph [ref=f3e723]: Program Director
+                - paragraph [ref=f3e724]: Daybreak / CareGiver
+            - paragraph [ref=f3e725]: “We are crazy about Kibu!”
+          - generic [ref=f3e726]:
+            - generic [ref=f3e727]:
+              - generic [ref=f3e728]: FR
+              - generic [ref=f3e729]:
+                - paragraph [ref=f3e730]: Brian DeLeon
+                - paragraph [ref=f3e731]: Direct Support Professional
+                - paragraph [ref=f3e732]: Family Resource Associates
+            - paragraph [ref=f3e733]: “It's all about working smarter, not harder. Kibu lets us do that.”
+          - generic [ref=f3e734]:
+            - generic [ref=f3e735]:
+              - generic [ref=f3e736]: UA
+              - generic [ref=f3e737]:
+                - paragraph [ref=f3e738]: Aretha Harper
+                - paragraph [ref=f3e739]: Assistant Director
+                - paragraph [ref=f3e740]: Unique Abilities
+            - paragraph [ref=f3e741]: “Using the magic pen on daily notes makes things a lot more efficient and easier. So no secret, we just really like Kibu!”
+          - generic [ref=f3e742]:
+            - generic [ref=f3e743]:
+              - generic [ref=f3e744]: SA
+              - generic [ref=f3e745]:
+                - paragraph [ref=f3e746]: Sara Umfleet
+                - paragraph [ref=f3e747]: Special Needs Coordinator
+                - paragraph [ref=f3e748]: SEMO Alliance for Disability Independence
+            - paragraph [ref=f3e749]: “…this has made my life soooo much easier, you have no idea how much time this is saving me.”
+        - generic [ref=f3e750]:
+          - generic [ref=f3e751]:
+            - generic [ref=f3e752]:
+              - generic [ref=f3e753]: TC
+              - generic [ref=f3e754]:
+                - paragraph [ref=f3e755]: Pennie Staup
+                - paragraph [ref=f3e756]: Adult Day Instructor
+                - paragraph [ref=f3e757]: Target Community & Education
+            - paragraph [ref=f3e758]: “Kibu's lesson plans make things so much easier… It allows us to focus on engaging with our members instead of searching for materials.”
+          - generic [ref=f3e759]:
+            - generic [ref=f3e760]:
+              - generic [ref=f3e761]: TA
+              - generic [ref=f3e762]:
+                - paragraph [ref=f3e763]: Laurie Sena
+                - paragraph [ref=f3e764]: Engagement Coordinator
+                - paragraph [ref=f3e765]: The Arc Caddo-Bossier
+            - paragraph [ref=f3e766]: “Kibu gives us one more tool to teach real-life skills, making learning engaging and impactful.”
+          - generic [ref=f3e767]:
+            - generic [ref=f3e768]:
+              - generic [ref=f3e769]: FR
+              - generic [ref=f3e770]:
+                - paragraph [ref=f3e771]: Alexis Spektor
+                - paragraph [ref=f3e772]: Program Director
+                - paragraph [ref=f3e773]: Family Resource Associates
+            - paragraph [ref=f3e774]: “When I found Kibu, I think I had a tear in my eye. It was the first digital platform I've seen that is actually built for people with IDD.”
+          - generic [ref=f3e775]:
+            - generic [ref=f3e776]:
+              - generic [ref=f3e777]: TC
+              - generic [ref=f3e778]:
+                - paragraph [ref=f3e779]: Pennie Staup
+                - paragraph [ref=f3e780]: Adult Day Instructor
+                - paragraph [ref=f3e781]: Target Community & Education
+            - paragraph [ref=f3e782]: “Kibu's lesson plans make things so much easier… It allows us to focus on engaging with our members instead of searching for materials.”
+          - generic [ref=f3e783]:
+            - generic [ref=f3e784]:
+              - generic [ref=f3e785]: TA
+              - generic [ref=f3e786]:
+                - paragraph [ref=f3e787]: Laurie Sena
+                - paragraph [ref=f3e788]: Engagement Coordinator
+                - paragraph [ref=f3e789]: The Arc Caddo-Bossier
+            - paragraph [ref=f3e790]: “Kibu gives us one more tool to teach real-life skills, making learning engaging and impactful.”
+          - generic [ref=f3e791]:
+            - generic [ref=f3e792]:
+              - generic [ref=f3e793]: FR
+              - generic [ref=f3e794]:
+                - paragraph [ref=f3e795]: Alexis Spektor
+                - paragraph [ref=f3e796]: Program Director
+                - paragraph [ref=f3e797]: Family Resource Associates
+            - paragraph [ref=f3e798]: “When I found Kibu, I think I had a tear in my eye. It was the first digital platform I've seen that is actually built for people with IDD.”
+    - generic [ref=f3e799]:
+      - generic [ref=f3e801]:
+        - generic [ref=f3e802]: Chimes
+        - generic [ref=f3e803]: The ARC
+        - generic [ref=f3e804]: YMCA
+        - generic [ref=f3e805]: UCP
+        - generic [ref=f3e806]: Jewish Federation
+        - generic [ref=f3e807]: CP Unlimited
+        - generic [ref=f3e808]: Woodfords
+        - generic [ref=f3e809]: Mission Road
+        - generic [ref=f3e810]: Active Day
+        - generic [ref=f3e811]: Elwyn
+        - generic [ref=f3e812]: Chimes
+        - generic [ref=f3e813]: The ARC
+        - generic [ref=f3e814]: YMCA
+        - generic [ref=f3e815]: UCP
+        - generic [ref=f3e816]: Jewish Federation
+        - generic [ref=f3e817]: CP Unlimited
+        - generic [ref=f3e818]: Woodfords
+        - generic [ref=f3e819]: Mission Road
+        - generic [ref=f3e820]: Active Day
+        - generic [ref=f3e821]: Elwyn
+      - heading "Compliance Shouldn't Stand in the Way of Exceptional Care" [level=2] [ref=f3e822]
+      - link "Get a demo" [ref=f3e823] [cursor=pointer]:
+        - /url: "#demo"
+  - contentinfo [ref=f3e824]:
+    - generic [ref=f3e825]:
+      - generic [ref=f3e826]:
+        - generic [ref=f3e827]:
+          - heading "kibu" [level=3] [ref=f3e828]
+          - generic [ref=f3e829]: CONNECTICUT 💙
+          - generic [ref=f3e830]:
+            - link "LinkedIn" [ref=f3e831] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/kibuhq/
+              - img [ref=f3e832]
+            - link "Instagram" [ref=f3e834] [cursor=pointer]:
+              - /url: https://www.instagram.com/kibuhq/
+              - img [ref=f3e835]
+            - link "Facebook" [ref=f3e839] [cursor=pointer]:
+              - /url: https://www.facebook.com/kibuhq
+              - img [ref=f3e840]
+            - link "YouTube" [ref=f3e842] [cursor=pointer]:
+              - /url: https://www.youtube.com/@kibuTV
+              - img [ref=f3e843]
+            - link "X" [ref=f3e845] [cursor=pointer]:
+              - /url: https://twitter.com/kibuhq
+              - img [ref=f3e846]
+          - paragraph [ref=f3e848]:
+            - text: 78 Harvard Ave, Floor 3
+            - text: Stamford, CT 06902
+        - generic [ref=f3e849]:
+          - generic [ref=f3e850]:
+            - paragraph [ref=f3e851]: Solutions
+            - generic [ref=f3e852]:
+              - link "Documentation" [ref=f3e853] [cursor=pointer]:
+                - /url: "#documentation"
+              - link "Content" [ref=f3e854] [cursor=pointer]:
+                - /url: "#content"
+          - generic [ref=f3e855]:
+            - paragraph [ref=f3e856]: Resources
+            - generic [ref=f3e857]:
+              - link "Blog" [ref=f3e858] [cursor=pointer]:
+                - /url: "#blog"
+              - link "Resource Center" [ref=f3e859] [cursor=pointer]:
+                - /url: https://help.kibu.com/getting-started/introduction
+              - link "About" [ref=f3e860] [cursor=pointer]:
+                - /url: "#about"
+              - link "Contact" [ref=f3e861] [cursor=pointer]:
+                - /url: "#contact"
+              - link "Careers" [ref=f3e862] [cursor=pointer]:
+                - /url: "#careers"
+              - link "Submit Request for Proposal (RFP)" [ref=f3e863] [cursor=pointer]:
+                - /url: "#rfp"
+              - link "Changelog" [ref=f3e864] [cursor=pointer]:
+                - /url: "#changelog"
+          - generic [ref=f3e865]:
+            - paragraph [ref=f3e866]: Legal
+            - generic [ref=f3e867]:
+              - link "Privacy Policy" [ref=f3e868] [cursor=pointer]:
+                - /url: "#privacy"
+              - link "Terms of Service" [ref=f3e869] [cursor=pointer]:
+                - /url: "#terms"
+              - link "Member Code of Conduct" [ref=f3e870] [cursor=pointer]:
+                - /url: "#member-code"
+      - paragraph [ref=f3e872]: © 2026 kibu

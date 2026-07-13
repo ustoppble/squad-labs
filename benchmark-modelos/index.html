@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overclock — Benchmark de modelos de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="index.html" class="active">Home</a>
+    <a href="modelos.html">Modelos</a>
+    <a href="benchmark.html">Benchmark</a>
+    <a href="benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="benchmark-gpt-5-6.html">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow brand">Vibe Coding · 30/06/2026</div>
+  <h1>Qual modelo de IA <span class="hl">constrói melhor</span>?</h1>
+  <p class="lede">Mesmos prompts, modelos diferentes, um chute só — sem skill, sem subagente, só o modelo cru. Medimos resultado, tokens e custo real. Começamos com o lançamento do Claude Sonnet 5 contra o barato velho (Sonnet 4.6) e o rei caro (Opus 4.8), depois o novo topo da linha, o <b>Claude Fable 5</b> ($10/$50) — e agora o primeiro não-Claude da bateria: o <b>Grok 4.5</b> da xAI ($2/$6), lançado hoje e treinado com a Cursor.</p>
+
+  <div class="home-grid">
+    <a class="home-card" href="modelos.html">
+      <div class="k">Por modelo →</div>
+      <div class="t">Modelos</div>
+      <div class="d">Página dedicada de cada modelo: o que foi comunicado, os principais insights e os números no benchmark. Sonnet 5 e Fable 5 já disponíveis.</div>
+    </a>
+    <a class="home-card" href="benchmark.html">
+      <div class="k">Comparação 5 vias →</div>
+      <div class="t">Benchmark</div>
+      <div class="d">Sonnet 5 vs Sonnet 4.6 vs Opus 4.8 vs Fable 5 vs Grok 4.5 nos 4 testes: UX (site Apple), FPS, sistema solar 3D e física com mouse. Apps interativos lado a lado.</div>
+    </a>
+    <a class="home-card" href="benchmark-fable-vs-opus.html">
+      <div class="k">Topo vs rei →</div>
+      <div class="t">Fable 5 vs Opus 4.8</div>
+      <div class="d">O novo topo da linha ($10/$50) contra o Opus 4.8 nos mesmos 4 testes. Fable verifica sozinho como o Sonnet 5 — e cobra 4,5× o custo do Opus na bateria.</div>
+    </a>
+  </div>
+
+  <div class="scoreboard" style="grid-template-columns:repeat(5,1fr)">
+    <div class="model-card">
+      <div class="name">Sonnet 4.6</div>
+      <div class="role">O barato velho</div>
+      <div class="price"><b>$3 / $15</b> por M</div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">$2,27</span></div>
+    </div>
+    <div class="model-card hero">
+      <div class="name">Sonnet 5</div>
+      <div class="role">O barato novo · default grátis</div>
+      <div class="price"><b>$2 / $10</b> por M<small>promo até 31/08</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">$2,06</span></div>
+    </div>
+    <div class="model-card">
+      <div class="name">Opus 4.8</div>
+      <div class="role">O rei caro · só 1,7× o Sonnet 5</div>
+      <div class="price"><b>$5 / $25</b> por M</div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">$3,49</span></div>
+    </div>
+    <div class="model-card">
+      <div class="name">Fable 5</div>
+      <div class="role">O novo topo · mais caro</div>
+      <div class="price"><b>$10 / $50</b> por M<small>2× o Opus 4.8</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val" style="color:var(--ov-accent)">$15,81</span></div>
+    </div>
+    <div class="model-card">
+      <div class="name">Grok 4.5</div>
+      <div class="role">O desafiante xAI · lançado 08/07</div>
+      <div class="price"><b>$2 / $6</b> por M<small>treinado com a Cursor</small></div>
+      <div class="tally"><span class="lab">Custo estimado · 4 runs</span><span class="val">~$1,58</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <b>Regra de fairness:</b> todo teste roda com o modelo puro — <b>sem Skill, sem subagente, sem squad</b>. Cada run é auditada no transcript depois.<br>
+    Design system: overclock-web (--ov tokens, Geist Mono, brand #FF3B30).
+  </footer>
+</div>
+</body>
+</html>

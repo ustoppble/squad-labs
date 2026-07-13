@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Barba Brava</title>
+  <meta name="description" content="Finalize sua compra na Barba Brava." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://barbabrava.com.br/checkout.html" />
+  <meta name="theme-color" content="#111110" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a href="#main" class="skip-nav">Pular para o conteúdo</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="Barba Brava — página inicial">
+        <span class="logo-icon" aria-hidden="true">✦</span>
+        Barba Brava
+      </a>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="catalogo.html">Catálogo</a>
+        <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+
+      <button class="cart-btn" id="cartBtn" aria-label="Abrir carrinho de compras" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-badge" id="cartCount" aria-live="polite" aria-label="itens no carrinho">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Você está em">
+        <a href="index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="catalogo.html">Catálogo</a>
+        <span aria-hidden="true">/</span>
+        <span class="breadcrumb-current">Checkout</span>
+      </nav>
+
+      <div class="page-head">
+        <p class="section-eyebrow">Finalizar Compra</p>
+        <h1>Checkout</h1>
+      </div>
+
+      <!-- Carrinho vazio -->
+      <div class="checkout-empty" id="checkoutEmpty" hidden>
+        <p>Seu carrinho está vazio.</p>
+        <a class="btn btn-primary" href="catalogo.html">Ver cremes</a>
+      </div>
+
+      <!-- Confirmação (pós-pedido) -->
+      <div class="checkout-confirm" id="checkoutConfirm" hidden>
+        <div class="confirm-check" aria-hidden="true">✓</div>
+        <h2>Pedido confirmado!</h2>
+        <p class="confirm-order">Pedido <strong id="orderNumber"></strong></p>
+        <p class="confirm-msg" id="confirmMsg"></p>
+        <a class="btn btn-primary" href="catalogo.html">Continuar comprando</a>
+      </div>
+
+      <!-- Formulário + resumo -->
+      <div class="checkout-layout" id="checkoutLayout" hidden>
+        <form class="checkout-form" id="checkoutForm" novalidate>
+          <fieldset class="form-section">
+            <legend>Seus dados</legend>
+            <div class="field">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" name="nome" autocomplete="name" required />
+              <span class="field-error" data-error-for="nome"></span>
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+              <span class="field-error" data-error-for="email"></span>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Endereço de entrega</legend>
+            <div class="field-row">
+              <div class="field field-cep">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" inputmode="numeric" placeholder="00000-000" autocomplete="postal-code" required />
+                <span class="field-error" data-error-for="cep"></span>
+              </div>
+              <div class="field field-grow">
+                <label for="endereco">Endereço</label>
+                <input type="text" id="endereco" name="endereco" autocomplete="address-line1" required />
+                <span class="field-error" data-error-for="endereco"></span>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field field-num">
+                <label for="numero">Número</label>
+                <input type="text" id="numero" name="numero" required />
+                <span class="field-error" data-error-for="numero"></span>
+              </div>
+              <div class="field field-grow">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" autocomplete="address-level2" required />
+                <span class="field-error" data-error-for="cidade"></span>
+              </div>
+              <div class="field field-uf">
+                <label for="uf">UF</label>
+                <input type="text" id="uf" name="uf" maxlength="2" placeholder="SP" autocomplete="address-level1" required />
+                <span class="field-error" data-error-for="uf"></span>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Pagamento</legend>
+            <div class="pay-methods" role="radiogroup" aria-label="Forma de pagamento">
+              <label class="pay-option">
+                <input type="radio" name="pagamento" value="cartao" checked />
+                <span>Cartão de crédito</span>
+              </label>
+              <label class="pay-option">
+                <input type="radio" name="pagamento" value="pix" />
+                <span>Pix</span>
+              </label>
+            </div>
+
+            <div class="card-fields" id="cardFields">
+              <div class="field">
+                <label for="cardNome">Nome no cartão</label>
+                <input type="text" id="cardNome" name="cardNome" autocomplete="cc-name" />
+                <span class="field-error" data-error-for="cardNome"></span>
+              </div>
+              <div class="field">
+                <label for="cardNumero">Número do cartão</label>
+                <input type="text" id="cardNumero" name="cardNumero" inputmode="numeric" placeholder="0000 0000 0000 0000" autocomplete="cc-number" />
+                <span class="field-error" data-error-for="cardNumero"></span>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="cardValidade">Validade</label>
+                  <input type="text" id="cardValidade" name="cardValidade" placeholder="MM/AA" autocomplete="cc-exp" />
+                  <span class="field-error" data-error-for="cardValidade"></span>
+                </div>
+                <div class="field">
+                  <label for="cardCvv">CVV</label>
+                  <input type="text" id="cardCvv" name="cardCvv" inputmode="numeric" placeholder="123" autocomplete="cc-csc" />
+                  <span class="field-error" data-error-for="cardCvv"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pix-note" id="pixNote" hidden>
+              <p>Um QR Code Pix mock será exibido após a confirmação. Nenhuma cobrança real é feita nesta demonstração.</p>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary btn-full checkout-submit">
+            Finalizar pedido
+          </button>
+          <p class="checkout-disclaimer">Demonstração — nenhum pagamento real é processado.</p>
+        </form>
+
+        <aside class="order-summary" aria-label="Resumo do pedido">
+          <h2>Resumo do pedido</h2>
+          <ul class="summary-items" id="summaryItems"></ul>
+          <div class="summary-row summary-sub">
+            <span>Subtotal</span>
+            <span id="summarySubtotal">R$ 0,00</span>
+          </div>
+          <div class="summary-row summary-ship">
+            <span>Frete</span>
+            <span id="summaryShipping">Grátis</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span id="summaryTotal">R$ 0,00</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">✦ Barba Brava</span>
+        <p>Feito com cuidado para barbas que merecem respeito.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="index.html#sobre">Sobre Nós</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="mailto:contato@barbabrava.com.br">contato@barbabrava.com.br</a></li>
+          <li><a href="tel:+5511999990000">(11) 99999-0000</a></li>
+          <li>São Paulo, SP — Brasil</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Barba Brava. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Carrinho de compras" aria-hidden="true">
+    <div class="drawer-header">
+      <h2>Carrinho</h2>
+      <button class="drawer-close" id="cartClose" aria-label="Fechar carrinho">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawerBody">
+      <div class="cart-empty" id="cartEmpty">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <p>Seu carrinho está vazio</p>
+        <span>Adicione produtos para começar</span>
+      </div>
+      <ul class="cart-items" id="cartItems" aria-label="Itens no carrinho"></ul>
+    </div>
+    <div class="drawer-footer" id="drawerFooter" hidden>
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span class="cart-total-value" id="cartTotal">R$ 0,00</span>
+      </div>
+      <a class="btn btn-primary btn-full" href="checkout.html">Finalizar Compra</a>
+    </div>
+  </aside>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>

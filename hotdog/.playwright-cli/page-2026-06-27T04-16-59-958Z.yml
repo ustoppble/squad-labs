@@ -1,0 +1,156 @@
+- generic [ref=e3]:
+  - region "top of page"
+  - generic [ref=e10]:
+    - main [ref=e11]:
+      - generic [ref=e16]:
+        - generic:
+          - generic:
+            - generic:
+              - generic [ref=e26]:
+                - img "empresario-sorridente-em-oculos-sentado-junto-a-mesa-no-cafe-com-o-computador-portatil-enq" [ref=e31]
+                - generic:
+                  - generic:
+                    - img [ref=e34]
+                    - img [ref=e39]
+                    - generic:
+                      - paragraph [ref=e53]:
+                        - generic [ref=e55]: Contabilidade digital para quem busca soluções ágeis e especializadas para o seu negócio.
+                      - paragraph [ref=e56]:
+                        - generic [ref=e57]: Utilize o nosso aplicativo para ter todas as informações da sua empresa na palma da sua mão, com praticidade e segurança.
+                    - link "Quero a Singular One" [ref=e59] [cursor=pointer]:
+                      - /url: https://www.singularcont.com.br/one
+                      - generic [ref=e60]: Quero a Singular One
+              - generic [ref=e61]:
+                - generic:
+                  - generic:
+                    - heading "Contabilidade para você crescer" [level=2] [ref=e74]:
+                      - generic [ref=e75]:
+                        - generic [ref=e76]: Contabilidade
+                        - generic [ref=e77]: para você crescer
+                    - generic [ref=e83]:
+                      - generic:
+                        - generic:
+                          - heading "O futuro ao seu alcance" [level=3] [ref=e88]:
+                            - generic [ref=e90]: O
+                            - generic [ref=e91]: futuro
+                            - generic [ref=e93]: ao seu alcance
+                          - generic:
+                            - paragraph [ref=e94]:
+                              - generic [ref=e95]: O mundo mudou e a contabilidade também. Sabendo disso, na Singular One, somos especialistas na contabilidade digital. Somamos a expertise de mais de 30 anos com as inovações do mercado, para dar um atendimento ainda mais rápido, prático e amplamente seguro. Uma opção ideal para quem não quer perder tempo.
+                            - paragraph [ref=e96]
+                            - paragraph [ref=e97]:
+                              - generic [ref=e98]: Com a Singular, o futuro está ao seu alcance.
+                          - link "Quero a Singular One" [ref=e100] [cursor=pointer]:
+                            - /url: https://www.singularcont.com.br/one
+                            - generic [ref=e101]: Quero a Singular One
+              - generic [ref=e102]:
+                - generic:
+                  - generic:
+                    - heading "A garantia de um futuro seguro" [level=2] [ref=e115]:
+                      - generic [ref=e116]:
+                        - generic [ref=e117]: A garantia de um
+                        - generic [ref=e118]: futuro seguro
+                    - generic [ref=e123]:
+                      - generic [ref=e124]:
+                        - generic:
+                          - generic:
+                            - paragraph [ref=e128]: "+1.000"
+                            - paragraph [ref=e129]:
+                              - generic [ref=e130]: Clientes já atendidos com sucesso
+                      - generic [ref=e131]:
+                        - generic:
+                          - generic:
+                            - paragraph [ref=e135]: 30 anos
+                            - paragraph [ref=e136]:
+                              - generic [ref=e137]: de experiência no mercado
+                    - generic [ref=e143]:
+                      - generic:
+                        - generic:
+                          - paragraph [ref=e148]:
+                            - generic [ref=e149]:
+                              - generic [ref=e150]: Agilidade
+                              - text: e
+                              - generic [ref=e151]: inovação
+                              - text: ", sem deixar de lado o atendimento humanizado e personalizado."
+                          - link "Quero a Singular One" [ref=e153] [cursor=pointer]:
+                            - /url: https://www.singularcont.com.br/one
+                            - generic [ref=e154]: Quero a Singular One
+              - generic [ref=e155]:
+                - generic:
+                  - generic:
+                    - region "Serviços"
+                    - heading "Nossos serviços" [level=2] [ref=e168]:
+                      - generic [ref=e169]:
+                        - generic [ref=e170]: Nossos
+                        - generic [ref=e171]: serviços
+                    - generic [ref=e176]:
+                      - generic [ref=e177]:
+                        - generic:
+                          - generic:
+                            - heading "Assessoria" [level=3] [ref=e182]
+                            - generic:
+                              - paragraph [ref=e183]: Para empresários que buscam uma assessoria completa nas áreas contábil, fiscal, RH e tributária.
+                              - paragraph [ref=e184]
+                              - paragraph [ref=e185]: Atuamos no processo de constituição, alteração e baixa de empresas, bem como na contabilidade mensal, apuração dos impostos, elaboração da folha de pagamento e planejamento tributário periódico para melhor performance da empresa.
+                      - generic [ref=e186]:
+                        - generic:
+                          - generic:
+                            - heading "Consultoria" [level=3] [ref=e191]
+                            - paragraph [ref=e192]:
+                              - generic [ref=e193]: Foco em responder dúvidas e problemas pontuais que podem auxiliar na tomada de decisão e direcionar para melhores resultados, visando economia de impostos e projeção de crescimento.
+                      - generic [ref=e194]:
+                        - generic:
+                          - generic:
+                            - heading "Declaração IRPF & IRPJ" [level=3] [ref=e199]
+                            - paragraph [ref=e200]: Elaboração de declarações sobre a construção de patrimônio e clareza nas informações prestadas. Atendemos também casos de retificação e regularização após o prazo de entrega.
+                      - generic [ref=e201]:
+                        - generic:
+                          - generic:
+                            - heading "Perícia Trabalhista e Perícia Tributária" [level=3] [ref=e206]
+                            - paragraph [ref=e207]:
+                              - generic [ref=e208]: Análise de documentos e registros contábeis e trabalhistas para elaborar pareceres técnicos em processos judiciais ou extrajudiciais.
+                    - region "Depoimentos"
+                    - heading "O que os clientes dizem?" [level=2] [ref=e218]:
+                      - generic [ref=e219]:
+                        - generic [ref=e220]: O que os
+                        - generic [ref=e221]: clientes
+                        - generic [ref=e222]: dizem?
+                    - generic [ref=e227]:
+                      - generic [ref=e228]:
+                        - generic:
+                          - generic:
+                            - img [ref=e235]
+                            - blockquote [ref=e242]:
+                              - generic [ref=e244]: "\"Somos clientes há mais de 15 anos e centralizamos todos os nossos serviços na Singular. Os prazos, a qualidade e a excelência são uma questão de prioridade. Estamos muito satisfeitos e esperamos manter por muitos anos nossa parceria!.\""
+                            - paragraph [ref=e245]: Bell Design
+                      - generic [ref=e246]:
+                        - generic:
+                          - generic:
+                            - blockquote [ref=e251]:
+                              - generic [ref=e253]: "\"A Singular está conosco desde o início da empresa. É um escritório sério, de qualidade e comprometido com a plena satisfação de seus clientes. O diferencial deles, além da ótima prestação de serviço, está na disponibilidade do suporte, a fim de sanar quaisquer dúvidas e inseguranças que enfrentamos no dia a dia.\""
+                            - paragraph [ref=e254]: Alphamed
+                            - img [ref=e257]
+                      - generic [ref=e264]:
+                        - generic:
+                          - generic:
+                            - img [ref=e271]
+                            - blockquote [ref=e278]:
+                              - generic [ref=e280]: "\"Recomendamos o Escritório Singular pela sua excelência e competência. Nossa parceria já dura muitos anos. Profissionais sempre prontos a nos ajudar. Uma equipe realmente muito experiente!\""
+                            - paragraph [ref=e281]: InterativaCom
+              - generic [ref=e282]:
+                - generic:
+                  - generic:
+                    - region "Contato"
+                    - generic [ref=e291]:
+                      - generic:
+                        - generic:
+                          - img [ref=e297]
+                          - paragraph [ref=e300]:
+                            - generic [ref=e301]: Vamos garantir o futuro do seu negócio?
+                          - paragraph [ref=e302]:
+                            - generic [ref=e304]: Clique no botão abaixo e chame agora uma especialista da Singular One.
+                          - link "Chamar a Singular One" [ref=e306] [cursor=pointer]:
+                            - /url: https://api.whatsapp.com/send?phone=5554991000520&text=Ol%C3%A1,%20Singular%20One.%20Quero%20mais%20informa%C3%A7%C3%B5es!
+                            - generic [ref=e307]: Chamar a Singular One
+    - text: "* * * *"
+  - region "bottom of page"

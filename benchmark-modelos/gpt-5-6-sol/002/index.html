@@ -1,0 +1,1540 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Uma vitrine de produtos inspirada na experiência visual da Apple.">
+  <meta name="theme-color" content="#000000">
+  <title>Apple — Produtos, novidades e muito mais</title>
+  <style>
+    :root {
+      --nav-height: 44px;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --link-blue: #2997ff;
+      --ink: #1d1d1f;
+      --muted: #6e6e73;
+      --surface: #f5f5f7;
+      --line: rgba(0, 0, 0, 0.16);
+      --ease: cubic-bezier(.28, .11, .32, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 1000;
+      top: 7px;
+      left: 12px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: #fff;
+      background: #000;
+      font-size: 13px;
+      transform: translateY(-150%);
+      transition: transform .2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .global-nav {
+      position: fixed;
+      z-index: 100;
+      inset: 0 0 auto;
+      height: var(--nav-height);
+      color: rgba(0, 0, 0, .8);
+      background: rgba(250, 250, 252, .82);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+      transition: box-shadow .25s ease, background-color .25s ease;
+    }
+
+    .global-nav.is-scrolled {
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
+      background: rgba(250, 250, 252, .92);
+    }
+
+    .nav-content {
+      width: min(1024px, 100%);
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-link,
+    .nav-icon,
+    .menu-toggle {
+      opacity: .82;
+      transition: opacity .2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-icon:hover,
+    .menu-toggle:hover {
+      opacity: 1;
+    }
+
+    .nav-link {
+      padding: 0 7px;
+      font-size: 12px;
+      line-height: var(--nav-height);
+      white-space: nowrap;
+    }
+
+    .nav-icon {
+      width: 30px;
+      height: 44px;
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+    }
+
+    .nav-icon svg {
+      display: block;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 34px;
+      height: 44px;
+      padding: 0;
+      border: 0;
+      color: currentColor;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 15px;
+      height: 1px;
+      margin: 4px auto;
+      background: currentColor;
+      transition: transform .3s var(--ease);
+      transform-origin: center;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:first-child {
+      transform: translateY(2.5px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:last-child {
+      transform: translateY(-2.5px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    main {
+      padding-top: var(--nav-height);
+    }
+
+    .ribbon {
+      position: relative;
+      z-index: 2;
+      min-height: 44px;
+      padding: 11px 18px 10px;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      background: #fff;
+      font-size: 14px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .ribbon a,
+    .text-link {
+      color: var(--blue);
+    }
+
+    .ribbon a:hover,
+    .text-link:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      position: relative;
+      height: 692px;
+      min-height: 580px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      isolation: isolate;
+      text-align: center;
+    }
+
+    .hero-dark {
+      color: #f5f5f7;
+      background: #000;
+    }
+
+    .hero-light {
+      color: var(--ink);
+      background: #f5f5f7;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 5;
+      padding: 49px 20px 0;
+    }
+
+    .hero-kicker {
+      margin: 0 0 6px;
+      font-size: 20px;
+      line-height: 1.15;
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    .hero h1,
+    .hero h2 {
+      margin: 0;
+      font-size: clamp(44px, 4.2vw, 58px);
+      line-height: 1.03;
+      font-weight: 600;
+      letter-spacing: -.04em;
+    }
+
+    .hero-subtitle {
+      margin: 8px 0 0;
+      font-size: clamp(22px, 2.2vw, 28px);
+      line-height: 1.2;
+      font-weight: 400;
+      letter-spacing: .004em;
+    }
+
+    .cta-row {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 17px;
+    }
+
+    .button {
+      min-width: 119px;
+      padding: 11px 21px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 17px;
+      line-height: 1.15;
+      transition: color .2s ease, background-color .2s ease, transform .2s var(--ease), box-shadow .2s ease;
+    }
+
+    .button:hover {
+      background: var(--blue-hover);
+      box-shadow: 0 5px 16px rgba(0, 113, 227, .16);
+      transform: translateY(-1px);
+    }
+
+    .button:active {
+      transform: scale(.98);
+    }
+
+    .button-outline {
+      color: var(--blue);
+      background: transparent;
+    }
+
+    .button-outline:hover {
+      color: #fff;
+      background: var(--blue-hover);
+    }
+
+    .hero-dark .button-outline {
+      color: var(--link-blue);
+      border-color: var(--link-blue);
+    }
+
+    .hero-dark .button-outline:hover {
+      color: #fff;
+      background: var(--link-blue);
+    }
+
+    .hero-visual {
+      position: absolute;
+      z-index: 1;
+      inset: 210px 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .hero-visual svg {
+      width: min(920px, 94vw);
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    .hero-iphone::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      left: 50%;
+      bottom: -320px;
+      width: 930px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(50, 104, 187, .28) 0, rgba(10, 29, 66, .2) 42%, transparent 69%);
+      filter: blur(10px);
+      transform: translateX(-50%);
+    }
+
+    .hero-mac {
+      background:
+        radial-gradient(circle at 50% 78%, rgba(173, 213, 255, .85), transparent 26%),
+        linear-gradient(180deg, #eef8ff 0%, #fbfdff 64%, #eaf7ff 100%);
+    }
+
+    .hero-mac .hero-copy {
+      padding-top: 45px;
+    }
+
+    .hero-mac .hero-visual {
+      top: 225px;
+    }
+
+    .hero-iphone-color {
+      background:
+        radial-gradient(circle at 50% 85%, rgba(134, 174, 255, .45), transparent 38%),
+        linear-gradient(180deg, #f5f8ff 0%, #fff 62%, #edf4ff 100%);
+    }
+
+    .rainbow-text {
+      color: transparent;
+      background: linear-gradient(90deg, #0090f7, #ba62fc 38%, #f2416b 72%, #f55600);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .product-grid {
+      padding: 0 12px 12px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      background: #fff;
+    }
+
+    .tile {
+      position: relative;
+      height: 580px;
+      overflow: hidden;
+      isolation: isolate;
+      text-align: center;
+      background: var(--surface);
+    }
+
+    .tile-dark {
+      color: #f5f5f7;
+      background: #000;
+    }
+
+    .tile-copy {
+      position: relative;
+      z-index: 4;
+      padding: 45px 30px 0;
+    }
+
+    .tile h2 {
+      margin: 0;
+      font-size: clamp(32px, 3vw, 40px);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -.035em;
+    }
+
+    .tile-eyebrow {
+      margin: 4px 0 0;
+      color: #d01710;
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .tile-subtitle {
+      max-width: 440px;
+      margin: 7px auto 0;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: .005em;
+    }
+
+    .tile .cta-row {
+      margin-top: 15px;
+      gap: 12px;
+    }
+
+    .tile .button {
+      min-width: 0;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+
+    .tile-visual {
+      position: absolute;
+      z-index: 1;
+      inset: 188px 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      pointer-events: none;
+      transition: transform .8s var(--ease);
+    }
+
+    .tile:hover .tile-visual {
+      transform: scale(1.012);
+    }
+
+    .tile-visual svg {
+      width: min(560px, 96%);
+      height: auto;
+      display: block;
+    }
+
+    .tile-watch {
+      background: linear-gradient(180deg, #f7f7f7 0%, #f2f2f4 70%, #e8e8eb 100%);
+    }
+
+    .tile-watch .tile-visual {
+      top: 190px;
+    }
+
+    .tile-airpods {
+      background:
+        radial-gradient(circle at 50% 78%, rgba(80, 94, 120, .23), transparent 30%),
+        linear-gradient(#050506, #000);
+    }
+
+    .tile-ipad {
+      background:
+        radial-gradient(circle at 50% 80%, rgba(193, 179, 255, .62), transparent 36%),
+        linear-gradient(180deg, #f8f6ff, #f0edff 72%, #e9e4ff);
+    }
+
+    .tile-macbook {
+      background:
+        radial-gradient(circle at 50% 86%, rgba(95, 75, 160, .24), transparent 32%),
+        #000;
+    }
+
+    .tile-trade {
+      background:
+        radial-gradient(circle at 50% 85%, rgba(138, 210, 167, .28), transparent 33%),
+        #f5f5f7;
+    }
+
+    .tile-entertainment {
+      background: #081018;
+    }
+
+    .tile-entertainment .tile-copy {
+      padding-top: 43px;
+    }
+
+    .tile-entertainment .tile-subtitle {
+      max-width: 455px;
+    }
+
+    .cinema-art {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .cinema-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(5, 10, 18, .2), rgba(5, 10, 18, .03) 44%, rgba(5, 10, 18, .25)),
+        radial-gradient(circle at 23% 76%, #eb5f5a 0 4%, transparent 20%),
+        radial-gradient(circle at 80% 68%, #366ed0 0 5%, transparent 28%),
+        radial-gradient(circle at 54% 78%, #d8a260 0 4%, transparent 25%),
+        linear-gradient(140deg, #09111e 7%, #1d3044 36%, #633e42 66%, #111a28 90%);
+      transform: scale(1.04);
+      transition: transform 1.2s var(--ease);
+    }
+
+    .tile-entertainment:hover .cinema-art::before {
+      transform: scale(1.08);
+    }
+
+    .cinema-figures {
+      position: absolute;
+      inset: auto 0 0;
+      height: 66%;
+      opacity: .92;
+      background:
+        radial-gradient(ellipse at 27% 100%, #151b24 0 17%, transparent 17.5%),
+        radial-gradient(ellipse at 53% 110%, #111722 0 22%, transparent 22.5%),
+        radial-gradient(ellipse at 78% 105%, #151925 0 19%, transparent 19.5%);
+      filter: drop-shadow(0 -10px 35px rgba(0, 0, 0, .35));
+    }
+
+    .service-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 38px;
+      font-weight: 600;
+      letter-spacing: -.035em;
+    }
+
+    .service-mark svg {
+      width: 31px;
+      height: 37px;
+    }
+
+    .service-note {
+      position: absolute;
+      z-index: 3;
+      right: 20px;
+      bottom: 18px;
+      left: 20px;
+      color: rgba(255, 255, 255, .8);
+      font-size: 13px;
+    }
+
+    .highlights {
+      overflow: hidden;
+      padding: 24px 0 30px;
+      background: #fff;
+    }
+
+    .highlights h2 {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto 18px;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -.025em;
+    }
+
+    .highlight-track {
+      width: max-content;
+      padding: 0 max(20px, calc((100vw - 1020px) / 2));
+      display: flex;
+      gap: 14px;
+      animation: drift 30s linear infinite;
+    }
+
+    .highlights:hover .highlight-track,
+    .highlights:focus-within .highlight-track {
+      animation-play-state: paused;
+    }
+
+    .highlight-card {
+      position: relative;
+      width: 300px;
+      height: 178px;
+      padding: 22px;
+      overflow: hidden;
+      border-radius: 22px;
+      color: #fff;
+      background: #111;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+      transition: transform .35s var(--ease), box-shadow .35s ease;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 38px rgba(0, 0, 0, .18);
+    }
+
+    .highlight-card:nth-child(1),
+    .highlight-card:nth-child(5) {
+      background: linear-gradient(135deg, #ff7a45, #a40d5c 62%, #290b42);
+    }
+
+    .highlight-card:nth-child(2),
+    .highlight-card:nth-child(6) {
+      background: linear-gradient(135deg, #1455c9, #5c24bd 58%, #ff4f8b);
+    }
+
+    .highlight-card:nth-child(3),
+    .highlight-card:nth-child(7) {
+      background: linear-gradient(135deg, #157369, #29b787 55%, #d3ef8c);
+    }
+
+    .highlight-card:nth-child(4),
+    .highlight-card:nth-child(8) {
+      background: linear-gradient(135deg, #16191f, #454e5e 58%, #9eacbd);
+    }
+
+    .highlight-label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .75;
+    }
+
+    .highlight-card strong {
+      max-width: 210px;
+      display: block;
+      font-size: 22px;
+      line-height: 1.08;
+      letter-spacing: -.025em;
+    }
+
+    .highlight-orb {
+      position: absolute;
+      right: -32px;
+      bottom: -45px;
+      width: 150px;
+      height: 150px;
+      border: 1px solid rgba(255, 255, 255, .45);
+      border-radius: 50%;
+      box-shadow: inset 0 0 35px rgba(255, 255, 255, .2), 0 0 50px rgba(255, 255, 255, .16);
+    }
+
+    .site-footer {
+      color: var(--muted);
+      background: var(--surface);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .footer-inner {
+      width: min(980px, calc(100% - 44px));
+      margin: 0 auto;
+      padding: 18px 0 28px;
+    }
+
+    .legal-copy {
+      margin: 0;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .footer-columns {
+      padding: 20px 0 24px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 28px;
+    }
+
+    .footer-column h3 {
+      margin: 0 0 9px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .footer-column a {
+      margin: 0 0 8px;
+      display: block;
+    }
+
+    .footer-column a:hover {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .footer-shop {
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .footer-shop a {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      padding-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-bottom nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .footer-bottom nav a {
+      padding: 0 10px;
+      border-right: 1px solid var(--line);
+    }
+
+    .footer-bottom nav a:first-child {
+      padding-left: 0;
+    }
+
+    .footer-bottom nav a:last-child {
+      border-right: 0;
+    }
+
+    .country {
+      margin-left: auto;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(0, 113, 227, .7);
+      outline-offset: 3px;
+    }
+
+    @keyframes drift {
+      from { transform: translateX(0); }
+      to { transform: translateX(-1256px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media (max-width: 833px) {
+      .nav-content {
+        padding: 0 16px;
+      }
+
+      .nav-link {
+        display: none;
+      }
+
+      .nav-content .nav-icon.apple-mark {
+        margin-right: auto;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        z-index: 99;
+        inset: var(--nav-height) 0 0;
+        padding: 25px 48px 48px;
+        display: block;
+        overflow-y: auto;
+        color: var(--ink);
+        background: rgba(250, 250, 252, .98);
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-16px);
+        transition: opacity .25s ease, transform .35s var(--ease), visibility .35s;
+      }
+
+      .mobile-menu.open {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .mobile-menu a {
+        padding: 8px 0;
+        display: block;
+        font-size: 28px;
+        line-height: 1.18;
+        font-weight: 600;
+        letter-spacing: -.03em;
+      }
+
+      .hero {
+        height: 620px;
+      }
+
+      .hero-copy {
+        padding-top: 42px;
+      }
+
+      .hero-visual {
+        top: 230px;
+      }
+
+      .hero-visual svg {
+        width: min(760px, 116vw);
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tile {
+        height: 560px;
+      }
+
+      .footer-columns {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .country {
+        margin-left: 0;
+        order: -1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .ribbon {
+        padding: 12px 35px;
+        font-size: 13px;
+      }
+
+      .hero {
+        height: 575px;
+        min-height: 0;
+      }
+
+      .hero h1,
+      .hero h2 {
+        font-size: 39px;
+      }
+
+      .hero-subtitle {
+        padding: 0 8px;
+        font-size: 20px;
+      }
+
+      .hero-kicker {
+        font-size: 17px;
+      }
+
+      .hero-copy {
+        padding: 38px 12px 0;
+      }
+
+      .hero-visual {
+        inset: 242px -10% 0;
+      }
+
+      .hero-visual svg {
+        width: 660px;
+        max-width: none;
+      }
+
+      .hero-mac .hero-visual {
+        inset: 245px -24% 0;
+      }
+
+      .hero-iphone-color .hero-visual {
+        inset: 235px -13% 0;
+      }
+
+      .cta-row {
+        margin-top: 16px;
+        gap: 10px;
+      }
+
+      .button {
+        min-width: 0;
+        padding: 10px 17px;
+        font-size: 15px;
+      }
+
+      .product-grid {
+        padding: 0 0 8px;
+        gap: 8px;
+      }
+
+      .tile {
+        height: 500px;
+      }
+
+      .tile-copy {
+        padding: 37px 18px 0;
+      }
+
+      .tile h2,
+      .service-mark {
+        font-size: 32px;
+      }
+
+      .tile-subtitle {
+        font-size: 18px;
+      }
+
+      .tile-visual {
+        inset: 175px -7% 0;
+      }
+
+      .tile-watch .tile-visual {
+        inset: 177px -6% 0;
+      }
+
+      .tile-entertainment {
+        height: 530px;
+      }
+
+      .footer-inner {
+        width: calc(100% - 32px);
+      }
+
+      .footer-columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .footer-column {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer-column h3 {
+        margin: 0 0 8px;
+      }
+
+      .footer-column a {
+        margin-left: 10px;
+      }
+
+      .footer-bottom nav a {
+        margin: 3px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="global-nav" id="global-nav">
+    <nav class="nav-content" aria-label="Navegação global">
+      <a class="nav-icon apple-mark" href="#conteudo" aria-label="Apple — Início">
+        <svg width="15" height="19" viewBox="0 0 15 19" aria-hidden="true">
+          <path fill="currentColor" d="M12.45 10.05c.02-2.08 1.7-3.08 1.78-3.13a3.81 3.81 0 0 0-3-1.62c-1.26-.13-2.49.75-3.13.75-.65 0-1.63-.74-2.69-.71a3.98 3.98 0 0 0-3.35 2.04c-1.45 2.5-.37 6.19 1.02 8.21.7 1 1.51 2.1 2.57 2.06 1.04-.04 1.43-.66 2.69-.66 1.25 0 1.61.66 2.7.64 1.12-.02 1.82-1 2.5-2a8.2 8.2 0 0 0 1.14-2.31 3.58 3.58 0 0 1-2.23-3.27ZM10.4 3.97A3.62 3.62 0 0 0 11.23 1a3.7 3.7 0 0 0-2.42 1.4 3.46 3.46 0 0 0-.85 2.86 3.05 3.05 0 0 0 2.44-1.29Z"/>
+        </svg>
+      </a>
+      <a class="nav-link" href="#mac">Mac</a>
+      <a class="nav-link" href="#ipad">iPad</a>
+      <a class="nav-link" href="#iphone">iPhone</a>
+      <a class="nav-link" href="#watch">Watch</a>
+      <a class="nav-link" href="#airpods">AirPods</a>
+      <a class="nav-link" href="#entretenimento">TV e Casa</a>
+      <a class="nav-link" href="#entretenimento">Entretenimento</a>
+      <a class="nav-link" href="#footer">Suporte</a>
+      <a class="nav-icon" href="#destaques" aria-label="Buscar">
+        <svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true">
+          <circle cx="7.2" cy="7.2" r="5.3" fill="none" stroke="currentColor" stroke-width="1.25"/>
+          <path d="m11.2 11.2 4 4" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a class="nav-icon" href="#trade-in" aria-label="Sacola">
+        <svg width="16" height="18" viewBox="0 0 16 18" aria-hidden="true">
+          <path d="M3.1 5.4h9.8l.7 11H2.4l.7-11Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M5.4 5.3V3.7A2.6 2.6 0 0 1 8 1.2a2.6 2.6 0 0 1 2.6 2.5v1.6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+        <span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="#mac">Mac</a>
+    <a href="#ipad">iPad</a>
+    <a href="#iphone">iPhone</a>
+    <a href="#watch">Watch</a>
+    <a href="#airpods">AirPods</a>
+    <a href="#entretenimento">TV e Casa</a>
+    <a href="#destaques">Entretenimento</a>
+    <a href="#footer">Suporte</a>
+  </div>
+
+  <main id="conteudo">
+    <div class="ribbon">
+      <span>Compre online e receba com frete grátis. <a href="#iphone">Saiba mais <span aria-hidden="true">›</span></a></span>
+    </div>
+
+    <section class="hero hero-dark hero-iphone" id="iphone" aria-labelledby="iphone-title">
+      <div class="hero-copy">
+        <h1 id="iphone-title">iPhone Pro</h1>
+        <p class="hero-subtitle">Titanium. Tão poderoso. Tão Pro.</p>
+        <div class="cta-row">
+          <a class="button" href="#destaques">Saiba mais <span aria-hidden="true">›</span></a>
+          <a class="button button-outline" href="#trade-in">Comprar <span aria-hidden="true">›</span></a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 900 500" role="img">
+          <defs>
+            <linearGradient id="phoneEdgeA" x1="0" x2="1">
+              <stop offset="0" stop-color="#5b5c60"/>
+              <stop offset=".18" stop-color="#d7d4cc"/>
+              <stop offset=".5" stop-color="#777779"/>
+              <stop offset=".82" stop-color="#e4dfd2"/>
+              <stop offset="1" stop-color="#5c5d60"/>
+            </linearGradient>
+            <linearGradient id="screenA" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#050507"/>
+              <stop offset=".36" stop-color="#152b5d"/>
+              <stop offset=".62" stop-color="#b67a45"/>
+              <stop offset=".8" stop-color="#19376f"/>
+              <stop offset="1" stop-color="#030307"/>
+            </linearGradient>
+            <radialGradient id="glowA" cx="50%" cy="45%">
+              <stop offset="0" stop-color="#ffdf9e" stop-opacity=".9"/>
+              <stop offset=".25" stop-color="#bd6b32" stop-opacity=".65"/>
+              <stop offset=".58" stop-color="#173d86" stop-opacity=".5"/>
+              <stop offset="1" stop-color="#03040a" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="shadowA" x="-40%" y="-20%" width="180%" height="170%">
+              <feDropShadow dx="0" dy="22" stdDeviation="20" flood-color="#000" flood-opacity=".65"/>
+            </filter>
+          </defs>
+          <ellipse cx="450" cy="460" rx="305" ry="28" fill="#284b85" opacity=".18"/>
+          <g filter="url(#shadowA)">
+            <g transform="translate(145 32) rotate(-8 170 220)">
+              <rect x="48" y="4" width="270" height="482" rx="48" fill="url(#phoneEdgeA)"/>
+              <rect x="55" y="11" width="256" height="468" rx="42" fill="#121214"/>
+              <rect x="62" y="18" width="242" height="454" rx="37" fill="url(#screenA)"/>
+              <ellipse cx="183" cy="235" rx="175" ry="225" fill="url(#glowA)" opacity=".92"/>
+              <path d="M37 118h8v66h-8M321 143h7v94h-7" stroke="#c8c2b7" stroke-width="4" stroke-linecap="round"/>
+              <rect x="143" y="28" width="81" height="23" rx="12" fill="#050505"/>
+              <circle cx="210" cy="39.5" r="3" fill="#141b26"/>
+            </g>
+            <g transform="translate(486 15) rotate(8 160 230)">
+              <rect x="42" y="4" width="270" height="482" rx="48" fill="url(#phoneEdgeA)"/>
+              <rect x="50" y="12" width="254" height="466" rx="41" fill="#3b3b3c"/>
+              <rect x="63" y="25" width="228" height="440" rx="33" fill="url(#phoneEdgeA)" opacity=".62"/>
+              <g transform="translate(77 48)">
+                <circle cx="52" cy="52" r="43" fill="#2b2b2d" stroke="#b5b0a7" stroke-width="5"/>
+                <circle cx="52" cy="52" r="28" fill="#0c0f16"/><circle cx="44" cy="44" r="10" fill="#1d304e"/>
+                <circle cx="142" cy="52" r="43" fill="#2b2b2d" stroke="#b5b0a7" stroke-width="5"/>
+                <circle cx="142" cy="52" r="28" fill="#0c0f16"/><circle cx="134" cy="44" r="10" fill="#1d304e"/>
+                <circle cx="97" cy="142" r="43" fill="#2b2b2d" stroke="#b5b0a7" stroke-width="5"/>
+                <circle cx="97" cy="142" r="28" fill="#0c0f16"/><circle cx="89" cy="134" r="10" fill="#1d304e"/>
+                <circle cx="157" cy="130" r="9" fill="#17191e"/><circle cx="157" cy="130" r="4" fill="#556574"/>
+                <circle cx="34" cy="132" r="10" fill="#efebe1" opacity=".75"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="hero hero-light hero-mac" id="mac" aria-labelledby="mac-title">
+      <div class="hero-copy">
+        <h2 id="mac-title">MacBook Air</h2>
+        <p class="hero-subtitle">Superleve. Superpotente.</p>
+        <div class="cta-row">
+          <a class="button" href="#destaques">Saiba mais <span aria-hidden="true">›</span></a>
+          <a class="button button-outline" href="#trade-in">Comprar <span aria-hidden="true">›</span></a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 980 500" role="img">
+          <defs>
+            <linearGradient id="macMetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f4f6f8"/>
+              <stop offset=".44" stop-color="#afb8c3"/>
+              <stop offset="1" stop-color="#788592"/>
+            </linearGradient>
+            <linearGradient id="macSky" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#c7ebff"/>
+              <stop offset=".34" stop-color="#56bff8"/>
+              <stop offset=".58" stop-color="#2562d5"/>
+              <stop offset=".77" stop-color="#9b5cd6"/>
+              <stop offset="1" stop-color="#ff9f8b"/>
+            </linearGradient>
+            <radialGradient id="macGlow" cx="50%" cy="45%">
+              <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+              <stop offset=".65" stop-color="#fff" stop-opacity=".05"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="macShadow" x="-30%" y="-30%" width="160%" height="200%">
+              <feDropShadow dx="0" dy="25" stdDeviation="18" flood-color="#376f96" flood-opacity=".28"/>
+            </filter>
+          </defs>
+          <ellipse cx="490" cy="453" rx="390" ry="30" fill="#5daee6" opacity=".22"/>
+          <g filter="url(#macShadow)">
+            <rect x="193" y="15" width="594" height="380" rx="20" fill="url(#macMetal)"/>
+            <rect x="201" y="23" width="578" height="364" rx="14" fill="#07101a"/>
+            <rect x="212" y="34" width="556" height="342" rx="6" fill="url(#macSky)"/>
+            <circle cx="560" cy="166" r="210" fill="url(#macGlow)" opacity=".45"/>
+            <path d="M212 339c78-98 151-78 226-144 89-78 151-76 330-50v231H212Z" fill="#713ea4" opacity=".45"/>
+            <path d="M212 356c123-82 179-56 272-116 100-64 172-53 284-15v151H212Z" fill="#ef8b95" opacity=".42"/>
+            <path d="M95 394h790l61 37c7 4 4 15-5 16H40c-9-1-12-12-5-16l60-37Z" fill="url(#macMetal)"/>
+            <path d="M95 394h790l-20 15H115Z" fill="#85919c" opacity=".72"/>
+            <path d="M421 409h138c-2 10-10 14-21 14h-96c-11 0-19-4-21-14Z" fill="#cbd2d8"/>
+            <path d="M52 443h876" stroke="#78838d" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="hero hero-light hero-iphone-color" aria-labelledby="iphone-color-title">
+      <div class="hero-copy">
+        <h2 id="iphone-color-title">iPhone</h2>
+        <p class="hero-subtitle">Poderoso em todos os sentidos.</p>
+        <div class="cta-row">
+          <a class="button" href="#destaques">Saiba mais <span aria-hidden="true">›</span></a>
+          <a class="button button-outline" href="#trade-in">Comprar <span aria-hidden="true">›</span></a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 920 500" role="img">
+          <defs>
+            <linearGradient id="bluePhone" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#7da5ea"/>
+              <stop offset=".5" stop-color="#4e78c9"/>
+              <stop offset="1" stop-color="#224483"/>
+            </linearGradient>
+            <linearGradient id="blueScreen" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0e1e65"/>
+              <stop offset=".28" stop-color="#2a6bea"/>
+              <stop offset=".54" stop-color="#e0c1ff"/>
+              <stop offset=".72" stop-color="#fb7a7a"/>
+              <stop offset="1" stop-color="#250f5b"/>
+            </linearGradient>
+            <filter id="blueShadow" x="-50%" y="-30%" width="200%" height="190%">
+              <feDropShadow dx="0" dy="24" stdDeviation="20" flood-color="#3561b0" flood-opacity=".32"/>
+            </filter>
+          </defs>
+          <ellipse cx="462" cy="465" rx="315" ry="24" fill="#6f99dc" opacity=".24"/>
+          <g filter="url(#blueShadow)">
+            <g transform="translate(140 10) rotate(-7 150 230)">
+              <rect x="44" y="10" width="270" height="478" rx="48" fill="url(#bluePhone)"/>
+              <rect x="53" y="19" width="252" height="460" rx="40" fill="#264a8c"/>
+              <g transform="translate(70 42)">
+                <circle cx="57" cy="57" r="48" fill="#6f95d4" stroke="#27477e" stroke-width="3"/>
+                <circle cx="57" cy="57" r="32" fill="#0d1730"/><circle cx="47" cy="47" r="12" fill="#294979"/>
+                <circle cx="150" cy="57" r="48" fill="#6f95d4" stroke="#27477e" stroke-width="3"/>
+                <circle cx="150" cy="57" r="32" fill="#0d1730"/><circle cx="140" cy="47" r="12" fill="#294979"/>
+                <circle cx="104" cy="148" r="8" fill="#f3f0e9" opacity=".88"/>
+              </g>
+            </g>
+            <g transform="translate(500 18) rotate(7 150 230)">
+              <rect x="38" y="8" width="270" height="478" rx="48" fill="url(#bluePhone)"/>
+              <rect x="46" y="16" width="254" height="462" rx="41" fill="#101724"/>
+              <rect x="53" y="23" width="240" height="448" rx="36" fill="url(#blueScreen)"/>
+              <path d="M54 340c75-90 144-71 238-151v282H54Z" fill="#d9c0ff" opacity=".32"/>
+              <path d="M54 393c85-69 150-50 238-120v198H54Z" fill="#ff7d89" opacity=".3"/>
+              <rect x="129" y="31" width="88" height="24" rx="12" fill="#07090d"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <div class="product-grid">
+      <section class="tile tile-watch" id="watch" aria-labelledby="watch-title">
+        <div class="tile-copy">
+          <h2 id="watch-title">
+            <span aria-hidden="true"></span> WATCH
+          </h2>
+          <p class="tile-eyebrow">Series 10</p>
+          <p class="tile-subtitle">É coisa fina.</p>
+          <div class="cta-row">
+            <a class="button" href="#destaques">Saiba mais <span aria-hidden="true">›</span></a>
+            <a class="button button-outline" href="#trade-in">Comprar <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+        <div class="tile-visual" aria-hidden="true">
+          <svg viewBox="0 0 600 390" role="img">
+            <defs>
+              <linearGradient id="watchBand" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ddd5c8"/>
+                <stop offset=".5" stop-color="#f3eee6"/>
+                <stop offset="1" stop-color="#c8c0b4"/>
+              </linearGradient>
+              <linearGradient id="watchBody" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f4f2ee"/>
+                <stop offset=".48" stop-color="#a9a8a6"/>
+                <stop offset="1" stop-color="#686a6d"/>
+              </linearGradient>
+              <radialGradient id="watchFace" cx="50%" cy="50%">
+                <stop offset="0" stop-color="#142c4d"/>
+                <stop offset=".55" stop-color="#0c1528"/>
+                <stop offset="1" stop-color="#000"/>
+              </radialGradient>
+              <filter id="watchShadow" x="-40%" y="-40%" width="180%" height="190%">
+                <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#747474" flood-opacity=".35"/>
+              </filter>
+            </defs>
+            <ellipse cx="300" cy="354" rx="175" ry="20" fill="#777" opacity=".13"/>
+            <g transform="translate(178 -74)" filter="url(#watchShadow)">
+              <path d="M84 0h76l18 146-14 204-9 118H89L78 350 64 146Z" fill="url(#watchBand)"/>
+              <path d="M100 0h44l8 140h-60Z" fill="#fff" opacity=".22"/>
+              <rect x="26" y="118" width="194" height="226" rx="54" fill="url(#watchBody)"/>
+              <rect x="35" y="127" width="176" height="208" rx="47" fill="#111"/>
+              <rect x="42" y="134" width="162" height="194" rx="42" fill="url(#watchFace)"/>
+              <circle cx="123" cy="231" r="62" fill="none" stroke="#51b5ff" stroke-width="10" stroke-dasharray="300 90" stroke-linecap="round" transform="rotate(-80 123 231)"/>
+              <circle cx="123" cy="231" r="45" fill="none" stroke="#fe5f62" stroke-width="8" stroke-dasharray="220 64" stroke-linecap="round" transform="rotate(-40 123 231)"/>
+              <path d="M123 231 153 194M123 231l-19 44" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="123" cy="231" r="6" fill="#fff"/>
+              <rect x="219" y="184" width="10" height="55" rx="5" fill="#777"/>
+              <circle cx="225" cy="267" r="11" fill="#888" stroke="#666" stroke-width="3"/>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="tile tile-dark tile-airpods" id="airpods" aria-labelledby="airpods-title">
+        <div class="tile-copy">
+          <h2 id="airpods-title">AirPods Pro</h2>
+          <p class="tile-subtitle">O som nunca foi tão envolvente.</p>
+          <div class="cta-row">
+            <a class="button" href="#destaques">Saiba mais <span aria-hidden="true">›</span></a>
+            <a class="button button-outline" href="#trade-in">Comprar <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+        <div class="tile-visual" aria-hidden="true">
+          <svg viewBox="0 0 600 390" role="img">
+            <defs>
+              <linearGradient id="podWhite" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fff"/>
+                <stop offset=".55" stop-color="#dfe3e9"/>
+                <stop offset="1" stop-color="#929aa7"/>
+              </linearGradient>
+              <filter id="podShadow" x="-70%" y="-40%" width="240%" height="210%">
+                <feDropShadow dx="0" dy="25" stdDeviation="18" flood-color="#5d77a3" flood-opacity=".32"/>
+              </filter>
+            </defs>
+            <ellipse cx="302" cy="345" rx="190" ry="24" fill="#7a8fab" opacity=".14"/>
+            <g filter="url(#podShadow)">
+              <g transform="translate(130 44) rotate(-14 100 150)">
+                <path d="M102 22c-42 0-73 31-73 72 0 31 19 57 48 67v146a34 34 0 0 0 68 0V158c25-13 42-37 42-64 0-41-36-72-85-72Z" fill="url(#podWhite)"/>
+                <ellipse cx="77" cy="91" rx="43" ry="55" fill="#1a202a"/>
+                <ellipse cx="71" cy="85" rx="27" ry="38" fill="#06090e"/>
+                <path d="M140 166v130" stroke="#fff" stroke-width="4" opacity=".52"/>
+                <circle cx="111" cy="206" r="5" fill="#657283" opacity=".7"/>
+              </g>
+              <g transform="translate(335 24) rotate(15 90 160)">
+                <path d="M92 25c42 0 73 31 73 72 0 31-19 57-48 67v146a34 34 0 0 1-68 0V161C24 148 7 124 7 97c0-41 36-72 85-72Z" fill="url(#podWhite)"/>
+                <ellipse cx="118" cy="94" rx="43" ry="55" fill="#1a202a"/>
+                <ellipse cx="124" cy="88" rx="27" ry="38" fill="#06090e"/>
+                <path d="M54 169v130" stroke="#fff" stroke-width="4" opacity=".52"/>
+                <circle cx="84" cy="210" r="5" fill="#657283" opacity=".7"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="tile tile-ipad" id="ipad" aria-labelledby="ipad-title">
+        <div class="tile-copy">
+          <h2 id="ipad-title">iPad <span class="rainbow-text">air</span></h2>
+          <p class="tile-subtitle">Dois tamanhos. Chip poderoso. Possibilidades infinitas.</p>
+          <div class="cta-row">
+            <a class="button" href="#destaques">Saiba mais <span aria-hidden="true">›</span></a>
+            <a class="button button-outline" href="#trade-in">Comprar <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+        <div class="tile-visual" aria-hidden="true">
+          <svg viewBox="0 0 600 390" role="img">
+            <defs>
+              <linearGradient id="ipadEdge" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#d5caf4"/>
+                <stop offset="1" stop-color="#746aa2"/>
+              </linearGradient>
+              <linearGradient id="ipadScreen" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fe725c"/>
+                <stop offset=".35" stop-color="#f9cf56"/>
+                <stop offset=".58" stop-color="#bde883"/>
+                <stop offset=".78" stop-color="#64cbe9"/>
+                <stop offset="1" stop-color="#a46ded"/>
+              </linearGradient>
+              <filter id="ipadShadow" x="-40%" y="-40%" width="180%" height="200%">
+                <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#7562a5" flood-opacity=".35"/>
+              </filter>
+            </defs>
+            <ellipse cx="305" cy="357" rx="210" ry="18" fill="#725cad" opacity=".16"/>
+            <g filter="url(#ipadShadow)" transform="translate(78 21) rotate(-2 220 170)">
+              <rect x="10" y="5" width="440" height="330" rx="24" fill="url(#ipadEdge)"/>
+              <rect x="18" y="13" width="424" height="314" rx="18" fill="#1b1b21"/>
+              <rect x="29" y="24" width="402" height="292" rx="10" fill="url(#ipadScreen)"/>
+              <path d="M30 272C135 179 218 204 290 94c46-71 93-74 141-59v281H30Z" fill="#6645d5" opacity=".42"/>
+              <path d="M30 216c98-50 136-137 242-95 65 26 107-8 159-51v246H30Z" fill="#f95479" opacity=".34"/>
+              <circle cx="230" cy="18" r="3" fill="#333"/>
+              <path d="m456 19 6 310" stroke="#5e567f" stroke-width="4" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="tile tile-dark tile-macbook" aria-labelledby="macbook-title">
+        <div class="tile-copy">
+          <h2 id="macbook-title">MacBook Pro</h2>
+          <p class="tile-subtitle">Uma obra-prima de potência.</p>
+          <div class="cta-row">
+            <a class="button" href="#destaques">Saiba mais <span aria-hidden="true">›</span></a>
+            <a class="button button-outline" href="#trade-in">Comprar <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+        <div class="tile-visual" aria-hidden="true">
+          <svg viewBox="0 0 600 390" role="img">
+            <defs>
+              <linearGradient id="proMetal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#6e7077"/>
+                <stop offset="1" stop-color="#25262a"/>
+              </linearGradient>
+              <linearGradient id="proScreen" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#182e77"/>
+                <stop offset=".32" stop-color="#5237b3"/>
+                <stop offset=".58" stop-color="#ca3b96"/>
+                <stop offset=".8" stop-color="#ff7447"/>
+                <stop offset="1" stop-color="#25104c"/>
+              </linearGradient>
+              <filter id="proShadow" x="-30%" y="-40%" width="160%" height="200%">
+                <feDropShadow dx="0" dy="24" stdDeviation="16" flood-color="#381e6e" flood-opacity=".5"/>
+              </filter>
+            </defs>
+            <ellipse cx="300" cy="348" rx="235" ry="18" fill="#996ac9" opacity=".15"/>
+            <g filter="url(#proShadow)">
+              <rect x="101" y="25" width="398" height="278" rx="13" fill="url(#proMetal)"/>
+              <rect x="109" y="33" width="382" height="262" rx="8" fill="#08090c"/>
+              <rect x="119" y="43" width="362" height="242" rx="3" fill="url(#proScreen)"/>
+              <path d="M119 269c82-81 131-122 205-94 60 23 100-36 157-87v197H119Z" fill="#ff804d" opacity=".33"/>
+              <path d="M119 225c73-28 108-106 179-83 71 23 98-31 183-81v224H119Z" fill="#803bc7" opacity=".35"/>
+              <path d="M38 302h524l34 29c5 5 2 12-6 13H10c-7-1-10-8-5-13l33-29Z" fill="url(#proMetal)"/>
+              <path d="M255 311h90c-2 8-7 11-17 11h-56c-9 0-15-3-17-11Z" fill="#86878b"/>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="tile tile-trade" id="trade-in" aria-labelledby="trade-title">
+        <div class="tile-copy">
+          <h2 id="trade-title"><span aria-hidden="true"></span> Trade In</h2>
+          <p class="tile-subtitle">Ganhe crédito na troca do seu aparelho por um novo.</p>
+          <div class="cta-row">
+            <a class="button" href="#footer">Veja quanto vale <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+        <div class="tile-visual" aria-hidden="true">
+          <svg viewBox="0 0 600 390" role="img">
+            <defs>
+              <linearGradient id="tradePhone" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#4f5158"/>
+                <stop offset="1" stop-color="#17181c"/>
+              </linearGradient>
+              <linearGradient id="tradeScreen" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#16a275"/>
+                <stop offset=".45" stop-color="#56d9a2"/>
+                <stop offset="1" stop-color="#115644"/>
+              </linearGradient>
+              <filter id="tradeShadow" x="-50%" y="-40%" width="200%" height="210%">
+                <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#4b856c" flood-opacity=".27"/>
+              </filter>
+            </defs>
+            <ellipse cx="300" cy="355" rx="180" ry="20" fill="#47916f" opacity=".15"/>
+            <g filter="url(#tradeShadow)">
+              <g transform="translate(150 24) rotate(-9 130 170)">
+                <rect x="0" y="0" width="235" height="350" rx="40" fill="url(#tradePhone)"/>
+                <rect x="8" y="8" width="219" height="334" rx="34" fill="#101413"/>
+                <rect x="14" y="14" width="207" height="322" rx="30" fill="url(#tradeScreen)"/>
+                <circle cx="118" cy="174" r="72" fill="none" stroke="#fff" stroke-width="12" opacity=".88" stroke-dasharray="330 130" stroke-linecap="round" transform="rotate(-58 118 174)"/>
+                <path d="m166 137 23 5-4-23" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="80" y="22" width="76" height="21" rx="11" fill="#07100c"/>
+              </g>
+              <g transform="translate(369 79) rotate(13 70 130)" opacity=".94">
+                <rect x="0" y="0" width="170" height="270" rx="31" fill="#aeb8bd"/>
+                <rect x="8" y="8" width="154" height="254" rx="25" fill="#d8ddd9"/>
+                <circle cx="54" cy="57" r="34" fill="#1b2125"/><circle cx="54" cy="57" r="21" fill="#080b0e"/>
+                <circle cx="116" cy="57" r="34" fill="#1b2125"/><circle cx="116" cy="57" r="21" fill="#080b0e"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="tile tile-dark tile-entertainment" id="entretenimento" aria-labelledby="tv-title">
+        <div class="cinema-art" aria-hidden="true"><div class="cinema-figures"></div></div>
+        <div class="tile-copy">
+          <h2 class="service-mark" id="tv-title">
+            <svg viewBox="0 0 15 19" aria-hidden="true"><path fill="currentColor" d="M12.45 10.05c.02-2.08 1.7-3.08 1.78-3.13a3.81 3.81 0 0 0-3-1.62c-1.26-.13-2.49.75-3.13.75-.65 0-1.63-.74-2.69-.71a3.98 3.98 0 0 0-3.35 2.04c-1.45 2.5-.37 6.19 1.02 8.21.7 1 1.51 2.1 2.57 2.06 1.04-.04 1.43-.66 2.69-.66 1.25 0 1.61.66 2.7.64 1.12-.02 1.82-1 2.5-2a8.2 8.2 0 0 0 1.14-2.31 3.58 3.58 0 0 1-2.23-3.27ZM10.4 3.97A3.62 3.62 0 0 0 11.23 1a3.7 3.7 0 0 0-2.42 1.4 3.46 3.46 0 0 0-.85 2.86 3.05 3.05 0 0 0 2.44-1.29Z"/></svg>
+            tv+
+          </h2>
+          <p class="tile-subtitle">Histórias originais que ficam com você.</p>
+          <div class="cta-row">
+            <a class="button" href="#destaques">Comece a assistir <span aria-hidden="true">›</span></a>
+          </div>
+        </div>
+        <p class="service-note">Novas estreias toda semana.</p>
+      </section>
+    </div>
+
+    <section class="highlights" id="destaques" aria-labelledby="highlights-title">
+      <h2 id="highlights-title">Descubra mais.</h2>
+      <div class="highlight-track">
+        <a class="highlight-card" href="#iphone">
+          <span class="highlight-label">Fotografia</span>
+          <strong>Detalhes incríveis, mesmo com pouca luz.</strong>
+          <span class="highlight-orb" aria-hidden="true"></span>
+        </a>
+        <a class="highlight-card" href="#mac">
+          <span class="highlight-label">Desempenho</span>
+          <strong>Pronto para criar no seu ritmo.</strong>
+          <span class="highlight-orb" aria-hidden="true"></span>
+        </a>
+        <a class="highlight-card" href="#watch">
+          <span class="highlight-label">Bem-estar</span>
+          <strong>Mais maneiras de cuidar de você.</strong>
+          <span class="highlight-orb" aria-hidden="true"></span>
+        </a>
+        <a class="highlight-card" href="#trade-in">
+          <span class="highlight-label">Trade In</span>
+          <strong>Seu aparelho antigo vale crédito.</strong>
+          <span class="highlight-orb" aria-hidden="true"></span>
+        </a>
+        <a class="highlight-card" href="#iphone" aria-hidden="true" tabindex="-1">
+          <span class="highlight-label">Fotografia</span><strong>Detalhes incríveis, mesmo com pouca luz.</strong><span class="highlight-orb"></span>
+        </a>
+        <a class="highlight-card" href="#mac" aria-hidden="true" tabindex="-1">
+          <span class="highlight-label">Desempenho</span><strong>Pronto para criar no seu ritmo.</strong><span class="highlight-orb"></span>
+        </a>
+        <a class="highlight-card" href="#watch" aria-hidden="true" tabindex="-1">
+          <span class="highlight-label">Bem-estar</span><strong>Mais maneiras de cuidar de você.</strong><span class="highlight-orb"></span>
+        </a>
+        <a class="highlight-card" href="#trade-in" aria-hidden="true" tabindex="-1">
+          <span class="highlight-label">Trade In</span><strong>Seu aparelho antigo vale crédito.</strong><span class="highlight-orb"></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="footer-inner">
+      <p class="legal-copy">Os produtos, serviços e imagens exibidos nesta página são uma recriação conceitual feita com ilustrações em SVG. A disponibilidade de recursos pode variar. Consulte os termos e condições aplicáveis antes de comprar.</p>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>Descobrir e Comprar</h3>
+          <a href="#mac">Mac</a>
+          <a href="#ipad">iPad</a>
+          <a href="#iphone">iPhone</a>
+          <a href="#watch">Watch</a>
+          <a href="#airpods">AirPods</a>
+        </div>
+        <div class="footer-column">
+          <h3>Conta</h3>
+          <a href="#footer">Gerenciar sua Conta</a>
+          <a href="#footer">Conta da loja</a>
+          <a href="#footer">iCloud.com</a>
+        </div>
+        <div class="footer-column">
+          <h3>Entretenimento</h3>
+          <a href="#entretenimento">Apple One</a>
+          <a href="#entretenimento">Apple TV+</a>
+          <a href="#entretenimento">Apple Music</a>
+          <a href="#entretenimento">Apple Arcade</a>
+        </div>
+        <div class="footer-column">
+          <h3>Para Empresas</h3>
+          <a href="#footer">Apple e os negócios</a>
+          <a href="#footer">Comprar para sua empresa</a>
+          <a href="#footer">Apple e a educação</a>
+        </div>
+        <div class="footer-column">
+          <h3>Valores</h3>
+          <a href="#trade-in">Meio ambiente</a>
+          <a href="#footer">Privacidade</a>
+          <a href="#footer">Acessibilidade</a>
+          <a href="#footer">Responsabilidade</a>
+        </div>
+      </div>
+      <div class="footer-shop">Outras formas de comprar: <a href="#iphone">encontre uma loja</a> ou compre online.</div>
+      <div class="footer-bottom">
+        <span>Copyright © 2026 Apple Inc. Todos os direitos reservados.</span>
+        <nav aria-label="Links legais">
+          <a href="#footer">Política de Privacidade</a>
+          <a href="#footer">Termos de Uso</a>
+          <a href="#footer">Vendas e Reembolsos</a>
+        </nav>
+        <span class="country">Brasil</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const nav = document.querySelector('#global-nav');
+      const toggle = document.querySelector('.menu-toggle');
+      const menu = document.querySelector('#mobile-menu');
+      const menuLinks = menu.querySelectorAll('a');
+
+      const closeMenu = () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Abrir menu');
+        menu.setAttribute('aria-hidden', 'true');
+        menu.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      };
+
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Abrir menu' : 'Fechar menu');
+        menu.setAttribute('aria-hidden', String(isOpen));
+        menu.classList.toggle('open', !isOpen);
+        document.body.classList.toggle('menu-open', !isOpen);
+      });
+
+      menuLinks.forEach((link) => link.addEventListener('click', closeMenu));
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menu.classList.contains('open')) {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 833) closeMenu();
+      });
+
+      const updateNav = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+      updateNav();
+      window.addEventListener('scroll', updateNav, { passive: true });
+    })();
+  </script>
+</body>
+</html>

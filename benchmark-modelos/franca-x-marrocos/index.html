@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>França × Marrocos — Arena 3D</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #02040a;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: #f0f2f8;
+    user-select: none;
+  }
+  canvas { display: block; width: 100%; height: 100%; }
+
+  #start {
+    position: fixed; inset: 0; z-index: 60;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,40,120,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 70% 70%, rgba(180,20,30,0.35) 0%, transparent 50%),
+      linear-gradient(160deg, #040812 0%, #0a1020 50%, #120808 100%);
+    cursor: pointer;
+  }
+  #start .panel {
+    text-align: center;
+    padding: 40px 52px 36px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(6,10,22,0.82);
+    backdrop-filter: blur(16px);
+    box-shadow:
+      0 0 0 1px rgba(0,80,200,0.15),
+      0 30px 80px rgba(0,0,0,0.55),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    max-width: 520px;
+  }
+  #start .flags {
+    display: flex; align-items: center; justify-content: center;
+    gap: 28px; margin-bottom: 18px;
+  }
+  #start .flag {
+    width: 72px; height: 48px;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    overflow: hidden;
+    position: relative;
+  }
+  #start .flag.fr {
+    background: linear-gradient(90deg, #002395 33%, #fff 33% 66%, #ed2939 66%);
+  }
+  #start .flag.ma {
+    background: #c1272d;
+  }
+  #start .flag.ma::after {
+    content: "★";
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #006233; font-size: 28px; line-height: 1;
+  }
+  #start .vs {
+    font-size: 18px; font-weight: 700; letter-spacing: 0.2em;
+    color: #ffd56a; text-shadow: 0 0 20px rgba(255,200,60,0.5);
+  }
+  #start h1 {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    background: linear-gradient(180deg, #fff 0%, #b8c4e0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  #start .sub {
+    color: #8a94b0; font-size: 13px; letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 22px;
+  }
+  #start .controls {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px 20px; text-align: left;
+    font-size: 13px; color: #aab4cc; margin-bottom: 26px;
+  }
+  #start .controls kbd {
+    display: inline-block; min-width: 22px; padding: 1px 6px;
+    background: #161c30; border: 1px solid #2e3858;
+    border-radius: 4px; color: #ffd56a; font-size: 11px;
+    font-family: inherit; text-align: center;
+  }
+  #start .cta {
+    font-size: 15px; color: #ffd56a; letter-spacing: 0.12em;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  #hud {
+    position: fixed; inset: 0; z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  #hud.on { opacity: 1; }
+
+  #scoreboard {
+    position: absolute; top: 18px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; align-items: stretch;
+    background: rgba(4,8,18,0.78);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+  }
+  #scoreboard .team {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px; min-width: 120px;
+  }
+  #scoreboard .team.home { background: linear-gradient(90deg, rgba(0,35,149,0.45), transparent); }
+  #scoreboard .team.away { background: linear-gradient(270deg, rgba(193,39,45,0.45), transparent); flex-direction: row-reverse; }
+  #scoreboard .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+  }
+  #scoreboard .dot.fr { background: #3d7cff; color: #3d7cff; }
+  #scoreboard .dot.ma { background: #e03a40; color: #e03a40; }
+  #scoreboard .name { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; }
+  #scoreboard .score {
+    font-size: 28px; font-weight: 800; font-variant-numeric: tabular-nums;
+    min-width: 28px; text-align: center;
+  }
+  #scoreboard .mid {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 6px 18px; background: rgba(0,0,0,0.35);
+    border-left: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  #scoreboard .clock {
+    font-size: 16px; font-weight: 700; color: #ffd56a;
+    font-variant-numeric: tabular-nums; letter-spacing: 0.06em;
+  }
+  #scoreboard .half { font-size: 10px; color: #7a849e; letter-spacing: 0.16em; margin-top: 2px; }
+
+  #hint {
+    position: absolute; bottom: 22px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px; color: rgba(200,210,230,0.65);
+    letter-spacing: 0.06em;
+    background: rgba(0,0,0,0.35);
+    padding: 8px 16px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  #hint kbd {
+    display: inline-block; padding: 1px 6px; margin: 0 2px;
+    background: rgba(255,255,255,0.08); border-radius: 3px;
+    color: #ffd56a; font-size: 11px; font-family: inherit;
+  }
+
+  #msg {
+    position: absolute; top: 42%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 40px rgba(255,200,60,0.6), 0 4px 20px rgba(0,0,0,0.8);
+    opacity: 0;
+    transition: opacity 0.25s, transform 0.25s;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  #msg.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  #possession {
+    position: absolute; top: 78px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px; letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.55);
+  }
+  #possession span { color: #ffd56a; font-weight: 700; }
+
+  #end {
+    position: fixed; inset: 0; z-index: 50;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(2,4,10,0.72);
+    backdrop-filter: blur(8px);
+  }
+  #end.show { display: flex; }
+  #end .box {
+    text-align: center; padding: 40px 48px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(8,12,24,0.9);
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  #end h2 { font-size: 28px; margin-bottom: 8px; letter-spacing: 0.06em; }
+  #end .final-score {
+    font-size: 48px; font-weight: 900; color: #ffd56a;
+    margin: 16px 0 24px; font-variant-numeric: tabular-nums;
+  }
+  #end button {
+    pointer-events: auto;
+    border: 1px solid rgba(255,213,106,0.4);
+    background: rgba(255,213,106,0.12);
+    color: #ffd56a; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.12em; padding: 12px 28px;
+    border-radius: 8px; cursor: pointer;
+    font-family: inherit;
+  }
+  #end button:hover { background: rgba(255,213,106,0.22); }
+</style>
+</head>
+<body>
+<div id="start">
+  <div class="panel">
+    <div class="flags">
+      <div class="flag fr" title="França"></div>
+      <div class="vs">VS</div>
+      <div class="flag ma" title="Marrocos"></div>
+    </div>
+    <h1>FRANÇA × MARROCOS</h1>
+    <div class="sub">Arena Noturna · Match 3D</div>
+    <div class="controls">
+      <div><kbd>WASD</kbd> mover jogador</div>
+      <div><kbd>Mouse</kbd> mirar chute</div>
+      <div><kbd>Espaço</kbd> / <kbd>Click</kbd> chutar</div>
+      <div><kbd>Shift</kbd> sprint</div>
+      <div><kbd>Tab</kbd> trocar jogador</div>
+      <div><kbd>R</kbd> reset bola</div>
+    </div>
+    <div class="cta">CLIQUE PARA COMEÇAR</div>
+  </div>
+</div>
+
+<div id="hud">
+  <div id="scoreboard">
+    <div class="team home">
+      <div class="dot fr"></div>
+      <div class="name">FRA</div>
+      <div class="score" id="score-fr">0</div>
+    </div>
+    <div class="mid">
+      <div class="clock" id="clock">3:00</div>
+      <div class="half">1º TEMPO</div>
+    </div>
+    <div class="team away">
+      <div class="dot ma"></div>
+      <div class="name">MAR</div>
+      <div class="score" id="score-ma">0</div>
+    </div>
+  </div>
+  <div id="possession">VOCÊ: <span>FRANÇA</span> · controle o jogador azul destacado</div>
+  <div id="msg"></div>
+  <div id="hint">
+    <kbd>WASD</kbd> mover · <kbd>Mouse</kbd> mirar · <kbd>Espaço</kbd> chutar · <kbd>Tab</kbd> trocar · faça gol no Marrocos
+  </div>
+</div>
+
+<div id="end">
+  <div class="box">
+    <h2 id="end-title">FIM DE JOGO</h2>
+    <div class="final-score" id="end-score">0 — 0</div>
+    <button id="replay">JOGAR DE NOVO</button>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+// ─── Constants ───────────────────────────────────────────────
+const PITCH_W = 68;   // half-width-ish playable (x)
+const PITCH_L = 105;  // length (z)
+const HALF_W = PITCH_W / 2;
+const HALF_L = PITCH_L / 2;
+const GOAL_W = 7.32;
+const GOAL_H = 2.44;
+const GOAL_D = 1.6;
+const MATCH_SEC = 180;
+const TEAM = { FR: 0, MA: 1 };
+
+// ─── DOM ─────────────────────────────────────────────────────
+const elStart = document.getElementById('start');
+const elHud = document.getElementById('hud');
+const elClock = document.getElementById('clock');
+const elScoreFr = document.getElementById('score-fr');
+const elScoreMa = document.getElementById('score-ma');
+const elMsg = document.getElementById('msg');
+const elEnd = document.getElementById('end');
+const elEndTitle = document.getElementById('end-title');
+const elEndScore = document.getElementById('end-score');
+const elReplay = document.getElementById('replay');
+
+// ─── Renderer / Scene ────────────────────────────────────────
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x050810);
+scene.fog = new THREE.FogExp2(0x050810, 0.0045);
+
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.2, 400);
+camera.position.set(0, 28, 48);
+
+// Post: bloom for floodlights & ball glow
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.35, 0.5, 0.82);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+
+// ─── Lighting ────────────────────────────────────────────────
+const hemi = new THREE.HemisphereLight(0x6a8ec8, 0x1a2a18, 0.55);
+scene.add(hemi);
+
+const ambient = new THREE.AmbientLight(0x1a2235, 0.35);
+scene.add(ambient);
+
+// Four stadium floodlights
+const floodPositions = [
+  [-HALF_W - 8, 22, -HALF_L - 6],
+  [ HALF_W + 8, 22, -HALF_L - 6],
+  [-HALF_W - 8, 22,  HALF_L + 6],
+  [ HALF_W + 8, 22,  HALF_L + 6],
+];
+for (const [x, y, z] of floodPositions) {
+  const light = new THREE.SpotLight(0xfff2d6, 120, 120, Math.PI / 4.5, 0.45, 1.1);
+  light.position.set(x, y, z);
+  light.target.position.set(x * 0.2, 0, z * 0.15);
+  light.castShadow = true;
+  light.shadow.mapSize.set(1024, 1024);
+  light.shadow.camera.near = 2;
+  light.shadow.camera.far = 100;
+  light.shadow.bias = -0.0002;
+  scene.add(light);
+  scene.add(light.target);
+
+  // visible lamp glow
+  const lamp = new THREE.Mesh(
+    new THREE.SphereGeometry(0.8, 12, 12),
+    new THREE.MeshBasicMaterial({ color: 0xfff0c0 })
+  );
+  lamp.position.set(x, y, z);
+  scene.add(lamp);
+}
+
+// Fill key light over center
+const key = new THREE.DirectionalLight(0xdde8ff, 0.55);
+key.position.set(12, 40, 18);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = -60;
+key.shadow.camera.right = 60;
+key.shadow.camera.top = 60;
+key.shadow.camera.bottom = -60;
+key.shadow.camera.near = 1;
+key.shadow.camera.far = 120;
+key.shadow.bias = -0.0003;
+scene.add(key);
+
+// ─── Pitch ───────────────────────────────────────────────────
+function makePitch() {
+  const group = new THREE.Group();
+
+  // striped grass via canvas texture
+  const c = document.createElement('canvas');
+  c.width = 512; c.height = 1024;
+  const ctx = c.getContext('2d');
+  const stripes = 12;
+  for (let i = 0; i < stripes; i++) {
+    const t = i / stripes;
+    ctx.fillStyle = i % 2 === 0 ? '#1f7a3a' : '#176b32';
+    ctx.fillRect(0, t * c.height, c.width, c.height / stripes + 1);
+  }
+  // subtle noise
+  const img = ctx.getImageData(0, 0, c.width, c.height);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const n = (Math.random() - 0.5) * 18;
+    img.data[i] = Math.max(0, Math.min(255, img.data[i] + n));
+    img.data[i + 1] = Math.max(0, Math.min(255, img.data[i + 1] + n));
+    img.data[i + 2] = Math.max(0, Math.min(255, img.data[i + 2] + n * 0.5));
+  }
+  ctx.putImageData(img, 0, 0);
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+
+  const grass = new THREE.Mesh(
+    new THREE.PlaneGeometry(PITCH_W + 6, PITCH_L + 6),
+    new THREE.MeshStandardMaterial({
+      map: tex,
+      roughness: 0.92,
+      metalness: 0.02,
+    })
+  );
+  grass.rotation.x = -Math.PI / 2;
+  grass.receiveShadow = true;
+  group.add(grass);
+
+  // outer dirt ring
+  const apron = new THREE.Mesh(
+    new THREE.PlaneGeometry(PITCH_W + 22, PITCH_L + 28),
+    new THREE.MeshStandardMaterial({ color: 0x2a241c, roughness: 1 })
+  );
+  apron.rotation.x = -Math.PI / 2;
+  apron.position.y = -0.02;
+  apron.receiveShadow = true;
+  group.add(apron);
+
+  // markings
+  const lineMat = new THREE.MeshBasicMaterial({ color: 0xf4f6f8 });
+  const lineY = 0.03;
+  function rectLine(w, h, x, z) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), lineMat);
+    m.rotation.x = -Math.PI / 2;
+    m.position.set(x, lineY, z);
+    group.add(m);
+  }
+  // outer boundary
+  const edge = 0.14;
+  rectLine(PITCH_W, edge, 0, -HALF_L);
+  rectLine(PITCH_W, edge, 0, HALF_L);
+  rectLine(edge, PITCH_L, -HALF_W, 0);
+  rectLine(edge, PITCH_L, HALF_W, 0);
+  // halfway
+  rectLine(PITCH_W, edge, 0, 0);
+  // center circle
+  const circleGeo = new THREE.RingGeometry(9.05, 9.2, 64);
+  const circle = new THREE.Mesh(circleGeo, lineMat);
+  circle.rotation.x = -Math.PI / 2;
+  circle.position.y = lineY;
+  group.add(circle);
+  // center spot
+  const spot = new THREE.Mesh(new THREE.CircleGeometry(0.22, 16), lineMat);
+  spot.rotation.x = -Math.PI / 2;
+  spot.position.y = lineY;
+  group.add(spot);
+
+  // penalty areas + goals boxes
+  function boxMark(cx, cz, bw, bd) {
+    // top/bottom
+    rectLine(bw, edge, cx, cz - bd / 2);
+    rectLine(bw, edge, cx, cz + bd / 2);
+    rectLine(edge, bd, cx - bw / 2, cz);
+    rectLine(edge, bd, cx + bw / 2, cz);
+  }
+  boxMark(0, -HALF_L + 16.5 / 2, 40.32, 16.5);
+  boxMark(0, HALF_L - 16.5 / 2, 40.32, 16.5);
+  boxMark(0, -HALF_L + 5.5 / 2, 18.32, 5.5);
+  boxMark(0, HALF_L - 5.5 / 2, 18.32, 5.5);
+
+  // penalty spots
+  for (const z of [-HALF_L + 11, HALF_L - 11]) {
+    const p = new THREE.Mesh(new THREE.CircleGeometry(0.18, 12), lineMat);
+    p.rotation.x = -Math.PI / 2;
+    p.position.set(0, lineY, z);
+    group.add(p);
+  }
+
+  scene.add(group);
+}
+
+function makeGoal(zSign) {
+  const g = new THREE.Group();
+  const postMat = new THREE.MeshStandardMaterial({
+    color: 0xf0f2f5,
+    roughness: 0.35,
+    metalness: 0.55,
+  });
+  const netMat = new THREE.MeshBasicMaterial({
+    color: 0xc8d0dc,
+    transparent: true,
+    opacity: 0.22,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+  });
+
+  const postR = 0.1;
+  const hw = GOAL_W / 2;
+  // posts
+  for (const x of [-hw, hw]) {
+    const post = new THREE.Mesh(
+      new THREE.CylinderGeometry(postR, postR, GOAL_H, 10),
+      postMat
+    );
+    post.position.set(x, GOAL_H / 2, zSign * HALF_L);
+    post.castShadow = true;
+    g.add(post);
+  }
+  // crossbar
+  const bar = new THREE.Mesh(
+    new THREE.CylinderGeometry(postR, postR, GOAL_W + postR * 2, 10),
+    postMat
+  );
+  bar.rotation.z = Math.PI / 2;
+  bar.position.set(0, GOAL_H, zSign * HALF_L);
+  bar.castShadow = true;
+  g.add(bar);
+
+  // net box
+  const netBack = new THREE.Mesh(
+    new THREE.PlaneGeometry(GOAL_W, GOAL_H),
+    netMat
+  );
+  netBack.position.set(0, GOAL_H / 2, zSign * (HALF_L + GOAL_D));
+  g.add(netBack);
+
+  for (const x of [-hw, hw]) {
+    const side = new THREE.Mesh(
+      new THREE.PlaneGeometry(GOAL_D, GOAL_H),
+      netMat
+    );
+    side.rotation.y = Math.PI / 2;
+    side.position.set(x, GOAL_H / 2, zSign * (HALF_L + GOAL_D / 2));
+    g.add(side);
+  }
+  const netTop = new THREE.Mesh(
+    new THREE.PlaneGeometry(GOAL_W, GOAL_D),
+    netMat
+  );
+  netTop.rotation.x = Math.PI / 2;
+  netTop.position.set(0, GOAL_H, zSign * (HALF_L + GOAL_D / 2));
+  g.add(netTop);
+
+  // goal line sensor visual (subtle)
+  const gl = new THREE.Mesh(
+    new THREE.PlaneGeometry(GOAL_W, 0.08),
+    new THREE.MeshBasicMaterial({ color: 0xffffff })
+  );
+  gl.rotation.x = -Math.PI / 2;
+  gl.position.set(0, 0.04, zSign * HALF_L);
+  g.add(gl);
+
+  scene.add(g);
+}
+
+function makeStadium() {
+  // stands blocks
+  const standMat = new THREE.MeshStandardMaterial({
+    color: 0x121820,
+    roughness: 0.85,
+    metalness: 0.1,
+  });
+  const seatColors = [0x1a3a8a, 0xc1272d, 0xffffff, 0x0d5c2e];
+
+  function stand(w, d, h, x, z, rotY = 0) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), standMat);
+    m.position.set(x, h / 2 - 0.5, z);
+    m.rotation.y = rotY;
+    m.castShadow = true;
+    m.receiveShadow = true;
+    scene.add(m);
+
+    // seat texture strip on inner face
+    const seats = new THREE.Mesh(
+      new THREE.PlaneGeometry(w * 0.92, h * 0.7),
+      new THREE.MeshStandardMaterial({
+        color: seatColors[Math.floor(Math.random() * seatColors.length)],
+        roughness: 0.7,
+        metalness: 0.05,
+        emissive: 0x111820,
+        emissiveIntensity: 0.15,
+      })
+    );
+    seats.position.set(x, h * 0.45, z);
+    seats.rotation.y = rotY;
+    // push slightly inward
+    const dir = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), rotY);
+    seats.position.addScaledVector(dir, -d * 0.48);
+    scene.add(seats);
+  }
+
+  const off = 18;
+  stand(PITCH_W + 40, 14, 16, 0, -HALF_L - off);
+  stand(PITCH_W + 40, 14, 16, 0, HALF_L + off, Math.PI);
+  stand(PITCH_L + 20, 12, 14, -HALF_W - off, 0, Math.PI / 2);
+  stand(PITCH_L + 20, 12, 14, HALF_W + off, 0, -Math.PI / 2);
+
+  // light towers
+  const towerMat = new THREE.MeshStandardMaterial({ color: 0x2a3040, metalness: 0.6, roughness: 0.4 });
+  for (const [x, z] of [
+    [-HALF_W - 10, -HALF_L - 8],
+    [HALF_W + 10, -HALF_L - 8],
+    [-HALF_W - 10, HALF_L + 8],
+    [HALF_W + 10, HALF_L + 8],
+  ]) {
+    const tower = new THREE.Mesh(new THREE.BoxGeometry(1.2, 24, 1.2), towerMat);
+    tower.position.set(x, 12, z);
+    tower.castShadow = true;
+    scene.add(tower);
+  }
+
+  // sky dome gradient
+  const skyGeo = new THREE.SphereGeometry(220, 32, 16);
+  const skyMat = new THREE.ShaderMaterial({
+    side: THREE.BackSide,
+    depthWrite: false,
+    uniforms: {},
+    vertexShader: `
+      varying vec3 vPos;
+      void main() {
+        vPos = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vPos;
+      void main() {
+        float h = normalize(vPos).y;
+        vec3 top = vec3(0.02, 0.04, 0.12);
+        vec3 mid = vec3(0.05, 0.08, 0.18);
+        vec3 bot = vec3(0.08, 0.06, 0.1);
+        vec3 col = mix(bot, mid, smoothstep(-0.2, 0.2, h));
+        col = mix(col, top, smoothstep(0.2, 0.9, h));
+        // faint stars
+        float star = step(0.997, fract(sin(dot(vPos.xyz, vec3(12.9898,78.233,45.164))) * 43758.5453));
+        col += star * 0.55 * smoothstep(0.1, 0.8, h);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  });
+  scene.add(new THREE.Mesh(skyGeo, skyMat));
+}
+
+// ─── Ball ────────────────────────────────────────────────────
+function makeBall() {
+  const c = document.createElement('canvas');
+  c.width = 256; c.height = 128;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#f5f5f5';
+  ctx.fillRect(0, 0, 256, 128);
+  ctx.fillStyle = '#111';
+  // simple panel pattern
+  for (let i = 0; i < 8; i++) {
+    ctx.beginPath();
+    const x = (i / 8) * 256;
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x + 16, 64);
+    ctx.lineTo(x, 128);
+    ctx.lineTo(x - 16, 64);
+    ctx.closePath();
+    if (i % 2 === 0) ctx.fill();
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+
+  const mesh = new THREE.Mesh(
+    new THREE.SphereGeometry(0.22, 24, 24),
+    new THREE.MeshStandardMaterial({
+      map: tex,
+      roughness: 0.45,
+      metalness: 0.05,
+    })
+  );
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+
+  // soft glow ring under ball
+  const glow = new THREE.Mesh(
+    new THREE.CircleGeometry(0.35, 20),
+    new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.12,
+      depthWrite: false,
+    })
+  );
+  glow.rotation.x = -Math.PI / 2;
+  scene.add(glow);
+
+  return {
+    mesh,
+    glow,
+    pos: new THREE.Vector3(0, 0.22, 0),
+    vel: new THREE.Vector3(),
+    spin: new THREE.Vector3(),
+    lastTouch: null,
+  };
+}
+
+// ─── Players ─────────────────────────────────────────────────
+function makePlayerMesh(team, isGK = false) {
+  const g = new THREE.Group();
+  const kit = team === TEAM.FR
+    ? { body: 0x1a4fd6, short: 0xffffff, sock: 0x1a4fd6, accent: 0xed2939 }
+    : { body: 0xc1272d, short: 0x0a3d28, sock: 0xc1272d, accent: 0x006233 };
+
+  const skin = 0xd4a574;
+  const bodyMat = new THREE.MeshStandardMaterial({ color: kit.body, roughness: 0.65, metalness: 0.08 });
+  const shortMat = new THREE.MeshStandardMaterial({ color: kit.short, roughness: 0.7 });
+  const skinMat = new THREE.MeshStandardMaterial({ color: skin, roughness: 0.75 });
+  const shoeMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.5, metalness: 0.3 });
+
+  // torso
+  const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.28, 0.45, 4, 10), bodyMat);
+  torso.position.y = 1.15;
+  torso.castShadow = true;
+  g.add(torso);
+
+  // shorts
+  const shorts = new THREE.Mesh(new THREE.CapsuleGeometry(0.26, 0.15, 4, 8), shortMat);
+  shorts.position.y = 0.78;
+  shorts.castShadow = true;
+  g.add(shorts);
+
+  // head
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 12), skinMat);
+  head.position.y = 1.62;
+  head.castShadow = true;
+  g.add(head);
+
+  // legs
+  for (const sx of [-0.12, 0.12]) {
+    const leg = new THREE.Mesh(new THREE.CapsuleGeometry(0.08, 0.35, 3, 6), shortMat);
+    leg.position.set(sx, 0.42, 0);
+    leg.castShadow = true;
+    g.add(leg);
+    const shoe = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.08, 0.24), shoeMat);
+    shoe.position.set(sx, 0.06, 0.04);
+    shoe.castShadow = true;
+    g.add(shoe);
+  }
+
+  // arms
+  for (const sx of [-0.38, 0.38]) {
+    const arm = new THREE.Mesh(new THREE.CapsuleGeometry(0.06, 0.32, 3, 6), bodyMat);
+    arm.position.set(sx, 1.15, 0);
+    arm.castShadow = true;
+    g.add(arm);
+  }
+
+  // GK gloves / band
+  if (isGK) {
+    torso.material = new THREE.MeshStandardMaterial({
+      color: team === TEAM.FR ? 0xffcc00 : 0x1a1a2e,
+      roughness: 0.6,
+    });
+  }
+
+  // number plate glow ring when controlled
+  const ring = new THREE.Mesh(
+    new THREE.RingGeometry(0.45, 0.55, 28),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd56a,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    })
+  );
+  ring.rotation.x = -Math.PI / 2;
+  ring.position.y = 0.04;
+  g.add(ring);
+  g.userData.ring = ring;
+
+  // team flag stripe on chest
+  const stripe = new THREE.Mesh(
+    new THREE.BoxGeometry(0.35, 0.08, 0.05),
+    new THREE.MeshBasicMaterial({ color: kit.accent })
+  );
+  stripe.position.set(0, 1.25, 0.26);
+  g.add(stripe);
+
+  scene.add(g);
+  return g;
+}
+
+function spawnTeams() {
+  const players = [];
+  // 5v5 + GKs for efficiency & clarity
+  // Formation FR (bottom half, defending -z goal): attack toward +z (Morocco goal)
+  const frSlots = [
+    { x: 0, z: -HALF_L + 3, gk: true },
+    { x: -8, z: -18 },
+    { x: 8, z: -18 },
+    { x: -5, z: -6 },
+    { x: 5, z: -6 },
+    { x: 0, z: 4 },
+  ];
+  const maSlots = [
+    { x: 0, z: HALF_L - 3, gk: true },
+    { x: -8, z: 18 },
+    { x: 8, z: 18 },
+    { x: -5, z: 6 },
+    { x: 5, z: 6 },
+    { x: 0, z: -4 },
+  ];
+
+  frSlots.forEach((s, i) => {
+    const mesh = makePlayerMesh(TEAM.FR, !!s.gk);
+    mesh.position.set(s.x, 0, s.z);
+    players.push({
+      team: TEAM.FR,
+      mesh,
+      pos: new THREE.Vector3(s.x, 0, s.z),
+      vel: new THREE.Vector3(),
+      home: new THREE.Vector3(s.x, 0, s.z),
+      isGK: !!s.gk,
+      speed: s.gk ? 7.5 : 9.2,
+      facing: 0,
+      stamina: 1,
+    });
+  });
+  maSlots.forEach((s, i) => {
+    const mesh = makePlayerMesh(TEAM.MA, !!s.gk);
+    mesh.position.set(s.x, 0, s.z);
+    players.push({
+      team: TEAM.MA,
+      mesh,
+      pos: new THREE.Vector3(s.x, 0, s.z),
+      vel: new THREE.Vector3(),
+      home: new THREE.Vector3(s.x, 0, s.z),
+      isGK: !!s.gk,
+      speed: s.gk ? 7.5 : 9.0,
+      facing: Math.PI,
+      stamina: 1,
+    });
+  });
+  return players;
+}
+
+// ─── Particles (kick dust / goal confetti) ────────────────────
+const dustPool = [];
+function spawnDust(pos, color = 0xc8e0a0, n = 10) {
+  for (let i = 0; i < n; i++) {
+    let p = dustPool.find(d => !d.alive);
+    if (!p) {
+      const m = new THREE.Mesh(
+        new THREE.SphereGeometry(0.06, 4, 4),
+        new THREE.MeshBasicMaterial({ color, transparent: true })
+      );
+      scene.add(m);
+      p = { mesh: m, vel: new THREE.Vector3(), life: 0, alive: false };
+      dustPool.push(p);
+    }
+    p.alive = true;
+    p.life = 0.4 + Math.random() * 0.35;
+    p.mesh.position.copy(pos);
+    p.mesh.position.y = 0.1;
+    p.mesh.material.color.setHex(color);
+    p.mesh.material.opacity = 0.8;
+    p.vel.set(
+      (Math.random() - 0.5) * 4,
+      1 + Math.random() * 3,
+      (Math.random() - 0.5) * 4
+    );
+    p.mesh.visible = true;
+  }
+}
+
+function updateDust(dt) {
+  for (const p of dustPool) {
+    if (!p.alive) continue;
+    p.life -= dt;
+    if (p.life <= 0) {
+      p.alive = false;
+      p.mesh.visible = false;
+      continue;
+    }
+    p.vel.y -= 12 * dt;
+    p.mesh.position.addScaledVector(p.vel, dt);
+    p.mesh.material.opacity = Math.max(0, p.life * 1.5);
+  }
+}
+
+// ─── Game state ──────────────────────────────────────────────
+const ball = makeBall();
+const players = spawnTeams();
+makePitch();
+makeGoal(-1);
+makeGoal(1);
+makeStadium();
+
+let running = false;
+let ended = false;
+let timeLeft = MATCH_SEC;
+let score = { fr: 0, ma: 0 };
+let controlledIdx = players.findIndex(p => p.team === TEAM.FR && !p.isGK && p.home.z > -10);
+if (controlledIdx < 0) controlledIdx = 1;
+let kickCooldown = 0;
+let goalLock = 0;
+let msgTimer = 0;
+let aim = new THREE.Vector2(0, 1); // world XZ aim from mouse ray
+
+const keys = Object.create(null);
+const mouse = { x: 0, y: 0, down: false };
+
+// ─── Input ───────────────────────────────────────────────────
+window.addEventListener('keydown', e => {
+  keys[e.code] = true;
+  if (e.code === 'Tab') {
+    e.preventDefault();
+    if (running && !ended) cyclePlayer();
+  }
+  if (e.code === 'KeyR' && running && !ended && goalLock <= 0) {
+    resetBall(0);
+    showMsg('BOLA REINICIADA', 0.9);
+  }
+  if (e.code === 'Space') e.preventDefault();
+});
+window.addEventListener('keyup', e => { keys[e.code] = false; });
+window.addEventListener('mousemove', e => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+window.addEventListener('mousedown', () => { mouse.down = true; });
+window.addEventListener('mouseup', () => { mouse.down = false; });
+
+function cyclePlayer() {
+  // pick FR field player closest to ball (or next)
+  const fr = players
+    .map((p, i) => ({ p, i }))
+    .filter(o => o.p.team === TEAM.FR && !o.p.isGK);
+  fr.sort((a, b) => a.p.pos.distanceTo(ball.pos) - b.p.pos.distanceTo(ball.pos));
+  // if already controlling closest, take next
+  if (fr.length) {
+    const cur = fr.findIndex(o => o.i === controlledIdx);
+    controlledIdx = fr[(cur + 1) % fr.length].i;
+  }
+}
+
+const raycaster = new THREE.Raycaster();
+const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+const aimPoint = new THREE.Vector3();
+
+function updateAim() {
+  raycaster.setFromCamera(mouse, camera);
+  if (raycaster.ray.intersectPlane(groundPlane, aimPoint)) {
+    const ctrl = players[controlledIdx];
+    aim.set(aimPoint.x - ctrl.pos.x, aimPoint.z - ctrl.pos.z);
+    if (aim.lengthSq() < 0.0001) aim.set(0, 1);
+    else aim.normalize();
+  }
+}
+
+// ─── Physics / AI ────────────────────────────────────────────
+function clampToPitch(v, margin = 0.8) {
+  v.x = THREE.MathUtils.clamp(v.x, -HALF_W + margin, HALF_W - margin);
+  v.z = THREE.MathUtils.clamp(v.z, -HALF_L + margin, HALF_L - margin);
+}
+
+function resetBall(kickoffTeam = TEAM.FR) {
+  ball.pos.set(0, 0.22, 0);
+  ball.vel.set(0, 0, 0);
+  ball.spin.set(0, 0, 0);
+  ball.mesh.position.copy(ball.pos);
+  // soft reset players toward home
+  for (const p of players) {
+    p.pos.copy(p.home);
+    p.vel.set(0, 0, 0);
+    p.mesh.position.copy(p.pos);
+  }
+  // controlled attacker slightly off center
+  const att = players.find(p => p.team === TEAM.FR && !p.isGK && p.home.z > 0);
+  if (att) {
+    att.pos.set(0, 0, -2);
+    att.mesh.position.copy(att.pos);
+  }
+}
+
+function showMsg(text, sec = 1.6) {
+  elMsg.textContent = text;
+  elMsg.classList.add('show');
+  msgTimer = sec;
+}
+
+function scoreGoal(team) {
+  if (goalLock > 0) return;
+  goalLock = 3.2;
+  if (team === TEAM.FR) {
+    score.fr++;
+    elScoreFr.textContent = score.fr;
+    showMsg('⚽ GOL DA FRANÇA!', 2.2);
+    spawnDust(ball.pos, 0x3d7cff, 28);
+    spawnDust(ball.pos, 0xffffff, 16);
+  } else {
+    score.ma++;
+    elScoreMa.textContent = score.ma;
+    showMsg('⚽ GOL DO MARROCOS!', 2.2);
+    spawnDust(ball.pos, 0xe03a40, 28);
+    spawnDust(ball.pos, 0x006233, 16);
+  }
+  setTimeout(() => {
+    if (!ended) {
+      resetBall(team === TEAM.FR ? TEAM.MA : TEAM.FR);
+      showMsg('SAÍDA DE BOLA', 1.1);
+    }
+  }, 2200);
+}
+
+function tryKick(player, power, elev = 0.12) {
+  const toBall = new THREE.Vector3().subVectors(ball.pos, player.pos);
+  toBall.y = 0;
+  const dist = toBall.length();
+  if (dist > 1.35) return false;
+
+  // direction: player facing / aim for controlled
+  let dir = new THREE.Vector3();
+  if (player === players[controlledIdx]) {
+    dir.set(aim.x, 0, aim.y).normalize();
+  } else {
+    // kick toward opposing goal
+    const goalZ = player.team === TEAM.FR ? HALF_L : -HALF_L;
+    dir.set(0 - ball.pos.x * 0.15, 0, goalZ - ball.pos.z).normalize();
+    // sometimes pass to teammate
+    if (Math.random() < 0.35) {
+      const mates = players.filter(p => p.team === player.team && p !== player && !p.isGK);
+      if (mates.length) {
+        const t = mates[Math.floor(Math.random() * mates.length)];
+        dir.set(t.pos.x - ball.pos.x, 0, t.pos.z - ball.pos.z).normalize();
+        power *= 0.72;
+      }
+    }
+  }
+
+  const kickPower = power * (0.85 + Math.random() * 0.2);
+  ball.vel.x = dir.x * kickPower;
+  ball.vel.z = dir.z * kickPower;
+  ball.vel.y = elev * kickPower * 0.35;
+  ball.spin.set(-dir.z * 8, 0, dir.x * 8);
+  ball.lastTouch = player.team;
+  spawnDust(ball.pos, 0xd8e8c0, 8);
+  return true;
+}
+
+function updateBall(dt) {
+  // gravity
+  ball.vel.y -= 18 * dt;
+  ball.pos.addScaledVector(ball.vel, dt);
+
+  // ground
+  if (ball.pos.y < 0.22) {
+    ball.pos.y = 0.22;
+    if (ball.vel.y < 0) {
+      ball.vel.y *= -0.42;
+      if (Math.abs(ball.vel.y) < 0.6) ball.vel.y = 0;
+      // friction
+      ball.vel.x *= 0.97;
+      ball.vel.z *= 0.97;
+    }
+  }
+
+  // air drag
+  ball.vel.x *= 1 - 0.35 * dt;
+  ball.vel.z *= 1 - 0.35 * dt;
+
+  // pitch bounds bounce (except goal mouths)
+  const inGoalMouth = Math.abs(ball.pos.x) < GOAL_W / 2 - 0.1;
+
+  if (ball.pos.x < -HALF_W + 0.22) {
+    ball.pos.x = -HALF_W + 0.22;
+    ball.vel.x *= -0.55;
+  } else if (ball.pos.x > HALF_W - 0.22) {
+    ball.pos.x = HALF_W - 0.22;
+    ball.vel.x *= -0.55;
+  }
+
+  // end lines / goals
+  if (ball.pos.z < -HALF_L) {
+    if (inGoalMouth && ball.pos.y < GOAL_H && ball.pos.z > -HALF_L - GOAL_D - 0.3) {
+      // potential goal for Morocco (attacking -z)
+      if (ball.pos.z < -HALF_L - 0.15) scoreGoal(TEAM.MA);
+    } else {
+      ball.pos.z = -HALF_L + 0.22;
+      ball.vel.z *= -0.45;
+    }
+  } else if (ball.pos.z > HALF_L) {
+    if (inGoalMouth && ball.pos.y < GOAL_H && ball.pos.z < HALF_L + GOAL_D + 0.3) {
+      if (ball.pos.z > HALF_L + 0.15) scoreGoal(TEAM.FR);
+    } else {
+      ball.pos.z = HALF_L - 0.22;
+      ball.vel.z *= -0.45;
+    }
+  }
+
+  // posts collision rough
+  for (const zSign of [-1, 1]) {
+    for (const x of [-GOAL_W / 2, GOAL_W / 2]) {
+      const px = x, pz = zSign * HALF_L;
+      const dx = ball.pos.x - px;
+      const dz = ball.pos.z - pz;
+      const d = Math.hypot(dx, dz);
+      if (d < 0.32 && ball.pos.y < GOAL_H + 0.2) {
+        const nx = dx / (d || 1), nz = dz / (d || 1);
+        ball.pos.x = px + nx * 0.32;
+        ball.pos.z = pz + nz * 0.32;
+        const vn = ball.vel.x * nx + ball.vel.z * nz;
+        if (vn < 0) {
+          ball.vel.x -= 1.6 * vn * nx;
+          ball.vel.z -= 1.6 * vn * nz;
+        }
+      }
+    }
+  }
+
+  ball.mesh.position.copy(ball.pos);
+  // spin visual
+  if (ball.spin.lengthSq() > 0.01) {
+    ball.mesh.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), ball.spin.x * dt * 0.15);
+    ball.mesh.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), ball.spin.z * dt * 0.15);
+    ball.spin.multiplyScalar(1 - 2 * dt);
+  }
+  // roll from velocity
+  const spd = Math.hypot(ball.vel.x, ball.vel.z);
+  if (spd > 0.1 && ball.pos.y <= 0.23) {
+    const axis = new THREE.Vector3(ball.vel.z, 0, -ball.vel.x).normalize();
+    ball.mesh.rotateOnWorldAxis(axis, spd * dt / 0.22);
+  }
+
+  ball.glow.position.set(ball.pos.x, 0.03, ball.pos.z);
+  ball.glow.material.opacity = 0.08 + Math.min(0.2, spd * 0.02);
+}
+
+function updateControlled(dt) {
+  const p = players[controlledIdx];
+  updateAim();
+
+  let mx = 0, mz = 0;
+  if (keys['KeyW'] || keys['ArrowUp']) mz -= 1;
+  if (keys['KeyS'] || keys['ArrowDown']) mz += 1;
+  if (keys['KeyA'] || keys['ArrowLeft']) mx -= 1;
+  if (keys['KeyD'] || keys['ArrowRight']) mx += 1;
+
+  // camera-relative-ish: world axes (pitch aligned)
+  const sprint = keys['ShiftLeft'] || keys['ShiftRight'];
+  const speed = p.speed * (sprint ? 1.35 : 1) * (0.7 + 0.3 * p.stamina);
+  if (sprint) p.stamina = Math.max(0.35, p.stamina - 0.18 * dt);
+  else p.stamina = Math.min(1, p.stamina + 0.12 * dt);
+
+  if (mx || mz) {
+    const len = Math.hypot(mx, mz) || 1;
+    mx /= len; mz /= len;
+    p.vel.x = mx * speed;
+    p.vel.z = mz * speed;
+    p.facing = Math.atan2(mx, mz);
+  } else {
+    p.vel.x *= 1 - 10 * dt;
+    p.vel.z *= 1 - 10 * dt;
+  }
+
+  p.pos.x += p.vel.x * dt;
+  p.pos.z += p.vel.z * dt;
+  clampToPitch(p.pos);
+  p.mesh.position.copy(p.pos);
+  p.mesh.rotation.y = p.facing;
+
+  // kick
+  kickCooldown = Math.max(0, kickCooldown - dt);
+  if (kickCooldown <= 0 && (keys['Space'] || mouse.down) && goalLock <= 0) {
+    const power = sprint ? 22 : 16.5;
+    if (tryKick(p, power, sprint ? 0.22 : 0.1)) {
+      kickCooldown = 0.35;
+    }
+  }
+}
+
+function updateAI(dt) {
+  for (let i = 0; i < players.length; i++) {
+    if (i === controlledIdx) continue;
+    const p = players[i];
+    const toBall = new THREE.Vector3().subVectors(ball.pos, p.pos);
+    toBall.y = 0;
+    const distBall = toBall.length();
+
+    let target = new THREE.Vector3();
+    const attackZ = p.team === TEAM.FR ? 1 : -1;
+    const ownGoalZ = p.team === TEAM.FR ? -HALF_L : HALF_L;
+
+    if (p.isGK) {
+      // stay on line, track ball x
+      target.set(
+        THREE.MathUtils.clamp(ball.pos.x, -GOAL_W * 0.55, GOAL_W * 0.55),
+        0,
+        ownGoalZ + (p.team === TEAM.FR ? 2.2 : -2.2)
+      );
+      // rush if ball close in box
+      if (distBall < 10 && Math.sign(ball.pos.z - ownGoalZ) === (p.team === TEAM.FR ? 1 : -1)) {
+        target.lerp(ball.pos, 0.45);
+        target.z = THREE.MathUtils.clamp(
+          target.z,
+          p.team === TEAM.FR ? -HALF_L + 0.5 : HALF_L - 12,
+          p.team === TEAM.FR ? -HALF_L + 12 : HALF_L - 0.5
+        );
+      }
+    } else {
+      // role: if closest on team to ball → chase, else support / home
+      const teammates = players.filter(t => t.team === p.team && !t.isGK);
+      const ranked = teammates.slice().sort((a, b) => a.pos.distanceTo(ball.pos) - b.pos.distanceTo(ball.pos));
+      const isChaser = ranked[0] === p;
+      const isSecond = ranked[1] === p;
+
+      if (isChaser) {
+        // intercept
+        const predict = ball.pos.clone().addScaledVector(ball.vel, 0.25);
+        target.copy(predict);
+      } else if (isSecond) {
+        target.set(
+          ball.pos.x * 0.5 + p.home.x * 0.3,
+          0,
+          ball.pos.z + attackZ * 8
+        );
+      } else {
+        // hold formation, slight drift toward ball
+        target.copy(p.home);
+        target.x += (ball.pos.x - p.home.x) * 0.25;
+        target.z += (ball.pos.z - p.home.z) * 0.15;
+      }
+
+      // avoid packing controlled player space slightly
+      if (p.team === TEAM.FR) {
+        const c = players[controlledIdx];
+        if (c && p.pos.distanceTo(c.pos) < 2.5) {
+          target.x += (p.pos.x - c.pos.x) * 0.8;
+        }
+      }
+    }
+
+    const toT = new THREE.Vector3().subVectors(target, p.pos);
+    toT.y = 0;
+    const d = toT.length();
+    const maxSpd = p.speed * (0.75 + 0.25 * Math.random() * 0.01 + (distBall < 6 ? 0.15 : 0));
+    if (d > 0.35) {
+      toT.normalize();
+      p.vel.x = toT.x * maxSpd;
+      p.vel.z = toT.z * maxSpd;
+      p.facing = Math.atan2(toT.x, toT.z);
+    } else {
+      p.vel.x *= 1 - 8 * dt;
+      p.vel.z *= 1 - 8 * dt;
+    }
+
+    p.pos.x += p.vel.x * dt;
+    p.pos.z += p.vel.z * dt;
+    clampToPitch(p.pos, p.isGK ? 0.5 : 0.8);
+    p.mesh.position.copy(p.pos);
+    p.mesh.rotation.y = p.facing;
+
+    // AI kick / tackle
+    if (goalLock <= 0 && distBall < 1.2 && Math.random() < (p.isGK ? 0.08 : 0.04)) {
+      tryKick(p, p.isGK ? 14 : 12 + Math.random() * 6, p.isGK ? 0.08 : 0.12);
+    }
+  }
+
+  // simple player-player separation
+  for (let i = 0; i < players.length; i++) {
+    for (let j = i + 1; j < players.length; j++) {
+      const a = players[i], b = players[j];
+      const dx = b.pos.x - a.pos.x;
+      const dz = b.pos.z - a.pos.z;
+      const d2 = dx * dx + dz * dz;
+      const min = 0.85;
+      if (d2 < min * min && d2 > 1e-6) {
+        const d = Math.sqrt(d2);
+        const push = (min - d) * 0.5;
+        const nx = dx / d, nz = dz / d;
+        a.pos.x -= nx * push; a.pos.z -= nz * push;
+        b.pos.x += nx * push; b.pos.z += nz * push;
+        clampToPitch(a.pos); clampToPitch(b.pos);
+        a.mesh.position.copy(a.pos);
+        b.mesh.position.copy(b.pos);
+      }
+    }
+  }
+
+  // ball-player soft collision (dribble carry)
+  for (const p of players) {
+    const dx = ball.pos.x - p.pos.x;
+    const dz = ball.pos.z - p.pos.z;
+    const d = Math.hypot(dx, dz);
+    const rad = 0.55;
+    if (d < rad && ball.pos.y < 1.1) {
+      const nx = dx / (d || 1), nz = dz / (d || 1);
+      // push ball out
+      ball.pos.x = p.pos.x + nx * rad;
+      ball.pos.z = p.pos.z + nz * rad;
+      // transfer some velocity (dribble)
+      ball.vel.x += p.vel.x * 0.35 + nx * 1.2;
+      ball.vel.z += p.vel.z * 0.35 + nz * 1.2;
+      ball.lastTouch = p.team;
+    }
+  }
+}
+
+function updateRings() {
+  for (let i = 0; i < players.length; i++) {
+    const ring = players[i].mesh.userData.ring;
+    const on = i === controlledIdx;
+    ring.material.opacity = on ? 0.85 : 0;
+    if (on) {
+      ring.rotation.z += 0.03;
+      ring.scale.setScalar(1 + Math.sin(performance.now() * 0.008) * 0.08);
+    }
+  }
+}
+
+// ─── Camera ──────────────────────────────────────────────────
+const camTarget = new THREE.Vector3();
+const camPos = new THREE.Vector3(0, 28, 42);
+
+function updateCamera(dt) {
+  // broadcast style: follow ball with look-ahead
+  const look = ball.pos.clone();
+  look.y = 0;
+  look.x += ball.vel.x * 0.15;
+  look.z += ball.vel.z * 0.15;
+
+  // offset behind play toward midfield side
+  const side = ball.pos.z * 0.08;
+  const desired = new THREE.Vector3(
+    look.x * 0.35 + side,
+    18 + Math.min(8, Math.hypot(ball.vel.x, ball.vel.z) * 0.15),
+    look.z + 28
+  );
+  // keep somewhat centered
+  desired.x = THREE.MathUtils.clamp(desired.x, -25, 25);
+  desired.z = THREE.MathUtils.clamp(desired.z, -HALF_L + 15, HALF_L + 35);
+
+  camPos.lerp(desired, 1 - Math.pow(0.001, dt));
+  camTarget.lerp(look, 1 - Math.pow(0.0001, dt));
+  camera.position.copy(camPos);
+  camera.lookAt(camTarget.x, 0.5, camTarget.z);
+}
+
+// ─── Match flow ──────────────────────────────────────────────
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+function endMatch() {
+  ended = true;
+  running = false;
+  elEndScore.textContent = `${score.fr} — ${score.ma}`;
+  if (score.fr > score.ma) elEndTitle.textContent = 'VITÓRIA DA FRANÇA 🇫🇷';
+  else if (score.ma > score.fr) elEndTitle.textContent = 'VITÓRIA DO MARROCOS 🇲🇦';
+  else elEndTitle.textContent = 'EMPATE';
+  elEnd.classList.add('show');
+}
+
+function startMatch() {
+  elStart.style.display = 'none';
+  elHud.classList.add('on');
+  elEnd.classList.remove('show');
+  running = true;
+  ended = false;
+  timeLeft = MATCH_SEC;
+  score.fr = 0; score.ma = 0;
+  elScoreFr.textContent = '0';
+  elScoreMa.textContent = '0';
+  goalLock = 0;
+  resetBall();
+  showMsg('APITO INICIAL', 1.4);
+}
+
+elStart.addEventListener('click', startMatch);
+elReplay.addEventListener('click', () => {
+  elEnd.classList.remove('show');
+  startMatch();
+});
+
+// ─── Resize ──────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
+  bloom.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ─── Loop ────────────────────────────────────────────────────
+let last = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame);
+  const dt = Math.min(0.033, (now - last) / 1000);
+  last = now;
+
+  if (running && !ended) {
+    timeLeft -= dt;
+    if (timeLeft <= 0) {
+      timeLeft = 0;
+      endMatch();
+    }
+    elClock.textContent = formatTime(timeLeft);
+
+    if (goalLock > 0) goalLock -= dt;
+
+    if (msgTimer > 0) {
+      msgTimer -= dt;
+      if (msgTimer <= 0) elMsg.classList.remove('show');
+    }
+
+    if (goalLock <= 0) {
+      updateControlled(dt);
+      updateAI(dt);
+      updateBall(dt);
+    } else {
+      updateBall(dt * 0.4);
+    }
+    updateRings();
+    updateDust(dt);
+    updateCamera(dt);
+  } else if (!running && !ended) {
+    // idle orbit on menu
+    const t = now * 0.00015;
+    camera.position.set(Math.sin(t) * 40, 22, Math.cos(t) * 40);
+    camera.lookAt(0, 0, 0);
+  } else {
+    updateCamera(dt);
+    updateDust(dt);
+  }
+
+  composer.render();
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

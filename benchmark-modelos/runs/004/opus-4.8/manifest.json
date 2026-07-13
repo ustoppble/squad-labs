@@ -1,0 +1,13 @@
+{
+  "test": "004",
+  "model": "opus-4.8",
+  "source_file": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/004-48/index.html",
+  "bytes": 25379,
+  "lines": 704,
+  "libs": ["three.js"],
+  "external_requests": true,
+  "modified_date": "2026-06-30T15:47:55",
+  "cost_usd": 1.61,
+  "tokens_in": 118000,
+  "tokens_out": 29000
+}

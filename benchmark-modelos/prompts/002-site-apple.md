@@ -1,0 +1,3 @@
+# Teste 002 — UX: Recriar o site da Apple
+
+Crie um único arquivo HTML que recrie a página inicial da Apple (apple.com). Navbar fixa no topo com o menu da Apple (logo, produtos, busca, sacola). Hero de produto em destaque: imagem grande centralizada, título grande, subtítulo e dois links ("Saiba mais ›" e "Comprar ›"). Abaixo, um grid de seções de produto alternando fundo claro e escuro, cada uma com título, subtítulo e CTAs centralizados. Tipografia, pesos e espaçamento fiéis à Apple (San Francisco / -apple-system), responsivo desktop e mobile, animações sutis no hover e ao rolar. Pode usar gradientes ou SVG como placeholder das imagens de produto. Não referencie nenhum outro arquivo.

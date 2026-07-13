@@ -1,0 +1,7 @@
+{
+  "frameCount": 121,
+  "pattern": "/hero/frames/%04d.jpg",
+  "fps": 24,
+  "width": 1764,
+  "height": 1172
+}

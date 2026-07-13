@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agência Zero — Crie Sites Profissionais com IA e Entregue para Clientes Reais</title>
+  <meta name="description" content="O treinamento prático que te leva do primeiro prompt ao primeiro pagamento. Crie sites profissionais com IA, aprenda a precificar, fechar e entregar — sem saber programar." />
+
+  <meta property="og:title" content="Agência Zero — Do primeiro prompt ao primeiro pagamento" />
+  <meta property="og:description" content="Treinamento premium de criação de sites com IA. R$ 4.997 ou 12x R$ 499. Garantia de 30 dias." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#hero">Pular para o conteúdo</a>
+  <div class="progress-bar" id="progress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ═══════════════ NAV ═══════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#hero" aria-label="Agência Zero — início">
+        Agência<span class="brand-mark">Zero</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <ul class="nav-links">
+          <li><a href="#mecanismo">Método</a></li>
+          <li><a href="#modulos">Módulos</a></li>
+          <li><a href="#instrutor">Instrutor</a></li>
+          <li><a href="#oferta">Investimento</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <div class="nav-right">
+        <span class="nav-deadline" aria-hidden="true">
+          Turma fecha em <b data-countdown-compact>—</b>
+        </span>
+        <a class="btn btn-primary btn-sm" href="#oferta" data-cta="nav">Garantir vaga <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero" id="hero">
+      <!-- Mídia gerada (própria): ./assets/hero.png — fallback: cor sólida + composição tipográfica -->
+      <div class="hero-media" role="img" aria-label="Composição visual de páginas e sites criados com IA"></div>
+      <div class="container hero-inner">
+        <span class="label eyebrow">Treinamento premium · Criação de sites com IA</span>
+        <h1 class="display-1">
+          <span class="line"><span>Crie Sites Profissionais com IA.</span></span>
+          <span class="line"><span>Entregue para Clientes Reais.</span></span>
+          <span class="line accent-line"><span>Sem Saber Programar.</span></span>
+        </h1>
+        <p class="hero-sub body-lg">
+          O Agência Zero é o treinamento prático que te leva do primeiro prompt ao primeiro
+          pagamento — com o mesmo processo que eu uso nas minhas próprias entregas.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="#oferta" data-cta="hero">Quero Garantir Minha Vaga <span class="arrow">→</span></a>
+          <a class="btn btn-secondary btn-lg" href="#modulos">Ver o que está incluído</a>
+        </div>
+        <div class="hero-micro">
+          <!-- TO CONFIRM: número de vagas da turma -->
+          <span><span class="hl">40 vagas</span> disponíveis</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>Turma fecha em <span class="hl" data-countdown-compact>—</span></span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>Garantia de 30 dias</span>
+        </div>
+        <div class="hero-proof">
+          <div class="stat">
+            <!-- PLACEHOLDER: número real de alunos da audiência do Guilherme -->
+            <b>1.200+</b>
+            <span>Alunos na base</span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <div class="stat">
+            <b><span class="stars" aria-hidden="true">★★★★★</span></b>
+            <span>Avaliação 4.9/5</span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <div class="stat">
+            <b>30 dias</b>
+            <span>Garantia incondicional</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SOCIAL PROOF TICKER ═══════════════ -->
+    <!-- PLACEHOLDER: substituir por nomes/logos reais de alunos após o lançamento -->
+    <section class="ticker" aria-label="Alunos da comunidade">
+      <p class="ticker-label label">Quem já constrói com o método</p>
+      <div class="ticker-track" aria-hidden="true">
+        <span class="ticker-item"><span class="who">Marina R.</span> · primeiro site no ar</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Diego L.</span> · portfólio publicado</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Camila F.</span> · 1º cliente fechado</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Rafael M.</span> · landing entregue</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Beatriz S.</span> · preço reajustado</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Thiago A.</span> · 3 projetos ativos</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Larissa P.</span> · indicação recebida</span>
+        <!-- duplicado para loop contínuo -->
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Marina R.</span> · primeiro site no ar</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Diego L.</span> · portfólio publicado</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Camila F.</span> · 1º cliente fechado</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Rafael M.</span> · landing entregue</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Beatriz S.</span> · preço reajustado</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Thiago A.</span> · 3 projetos ativos</span>
+        <span class="ticker-item"><span class="sep">/</span> <span class="who">Larissa P.</span> · indicação recebida</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════ DOR / IDENTIFICAÇÃO ═══════════════ -->
+    <section class="section section--surface" id="dor">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">01 — O problema</span>
+          <h2 class="display-2" style="margin-top:var(--space-4)">Você já sabe que dá para fazer.<br>O problema é outro.</h2>
+        </div>
+        <div class="dor-body reveal">
+          <p class="lead">
+            Você acompanha as aulas, vê o que é possível com IA, e pensa: <span class="emph">"eu consigo fazer isso"</span>.
+            E consegue mesmo. Só que na hora de transformar esse conhecimento em algo concreto — um projeto para
+            mostrar, um cliente para cobrar, um processo que funciona de verdade — trava.
+          </p>
+          <p>Não é falta de talento. É falta de um caminho.</p>
+          <ul class="dor-list">
+            <li>
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </span>
+              <span>Você não sabe quanto cobrar, então não cobra nada.</span>
+            </li>
+            <li>
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </span>
+              <span>Você não sabe como apresentar o serviço, então não apresenta.</span>
+            </li>
+            <li>
+              <span class="ic" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span>Você não sabe o que acontece depois que o cliente aprova, então evita chegar nessa hora.</span>
+            </li>
+          </ul>
+          <p>E enquanto isso, o conhecimento fica parado — sendo consumido em vez de gerar renda.</p>
+          <p class="dor-close">O Agência Zero existe para fechar essa lacuna.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ MECANISMO ÚNICO ═══════════════ -->
+    <section class="section metodo" id="mecanismo">
+      <!-- Mídia gerada (própria): ./assets/metodo.png — atmosférica, com fallback -->
+      <div class="metodo-media" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">02 — O método</span>
+          <h2 class="display-2" style="margin-top:var(--space-4)">
+            O Método Vibe-to-Client: três etapas que transformam conhecimento em receita
+          </h2>
+          <p class="body-lg">
+            Não é sobre saber mais ferramentas. É sobre ter um processo que você repete com cada cliente.
+          </p>
+        </div>
+        <div class="steps card-group">
+          <div class="step">
+            <span class="step-num">ETAPA 01</span>
+            <h3 class="heading-3">Criar</h3>
+            <p>
+              Você aprende a construir sites e landing pages profissionais usando IA do início ao fim.
+              Não só "gerar código" — mas estruturar, revisar, ajustar e entregar algo que realmente
+              funciona. Aqui você termina com projetos reais no portfólio.
+            </p>
+            <span class="step-arrow" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+          <div class="step">
+            <span class="step-num">ETAPA 02</span>
+            <h3 class="heading-3">Posicionar</h3>
+            <p>
+              Você aprende quanto cobrar (e por quê cobrar esse valor faz sentido), como apresentar o
+              serviço para que o cliente entenda o que está comprando, e como responder as objeções mais
+              comuns sem travar.
+            </p>
+            <span class="step-arrow" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+          <div class="step">
+            <span class="step-num">ETAPA 03</span>
+            <h3 class="heading-3">Entregar</h3>
+            <p>
+              Você aprende o processo de entrega — revisões, aprovações, o que documentar, como manter o
+              cliente satisfeito e como transformar um projeto em indicações futuras.
+            </p>
+          </div>
+        </div>
+        <div class="metodo-cta reveal">
+          <a class="btn btn-primary btn-lg" href="#oferta" data-cta="metodo">Quero aprender o processo completo <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ MÓDULOS ═══════════════ -->
+    <section class="section section--surface" id="modulos">
+      <div class="container">
+        <div class="mods-intro">
+          <div class="section-head reveal" style="margin-bottom:0">
+            <span class="section-num">03 — O conteúdo</span>
+            <h2 class="display-2" style="margin-top:var(--space-4)">O que está dentro do Agência Zero</h2>
+            <p class="body-lg">
+              Seis módulos em sequência. Cada um termina com um entregável prático — não exercício, entregável.
+            </p>
+          </div>
+          <div class="mods-mockup reveal" aria-hidden="false">
+            <!-- Mídia gerada (própria): ./assets/mockup-paginas.png — mosaico de páginas do método -->
+            <img src="./assets/mockup-paginas.png" alt="Mosaico de páginas e sites criados com o método Agência Zero" loading="lazy" onerror="this.style.display='none'" />
+            <span class="ph">Mosaico de páginas<br>criadas no método</span>
+          </div>
+        </div>
+
+        <div class="modules card-group">
+          <article class="card-module">
+            <div class="m-top"><span class="m-num">MÓDULO 01</span></div>
+            <h3>Fundamentos do Vibe Coding</h3>
+            <p class="m-tag">O ponto de partida certo para quem quer profissionalizar</p>
+            <p class="m-body">
+              Como configurar seu ambiente de trabalho do jeito que um profissional configura. As ferramentas
+              de IA que realmente importam (e as que só enchem tempo). Como ler o output da IA de forma crítica —
+              para não entregar lixo embrulhado em código bonito. Sua primeira página completa começa aqui.
+            </p>
+            <div class="m-deliver">
+              <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>No final: <b>sua primeira página funcional, estruturada e versionada.</b></span>
+            </div>
+          </article>
+
+          <article class="card-module">
+            <div class="m-top"><span class="m-num">MÓDULO 02</span></div>
+            <h3>Design que Funciona: UI/UX com IA</h3>
+            <p class="m-tag">Páginas que parecem feitas por um designer sênior</p>
+            <p class="m-body">
+              Princípios de design que você aplica sem precisar estudar design por dois anos. Como usar IA para
+              gerar layouts, escolher paletas e criar hierarquia visual. A diferença entre uma página que "parece
+              amadora" e uma que "parece agência". Responsividade sem retrabalho.
+            </p>
+            <div class="m-deliver">
+              <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>No final: <b>um template visual que você reutiliza em todos os projetos.</b></span>
+            </div>
+          </article>
+
+          <article class="card-module">
+            <div class="m-top"><span class="m-num">MÓDULO 03</span></div>
+            <h3>Do Protótipo ao Deploy</h3>
+            <p class="m-tag">Terminar de verdade, não "quase terminar"</p>
+            <p class="m-body">
+              Como sair do "funcionando na minha máquina" para "funcionando no ar, com domínio, acessível para o
+              cliente". Onde hospedar (e o que não usar). Como testar antes de entregar. Como lidar com erros que
+              a IA não resolve sozinha. Deploy em menos de 30 minutos.
+            </p>
+            <div class="m-deliver">
+              <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>No final: <b>um projeto publicado, com domínio, pronto para mostrar.</b></span>
+            </div>
+          </article>
+
+          <article class="card-module">
+            <div class="m-top"><span class="m-num">MÓDULO 04</span></div>
+            <h3>Precificação e Posicionamento Premium</h3>
+            <p class="m-tag">Cobrar certo não é arrogância. É respeito pelo seu trabalho.</p>
+            <p class="m-body">
+              Por que cobrar pouco atrai clientes problemáticos e afasta os bons. Como calcular seu valor mínimo
+              de projeto. Três estratégias de precificação — qual usar em cada situação. Como montar um portfólio
+              que justifica o preço antes do cliente perguntar.
+            </p>
+            <div class="m-deliver">
+              <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>No final: <b>sua tabela de preços e seu posicionamento escrito.</b></span>
+            </div>
+          </article>
+
+          <article class="card-module">
+            <div class="m-top"><span class="m-num">MÓDULO 05</span></div>
+            <h3>Como Fechar Clientes Sem Precisar "Vender"</h3>
+            <p class="m-tag">A parte que a maioria ignora e depois se pergunta por que não tem clientes</p>
+            <p class="m-body">
+              Onde encontrar seus primeiros clientes (e não é no LinkedIn enviando mensagem fria para 200 pessoas).
+              Como fazer a primeira conversa de forma que o cliente entenda o valor antes de perguntar o preço.
+              O que responder para "tá caro", "deixa eu pensar" e "meu sobrinho faz de graça".
+            </p>
+            <div class="m-deliver">
+              <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>No final: <b>seu script de prospecção e fechamento personalizado.</b></span>
+            </div>
+          </article>
+
+          <article class="card-module">
+            <div class="m-top"><span class="m-num">MÓDULO 06</span></div>
+            <h3>Entrega, Revisão e Retenção de Clientes</h3>
+            <p class="m-tag">O que acontece depois do "fechou" determina se você tem indicações ou dor de cabeça</p>
+            <p class="m-body">
+              Como conduzir o processo de revisão sem entrar em um loop infinito de mudanças. O que documentar e
+              entregar no final do projeto. Como pedir indicação no momento certo, do jeito certo. Como manter o
+              cliente como fonte de receita recorrente.
+            </p>
+            <div class="m-deliver">
+              <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>No final: <b>seu processo de entrega documentado, pronto para o próximo cliente.</b></span>
+            </div>
+          </article>
+        </div>
+
+        <div class="mods-cta reveal">
+          <a class="btn btn-primary btn-lg" href="#oferta" data-cta="modulos">Quero acesso aos 6 módulos <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ PARA QUEM É / NÃO É ═══════════════ -->
+    <section class="section" id="para-quem">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">04 — Fit</span>
+          <h2 class="display-2" style="margin-top:var(--space-4)">Para quem o Agência Zero foi feito</h2>
+        </div>
+        <div class="audience">
+          <div class="aud-col is-for reveal">
+            <h3><span class="badge" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </span> É para você se…</h3>
+            <ul class="aud-list">
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span> Você já acompanha as aulas e quer transformar o que aprendeu em renda real.</li>
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span> Você quer uma fonte de receita extra sem depender de emprego fixo ou horário rígido.</li>
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span> Você quer transitar para uma área criativa e técnica sem anos estudando programação do zero.</li>
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span> Você tem tempo para se dedicar e quer um processo claro — não teoria solta.</li>
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></span> Você está disposto a entregar projetos reais, receber feedback e ajustar.</li>
+            </ul>
+          </div>
+          <div class="aud-col is-not reveal">
+            <h3><span class="badge" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </span> Não é para você se…</h3>
+            <ul class="aud-list">
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Você quer um atalho mágico que não exige trabalho — não existe e não vendemos isso.</li>
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Você não tem interesse em trabalhar com clientes e só quer projetos pessoais.</li>
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Você espera resultados financeiros antes de terminar o treinamento.</li>
+              <!-- TO CONFIRM: carga horária semanal estimada -->
+              <li><span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Você não tem disponibilidade de ~5 horas por semana para as aulas e a prática.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ DEPOIMENTOS ═══════════════ -->
+    <section class="section section--surface" id="depoimentos">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">05 — Prova social</span>
+          <h2 class="display-2" style="margin-top:var(--space-4)">O que os alunos estão dizendo</h2>
+          <!-- [PLACEHOLDER: depoimentos de exemplo — substituir pelos depoimentos reais dos alunos (vídeo preferencial) após o lançamento] -->
+        </div>
+        <!-- [PLACEHOLDER: nomes, cidades e números abaixo são exemplos plausíveis — trocar pelos dados reais dos alunos após o lançamento] -->
+        <div class="testimonials card-group">
+          <figure class="card-testimonial">
+            <blockquote class="quote">Entrei sem saber nada de código. Em 6 semanas entreguei meu primeiro projeto para uma clínica local e cobrei R$ 2.500. O processo do Módulo 5 foi o que mudou tudo — eu sabia criar, mas não sabia cobrar.</blockquote>
+            <figcaption class="who">
+              <span class="avatar" aria-hidden="true">M</span>
+              <span><span class="n">Marina Ribeiro</span><span class="r">São Paulo, SP · ex-analista administrativa</span></span>
+            </figcaption>
+          </figure>
+          <figure class="card-testimonial">
+            <blockquote class="quote">Tentei aprender desenvolvimento web por conta própria por meses e travei sempre no mesmo lugar. No Agência Zero, em 4 semanas, já tinha meu portfólio no ar e já tinha conversado com 5 potenciais clientes.</blockquote>
+            <figcaption class="who">
+              <span class="avatar" aria-hidden="true">D</span>
+              <span><span class="n">Diego Lemos</span><span class="r">Curitiba, PR · ex-vendedor</span></span>
+            </figcaption>
+          </figure>
+          <figure class="card-testimonial">
+            <blockquote class="quote">O que me surpreendeu foi a parte de entrega. Eu nunca tinha pensado que o pós-fechamento era tão importante quanto o fechamento em si. Perdi menos revisões, tive menos retrabalho e o cliente ficou mais satisfeito.</blockquote>
+            <figcaption class="who">
+              <span class="avatar" aria-hidden="true">C</span>
+              <span><span class="n">Camila Ferraz</span><span class="r">Belo Horizonte, MG · designer gráfica</span></span>
+            </figcaption>
+          </figure>
+          <figure class="card-testimonial">
+            <blockquote class="quote">Já fazia alguns projetos antes, mas cobrava barato porque não sabia posicionar o serviço. Depois do Módulo 4, reajustei meu valor mínimo e consegui fechar um projeto com 3x o que cobrava antes.</blockquote>
+            <figcaption class="who">
+              <span class="avatar" aria-hidden="true">R</span>
+              <span><span class="n">Rafael Menezes</span><span class="r">Porto Alegre, RS · freelancer</span></span>
+            </figcaption>
+          </figure>
+          <figure class="card-testimonial">
+            <blockquote class="quote">A comunidade faz diferença. Quando trava em algum projeto, tem sempre alguém que já passou pelo mesmo problema. E as sessões ao vivo do Guilherme são o diferencial que nenhum outro curso tem.</blockquote>
+            <figcaption class="who">
+              <span class="avatar" aria-hidden="true">B</span>
+              <span><span class="n">Beatriz Souza</span><span class="r">Recife, PE · social media</span></span>
+            </figcaption>
+          </figure>
+          <figure class="card-testimonial">
+            <blockquote class="quote">Tenho 47 anos e achei que era tarde para entrar em tecnologia. O Agência Zero mostrou que não preciso ser programador — preciso saber usar as ferramentas certas do jeito certo. Em 3 meses, já tenho 4 clientes.</blockquote>
+            <figcaption class="who">
+              <span class="avatar" aria-hidden="true">T</span>
+              <span><span class="n">Thiago Alves</span><span class="r">Florianópolis, SC · 47 anos</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ INSTRUTOR ═══════════════ -->
+    <section class="section" id="instrutor">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">06 — Quem ensina</span>
+          <h2 class="display-2" style="margin-top:var(--space-4)">Quem está te ensinando</h2>
+        </div>
+        <div class="instructor">
+          <div class="instructor-photo instructor-photo--monogram reveal" role="img" aria-label="Guilherme Laschuk, instrutor do Agência Zero">
+            <!-- [PLACEHOLDER: substituir por foto real do instrutor — trocar este bloco por <img src="./assets/instrutor.jpg">] -->
+            <div class="monogram" aria-hidden="true">
+              <span class="monogram-g">G</span>
+              <span class="monogram-name">Guilherme Laschuk</span>
+            </div>
+          </div>
+          <div class="instructor-bio reveal">
+            <span class="label">Instrutor</span>
+            <p class="name">Guilherme Laschuk</p>
+            <!-- PLACEHOLDER: bio real aprovada pelo Guilherme. Texto abaixo é estrutura de exemplo. -->
+            <p>
+              Guilherme constrói sites e landing pages com IA e ensina, todos os dias, quem quer fazer o mesmo.
+              Antes de chegar aqui, passou pelo caminho difícil — o de tentar, travar e aprender na prática o que
+              nenhum curso genérico ensinava.
+            </p>
+            <p>
+              Quando o vibe coding amadureceu, ele percebeu que a maioria dos alunos sabia criar, mas empacava na
+              hora de precificar, apresentar e entregar. O Agência Zero nasceu para fechar exatamente essa lacuna:
+              transformar conhecimento técnico em um negócio que paga as contas.
+            </p>
+            <p class="emph" style="font-size:var(--text-lg)">
+              "Não ensino o que li em algum lugar. Ensino o processo que uso nas minhas próprias entregas."
+            </p>
+            <div class="instructor-stats">
+              <!-- [TO CONFIRM: números de exemplo — substituir pelos valores reais do Guilherme] -->
+              <div class="st"><b>1.200+</b><span>Alunos na base</span></div>
+              <div class="st"><b>500+</b><span>Projetos entregues</span></div>
+              <div class="st"><b>3 anos</b><span>Criando com IA</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ OFERTA / PREÇO ═══════════════ -->
+    <section class="section section--surface offer" id="oferta">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">07 — O investimento</span>
+          <h2 class="display-2" style="margin-top:var(--space-4)">Tudo que está incluído no Agência Zero</h2>
+          <p class="body-lg">
+            Um treinamento estruturado. Seis módulos práticos. Ferramentas, scripts e templates que você usa de verdade.
+          </p>
+        </div>
+
+        <div class="offer-grid">
+          <div class="stack reveal">
+            <span class="stack-badge">O treinamento completo · R$ 3.882</span>
+            <div class="stack-list">
+              <div class="stack-row"><span class="item">Módulo 1 — Fundamentos do Vibe Coding</span><span class="val">R$ 497</span></div>
+              <div class="stack-row"><span class="item">Módulo 2 — Design que Funciona: UI/UX com IA</span><span class="val">R$ 797</span></div>
+              <div class="stack-row"><span class="item">Módulo 3 — Do Protótipo ao Deploy</span><span class="val">R$ 597</span></div>
+              <div class="stack-row"><span class="item">Módulo 4 — Precificação e Posicionamento Premium</span><span class="val">R$ 497</span></div>
+              <div class="stack-row"><span class="item">Módulo 5 — Como Fechar Clientes Sem "Vender"</span><span class="val">R$ 997</span></div>
+              <div class="stack-row"><span class="item">Módulo 6 — Entrega, Revisão e Retenção</span><span class="val">R$ 497</span></div>
+
+              <div class="stack-row is-bonus"><span class="item">Bônus 1 — Pack de Templates Premium <small>Landing pages, portfólios e páginas de serviço prontos para personalizar.</small></span><span class="val">R$ 497</span></div>
+              <div class="stack-row is-bonus"><span class="item">Bônus 2 — Scripts de Prospecção e Fechamento <small>Mensagem por mensagem, testados na prática.</small></span><span class="val">R$ 297</span></div>
+              <div class="stack-row is-bonus"><span class="item">Bônus 3 — Modelo de Contrato de Serviço <small>Revisado por advogado: escopo, revisões, prazo e pagamento.</small></span><span class="val">R$ 197</span></div>
+              <div class="stack-row is-bonus"><span class="item">Bônus 4 — Comunidade Exclusiva de Alunos <small>Grupo privado com suporte ativo e troca de indicações.</small></span><span class="val">R$ 497</span></div>
+
+              <div class="stack-row is-launch">
+                <span class="item">
+                  <span class="stack-badge">⚡ Exclusivo de lançamento — expira com a turma</span>
+                  <b>Bônus 5 — Sessão de Mentoria ao Vivo com Guilherme</b>
+                  <small>Feedback direto nos seus projetos, dúvidas e proposta. Só para quem entrar nos 7 dias.</small>
+                </span>
+                <span class="val">R$ 997</span>
+              </div>
+            </div>
+            <div class="stack-total">
+              <span class="lbl">Valor total</span>
+              <span class="amt">R$ 6.367</span>
+            </div>
+          </div>
+
+          <aside class="card-pricing reveal" aria-label="Resumo do investimento">
+            <p class="price-eyebrow">Seu investimento hoje</p>
+            <p class="price-old">De R$ 6.367</p>
+            <p class="price-now"><span class="cur">R$</span> 4.997</p>
+            <p class="price-install">ou <b>12x de R$ 499</b> no cartão</p>
+            <a class="btn btn-primary btn-lg" href="#oferta" data-cta="oferta">Quero Garantir Minha Vaga <span class="arrow">→</span></a>
+            <p class="price-micro">
+              Acesso imediato após o pagamento · Garantia de 30 dias · Pagamento seguro
+            </p>
+            <div class="deadline-inline">
+              <span class="dl-lbl">A turma de lançamento fecha em</span>
+              <div class="countdown" data-countdown role="timer" aria-live="off">
+                <span class="unit"><b data-d>--</b><span>dias</span></span>
+                <span class="unit"><b data-h>--</b><span>horas</span></span>
+                <span class="unit"><b data-m>--</b><span>min</span></span>
+                <span class="unit"><b data-s>--</b><span>seg</span></span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ GARANTIA ═══════════════ -->
+    <section class="section" id="garantia">
+      <div class="container">
+        <div class="guarantee">
+          <div class="seal reveal" aria-hidden="true">
+            <div>
+              <b>30</b>
+              <span>dias</span>
+            </div>
+          </div>
+          <div class="guarantee-body reveal">
+            <span class="label">Garantia incondicional</span>
+            <h2 class="display-3" style="margin-top:var(--space-3)">30 dias. Sem perguntas.</h2>
+            <p>
+              Se você entrar no Agência Zero, passar pelos módulos e achar que não valeu o investimento — por
+              qualquer motivo — você pede reembolso em até 30 dias e devolvo 100% do que pagou.
+            </p>
+            <p>Sem burocracia. Sem questionamento. Sem "mas você assistiu todas as aulas?".</p>
+            <p class="emph-line">
+              Essa garantia existe porque confio no que está dentro do treinamento. E porque não quero aluno que
+              ficou obrigado.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FAQ ═══════════════ -->
+    <section class="section section--surface" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-num">08 — Dúvidas</span>
+          <h2 class="display-2" style="margin-top:var(--space-4)">Perguntas que você provavelmente tem</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-1">
+              Preciso saber programar para fazer o Agência Zero?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-a" id="faq-1" role="region"><div class="faq-a-inner">
+              Não. O treinamento foi desenhado para quem usa IA como ferramenta principal — você não precisa
+              escrever código do zero nem entender lógica de programação. Se você consegue usar as ferramentas que
+              o Guilherme mostra nas aulas, consegue acompanhar o treinamento.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-2">
+              Quanto tempo por semana vou precisar dedicar?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <!-- TO CONFIRM: carga horária semanal estimada -->
+            <div class="faq-a" id="faq-2" role="region"><div class="faq-a-inner">
+              Em torno de 5 horas por semana. O treinamento é gravado, então você assiste no seu ritmo. A sessão de
+              mentoria ao vivo (Bônus 5) tem data marcada — você recebe com antecedência para se organizar.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-3">
+              Em quanto tempo posso conseguir meu primeiro cliente?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-a" id="faq-3" role="region"><div class="faq-a-inner">
+              Depende do quanto você se dedicar e de quantos contatos você já tem. Alunos que seguem o processo do
+              Módulo 5 desde o começo costumam ter suas primeiras conversas antes de terminar o treinamento. Não
+              prometemos prazo — prometemos o processo.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-4">
+              O curso tem certificado?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <!-- TO CONFIRM: verificar se haverá certificado de conclusão -->
+            <div class="faq-a" id="faq-4" role="region"><div class="faq-a-inner">
+              O que importa para fechar clientes não é o certificado — é o portfólio e o processo. Se certificado
+              for relevante para você, confirme antes de entrar.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-5">
+              Por quanto posso cobrar pelos sites que vou criar?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-a" id="faq-5" role="region"><div class="faq-a-inner">
+              Depende do nicho, da complexidade e de como você se posiciona — é exatamente isso que o Módulo 4
+              ensina. O treinamento não inventa número para te animar: você vai aprender a calcular o seu valor com
+              base na realidade do seu mercado.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-6">
+              E se eu travar em alguma parte do treinamento?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-a" id="faq-6" role="region"><div class="faq-a-inner">
+              Você tem acesso à comunidade exclusiva (Bônus 4) onde pode tirar dúvidas com outros alunos e com a
+              equipe. Para a turma de lançamento, a mentoria ao vivo (Bônus 5) é o canal mais direto para resolver
+              travas em projetos específicos.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-7">
+              O acesso ao treinamento tem prazo de expiração?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <!-- TO CONFIRM: definir política de acesso (vitalício, 1 ano, etc.) -->
+            <div class="faq-a" id="faq-7" role="region"><div class="faq-a-inner">
+              Confirme antes de entrar se esse ponto for importante para você — a política de acesso é definida na
+              página de checkout.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-8">
+              Já faço alguns projetos freelance. O Agência Zero ainda faz sentido para mim?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-a" id="faq-8" role="region"><div class="faq-a-inner">
+              Depende do seu gargalo atual. Se você consegue criar mas trava em precificação, posicionamento ou
+              fechamento, o Módulo 4 e o Módulo 5 foram feitos para você. Se seu processo de entrega gera retrabalho
+              e stress, o Módulo 6 resolve isso. Se você já tem tudo funcionando bem, provavelmente não precisa do
+              básico — mas pode precisar do refinamento.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-9">
+              Posso parcelar?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-a" id="faq-9" role="region"><div class="faq-a-inner">
+              Sim. O investimento pode ser feito em até 12x de R$ 499 no cartão de crédito. À vista, o valor é R$ 4.997.
+            </div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faq-10">
+              Se eu não gostar, como funciona o reembolso?
+              <span class="chev" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+            </button>
+            <div class="faq-a" id="faq-10" role="region"><div class="faq-a-inner">
+              Você envia uma mensagem em até 30 dias corridos após a compra pedindo o reembolso. Devolvo 100% do
+              valor, sem perguntas e sem burocracia. O risco é zero do seu lado.
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CTA FINAL ═══════════════ -->
+    <section class="final-cta" id="checkout">
+      <!-- Mídia gerada (própria): ./assets/cta-fundo.png — atmosférica, com fallback -->
+      <div class="final-media" aria-hidden="true"></div>
+      <div class="final-veil" aria-hidden="true"></div>
+      <div class="container final-inner reveal">
+        <span class="label">A turma de lançamento</span>
+        <!-- TO CONFIRM: número de vagas -->
+        <h2 class="display-2">40 vagas. 7 dias.<br>Depois disso, o treinamento fecha.</h2>
+        <p class="lead">
+          O Agência Zero é um lançamento com turma limitada — não é estratégia de marketing, é logística. A
+          mentoria ao vivo do Bônus 5 tem capacidade física de participantes, e a turma precisa entrar junta para
+          o acompanhamento fazer sentido.
+        </p>
+        <p class="lead">
+          Quando as vagas encherem ou o prazo de 7 dias terminar, a página fecha. A próxima oportunidade — se
+          houver — <span class="hl">não terá o Bônus 5 nem o preço de lançamento.</span>
+        </p>
+
+        <div class="final-countdown-wrap">
+          <span class="dl-lbl">Encerra em 20 de julho de 2026, 23h59 (horário de Brasília)</span>
+          <div class="countdown" data-countdown role="timer" aria-live="off">
+            <span class="unit"><b data-d>--</b><span>dias</span></span>
+            <span class="unit"><b data-h>--</b><span>horas</span></span>
+            <span class="unit"><b data-m>--</b><span>min</span></span>
+            <span class="unit"><b data-s>--</b><span>seg</span></span>
+          </div>
+        </div>
+
+        <a class="btn btn-primary btn-lg" href="#oferta" data-cta="final">Quero Garantir Minha Vaga no Agência Zero <span class="arrow">→</span></a>
+        <p class="final-micro">R$ 4.997 à vista · ou 12x de R$ 499 · Garantia de 30 dias · Acesso imediato</p>
+        <!-- [TO CONFIRM: canal de suporte — confirmar se é WhatsApp ou e-mail antes de publicar] -->
+        <p class="final-secure">Pagamento seguro · Parcelamento em até 12x · Suporte via WhatsApp</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════ RODAPÉ ═══════════════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a class="brand" href="#hero">Agência<span class="brand-mark">Zero</span></a>
+        <p class="footer-legal">
+          Treinamento de criação de sites e landing pages com IA. Os resultados dependem do empenho individual de
+          cada aluno — o treinamento entrega o processo, não uma promessa de renda garantida.
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="#mecanismo">Método</a>
+        <a href="#modulos">Módulos</a>
+        <a href="#oferta">Investimento</a>
+        <a href="#faq">Perguntas frequentes</a>
+        <a href="#garantia">Garantia</a>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      © 2026 Agência Zero · Guilherme Laschuk. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>

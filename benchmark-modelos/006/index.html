@@ -1,0 +1,894 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kibu - Focus on Excellent Service. We Handle The Rest.</title>
+<meta name="description" content="Kibu transforms compliance, documentation, and reporting while providing content that service providers love.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Asap:wght@700&family=Noto+Serif+Display:wght@500;600&family=Libre+Baskerville:wght@400;500;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#000; --text:#222; --muted:#6b7280; --border:rgba(34,34,34,.1);
+    --gray-bg:#f5f5f5; --alt-bg:#fafafa; --navy:#1f4e91; --navy-dark:#16407a; --stat-red:#9e2a28;
+    --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --font-logo:'Asap',var(--font-sans);
+    --font-stat:'Noto Serif Display',Georgia,serif;
+    --font-quote:'Libre Baskerville',Georgia,serif;
+    --font-sig:'Caveat',cursive;
+    --container:1056px;
+    --g1a:#7db8ff; --g1b:#3b82f6;
+    --g2a:#ffb199; --g2b:#ff7a59;
+    --g3a:#8fe3c0; --g3b:#2fb989;
+    --g4a:#c9a6ff; --g4b:#9b6bef;
+    --g5a:#ffb6c6; --g5b:#ff6f91;
+    --g6a:#ffe08a; --g6b:#ffc33d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{font-family:var(--font-sans);color:var(--text);background:#fff;line-height:1.4;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font:inherit;cursor:pointer;background:none;border:none;color:inherit;}
+  ul{list-style:none;}
+  .container{max-width:var(--container);margin:0 auto;padding:0 20px;}
+  section{background:#fff;}
+
+  /* ---------- Buttons ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:500;
+    border-radius:10px;padding:6px 12px;font-size:14px;background:#000;color:#fff;border:1px solid #000;
+    transition:opacity .2s ease,transform .2s ease;white-space:nowrap;}
+  .btn:hover{opacity:.82;transform:translateY(-1px);}
+  .btn-lg{border-radius:12px;padding:9px 16px;font-size:16px;}
+  .btn .avatar{width:23px;height:23px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--g1a),var(--g1b));}
+  .btn-lg .avatar{width:27px;height:27px;}
+
+  /* ---------- Nav ---------- */
+  .nav-fixed{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:1000;width:calc(100% - 24px);max-width:var(--container);}
+  .nav{position:relative;display:flex;flex-direction:column;width:100%;background:rgba(0,0,0,.03);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:16px;
+    box-shadow:0 1px 1px rgba(0,0,0,.02);border:1px solid rgba(0,0,0,.04);transition:box-shadow .25s ease,background .25s ease;}
+  .nav.scrolled{background:rgba(255,255,255,.7);box-shadow:0 10px 30px rgba(0,0,0,.08);}
+  .nav-row{display:flex;align-items:center;padding:8px 16px;gap:0;}
+  .nav-logo{font-family:var(--font-logo);font-weight:700;font-size:22px;color:#000;margin-right:44px;}
+  .nav-links{display:none;align-items:center;gap:28px;flex:1;}
+  .nav-link{font-size:14px;font-weight:500;letter-spacing:-.1px;color:rgba(8,9,10,.8);white-space:nowrap;transition:color .2s ease;}
+  .nav-link:hover{color:#000;}
+  .nav-drop{position:relative;}
+  .nav-drop>button{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:rgba(8,9,10,.8);padding:4px 0;}
+  .nav-drop .chev{width:14px;height:14px;transition:transform .2s ease;}
+  .nav-drop.open .chev{transform:rotate(180deg);}
+  .nav-dropdown{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:#fff;
+    border-radius:12px;box-shadow:0 14px 34px rgba(0,0,0,.14);padding:8px;min-width:170px;display:none;flex-direction:column;z-index:20;}
+  .nav-drop.open .nav-dropdown{display:flex;}
+  .nav-dropdown a{padding:9px 12px;border-radius:8px;font-size:14px;color:#222;transition:background .15s ease;}
+  .nav-dropdown a:hover{background:var(--gray-bg);}
+  .nav-right{display:flex;align-items:center;gap:16px;margin-left:auto;}
+  .nav-login{display:none;font-size:14px;font-weight:500;color:rgba(8,9,10,.8);}
+  .nav-login:hover{color:#000;}
+  .hamburger{display:flex;width:40px;height:40px;align-items:center;justify-content:center;position:relative;flex-shrink:0;}
+  .hamburger span{position:absolute;width:20px;height:2px;background:#000;border-radius:2px;transition:transform .3s ease,opacity .3s ease;}
+  .hamburger span:nth-child(1){transform:translateY(-6px);}
+  .hamburger span:nth-child(3){transform:translateY(6px);}
+  body.nav-open .hamburger span:nth-child(1){transform:translateY(0) rotate(45deg);}
+  body.nav-open .hamburger span:nth-child(2){opacity:0;}
+  body.nav-open .hamburger span:nth-child(3){transform:translateY(0) rotate(-45deg);}
+  .mobile-panel{display:none;flex-direction:column;gap:2px;padding:6px 14px 16px;border-top:1px solid rgba(0,0,0,.06);}
+  body.nav-open .mobile-panel{display:flex;}
+  body.nav-open .nav{background:rgba(255,255,255,.98);box-shadow:0 20px 50px rgba(0,0,0,.15);}
+  .mobile-panel a,.mobile-panel .m-label{padding:10px 6px;font-size:15px;font-weight:500;color:#111;}
+  .mobile-panel .m-label{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-bottom:2px;margin-top:6px;}
+  .mobile-panel .btn{margin:10px 6px 4px;align-self:flex-start;}
+
+  @media (min-width:1024px){
+    .nav-links{display:flex;}
+    .nav-login{display:block;}
+    .hamburger{display:none;}
+    .mobile-panel{display:none !important;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding-top:96px;overflow:hidden;text-align:center;}
+  .hero-bg{position:absolute;inset:0;z-index:0;
+    background:linear-gradient(180deg,#c7e7ff 0%,#96cbff 28%,rgba(5,122,255,.5) 60%,#fff 90%);}
+  .hero-bg::after{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 60% 40% at 30% 15%,rgba(255,255,255,.6),transparent 60%);}
+  .hero-inner{position:relative;z-index:2;max-width:var(--container);margin:0 auto;padding:0 24px;}
+  .hero-title{font-weight:600;font-size:28px;line-height:34px;letter-spacing:-1.2px;color:#000;}
+  .hero-sub{margin:16px auto 0;max-width:600px;font-weight:500;font-size:15px;line-height:23px;color:rgba(0,0,0,.8);}
+  .hero-cta-wrap{margin-top:20px;}
+  @media (min-width:1024px){
+    .hero{padding-top:140px;text-align:left;}
+    .hero-title{font-size:60px;line-height:66px;}
+    .hero-sub{margin:16px 0 0;font-size:20px;line-height:30px;}
+    .hero-cta-wrap{margin-top:28px;}
+  }
+
+  .tabs-demo{position:relative;z-index:2;max-width:var(--container);margin:56px auto 0;padding:0 20px;}
+  @media (min-width:1024px){.tabs-demo{margin-top:80px;}}
+  .tabs-list{display:flex;gap:28px;overflow-x:auto;justify-content:flex-start;padding-bottom:6px;scrollbar-width:none;}
+  .tabs-list::-webkit-scrollbar{display:none;}
+  @media (min-width:900px){.tabs-list{justify-content:center;}}
+  .tab-item{display:flex;flex-direction:column;flex-shrink:0;}
+  .tab-btn{display:flex;align-items:center;gap:8px;padding-bottom:6px;font-size:15px;font-weight:500;color:#000;opacity:.5;transition:opacity .25s ease;white-space:nowrap;}
+  .tab-item.active .tab-btn{opacity:1;}
+  .tab-dot{width:15px;height:15px;border-radius:4px;background:rgba(0,0,0,.35);flex-shrink:0;}
+  .tab-item.active .tab-dot{background:#000;}
+  .tab-underline{height:3px;background:#000;border-radius:4px;margin-top:2px;width:0;}
+  .tab-item.active .tab-underline{animation:fillbar 4.6s linear forwards;}
+  @keyframes fillbar{from{width:0%}to{width:100%}}
+
+  .tab-panel-wrap{position:relative;width:100%;border-radius:20px;overflow:hidden;margin-top:20px;
+    padding-bottom:60%;box-shadow:0 24px 60px -12px rgba(0,0,0,.25);background:#e5e5e5;}
+  @media (min-width:1024px){.tab-panel-wrap{padding-bottom:0;height:460px;}}
+  .tab-panel{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;padding:16px;
+    display:flex;flex-direction:column;gap:12px;color:#fff;}
+  .tab-panel.active{opacity:1;}
+  .tp-bar{display:flex;gap:6px;}
+  .tp-bar span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.5);}
+  .tp-body{flex:1;display:flex;gap:12px;min-height:0;}
+  .tp-side{width:22%;background:rgba(255,255,255,.22);border-radius:10px;}
+  .tp-main{flex:1;display:flex;flex-direction:column;gap:8px;min-width:0;}
+  .tp-line{height:9px;border-radius:6px;background:rgba(255,255,255,.5);}
+  .w-70{width:70%;} .w-40{width:40%;} .w-55{width:55%;} .w-85{width:85%;}
+  .tp-card{flex:1;border-radius:10px;background:rgba(255,255,255,.25);min-height:28px;}
+  .tp-rows{flex:1;display:flex;flex-direction:column;gap:8px;justify-content:center;}
+  .tp-row{display:flex;align-items:center;gap:10px;}
+  .tp-row i{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.4);flex-shrink:0;}
+  .tp-row b{flex:1;height:8px;border-radius:5px;background:rgba(255,255,255,.4);}
+  .tp-row em{width:16px;height:16px;border-radius:4px;background:rgba(255,255,255,.55);flex-shrink:0;font-style:normal;}
+  .tp-chart{flex:1;display:flex;align-items:flex-end;gap:8px;padding:4px 0;}
+  .tp-chart div{flex:1;background:rgba(255,255,255,.5);border-radius:4px 4px 0 0;}
+  .tp-grid{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .tp-grid span{border-radius:8px;background:rgba(255,255,255,.35);}
+  .tp-thumbs{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .tp-thumbs div{border-radius:8px;background:rgba(255,255,255,.3);}
+
+  .tab-panel[data-tab="attendance"]{background:linear-gradient(135deg,var(--g1a),var(--g1b));}
+  .tab-panel[data-tab="notes"]{background:linear-gradient(135deg,var(--g4a),var(--g4b));}
+  .tab-panel[data-tab="ai-reports"]{background:linear-gradient(135deg,var(--g3a),var(--g3b));}
+  .tab-panel[data-tab="life-plans"]{background:linear-gradient(135deg,var(--g5a),var(--g5b));}
+  .tab-panel[data-tab="medication"]{background:linear-gradient(135deg,var(--g6a),var(--g6b));}
+  .tab-panel[data-tab="content"]{background:linear-gradient(135deg,var(--g2a),var(--g2b));}
+
+  /* ---------- Section heading helpers ---------- */
+  .sec{padding:60px 0;}
+  @media (min-width:1024px){.sec{padding:80px 0;}}
+  .sec.alt{background:var(--alt-bg);}
+  .h2-std{font-size:24px;line-height:30px;font-weight:600;letter-spacing:-.8px;color:#000;margin-bottom:8px;}
+  @media (min-width:1024px){.h2-std{font-size:38px;line-height:46px;}}
+  .p-std{font-size:16px;color:#000;}
+  @media (min-width:1024px){.p-std{font-size:18px;}}
+  .center{text-align:center;}
+  .mx-auto{margin-left:auto;margin-right:auto;}
+
+  /* ---------- Logo cloud ---------- */
+  .logos-eyebrow{font-size:18px;font-weight:500;letter-spacing:-.4px;color:#000;margin-bottom:4px;}
+  @media (min-width:1024px){.logos-eyebrow{font-size:20px;}}
+  .logos-sub{font-size:15px;font-weight:500;letter-spacing:-.4px;color:rgba(0,0,0,.54);margin-bottom:32px;}
+  @media (min-width:1024px){.logos-sub{font-size:18px;}}
+  .logos-wrap{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .logos-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;column-gap:28px;row-gap:16px;}
+  .logo-word{font-weight:700;font-size:15px;letter-spacing:.02em;color:rgba(0,0,0,.4);white-space:nowrap;}
+  @media (min-width:1024px){.logo-word{font-size:17px;}}
+
+  /* ---------- Quote / founder ---------- */
+  .quote-section .container{max-width:720px;}
+  .quote-h2{font-family:var(--font-quote);font-size:26px;line-height:36px;font-weight:500;letter-spacing:-.4px;color:#000;margin-bottom:32px;}
+  @media (min-width:1024px){.quote-h2{font-size:32px;line-height:48px;}}
+  .quote-p{font-size:16px;line-height:28px;font-style:italic;}
+  @media (min-width:1024px){.quote-p{font-size:22px;line-height:38px;}}
+  .rw{display:inline-block;opacity:.4;transition:opacity .6s ease;}
+  .quote-p.in-view .rw{opacity:1;}
+  .sig-wrap{margin-top:44px;}
+  .sig-mark{width:150px;height:44px;margin-bottom:2px;}
+  .sig-name{font-family:var(--font-sig);font-weight:500;font-size:22px;font-style:italic;color:#000;}
+
+  /* ---------- Card grids (staff) ---------- */
+  .grid-3{display:grid;grid-template-columns:1fr;gap:20px;}
+  @media (min-width:640px){.grid-3{grid-template-columns:1fr 1fr;}}
+  @media (min-width:1024px){.grid-3{grid-template-columns:repeat(3,1fr);}}
+  .feat-card{border-radius:16px;overflow:hidden;background:var(--gray-bg);text-align:center;}
+  .feat-card .art{height:260px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+  @media (min-width:1024px){.feat-card .art{height:320px;}}
+  .feat-card p{font-size:18px;font-weight:500;color:#000;padding:16px;}
+
+  /* ---------- Compliance (vertical tabs) ---------- */
+  .compliance-flex{display:flex;flex-direction:column;gap:32px;align-items:flex-start;}
+  @media (min-width:1024px){.compliance-flex{flex-direction:row;gap:10px;}}
+  .compliance-text{flex-shrink:0;width:100%;padding-top:16px;}
+  @media (min-width:1024px){.compliance-text{max-width:382px;}}
+  .vt-list{display:flex;flex-direction:column;gap:10px;padding-top:28px;}
+  @media (min-width:1024px){.vt-list{padding-top:36px;}}
+  .vt-item{display:flex;align-items:center;gap:10px;text-align:left;padding:2px 0;}
+  .vt-bar{width:4px;height:20px;border-radius:4px;background:rgba(0,0,0,.1);flex-shrink:0;transition:background .3s ease;}
+  .vt-item.active .vt-bar{background:#000;}
+  .vt-item span{font-size:16px;font-weight:500;color:#000;}
+  @media (min-width:1024px){.vt-item span{font-size:18px;}}
+  .compliance-media{flex:1;width:100%;border-radius:20px;overflow:hidden;position:relative;aspect-ratio:4/3;}
+  @media (min-width:1024px){.compliance-media{aspect-ratio:auto;height:480px;}}
+  .cm-panel{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;color:#fff;padding:20px;
+    display:flex;flex-direction:column;gap:12px;}
+  .cm-panel.active{opacity:1;}
+  .cm-panel[data-cm="translation"]{background:linear-gradient(135deg,var(--g1a),var(--g1b));}
+  .cm-panel[data-cm="notes"]{background:linear-gradient(135deg,var(--g4a),var(--g4b));}
+  .cm-panel[data-cm="reporting"]{background:linear-gradient(135deg,var(--g3a),var(--g3b));}
+
+  /* ---------- Bordered feature grid (directors / tracking) ---------- */
+  .bgrid{display:grid;grid-template-columns:1fr;}
+  @media (min-width:640px){.bgrid{grid-template-columns:1fr 1fr;}}
+  @media (min-width:1024px){.bgrid{grid-template-columns:repeat(4,1fr);}}
+  .bcell{padding:20px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  @media (min-width:1024px){.bcell{padding:24px;border-right:1px solid var(--border);}}
+  .bcell .row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .bcell .row svg{color:rgba(0,0,0,.25);flex-shrink:0;}
+  .bcell .row span{font-size:16px;font-weight:600;color:#000;}
+  .bcell p{font-size:14px;line-height:22px;letter-spacing:-.2px;color:rgba(0,0,0,.75);}
+  .bwide{grid-column:1/-1;padding:32px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  @media (min-width:640px){.bwide{grid-column:span 2;}}
+  @media (min-width:1024px){.bwide{padding:56px;border-right:1px solid var(--border);}}
+  .bwide h3{font-size:20px;font-weight:600;line-height:28px;letter-spacing:-.3px;color:#000;margin-bottom:8px;}
+  .bwide p{font-size:15px;line-height:24px;color:var(--muted);}
+  .bwide .art{margin-top:22px;border-radius:12px;overflow:hidden;aspect-ratio:1536/1322;position:relative;}
+
+  .dash-mock{position:absolute;inset:0;background:linear-gradient(135deg,#dfe9f5,#c3d6ec);padding:16px;display:flex;flex-direction:column;gap:10px;}
+  .dash-mock .top{display:flex;gap:8px;}
+  .dash-mock .top span{width:60px;height:10px;border-radius:5px;background:rgba(31,78,145,.25);}
+  .dash-mock .bars{flex:1;display:flex;align-items:flex-end;gap:10px;padding-top:10px;}
+  .dash-mock .bars div{flex:1;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--navy),var(--navy-dark));}
+
+  .stat-card{position:absolute;inset:0;border-radius:16px;overflow:hidden;padding:20px;
+    background:radial-gradient(circle at 25% 25%,#eaf1fc,transparent 55%),radial-gradient(circle at 80% 75%,#fdeceb,transparent 55%),#f4f6fa;}
+  .stat-inner{position:relative;width:100%;height:100%;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.06);}
+  .stat-inner .gt{font-family:var(--font-stat);font-size:34px;color:var(--navy-dark);}
+  .stat-inner .num{font-family:var(--font-stat);font-size:44px;font-weight:600;line-height:1.5;color:var(--navy);}
+  .stat-inner .pct{font-family:var(--font-stat);font-size:34px;font-weight:600;
+    background:linear-gradient(90deg,var(--stat-red),var(--navy));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  @media (min-width:1024px){
+    .stat-inner .gt,.stat-inner .pct{font-size:55px;}
+    .stat-inner .num{font-size:64px;}
+  }
+
+  .onboard-mock{position:absolute;inset:0;background:linear-gradient(160deg,#fff3e0,#ffe0b3);display:flex;align-items:center;justify-content:center;}
+  .onboard-mock .blob{width:56%;aspect-ratio:1;border-radius:50%;background:linear-gradient(135deg,var(--g2a),var(--g2b));position:relative;}
+  .onboard-mock .blob::after{content:'';position:absolute;inset:18%;border-radius:50%;background:rgba(255,255,255,.35);}
+
+  .hipaa-mock{position:absolute;inset:0;background:linear-gradient(160deg,#eef4ff,#dbe6fb);display:flex;align-items:center;justify-content:center;padding:24px;}
+  .hipaa-badge{width:120px;height:120px;background:#fff;border-radius:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.08);}
+  .hipaa-badge svg{color:var(--navy);}
+
+  /* ---------- Content library marquee ---------- */
+  .marquee-row{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .marquee-track{display:flex;gap:14px;width:max-content;animation:marqueeX 26s linear infinite;}
+  .marquee-track.rev{animation-direction:reverse;animation-duration:34s;}
+  .marquee-row:hover .marquee-track{animation-play-state:paused;}
+  @keyframes marqueeX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .cat-pill{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--gray-bg);flex-shrink:0;}
+  .cat-pill i{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--g3a),var(--g3b));flex-shrink:0;}
+  .cat-pill span{font-size:14px;font-weight:500;color:#000;white-space:nowrap;}
+  .thumb-card{width:150px;height:96px;border-radius:12px;flex-shrink:0;position:relative;display:flex;align-items:flex-end;padding:10px;overflow:hidden;}
+  .thumb-card span{position:relative;font-size:12px;font-weight:600;color:#fff;}
+  .thumb-card::after{content:'';position:absolute;top:8px;right:10px;width:0;height:0;
+    border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent rgba(255,255,255,.85);}
+  .thumb-card::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.35),transparent 60%);}
+
+  /* ---------- Elevate intro video banner ---------- */
+  .elevate-banner{border-radius:16px;overflow:hidden;margin-top:40px;aspect-ratio:16/9;position:relative;
+    background:linear-gradient(135deg,var(--g4a),var(--g1b));}
+  .elevate-banner .tp-body,.elevate-banner .tp-bar{padding:24px;}
+  .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;
+    background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;}
+  .play-btn::after{content:'';border-style:solid;border-width:10px 0 10px 16px;border-color:transparent transparent transparent #000;margin-left:4px;}
+
+  /* ---------- Results cards ---------- */
+  .results-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+  @media (min-width:1024px){.results-grid{grid-template-columns:repeat(3,1fr);}}
+  .story-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,.06);transition:box-shadow .25s ease,transform .25s ease;}
+  .story-card:hover{box-shadow:0 16px 40px rgba(0,0,0,.1);transform:translateY(-2px);}
+  .story-card .cover{height:200px;}
+  .story-card p{font-size:14px;font-weight:600;color:#000;padding:16px;}
+
+  /* ---------- Wall of love ---------- */
+  .wall{position:relative;height:460px;overflow:hidden;}
+  @media (min-width:1024px){.wall{height:520px;}}
+  .wall::before,.wall::after{content:'';position:absolute;left:0;right:0;height:70px;z-index:2;pointer-events:none;}
+  .wall::before{top:0;background:linear-gradient(#fff,transparent);}
+  .wall::after{bottom:0;background:linear-gradient(transparent,#fff);}
+  .wall-cols{display:grid;grid-template-columns:1fr;gap:16px;height:100%;}
+  @media (min-width:1024px){.wall-cols{grid-template-columns:repeat(3,1fr);}}
+  .wall-col{overflow:hidden;position:relative;display:none;}
+  .wall-col.col-1{display:block;}
+  @media (min-width:1024px){.wall-col{display:block;}}
+  .wall-track{display:flex;flex-direction:column;gap:16px;animation:marqueeY 42s linear infinite;}
+  .wall-col.col-2 .wall-track{animation-duration:54s;}
+  .wall-col.col-3 .wall-track{animation-duration:48s;animation-direction:reverse;}
+  @keyframes marqueeY{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+  .tcard{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:20px;padding:22px;flex-shrink:0;}
+  .tcard-head{display:flex;gap:12px;align-items:center;margin-bottom:12px;}
+  .tcard-avatar{width:44px;height:44px;border-radius:50%;flex-shrink:0;color:#fff;font-weight:600;font-size:15px;
+    display:flex;align-items:center;justify-content:center;}
+  .tcard-name{font-size:14px;font-weight:600;color:#000;margin-bottom:1px;}
+  .tcard-role,.tcard-org{font-size:12px;color:rgba(0,0,0,.5);line-height:1.5;}
+  .tcard-quote{font-size:14px;line-height:22px;color:#000;}
+
+  /* ---------- Final CTA ---------- */
+  .final-cta h2{font-size:24px;line-height:30px;font-weight:600;letter-spacing:-.8px;color:#000;max-width:560px;margin:0 auto 28px;}
+  @media (min-width:1024px){.final-cta h2{font-size:38px;line-height:46px;}}
+
+  /* ---------- Footer ---------- */
+  footer{background:#fbfbfb;border-top:1px solid rgba(0,0,0,.1);display:flex;justify-content:center;padding:0 20px;}
+  .footer-inner{width:100%;max-width:var(--container);border-left:1px solid rgba(0,0,0,.1);border-right:1px solid rgba(0,0,0,.1);
+    padding:56px 24px;display:flex;flex-direction:column;gap:40px;}
+  @media (min-width:1024px){.footer-inner{padding:80px 56px;gap:64px;}}
+  .footer-top{display:flex;flex-direction:column;gap:32px;}
+  @media (min-width:1024px){.footer-top{flex-direction:row;}}
+  .footer-brand-block{display:flex;flex-direction:column;gap:14px;}
+  @media (min-width:1024px){.footer-brand-block{width:175px;flex-shrink:0;}}
+  .footer-brand{font-family:var(--font-logo);font-weight:700;font-size:24px;letter-spacing:-.4px;color:#000;}
+  .footer-badge{width:70px;height:44px;opacity:.55;color:#888;}
+  .footer-social{display:flex;align-items:center;gap:12px;}
+  .footer-social a{color:#000;opacity:.6;transition:opacity .2s ease;}
+  .footer-social a:hover{opacity:1;}
+  .footer-social svg{width:17px;height:17px;}
+  .footer-addr{font-size:12px;color:#3f3f3f;line-height:1.5;}
+  .footer-cols{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  @media (min-width:480px){.footer-cols{grid-template-columns:repeat(3,1fr);}}
+  .footer-col{display:flex;flex-direction:column;align-items:center;gap:15px;text-align:center;}
+  .footer-col.order-legal{order:2;}
+  .footer-col.order-resources{order:3;}
+  @media (min-width:480px){.footer-col.order-legal,.footer-col.order-resources{order:0;}}
+  .footer-col h4{width:100%;font-size:14px;font-weight:500;letter-spacing:-.16px;color:rgba(0,0,0,.75);}
+  .footer-col .links{width:100%;display:flex;flex-direction:column;gap:10px;}
+  .footer-col a{font-size:14px;color:#777;transition:color .2s ease;}
+  .footer-col a:hover{color:#000;}
+  .footer-bottom{font-size:14px;color:rgba(0,0,0,.6);text-align:center;}
+</style>
+
+<!-- ============ NAV ============ -->
+<div class="nav-fixed" id="navFixed">
+  <nav class="nav" id="navEl">
+    <div class="nav-row">
+      <a class="nav-logo" href="#">kibu</a>
+      <div class="nav-links">
+        <a class="nav-link" href="#">Documentation</a>
+        <a class="nav-link" href="#">Content</a>
+        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Contact</a>
+        <div class="nav-drop" data-drop="resources">
+          <button type="button">Resources
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="#">Blog</a>
+            <a href="#">Resource Center</a>
+            <a href="#">Careers</a>
+            <a href="#">Changelog</a>
+          </div>
+        </div>
+        <div class="nav-drop" data-drop="fun">
+          <button type="button">Fun
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="#">Games</a>
+            <a href="#">Dance</a>
+            <a href="#">Cooking</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <a class="nav-login" href="#">Login</a>
+        <a class="btn" href="#"><span>Get a demo</span><span class="avatar"></span></a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-panel">
+      <a href="#">Documentation</a>
+      <a href="#">Content</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <div class="m-label">Resources</div>
+      <a href="#">Blog</a>
+      <a href="#">Resource Center</a>
+      <a href="#">Careers</a>
+      <a href="#">Changelog</a>
+      <div class="m-label">Fun</div>
+      <a href="#">Games</a>
+      <a href="#">Dance</a>
+      <a href="#">Cooking</a>
+      <div class="m-label">Account</div>
+      <a href="#">Login</a>
+      <a class="btn" href="#"><span>Get a demo</span></a>
+    </div>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <h1 class="hero-title">Focus on Excellent Service.<br>We'll Handle the Rest.</h1>
+    <p class="hero-sub">Kibu transforms compliance, documentation, and reporting while providing content that service providers love.</p>
+    <div class="hero-cta-wrap">
+      <a class="btn btn-lg" href="#"><span>Get a demo</span><span class="avatar"></span></a>
+    </div>
+  </div>
+
+  <div class="tabs-demo">
+    <div class="tabs-list" id="heroTabsList">
+      <div class="tab-item" data-tab="attendance"><button class="tab-btn"><span class="tab-dot"></span>Attendance</button><div class="tab-underline"></div></div>
+      <div class="tab-item active" data-tab="notes"><button class="tab-btn"><span class="tab-dot"></span>Notes</button><div class="tab-underline"></div></div>
+      <div class="tab-item" data-tab="ai-reports"><button class="tab-btn"><span class="tab-dot"></span>AI Reports</button><div class="tab-underline"></div></div>
+      <div class="tab-item" data-tab="life-plans"><button class="tab-btn"><span class="tab-dot"></span>Life Plans</button><div class="tab-underline"></div></div>
+      <div class="tab-item" data-tab="medication"><button class="tab-btn"><span class="tab-dot"></span>Medication</button><div class="tab-underline"></div></div>
+      <div class="tab-item" data-tab="content"><button class="tab-btn"><span class="tab-dot"></span>Content</button><div class="tab-underline"></div></div>
+    </div>
+
+    <div class="tab-panel-wrap">
+      <div class="tab-panel" data-tab="attendance">
+        <div class="tp-bar"><span></span><span></span><span></span></div>
+        <div class="tp-rows">
+          <div class="tp-row"><i></i><b></b><em></em></div>
+          <div class="tp-row"><i></i><b></b><em></em></div>
+          <div class="tp-row"><i></i><b></b><em></em></div>
+          <div class="tp-row"><i></i><b></b><em></em></div>
+        </div>
+      </div>
+      <div class="tab-panel active" data-tab="notes">
+        <div class="tp-bar"><span></span><span></span><span></span></div>
+        <div class="tp-body">
+          <div class="tp-side"></div>
+          <div class="tp-main">
+            <div class="tp-line w-70"></div>
+            <div class="tp-line w-40"></div>
+            <div class="tp-card"></div>
+            <div class="tp-line w-55"></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="ai-reports">
+        <div class="tp-bar"><span></span><span></span><span></span></div>
+        <div class="tp-chart">
+          <div style="height:40%"></div><div style="height:70%"></div><div style="height:55%"></div>
+          <div style="height:90%"></div><div style="height:35%"></div><div style="height:65%"></div>
+          <div style="height:50%"></div><div style="height:80%"></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="life-plans">
+        <div class="tp-bar"><span></span><span></span><span></span></div>
+        <div class="tp-rows">
+          <div class="tp-row"><i></i><b></b><em></em></div>
+          <div class="tp-row"><i></i><b></b><em></em></div>
+          <div class="tp-row"><i></i><b></b><em></em></div>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="medication">
+        <div class="tp-bar"><span></span><span></span><span></span></div>
+        <div class="tp-grid">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="tab-panel" data-tab="content">
+        <div class="tp-bar"><span></span><span></span><span></span></div>
+        <div class="tp-thumbs">
+          <div></div><div></div><div></div><div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ============ ORGANIZATIONS ============ -->
+  <section class="sec">
+    <div class="container center">
+      <h2 class="logos-eyebrow">Organizations We Serve</h2>
+      <p class="logos-sub">Trusted by Disability Providers across the USA</p>
+      <div class="logos-wrap">
+        <div class="logos-row">
+          <span class="logo-word">CHIMES</span><span class="logo-word">THE ARC</span><span class="logo-word">YMCA</span>
+          <span class="logo-word">UCP</span><span class="logo-word">JEWISH FEDERATION</span><span class="logo-word">CP UNLIMITED</span>
+          <span class="logo-word">WOODFORDS</span>
+        </div>
+        <div class="logos-row">
+          <span class="logo-word">MISSION ROAD</span><span class="logo-word">CORNER OF DETERMINATION</span>
+          <span class="logo-word">CATHOLIC GUARDIAN</span><span class="logo-word">ACTIVE DAY</span>
+          <span class="logo-word">BABCOCK</span><span class="logo-word">ELWYN</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOCUS ON PEOPLE (QUOTE) ============ -->
+  <section class="sec quote-section">
+    <div class="container">
+      <h2 class="quote-h2">Focus on People, Not Paper</h2>
+      <p class="quote-p" id="revealParagraph">Disability providers know firsthand the challenges facing individuals with intellectual and developmental disabilities — social isolation, communication barriers, limited resources, and the constant struggle for independence. Still, outdated systems and never-ending compliance requirements shift your focus, limiting the time and energy you have to support meaningful progress. Kibu was founded to help disability providers overcome these hurdles to focus on what really matters: supporting individuals living with IDD.</p>
+      <div class="sig-wrap">
+        <svg class="sig-mark" viewBox="0 0 150 44" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><path d="M6 34C16 8 22 8 26 26C30 12 36 12 40 30C46 10 52 34 60 20C66 30 72 14 80 26C86 16 92 30 100 18C108 30 116 12 124 24C130 16 138 26 144 20"/></svg>
+        <p class="sig-name">Daniel Caridi, Co-Founder &amp; CEO</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACTUALLY BUILT FOR STAFF ============ -->
+  <section class="sec">
+    <div class="container center">
+      <h2 class="h2-std">Actually built for staff</h2>
+      <p class="p-std" style="margin-bottom:32px;">Kibu gives DSPs the power to focus on delivering outstanding support.</p>
+      <div class="grid-3">
+        <div class="feat-card">
+          <div class="art" style="background:linear-gradient(135deg,var(--g1a),var(--g1b));">
+            <div class="tp-rows" style="width:80%;">
+              <div class="tp-row"><i style="background:rgba(255,255,255,.5)"></i><b style="background:rgba(255,255,255,.5)"></b></div>
+              <div class="tp-row"><i style="background:rgba(255,255,255,.5)"></i><b style="background:rgba(255,255,255,.5)"></b></div>
+            </div>
+          </div>
+          <p>Personalized</p>
+        </div>
+        <div class="feat-card">
+          <div class="art" style="background:linear-gradient(135deg,var(--g3a),var(--g3b));">
+            <div class="play-btn" style="position:static;transform:none;width:48px;height:48px;"></div>
+          </div>
+          <p>Fast &amp; Easy</p>
+        </div>
+        <div class="feat-card">
+          <div class="art" style="background:linear-gradient(135deg,var(--g5a),var(--g5b));">
+            <div style="width:60%;aspect-ratio:9/16;background:rgba(255,255,255,.3);border-radius:14px;"></div>
+          </div>
+          <p>Mobile-Ready</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPLIANCE IN 60 SECONDS ============ -->
+  <section class="sec">
+    <div class="container">
+      <div class="compliance-flex">
+        <div class="compliance-text">
+          <h2 class="h2-std">Compliance in 60 Seconds</h2>
+          <p class="p-std">Accessible features that save your organization time, while keeping up with regulations:</p>
+          <div class="vt-list" id="complianceTabs">
+            <button class="vt-item active" data-cm="translation"><span class="vt-bar"></span><span>Built-In Translation</span></button>
+            <button class="vt-item" data-cm="notes"><span class="vt-bar"></span><span>AI-Assisted Service Notes</span></button>
+            <button class="vt-item" data-cm="reporting"><span class="vt-bar"></span><span>Beautiful, Fast Reporting</span></button>
+          </div>
+        </div>
+        <div class="compliance-media">
+          <div class="cm-panel active" data-cm="translation">
+            <div class="tp-bar"><span></span><span></span><span></span></div>
+            <div class="tp-rows"><div class="tp-row"><i></i><b></b></div><div class="tp-row"><i></i><b></b></div><div class="tp-row"><i></i><b></b></div></div>
+          </div>
+          <div class="cm-panel" data-cm="notes">
+            <div class="tp-bar"><span></span><span></span><span></span></div>
+            <div class="tp-body"><div class="tp-side"></div><div class="tp-main"><div class="tp-line w-70"></div><div class="tp-line w-40"></div><div class="tp-card"></div></div></div>
+          </div>
+          <div class="cm-panel" data-cm="reporting">
+            <div class="tp-bar"><span></span><span></span><span></span></div>
+            <div class="tp-chart"><div style="height:50%"></div><div style="height:80%"></div><div style="height:30%"></div><div style="height:65%"></div><div style="height:45%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIRECTORS GRID ============ -->
+  <section class="sec" style="padding-bottom:0;">
+    <div class="container">
+      <div class="bgrid">
+        <div class="bcell">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.36" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Member Records</span></div>
+          <p>Keep member records accurate and accessible.</p>
+        </div>
+        <div class="bcell">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.36" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Tasks</span></div>
+          <p>Assign, track, and complete tasks quickly.</p>
+        </div>
+        <div class="bcell">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.36" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Appointments/Transports</span></div>
+          <p>Never miss a pickup or appointment again.</p>
+        </div>
+        <div class="bcell" style="border-right:none;">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.36" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Custom Controls</span></div>
+          <p>Adapt Kibu's platform to fit your needs.</p>
+        </div>
+
+        <div class="bwide">
+          <h3>Directors Can Track Compliance Instantly. Anywhere, Anytime.</h3>
+          <p>No more complex Excel work - we'll do the math for you.</p>
+          <div class="art"><div class="dash-mock"><div class="top"><span></span><span></span></div><div class="bars"><div style="height:35%"></div><div style="height:70%"></div><div style="height:55%"></div><div style="height:90%"></div><div style="height:45%"></div><div style="height:75%"></div></div></div></div>
+        </div>
+        <div class="bwide" style="border-right:none;">
+          <h3>Providers who use Kibu don't just meet standards — they set them.</h3>
+          <p>Kibu partners average over 99.2% compliance within their first 2 months.</p>
+          <div class="art"><div class="stat-card"><div class="stat-inner"><span class="gt">&gt;</span><span class="num">84.3</span><span class="pct">%</span></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENT LIBRARY ============ -->
+  <section class="sec">
+    <div class="container">
+      <h2 class="h2-std">Content and Lesson Plans, Built for You</h2>
+      <p class="p-std" style="max-width:600px;margin-bottom:32px;">Never worry about finding your next video lesson or building your next lesson plan. We've already done the heavy lifting for you!</p>
+      <div style="margin-bottom:32px;"><a class="btn btn-lg" href="#">Get a demo</a></div>
+    </div>
+    <div class="container marquee-row" style="margin-bottom:16px;">
+      <div class="marquee-track" id="catTrack"></div>
+    </div>
+    <div class="container marquee-row">
+      <div class="marquee-track rev" id="thumbTrack"></div>
+    </div>
+  </section>
+
+  <!-- ============ ELEVATE CONTENT ============ -->
+  <section class="sec">
+    <div class="container center">
+      <h2 class="h2-std mx-auto" style="max-width:600px;">Elevate Content with Intelligent Features</h2>
+      <p class="p-std mx-auto" style="max-width:620px;">Combining content and documentation is what makes our platform extraordinary. Educate members and track progress automatically, all in one place.</p>
+      <div class="elevate-banner">
+        <div class="tp-bar"><span></span><span></span><span></span></div>
+        <div class="play-btn"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRACKING GRID ============ -->
+  <section class="sec" style="padding-top:0;">
+    <div class="container">
+      <div class="bgrid">
+        <div class="bcell">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.36" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Tracking &amp; Goals</span></div>
+          <p>Keep programming aligned for your members.</p>
+        </div>
+        <div class="bcell">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.36" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Full Platform</span></div>
+          <p>No more switching between different systems.</p>
+        </div>
+        <div class="bcell">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.36" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Easy to use</span></div>
+          <p>Eliminate confusion from clunky, outdated platforms.</p>
+        </div>
+        <div class="bcell" style="border-right:none;">
+          <div class="row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.36" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Custom dashboard</span></div>
+          <p>Personalized for every member of your organization.</p>
+        </div>
+
+        <div class="bwide">
+          <h3>We'll Walk You Through Every Step.</h3>
+          <p>Start strong with personalized onboarding tailored for your organization.</p>
+          <div class="art"><div class="onboard-mock"><div class="blob"></div></div></div>
+        </div>
+        <div class="bwide" style="border-right:none;">
+          <h3>HIPAA Compliant. Fully Encrypted.</h3>
+          <p>With Kibu, security comes standard - your member data stays safe, no matter what.</p>
+          <div class="art"><div class="hipaa-mock"><div class="hipaa-badge"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3Z"/><path d="m9.5 12.5 2 2 4-4.5"/></svg></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REAL PEOPLE, REAL RESULTS ============ -->
+  <section class="sec alt">
+    <div class="container">
+      <h2 class="h2-std">Real People, Real Results.</h2>
+      <p class="p-std" style="margin-bottom:32px;">Read one of our customer stories from our blog.</p>
+      <div class="results-grid">
+        <a class="story-card" href="#">
+          <div class="cover" style="background:linear-gradient(135deg,var(--g1a),var(--g1b));"></div>
+          <p>Target Community &amp; Education</p>
+        </a>
+        <a class="story-card" href="#">
+          <div class="cover" style="background:linear-gradient(135deg,var(--g3a),var(--g3b));"></div>
+          <p>The ARC Caddo-Bossier</p>
+        </a>
+        <a class="story-card" href="#">
+          <div class="cover" style="background:linear-gradient(135deg,var(--g5a),var(--g5b));"></div>
+          <p>Woodfords Family Services</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WALL OF LOVE ============ -->
+  <section class="sec">
+    <div class="container center" style="margin-bottom:32px;">
+      <h2 class="h2-std">Wall of Love</h2>
+      <p class="p-std">See how organizations like yours are leveling up with Kibu!</p>
+    </div>
+    <div class="container">
+      <div class="wall">
+        <div class="wall-cols" id="wallCols"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="sec alt final-cta">
+    <div class="container center">
+      <div class="logos-wrap" style="margin-bottom:36px;">
+        <div class="logos-row">
+          <span class="logo-word">CHIMES</span><span class="logo-word">THE ARC</span><span class="logo-word">YMCA</span>
+          <span class="logo-word">UCP</span><span class="logo-word">JEWISH FEDERATION</span><span class="logo-word">CP UNLIMITED</span>
+          <span class="logo-word">WOODFORDS</span>
+        </div>
+        <div class="logos-row">
+          <span class="logo-word">MISSION ROAD</span><span class="logo-word">CORNER OF DETERMINATION</span>
+          <span class="logo-word">CATHOLIC GUARDIAN</span><span class="logo-word">ACTIVE DAY</span>
+          <span class="logo-word">BABCOCK</span><span class="logo-word">ELWYN</span>
+        </div>
+      </div>
+      <h2>Compliance Shouldn't Stand in the Way of Exceptional Care</h2>
+      <a class="btn btn-lg" href="#">Get a demo</a>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand-block">
+        <div class="footer-brand">kibu</div>
+        <svg class="footer-badge" viewBox="0 0 70 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M10 6h34l6 7v9l8 6-2 10-8 2-4 6H16l-6-8H6l-2-10 6-4Z"/></svg>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.97V21h-4V9Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V5.5h-3C11.5 5.5 10 7 10 9.3V11H8v3.5h2V21h3.5v-6.5H16l.5-3.5h-3V9.6c0-.4.2-.6.5-.6Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.6a2.7 2.7 0 0 0-1.9-1.9C18 5.2 12 5.2 12 5.2s-6 0-7.7.5A2.7 2.7 0 0 0 2.4 7.6 28 28 0 0 0 2 12a28 28 0 0 0 .4 4.4 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.4ZM10 15V9l5.2 3-5.2 3Z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 300 271" fill="currentColor"><path d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z"/></svg></a>
+        </div>
+        <p class="footer-addr">78 Harvard Ave, Floor 3<br>Stamford, CT 06902</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <div class="links">
+            <a href="#">Documentation</a>
+            <a href="#">Content</a>
+          </div>
+        </div>
+        <div class="footer-col order-resources">
+          <h4>Resources</h4>
+          <div class="links">
+            <a href="#">Blog</a>
+            <a href="#">Resource Center</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Careers</a>
+            <a href="#">Submit Request for Proposal (RFP)</a>
+            <a href="#">Changelog</a>
+          </div>
+        </div>
+        <div class="footer-col order-legal">
+          <h4>Legal</h4>
+          <div class="links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Member Code of Conduct</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 kibu</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Mobile menu
+  var hamburger = document.getElementById('hamburgerBtn');
+  hamburger.addEventListener('click', function(){
+    document.body.classList.toggle('nav-open');
+  });
+
+  // Nav dropdowns
+  document.querySelectorAll('.nav-drop').forEach(function(drop){
+    var btn = drop.querySelector('button');
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = drop.classList.contains('open');
+      document.querySelectorAll('.nav-drop.open').forEach(function(d){ d.classList.remove('open'); });
+      if(!isOpen) drop.classList.add('open');
+    });
+  });
+  document.addEventListener('click', function(){
+    document.querySelectorAll('.nav-drop.open').forEach(function(d){ d.classList.remove('open'); });
+  });
+
+  // Nav scroll shadow
+  var navEl = document.getElementById('navEl');
+  window.addEventListener('scroll', function(){
+    navEl.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive:true });
+
+  // Hero tab rotator
+  var heroTabs = Array.prototype.slice.call(document.querySelectorAll('#heroTabsList .tab-item'));
+  var heroPanels = Array.prototype.slice.call(document.querySelectorAll('.tab-panel'));
+  var heroIdx = heroTabs.findIndex(function(t){ return t.classList.contains('active'); });
+  var heroTimer;
+  function setHeroTab(i){
+    heroTabs.forEach(function(t,ti){ t.classList.toggle('active', ti===i); });
+    heroPanels.forEach(function(p){ p.classList.toggle('active', p.dataset.tab === heroTabs[i].dataset.tab); });
+    heroIdx = i;
+  }
+  function heroNext(){ setHeroTab((heroIdx+1) % heroTabs.length); }
+  function restartHeroTimer(){ clearInterval(heroTimer); heroTimer = setInterval(heroNext, 4600); }
+  heroTabs.forEach(function(t,i){
+    t.querySelector('.tab-btn').addEventListener('click', function(){ setHeroTab(i); restartHeroTimer(); });
+  });
+  restartHeroTimer();
+
+  // Compliance vertical tab rotator
+  var cmTabs = Array.prototype.slice.call(document.querySelectorAll('#complianceTabs .vt-item'));
+  var cmPanels = Array.prototype.slice.call(document.querySelectorAll('.cm-panel'));
+  var cmIdx = 0;
+  var cmTimer;
+  function setCmTab(i){
+    cmTabs.forEach(function(t,ti){ t.classList.toggle('active', ti===i); });
+    cmPanels.forEach(function(p){ p.classList.toggle('active', p.dataset.cm === cmTabs[i].dataset.cm); });
+    cmIdx = i;
+  }
+  function cmNext(){ setCmTab((cmIdx+1) % cmTabs.length); }
+  function restartCmTimer(){ clearInterval(cmTimer); cmTimer = setInterval(cmNext, 5200); }
+  cmTabs.forEach(function(t,i){
+    t.addEventListener('click', function(){ setCmTab(i); restartCmTimer(); });
+  });
+  restartCmTimer();
+
+  // Word-by-word scroll reveal
+  var p = document.getElementById('revealParagraph');
+  var words = p.textContent.trim().split(/\s+/);
+  p.innerHTML = words.map(function(w,i){ return '<span class="rw" style="transition-delay:'+(i*22)+'ms">'+w+'</span>'; }).join(' ');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) p.classList.add('in-view'); });
+  }, { threshold:.4 });
+  io.observe(p);
+
+  // Category + thumbnail marquees
+  var categories = ['Dance','Life Skills','Job Development','General Fitness','Yoga','Cooking','Enrichment and Arts','Games','Staff Training'];
+  var catHtml = categories.map(function(c){ return '<div class="cat-pill"><i></i><span>'+c+'</span></div>'; }).join('');
+  document.getElementById('catTrack').innerHTML = catHtml + catHtml;
+
+  var grads = ['g1','g2','g3','g4','g5','g6'];
+  var thumbHtml = categories.map(function(c,i){
+    var g = grads[i % grads.length];
+    return '<div class="thumb-card" style="background:linear-gradient(135deg,var(--'+g+'a),var(--'+g+'b));"><span>'+c+'</span></div>';
+  }).join('');
+  document.getElementById('thumbTrack').innerHTML = thumbHtml + thumbHtml;
+
+  // Wall of love testimonials
+  var testimonials = [
+    { name:'Barbara Yates', role:'Service Manager', org:'The Arc of North Florida', quote:'Using Kibu has allowed our staff to take the lead and has empowered them with tools to succeed.' },
+    { name:'Cortney Lucente', role:'Director of Day Services', org:'Little City Foundation', quote:'Kibu gives us the flexibility to meet each person where they are while keeping things engaging, structured, and fun.' },
+    { name:'Alethea Breidenbaugh', role:'Life Skills DSP', org:'Inspire Central Florida', quote:'These are real tools that engage clients without feeling childish. That makes all the difference.' },
+    { name:'Erica Null Pellegrin', role:'Director of Engagement & Marketing', org:'TARC - Terrebonne ARC', quote:'Having Kibu is a true highlight daily for the people we serve. We are having soooo much fun with it and learning a lot as well!' }
+  ];
+  var tgrads = ['g1','g5','g3','g4'];
+  function cardsHtml(list){
+    return list.map(function(t,i){
+      var g = tgrads[i % tgrads.length];
+      var initials = t.name.split(' ').map(function(n){return n[0];}).slice(0,2).join('');
+      return '<div class="tcard"><div class="tcard-head"><div class="tcard-avatar" style="background:linear-gradient(135deg,var(--'+g+'a),var(--'+g+'b));">'+initials+'</div>'+
+        '<div><div class="tcard-name">'+t.name+'</div><div class="tcard-role">'+t.role+'</div><div class="tcard-org">'+t.org+'</div></div></div>'+
+        '<p class="tcard-quote">“'+t.quote+'”</p></div>';
+    }).join('');
+  }
+  var col1 = [testimonials[0],testimonials[1],testimonials[2],testimonials[3]];
+  var col2 = [testimonials[2],testimonials[3],testimonials[0],testimonials[1]];
+  var col3 = [testimonials[1],testimonials[0],testimonials[3],testimonials[2]];
+  document.getElementById('wallCols').innerHTML =
+    '<div class="wall-col col-1"><div class="wall-track">'+cardsHtml(col1)+cardsHtml(col1)+'</div></div>'+
+    '<div class="wall-col col-2"><div class="wall-track">'+cardsHtml(col2)+cardsHtml(col2)+'</div></div>'+
+    '<div class="wall-col col-3"><div class="wall-track">'+cardsHtml(col3)+cardsHtml(col3)+'</div></div>';
+
+  // Escape closes mobile menu
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') document.body.classList.remove('nav-open');
+  });
+})();
+</script>

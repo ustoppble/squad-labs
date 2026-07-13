@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 36" width="200" height="36">
+  <!-- Market bars icon — crowd signal rising to peak -->
+  <rect x="0" y="22" width="4" height="10" rx="2" fill="#4A5850"/>
+  <rect x="6" y="16" width="4" height="16" rx="2" fill="#8A9690"/>
+  <rect x="12" y="8" width="4" height="24" rx="2" fill="#C77B17"/>
+  <rect x="18" y="2" width="4" height="30" rx="2" fill="#00E87C"/>
+  <rect x="24" y="12" width="4" height="20" rx="2" fill="#4A5850"/>
+  <!-- CROWD in semibold -->
+  <text x="38" y="25"
+    font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-weight="700"
+    font-size="17"
+    fill="#E8EDE9"
+    letter-spacing="-0.4">CROWD</text>
+  <!-- CAST in light amber -->
+  <text x="114" y="25"
+    font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-weight="300"
+    font-size="17"
+    fill="#C77B17"
+    letter-spacing="-0.2">CAST</text>
+</svg>

@@ -1,0 +1,496 @@
+- generic [active] [ref=f4e1]:
+  - navigation [ref=f4e2]:
+    - generic [ref=f4e3]:
+      - link "kibu" [ref=f4e4] [cursor=pointer]:
+        - /url: "#"
+        - text: ki
+        - emphasis [ref=f4e5]: bu
+      - generic [ref=f4e6]:
+        - link "Documentation" [ref=f4e7] [cursor=pointer]:
+          - /url: "#"
+        - link "Content" [ref=f4e8] [cursor=pointer]:
+          - /url: "#"
+        - link "About" [ref=f4e9] [cursor=pointer]:
+          - /url: "#"
+        - link "Contact" [ref=f4e10] [cursor=pointer]:
+          - /url: "#"
+      - generic [ref=f4e11]:
+        - button "Login" [ref=f4e12] [cursor=pointer]
+        - link "Get a demo" [ref=f4e13] [cursor=pointer]:
+          - /url: "#"
+  - generic [ref=f4e14]:
+    - generic [ref=f4e15]:
+      - generic [ref=f4e16]: Built for Disability Service Providers
+      - heading "Focus on Excellent Service. We'll Handle the Rest." [level=1] [ref=f4e18]:
+        - text: Focus on
+        - mark [ref=f4e19]: Excellent Service
+        - text: . We'll Handle the Rest.
+      - paragraph [ref=f4e20]: Kibu transforms compliance, documentation, and reporting into a seamless experience — giving DSPs the platform and content that funders appreciate.
+      - generic [ref=f4e21]:
+        - link "Get a demo" [ref=f4e22] [cursor=pointer]:
+          - /url: "#"
+        - link "See how it works" [ref=f4e23] [cursor=pointer]:
+          - /url: "#"
+          - text: See how it works
+          - img [ref=f4e24]
+      - generic [ref=f4e26]:
+        - generic [ref=f4e27]:
+          - generic [ref=f4e28]: S
+          - generic [ref=f4e29]: M
+          - generic [ref=f4e30]: K
+          - generic [ref=f4e31]: J
+        - paragraph [ref=f4e32]:
+          - strong [ref=f4e33]: 200+ organizations
+          - text: trust Kibu daily
+    - generic [ref=f4e34]:
+      - generic [ref=f4e61]:
+        - generic [ref=f4e70]: ✓ Complete
+        - generic [ref=f4e75]: On Track
+        - generic [ref=f4e80]: ⏳ Pending
+        - generic [ref=f4e85]: ✓ Complete
+      - generic [ref=f4e86]:
+        - img [ref=f4e88]
+        - generic [ref=f4e90]:
+          - generic [ref=f4e91]: 99.2% Compliance
+          - generic [ref=f4e92]: avg. within 2 months
+      - generic [ref=f4e93]:
+        - generic [ref=f4e94]: ⚡
+        - generic [ref=f4e95]:
+          - generic [ref=f4e96]: 60 Seconds
+          - generic [ref=f4e97]: to compliance reporting
+  - generic [ref=f4e99]:
+    - paragraph [ref=f4e100]: Trusted by leading organizations
+    - generic [ref=f4e101]:
+      - generic [ref=f4e102]: Chimes
+      - generic [ref=f4e104]: The ARC
+      - generic [ref=f4e106]: YMCA
+      - generic [ref=f4e108]: UCP
+      - generic [ref=f4e110]: Easterseals
+      - generic [ref=f4e112]: Glenwood
+      - generic [ref=f4e114]: Spectrum
+      - generic [ref=f4e116]: PathPoint
+  - generic [ref=f4e119]:
+    - generic [ref=f4e120]:
+      - paragraph [ref=f4e121]: Platform Features
+      - heading "Everything Your Team Needs" [level=2] [ref=f4e122]
+      - paragraph [ref=f4e123]: One platform covering every aspect of service delivery — from attendance to AI-powered reports.
+    - generic [ref=f4e124]:
+      - button "Attendance" [ref=f4e125] [cursor=pointer]:
+        - img [ref=f4e126]
+        - text: Attendance
+      - button "Notes" [ref=f4e129] [cursor=pointer]:
+        - img [ref=f4e130]
+        - text: Notes
+      - button "AI Reports" [ref=f4e133] [cursor=pointer]:
+        - img [ref=f4e134]
+        - text: AI Reports
+      - button "Life Plans" [ref=f4e136] [cursor=pointer]:
+        - img [ref=f4e137]
+        - text: Life Plans
+      - button "Medication" [ref=f4e141] [cursor=pointer]:
+        - img [ref=f4e142]
+        - text: Medication
+      - button "Content" [ref=f4e144] [cursor=pointer]:
+        - img [ref=f4e145]
+        - text: Content
+    - generic [ref=f4e149]:
+      - generic [ref=f4e150]:
+        - heading "Simple, Accurate Attendance Tracking" [level=3] [ref=f4e151]
+        - paragraph [ref=f4e152]: Streamline daily check-ins and check-outs. Auto-populate data for billing and reporting without extra steps.
+        - list [ref=f4e153]:
+          - listitem [ref=f4e154]:
+            - img [ref=f4e156]
+            - text: One-tap check-in / check-out for DSPs
+          - listitem [ref=f4e158]:
+            - img [ref=f4e160]
+            - text: Auto-sync with billing systems
+          - listitem [ref=f4e162]:
+            - img [ref=f4e164]
+            - text: Real-time member roster view
+          - listitem [ref=f4e166]:
+            - img [ref=f4e168]
+            - text: Signature capture & audit trail
+      - generic [ref=f4e171]:
+        - generic [ref=f4e172]: Today's Attendance
+        - generic [ref=f4e173]:
+          - generic [ref=f4e174]:
+            - generic [ref=f4e176]:
+              - generic [ref=f4e177]: Sarah A.
+              - generic [ref=f4e178]: Checked in 9:02 AM
+            - generic [ref=f4e179]: ✓ Present
+          - generic [ref=f4e180]:
+            - generic [ref=f4e182]:
+              - generic [ref=f4e183]: Marcus J.
+              - generic [ref=f4e184]: Checked in 9:15 AM
+            - generic [ref=f4e185]: ✓ Present
+          - generic [ref=f4e186]:
+            - generic [ref=f4e188]:
+              - generic [ref=f4e189]: Kim L.
+              - generic [ref=f4e190]: Expected arrival
+            - generic [ref=f4e191]: ⏳ Pending
+  - generic [ref=f4e193]:
+    - paragraph [ref=f4e194]: From the founder
+    - heading "\"Our mission has always been to focus on people, not paper.\"" [level=2] [ref=f4e195]:
+      - text: "\"Our mission has always been to"
+      - emphasis [ref=f4e196]: focus on people
+      - text: ", not paper.\""
+    - paragraph [ref=f4e197]: When we built Kibu, we watched incredible DSPs spend hours every day on paperwork instead of connecting with the people they serve. We knew there had to be a better way — technology that gets out of the way and lets great care happen.
+    - generic [ref=f4e198]:
+      - generic [ref=f4e199]: D
+      - generic [ref=f4e200]:
+        - generic [ref=f4e201]: Daniel Goldstein
+        - generic [ref=f4e202]: Founder & CEO, Kibu
+  - generic [ref=f4e204]:
+    - generic [ref=f4e205]:
+      - paragraph [ref=f4e206]: Why Kibu
+      - heading "Designed Around Your Workflow" [level=2] [ref=f4e207]
+      - paragraph [ref=f4e208]: Purpose-built for disability service providers — not adapted from generic software.
+    - generic [ref=f4e209]:
+      - generic [ref=f4e210]:
+        - img [ref=f4e212]
+        - heading "Personalized for Each Organization" [level=3] [ref=f4e214]
+        - paragraph [ref=f4e215]: Custom workflows, roles, and settings tailored to how your organization actually operates — not a generic template.
+      - generic [ref=f4e216]:
+        - img [ref=f4e218]
+        - heading "Fast & Easy to Use" [level=3] [ref=f4e220]
+        - paragraph [ref=f4e221]: Designed for DSPs — not tech experts. Intuitive interface means less training time and more time with the people you serve.
+      - generic [ref=f4e222]:
+        - img [ref=f4e224]
+        - heading "Mobile-Ready by Design" [level=3] [ref=f4e226]
+        - paragraph [ref=f4e227]: Works seamlessly on any device. Staff can complete documentation from day programs, community outings, and beyond.
+  - generic [ref=f4e228]:
+    - generic [ref=f4e229]:
+      - paragraph [ref=f4e230]: Compliance
+      - heading "Compliance in 60 Seconds" [level=2] [ref=f4e231]
+      - paragraph [ref=f4e232]: Our platform guides every interaction toward compliance — so you're always audit-ready without the extra effort.
+      - list [ref=f4e233]:
+        - listitem [ref=f4e234]:
+          - img [ref=f4e236]
+          - text: Built-In Translation — 40+ languages
+        - listitem [ref=f4e238]:
+          - img [ref=f4e240]
+          - text: AI-Assisted Service Notes
+        - listitem [ref=f4e242]:
+          - img [ref=f4e244]
+          - text: Beautiful, Fast Reporting
+        - listitem [ref=f4e246]:
+          - img [ref=f4e248]
+          - text: Complete Member Records
+        - listitem [ref=f4e250]:
+          - img [ref=f4e252]
+          - text: Task Assignment & Tracking
+        - listitem [ref=f4e254]:
+          - img [ref=f4e256]
+          - text: Appointments & Transport Management
+        - listitem [ref=f4e258]:
+          - img [ref=f4e260]
+          - text: Custom Role Controls & Permissions
+    - generic [ref=f4e262]:
+      - generic [ref=f4e263]: 84.3%
+      - paragraph [ref=f4e264]: Average Compliance Rate
+      - paragraph [ref=f4e266]: Organizations achieve this score within 2 months — compared to the industry average of 61%.
+      - generic [ref=f4e267]:
+        - img [ref=f4e268]
+        - text: 99.2% avg within 2 months
+  - generic [ref=f4e271]:
+    - generic [ref=f4e272]:
+      - paragraph [ref=f4e273]: Content Library
+      - heading "Thousands of Ready-to-Use Activities" [level=2] [ref=f4e274]
+      - paragraph [ref=f4e275]: Engage members with curated, goal-aligned lesson plans across every category imaginable.
+    - generic [ref=f4e276]:
+      - button "💃 Dance" [ref=f4e277] [cursor=pointer]
+      - button "📚 Life Skills" [ref=f4e278] [cursor=pointer]
+      - button "💼 Job Development" [ref=f4e279] [cursor=pointer]
+      - button "💪 General Fitness" [ref=f4e280] [cursor=pointer]
+      - button "🧘 Yoga" [ref=f4e281] [cursor=pointer]
+      - button "🍳 Cooking" [ref=f4e282] [cursor=pointer]
+      - button "🎨 Enrichment & Arts" [ref=f4e283] [cursor=pointer]
+      - button "🎮 Games" [ref=f4e284] [cursor=pointer]
+      - button "👥 Staff Training" [ref=f4e285] [cursor=pointer]
+    - generic [ref=f4e286]:
+      - generic [ref=f4e287]:
+        - generic [ref=f4e288]: 🔥
+        - generic [ref=f4e289]:
+          - generic [ref=f4e290]: Life Skills
+          - generic [ref=f4e291]: Fire Safety at Home
+      - generic [ref=f4e292]:
+        - generic [ref=f4e293]: ✍️
+        - generic [ref=f4e294]:
+          - generic [ref=f4e295]: Life Skills
+          - generic [ref=f4e296]: How to Write a Check
+      - generic [ref=f4e297]:
+        - generic [ref=f4e298]: 🚌
+        - generic [ref=f4e299]:
+          - generic [ref=f4e300]: Community
+          - generic [ref=f4e301]: Navigating Public Transit
+      - generic [ref=f4e302]:
+        - generic [ref=f4e303]: 🎨
+        - generic [ref=f4e304]:
+          - generic [ref=f4e305]: Enrichment
+          - generic [ref=f4e306]: Watercolor Painting
+      - generic [ref=f4e307]:
+        - generic [ref=f4e308]: 💵
+        - generic [ref=f4e309]:
+          - generic [ref=f4e310]: Life Skills
+          - generic [ref=f4e311]: Financial Literacy 101
+      - generic [ref=f4e312]:
+        - generic [ref=f4e313]: 🧘
+        - generic [ref=f4e314]:
+          - generic [ref=f4e315]: Yoga
+          - generic [ref=f4e316]: Morning Stretch Routine
+      - generic [ref=f4e317]:
+        - generic [ref=f4e318]: 🍝
+        - generic [ref=f4e319]:
+          - generic [ref=f4e320]: Cooking
+          - generic [ref=f4e321]: Easy Pasta Dinner
+      - generic [ref=f4e322]:
+        - generic [ref=f4e323]: 🎯
+        - generic [ref=f4e324]:
+          - generic [ref=f4e325]: Games
+          - generic [ref=f4e326]: Team Trivia Challenge
+  - generic [ref=f4e329]:
+    - generic [ref=f4e330]:
+      - paragraph [ref=f4e331]: Intelligent Features
+      - heading "Elevate Content with Intelligent Features" [level=2] [ref=f4e332]
+      - generic [ref=f4e333]:
+        - generic [ref=f4e334]:
+          - img [ref=f4e336]
+          - generic [ref=f4e338]:
+            - generic [ref=f4e339]: Automated Tracking & Goal Alignment
+            - paragraph [ref=f4e340]: Every activity automatically links to member goals and generates documentation — no manual entry needed.
+        - generic [ref=f4e341]:
+          - img [ref=f4e343]
+          - generic [ref=f4e345]:
+            - generic [ref=f4e346]: Unified Platform — No System Switching
+            - paragraph [ref=f4e347]: Content, attendance, notes, and reports all in one place. Your team stays focused without jumping between apps.
+        - generic [ref=f4e348]:
+          - img [ref=f4e350]
+          - generic [ref=f4e352]:
+            - generic [ref=f4e353]: Custom Dashboards per Role
+            - paragraph [ref=f4e354]: DSPs, program directors, and admins each see exactly what they need — no more, no less.
+    - generic [ref=f4e356]:
+      - generic [ref=f4e357]:
+        - generic [ref=f4e358]: Program Dashboard
+        - generic [ref=f4e359]: June 2026
+      - generic [ref=f4e360]:
+        - generic [ref=f4e361]:
+          - generic [ref=f4e362]: Active Members
+          - generic [ref=f4e363]: "142"
+          - generic [ref=f4e364]: ↑ 8 this month
+        - generic [ref=f4e365]:
+          - generic [ref=f4e366]: Compliance Rate
+          - generic [ref=f4e367]: 91%
+          - generic [ref=f4e368]: ↑ 3% vs last month
+      - generic [ref=f4e369]:
+        - generic [ref=f4e370]:
+          - generic [ref=f4e371]: Notes Submitted Today
+          - generic [ref=f4e372]: 38/42
+        - generic [ref=f4e375]: 4 notes still outstanding
+  - generic [ref=f4e378]:
+    - generic [ref=f4e379]:
+      - img [ref=f4e381]
+      - generic [ref=f4e385]: Personalized Onboarding
+      - generic [ref=f4e386]: Dedicated support from day one. Our team trains your staff and sets up your account to match your workflow.
+      - generic [ref=f4e389]: "Average setup: 2 weeks"
+    - generic [ref=f4e390]:
+      - paragraph [ref=f4e391]: Security & Support
+      - heading "HIPAA-Compliant & Fully Supported" [level=2] [ref=f4e392]
+      - paragraph [ref=f4e393]: Your members' data is protected with enterprise-grade security. And your team is never alone — we're here every step of the way.
+      - generic [ref=f4e394]:
+        - generic [ref=f4e395]:
+          - img [ref=f4e396]
+          - text: HIPAA Compliant
+        - generic [ref=f4e398]:
+          - img [ref=f4e399]
+          - text: 256-bit Encryption
+        - generic [ref=f4e402]:
+          - img [ref=f4e403]
+          - text: SOC 2 Type II
+      - generic [ref=f4e405]:
+        - generic [ref=f4e406]: Free, Unlimited Support
+        - paragraph [ref=f4e407]: "Live chat, email, and phone support — included for every customer at no extra cost. Average response time: under 2 hours."
+  - generic [ref=f4e409]:
+    - generic [ref=f4e410]:
+      - paragraph [ref=f4e411]: Customer Stories
+      - heading "Real People, Real Results" [level=2] [ref=f4e412]
+      - paragraph [ref=f4e413]: See how organizations like yours are transforming care with Kibu.
+    - generic [ref=f4e414]:
+      - generic [ref=f4e415]:
+        - generic [ref=f4e416]: 🏢
+        - generic [ref=f4e417]:
+          - generic [ref=f4e418]: Chimes International
+          - generic [ref=f4e419]: From 61% to 94% Compliance in 6 Weeks
+          - paragraph [ref=f4e420]: Chimes transformed their documentation process and eliminated hours of paperwork per DSP per week.
+          - link "Read case study" [ref=f4e421] [cursor=pointer]:
+            - /url: "#"
+            - text: Read case study
+            - img [ref=f4e422]
+      - generic [ref=f4e424]:
+        - generic [ref=f4e425]: 🌟
+        - generic [ref=f4e426]:
+          - generic [ref=f4e427]: The ARC of the Midlands
+          - generic [ref=f4e428]: Staff Turnover Cut by 30% After Switching
+          - paragraph [ref=f4e429]: DSPs report spending 2+ fewer hours per shift on paperwork — time now spent directly with members.
+          - link "Read case study" [ref=f4e430] [cursor=pointer]:
+            - /url: "#"
+            - text: Read case study
+            - img [ref=f4e431]
+      - generic [ref=f4e433]:
+        - generic [ref=f4e434]: 🎯
+        - generic [ref=f4e435]:
+          - generic [ref=f4e436]: YMCA of Greater Hartford
+          - generic [ref=f4e437]: Content Library Drives 40% Higher Engagement
+          - paragraph [ref=f4e438]: Members participate in more activities than ever, with every session automatically documented.
+          - link "Read case study" [ref=f4e439] [cursor=pointer]:
+            - /url: "#"
+            - text: Read case study
+            - img [ref=f4e440]
+  - generic [ref=f4e442]:
+    - generic [ref=f4e444]:
+      - paragraph [ref=f4e445]: Wall of Love
+      - heading "Loved by DSPs Everywhere" [level=2] [ref=f4e446]
+    - generic [ref=f4e448]:
+      - generic [ref=f4e449]:
+        - paragraph [ref=f4e450]: "\"Using Kibu has allowed our staff to take the lead and empowered them with the tools to succeed.\""
+        - generic [ref=f4e451]: — Sarah M., Service Manager
+      - generic [ref=f4e452]:
+        - paragraph [ref=f4e453]: "\"I used to dread end-of-day notes. Now I finish them in 5 minutes. It's genuinely changed my work life.\""
+        - generic [ref=f4e454]: — Marcus T., DSP
+      - generic [ref=f4e455]:
+        - paragraph [ref=f4e456]: "\"Our audit compliance went from a stressful guessing game to a confident, data-backed presentation.\""
+        - generic [ref=f4e457]: — Kim L., Program Director
+      - generic [ref=f4e458]:
+        - paragraph [ref=f4e459]: "\"The content library alone is worth it. Our members are more engaged than they've ever been.\""
+        - generic [ref=f4e460]: — Jennifer R., Activity Coordinator
+      - generic [ref=f4e461]:
+        - paragraph [ref=f4e462]: "\"Kibu made onboarding new staff so much faster. The learning curve is practically nonexistent.\""
+        - generic [ref=f4e463]: — David K., HR Manager
+      - generic [ref=f4e464]:
+        - paragraph [ref=f4e465]: "\"We went from three separate systems to one. The time we've saved is remarkable.\""
+        - generic [ref=f4e466]: — Patricia W., Operations Director
+      - generic [ref=f4e467]:
+        - paragraph [ref=f4e468]: "\"The AI reports are unbelievable. What took our team hours each week now takes minutes.\""
+        - generic [ref=f4e469]: — Anthony B., Executive Director
+      - generic [ref=f4e470]:
+        - paragraph [ref=f4e471]: "\"I can check compliance in real time instead of waiting for the monthly review. Game changer.\""
+        - generic [ref=f4e472]: — Lisa H., Quality Assurance
+      - generic [ref=f4e473]:
+        - paragraph [ref=f4e474]: "\"Using Kibu has allowed our staff to take the lead and empowered them with the tools to succeed.\""
+        - generic [ref=f4e475]: — Sarah M., Service Manager
+      - generic [ref=f4e476]:
+        - paragraph [ref=f4e477]: "\"I used to dread end-of-day notes. Now I finish them in 5 minutes. It's genuinely changed my work life.\""
+        - generic [ref=f4e478]: — Marcus T., DSP
+      - generic [ref=f4e479]:
+        - paragraph [ref=f4e480]: "\"Our audit compliance went from a stressful guessing game to a confident, data-backed presentation.\""
+        - generic [ref=f4e481]: — Kim L., Program Director
+      - generic [ref=f4e482]:
+        - paragraph [ref=f4e483]: "\"The content library alone is worth it. Our members are more engaged than they've ever been.\""
+        - generic [ref=f4e484]: — Jennifer R., Activity Coordinator
+      - generic [ref=f4e485]:
+        - paragraph [ref=f4e486]: "\"Kibu made onboarding new staff so much faster. The learning curve is practically nonexistent.\""
+        - generic [ref=f4e487]: — David K., HR Manager
+      - generic [ref=f4e488]:
+        - paragraph [ref=f4e489]: "\"We went from three separate systems to one. The time we've saved is remarkable.\""
+        - generic [ref=f4e490]: — Patricia W., Operations Director
+      - generic [ref=f4e491]:
+        - paragraph [ref=f4e492]: "\"The AI reports are unbelievable. What took our team hours each week now takes minutes.\""
+        - generic [ref=f4e493]: — Anthony B., Executive Director
+      - generic [ref=f4e494]:
+        - paragraph [ref=f4e495]: "\"I can check compliance in real time instead of waiting for the monthly review. Game changer.\""
+        - generic [ref=f4e496]: — Lisa H., Quality Assurance
+  - generic [ref=f4e499]:
+    - generic [ref=f4e500]:
+      - generic [ref=f4e501]: ★★★★★
+      - paragraph [ref=f4e502]: "\"Kibu has completely transformed how we document services. Our DSPs are happier and our compliance scores have never been better.\""
+      - generic [ref=f4e503]:
+        - generic [ref=f4e504]: R
+        - generic [ref=f4e505]:
+          - generic [ref=f4e506]: Rebecca C.
+          - generic [ref=f4e507]: Program Director, Easterseals
+    - generic [ref=f4e508]:
+      - generic [ref=f4e509]: ★★★★★
+      - paragraph [ref=f4e510]: "\"The content library has been a complete game-changer for our day programs. Members are engaged, and sessions document themselves.\""
+      - generic [ref=f4e511]:
+        - generic [ref=f4e512]: J
+        - generic [ref=f4e513]:
+          - generic [ref=f4e514]: James M.
+          - generic [ref=f4e515]: Day Program Manager, UCP
+    - generic [ref=f4e516]:
+      - generic [ref=f4e517]: ★★★★★
+      - paragraph [ref=f4e518]: "\"We passed our last audit with flying colors. The auditor literally commented on how organized our documentation was. That's Kibu.\""
+      - generic [ref=f4e519]:
+        - generic [ref=f4e520]: T
+        - generic [ref=f4e521]:
+          - generic [ref=f4e522]: Theresa N.
+          - generic [ref=f4e523]: Compliance Officer, The ARC
+  - generic [ref=f4e525]:
+    - heading "Ready to Focus on People, Not Paper?" [level=2] [ref=f4e526]
+    - paragraph [ref=f4e527]: Join 200+ organizations delivering better care with Kibu.
+    - link "Get a demo" [ref=f4e528] [cursor=pointer]:
+      - /url: "#"
+  - contentinfo [ref=f4e529]:
+    - generic [ref=f4e530]:
+      - generic [ref=f4e531]:
+        - generic [ref=f4e532]:
+          - link "kibu" [ref=f4e533] [cursor=pointer]:
+            - /url: "#"
+            - text: ki
+            - emphasis [ref=f4e534]: bu
+          - paragraph [ref=f4e535]: The platform for disability service providers — simplifying compliance, documentation, and content delivery so your team can focus on what matters.
+          - generic [ref=f4e536]:
+            - text: 78 Harvard Ave, Floor 3
+            - text: Stamford, CT 06902
+        - generic [ref=f4e537]:
+          - generic [ref=f4e538]: Solutions
+          - generic [ref=f4e539]:
+            - link "Documentation" [ref=f4e540] [cursor=pointer]:
+              - /url: "#"
+            - link "Content Library" [ref=f4e541] [cursor=pointer]:
+              - /url: "#"
+            - link "Compliance" [ref=f4e542] [cursor=pointer]:
+              - /url: "#"
+            - link "Life Plans" [ref=f4e543] [cursor=pointer]:
+              - /url: "#"
+        - generic [ref=f4e544]:
+          - generic [ref=f4e545]: Resources
+          - generic [ref=f4e546]:
+            - link "Blog" [ref=f4e547] [cursor=pointer]:
+              - /url: "#"
+            - link "Help Center" [ref=f4e548] [cursor=pointer]:
+              - /url: "#"
+            - link "About" [ref=f4e549] [cursor=pointer]:
+              - /url: "#"
+            - link "Contact" [ref=f4e550] [cursor=pointer]:
+              - /url: "#"
+            - link "Careers" [ref=f4e551] [cursor=pointer]:
+              - /url: "#"
+            - link "Submit RFP" [ref=f4e552] [cursor=pointer]:
+              - /url: "#"
+            - link "Changelog" [ref=f4e553] [cursor=pointer]:
+              - /url: "#"
+        - generic [ref=f4e554]:
+          - generic [ref=f4e555]: Connect
+          - generic [ref=f4e556]:
+            - link "LinkedIn" [ref=f4e557] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=f4e558]
+            - link "Instagram" [ref=f4e561] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=f4e562]
+            - link "Facebook" [ref=f4e565] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=f4e566]
+            - link "YouTube" [ref=f4e568] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=f4e569]
+          - link "Get a demo" [ref=f4e572] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f4e573]:
+        - paragraph [ref=f4e574]: © 2026 kibu. All rights reserved.
+        - generic [ref=f4e575]:
+          - link "Privacy Policy" [ref=f4e576] [cursor=pointer]:
+            - /url: "#"
+          - link "Terms of Service" [ref=f4e577] [cursor=pointer]:
+            - /url: "#"
+          - link "Member Code of Conduct" [ref=f4e578] [cursor=pointer]:
+            - /url: "#"

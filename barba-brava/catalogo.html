@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo — Cremes de Barbear Artesanais | Barba Brava</title>
+  <meta name="description" content="Todos os cremes de barbear artesanais Barba Brava. Filtre por coleção, família olfativa e tipo de pele. Ingredientes naturais, sem parabenos." />
+  <meta name="keywords" content="catálogo creme de barbear, creme barbear natural, coleções, família olfativa, tipo de pele" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://barbabrava.com.br/catalogo.html" />
+  <meta name="theme-color" content="#111110" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Catálogo — Cremes de Barbear Artesanais | Barba Brava" />
+  <meta property="og:description" content="Filtre por coleção, família olfativa e tipo de pele. Ingredientes naturais, sem parabenos." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://barbabrava.com.br/catalogo.html" />
+  <meta property="og:image" content="https://barbabrava.com.br/og-image.jpg" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Barba Brava" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Catálogo — Barba Brava" />
+  <meta name="twitter:description" content="Filtre por coleção, família olfativa e tipo de pele." />
+  <meta name="twitter:image" content="https://barbabrava.com.br/og-image.jpg" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- JSON-LD: ItemList do catálogo (injetado por catalogo.js) -->
+  <script type="application/ld+json" id="catalogJsonLd"></script>
+</head>
+<body>
+
+  <a href="#main" class="skip-nav">Pular para o conteúdo</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="Barba Brava — página inicial">
+        <span class="logo-icon" aria-hidden="true">✦</span>
+        Barba Brava
+      </a>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="catalogo.html" aria-current="page">Catálogo</a>
+        <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+
+      <button class="cart-btn" id="cartBtn" aria-label="Abrir carrinho de compras" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-badge" id="cartCount" aria-live="polite" aria-label="itens no carrinho">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Você está em">
+        <a href="index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <span class="breadcrumb-current">Catálogo</span>
+      </nav>
+
+      <!-- Cabeçalho da página -->
+      <div class="page-head">
+        <p class="section-eyebrow">Catálogo</p>
+        <h1>Todos os Cremes</h1>
+        <p class="page-head-sub">Seis fórmulas artesanais. Filtre por coleção, aroma ou tipo de pele e encontre o seu.</p>
+      </div>
+
+      <!-- Layout: filtros + grid -->
+      <div class="catalog-layout">
+        <aside class="filters" id="filters" aria-label="Filtros de produtos">
+          <!-- Preenchido por catalogo.js -->
+        </aside>
+
+        <div class="catalog-results">
+          <div class="catalog-toolbar">
+            <p class="result-count" id="resultCount" aria-live="polite"></p>
+            <label class="sort-control">
+              <span>Ordenar:</span>
+              <select id="sortSelect" aria-label="Ordenar produtos">
+                <option value="relevancia">Relevância</option>
+                <option value="preco-asc">Menor preço</option>
+                <option value="preco-desc">Maior preço</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="products-grid" id="catalogGrid" role="list">
+            <!-- Preenchido por catalogo.js -->
+          </div>
+
+          <div class="catalog-empty" id="catalogEmpty" hidden>
+            <p>Nenhum creme corresponde a esses filtros.</p>
+            <button class="btn btn-ghost" id="clearFilters">Limpar filtros</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">✦ Barba Brava</span>
+        <p>Feito com cuidado para barbas que merecem respeito.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="index.html#sobre">Sobre Nós</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="mailto:contato@barbabrava.com.br">contato@barbabrava.com.br</a></li>
+          <li><a href="tel:+5511999990000">(11) 99999-0000</a></li>
+          <li>São Paulo, SP — Brasil</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Barba Brava. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Carrinho de compras" aria-hidden="true">
+    <div class="drawer-header">
+      <h2>Carrinho</h2>
+      <button class="drawer-close" id="cartClose" aria-label="Fechar carrinho">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body" id="drawerBody">
+      <div class="cart-empty" id="cartEmpty">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <p>Seu carrinho está vazio</p>
+        <span>Adicione produtos para começar</span>
+      </div>
+      <ul class="cart-items" id="cartItems" aria-label="Itens no carrinho"></ul>
+    </div>
+
+    <div class="drawer-footer" id="drawerFooter" hidden>
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span class="cart-total-value" id="cartTotal">R$ 0,00</span>
+      </div>
+      <a class="btn btn-primary btn-full" href="checkout.html">
+        Finalizar Compra
+      </a>
+    </div>
+  </aside>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <script src="catalogo.js"></script>
+</body>
+</html>

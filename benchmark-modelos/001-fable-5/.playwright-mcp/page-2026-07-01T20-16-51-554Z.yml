@@ -1,0 +1,21 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - text: Sistema Solar 3D
+    - generic: W A S D
+    - text: mover |
+    - generic: Q
+    - text: /
+    - generic: E
+    - text: descer/subir
+    - generic: Mouse arrastar
+    - text: olhar |
+    - generic: Scroll
+    - text: zoom
+    - generic: Shift
+    - text: acelerar |
+    - generic: Clique
+    - text: num planeta = dados
+  - generic [ref=e3]:
+    - generic [ref=e4]: Velocidade do tempo
+    - slider [ref=e5]: "5"
+    - generic [ref=e6]: 5×

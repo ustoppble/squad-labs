@@ -1,0 +1,13 @@
+{
+  "test": "003",
+  "model": "fable-5",
+  "source_file": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/003-fable-5/bolinhas.html",
+  "bytes": 8964,
+  "lines": 307,
+  "libs": [],
+  "external_requests": false,
+  "modified_date": "2026-07-01T17:15:32",
+  "cost_usd": 3.50,
+  "tokens_in": 157000,
+  "tokens_out": 18000
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "asset": "assets/ui/app-shell-bg.png",
+    "usage": "app-background",
+    "screen": "generic",
+    "note": "Ultra-dark blue-black ambient background for the app shell canvas (--bg-base zone). Barely-visible hexagonal micro-grid at 2% opacity, faint ice-blue wash at top edge only. Set as CSS background-image on .app or body; sits safely behind dense data tables at any density."
+  },
+  {
+    "asset": "assets/ui/dashboard-bg.png",
+    "usage": "app-background",
+    "screen": "dashboard",
+    "note": "Dashboard-specific ambient background. Same deep blue-black field with a centered soft radial ice-blue bloom (4% opacity) and peripheral topology traces. Apply behind stat tiles and charts only — the centered glow draws the eye toward the data without competing with it."
+  },
+  {
+    "asset": "assets/ui/login-splash.png",
+    "usage": "login-splash",
+    "screen": "login",
+    "note": "Hero visual for the login screen. Dark observatory control room interior, single silhouetted figure facing a star-field panoramic window. Ice-blue instrument hairlines, deep shadows. Use as full-bleed right-panel or background on the login layout — this is the one screen that earns an immersive treatment."
+  },
+  {
+    "asset": "assets/ui/glow-radial.png",
+    "usage": "glow",
+    "screen": "generic",
+    "note": "Soft centered radial ice-blue glow on pure black. Use as a decorative layer behind active KPI tiles, section hero areas, or modal backdrops. Apply via CSS mix-blend-mode: screen or as a pseudo-element at 30–60% opacity to avoid overpowering the UI surface beneath."
+  },
+  {
+    "asset": "assets/ui/hairline-grid.png",
+    "usage": "glow",
+    "screen": "generic",
+    "note": "Ultra-fine ice-blue hairline grid on deep blue-black. Tileable 1:1 texture for section backgrounds, modal panels, or overlay accents. Ice-blue at 6% opacity — safe to use under text. Pairs with glow-radial.png layered on top for depth. Match --stroke-subtle token intent."
+  },
+  {
+    "asset": "assets/ui/empty-clients.png",
+    "usage": "empty-state",
+    "screen": "clientes",
+    "note": "Empty-state illustration for the client list when no clients exist yet. Floating geometric data-table frame with hairline ice-blue lines, empty rows, faint orbital ring below. Use inside .empty pattern per design system §5.8 — 40px icon zone replaced by this illustration at ~120px centered."
+  },
+  {
+    "asset": "assets/ui/empty-trash.png",
+    "usage": "empty-state",
+    "screen": "generic",
+    "note": "Empty-state illustration for cleared or empty archive/trash views. Open geometric container with data-particles drifting upward and fading. Use when a list or queue has been fully cleared. Same placement as empty-clients.png — centered at ~120px, paired with a .empty__title and single action."
+  },
+  {
+    "asset": "assets/ui/empty-search.png",
+    "usage": "empty-state",
+    "screen": "generic",
+    "note": "Empty-state illustration for search or filter returning zero results. Geometric magnifying glass scanning a void, receding grid lines behind lens. Use on any screen where a search/filter query produces an empty result set. Pair with copy: 'Nenhum resultado encontrado' + clear-filters action."
+  }
+]

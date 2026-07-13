@@ -1,0 +1,11 @@
+{
+  "9mjayycgzdrmt0cz0whtwbmk44": {
+    "jobId": "9mjayycgzdrmt0cz0whtwbmk44",
+    "provider": "replicate-video",
+    "pollUrl": "https://api.replicate.com/v1/predictions/9mjayycgzdrmt0cz0whtwbmk44",
+    "prompt": "The provided image is both the first frame and the final frame, so all motion returns to its exact starting state for a seamless background loop with no visible cut. Hot steam curls and rises gently off the glossy grilled sausage, swirling slowly upward and dissipating, then settling back. The yellow mustard and red ketchup glisten as soft highlights shimmer across the wet glossy sauce. Out-of-focus warm string lights twinkle softly in the background market bokeh. Camera: locked-off static close-up, no movement. Style: warm golden practical light, shallow depth of field, rich saturated reds and mustard yellow, fine film grain. Aspect ratio: 16:9. Duration: 5s. 24 fps, no repeated frames.",
+    "outPath": "assets/hotdog-hero-loop.mp4",
+    "startedAt": 1782531199373,
+    "status": "completed"
+  }
+}

@@ -1,0 +1,114 @@
+- generic [active] [ref=f1e1]:
+  - navigation "Navegação principal" [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - link "Aura" [ref=f1e4] [cursor=pointer]:
+        - /url: "#"
+      - list [ref=f1e5]:
+        - listitem [ref=f1e6]:
+          - link "Som" [ref=f1e7] [cursor=pointer]:
+            - /url: "#som"
+        - listitem [ref=f1e8]:
+          - link "Silêncio" [ref=f1e9] [cursor=pointer]:
+            - /url: "#silencio"
+        - listitem [ref=f1e10]:
+          - link "Bateria" [ref=f1e11] [cursor=pointer]:
+            - /url: "#bateria"
+        - listitem [ref=f1e12]:
+          - link "Especificações" [ref=f1e13] [cursor=pointer]:
+            - /url: "#specs"
+        - listitem [ref=f1e14]:
+          - link "Comprar" [ref=f1e15] [cursor=pointer]:
+            - /url: "#comprar"
+  - banner [ref=f1e16]:
+    - paragraph [ref=f1e17]: Aura Pro
+    - heading "Som além do silêncio." [level=1] [ref=f1e18]:
+      - text: Som além
+      - text: do silêncio.
+    - paragraph [ref=f1e19]: O fone de ouvido que aprende como você escuta. Cancelamento de ruído adaptativo, áudio espacial e 40 horas de bateria.
+    - generic [ref=f1e20]:
+      - link "Comprar" [ref=f1e21] [cursor=pointer]:
+        - /url: "#comprar"
+      - link "Saiba mais" [ref=f1e22] [cursor=pointer]:
+        - /url: "#som"
+    - paragraph [ref=f1e23]: A partir de R$ 2.499 ou 12x de R$ 208,25
+    - img "Fone de ouvido Aura Pro" [ref=f1e24]
+  - generic [ref=f1e35]:
+    - paragraph [ref=f1e36]: Áudio espacial personalizado
+    - heading "O som se move com você." [level=2] [ref=f1e37]:
+      - text: O som se move
+      - text: com você.
+    - paragraph [ref=f1e38]: Rastreamento dinâmico de cabeça posiciona o som ao seu redor. Cada instrumento no seu lugar. Cada detalhe onde deveria estar.
+    - paragraph [ref=f1e39]:
+      - link "Como funciona o áudio espacial ›" [ref=f1e40] [cursor=pointer]:
+        - /url: "#specs"
+    - img "Visualização do campo sonoro tridimensional" [ref=f1e41]
+  - generic [ref=f1e43]:
+    - paragraph [ref=f1e44]: Cancelamento ativo de ruído
+    - heading "O mundo lá fora. Você aqui dentro." [level=2] [ref=f1e45]:
+      - text: O mundo lá fora.
+      - text: Você aqui dentro.
+    - paragraph [ref=f1e46]: Oito microfones analisam o ambiente 200 vezes por segundo e apagam o ruído antes que ele chegue até você.
+    - generic [ref=f1e47]:
+      - generic [ref=f1e48]:
+        - generic [ref=f1e49]: "-45 dB"
+        - heading "Redução de ruído líder da categoria" [level=3] [ref=f1e50]
+        - paragraph [ref=f1e51]: O chip Aura H2 processa o cancelamento em tempo real, adaptando-se de um voo lotado a um escritório silencioso sem que você perceba a transição.
+      - generic [ref=f1e52]:
+        - generic [ref=f1e53]: "8"
+        - heading "Microfones" [level=3] [ref=f1e54]
+        - paragraph [ref=f1e55]: Seis externos para o ambiente, dois internos para calibrar o que você realmente ouve.
+      - generic [ref=f1e56]:
+        - generic [ref=f1e57]: 200x
+        - heading "Por segundo" [level=3] [ref=f1e58]
+        - paragraph [ref=f1e59]: Frequência de análise do ambiente para ajuste contínuo do cancelamento.
+      - generic [ref=f1e60]:
+        - generic [ref=f1e61]: Modo Ambiente
+        - heading "Ouça o que importa, quando importa" [level=3] [ref=f1e62]
+        - paragraph [ref=f1e63]: Um toque deixa o mundo entrar — anúncios de voo, uma conversa rápida — sem tirar o fone.
+  - generic [ref=f1e65]:
+    - paragraph [ref=f1e66]: Bateria
+    - heading "Toca o dia inteiro. E o de amanhã também." [level=2] [ref=f1e67]:
+      - text: Toca o dia inteiro.
+      - text: E o de amanhã também.
+    - generic [ref=f1e68]:
+      - generic [ref=f1e69]: 40h
+      - paragraph [ref=f1e70]: de reprodução com cancelamento de ruído ativo
+    - paragraph [ref=f1e71]: Cinco minutos de carga rendem quatro horas de música. Carregamento via USB-C ou sem fio.
+  - generic [ref=f1e73]:
+    - paragraph [ref=f1e74]: Especificações
+    - heading "Feito para durar. Pensado para desaparecer." [level=2] [ref=f1e75]:
+      - text: Feito para durar.
+      - text: Pensado para desaparecer.
+    - paragraph [ref=f1e76]: Alumínio anodizado, malha respirável e 248 gramas distribuídos para você esquecer que está usando.
+    - generic [ref=f1e77]:
+      - generic [ref=f1e78]:
+        - generic [ref=f1e79]: 248 g
+        - heading "Leveza real" [level=3] [ref=f1e80]
+        - paragraph [ref=f1e81]: Estrutura em alumínio e fibra de carbono.
+      - generic [ref=f1e82]:
+        - generic [ref=f1e83]: USB-C
+        - heading "Carga universal" [level=3] [ref=f1e84]
+        - paragraph [ref=f1e85]: Um cabo para tudo. Áudio lossless via cabo incluído.
+      - generic [ref=f1e86]:
+        - generic [ref=f1e87]: IPX4
+        - heading "Resistência" [level=3] [ref=f1e88]
+        - paragraph [ref=f1e89]: Protegido contra respingos e suor.
+  - generic [ref=f1e91]:
+    - heading "Aura Pro." [level=2] [ref=f1e92]
+    - paragraph [ref=f1e93]: Disponível em grafite, prata e azul-meia-noite.
+    - link "Comprar por R$ 2.499" [ref=f1e95] [cursor=pointer]:
+      - /url: "#"
+    - paragraph [ref=f1e96]: Frete grátis. Devolução gratuita em até 14 dias.
+  - contentinfo [ref=f1e97]:
+    - generic [ref=f1e98]:
+      - paragraph [ref=f1e99]: "* A duração da bateria varia conforme o uso e a configuração. O áudio espacial requer dispositivo compatível. Aura Pro é um produto fictício criado para demonstração de design."
+      - generic [ref=f1e100]:
+        - link "Privacidade" [ref=f1e101] [cursor=pointer]:
+          - /url: "#"
+        - link "Termos de uso" [ref=f1e102] [cursor=pointer]:
+          - /url: "#"
+        - link "Vendas e reembolsos" [ref=f1e103] [cursor=pointer]:
+          - /url: "#"
+        - link "Contato" [ref=f1e104] [cursor=pointer]:
+          - /url: "#"
+      - paragraph [ref=f1e105]: Copyright © 2026 Aura Inc. Todos os direitos reservados.

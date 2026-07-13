@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bolinhas — Física Interativa</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; background: #0d0f14; }
+  canvas { display: block; cursor: crosshair; }
+  #ui {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    user-select: none;
+  }
+  #spawn {
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #6c5ce7, #a55eea);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(108, 92, 231, 0.4);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  #spawn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(108, 92, 231, 0.55); }
+  #spawn:active { transform: translateY(1px) scale(0.97); }
+  #count {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  #hint {
+    position: fixed;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.35);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    pointer-events: none;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <button id="spawn">+50 bolinhas</button>
+  <span id="count"></span>
+</div>
+<div id="hint">segure o mouse: atrai &nbsp;·&nbsp; clique rápido: explosão</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const countEl = document.getElementById('count');
+
+  let W, H, DPR;
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ---------- Física ----------
+  const GRAVITY = 1400;          // px/s²
+  const RESTITUTION = 0.82;      // quicar nas bordas
+  const BALL_RESTITUTION = 0.9;  // colisão bola-bola
+  const AIR_DRAG = 0.999;
+  const MAX_BALLS = 900;
+
+  const PALETTE = ['#ff6b6b', '#feca57', '#48dbfb', '#1dd1a1', '#f368e0', '#ff9f43', '#54a0ff', '#5f27cd', '#00d2d3', '#ee5253'];
+
+  const balls = [];
+
+  function spawnBall(x, y) {
+    const r = 6 + Math.random() * 10;
+    balls.push({
+      x, y,
+      vx: (Math.random() - 0.5) * 400,
+      vy: (Math.random() - 0.5) * 200,
+      r,
+      m: r * r,
+      color: PALETTE[(Math.random() * PALETTE.length) | 0]
+    });
+  }
+
+  function spawnBatch(n) {
+    const excess = balls.length + n - MAX_BALLS;
+    if (excess > 0) balls.splice(0, excess);
+    for (let i = 0; i < n; i++) {
+      spawnBall(W * 0.2 + Math.random() * W * 0.6, -20 - Math.random() * 150);
+    }
+  }
+
+  document.getElementById('spawn').addEventListener('click', e => {
+    e.stopPropagation();
+    spawnBatch(50);
+  });
+
+  // ---------- Mouse ----------
+  const mouse = { x: 0, y: 0, down: false, downTime: 0 };
+  const ATTRACT_RADIUS = 260;
+  const ATTRACT_FORCE = 3200;
+  const EXPLODE_RADIUS = 300;
+  const EXPLODE_FORCE = 900;
+  const CLICK_MS = 180; // soltar rápido = clique → explosão
+
+  canvas.addEventListener('pointerdown', e => {
+    mouse.down = true;
+    mouse.downTime = performance.now();
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  window.addEventListener('pointermove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  window.addEventListener('pointerup', () => {
+    if (mouse.down && performance.now() - mouse.downTime < CLICK_MS) explode(mouse.x, mouse.y);
+    mouse.down = false;
+  });
+  window.addEventListener('blur', () => { mouse.down = false; });
+
+  let explosion = null; // efeito visual
+  function explode(x, y) {
+    for (const b of balls) {
+      const dx = b.x - x, dy = b.y - y;
+      const d = Math.hypot(dx, dy) || 1;
+      if (d < EXPLODE_RADIUS) {
+        const f = EXPLODE_FORCE * (1 - d / EXPLODE_RADIUS);
+        b.vx += (dx / d) * f;
+        b.vy += (dy / d) * f;
+      }
+    }
+    explosion = { x, y, t: 0 };
+  }
+
+  // ---------- Grid espacial p/ colisões O(n) ----------
+  const CELL = 40;
+  function collide() {
+    const grid = new Map();
+    for (let i = 0; i < balls.length; i++) {
+      const b = balls[i];
+      const key = ((b.x / CELL) | 0) + ',' + ((b.y / CELL) | 0);
+      let cell = grid.get(key);
+      if (!cell) grid.set(key, cell = []);
+      cell.push(i);
+    }
+    for (let i = 0; i < balls.length; i++) {
+      const a = balls[i];
+      const cx = (a.x / CELL) | 0, cy = (a.y / CELL) | 0;
+      for (let gx = cx - 1; gx <= cx + 1; gx++) {
+        for (let gy = cy - 1; gy <= cy + 1; gy++) {
+          const cell = grid.get(gx + ',' + gy);
+          if (!cell) continue;
+          for (const j of cell) {
+            if (j <= i) continue;
+            resolvePair(a, balls[j]);
+          }
+        }
+      }
+    }
+  }
+
+  function resolvePair(a, b) {
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const minDist = a.r + b.r;
+    const distSq = dx * dx + dy * dy;
+    if (distSq >= minDist * minDist || distSq === 0) return;
+    const dist = Math.sqrt(distSq);
+    const nx = dx / dist, ny = dy / dist;
+
+    // separar sobreposição (ponderado por massa)
+    const overlap = minDist - dist;
+    const total = a.m + b.m;
+    a.x -= nx * overlap * (b.m / total);
+    a.y -= ny * overlap * (b.m / total);
+    b.x += nx * overlap * (a.m / total);
+    b.y += ny * overlap * (a.m / total);
+
+    // impulso elástico
+    const rvx = b.vx - a.vx, rvy = b.vy - a.vy;
+    const velAlongNormal = rvx * nx + rvy * ny;
+    if (velAlongNormal > 0) return;
+    const jImp = -(1 + BALL_RESTITUTION) * velAlongNormal / (1 / a.m + 1 / b.m);
+    a.vx -= (jImp * nx) / a.m;
+    a.vy -= (jImp * ny) / a.m;
+    b.vx += (jImp * nx) / b.m;
+    b.vy += (jImp * ny) / b.m;
+  }
+
+  // ---------- Loop ----------
+  let last = performance.now();
+
+  function step(dt) {
+    const attracting = mouse.down && performance.now() - mouse.downTime >= CLICK_MS;
+
+    for (const b of balls) {
+      b.vy += GRAVITY * dt;
+
+      if (attracting) {
+        const dx = mouse.x - b.x, dy = mouse.y - b.y;
+        const d = Math.hypot(dx, dy) || 1;
+        if (d < ATTRACT_RADIUS) {
+          const f = ATTRACT_FORCE * (1 - d / ATTRACT_RADIUS) + 400;
+          b.vx += (dx / d) * f * dt;
+          b.vy += (dy / d) * f * dt;
+          // amortecer perto do cursor pra formar aglomerado estável
+          if (d < 60) { b.vx *= 0.92; b.vy *= 0.92; }
+        }
+      }
+
+      b.vx *= AIR_DRAG;
+      b.vy *= AIR_DRAG;
+      b.x += b.vx * dt;
+      b.y += b.vy * dt;
+
+      // bordas
+      if (b.x - b.r < 0) { b.x = b.r; b.vx = -b.vx * RESTITUTION; }
+      else if (b.x + b.r > W) { b.x = W - b.r; b.vx = -b.vx * RESTITUTION; }
+      if (b.y - b.r < 0) { b.y = b.r; b.vy = -b.vy * RESTITUTION; }
+      else if (b.y + b.r > H) {
+        b.y = H - b.r;
+        b.vy = -b.vy * RESTITUTION;
+        b.vx *= 0.98; // atrito no chão
+        if (Math.abs(b.vy) < 20) b.vy = 0;
+      }
+    }
+
+    // 2 passadas de colisão = empilhamento mais estável
+    collide();
+    collide();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // anel de atração
+    if (mouse.down && performance.now() - mouse.downTime >= CLICK_MS) {
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, ATTRACT_RADIUS, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(165, 94, 234, 0.25)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    // onda da explosão
+    if (explosion) {
+      explosion.t += 0.06;
+      if (explosion.t >= 1) explosion = null;
+      else {
+        ctx.beginPath();
+        ctx.arc(explosion.x, explosion.y, explosion.t * EXPLODE_RADIUS, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255, 200, 87, ${0.5 * (1 - explosion.t)})`;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+    }
+
+    for (const b of balls) {
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.fillStyle = b.color;
+      ctx.fill();
+      // brilho sutil
+      ctx.beginPath();
+      ctx.arc(b.x - b.r * 0.3, b.y - b.r * 0.3, b.r * 0.35, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.fill();
+    }
+
+    countEl.textContent = balls.length + ' bolinhas';
+  }
+
+  function frame(now) {
+    // dt limitado + substeps fixos = estável em qualquer refresh rate
+    let dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    const SUB = 2;
+    for (let s = 0; s < SUB; s++) step(dt / SUB);
+    draw();
+    requestAnimationFrame(frame);
+  }
+
+  spawnBatch(50);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

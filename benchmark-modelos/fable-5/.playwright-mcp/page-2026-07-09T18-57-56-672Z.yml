@@ -1,0 +1,21 @@
+- generic [active] [ref=f3e1]:
+  - generic: ✕
+  - generic [ref=f3e2]:
+    - generic [ref=f3e3]: VIDA
+    - generic [ref=f3e7]: "100"
+  - generic [ref=f3e8]:
+    - generic [ref=f3e9]: ABATES
+    - generic [ref=f3e10]: "0"
+  - generic [ref=f3e11]:
+    - generic [ref=f3e12]: RIFLE
+    - generic [ref=f3e13]: 30 ∕ ∞
+    - generic [ref=f3e14]:
+      - generic [ref=f3e15]: 1 RIFLE
+      - generic [ref=f3e16]: 2 RPG
+  - generic [ref=f3e17] [cursor=pointer]:
+    - heading "SETOR 004" [level=1] [ref=f3e18]
+    - paragraph [ref=f3e19]:
+      - text: WASD — mover · SHIFT — correr · ESPAÇO — pular
+      - text: MOUSE — mirar · CLIQUE — atirar
+      - text: 1 / 2 · Q · SCROLL — trocar arma · R — recarregar
+    - generic [ref=f3e20]: CLIQUE PARA JOGAR

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overclock — Orchestrate agents. Ship faster.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="site-nav">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="/" class="nav-logo" aria-label="Overclock home">OVERCLOCK</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#models">Models</a></li>
+      </ul>
+      <a href="#main" class="btn btn-primary nav-cta">Get Early Access</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero-content">
+        <p class="eyebrow">MULTI-AGENT IDE</p>
+        <h1 id="hero-headline" class="hero-headline">
+          <span class="gradient-text">Orchestrate agents.</span><br />
+          Ship faster.
+        </h1>
+        <p class="hero-sub">
+          A grid of AI agents working in parallel — each with its own visible pane.
+          Your pilot routes work to builders, scouts, and reviewers running the best model for every task.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary">Get Early Access</a>
+          <a href="#how-it-works" class="btn btn-ghost">See it in action</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="agent-grid">
+
+          <div class="agent-pane">
+            <div class="pane-header">
+              <span class="pane-dot dot-cyan"></span>
+              <span class="pane-name">Scout-1</span>
+              <span class="pane-status status-running">running</span>
+            </div>
+            <div class="pane-body">
+              <span class="pane-line">$ search_codebase("auth module")</span>
+              <span class="pane-line">→ Found 12 relevant files</span>
+              <span class="pane-line">→ Indexing patterns...</span>
+              <span class="pane-line">→ Analysis complete</span>
+            </div>
+          </div>
+
+          <div class="agent-pane">
+            <div class="pane-header">
+              <span class="pane-dot dot-violet"></span>
+              <span class="pane-name">Builder-A</span>
+              <span class="pane-status status-running">running</span>
+            </div>
+            <div class="pane-body">
+              <span class="pane-line">$ write_file("api/auth.ts")</span>
+              <span class="pane-line">+ export async function login(</span>
+              <span class="pane-line">+   email: string,</span>
+              <span class="pane-line">+   password: string</span>
+              <span class="pane-line">+ ): Promise&lt;Session&gt;</span>
+            </div>
+          </div>
+
+          <div class="agent-pane pane-active">
+            <div class="pane-header">
+              <span class="pane-dot dot-cyan"></span>
+              <span class="pane-name">Builder-B</span>
+              <span class="pane-status status-running">running</span>
+            </div>
+            <div class="pane-body">
+              <span class="pane-line">$ write_file("ui/LoginForm.tsx")</span>
+              <span class="pane-line">+ const LoginForm = () =&gt; {</span>
+              <span class="pane-line">+   const [email, setEmail]</span>
+              <span class="cursor">▋</span>
+            </div>
+          </div>
+
+          <div class="agent-pane">
+            <div class="pane-header">
+              <span class="pane-dot dot-green"></span>
+              <span class="pane-name">Reviewer</span>
+              <span class="pane-status status-waiting">waiting</span>
+            </div>
+            <div class="pane-body">
+              <span class="pane-line">$ await builder_a.done()</span>
+              <span class="pane-line">→ Queued for review</span>
+              <span class="pane-line">→ 0 issues found so far</span>
+            </div>
+          </div>
+
+          <div class="agent-pane pane-pilot">
+            <div class="pane-header">
+              <span class="pane-dot dot-yellow"></span>
+              <span class="pane-name">Orchestrator</span>
+              <span class="pane-status status-pilot">pilot</span>
+            </div>
+            <div class="pane-body">
+              <span class="pane-line">$ dispatch(mission)</span>
+              <span class="pane-line">→ Scout-1: recon ✓</span>
+              <span class="pane-line">→ Builder-A: api layer</span>
+              <span class="pane-line">→ Builder-B: ui layer</span>
+              <span class="pane-line">→ Reviewer: pending</span>
+            </div>
+          </div>
+
+          <div class="agent-pane">
+            <div class="pane-header">
+              <span class="pane-dot dot-violet"></span>
+              <span class="pane-name">Memory</span>
+              <span class="pane-status status-idle">idle</span>
+            </div>
+            <div class="pane-body">
+              <span class="pane-line">$ recall("auth patterns")</span>
+              <span class="pane-line">→ JWT + refresh tokens</span>
+              <span class="pane-line">→ bcrypt rounds: 12</span>
+              <span class="pane-line">→ Sessions: Redis</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF STRIP -->
+    <div class="proof-strip" data-reveal>
+      <span class="proof-label">Used alongside</span>
+      <ul class="model-chips" role="list">
+        <li class="chip">Claude Opus</li>
+        <li class="chip">Claude Sonnet</li>
+        <li class="chip">Codex</li>
+        <li class="chip">Gemini</li>
+        <li class="chip">Antigravity</li>
+      </ul>
+    </div>
+
+    <!-- FEATURES -->
+    <section class="features" id="features" aria-labelledby="features-title">
+      <div class="section-inner">
+        <p class="section-label" data-reveal>CAPABILITIES</p>
+        <h2 class="section-title" id="features-title" data-reveal>Everything your squad needs</h2>
+        <div class="feature-grid">
+
+          <article class="feature-card" data-reveal>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Multi-Agent Grid</h3>
+            <p class="card-desc">Spawn N agents side by side. Watch them all work in their own visible pane.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Orchestration Engine</h3>
+            <p class="card-desc">Pilot decomposes work and routes to specialists — top model for hard reasoning, cheap for lookup.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/>
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                <line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Skills Marketplace</h3>
+            <p class="card-desc">Install specialist agents and reusable skill packs. Right tool for every task.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Any Model</h3>
+            <p class="card-desc">Claude, Codex, Gemini, Antigravity in one workspace. Switch per task, not per project.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <line x1="6" y1="3" x2="6" y2="15"/>
+                <circle cx="18" cy="6" r="3"/>
+                <circle cx="6" cy="18" r="3"/>
+                <path d="M18 9a9 9 0 0 1-9 9"/>
+              </svg>
+            </div>
+            <h3 class="card-title">True Parallelism</h3>
+            <p class="card-desc">Frontend + backend + review at once. Long jobs run in their own pane while you keep going.</p>
+          </article>
+
+          <article class="feature-card" data-reveal>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.44-4.66z"/>
+                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.44-4.66z"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Persistent Memory</h3>
+            <p class="card-desc">Agents remember context across sessions. No re-explaining your codebase.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="steps" id="how-it-works" aria-labelledby="steps-title">
+      <div class="section-inner">
+        <p class="section-label" data-reveal>HOW IT WORKS</p>
+        <h2 class="section-title" id="steps-title" data-reveal>From mission to shipped, in minutes</h2>
+        <ol class="steps-list" role="list">
+
+          <li class="step" data-reveal>
+            <div class="step-number">01</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Define the mission</h3>
+              <p class="step-desc">Describe what you want to ship. The orchestrator breaks it into subtasks.</p>
+            </div>
+          </li>
+
+          <li class="step" data-reveal>
+            <div class="step-number">02</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Pilot spawns your squad</h3>
+              <p class="step-desc">Specialist agents are assigned: builder, scout, reviewer. Each gets the right model for the job.</p>
+            </div>
+          </li>
+
+          <li class="step" data-reveal>
+            <div class="step-number">03</div>
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Agents ship in parallel</h3>
+              <p class="step-desc">Watch your squad work side by side. Frontend, backend, and review — simultaneously.</p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- MODELS STRIP -->
+    <section class="models-strip" id="models" aria-labelledby="models-title">
+      <div class="section-inner">
+        <p class="section-label" id="models-title" data-reveal>WORKS WITH ANY MODEL</p>
+        <div class="model-cards" role="list">
+          <div class="model-card" role="listitem" data-reveal>
+            <span class="model-dot dot-cyan"></span>
+            <span class="model-name">Claude Opus 4</span>
+          </div>
+          <div class="model-card" role="listitem" data-reveal>
+            <span class="model-dot dot-cyan"></span>
+            <span class="model-name">Claude Sonnet 4</span>
+          </div>
+          <div class="model-card" role="listitem" data-reveal>
+            <span class="model-dot dot-cyan"></span>
+            <span class="model-name">Claude Haiku 4</span>
+          </div>
+          <div class="model-card" role="listitem" data-reveal>
+            <span class="model-dot dot-violet"></span>
+            <span class="model-name">Codex</span>
+          </div>
+          <div class="model-card" role="listitem" data-reveal>
+            <span class="model-dot dot-green"></span>
+            <span class="model-name">Gemini</span>
+          </div>
+          <div class="model-card" role="listitem" data-reveal>
+            <span class="model-dot dot-yellow"></span>
+            <span class="model-name">Antigravity</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <section class="cta-band" aria-labelledby="cta-headline">
+      <div class="section-inner cta-inner" data-reveal>
+        <h2 class="cta-headline" id="cta-headline">Ready to orchestrate?</h2>
+        <p class="cta-sub">Join the waitlist. First squads shipping in Q3 2025.</p>
+        <a href="#" class="btn btn-primary btn-lg">Get Early Access</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" aria-label="Overclock home">OVERCLOCK</a>
+        <p class="footer-tagline">Orchestrate agents. Ship faster.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div class="footer-col">
+          <p class="footer-col-title">Product</p>
+          <ul role="list">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How it Works</a></li>
+            <li><a href="#models">Models</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Community</p>
+          <ul role="list">
+            <li><a href="#">Discord</a></li>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Company</p>
+          <ul role="list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Overclock. Built with agents.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

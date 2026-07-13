@@ -1,0 +1,13 @@
+{
+  "test": "001",
+  "model": "fable-5",
+  "source_file": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/001-fable-5/sistema-solar.html",
+  "bytes": 14721,
+  "lines": 356,
+  "libs": ["three.js"],
+  "external_requests": true,
+  "modified_date": "2026-07-01T17:16:47",
+  "cost_usd": 4.41,
+  "tokens_in": 161000,
+  "tokens_out": 28000
+}

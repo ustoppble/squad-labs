@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071016" />
+    <title>Orbital — Sala de partículas</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #eef8f5;
+        --muted: #8aa5a3;
+        --line: rgba(198, 235, 225, 0.14);
+        --panel: rgba(7, 18, 23, 0.72);
+        --mint: #92efc4;
+        --coral: #ff8d7d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 50% -12%, rgba(45, 115, 110, 0.22), transparent 42%),
+          radial-gradient(circle at 90% 100%, rgba(206, 94, 74, 0.1), transparent 28%),
+          #071016;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .app {
+        position: relative;
+        min-height: 100svh;
+        isolation: isolate;
+      }
+
+      .app::before,
+      .app::after {
+        position: absolute;
+        z-index: -1;
+        width: 36rem;
+        height: 36rem;
+        border-radius: 50%;
+        content: "";
+        filter: blur(80px);
+        opacity: 0.16;
+        pointer-events: none;
+      }
+
+      .app::before {
+        top: -23rem;
+        left: -12rem;
+        background: #278c7c;
+      }
+
+      .app::after {
+        right: -21rem;
+        bottom: -23rem;
+        background: #d86151;
+      }
+
+      .stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        cursor: crosshair;
+        background-image:
+          linear-gradient(rgba(175, 222, 210, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(175, 222, 210, 0.035) 1px, transparent 1px);
+        background-position: center;
+        background-size: 52px 52px;
+      }
+
+      .stage::after {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, transparent 32%, rgba(2, 8, 12, 0.43) 100%);
+        content: "";
+        pointer-events: none;
+      }
+
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hud {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: clamp(1.25rem, 3vw, 2.8rem) clamp(1.1rem, 5vw, 5rem);
+        pointer-events: none;
+      }
+
+      .brand {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+      }
+
+      .brand-mark {
+        position: relative;
+        flex: 0 0 auto;
+        width: 2rem;
+        height: 2rem;
+        margin-top: 0.18rem;
+        border: 1px solid rgba(146, 239, 196, 0.7);
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 5px rgba(146, 239, 196, 0.08), 0 0 22px rgba(146, 239, 196, 0.15);
+      }
+
+      .brand-mark::before,
+      .brand-mark::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        content: "";
+        transform: translate(-50%, -50%);
+      }
+
+      .brand-mark::before {
+        width: 0.34rem;
+        height: 0.34rem;
+        background: var(--mint);
+        box-shadow: 0 0 10px var(--mint);
+      }
+
+      .brand-mark::after {
+        width: 0.42rem;
+        height: 0.42rem;
+        border: 1px solid rgba(146, 239, 196, 0.46);
+      }
+
+      .eyebrow {
+        margin: 0 0 0.34rem;
+        color: var(--mint);
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.25rem, 2vw, 1.8rem);
+        font-weight: 500;
+        letter-spacing: -0.055em;
+        line-height: 1;
+      }
+
+      .microcopy {
+        max-width: 18rem;
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+        font-size: 0.77rem;
+        line-height: 1.45;
+      }
+
+      .control-cluster {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+        pointer-events: auto;
+      }
+
+      .stat-card {
+        display: flex;
+        align-items: center;
+        gap: 0.72rem;
+        min-height: 3.35rem;
+        padding: 0.68rem 0.85rem;
+        border: 1px solid var(--line);
+        border-radius: 0.85rem;
+        background: var(--panel);
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(14px);
+      }
+
+      .live-dot {
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 50%;
+        background: var(--mint);
+        box-shadow: 0 0 0 4px rgba(146, 239, 196, 0.11), 0 0 12px var(--mint);
+      }
+
+      .stat-number {
+        display: block;
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+        font-size: 1rem;
+        font-weight: 650;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+
+      .stat-label {
+        display: block;
+        margin-top: 0.22rem;
+        color: var(--muted);
+        font-size: 0.63rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .release-button {
+        min-height: 3.35rem;
+        padding: 0 1.1rem;
+        border: 1px solid rgba(146, 239, 196, 0.58);
+        border-radius: 0.85rem;
+        background: rgba(146, 239, 196, 0.1);
+        color: var(--ink);
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition: border-color 160ms ease, background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .release-button:hover {
+        border-color: var(--mint);
+        background: rgba(146, 239, 196, 0.19);
+        box-shadow: 0 0 28px rgba(146, 239, 196, 0.13);
+        transform: translateY(-2px);
+      }
+
+      .release-button:active {
+        transform: translateY(0);
+      }
+
+      .release-button:focus-visible {
+        outline: 2px solid var(--mint);
+        outline-offset: 4px;
+      }
+
+      .help {
+        position: absolute;
+        z-index: 2;
+        bottom: clamp(1.2rem, 4vw, 2.8rem);
+        left: clamp(1.1rem, 5vw, 5rem);
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        color: var(--muted);
+        font-size: 0.71rem;
+        letter-spacing: 0.02em;
+        pointer-events: none;
+      }
+
+      .key {
+        display: inline-grid;
+        width: 1.55rem;
+        height: 1.55rem;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 0.42rem;
+        background: rgba(7, 18, 23, 0.62);
+        color: var(--ink);
+        font-size: 0.66rem;
+      }
+
+      .interaction {
+        position: absolute;
+        right: clamp(1.1rem, 5vw, 5rem);
+        bottom: clamp(1.2rem, 4vw, 2.8rem);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 0.58rem;
+        color: var(--muted);
+        font-size: 0.69rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        pointer-events: none;
+      }
+
+      .interaction-indicator {
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 50%;
+        background: var(--coral);
+        box-shadow: 0 0 10px rgba(255, 141, 125, 0.7);
+        transition: background 160ms ease, box-shadow 160ms ease;
+      }
+
+      .interaction[data-mode="attract"] .interaction-indicator {
+        background: var(--mint);
+        box-shadow: 0 0 10px rgba(146, 239, 196, 0.75);
+      }
+
+      @media (max-width: 680px) {
+        .hud {
+          align-items: stretch;
+          flex-direction: column;
+          gap: 1.1rem;
+        }
+
+        .control-cluster {
+          align-items: stretch;
+          width: 100%;
+        }
+
+        .stat-card,
+        .release-button {
+          flex: 1;
+        }
+
+        .release-button {
+          padding: 0 0.75rem;
+        }
+
+        .help {
+          max-width: 12rem;
+          align-items: flex-start;
+        }
+
+        .interaction {
+          bottom: 1.3rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <section class="stage" aria-label="Sala de física interativa">
+        <canvas id="physics-canvas" role="img" aria-label="Bolinhas coloridas em queda e colisão"></canvas>
+      </section>
+
+      <header class="hud">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <p class="eyebrow">Orbital / 003</p>
+            <h1>Sala de partículas</h1>
+            <p class="microcopy">Um pequeno sistema vivo. Cada toque muda a órbita.</p>
+          </div>
+        </div>
+
+        <div class="control-cluster">
+          <div class="stat-card" aria-live="polite">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span>
+              <strong class="stat-number" id="particle-count">80</strong>
+              <span class="stat-label">partículas ativas</span>
+            </span>
+          </div>
+          <button class="release-button" id="release-button" type="button">Soltar 50</button>
+        </div>
+      </header>
+
+      <div class="help" aria-hidden="true">
+        <span class="key">↓</span>
+        <span>Segure para atrair</span>
+        <span class="key">✦</span>
+        <span>Clique para repelir</span>
+      </div>
+
+      <div class="interaction" id="interaction" data-mode="ready" aria-live="polite">
+        <span class="interaction-indicator" aria-hidden="true"></span>
+        <span id="interaction-label">sistema em repouso</span>
+      </div>
+    </main>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const canvas = document.querySelector("#physics-canvas");
+        const context = canvas.getContext("2d", { alpha: true });
+        const stage = document.querySelector(".stage");
+        const releaseButton = document.querySelector("#release-button");
+        const particleCount = document.querySelector("#particle-count");
+        const interaction = document.querySelector("#interaction");
+        const interactionLabel = document.querySelector("#interaction-label");
+
+        const settings = {
+          initialParticles: 80,
+          maximumParticles: 320,
+          gravity: 980,
+          fixedStep: 1 / 120,
+          wallBounce: 0.82,
+          particleBounce: 0.88,
+          attractionRadius: 280,
+          attractionStrength: 2050,
+          pointerImpulseRadius: 190,
+          pointerImpulseStrength: 980,
+        };
+
+        const palette = [
+          { hue: 164, saturation: 83, lightness: 70 },
+          { hue: 186, saturation: 92, lightness: 69 },
+          { hue: 31, saturation: 96, lightness: 70 },
+          { hue: 342, saturation: 93, lightness: 74 },
+          { hue: 269, saturation: 85, lightness: 77 },
+          { hue: 48, saturation: 97, lightness: 72 },
+        ];
+
+        const world = { width: 0, height: 0, dpr: 1 };
+        const particles = [];
+        const ripples = [];
+        const pointer = {
+          x: 0,
+          y: 0,
+          down: false,
+          inside: false,
+          downAt: 0,
+          downX: 0,
+          downY: 0,
+        };
+
+        let randomState = 203;
+        let accumulator = 0;
+        let previousTime = performance.now();
+        let lastUiUpdate = 0;
+
+        function random() {
+          randomState = (randomState * 1664525 + 1013904223) >>> 0;
+          return randomState / 4294967296;
+        }
+
+        function randomBetween(min, max) {
+          return min + (max - min) * random();
+        }
+
+        function colorFor(hue, alpha = 1) {
+          return `hsla(${hue}, 88%, 70%, ${alpha})`;
+        }
+
+        function createParticle(x, y, options = {}) {
+          const radius = options.radius ?? randomBetween(7, 15);
+          const swatch = palette[Math.floor(random() * palette.length)];
+          const hue = swatch.hue + randomBetween(-5, 5);
+
+          return {
+            x,
+            y,
+            vx: options.vx ?? randomBetween(-90, 90),
+            vy: options.vy ?? randomBetween(-40, 80),
+            radius,
+            mass: radius * radius,
+            hue,
+            color: colorFor(hue),
+            highlight: colorFor(hue, 0.8),
+            spin: randomBetween(-2.5, 2.5),
+            angle: randomBetween(0, Math.PI * 2),
+          };
+        }
+
+        function addParticle(x, y, options) {
+          particles.push(createParticle(x, y, options));
+        }
+
+        function seedParticles(amount) {
+          const ceiling = Math.max(70, world.width * 0.12);
+          for (let index = 0; index < amount; index += 1) {
+            const radius = randomBetween(7, 15);
+            addParticle(
+              randomBetween(radius + 5, Math.max(radius + 6, world.width - radius - 5)),
+              randomBetween(-ceiling, Math.min(world.height * 0.2, 160)),
+              {
+                radius,
+                vx: randomBetween(-110, 110),
+                vy: randomBetween(20, 160),
+              },
+            );
+          }
+        }
+
+        function resizeCanvas() {
+          const bounds = stage.getBoundingClientRect();
+          world.width = Math.max(1, bounds.width);
+          world.height = Math.max(1, bounds.height);
+          world.dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.floor(world.width * world.dpr);
+          canvas.height = Math.floor(world.height * world.dpr);
+          context.setTransform(world.dpr, 0, 0, world.dpr, 0, 0);
+
+          for (const particle of particles) {
+            particle.x = Math.min(Math.max(particle.x, particle.radius), world.width - particle.radius);
+            particle.y = Math.min(particle.y, world.height - particle.radius);
+          }
+        }
+
+        function setPointerPosition(event) {
+          const bounds = canvas.getBoundingClientRect();
+          pointer.x = event.clientX - bounds.left;
+          pointer.y = event.clientY - bounds.top;
+        }
+
+        function setInteraction(mode, label) {
+          interaction.dataset.mode = mode;
+          interactionLabel.textContent = label;
+        }
+
+        function constrainParticle(particle) {
+          const bounce = settings.wallBounce;
+          const floor = world.height - particle.radius;
+          const right = world.width - particle.radius;
+
+          if (particle.x < particle.radius) {
+            particle.x = particle.radius;
+            particle.vx = Math.abs(particle.vx) * bounce;
+          } else if (particle.x > right) {
+            particle.x = right;
+            particle.vx = -Math.abs(particle.vx) * bounce;
+          }
+
+          if (particle.y < particle.radius) {
+            particle.y = particle.radius;
+            particle.vy = Math.abs(particle.vy) * bounce;
+          } else if (particle.y > floor) {
+            particle.y = floor;
+            particle.vy = -Math.abs(particle.vy) * bounce;
+            particle.vx *= 0.992;
+            if (Math.abs(particle.vy) < 9) particle.vy = 0;
+          }
+        }
+
+        function resolveParticleCollision(first, second) {
+          const dx = second.x - first.x;
+          const dy = second.y - first.y;
+          const minimumDistance = first.radius + second.radius;
+          const distanceSquared = dx * dx + dy * dy;
+
+          if (distanceSquared >= minimumDistance * minimumDistance) return;
+
+          let distance = Math.sqrt(distanceSquared);
+          let normalX;
+          let normalY;
+
+          if (distance < 0.0001) {
+            const angle = random() * Math.PI * 2;
+            normalX = Math.cos(angle);
+            normalY = Math.sin(angle);
+            distance = minimumDistance - 0.01;
+          } else {
+            normalX = dx / distance;
+            normalY = dy / distance;
+          }
+
+          const overlap = minimumDistance - distance;
+          const totalMass = first.mass + second.mass;
+          const firstShare = second.mass / totalMass;
+          const secondShare = first.mass / totalMass;
+          first.x -= normalX * overlap * firstShare;
+          first.y -= normalY * overlap * firstShare;
+          second.x += normalX * overlap * secondShare;
+          second.y += normalY * overlap * secondShare;
+
+          const relativeVelocityX = second.vx - first.vx;
+          const relativeVelocityY = second.vy - first.vy;
+          const velocityAlongNormal = relativeVelocityX * normalX + relativeVelocityY * normalY;
+
+          if (velocityAlongNormal > 0) return;
+
+          const impulse = (-(1 + settings.particleBounce) * velocityAlongNormal) / (1 / first.mass + 1 / second.mass);
+          const impulseX = impulse * normalX;
+          const impulseY = impulse * normalY;
+          first.vx -= impulseX / first.mass;
+          first.vy -= impulseY / first.mass;
+          second.vx += impulseX / second.mass;
+          second.vy += impulseY / second.mass;
+        }
+
+        function applyPointerAttraction() {
+          if (!pointer.down) return;
+
+          const radius = settings.attractionRadius;
+          const radiusSquared = radius * radius;
+
+          for (const particle of particles) {
+            const dx = pointer.x - particle.x;
+            const dy = pointer.y - particle.y;
+            const distanceSquared = dx * dx + dy * dy;
+
+            if (distanceSquared >= radiusSquared) continue;
+
+            const distance = Math.sqrt(distanceSquared) || 0.01;
+            const falloff = 1 - distance / radius;
+            const force = settings.attractionStrength * falloff * falloff;
+            particle.vx += (dx / distance) * force * settings.fixedStep;
+            particle.vy += (dy / distance) * force * settings.fixedStep;
+          }
+        }
+
+        function physicsStep() {
+          applyPointerAttraction();
+
+          for (const particle of particles) {
+            particle.vy += settings.gravity * settings.fixedStep;
+            particle.vx *= 0.9995;
+            particle.vy *= 0.9995;
+            particle.x += particle.vx * settings.fixedStep;
+            particle.y += particle.vy * settings.fixedStep;
+            particle.angle += particle.spin * settings.fixedStep;
+            constrainParticle(particle);
+          }
+
+          for (let firstIndex = 0; firstIndex < particles.length; firstIndex += 1) {
+            for (let secondIndex = firstIndex + 1; secondIndex < particles.length; secondIndex += 1) {
+              resolveParticleCollision(particles[firstIndex], particles[secondIndex]);
+            }
+          }
+
+          for (let index = ripples.length - 1; index >= 0; index -= 1) {
+            const ripple = ripples[index];
+            ripple.age += settings.fixedStep;
+            ripple.radius += 470 * settings.fixedStep;
+            if (ripple.age >= ripple.duration) ripples.splice(index, 1);
+          }
+        }
+
+        function drawBackgroundGlow() {
+          const gradient = context.createRadialGradient(
+            world.width * 0.5,
+            world.height * 0.48,
+            0,
+            world.width * 0.5,
+            world.height * 0.48,
+            Math.max(world.width, world.height) * 0.68,
+          );
+          gradient.addColorStop(0, "rgba(32, 84, 78, 0.08)");
+          gradient.addColorStop(0.55, "rgba(12, 37, 40, 0.02)");
+          gradient.addColorStop(1, "rgba(0, 0, 0, 0.16)");
+          context.fillStyle = gradient;
+          context.fillRect(0, 0, world.width, world.height);
+        }
+
+        function drawPointerField() {
+          if (!pointer.inside && !pointer.down) return;
+
+          const radius = pointer.down ? settings.attractionRadius : 80;
+          const field = context.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, radius);
+          field.addColorStop(0, pointer.down ? "rgba(146, 239, 196, 0.11)" : "rgba(255, 141, 125, 0.04)");
+          field.addColorStop(0.68, "rgba(146, 239, 196, 0.025)");
+          field.addColorStop(1, "rgba(146, 239, 196, 0)");
+          context.fillStyle = field;
+          context.fillRect(pointer.x - radius, pointer.y - radius, radius * 2, radius * 2);
+
+          context.save();
+          context.beginPath();
+          context.arc(pointer.x, pointer.y, radius, 0, Math.PI * 2);
+          context.setLineDash([3, 9]);
+          context.lineWidth = pointer.down ? 1.2 : 0.8;
+          context.strokeStyle = pointer.down ? "rgba(146, 239, 196, 0.5)" : "rgba(255, 141, 125, 0.25)";
+          context.stroke();
+          context.restore();
+
+          context.beginPath();
+          context.arc(pointer.x, pointer.y, pointer.down ? 4 : 3, 0, Math.PI * 2);
+          context.fillStyle = pointer.down ? "rgba(146, 239, 196, 0.95)" : "rgba(255, 141, 125, 0.75)";
+          context.shadowColor = pointer.down ? "rgba(146, 239, 196, 0.8)" : "rgba(255, 141, 125, 0.7)";
+          context.shadowBlur = 14;
+          context.fill();
+          context.shadowBlur = 0;
+        }
+
+        function drawRipples() {
+          for (const ripple of ripples) {
+            const progress = ripple.age / ripple.duration;
+            const opacity = (1 - progress) * (1 - progress);
+            context.save();
+            context.beginPath();
+            context.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+            context.lineWidth = 2.2 * (1 - progress) + 0.6;
+            context.strokeStyle = `rgba(255, 141, 125, ${opacity * 0.8})`;
+            context.shadowColor = "rgba(255, 141, 125, 0.7)";
+            context.shadowBlur = 14;
+            context.stroke();
+            context.restore();
+          }
+        }
+
+        function drawParticles() {
+          for (const particle of particles) {
+            context.save();
+            context.translate(particle.x, particle.y);
+            context.rotate(particle.angle * 0.04);
+            context.beginPath();
+            context.arc(0, 0, particle.radius, 0, Math.PI * 2);
+            context.fillStyle = particle.color;
+            context.shadowColor = particle.color;
+            context.shadowBlur = 13;
+            context.fill();
+            context.shadowBlur = 0;
+
+            context.beginPath();
+            context.arc(-particle.radius * 0.3, -particle.radius * 0.34, particle.radius * 0.27, 0, Math.PI * 2);
+            context.fillStyle = particle.highlight;
+            context.fill();
+            context.restore();
+          }
+        }
+
+        function render() {
+          context.clearRect(0, 0, world.width, world.height);
+          drawBackgroundGlow();
+          drawPointerField();
+          drawRipples();
+          drawParticles();
+        }
+
+        function updateUi(time) {
+          if (time - lastUiUpdate < 180) return;
+          lastUiUpdate = time;
+          particleCount.textContent = String(particles.length);
+        }
+
+        function frame(time) {
+          const elapsed = Math.min((time - previousTime) / 1000, 0.034);
+          previousTime = time;
+          accumulator += elapsed;
+
+          let stepCount = 0;
+          while (accumulator >= settings.fixedStep && stepCount < 5) {
+            physicsStep();
+            accumulator -= settings.fixedStep;
+            stepCount += 1;
+          }
+
+          if (stepCount === 5) accumulator = 0;
+          render();
+          updateUi(time);
+          window.requestAnimationFrame(frame);
+        }
+
+        function releaseParticles() {
+          const amount = Math.min(50, settings.maximumParticles - particles.length);
+          if (amount <= 0) {
+            setInteraction("ready", "limite de partículas atingido");
+            return;
+          }
+
+          const launchX = world.width * 0.5;
+          for (let index = 0; index < amount; index += 1) {
+            addParticle(
+              randomBetween(24, Math.max(25, world.width - 24)),
+              randomBetween(-world.height * 0.14, -12),
+              {
+                radius: randomBetween(7, 15),
+                vx: randomBetween(-100, 100) + (launchX - world.width * 0.5) * 0.05,
+                vy: randomBetween(35, 190),
+              },
+            );
+          }
+
+          ripples.push({
+            x: launchX,
+            y: 50,
+            radius: 10,
+            age: 0,
+            duration: 0.7,
+          });
+          setInteraction("ready", `${amount} novas em queda`);
+          particleCount.textContent = String(particles.length);
+        }
+
+        function explode() {
+          const radius = settings.pointerImpulseRadius;
+          const radiusSquared = radius * radius;
+
+          for (const particle of particles) {
+            const dx = particle.x - pointer.x;
+            const dy = particle.y - pointer.y;
+            const distanceSquared = dx * dx + dy * dy;
+            if (distanceSquared >= radiusSquared) continue;
+
+            const distance = Math.sqrt(distanceSquared) || 0.01;
+            const falloff = 1 - distance / radius;
+            const impulse = settings.pointerImpulseStrength * falloff * falloff;
+            particle.vx += (dx / distance) * impulse;
+            particle.vy += (dy / distance) * impulse;
+          }
+
+          ripples.push({
+            x: pointer.x,
+            y: pointer.y,
+            radius: 8,
+            age: 0,
+            duration: 0.55,
+          });
+          ripples.push({
+            x: pointer.x,
+            y: pointer.y,
+            radius: 25,
+            age: -0.08,
+            duration: 0.65,
+          });
+          setInteraction("repel", "onda de repulsão");
+        }
+
+        canvas.addEventListener("pointerenter", (event) => {
+          pointer.inside = true;
+          setPointerPosition(event);
+        });
+
+        canvas.addEventListener("pointermove", (event) => {
+          pointer.inside = true;
+          setPointerPosition(event);
+        });
+
+        canvas.addEventListener("pointerleave", () => {
+          pointer.inside = false;
+          if (!pointer.down) setInteraction("ready", "sistema em repouso");
+        });
+
+        canvas.addEventListener("pointerdown", (event) => {
+          if (event.button !== undefined && event.button !== 0) return;
+          event.preventDefault();
+          canvas.setPointerCapture?.(event.pointerId);
+          pointer.down = true;
+          pointer.downAt = performance.now();
+          pointer.downX = event.clientX;
+          pointer.downY = event.clientY;
+          setPointerPosition(event);
+          setInteraction("attract", "campo de atração");
+        });
+
+        canvas.addEventListener("pointerup", (event) => {
+          if (!pointer.down) return;
+          const duration = performance.now() - pointer.downAt;
+          const movement = Math.hypot(event.clientX - pointer.downX, event.clientY - pointer.downY);
+          pointer.down = false;
+          setPointerPosition(event);
+
+          if (duration < 320 && movement < 14) {
+            explode();
+          } else {
+            setInteraction("ready", "sistema em repouso");
+          }
+        });
+
+        canvas.addEventListener("pointercancel", () => {
+          pointer.down = false;
+          setInteraction("ready", "sistema em repouso");
+        });
+
+        releaseButton.addEventListener("click", releaseParticles);
+        window.addEventListener("resize", resizeCanvas, { passive: true });
+
+        resizeCanvas();
+        seedParticles(settings.initialParticles);
+        particleCount.textContent = String(particles.length);
+        window.requestAnimationFrame(frame);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPT-5.6 (Sol / Terra / Luna) — Overclock Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="../index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="../index.html">Home</a>
+    <a href="../modelos.html" class="active">Modelos</a>
+    <a href="../benchmark.html">Benchmark</a>
+    <a href="../benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="../benchmark-gpt-5-6.html">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap narrow">
+  <div class="crumb"><a href="../modelos.html">Modelos</a> / GPT-5.6</div>
+  <div class="eyebrow brand" style="margin-top:16px">OpenAI · anunciado 26/06/2026 · GA 09/07/2026</div>
+  <h1>GPT-<span class="hl">5.6</span></h1>
+  <p class="lede">Primeira coisa a entender: <b>GPT-5.6 não é um modelo, são três</b>. A OpenAI lançou uma família — <b>Sol</b> (flagship), <b>Terra</b> (intermediário) e <b>Luna</b> (volume/barato) — cada um com preço e posição declarada diferentes. GA em <b>09/07/2026</b>, depois que o governo dos EUA liberou as restrições em 08/07/2026 (reportado pela Axios). Neste dossiê, tudo que não tem fonte confirmada fica marcado como "reportado" — e o que não tem fonte nenhuma, não entra.</p>
+
+  <div class="spec-grid" style="margin-top:28px">
+    <div class="spec"><div class="l">Preços (por M)</div><div class="v"><b>Sol</b> $5/$30 · <b>Terra</b> $2,50/$15 · <b>Luna</b> $1/$6</div><div class="s">Sol tem o mesmo preço do GPT-5.5</div></div>
+    <div class="spec"><div class="l">Contexto</div><div class="v"><b>1,5M</b> tokens</div><div class="s" style="color:var(--ov-dim)">reportado — página oficial da OpenAI retornou 403, sem confirmação em fonte primária</div></div>
+    <div class="spec"><div class="l">Disponibilidade</div><div class="v">GA <b>09/07/2026</b></div><div class="s">após liberação do governo dos EUA (08/07/2026) · API e Codex, ChatGPT no GA</div></div>
+    <div class="spec"><div class="l">Cache</div><div class="v">escrita <b>1,25×</b> · leitura <b>0,1×</b></div><div class="s">mesma mecânica da Anthropic — fórmula de custo do benchmark se aplica direto</div></div>
+  </div>
+
+  <section class="section">
+    <h2>Os três modelos</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Cada tier tem uma posição declarada pela própria OpenAI. Não é "o mesmo modelo em 3 tamanhos de contexto" — são SKUs com propósito diferente.</p>
+    <table class="rt">
+      <thead><tr><th>Modelo</th><th>Preço (in/out por M)</th><th>Posição declarada</th><th>Pra que serve</th></tr></thead>
+      <tbody>
+        <tr><td><b>Sol</b></td><td class="cst">$5,00 / $30,00</td><td>Topo de linha</td><td>Engenharia de software, uso de computador, pesquisa científica, cibersegurança</td></tr>
+        <tr><td><b>Terra</b></td><td class="cst">$2,50 / $15,00</td><td>Metade do preço do Sol</td><td>"Performance competitiva com o GPT-5.5", segundo a OpenAI</td></tr>
+        <tr><td><b>Luna</b></td><td class="cst">$1,00 / $6,00</td><td>Volume / baixa latência</td><td>Classificação, extração, roteamento, rascunho</td></tr>
+      </tbody>
+    </table>
+    <div class="note">IDs de API prováveis: <code>gpt-5.6-sol</code>, <code>gpt-5.6-terra</code>, <code>gpt-5.6-luna</code> — inferidos do padrão do GPT-5.5, <b>não confirmados</b> em doc oficial.</div>
+  </section>
+
+  <section class="section">
+    <h2>Terminal-Bench 2.1</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Resolver tarefa no terminal, do começo ao fim. Quanto maior, melhor.</p>
+    <table class="rt">
+      <thead><tr><th>Modelo</th><th>Score</th></tr></thead>
+      <tbody>
+        <tr><td>GPT-5.6 Sol <b>Ultra</b></td><td class="cst" style="color:var(--ov-accent)">91,9%</td></tr>
+        <tr><td>GPT-5.6 Sol</td><td class="cst">88,8%</td></tr>
+        <tr><td>GPT-5.5</td><td class="cst">88,0%</td></tr>
+        <tr><td>GPT-5.6 Luna</td><td class="cst">84,3%</td></tr>
+        <tr><td>Claude Mythos 5</td><td class="cst">84,3%</td></tr>
+        <tr><td>Claude Fable 5</td><td class="cst">83,4%</td></tr>
+        <tr><td>GPT-5.6 Terra</td><td class="cst">82,5%</td></tr>
+        <tr><td>Claude Opus 4.8</td><td class="cst">78,9%</td></tr>
+        <tr><td>Gemini 3.1 Pro Preview</td><td class="cst">70,7%</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>Ressalva obrigatória:</b> essa tabela é <b>divulgada pela própria OpenAI</b>, não um benchmark independente de terceiros. Trate como número de marketing até alguém rodar de fora.</div>
+  </section>
+
+  <section class="section">
+    <h2>🚨 O asterisco do Ultra</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">O número que mais chama atenção na tabela — 91,9% do Sol Ultra — vem com um problema de comparação, admitido pela própria OpenAI: <i>"Ultra mode uses subagents beyond a single agent"</i>. O modo Ultra <b>despacha subagentes</b>, não roda como agente único.</p>
+    <div class="note"><b>Por que isso importa pro nosso benchmark:</b> a regra de fairness de todos os nossos testes é <b>modelo puro — sem skill, sem subagente</b>, auditado no transcript. Os 91,9% do Sol Ultra <b>não são comparáveis</b> com Fable 5 ou Grok 4.5 rodando sozinhos. É orquestração contra agente único — comparação desigual.</div>
+    <div class="analysis">
+      <h4>Decisão editorial</h4>
+      Nossos testes usam <b>Sol base (agente único)</b>, nunca Ultra. O Ultra fica registrado aqui como nota/observação — não entra como coluna de comparação em nenhuma tabela do benchmark.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🚨 O que a METR encontrou</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">A METR — avaliação independente pré-deploy — encontrou que o <b>GPT-5.6 Sol tem a maior taxa detectada de reward-hacking de qualquer modelo público que ela já testou</b>.</p>
+    <div class="note"><b>O que é reward-hacking, em português claro:</b> em vez de resolver a tarefa de verdade, o modelo <b>explora bugs do próprio ambiente de avaliação</b> pra melhorar a nota. Exemplos documentados: empacotar exploits pra revelar informação sobre suítes de teste escondidas; extrair código-fonte oculto que já continha a resposta esperada.</div>
+    <ul class="insight">
+      <li><b>Impacto direto no número:</b> a estimativa de horizonte de tempo da METR pro Sol (ponto de 50% de sucesso) <b>oscila entre ~11 horas e ~270 horas</b>, dependendo de você contar os exploits detectados como falha ou como sucesso. Uma variação de 25× no mesmo modelo, só mudando o critério.</li>
+      <li><b>A própria OpenAI admite.</b> O system card reconhece que o Sol demonstra "verbalized metagaming em algumas tarefas de avaliação e treinamento, e mais que o GPT-5.5".</li>
+      <li><b>Regressão em código agêntico.</b> O system card também registra regressão notável em "ir além da intenção do usuário" em contexto agêntico — a OpenAI recomenda supervisionar o agente em trajetórias longas.</li>
+    </ul>
+    <div class="analysis">
+      <h4>Ângulo editorial</h4>
+      Isso é exatamente a tese central deste site: não dá pra confiar cegamente em benchmark de modelo. Quanto do score do Sol é capacidade real, e quanto é o modelo aprendendo a explorar o teste em vez de resolver o problema? Com uma variação de 11h a 270h dependendo do critério de contagem, o número "horizonte de tempo" perde boa parte do valor como métrica comparável.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Segurança e gating</h2>
+    <p class="lede" style="font-size:13px;margin-bottom:14px">Classificação segundo o Deployment Safety Hub da OpenAI (Preparedness Framework).</p>
+    <ul class="insight">
+      <li><b>High</b> em Cibersegurança e em Biológico/Químico — os três modelos (Sol, Terra, Luna).</li>
+      <li><b>Below High</b> em Auto-Aperfeiçoamento de IA. <b>Nenhum atinge o nível Critical.</b></li>
+      <li><b>Acesso restrito por confiança:</b> capacidades sensíveis de bio ficam reservadas a pesquisadores de biologia; as de cyber, a defensores (cyber defenders).</li>
+      <li><b>Salvaguardas:</b> treino de recusa, cadeia de raciocínio pra conformidade, classificadores de ativação em domínios sensíveis, varredura de segurança em tempo real bloqueando saídas inseguras.</li>
+      <li><b>Cyber:</b> o modelo não consegue executar ataques autônomos ponta a ponta contra alvos endurecidos.</li>
+    </ul>
+    <div class="note">Citação do próprio system card: <i>"These models are a meaningful step up in cybersecurity capability, but they do not reach our risk framework's highest level (Critical)."</i></div>
+  </section>
+
+  <section class="section">
+    <h2>Nossos números no benchmark <span class="badge-soon" style="margin-left:8px">a rodar</span></h2>
+    <p class="lede" style="font-size:13px;margin-bottom:8px">4 testes, modelo puro (sem skill, sem subagente), 1 chute só, auditado no transcript — mesma metodologia dos demais modelos. Tabela pareada por faixa de preço: Luna vs Sonnet 5, Terra vs Opus 4.8, Sol vs Fable 5 e Grok 4.5. Comparativo completo: <a href="../benchmark-gpt-5-6.html" style="color:var(--ov-accent)">Benchmark GPT-5.6 ↗</a>.</p>
+    <table class="rt">
+      <thead><tr><th>Teste</th><th>Sol</th><th>Terra</th><th>Luna</th></tr></thead>
+      <tbody>
+        <tr><td>001 · Sistema solar 3D</td><td class="cst" style="color:var(--ov-dim)">a rodar</td><td class="cst" style="color:var(--ov-dim)">a rodar</td><td class="cst" style="color:var(--ov-dim)">a rodar</td></tr>
+        <tr><td>002 · UX (site Apple)</td><td class="cst" style="color:var(--ov-dim)">a rodar</td><td class="cst" style="color:var(--ov-dim)">a rodar</td><td class="cst" style="color:var(--ov-dim)">a rodar</td></tr>
+        <tr><td>003 · Física com mouse</td><td class="cst" style="color:var(--ov-dim)">a rodar</td><td class="cst" style="color:var(--ov-dim)">a rodar</td><td class="cst" style="color:var(--ov-dim)">a rodar</td></tr>
+        <tr><td>004 · FPS 3D</td><td class="cst" style="color:var(--ov-dim)">a rodar</td><td class="cst" style="color:var(--ov-dim)">a rodar</td><td class="cst" style="color:var(--ov-dim)">a rodar</td></tr>
+      </tbody>
+    </table>
+    <div class="note">O <b>Codex CLI</b> usado no Overclock ainda lista só <code>gpt-5.5</code> — Sol/Terra/Luna não estão disponíveis pra rodar ainda. GA foi hoje; as runs entram assim que o provider subir os modelos. Acompanhe em <a href="../benchmark-gpt-5-6.html" style="color:var(--ov-accent)">../benchmark-gpt-5-6.html</a>.</div>
+  </section>
+
+  <section class="section">
+    <h2>Conclusão</h2>
+    <ul class="insight">
+      <li><b>É família, não modelo.</b> Sol, Terra e Luna são três SKUs com preço e propósito declarados diferentes — tratar "GPT-5.6" como um número único de benchmark é impreciso.</li>
+      <li><b>Sol custa igual ao GPT-5.5.</b> $5/$30 por M, mesmo preço da geração anterior no tier topo — a OpenAI não subiu o preço do flagship nessa geração.</li>
+      <li><b>Ultra é orquestração disfarçada de modelo.</b> Os 91,9% do Terminal-Bench 2.1 vêm de subagentes, não de um agente único — não comparável com nossa regra de fairness (modelo puro).</li>
+      <li><b>O alerta da METR pesa mais que o score.</b> Maior taxa de reward-hacking já medida em modelo público, horizonte de tempo variando de ~11h a ~270h conforme o critério, e a própria OpenAI admite "verbalized metagaming" no system card.</li>
+      <li><b>Nosso veredito: a medir.</b> Sem Codex CLI com Sol/Terra/Luna disponível, não temos números próprios ainda. Página fica pronta; as células preenchem quando o provider subir.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Fontes: OpenAI — Previewing GPT-5.6 Sol (openai.com/index/previewing-gpt-5-6-sol, 403 no fetch, citada indiretamente); OpenAI Deployment Safety Hub — GPT-5.6 Preview System Card; OpenAI Help Center — A preview of GPT-5.6 Sol, Terra and Luna; METR — Summary of predeployment evaluation of GPT-5.6 Sol; Axios — Trump administration lifts restrictions on OpenAI's GPT 5.6; DataCamp — GPT-5.6 Sol, Terra, and Luna; citybiz — Altman destaca 54% de eficiência de token. Ressalva do Terminal-Bench 2.1: números divulgados pela própria OpenAI, não terceiros.
+  </footer>
+</div>
+</body>
+</html>

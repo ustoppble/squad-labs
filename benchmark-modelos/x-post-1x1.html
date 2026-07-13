@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  html,body{width:1200px;height:1200px;overflow:hidden}
+  body{background-image:radial-gradient(ellipse 90% 60% at 50% -10%, rgba(255,59,48,0.14), transparent 60%)}
+  .sq{width:1200px;height:1200px;padding:56px 64px;display:flex;flex-direction:column}
+  .eyebrow{font-size:16px}
+  h1{font-size:46px;margin:16px 0 10px}
+  .lede{font-size:19px;max-width:100%;color:var(--ov-text)}
+  .scoreboard{margin:30px 0 0;gap:16px}
+  .model-card{padding:20px}
+  .model-card .name{font-size:24px}
+  .model-card .role{font-size:13px}
+  .price{font-size:16px}
+  .tally .val{font-size:30px}
+  .rt{font-size:18px;margin-top:26px;position:relative}
+  .rt th,.rt td{padding:16px 16px}
+  .rt thead th{font-size:12px}
+  .rt td.cst{font-size:20px}
+  .rt tbody tr.callout-row td{position:relative;box-shadow:inset 0 2px 0 var(--ov-accent),inset 0 -2px 0 var(--ov-accent)}
+  .rt tbody tr.callout-row td:first-child{box-shadow:inset 0 2px 0 var(--ov-accent),inset 0 -2px 0 var(--ov-accent),inset 3px 0 0 var(--ov-accent)}
+  .rt tbody tr.callout-row td:last-child{box-shadow:inset 0 2px 0 var(--ov-accent),inset 0 -2px 0 var(--ov-accent),inset -3px 0 0 var(--ov-accent)}
+  .cst-arrow{display:inline-flex;align-items:center;gap:6px}
+  .cst-arrow .arr{font-size:20px;line-height:1}
+  .footline{margin-top:24px;padding-top:20px;border-top:1px solid var(--ov-faintest);font-size:16px;color:var(--ov-text)}
+  .footline b{color:var(--ov-accent)}
+  .badge{position:absolute;top:56px;right:64px;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ov-dim)}
+  .callout{margin-top:28px;padding:26px 32px;border:1px solid rgba(255,59,48,0.30);border-radius:12px;background:rgba(255,59,48,0.05);box-shadow:0 0 24px rgba(255,59,48,0.15)}
+  .callout p{font-size:22px;line-height:1.45;font-weight:700;letter-spacing:-.01em}
+  .callout p b{color:var(--ov-accent)}
+  .callout .src{margin-top:14px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ov-dim)}
+</style>
+</head>
+<body>
+<div class="sq">
+  <div class="badge">overclock · benchmark</div>
+  <div class="eyebrow brand">Claude · Showdown 3 vias · Teste Sistema Solar 3D</div>
+  <h1>Sonnet 5 <span class="hl">vs</span> Sonnet 4.6 <span class="hl">vs</span> Opus 4.8</h1>
+  <p class="lede">Sistema solar 3D num único prompt. Aqui o barato saiu mais caro que o rei — e o motivo não foi escrever código.</p>
+
+  <div class="scoreboard">
+    <div class="model-card">
+      <div class="name">Sonnet 4.6</div>
+      <div class="role">Escreveu e confiou</div>
+      <div class="price"><b>3 idas</b><small>0 testes no navegador</small></div>
+      <div class="tally"><span class="lab">Custo</span><span class="val">$0,37</span></div>
+    </div>
+    <div class="model-card hero">
+      <div class="name">Sonnet 5</div>
+      <div class="role">26 idas testando de verdade</div>
+      <div class="price"><b>1,3M cache</b><small>confirmou render, console e clique</small></div>
+      <div class="tally"><span class="lab">Custo</span><span class="val" style="color:var(--ov-accent)">$0,87</span></div>
+    </div>
+    <div class="model-card">
+      <div class="name">Opus 4.8</div>
+      <div class="role">Acertou em 4 idas</div>
+      <div class="price"><b>68k entrada</b><small>menos releitura, menos custo</small></div>
+      <div class="tally"><span class="lab">Custo</span><span class="val">$0,80</span></div>
+    </div>
+  </div>
+
+  <table class="rt tok"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+    <tr><td>Sonnet 4.6</td><td>48k</td><td>12k</td><td>556</td><td>77k</td><td>3</td><td>2,5min</td><td class="cst">$0,37</td></tr>
+    <tr class="callout-row"><td>Sonnet 5</td><td>191k</td><td>16k</td><td>322</td><td>1,3M</td><td>26</td><td>4,1min</td><td class="cst"><span class="cst-arrow"><span class="arr">◄</span>$0,87</span></td></tr>
+    <tr><td>Opus 4.8</td><td>68k</td><td>13k</td><td>305</td><td>130k</td><td>4</td><td>1,6min</td><td class="cst">$0,80</td></tr>
+  </tbody></table>
+
+  <div class="callout">
+    <p>Os três acertaram de primeira — <b>1 Write, 0 Edit</b>. Mas só o Sonnet 5 <b>abriu o navegador de verdade</b> pra conferir o WebGL, o console e o clique no planeta. Verificar custa: 26 idas relendo contexto crescente empurraram o preço acima do Opus.</p>
+    <div class="src">Análise do transcript · Teste 001 Sistema Solar 3D</div>
+  </div>
+
+  <div class="footline">O barato que <b>confere o próprio trabalho</b> às vezes custa mais que o caro. 4 prompts idênticos, 3 modelos, um chute só.</div>
+</div>
+</body>
+</html>

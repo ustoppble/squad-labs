@@ -1,0 +1,13 @@
+{
+  "test": "003",
+  "model": "sonnet-5",
+  "source_file": "/Users/laschuk/vibe-coding/benchmark/sonnet-5/003/index.html",
+  "bytes": 11386,
+  "lines": 421,
+  "libs": [],
+  "external_requests": false,
+  "modified_date": "2026-06-30T15:32:12",
+  "cost_usd": 0.36,
+  "tokens_in": 77000,
+  "tokens_out": 12000
+}

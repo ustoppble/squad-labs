@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple</title>
+<style>
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --nav-h: 44px;
+    --light-bg: #fbfbfd;
+    --dark-bg: #000;
+    --text: #1d1d1f;
+    --text-sub: #6e6e73;
+    --link: #0066cc;
+    --max: 1024px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--light-bg);
+    line-height: 1.4;
+  }
+
+  a { text-decoration: none; }
+
+  /* ---------- NAVBAR ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(251, 251, 253, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 9999;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .nav-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav li { display: flex; align-items: center; }
+
+  .nav a {
+    color: #1d1d1f;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.8;
+    padding: 0 8px;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .nav a:hover { opacity: 1; }
+
+  .nav .logo svg { width: 14px; height: 44px; display: block; fill: #1d1d1f; }
+  .nav .icon svg { width: 14px; height: 44px; display: block; fill: #1d1d1f; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    margin-top: var(--nav-h);
+    text-align: center;
+    padding: 60px 0 0;
+    background: var(--light-bg);
+  }
+
+  .hero.dark {
+    background: var(--dark-bg);
+    color: #f5f5f7;
+  }
+
+  .hero h1 {
+    font-size: 56px;
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin-bottom: 6px;
+  }
+
+  .hero h2.sub {
+    font-size: 28px;
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--text-sub);
+    margin-bottom: 14px;
+  }
+
+  .hero.dark h2.sub { color: #a1a1a6; }
+
+  .links {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .links a {
+    font-size: 21px;
+    color: var(--link);
+    transition: opacity 0.2s ease;
+  }
+
+  .links a:hover { text-decoration: underline; opacity: 0.85; }
+
+  .hero.dark .links a { color: #2997ff; }
+
+  .hero-art {
+    width: 100%;
+    max-width: 980px;
+    height: 420px;
+    margin: 10px auto 0;
+    border-radius: 0;
+  }
+
+  /* ---------- GRID ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 12px;
+    max-width: 1100px;
+    margin: 12px auto;
+  }
+
+  .tile {
+    position: relative;
+    text-align: center;
+    padding: 50px 20px;
+    min-height: 560px;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .tile.visible { opacity: 1; transform: translateY(0); }
+
+  .tile.full { grid-column: 1 / -1; min-height: 500px; }
+
+  .tile.light { background: #fafafc; color: #1d1d1f; }
+  .tile.dark  { background: #000; color: #f5f5f7; }
+
+  .tile h3 {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin-bottom: 6px;
+  }
+
+  .tile p.sub {
+    font-size: 21px;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+
+  .tile.light p.sub { color: var(--text-sub); }
+  .tile.dark  p.sub { color: #a1a1a6; }
+
+  .tile .links a { font-size: 19px; }
+  .tile.dark .links a { color: #2997ff; }
+
+  .tile-art {
+    margin-top: auto;
+    width: 80%;
+    max-width: 420px;
+    height: 280px;
+    border-radius: 14px;
+  }
+
+  /* ---------- PLACEHOLDER GRADIENTS ---------- */
+  .g-iphone   { background: linear-gradient(160deg, #f5f5f7 0%, #d9dbe0 50%, #b8bcc4 100%); }
+  .g-watch    { background: radial-gradient(circle at 50% 40%, #2c2c2e 0%, #000 70%); }
+  .g-mac      { background: linear-gradient(135deg, #1a1a1c 0%, #3a3a3d 100%); }
+  .g-ipad     { background: linear-gradient(160deg, #e8d9ff 0%, #c9b6f5 50%, #a98ef0 100%); }
+  .g-airpods  { background: linear-gradient(160deg, #ffffff 0%, #eef0f3 100%); }
+  .g-tv       { background: linear-gradient(135deg, #ff5f6d 0%, #ffc371 100%); }
+  .g-card     { background: linear-gradient(135deg, #f0f0f2 0%, #d0d2d8 100%); }
+  .g-trade    { background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 100%); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 833px) {
+    .hero h1 { font-size: 40px; }
+    .hero h2.sub { font-size: 22px; }
+    .hero-art { height: 300px; }
+    .grid { grid-template-columns: 1fr; }
+    .tile, .tile.full { min-height: 440px; }
+    .tile h3 { font-size: 32px; }
+    .tile p.sub { font-size: 18px; }
+    .nav a { font-size: 11px; padding: 0 5px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 32px; }
+    .links { gap: 18px; }
+    .links a { font-size: 18px; }
+    .nav-inner { padding: 0 12px; }
+    .nav .extra { display: none; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #f5f5f7;
+    color: #6e6e73;
+    font-size: 12px;
+    padding: 30px 22px;
+    text-align: center;
+    line-height: 1.6;
+  }
+  footer .copy { max-width: 980px; margin: 0 auto; border-top: 1px solid #d2d2d7; padding-top: 16px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-inner">
+    <ul>
+      <li class="logo">
+        <a href="#" aria-label="Apple">
+          <svg viewBox="0 0 14 44"><path d="M13.0729 17.6825a3.61 3.61 0 0 0-1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1-1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1-1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.6919 2.5924.6919.63 0 1.6112-.7333 2.8092-.7333a3.7579 3.7579 0 0 1 3.1604 1.5802zm-3.7284-2.8918a3.5615 3.5615 0 0 0 .8492-2.2206 1.57 1.57 0 0 0-.0207-.2792 3.5871 3.5871 0 0 0-2.3551 1.2084 3.4654 3.4654 0 0 0-.8804 2.1585 1.4789 1.4789 0 0 0 .0207.2585 1.2685 1.2685 0 0 0 .2275.0207 3.0859 3.0859 0 0 0 2.1585-1.2256z"/></svg>
+        </a>
+      </li>
+      <li><a href="#">Store</a></li>
+      <li><a href="#">Mac</a></li>
+      <li><a href="#">iPad</a></li>
+      <li><a href="#">iPhone</a></li>
+      <li><a href="#">Watch</a></li>
+      <li class="extra"><a href="#">Vision</a></li>
+      <li class="extra"><a href="#">AirPods</a></li>
+      <li class="extra"><a href="#">TV e Casa</a></li>
+      <li class="extra"><a href="#">Entretenimento</a></li>
+      <li class="extra"><a href="#">Acessórios</a></li>
+      <li><a href="#">Suporte</a></li>
+      <li class="icon">
+        <a href="#" aria-label="Buscar">
+          <svg viewBox="0 0 15 44"><path d="M14.298 27.202l-3.87-3.87a6.45 6.45 0 1 0-.99.99l3.87 3.87a.7.7 0 0 0 .99-.99zM3.51 21.81a5.04 5.04 0 1 1 7.13 0 5.05 5.05 0 0 1-7.13 0z"/></svg>
+        </a>
+      </li>
+      <li class="icon">
+        <a href="#" aria-label="Sacola">
+          <svg viewBox="0 0 14 44"><path d="M11.3535 16.0283H10.0205a2.6622 2.6622 0 0 0-2.5779-2.0218A2.6622 2.6622 0 0 0 4.8647 16.0283H3.5317a1.0026 1.0026 0 0 0-1.0011 1v9.5566a1.0026 1.0026 0 0 0 1.0011 1h7.8218a1.0026 1.0026 0 0 0 1.0011-1v-9.5566a1.0026 1.0026 0 0 0-1.0011-1zm-3.91-1.0218a1.6629 1.6629 0 0 1 1.5871 1.0218H5.8554a1.6629 1.6629 0 0 1 1.5881-1.0218zm3.911 11.5784a.0017.0017 0 0 1-.0011.0011H3.5317a.0017.0017 0 0 1-.0011-.0011v-9.5566a.0017.0017 0 0 1 .0011-.0011h7.8218a.0017.0017 0 0 1 .0011.0011z"/></svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero dark">
+  <h1>iPhone 16 Pro</h1>
+  <h2 class="sub">Titânio. Tão forte. Tão leve. Tão Pro.</h2>
+  <div class="links">
+    <a href="#">Saiba mais ›</a>
+    <a href="#">Comprar ›</a>
+  </div>
+  <div class="hero-art g-iphone"></div>
+</section>
+
+<!-- GRID -->
+<div class="grid">
+
+  <div class="tile dark full">
+    <h3>MacBook Pro</h3>
+    <p class="sub">Voa com o chip M4.</p>
+    <div class="links">
+      <a href="#">Saiba mais ›</a>
+      <a href="#">Comprar ›</a>
+    </div>
+    <div class="tile-art g-mac"></div>
+  </div>
+
+  <div class="tile light">
+    <h3>iPad Air</h3>
+    <p class="sub">Leveza superpoderosa.</p>
+    <div class="links">
+      <a href="#">Saiba mais ›</a>
+      <a href="#">Comprar ›</a>
+    </div>
+    <div class="tile-art g-ipad"></div>
+  </div>
+
+  <div class="tile dark">
+    <h3>Apple Watch Series 10</h3>
+    <p class="sub">Mais fino. Maior. Mais brilhante.</p>
+    <div class="links">
+      <a href="#">Saiba mais ›</a>
+      <a href="#">Comprar ›</a>
+    </div>
+    <div class="tile-art g-watch"></div>
+  </div>
+
+  <div class="tile light">
+    <h3>AirPods Pro 2</h3>
+    <p class="sub">Aparelho auditivo. Pela primeira vez.</p>
+    <div class="links">
+      <a href="#">Saiba mais ›</a>
+      <a href="#">Comprar ›</a>
+    </div>
+    <div class="tile-art g-airpods"></div>
+  </div>
+
+  <div class="tile dark">
+    <h3>Apple TV 4K</h3>
+    <p class="sub">O cinema. Em casa.</p>
+    <div class="links">
+      <a href="#">Saiba mais ›</a>
+      <a href="#">Comprar ›</a>
+    </div>
+    <div class="tile-art g-tv"></div>
+  </div>
+
+  <div class="tile light">
+    <h3>Apple Card</h3>
+    <p class="sub">Até 3% de cashback. Todo dia.</p>
+    <div class="links">
+      <a href="#">Saiba mais ›</a>
+      <a href="#">Pedir agora ›</a>
+    </div>
+    <div class="tile-art g-card"></div>
+  </div>
+
+  <div class="tile dark full">
+    <h3>Apple Trade In</h3>
+    <p class="sub">Ganhe crédito na troca do seu aparelho.</p>
+    <div class="links">
+      <a href="#">Saiba mais ›</a>
+      <a href="#">Ver valor ›</a>
+    </div>
+    <div class="tile-art g-trade"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="copy">
+    Copyright © 2026 Apple Inc. Todos os direitos reservados.<br>
+    Política de Privacidade &nbsp;|&nbsp; Termos de Uso &nbsp;|&nbsp; Vendas e Reembolsos &nbsp;|&nbsp; Mapa do Site
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const tiles = document.querySelectorAll('.tile');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  tiles.forEach(t => io.observe(t));
+</script>
+
+</body>
+</html>

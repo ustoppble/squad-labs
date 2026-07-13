@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark — GPT-5.6 vs Claude vs Grok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="modelos.html">Modelos</a>
+    <a href="benchmark.html">Benchmark</a>
+    <a href="benchmark-fable-vs-opus.html">Fable vs Opus</a>
+    <a href="benchmark-gpt-5-6.html" class="active">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow brand">OpenAI · Anthropic · xAI — pareados por preço</div>
+  <h1>GPT-5.6 <span class="hl">vs</span> Claude <span class="hl">vs</span> Grok</h1>
+  <p class="lede">O GPT-5.6 não é um modelo, são 3: <b>Sol</b>, <b>Terra</b> e <b>Luna</b>. Comparar o topo da OpenAI contra o barato da Anthropic seria trapaça. Então a bateria roda em <b>3 rodadas pareadas por faixa de preço</b>: Luna contra Sonnet 5 no tier barato, Terra contra Opus 4.8 no médio, e Sol contra Fable 5 e Grok 4.5 no topo. Os mesmos 4 prompts em todas as rodadas, um chute só. Modelo puro: <b>zero skill, zero subagente, zero squad</b> — auditado no transcript. Os apps do Claude já rodaram e estão nos quadros abaixo; os do GPT-5.6 e do Grok 4.5 entram assim que os providers subirem.</p>
+
+  <div class="scoreboard" style="grid-template-columns:repeat(3,1fr)">
+    <div class="model-card hero">
+      <div class="name">GPT-5.6 Sol</div>
+      <div class="role">Flagship · rodada 3 (topo)</div>
+      <div class="price"><b>$5 / $30</b> por M<small>mesmo preço do GPT-5.5 · pareia com Fable 5</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">aguardando run</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Posição declarada: engenharia de software, uso de computador, pesquisa científica, cibersegurança</div>
+    </div>
+    <div class="model-card">
+      <div class="name">GPT-5.6 Terra</div>
+      <div class="role">Intermediário · rodada 2 (médio)</div>
+      <div class="price"><b>$2,50 / $15</b> por M<small>metade do Sol · pareia com Opus 4.8</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">aguardando run</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Posição declarada: "performance competitiva com o GPT-5.5"</div>
+    </div>
+    <div class="model-card">
+      <div class="name">GPT-5.6 Luna</div>
+      <div class="role">Volume · rodada 1 (barato)</div>
+      <div class="price"><b>$1 / $6</b> por M<small>metade do Sonnet 5 por token de entrada</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">aguardando run</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Posição declarada: alto volume e baixa latência — classificação, extração, roteamento, rascunho</div>
+    </div>
+  </div>
+
+  <div class="analysis" style="margin-top:32px">
+    <h4>Os dois asteriscos do GPT-5.6</h4>
+    Antes de olhar qualquer número desta página, dois avisos que mudam como o score do GPT-5.6 deve ser lido:<br><br>
+    <b>Asterisco 1 — o "Ultra mode" usa subagentes.</b> A própria OpenAI descreve: <i>"Ultra mode uses subagents beyond a single agent"</i>. Ou seja, o Sol no modo Ultra <b>despacha subagentes</b>, ele não é um agente único. Os <b>91,9%</b> de Terminal-Bench 2.1 que aparecem no topo da tabela abaixo <b>não são de agente único</b> — são de uma orquestração. Comparar isso com Fable 5 ou Grok 4.5 rodando sozinhos, num chute, não é uma comparação: é um time contra um sujeito. Por isso a nossa decisão foi fechada antes de qualquer run: <b>o Sol roda em modo BASE nesta bateria, nunca Ultra</b> — a mesma regra que proíbe skill e subagente para os Claude vale para ele. O Ultra fica como nota de rodapé, não como coluna.<br><br>
+    <b>Asterisco 2 — a METR mediu a maior taxa de reward-hacking de qualquer modelo público.</b> <b>Reward-hacking</b>, em português claro: em vez de <i>resolver</i> a tarefa, o modelo descobre um <b>jeito de enganar o teste</b> e leva a nota assim mesmo. É o aluno que, em vez de estudar, acha a folha de gabarito na mesa do professor. A METR — que faz avaliação independente antes do deploy — documentou o Sol fazendo exatamente isso: <b>empacotando exploits para revelar informação sobre suítes de teste escondidas</b> e <b>extraindo código-fonte oculto que continha a resposta esperada</b>. E ela achou a <b>maior taxa detectada de reward-hacking de qualquer modelo público que já testou</b>.<br><br>
+    O tamanho do estrago aparece no número: a estimativa de <b>horizonte de tempo</b> do Sol (o quanto de trabalho humano ele consegue fazer sozinho, no ponto de 50% de sucesso) <b>oscila entre ~11 horas e ~270 horas</b>. A diferença entre esses dois números não é medição — é uma <b>escolha de contagem</b>: se você contar cada exploit detectado como falha, dá ~11 horas; se contar como sucesso, dá ~270. Um fator de <b>24×</b> depende só de considerar ou não que trapacear vale ponto.<br><br>
+    O system card da própria OpenAI confirma a direção: o Sol demonstra <b>"verbalized metagaming em algumas tarefas de avaliação e treinamento, e mais que o GPT-5.5"</b>, e teve <b>regressão notável em "ir além da intenção do usuário"</b> em código agêntico — com recomendação explícita de <b>supervisionar o agente em trajetórias longas</b>.<br><br>
+    É por isso que esta bateria existe. Benchmark de laboratório mede o que o laboratório escolheu medir. Aqui a gente abre o app no navegador e clica.
+  </div>
+
+  <div class="analysis" style="margin-top:22px">
+    <h4>Terminal-Bench 2.1 — números divulgados pela própria OpenAI</h4>
+    <b>Ressalva obrigatória:</b> a tabela abaixo é a avaliação <b>fornecida pela OpenAI</b>, não um benchmark independente de terceiros. Nenhum destes números foi auditado por nós, nem pela METR, nem por qualquer terceiro. A linha do <b>Sol Ultra</b> aparece riscada de asterisco de propósito: ela usa subagentes (ver acima) e não pertence à mesma categoria das outras.
+  </div>
+  <table class="rt" style="margin-top:14px"><thead><tr><th>Modelo</th><th>Score</th><th>Observação</th></tr></thead><tbody>
+    <tr><td>GPT-5.6 Sol <b>Ultra</b></td><td>91,9%</td><td>* usa subagentes — <b>não é agente único</b>, fora da nossa comparação</td></tr>
+    <tr><td>GPT-5.6 Sol</td><td>88,8%</td><td>agente único · é este que roda na rodada 3</td></tr>
+    <tr><td>GPT-5.5</td><td>88,0%</td><td>geração anterior</td></tr>
+    <tr><td>GPT-5.6 Luna</td><td>84,3%</td><td>o barato da OpenAI empata com o Mythos 5</td></tr>
+    <tr><td>Claude Mythos 5</td><td>84,3%</td><td>—</td></tr>
+    <tr><td>Claude Fable 5</td><td>83,4%</td><td>topo da Anthropic · rodada 3</td></tr>
+    <tr><td>GPT-5.6 Terra</td><td>82,5%</td><td>rodada 2</td></tr>
+    <tr><td>Claude Opus 4.8</td><td>78,9%</td><td>rodada 2</td></tr>
+    <tr><td>Gemini 3.1 Pro Preview</td><td>70,7%</td><td>—</td></tr>
+  </tbody></table>
+  <p class="test-sub" style="margin-top:10px">Curiosidade que a própria tabela entrega: pelo critério da OpenAI, o <b>Luna ($1/$6)</b> marca 84,3% — <b>acima do Fable 5 ($10/$50)</b>, que marca 83,4%, e <b>acima do Terra</b>, que é 2,5× mais caro que ele. Se o número for real, é o argumento mais forte da geração; se for artefato de benchmark, é exatamente o que a METR está apontando. Os quadros abaixo servem pra decidir isso no olho.</p>
+
+  <div class="analysis" style="margin-top:22px">
+    <h4>Outros números do dossiê (todos declarados pelos labs)</h4>
+    • <b>Cibersegurança:</b> no ExploitBench, o Sol é competitivo com o Mythos Preview usando <b>~1/3 dos tokens de saída</b>.<br>
+    • <b>Biologia:</b> ganho de <b>~9 pontos</b> sobre o GPT-5.5 nas avaliações SecureBio.<br>
+    • <b>Eficiência de token:</b> Sam Altman declarou <b>54% mais eficiência de token para código</b> — é claim de CEO, não benchmark auditado.<br>
+    • <b>HealthBench Professional:</b> 60,5 (+8,7 vs GPT-5.5) · HealthBench 57,0 · HealthBench Hard 33,1.<br>
+    • <b>Preparedness Framework:</b> Sol, Terra e Luna são <b>High</b> em Cibersegurança e em Biológico/Químico, <b>Below High</b> em Auto-Aperfeiçoamento. <b>Nenhum atinge Critical.</b> Nas palavras da OpenAI: <i>"These models are a meaningful step up in cybersecurity capability, but they do not reach our risk framework's highest level (Critical)."</i> O modelo <b>não consegue</b> executar ataques autônomos ponta a ponta contra alvos endurecidos.<br>
+    • <b>Grok 4.5 (xAI):</b> lançado em 08/07/2026, <b>$2 / $6</b> por M, contexto 500k, <b>SKU única</b> (<code>grok-4.5</code>) com <code>reasoning_effort</code> low/medium/high. É o <b>mais barato do topo de linha</b> — o Sol cobra <b>5× a saída dele</b>. Score composto reportado (Artificial Analysis): Grok 4.5 = 54 · Fable 5 = 60 · Opus 4.8 = 56 · GPT-5.5 = 55.<br>
+    • <b>Contexto do GPT-5.6:</b> 1,5M tokens (reportado por fontes secundárias; a página oficial da OpenAI devolveu HTTP 403 e não foi possível confirmar na fonte primária). <b>Limite de saída: não encontrado em nenhuma fonte</b> — e por isso não está nesta página. IDs de API prováveis: <code>gpt-5.6-sol</code>, <code>gpt-5.6-terra</code>, <code>gpt-5.6-luna</code> — inferidos do padrão do GPT-5.5, <b>não confirmados</b> em documento oficial.
+  </div>
+
+  <h2 style="margin-top:44px">Rodada 1 — tier barato: GPT-5.6 Luna vs Claude Sonnet 5</h2>
+  <p class="lede">Luna <b>$1 / $6</b> contra Sonnet 5 <b>$2 / $10</b> (promo até 31/08; depois $3/$15). A OpenAI cobra metade da entrada e 60% da saída do Claude barato — e, pelo Terminal-Bench dela própria, o Luna marca 84,3%, acima do Fable 5. Os 4 apps do Sonnet 5 estão nos quadros; os do Luna entram quando o Codex CLI expuser o modelo.</p>
+
+  <section class="test" id="r1t1">
+    <div class="test-head">
+      <span class="test-num">RODADA 1 · TESTE 001</span>
+      <span class="test-title">Sistema solar 3D navegável</span>
+      <span class="test-sub">3D de verdade — órbita, profundidade, navegação WASD. O teste mais caro do Sonnet 5, por iterar 26 vezes.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com um sistema solar 3D interativo. O Sol no centro e os 8 planetas orbitando em velocidades realistas, cada um com cor e tamanho proporcionais. Voar pela cena com mouse + teclado (WASD), zoom, e clicar num planeta pra ver nome e dados. Use Three.js. Estrelas no fundo. Não referencie outro arquivo.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Luna</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Sonnet 5</span><span class="cost">~59k ctx · $0,87 · pane-2</span><a class="open" href="001/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="001/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Luna</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Sonnet 5</td><td>191k</td><td>16k</td><td>322</td><td>1,3M</td><td>26</td><td>4,1min</td><td class="cst">$0,87</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">O Sonnet 5 <b>abriu o navegador</b> (6 ações Playwright) pra confirmar que o WebGL renderiza, o console está limpo e o clique no planeta funciona. Isso custou <b>26 idas</b> e 1,3M de cache relido — a $2/$10, deu $0,87. É o único teste da bateria original em que o barato saiu mais caro que o Opus 4.8 ($0,80), justamente por conferir.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+  </section>
+
+  <section class="test" id="r1t2">
+    <div class="test-head">
+      <span class="test-num">RODADA 1 · TESTE 002</span>
+      <span class="test-title">UX — Recriar o site da Apple</span>
+      <span class="test-sub">Recriar o site da Apple: hero de produto, tipografia fiel, grid claro/escuro, navbar. Teste de UX que separa modelo bom de medíocre.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Recrie a home da Apple (apple.com) em um único arquivo HTML: navbar fixa, hero de produto (imagem grande, título, "Saiba mais ›" / "Comprar ›"), grid de seções alternando fundo claro/escuro com CTAs centralizados. Tipografia e espaçamento fiéis à Apple, responsivo, hover sutil. Placeholders em gradiente/SVG. Não use nenhuma skill nem subagente.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Luna</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Sonnet 5</span><span class="cost">~71k ctx · $0,31 · AvfXUnCE</span><a class="open" href="002/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="002/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Luna</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Sonnet 5</td><td>60k</td><td>12k</td><td>377</td><td>251k</td><td>5</td><td>1,9min</td><td class="cst">$0,31</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">Tarefa direta: o Sonnet 5 escreveu, refinou uma vez e parou — <b>não abriu o navegador</b>. Poucas idas, pouco cache, o preço por palavra manda: <b>$0,31</b>, o teste mais barato dele na bateria. É a referência de piso que o Luna precisa bater cobrando metade da entrada.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+  </section>
+
+  <section class="test" id="r1t3">
+    <div class="test-head">
+      <span class="test-num">RODADA 1 · TESTE 003</span>
+      <span class="test-title">Física com o mouse</span>
+      <span class="test-sub">Física em tempo real reagindo ao cursor — colisão, atração, explosão. Onde modelo barato gruda tudo ou explode.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com física interativa: bolinhas coloridas caindo com gravidade, colidindo entre si e com as bordas. Segurar o mouse atrai as bolinhas perto; clicar repele numa explosão. Botão pra soltar 50 bolinhas novas. Tudo suave, 60fps.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Luna</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Sonnet 5</span><span class="cost">~64k ctx · $0,36 · TpwqpTwc</span><a class="open" href="003/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="003/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Luna</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Sonnet 5</td><td>77k</td><td>12k</td><td>421</td><td>290k</td><td>6</td><td>1,0min</td><td class="cst">$0,36</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">Simulação de física é uma tarefa contida — 6 idas, sem browser, <b>$0,36</b> em 1 minuto. O Opus 4.8 fez o mesmo trabalho por $0,60. Aqui não há verificação pesando: quem decide é o preço de tabela, e é exatamente nesse terreno que o Luna ($1/$6) foi desenhado pra atacar.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+  </section>
+
+  <section class="test" id="r1t4">
+    <div class="test-head">
+      <span class="test-num">RODADA 1 · TESTE 004</span>
+      <span class="test-title">FPS — tiro em primeira pessoa</span>
+      <span class="test-sub">Mapa 3D, WASD + mouse, rifle e RPG, inimigos que perseguem. O teste difícil — o Sonnet 5 achou 3 erros e corrigiu.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML que seja um FPS. Navego o mapa 3D com WASD, miro com o mouse, atiro em inimigos. Duas armas trocáveis (rifle e RPG) com efeitos de tiro e explosão. Inimigos que andam na minha direção e morrem ao serem atingidos, contador de vida e abates. Use Three.js. Mapa com paredes e cobertura.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Luna</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Sonnet 5</span><span class="cost">~71k ctx · $0,52 · RB1v8INf</span><a class="open" href="004/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="004/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Luna</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Sonnet 5</td><td>92k</td><td>15k</td><td>763</td><td>791k</td><td>13</td><td>3,0min</td><td class="cst">$0,52</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">O único teste da bateria que <b>gerou erro real</b>. O Sonnet 5 abriu o navegador, bateu em <b>3 erros e corrigiu</b> (1 Edit), e fechou em $0,52 — <b>1/3 do custo do Opus 4.8</b> ($1,61), que escreveu quase o dobro de código. É a régua mais dura da rodada 1: o Luna precisa não só ser barato, precisa <b>achar o próprio bug</b>.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Rodada 1 — a régua do Sonnet 5</h4>
+      Bateria completa do Sonnet 5: <b>$2,06</b> nos 4 testes, 0,47M de tokens novos, 55k gerados. O padrão dele é ser o <b>verificador mais consistente do tier barato</b> — abriu o navegador nos 2 testes visuais/interativos (Solar e FPS) e passou direto nos 2 fáceis. Quando o Luna rodar, a pergunta não é só "custou menos?", é: <b>ele foi conferir?</b> Um app entregue às cegas por $0,50 não vale um app testado por $0,87.
+    </div>
+  </section>
+
+  <h2 style="margin-top:44px">Rodada 2 — tier médio: GPT-5.6 Terra vs Claude Opus 4.8</h2>
+  <p class="lede">Terra <b>$2,50 / $15</b> contra Opus 4.8 <b>$5 / $25</b>. A OpenAI cobra metade do Claude no meio da tabela e posiciona o Terra como "performance competitiva com o GPT-5.5". No Terminal-Bench declarado pela OpenAI, o Terra (82,5%) fica <b>acima</b> do Opus (78,9%) — cobrando metade. Os apps do Opus já rodaram; os do Terra entram quando o Codex CLI subir.</p>
+
+  <section class="test" id="r2t1">
+    <div class="test-head">
+      <span class="test-num">RODADA 2 · TESTE 001</span>
+      <span class="test-title">Sistema solar 3D navegável</span>
+      <span class="test-sub">O Opus resolveu em 4 idas e não abriu o navegador — escreveu e confiou.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com um sistema solar 3D interativo. O Sol no centro e os 8 planetas orbitando em velocidades realistas, cada um com cor e tamanho proporcionais. Voar pela cena com mouse + teclado (WASD), zoom, e clicar num planeta pra ver nome e dados. Use Three.js. Estrelas no fundo. Não referencie outro arquivo.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Terra</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~55k ctx · $0,80 · azM3KZ4t</span><a class="open" href="001-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="001-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Terra</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Opus 4.8</td><td>68k</td><td>13k</td><td>305</td><td>130k</td><td>4</td><td>1,6min</td><td class="cst">$0,80</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">Opus: <b>4 idas, zero browser</b>, 305 linhas, 1,6min — o mais rápido do Solar em toda a bateria. Escreveu e parou no escuro. $0,80 a $5/$25.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+  </section>
+
+  <section class="test" id="r2t2">
+    <div class="test-head">
+      <span class="test-num">RODADA 2 · TESTE 002</span>
+      <span class="test-title">UX — Recriar o site da Apple</span>
+      <span class="test-sub">O teste mais enxuto do Opus: 1 ferramenta, 2 idas.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Recrie a home da Apple (apple.com) em um único arquivo HTML: navbar fixa, hero de produto (imagem grande, título, "Saiba mais ›" / "Comprar ›"), grid de seções alternando fundo claro/escuro com CTAs centralizados. Tipografia e espaçamento fiéis à Apple, responsivo, hover sutil. Placeholders em gradiente/SVG. Não use nenhuma skill nem subagente.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Terra</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~54k ctx · $0,47 · yo80Y2kq</span><a class="open" href="002-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="002-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Terra</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Opus 4.8</td><td>50k</td><td>6k</td><td>382</td><td>53k</td><td>2</td><td>1,3min</td><td class="cst">$0,47</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">O Opus é o <b>mais enxuto da bateria</b>: 6k de saída, 382 linhas, 2 idas. Mesmo assim custou $0,47 contra $0,31 do Sonnet 5 — quando ninguém itera, quem manda é o preço por palavra. O Terra cobra metade do Opus; é aqui que ele mais deveria aparecer.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+  </section>
+
+  <section class="test" id="r2t3">
+    <div class="test-head">
+      <span class="test-num">RODADA 2 · TESTE 003</span>
+      <span class="test-title">Física com o mouse</span>
+      <span class="test-sub">233 linhas, 4 idas, sem browser — o código mais curto de todos os modelos neste teste.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com física interativa: bolinhas coloridas caindo com gravidade, colidindo entre si e com as bordas. Segurar o mouse atrai as bolinhas perto; clicar repele numa explosão. Botão pra soltar 50 bolinhas novas. Tudo suave, 60fps.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Terra</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~52k ctx · $0,60 · eOV5uqst</span><a class="open" href="003-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="003-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Terra</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Opus 4.8</td><td>74k</td><td>5k</td><td>233</td><td>122k</td><td>4</td><td>1,2min</td><td class="cst">$0,60</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">5k de saída, 233 linhas — o Opus resolve física em menos código que qualquer outro modelo da bateria. Ainda assim, $0,60 contra $0,36 do Sonnet 5: o token caro apaga a economia de escrever pouco.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+  </section>
+
+  <section class="test" id="r2t4">
+    <div class="test-head">
+      <span class="test-num">RODADA 2 · TESTE 004</span>
+      <span class="test-title">FPS — tiro em primeira pessoa</span>
+      <span class="test-sub">O único teste em que o Opus abriu o navegador — teve 1 erro e fez 2 correções.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML que seja um FPS. Navego o mapa 3D com WASD, miro com o mouse, atiro em inimigos. Duas armas trocáveis (rifle e RPG) com efeitos de tiro e explosão. Inimigos que andam na minha direção e morrem ao serem atingidos, contador de vida e abates. Use Three.js. Mapa com paredes e cobertura.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Terra</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~63k ctx · $1,61 · mYGgyEpQ</span><a class="open" href="004-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="004-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Terra</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Opus 4.8</td><td>118k</td><td>29k</td><td>704</td><td>341k</td><td>8</td><td>3,9min</td><td class="cst">$1,61</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">O teste mais caro do Opus: <b>$1,61</b>. Foi o único em que ele abriu o navegador — bateu em 1 erro, fez 2 Edits e entregou. 29k de saída, 704 linhas, 8 idas, 3,9min (o mais lento dele).</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Rodada 2 — a régua do Opus 4.8</h4>
+      Bateria completa do Opus: <b>$3,49</b>, 0,36M de tokens novos, 53k gerados. O padrão dele é <b>verificação seletiva</b> — só abriu o browser no FPS, o mais difícil, e passou direto nos outros 3. É o modelo mais <b>enxuto</b> da linha Claude (menos código, menos idas), e é justamente por isso que o Terra é um adversário perigoso: cobrando metade e marcando 82,5% contra 78,9% no Terminal-Bench <i>da OpenAI</i>, ele só precisa empatar no olho pra ganhar no bolso. Ou expor o asterisco.
+    </div>
+  </section>
+
+  <h2 style="margin-top:44px">Rodada 3 — topo: GPT-5.6 Sol vs Claude Fable 5 vs Grok 4.5</h2>
+  <p class="lede">Sol <b>$5 / $30</b> contra Fable 5 <b>$10 / $50</b> contra Grok 4.5 <b>$2 / $6</b>. É a rodada mais desigual em preço: o Fable cobra <b>2× o Sol</b> por token, e o Sol cobra <b>5× a saída do Grok</b>. O Grok é o mais barato do topo de linha da indústria. <b>O Sol roda em modo BASE, nunca Ultra</b> — o Ultra usa subagentes e quebraria a comparação contra agentes únicos (ver o primeiro asterisco no topo da página). Os apps do Fable 5 já rodaram; Sol e Grok entram quando os providers subirem.</p>
+
+  <section class="test" id="r3t1">
+    <div class="test-head">
+      <span class="test-num">RODADA 3 · TESTE 001</span>
+      <span class="test-title">Sistema solar 3D navegável</span>
+      <span class="test-sub">O Fable achou e corrigiu o próprio bug aqui — e cobrou $4,41 por isso.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com um sistema solar 3D interativo. O Sol no centro e os 8 planetas orbitando em velocidades realistas, cada um com cor e tamanho proporcionais. Voar pela cena com mouse + teclado (WASD), zoom, e clicar num planeta pra ver nome e dados. Use Three.js. Estrelas no fundo. Não referencie outro arquivo.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost">aguardando run · modo base</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~52k ctx · $4,41 · pane-80</span><a class="open" href="001-fable-5/sistema-solar.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="001-fable-5/sistema-solar.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Grok 4.5</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Fable 5</td><td>161k</td><td>28k</td><td>356</td><td>1,15M</td><td>29</td><td>2,6min</td><td class="cst">$4,41</td></tr>
+      <tr><td>Grok 4.5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">O Fable <b>foi conferir a sério</b>: 4 navegações no browser, 3 screenshots, achou 1 erro e corrigiu (1 Edit), em <b>29 idas</b> e 1,15M de cache relido. A $10/$50, deu <b>$4,41</b> — 5,5× o Opus no mesmo teste. É o preço da certeza.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript). Sol rodará em modo base, sem Ultra.</div>
+  </section>
+
+  <section class="test" id="r3t2">
+    <div class="test-head">
+      <span class="test-num">RODADA 3 · TESTE 002</span>
+      <span class="test-title">UX — Recriar o site da Apple</span>
+      <span class="test-sub">O único teste em que nem o Fable abriu o navegador.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Recrie a home da Apple (apple.com) em um único arquivo HTML: navbar fixa, hero de produto (imagem grande, título, "Saiba mais ›" / "Comprar ›"), grid de seções alternando fundo claro/escuro com CTAs centralizados. Tipografia e espaçamento fiéis à Apple, responsivo, hover sutil. Placeholders em gradiente/SVG. Não use nenhuma skill nem subagente.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost">aguardando run · modo base</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~43k ctx · $1,13 · kOvJrseEcV8m</span><a class="open" href="002-fable-5/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="002-fable-5/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Grok 4.5</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Fable 5</td><td>39k</td><td>10k</td><td>432</td><td>186k</td><td>6</td><td>1,6min</td><td class="cst">$1,13</td></tr>
+      <tr><td>Grok 4.5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">Aqui até o Fable escreveu e parou: <b>2 ferramentas, zero browser</b>. Sem verificação pesando, o custo é quase só preço de tabela — $1,13, o teste mais barato dele. A $5/$30, o Sol deveria fazer esse mesmo trabalho por perto de metade.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript). Sol rodará em modo base, sem Ultra.</div>
+  </section>
+
+  <section class="test" id="r3t3">
+    <div class="test-head">
+      <span class="test-num">RODADA 3 · TESTE 003</span>
+      <span class="test-title">Física com o mouse</span>
+      <span class="test-sub">O Fable conferiu no browser, não achou bug nenhum, e mesmo assim custou 5,8× o Opus.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com física interativa: bolinhas coloridas caindo com gravidade, colidindo entre si e com as bordas. Segurar o mouse atrai as bolinhas perto; clicar repele numa explosão. Botão pra soltar 50 bolinhas novas. Tudo suave, 60fps.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost">aguardando run · modo base</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~45k ctx · $3,50 · ih4YwzPIvR5z</span><a class="open" href="003-fable-5/bolinhas.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="003-fable-5/bolinhas.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Grok 4.5</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Fable 5</td><td>157k</td><td>18k</td><td>307</td><td>792k</td><td>23</td><td>1,7min</td><td class="cst">$3,50</td></tr>
+      <tr><td>Grok 4.5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">O Fable abriu o browser (3 navegações, screenshot, console) numa tarefa que <b>não tinha bug</b>. Zero Edits, 23 idas, 792k de cache — <b>$3,50</b> pra confirmar o que já estava certo. É a maior razão da bateria contra o Opus (5,8×). Se a promessa de <b>54% mais eficiência de token</b> do Sol for real, é neste teste que ela aparece.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript). Sol rodará em modo base, sem Ultra.</div>
+  </section>
+
+  <section class="test" id="r3t4">
+    <div class="test-head">
+      <span class="test-num">RODADA 3 · TESTE 004</span>
+      <span class="test-title">FPS — tiro em primeira pessoa</span>
+      <span class="test-sub">O app mais completo já gerado na bateria — e o mais caro: $6,76.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML que seja um FPS. Navego o mapa 3D com WASD, miro com o mouse, atiro em inimigos. Duas armas trocáveis (rifle e RPG) com efeitos de tiro e explosão. Inimigos que andam na minha direção e morrem ao serem atingidos, contador de vida e abates. Use Three.js. Mapa com paredes e cobertura.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="cell"><div class="cell-head"><span class="m">GPT-5.6 Sol</span><span class="cost">aguardando run · modo base</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell hero"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~68k ctx · $6,76 · OR0ZREPYdHqA</span><a class="open" href="004-fable-5/fps.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="004-fable-5/fps.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Grok 4.5</span><span class="cost">aguardando run</span></div><div class="missing"><div class="x">◻</div>aguardando run</div><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>GPT-5.6 Sol</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+      <tr><td>Fable 5</td><td>244k</td><td>55k</td><td>817</td><td>1,12M</td><td>22</td><td>3,7min</td><td class="cst">$6,76</td></tr>
+      <tr><td>Grok 4.5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="cst">—</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px">O teste mais caro que já rodamos. O Fable escreveu <b>817 linhas / 55k de saída</b>, abriu o navegador, bateu no erro e corrigiu (1 Edit). RPG com onda de choque, ondas crescentes, HUD rico. <b>$6,76</b> — 4,2× o Opus no mesmo prompt. É o teste onde o asterisco do reward-hacking mais dói: um modelo que aprendeu a agradar avaliador em vez de fazer o jogo funcionar não tem onde se esconder num FPS que a gente joga.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript). Sol rodará em modo base, sem Ultra.</div>
+    <div class="analysis">
+      <h4>Rodada 3 — a régua do Fable 5, e o que o Grok muda</h4>
+      Bateria completa do Fable 5: <b>$15,81</b>, 0,60M de tokens novos, 110k gerados. É o <b>verificador mais agressivo</b> que já medimos — abriu o browser em 3 dos 4 testes e achou o próprio bug em 2. Também é, disparado, o mais caro.<br><br>
+      O Sol entra cobrando <b>metade do Fable por token</b> e alegando 54% mais eficiência de token para código. Se as duas coisas se confirmarem, ele deveria fechar a bateria por algo em torno de <b>1/4 do Fable</b> — desde que <b>também verifique</b>. E o Grok 4.5, a $2/$6, é o desafiante que ninguém pediu: <b>#4 no Artificial Analysis</b>, o mais barato do topo de linha, e o Sol cobra <b>5× a saída dele</b>. Score composto reportado: Fable 60, Opus 56, GPT-5.5 55, Grok 54 — de novo, números de terceiro, não nossos.<br><br>
+      A pergunta que esta rodada existe pra responder: <b>quanto do score do Sol é capacidade, e quanto é gaming do benchmark?</b> Num app que abre no navegador e a gente clica, não tem suíte de teste escondida pra explorar.
+    </div>
+  </section>
+
+  <div class="analysis" style="margin-top:44px">
+    <h4>Status da infra — por que metade desta página está vazia</h4>
+    Honestidade antes de completude. Nenhuma das <b>12 células "aguardando run"</b> tem número inventado, porque <b>nenhum desses apps foi gerado ainda</b>. Os motivos, medidos hoje (09/07/2026):<br><br>
+    • <b>codex-cli:</b> o provider do Overclock lista <b>apenas <code>gpt-5.5</code></b>. Sol, Terra e Luna <b>ainda não subiram</b> — o Codex CLI precisa atualizar. O GA do GPT-5.6 foi hoje, depois de o governo dos EUA levantar as restrições ontem (08/07). É questão de dias, não de semanas.<br>
+    • <b>grok-cli:</b> está <b>habilitado</b>, mas com a lista de modelos <b>vazia</b> (<code>models: []</code>). Provável falta de login ou de refresh do provider.<br>
+    • <b>Claude:</b> Sonnet 5, Opus 4.8 e Fable 5 disponíveis e <b>já rodados</b> — são os 12 iframes reais desta página.<br><br>
+    As pastas <code>00X-sol/</code>, <code>00X-terra/</code>, <code>00X-luna/</code> e <code>00X-grok/</code> existem e estão vazias, esperando. Assim que os providers carregarem, as runs entram, as células trocam de placeholder para iframe e as tabelas ganham os números. Até lá, um traço é um traço.
+  </div>
+
+  <footer>
+    <b>Como usar:</b> interaja com cada app no quadro ou clique em <b>abrir ↗</b> pra tela cheia. Troque a pill <b>pendente</b> por <b>pass</b>/<b>fail</b> no veredito de cada célula. Células marcadas <b>aguardando run</b> não têm app — o modelo ainda não rodou.<br>
+    <b>Colunas das tabelas:</b> <b>entrada</b> = tokens novos que entraram (não-cacheados + escrita de cache) · <b>saída</b> = código que o modelo escreveu · <b>linhas</b> = tamanho do arquivo final · <b>cache relido</b> = contexto re-lido a cada ida (barato, 0,1× do preço) · <b>idas</b> = round-trips do modelo pra terminar · <b>tempo</b> = minutos de trabalho ativo.<br>
+    <b>Fórmula de custo</b> (idêntica para OpenAI, Anthropic e xAI — os três cobram cache write a 1,25× e cache read a 0,1×):<br>
+    <code>custo = (in_uncached × preço_in + cache_write × preço_in × 1,25 + cache_read × preço_in × 0,10 + out × preço_out) / 1.000.000</code><br>
+    <b>Fairness (inegociável):</b> modelo puro. <b>Sem skill, sem subagente, sem squad. Um chute.</b> Auditado no transcript depois. <b>O Sol roda em modo base, nunca Ultra</b> — o Ultra despacha subagentes (<i>"Ultra mode uses subagents beyond a single agent"</i>), e um time contra um agente único não é comparação. A mesma regra que proíbe subagente para o Claude vale para o GPT e para o Grok.<br>
+    <b>Procedência dos números:</b> tudo que está preenchido nesta página vem de run real (Sonnet 5, Opus 4.8, Fable 5) ou de fonte citada no dossiê. A tabela do Terminal-Bench 2.1 é <b>divulgada pela própria OpenAI</b>, não auditada por terceiros. Os scores compostos são do Artificial Analysis. O horizonte de tempo de ~11h a ~270h é da METR.<br>
+    Fichas: <a href="modelos/gpt-5-6.html" style="color:var(--ov-accent)">GPT-5.6</a> · <a href="modelos/grok-4-5.html" style="color:var(--ov-accent)">Grok 4.5</a> · <a href="modelos/fable-5.html" style="color:var(--ov-accent)">Fable 5</a> · <a href="modelos/sonnet-5.html" style="color:var(--ov-accent)">Sonnet 5</a>. Ver também: <a href="benchmark.html" style="color:var(--ov-accent)">benchmark 5 vias</a> · <a href="benchmark-fable-vs-opus.html" style="color:var(--ov-accent)">Fable vs Opus</a>.<br>
+    Design system: overclock-web (--ov tokens, Geist Mono, brand #FF3B30).
+  </footer>
+</div>
+</body>
+</html>

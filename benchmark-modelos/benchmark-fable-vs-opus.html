@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark — Fable 5 vs Opus 4.8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="nav">
+  <span class="dot"></span>
+  <a class="brand" href="index.html">OVERCLOCK · BENCHMARK</a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="modelos.html">Modelos</a>
+    <a href="benchmark.html">Benchmark</a>
+    <a href="benchmark-fable-vs-opus.html" class="active">Fable vs Opus</a>
+    <a href="benchmark-gpt-5-6.html">GPT-5.6</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow brand">Claude · Topo de linha vs rei anterior</div>
+  <h1>Fable 5 <span class="hl">vs</span> Opus 4.8</h1>
+  <p class="lede">4 prompts idênticos, 2 modelos, um chute só. O novo topo da linha (Fable 5, $10/$50) contra o rei que ele substitui (Opus 4.8, $5/$25). Fable entrega mais? E quanto custa essa diferença? Cada app abaixo foi gerado num único prompt — interaja direto no quadro. Modelo puro: <b>zero skill, zero subagente</b>, auditado no transcript. Custo = dinheiro real (cumulativo).</p>
+
+  <div class="scoreboard" style="grid-template-columns:repeat(2,1fr)">
+    <div class="model-card hero">
+      <div class="name">Fable 5</div>
+      <div class="role">O novo topo · autônomo</div>
+      <div class="price"><b>$10 / $50</b> por M<small>2× o Opus 4.8 · novo estado-da-arte</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val" style="color:var(--ov-accent)">$15,81</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Volume: <b style="color:var(--ov-accent)">0,60M</b> tokens novos · 110k gerados</div>
+    </div>
+    <div class="model-card">
+      <div class="name">Opus 4.8</div>
+      <div class="role">O rei anterior · mais barato</div>
+      <div class="price"><b>$5 / $25</b> por M<small>metade do preço/token do Fable</small></div>
+      <div class="tally"><span class="lab">Custo oficial · 4 runs</span><span class="val">$3,49</span></div>
+      <div style="font-size:10px;color:var(--ov-dim);margin-top:8px;letter-spacing:.05em">Volume: <b style="color:var(--ov-muted)">0,36M</b> tokens novos · 53k gerados</div>
+    </div>
+  </div>
+
+  <div class="analysis" style="margin-top:32px">
+    <h4>O padrão que emergiu — Fable verifica, e cobra por isso</h4>
+    Auditando os transcripts, os dois modelos de fronteira acertam de primeira — o que separa é <b>quanto conferem o próprio trabalho</b> e <b>quanto cobram</b>:<br><br>
+    • <b>Fable 5</b> é o verificador mais agressivo — abriu o navegador em <b>3 dos 4 testes</b> (solar, física, FPS), confirmando render e console, e <b>achou + corrigiu o próprio bug</b> no solar e no FPS (1 Edit cada). Comportamento igual ao Sonnet 5, no topo da linha.<br>
+    • <b>Opus 4.8</b> verifica seletivamente — só abriu o browser no FPS (o mais difícil), escreveu e parou nos outros 3.<br><br>
+    O resultado: Fable entrega com mais confiança, mas cada verificação é uma ida que relê o contexto, e o Fable cobra <b>$10/$50</b> — 2× o Opus por token. Os dois efeitos multiplicam: <b>4,5× o custo do Opus</b> na mesma bateria ($15,81 vs $3,49). Capacidade de fronteira, preço de fronteira.
+  </div>
+
+  <section class="test" id="t1">
+    <div class="test-head">
+      <span class="test-num">TESTE 001</span>
+      <span class="test-title">Sistema solar 3D navegável</span>
+      <span class="test-sub">3D de verdade — órbita, profundidade, navegação WASD. O teste onde o Fable mais iterou pra acertar.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com um sistema solar 3D interativo. O Sol no centro e os 8 planetas orbitando em velocidades realistas, cada um com cor e tamanho proporcionais. Voar pela cena com mouse + teclado (WASD), zoom, e clicar num planeta pra ver nome e dados. Use Three.js. Estrelas no fundo. Não referencie outro arquivo.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell hero"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~52k ctx · $4,41 · pane-80</span><a class="open" href="001-fable-5/sistema-solar.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="001-fable-5/sistema-solar.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~55k ctx · $0,80 · azM3KZ4t</span><a class="open" href="001-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="001-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>Fable 5</td><td>161k</td><td>28k</td><td>356</td><td>1,15M</td><td>29</td><td>2,6min</td><td class="cst">$4,41</td></tr>
+      <tr><td>Opus 4.8</td><td>68k</td><td>13k</td><td>305</td><td>130k</td><td>4</td><td>1,6min</td><td class="cst">$0,80</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px"><b style="color:var(--ov-accent)">Por que o Fable saiu 5,5× mais caro:</b> os dois acertaram, mas o Fable <b>foi conferir a sério</b> — 4 navegações no browser, 3 screenshots, achou 1 erro e corrigiu (1 Edit), em <b>29 idas</b> contra 4 do Opus. Cada ida relê o contexto (1,15M de cache) e escreveu mais código (28k vs 13k). Some a isso os $10/$50 (2× o Opus): $4,41 contra $0,80. Verificação profunda + preço de topo.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Análise: Fable conferiu de verdade, Opus confiou</h4>
+      O <b>Fable 5 abriu o navegador</b> (4 navegações + 3 screenshots + console), confirmou que o 3D renderiza no WebGL e o clique no planeta funciona, e <b>corrigiu 1 bug</b> antes de entregar (1 Write, 1 Edit). O <b>Opus escreveu e parou no escuro</b> — 4 ferramentas, zero browser. Por isso o Fable fez 29 idas contra 4: cada verificação é uma ida que relê o contexto crescente. O custo a mais ($4,41 vs $0,80) vem de três coisas somadas — mais código escrito, mais cache relido e o preço 2× por token. É o argumento do topo de linha: só o Fable sabe se o app abre de verdade — mas você paga caro por essa certeza.
+    </div>
+  </section>
+
+  <section class="test" id="t2">
+    <div class="test-head">
+      <span class="test-num">TESTE 002</span>
+      <span class="test-title">UX — Recriar o site da Apple</span>
+      <span class="test-sub">Recriar o site da Apple: hero de produto, tipografia fiel, grid claro/escuro, navbar. Teste de UX que separa modelo bom de medíocre.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Recrie a home da Apple (apple.com) em um único arquivo HTML: navbar fixa, hero de produto (imagem grande, título, "Saiba mais ›" / "Comprar ›"), grid de seções alternando fundo claro/escuro com CTAs centralizados. Tipografia e espaçamento fiéis à Apple, responsivo, hover sutil. Placeholders em gradiente/SVG. Não use nenhuma skill nem subagente.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell hero"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~43k ctx · $1,13 · kOvJrseEcV8m</span><a class="open" href="002-fable-5/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="002-fable-5/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~54k ctx · $0,47 · yo80Y2kq</span><a class="open" href="002-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="002-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>Fable 5</td><td>39k</td><td>10k</td><td>432</td><td>186k</td><td>6</td><td>1,6min</td><td class="cst">$1,13</td></tr>
+      <tr><td>Opus 4.8</td><td>50k</td><td>6k</td><td>382</td><td>53k</td><td>2</td><td>1,3min</td><td class="cst">$0,47</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px"><b style="color:var(--green)">O teste mais barato dos dois:</b> aqui até o Fable escreveu e parou — <b>nenhum dos dois abriu o navegador</b> (Fable 2 tools, Opus 1). Sem verificação pesando, o custo vem quase só do preço por palavra: Fable a $10/$50 fez $1,13 contra $0,47 do Opus. A menor distância da bateria (2,4×), justo porque o Fable não iterou.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Análise: tarefa fácil, ninguém testou — preço de tabela manda</h4>
+      Recriar um site é direto, e foi o único teste em que o <b>Fable também não abriu o browser</b>: escreveu o HTML (1 Write) e parou. O Opus resolveu em 1 ferramenta. Com poucas idas e pouco cache, quem decide o custo é o <b>preço por palavra</b> — e o Fable cobra 2× o Opus. Resultado: $1,13 contra $0,47, a menor razão da bateria. Aqui a diferença é puro preço de tabela, não esforço: quando nem o Fable itera, a vantagem do Opus é só o token mais barato.
+    </div>
+  </section>
+
+  <section class="test" id="t3">
+    <div class="test-head">
+      <span class="test-num">TESTE 003</span>
+      <span class="test-title">Física com o mouse</span>
+      <span class="test-sub">Física em tempo real reagindo ao cursor — colisão, atração, explosão. O Fable conferiu no browser, mas não achou bug.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML com física interativa: bolinhas coloridas caindo com gravidade, colidindo entre si e com as bordas. Segurar o mouse atrai as bolinhas perto; clicar repele numa explosão. Botão pra soltar 50 bolinhas novas. Tudo suave, 60fps.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell hero"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~45k ctx · $3,50 · ih4YwzPIvR5z</span><a class="open" href="003-fable-5/bolinhas.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="003-fable-5/bolinhas.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~52k ctx · $0,60 · eOV5uqst</span><a class="open" href="003-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="003-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>Fable 5</td><td>157k</td><td>18k</td><td>307</td><td>792k</td><td>23</td><td>1,7min</td><td class="cst">$3,50</td></tr>
+      <tr><td>Opus 4.8</td><td>74k</td><td>5k</td><td>233</td><td>122k</td><td>4</td><td>1,2min</td><td class="cst">$0,60</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px"><b style="color:var(--ov-accent)">Por que o Fable saiu 5,8× mais caro:</b> mesmo sem achar bug, o Fable <b>foi conferir</b> — abriu o browser (3 navegações + screenshot + console), 23 idas contra 4 do Opus, 792k de cache relido. A verificação não achou erro, mas custou: cada ida relê o contexto. Some o preço 2× → $3,50 contra $0,60. A maior razão da bateria — verificar sem necessidade, no modelo mais caro.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Análise: Fable verifica mesmo quando não precisa</h4>
+      Física é uma tarefa contida, e o código saiu certo dos dois lados. A diferença: o <b>Fable abriu o navegador mesmo assim</b> (3 navegações, screenshot, console) e gastou 23 idas confirmando que estava tudo bem — sem nenhum Edit, porque não havia bug. O Opus escreveu e parou em 4 idas. Esse é o outro lado do verificador consistente: o Fable confere <b>por padrão</b>, o que dá confiança mas queima idas e cache mesmo em tarefa fácil. A $10/$50, essa checagem "à toa" fez o custo saltar pra 5,8× o do Opus — a maior distância da bateria.
+    </div>
+  </section>
+
+  <section class="test" id="t4">
+    <div class="test-head">
+      <span class="test-num">TESTE 004</span>
+      <span class="test-title">FPS — tiro em primeira pessoa</span>
+      <span class="test-sub">Mapa 3D, WASD + mouse, rifle e RPG, inimigos que perseguem. O teste difícil — os dois testaram e corrigiram bug.</span>
+    </div>
+    <div class="term">
+      <div class="term-bar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="lbl">prompt</span></div>
+      <div class="term-body"><span class="p">$ </span>Crie um único arquivo HTML que seja um FPS. Navego o mapa 3D com WASD, miro com o mouse, atiro em inimigos. Duas armas trocáveis (rifle e RPG) com efeitos de tiro e explosão. Inimigos que andam na minha direção e morrem ao serem atingidos, contador de vida e abates. Use Three.js. Mapa com paredes e cobertura.</div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cell hero"><div class="cell-head"><span class="m">Fable 5</span><span class="cost">~68k ctx · $6,76 · OR0ZREPYdHqA</span><a class="open" href="004-fable-5/fps.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="004-fable-5/fps.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+      <div class="cell"><div class="cell-head"><span class="m">Opus 4.8</span><span class="cost">~63k ctx · $1,61 · mYGgyEpQ</span><a class="open" href="004-48/index.html" target="_blank">abrir ↗</a></div><iframe class="frame" src="004-48/index.html" loading="lazy"></iframe><div class="verdict"><span class="pill pending">pendente</span></div></div>
+    </div>
+    <table class="rt tok" style="margin-top:14px"><thead><tr><th>Modelo</th><th>entrada</th><th>saída</th><th>linhas</th><th>cache relido</th><th>idas</th><th>tempo</th><th>custo</th></tr></thead><tbody>
+      <tr><td>Fable 5</td><td>244k</td><td>55k</td><td>817</td><td>1,12M</td><td>22</td><td>3,7min</td><td class="cst">$6,76</td></tr>
+      <tr><td>Opus 4.8</td><td>118k</td><td>29k</td><td>704</td><td>341k</td><td>8</td><td>3,9min</td><td class="cst">$1,61</td></tr>
+    </tbody></table>
+    <p class="test-sub" style="margin-top:10px"><b style="color:var(--ov-accent)">O teste mais caro — $6,76:</b> aqui apareceu bug de verdade e <b>os dois caçaram e corrigiram</b> (1 Edit cada). Mas o Fable escreveu quase o dobro de código (55k vs 29k de saída, 817 linhas), releu 1,12M de cache e roda a $10/$50. Os três efeitos somam: $6,76 contra $1,61 do Opus. O app mais completo da bateria, pelo preço mais alto.</p>
+    <div class="flag-clean">✓ Modelo puro — sem skill, sem subagente (auditado no transcript)</div>
+    <div class="analysis">
+      <h4>Análise: o teste difícil — os dois acharam o próprio bug</h4>
+      O FPS foi o único que <b>gerou erro real</b>, e aqui os dois modelos de fronteira se mostraram: ambos <b>abriram o navegador, bateram no erro e corrigiram</b> (1 Edit cada). Não é diferença de capacidade — é diferença de <b>verbosidade e preço</b>. O Fable escreveu <b>817 linhas / 55k de saída</b> contra 704 / 29k do Opus, releu quase o dobro de cache e cobra 2× por token. Multiplicado, dá $6,76 contra $1,61 — 4,2×. O app do Fable é o mais completo da bateria (RPG com onda de choque, ondas crescentes, HUD rico), mas foi também o mais caro que já rodamos. É o retrato do trade: capacidade de fronteira que você sente no resultado, com a fatura pra combinar.
+    </div>
+  </section>
+
+  <footer>
+    <b>Como usar:</b> interaja com cada app no quadro ou clique em <b>abrir ↗</b> pra tela cheia. Troque a pill <b>pendente</b> por <b>pass</b>/<b>fail</b> no veredito de cada célula.<br>
+    <b>Colunas das tabelas:</b> <b>entrada</b> = tokens novos que entraram (prompt + código escrito no cache) · <b>saída</b> = código que o modelo escreveu · <b>linhas</b> = tamanho do arquivo final · <b>cache relido</b> = contexto re-lido a cada ida (barato, 0,1× do preço) · <b>idas</b> = round-trips do modelo pra terminar · <b>tempo</b> = minutos de trabalho ativo.<br>
+    <b>A leitura em 1 frase:</b> Fable 5 é topo de linha real — verifica o próprio output em 3 dos 4 testes (o Opus só no FPS) e acha o próprio bug — mas cobra <b>4,5× o custo do Opus 4.8</b> na mesma bateria ($15,81 vs $3,49). Vale em tarefa difícil que paga o preço; não em volume.<br>
+    <b>Cada célula do app:</b> <b>contexto · $custo · paneId</b>. Contexto = tamanho da conversa (bate com o rodapé do pane). Custo recalculado a <b>preço oficial Anthropic</b> (Fable 5 $10/$50, Opus 4.8 $5/$25), incluindo cache read (0,1×) e cache write (1,25×).<br>
+    <b>Fairness:</b> os 8 testes rodaram com modelo puro — auditoria nos transcripts confirma <b>zero skill e zero subagente</b> em todas as sessões. Fable rodou via <code>claude-fable-5</code>; Opus via <code>claude-opus-4-8</code>.<br>
+    Ver também: <a href="modelos/fable-5.html" style="color:var(--ov-accent)">ficha do Fable 5</a> · <a href="benchmark.html" style="color:var(--ov-accent)">benchmark 3 vias (Sonnet 5 / 4.6 / Opus)</a>.<br>
+    Design system: overclock-web (--ov tokens, Geist Mono, brand #FF3B30).
+  </footer>
+</div>
+</body>
+</html>
